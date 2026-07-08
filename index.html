@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I'll Go if you say Algo | Creative DSA Tracker & Visualizer</title>
+  <meta name="description" content="A highly interactive, gamified platform to track DSA progress, visualize algorithm executions, and build daily coding habits.">
+  <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="header">
+    <div class="container">
+      <a href="#" class="logo-link" onclick="switchTab('lobby'); return false;">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <!-- Cute SVG robot head / terminal logo -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2" ry="2"></rect><path d="M12 2v9"></path><path d="M8 5h8"></path><circle cx="8" cy="16" r="1" fill="#fff"></circle><circle cx="16" cy="16" r="1" fill="#fff"></circle></svg>
+          </div>
+          <div class="logo-text">
+            <span>Algozee</span>
+            <span class="logo-subtext">I'll Go if you say Algo</span>
+          </div>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-tabs">
+          <li>
+            <button class="nav-tab-btn active" id="tab-btn-lobby" onclick="switchTab('lobby')">
+              <i data-lucide="home"></i> Home
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" id="tab-btn-dashboard" onclick="switchTab('dashboard')">
+              <i data-lucide="layout-dashboard"></i> Dashboard
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" id="tab-btn-explorer" onclick="switchTab('explorer')">
+              <i data-lucide="compass"></i> DSA Explorer
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" id="tab-btn-visualizer" onclick="switchTab('visualizer')">
+              <i data-lucide="play-circle"></i> Visualizer
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- ==========================================================================
+         LOBBY / HOME PAGE VIEW
+         ========================================================================== -->
+    <section id="page-lobby" class="page-view active">
+      <div class="hero-section">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i data-lucide="sparkles"></i> The Gamified Way to Master DSA
+          </div>
+          <h1 class="hero-title">I'll Go if you say<br>Algo!</h1>
+          <p class="hero-subtitle">
+            Stuck in analysis paralysis? Track a broader DSA problem deck, visualize algorithms step-by-step, and maintain streaks that keep your practice sharp.
+          </p>
+          <div class="hero-cta">
+            <button class="btn btn-primary" onclick="switchTab('explorer')">
+              Explore Problems <i data-lucide="arrow-right"></i>
+            </button>
+            <button class="btn btn-secondary" onclick="switchTab('visualizer')">
+              Try Algo Visualizer
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-orb"></div>
+          <div class="hero-widget-box">
+            <!-- "Algo Decider" Widget -->
+            <div class="glass-card decider-widget accent-indigo">
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                <i data-lucide="dices" style="color: var(--primary-glow)"></i>
+                Should you study today?
+              </h3>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Let the algorithm decide your daily challenge!</p>
+              
+              <div class="decider-display" id="decider-screen">
+                <div class="decider-topic" id="decider-topic">Click Roll!</div>
+                <div class="decider-prompt" id="decider-prompt">Let's find out...</div>
+              </div>
+              
+              <button class="btn btn-accent btn-sm" style="width: 100%" id="decider-roll-btn" onclick="rollAlgoDice()">
+                Roll the Dice 🎲
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature highlight cards -->
+      <h2 style="font-size: 1.8rem; margin: 4rem 0 1rem 0; text-align: center;">Everything you need to level up</h2>
+      <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem auto;">
+        We combine progress tracking, visualization sandboxes, and motivational game design to keep you coding daily.
+      </p>
+      
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="glass-card accent-indigo">
+          <div class="feature-header">
+            <div class="feature-icon-wrapper purple">
+              <i data-lucide="trending-up"></i>
+            </div>
+            <h3>Dynamic Dashboards</h3>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Watch your metrics grow with real-time circular statistics gauges, solve ratios, and a full contribution calendar grid that tracks daily coding consistency.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="glass-card accent-pink">
+          <div class="feature-header">
+            <div class="feature-icon-wrapper pink">
+              <i data-lucide="flame"></i>
+            </div>
+            <h3>Gamified Streaks</h3>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Earn custom achievements like "Binary Boss" or "Recursion Rookie". Maintain your continuous solve streak to double your points and claim higher ranks.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="glass-card accent-indigo">
+          <div class="feature-header">
+            <div class="feature-icon-wrapper cyan">
+              <i data-lucide="eye"></i>
+            </div>
+            <h3>Algorithm Sandbox</h3>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Step through sorting, graphs, DP, caches, heaps, strings, and backtracking. Control speed, inspect states, and read conversational execution logs.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         DASHBOARD VIEW
+         ========================================================================== -->
+    <section id="page-dashboard" class="page-view">
+      <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Your Training Dashboard</h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">Real-time analysis of your DSA metrics, streak activity, and unlocked awards.</p>
+
+      <div class="dashboard-layout">
+        <!-- Stats Row -->
+        <div class="stat-box-container">
+          <div class="glass-card stat-card">
+            <div class="stat-icon solved">
+              <i data-lucide="check-circle-2"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-num" id="stat-solved-count">0 / 0</span>
+              <span class="stat-label">Problems Solved</span>
+            </div>
+          </div>
+
+          <div class="glass-card stat-card">
+            <div class="stat-icon streak">
+              <i data-lucide="flame"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-num" id="stat-streak-val">7 Days</span>
+              <span class="stat-label">Active Streak</span>
+            </div>
+          </div>
+
+          <div class="glass-card stat-card">
+            <div class="stat-icon rank">
+              <i data-lucide="trophy"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-num" id="stat-rank-name">Elite</span>
+              <span class="stat-label">Rank Status</span>
+            </div>
+          </div>
+
+          <div class="glass-card stat-card">
+            <div class="stat-icon ratio">
+              <i data-lucide="award"></i>
+            </div>
+            <div class="stat-info">
+              <span class="stat-num" id="stat-points-val">420 pts</span>
+              <span class="stat-label">Total Points</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress ring breakdown -->
+        <div class="glass-card chart-card accent-indigo">
+          <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Solve Progress</h3>
+          <div class="progress-chart-container">
+            <div class="progress-svg-wrapper">
+              <svg class="progress-svg-ring" width="140" height="140">
+                <circle class="ring-bg" cx="70" cy="70" r="60" stroke-width="12" fill="transparent"/>
+                <circle class="ring-fg" id="dashboard-progress-ring" cx="70" cy="70" r="60" stroke-width="12" fill="transparent"/>
+              </svg>
+              <div class="progress-text">
+                <span class="progress-pct" id="dashboard-pct-text">0%</span>
+                <span class="progress-label">Solved</span>
+              </div>
+            </div>
+            
+            <div class="chart-breakdown">
+              <div class="breakdown-row">
+                <span class="breakdown-cat">
+                  <span class="cat-indicator easy"></span> Easy
+                </span>
+                <span class="breakdown-val" id="breakdown-easy">0 / 0</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-cat">
+                  <span class="cat-indicator medium"></span> Medium
+                </span>
+                <span class="breakdown-val" id="breakdown-medium">0 / 0</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="breakdown-cat">
+                  <span class="cat-indicator hard"></span> Hard
+                </span>
+                <span class="breakdown-val" id="breakdown-hard">0 / 0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity heat map grid -->
+        <div class="glass-card heatmap-card accent-pink">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 style="font-size: 1.25rem;">Activity Calendar</h3>
+            <span style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.25rem;">
+              <i data-lucide="info" style="width: 14px; height: 14px;"></i> Interactive daily solve log
+            </span>
+          </div>
+          <div class="heatmap-container">
+            <div id="activity-heatmap">
+              <!-- Heatmap cells will be inserted by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Badges container -->
+        <div class="glass-card badges-card accent-indigo">
+          <h3 style="font-size: 1.25rem;">Unlocked Badges</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Achieve target milestones to unlock shiny medals.</p>
+          <div class="badges-grid" id="badges-container">
+            <!-- Badges dynamically updated by JS -->
+          </div>
+        </div>
+
+        <!-- Topic Progress Bars -->
+        <div class="glass-card topic-progress-card accent-cyan">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <div>
+              <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Topic Mastery</h3>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Progress across all expanded DSA tracks</p>
+            </div>
+            <span id="topic-total-badge" style="background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.25); color: var(--accent-cyan); font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 20px; font-family: 'Fira Code', monospace;">0 topics mastered</span>
+          </div>
+          <div id="topic-progress-list">
+            <!-- Dynamically rendered topic bars -->
+          </div>
+        </div>
+
+        <!-- Recently Solved / Reading List -->
+        <div class="glass-card solved-feed-card accent-pink">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <div>
+              <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Solved Problems</h3>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">All problems you've completed — click to revisit</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <select id="solved-filter-diff" onchange="renderSolvedFeed()" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 0.75rem; padding: 0.35rem 0.6rem; border-radius: 6px; cursor: pointer;">
+                <option value="all">All Difficulties</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+              <select id="solved-filter-topic" onchange="renderSolvedFeed()" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 0.75rem; padding: 0.35rem 0.6rem; border-radius: 6px; cursor: pointer;">
+                <option value="all">All Topics</option>
+                <option value="Arrays &amp; Hashing">Arrays &amp; Hashing</option>
+                <option value="Binary Search">Binary Search</option>
+                <option value="Linked Lists">Linked Lists</option>
+                <option value="Stacks &amp; Queues">Stacks &amp; Queues</option>
+                <option value="Trees &amp; BSTs">Trees &amp; BSTs</option>
+                <option value="Heaps &amp; Intervals">Heaps &amp; Intervals</option>
+                <option value="Graphs">Graphs</option>
+                <option value="Tries &amp; Bits">Tries &amp; Bits</option>
+                <option value="Dynamic Programming">Dynamic Programming</option>
+                <option value="Backtracking &amp; Recursion">Backtracking &amp; Recursion</option>
+                <option value="Sorting &amp; Partitioning">Sorting &amp; Partitioning</option>
+                <option value="Design &amp; Advanced DS">Design &amp; Advanced DS</option>
+                <option value="Strings &amp; Pattern Matching">Strings &amp; Pattern Matching</option>
+              </select>
+            </div>
+          </div>
+          <div id="solved-feed-list">
+            <!-- Dynamically rendered solved problems -->
+          </div>
+          <div id="solved-feed-empty" style="display: none; text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">📭</div>
+            <p style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">No solved problems yet</p>
+            <p style="font-size: 0.85rem;">Go to <strong>DSA Explorer</strong> and mark problems as Solved to see them here.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         DSA PROBLEM EXPLORER VIEW
+         ========================================================================== -->
+    <section id="page-explorer" class="page-view">
+      <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">DSA Challenge Deck</h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">Toggle status indicators directly on cards to watch your statistics and calendar adapt.</p>
+
+      <div class="explorer-header">
+        <!-- Search and filters -->
+        <div class="search-filter-box">
+          <div class="search-input-wrapper">
+            <i data-lucide="search"></i>
+            <input type="text" class="search-input" id="search-bar" placeholder="Search DSA problem name..." oninput="filterProblems()">
+          </div>
+          
+          <select class="filter-select" id="difficulty-select" onchange="filterProblems()">
+            <option value="all">All Difficulties</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+
+        <!-- Category pills -->
+        <div class="category-pills" id="category-pills">
+          <button class="pill-btn active" onclick="selectCategory('all', this)">All</button>
+          <button class="pill-btn" onclick="selectCategory('Arrays & Hashing', this)">Arrays & Hashing</button>
+          <button class="pill-btn" onclick="selectCategory('Binary Search', this)">Binary Search</button>
+          <button class="pill-btn" onclick="selectCategory('Linked Lists', this)">Linked Lists</button>
+          <button class="pill-btn" onclick="selectCategory('Stacks & Queues', this)">Stacks & Queues</button>
+          <button class="pill-btn" onclick="selectCategory('Trees & BSTs', this)">Trees & BSTs</button>
+          <button class="pill-btn" onclick="selectCategory('Heaps & Intervals', this)">Heaps & Intervals</button>
+          <button class="pill-btn" onclick="selectCategory('Graphs', this)">Graphs</button>
+          <button class="pill-btn" onclick="selectCategory('Tries & Bits', this)">Tries & Bits</button>
+          <button class="pill-btn" onclick="selectCategory('Dynamic Programming', this)">DP</button>
+          <button class="pill-btn" onclick="selectCategory('Backtracking & Recursion', this)">Backtracking</button>
+          <button class="pill-btn" onclick="selectCategory('Sorting & Partitioning', this)">Sorting</button>
+          <button class="pill-btn" onclick="selectCategory('Design & Advanced DS', this)">Advanced DS</button>
+          <button class="pill-btn" onclick="selectCategory('Strings & Pattern Matching', this)">Strings</button>
+        </div>
+      </div>
+
+      <!-- Problem List -->
+      <div class="glass-card problems-card accent-indigo">
+        <table class="problems-table">
+          <thead>
+            <tr>
+              <th style="width: 50%;">Problem Title</th>
+              <th style="width: 15%;">Difficulty</th>
+              <th style="width: 15%;">Acceptance</th>
+              <th style="width: 20%; text-align: right;">Status Toggle</th>
+            </tr>
+          </thead>
+          <tbody id="problems-tbody">
+            <!-- Content will be injected dynamically by app.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         ALGO VISUALIZER & PLAYGROUND
+         ========================================================================== -->
+    <section id="page-visualizer" class="page-view">
+      <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Interactive Algorithm Sandbox</h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">Run step-by-step visuals to see exactly how indices pivot, compare, and modify states.</p>
+
+      <div class="visualizer-layout">
+        <!-- Left: main visualization -->
+        <div class="visualizer-main">
+          <!-- Selection & Controls -->
+          <div class="visualizer-controls">
+            <div class="control-group">
+              <label for="algo-select" style="font-size: 0.85rem; font-weight:600; color: var(--text-muted)">Algorithm:</label>
+              <select class="filter-select" id="algo-select" style="padding: 0.5rem 1.5rem 0.5rem 0.5rem;" onchange="loadSelectedAlgorithm()">
+                <option value="bubble">Bubble Sort</option>
+                <option value="binary">Binary Search</option>
+                <option value="window">Sliding Window (LC 3)</option>
+                <option value="pointer">Two Pointers (LC 11)</option>
+                <option value="twoSumII">Two Sum II (LC 167)</option>
+                <option value="cycle">Fast & Slow (LC 141)</option>
+                <option value="cycleII">Linked List Cycle II (LC 142)</option>
+                <option value="stack">Monotonic Stack (LC 739)</option>
+                <option value="largestRectangle">Largest Rectangle (LC 84)</option>
+                <option value="tree">Binary Tree DFS (LC 104)</option>
+                <option value="graph">Graph BFS/DFS (LC 200)</option>
+                <option value="matrix">Matrix Grid DP (LC 62)</option>
+                <option value="intervals">Interval Merging (LC 56)</option>
+                <option value="hash">Frequency HashMap (LC 1)</option>
+                <option value="bits">Bit Shift Register (LC 191)</option>
+                <option value="trie">Trie Prefix Map (LC 208)</option>
+                <option value="stringdp">String DP — LCS (LC 1143)</option>
+                <option value="dp1d">1D Dynamic Programming (LC 70)</option>
+                <option value="prefixsum">Prefix Sum (LC 560)</option>
+                <option value="backtracking">Backtracking Board (N-Queens)</option>
+                <option value="unionfind">Union-Find Components</option>
+                <option value="segmenttree">Segment Tree Range Query</option>
+                <option value="avl">Self-Balancing AVL Tree</option>
+                <option value="huffman">Huffman Encoder Tree</option>
+                <option value="greedy">Greedy Interval Selection</option>
+                <option value="editdistance">Edit Distance DP</option>
+                <option value="heap">Heap / Priority Queue</option>
+                <option value="dijkstra">Dijkstra Shortest Path</option>
+                <option value="toposort">Topological Sort</option>
+                <option value="knapsack">0/1 Knapsack DP</option>
+                <option value="kmp">KMP String Matching</option>
+                <option value="fenwick">Fenwick Tree / BIT</option>
+                <option value="bellmanford">Bellman-Ford Relaxation</option>
+                <option value="floydwarshall">Floyd-Warshall Matrix</option>
+                <option value="quicksort">Quick Sort Partition</option>
+                <option value="bfsgrid">BFS Grid Shortest Path</option>
+                <option value="lrucache">LRU Cache</option>
+                <option value="slidingmax">Sliding Window Maximum</option>
+                <option value="coinchange">Coin Change DP</option>
+                <option value="kruskal">Kruskal MST</option>
+                <option value="medianfinder">Median Finder</option>
+                <option value="sudoku">Sudoku Solver</option>
+              </select>
+            </div>
+
+            <!-- Media visual buttons -->
+            <div class="control-group">
+              <button class="btn btn-secondary btn-sm" onclick="resetVisualizer()" title="Reset array and logs">
+                <i data-lucide="rotate-ccw"></i> Reset
+              </button>
+              <button class="btn btn-secondary btn-sm" id="step-btn" onclick="stepVisualizer()" title="Execute one step">
+                <i data-lucide="skip-forward"></i> Step
+              </button>
+              <button class="btn btn-primary btn-sm" id="play-btn" onclick="playVisualizer()" title="Auto play execution">
+                <i data-lucide="play" id="play-icon"></i> <span id="play-text">Play</span>
+              </button>
+            </div>
+
+            <!-- Speed controls -->
+            <div class="speed-control">
+              <span>Speed:</span>
+              <input type="range" class="speed-slider" id="speed-slider" min="100" max="1500" value="800" step="50" onchange="updateVisualizerSpeed()">
+              <span id="speed-label" style="font-size: 0.75rem; width: 40px; font-family: monospace;">800ms</span>
+            </div>
+          </div>
+
+          <!-- Problem Info Banner (shown when loading from explorer) -->
+          <div class="problem-info-banner" id="problem-info-banner" style="display:none;">
+            <div class="pib-left">
+              <span class="pib-id" id="pib-id">#104</span>
+              <div class="pib-details">
+                <span class="pib-name" id="pib-name">Maximum Depth of Binary Tree</span>
+                <span class="pib-pattern" id="pib-pattern">Tree DFS</span>
+              </div>
+            </div>
+            <div class="pib-right">
+              <span class="difficulty-badge" id="pib-diff">easy</span>
+              <a class="pib-lc-link" id="pib-lc-link" href="#" target="_blank" title="Open on LeetCode">
+                <i data-lucide="external-link" style="width:14px;height:14px;"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Canvas Rendering Area -->
+          <div class="visualizer-canvas" id="canvas-area">
+            <!-- Dynamic elements created by JS -->
+          </div>
+
+          <!-- Problem Logic Panel (shown when loading from explorer) -->
+          <div class="glass-card problem-logic-panel" id="problem-logic-panel" style="display:none; margin-top: 1.5rem; padding: 1.5rem; border: 1px solid var(--border-color);">
+            <h3 style="font-size: 1.15rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem;">
+              <i data-lucide="book-open" style="color: var(--primary-glow); width: 20px; height: 20px;"></i>
+              Problem Logic & Formulation
+            </h3>
+            <div id="logic-content" style="display: flex; flex-direction: column; gap: 1rem;">
+              <!-- Injected dynamically by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Code view & Logs -->
+        <div class="visualizer-sidebar">
+          
+          <!-- Mock code sandbox -->
+          <div class="code-playground">
+            <div class="editor-header">
+              <div class="editor-dots">
+                <span class="editor-dot"></span>
+                <span class="editor-dot"></span>
+                <span class="editor-dot"></span>
+              </div>
+              <span class="editor-lang" id="editor-language">javascript</span>
+            </div>
+            <div class="editor-body">
+              <pre id="code-snippet-box">
+<!-- Code snippets will be rendered dynamically by JS -->
+              </pre>
+            </div>
+          </div>
+
+          <!-- Tracing logs -->
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <h4 style="font-size: 0.95rem; font-weight:600; display:flex; align-items:center; gap:0.5rem;">
+              <i data-lucide="terminal" style="color: var(--accent-cyan); width:16px; height:16px;"></i> Trace Log
+            </h4>
+            <div class="log-panel" id="log-panel">
+              <div class="log-entry info">Visualizer loaded. Click Step or Play to begin!</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <p style="font-weight: 600; color: #ffffff; margin-bottom: 0.25rem;">I'll Go if you say Algo</p>
+        <p>A pair-programming design for DSA aspirants.</p>
+      </div>
+      <div class="footer-right">
+        <a href="#" class="footer-link" onclick="switchTab('lobby'); return false;">Lobby</a>
+        <a href="#" class="footer-link" onclick="switchTab('dashboard'); return false;">Dashboard</a>
+        <a href="#" class="footer-link" onclick="switchTab('explorer'); return false;">DSA Explorer</a>
+        <a href="#" class="footer-link" onclick="switchTab('visualizer'); return false;">Sandbox</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js?v=3"></script>
+</body>
+</html>
