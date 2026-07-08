@@ -29,30 +29,37 @@
         </div>
       </a>
 
-      <nav>
-        <ul class="nav-tabs">
-          <li>
-            <button class="nav-tab-btn active" id="tab-btn-lobby" onclick="switchTab('lobby')">
-              <i data-lucide="home"></i> Home
-            </button>
-          </li>
-          <li>
-            <button class="nav-tab-btn" id="tab-btn-dashboard" onclick="switchTab('dashboard')">
-              <i data-lucide="layout-dashboard"></i> Dashboard
-            </button>
-          </li>
-          <li>
-            <button class="nav-tab-btn" id="tab-btn-explorer" onclick="switchTab('explorer')">
-              <i data-lucide="compass"></i> DSA Explorer
-            </button>
-          </li>
-          <li>
-            <button class="nav-tab-btn" id="tab-btn-visualizer" onclick="switchTab('visualizer')">
-              <i data-lucide="play-circle"></i> Visualizer
-            </button>
-          </li>
-        </ul>
-      </nav>
+      <div class="nav-wrapper-theme">
+        <nav>
+          <ul class="nav-tabs">
+            <li>
+              <button class="nav-tab-btn active" id="tab-btn-lobby" onclick="switchTab('lobby')">
+                <i data-lucide="home"></i> Home
+              </button>
+            </li>
+            <li>
+              <button class="nav-tab-btn" id="tab-btn-dashboard" onclick="switchTab('dashboard')">
+                <i data-lucide="layout-dashboard"></i> Dashboard
+              </button>
+            </li>
+            <li>
+              <button class="nav-tab-btn" id="tab-btn-explorer" onclick="switchTab('explorer')">
+                <i data-lucide="compass"></i> DSA Explorer
+              </button>
+            </li>
+            <li>
+              <button class="nav-tab-btn" id="tab-btn-visualizer" onclick="switchTab('visualizer')">
+                <i data-lucide="play-circle"></i> Visualizer
+              </button>
+            </li>
+          </ul>
+        </nav>
+        
+        <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+          <i data-lucide="sun" id="theme-icon-sun" style="display: none;"></i>
+          <i data-lucide="moon" id="theme-icon-moon"></i>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -288,13 +295,13 @@
               <p style="font-size: 0.8rem; color: var(--text-muted);">All problems you've completed — click to revisit</p>
             </div>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <select id="solved-filter-diff" onchange="renderSolvedFeed()" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 0.75rem; padding: 0.35rem 0.6rem; border-radius: 6px; cursor: pointer;">
+              <select id="solved-filter-diff" class="filter-select" onchange="renderSolvedFeed()" style="font-size: 0.75rem; padding: 0.35rem 1.5rem 0.35rem 0.6rem; border-radius: 6px; height: auto;">
                 <option value="all">All Difficulties</option>
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
               </select>
-              <select id="solved-filter-topic" onchange="renderSolvedFeed()" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 0.75rem; padding: 0.35rem 0.6rem; border-radius: 6px; cursor: pointer;">
+              <select id="solved-filter-topic" class="filter-select" onchange="renderSolvedFeed()" style="font-size: 0.75rem; padding: 0.35rem 1.5rem 0.35rem 0.6rem; border-radius: 6px; height: auto;">
                 <option value="all">All Topics</option>
                 <option value="Arrays &amp; Hashing">Arrays &amp; Hashing</option>
                 <option value="Binary Search">Binary Search</option>
@@ -435,7 +442,17 @@
                 <option value="bellmanford">Bellman-Ford Relaxation</option>
                 <option value="floydwarshall">Floyd-Warshall Matrix</option>
                 <option value="quicksort">Quick Sort Partition</option>
+                <option value="quicksortfull">Quick Sort (Recursive)</option>
+                <option value="mergesort">Merge Sort (Recursive)</option>
+                <option value="insertionsort">Insertion Sort</option>
                 <option value="bfsgrid">BFS Grid Shortest Path</option>
+                <option value="rbtree">Red-Black Tree Balancing</option>
+                <option value="netflow">Network Flow (Edmonds-Karp)</option>
+                <option value="astar">A* Pathfinding Search</option>
+                <option value="prims">Prim's MST Algorithm</option>
+                <option value="singlenumber">Single Number (XOR Accumulator)</option>
+                <option value="bitmasksubsets">Bitmask Subsets Generation</option>
+                <option value="binaryaddition">Binary Addition (XOR Carry)</option>
                 <option value="lrucache">LRU Cache</option>
                 <option value="slidingmax">Sliding Window Maximum</option>
                 <option value="coinchange">Coin Change DP</option>

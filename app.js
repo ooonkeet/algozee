@@ -80,13 +80,8 @@ const state = {
     { id: 704, name: "Binary Search", difficulty: "easy", topic: "Binary Search", subcategory: "Binary Search on Sorted Data", acceptance: "56.2%", status: "todo" },
     // On Answer
     { id: 875, name: "Koko Eating Bananas", difficulty: "medium", topic: "Binary Search", subcategory: "Binary Search on Answer", acceptance: "49.8%", status: "todo" },
-    { id: 704, name: "Binary Search", difficulty: "easy", topic: "Binary Search", subcategory: "Binary Answer", acceptance: "55.2%", status: "todo" },
-    { id: 35, name: "Search Insert Position", difficulty: "easy", topic: "Binary Search", subcategory: "Binary Answer", acceptance: "42.6%", status: "todo" },
     { id: 278, name: "First Bad Version", difficulty: "easy", topic: "Binary Search", subcategory: "Binary Answer", acceptance: "43.0%", status: "todo" },
     { id: 374, name: "Guess Number Higher or Lower", difficulty: "easy", topic: "Binary Search", subcategory: "Binary Answer", acceptance: "52.0%", status: "todo" },
-    { id: 153, name: "Find Minimum in Rotated Sorted Array", difficulty: "medium", topic: "Binary Search", subcategory: "Binary Answer", acceptance: "49.8%", status: "todo" },
-    { id: 33, name: "Search in Rotated Sorted Array", difficulty: "medium", topic: "Binary Search", subcategory: "Binary Answer", acceptance: "38.9%", status: "todo" },
-    { id: 162, name: "Find Peak Element", difficulty: "medium", topic: "Binary Search", subcategory: "Binary Answer", acceptance: "45.1%", status: "todo" },
     { id: 4, name: "Median of Two Sorted Arrays", difficulty: "hard", topic: "Binary Search", subcategory: "Binary Answer", acceptance: "37.5%", status: "todo" },
     { id: 1011, name: "Capacity To Ship Packages Within D Days", difficulty: "medium", topic: "Binary Search", subcategory: "Binary Search on Answer", acceptance: "67.5%", status: "todo" },
     { id: 410, name: "Split Array Largest Sum", difficulty: "hard", topic: "Binary Search", subcategory: "Binary Search on Answer", acceptance: "54.8%", status: "todo" },
@@ -110,8 +105,6 @@ const state = {
     { id: 92, name: "Reverse Linked List II", difficulty: "medium", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "46.2%", status: "todo" },
     { id: 138, name: "Copy List with Random Pointer", difficulty: "medium", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "53.2%", status: "todo" },
     { id: 206, name: "Reverse Linked List", difficulty: "easy", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "74.8%", status: "todo" },
-    { id: 876, name: "Middle of the Linked List", difficulty: "easy", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "77.1%", status: "todo" },
-    { id: 160, name: "Intersection of Two Linked Lists", difficulty: "easy", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "57.0%", status: "todo" },
     { id: 83, name: "Remove Duplicates from Sorted List", difficulty: "easy", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "51.1%", status: "todo" },
     { id: 82, name: "Remove Duplicates from Sorted List II", difficulty: "medium", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "45.8%", status: "todo" },
     { id: 61, name: "Rotate List", difficulty: "medium", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "36.6%", status: "todo" },
@@ -128,10 +121,6 @@ const state = {
     { id: 150, name: "Evaluate Reverse Polish Notation", difficulty: "medium", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "48.2%", status: "todo" },
     { id: 155, name: "Min Stack", difficulty: "medium", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "53.5%", status: "todo" },
     { id: 402, name: "Remove K Digits", difficulty: "medium", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "31.2%", status: "todo" },
-    { id: 225, name: "Implement Stack using Queues", difficulty: "easy", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "62.0%", status: "todo" },
-    { id: 232, name: "Implement Queue using Stacks", difficulty: "easy", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "64.5%", status: "todo" },
-    { id: 456, name: "132 Pattern", difficulty: "medium", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "33.5%", status: "todo" },
-    { id: 907, name: "Sum of Subarray Minimums", difficulty: "medium", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "35.4%", status: "todo" },
     { id: 225, name: "Implement Stack using Queues", difficulty: "easy", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "62.0%", status: "todo" },
     { id: 232, name: "Implement Queue using Stacks", difficulty: "easy", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "64.5%", status: "todo" },
     { id: 456, name: "132 Pattern", difficulty: "medium", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "33.5%", status: "todo" },
@@ -173,12 +162,10 @@ const state = {
     { id: 98, name: "Validate Binary Search Tree", difficulty: "medium", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "32.2%", status: "todo" },
     { id: 1382, name: "Balance a Binary Search Tree", difficulty: "medium", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "83.1%", status: "todo" },
     { id: 235, name: "Lowest Common Ancestor of a Binary Search Tree", difficulty: "easy", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "64.9%", status: "todo" },
-    { id: 235, name: "Lowest Common Ancestor of a Binary Search Tree", difficulty: "easy", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "64.9%", status: "todo" },
     { id: 669, name: "Trim a Binary Search Tree", difficulty: "medium", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "67.3%", status: "todo" },
     { id: 701, name: "Insert into a Binary Search Tree", difficulty: "medium", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "74.6%", status: "todo" },
     { id: 99, name: "Recover Binary Search Tree", difficulty: "medium", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "52.1%", status: "todo" },
     { id: 230, name: "Kth Smallest Element in a BST", difficulty: "medium", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "70.9%", status: "todo" },
-    { id: 235, name: "Lowest Common Ancestor of a Binary Search Tree", difficulty: "medium", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "60.2%", status: "todo" },
     { id: 450, name: "Delete Node in a BST", difficulty: "medium", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "50.8%", status: "todo" },
     { id: 700, name: "Search in a Binary Search Tree", difficulty: "easy", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "78.4%", status: "todo" },
 
@@ -226,7 +213,6 @@ const state = {
     { id: 1462, name: "Course Schedule IV", difficulty: "medium", topic: "Graphs", subcategory: "Topological Sort / DAG", acceptance: "49.6%", status: "todo" },
     { id: 1203, name: "Sort Items by Groups Respecting Dependencies", difficulty: "hard", topic: "Graphs", subcategory: "Topological Sort / DAG", acceptance: "53.2%", status: "todo" },
     { id: 2115, name: "Find All Possible Recipes from Given Supplies", difficulty: "medium", topic: "Graphs", subcategory: "Topological Sort / DAG", acceptance: "48.3%", status: "todo" },
-    { id: 695, name: "Max Area of Island", difficulty: "medium", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "71.8%", status: "todo" },
     { id: 417, name: "Pacific Atlantic Water Flow", difficulty: "medium", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "54.5%", status: "todo" },
     { id: 130, name: "Surrounded Regions", difficulty: "medium", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "37.9%", status: "todo" },
     { id: 269, name: "Alien Dictionary", difficulty: "hard", topic: "Graphs", subcategory: "Topological Sort / DAG", acceptance: "35.5%", status: "todo" },
@@ -273,11 +259,8 @@ const state = {
     { id: 191, name: "Number of 1 Bits", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "66.5%", status: "todo" },
     { id: 338, name: "Counting Bits", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "77.0%", status: "todo" },
     { id: 268, name: "Missing Number", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "66.5%", status: "todo" },
-    { id: 136, name: "Single Number", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "72.5%", status: "todo" },
     { id: 190, name: "Reverse Bits", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "57.8%", status: "todo" },
     { id: 371, name: "Sum of Two Integers", difficulty: "medium", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "49.8%", status: "todo" },
-    { id: 268, name: "Missing Number", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "63.7%", status: "todo" },
-    { id: 190, name: "Reverse Bits", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "56.4%", status: "todo" },
 
     // --- 9. DYNAMIC PROGRAMMING ---
     // 1D DP Basics
@@ -285,8 +268,6 @@ const state = {
     { id: 198, name: "House Robber", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "49.6%", status: "todo" },
     { id: 213, name: "House Robber II", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "41.9%", status: "todo" },
     { id: 322, name: "Coin Change", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "42.1%", status: "todo" },
-    { id: 198, name: "House Robber", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "50.2%", status: "todo" },
-    { id: 213, name: "House Robber II", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "42.1%", status: "todo" },
     { id: 139, name: "Word Break", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "46.3%", status: "todo" },
     { id: 300, name: "Longest Increasing Subsequence", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "54.6%", status: "todo" },
     { id: 746, name: "Min Cost Climbing Stairs", difficulty: "easy", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "64.0%", status: "todo" },
@@ -294,7 +275,6 @@ const state = {
     { id: 91, name: "Decode Ways", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "35.1%", status: "todo" },
     { id: 53, name: "Maximum Subarray", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "50.9%", status: "todo" },
     { id: 279, name: "Perfect Squares", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "52.9%", status: "todo" },
-    { id: 300, name: "Longest Increasing Subsequence", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "53.2%", status: "todo" },
     // Knapsack / Subset DP
     { id: 416, name: "Partition Equal Subset Sum", difficulty: "medium", topic: "Dynamic Programming", subcategory: "Knapsack / Subset DP", acceptance: "46.2%", status: "todo" },
     { id: 494, name: "Target Sum", difficulty: "medium", topic: "Dynamic Programming", subcategory: "Knapsack / Subset DP", acceptance: "46.5%", status: "todo" },
@@ -332,11 +312,7 @@ const state = {
     { id: 51, name: "N-Queens", difficulty: "hard", topic: "Backtracking & Recursion", subcategory: "N-Queens Backtracking", acceptance: "71.7%", status: "todo" },
     { id: 78, name: "Subsets", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "76.6%", status: "todo" },
     { id: 90, name: "Subsets II", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "57.2%", status: "todo" },
-    { id: 46, name: "Permutations", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "77.2%", status: "todo" },
     { id: 47, name: "Permutations II", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "58.3%", status: "todo" },
-    { id: 39, name: "Combination Sum", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "71.6%", status: "todo" },
-    { id: 78, name: "Subsets", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "79.9%", status: "todo" },
-    { id: 90, name: "Subsets II", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "58.4%", status: "todo" },
     { id: 131, name: "Palindrome Partitioning", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "72.4%", status: "todo" },
     { id: 2151, name: "Maximum Good People Based on Statements", difficulty: "hard", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "51.8%", status: "todo" },
 
@@ -369,7 +345,58 @@ const state = {
     { id: 459, name: "Repeated Substring Pattern", difficulty: "easy", topic: "Strings & Pattern Matching", subcategory: "KMP String Matching", acceptance: "46.8%", status: "todo" },
     { id: 686, name: "Repeated String Match", difficulty: "medium", topic: "Strings & Pattern Matching", subcategory: "Rolling Hash / KMP", acceptance: "36.5%", status: "todo" },
     { id: 1044, name: "Longest Duplicate Substring", difficulty: "hard", topic: "Strings & Pattern Matching", subcategory: "Rolling Hash", acceptance: "31.2%", status: "todo" },
-    { id: 1392, name: "Longest Happy Prefix", difficulty: "hard", topic: "Strings & Pattern Matching", subcategory: "KMP String Matching", acceptance: "44.0%", status: "todo" }
+    { id: 1392, name: "Longest Happy Prefix", difficulty: "hard", topic: "Strings & Pattern Matching", subcategory: "KMP String Matching", acceptance: "44.0%", status: "todo" },
+
+    // --- 14. COMPREHENSIVE ADDITIONS TO 300 ---
+    { id: 121, name: "Best Time to Buy and Sell Stock", difficulty: "easy", topic: "Arrays & Hashing", subcategory: "Sliding Window", acceptance: "54.0%", status: "todo" },
+    { id: 122, name: "Best Time to Buy and Sell Stock II", difficulty: "medium", topic: "Arrays & Hashing", subcategory: "Greedy Scheduling / Sorting", acceptance: "65.2%", status: "todo" },
+    { id: 344, name: "Reverse String", difficulty: "easy", topic: "Arrays & Hashing", subcategory: "Two Pointers", acceptance: "77.5%", status: "todo" },
+    { id: 925, name: "Long Pressed Name", difficulty: "easy", topic: "Arrays & Hashing", subcategory: "Two Pointers", acceptance: "37.8%", status: "todo" },
+    { id: 187, name: "Repeated DNA Sequences", difficulty: "medium", topic: "Arrays & Hashing", subcategory: "Sliding Window", acceptance: "47.2%", status: "todo" },
+    { id: 1658, name: "Minimum Operations to Reduce X to Zero", difficulty: "medium", topic: "Arrays & Hashing", subcategory: "Sliding Window", acceptance: "39.1%", status: "todo" },
+    { id: 367, name: "Valid Perfect Square", difficulty: "easy", topic: "Binary Search", subcategory: "Binary Answer", acceptance: "43.5%", status: "todo" },
+    { id: 441, name: "Arranging Coins", difficulty: "easy", topic: "Binary Search", subcategory: "Binary Answer", acceptance: "46.2%", status: "todo" },
+    { id: 240, name: "Search a 2D Matrix II", difficulty: "medium", topic: "Binary Search", subcategory: "Binary Answer", acceptance: "51.8%", status: "todo" },
+    { id: 203, name: "Remove Linked List Elements", difficulty: "easy", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "47.5%", status: "todo" },
+    { id: 328, name: "Odd Even Linked List", difficulty: "medium", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "61.2%", status: "todo" },
+    { id: 2, name: "Add Two Numbers", difficulty: "medium", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "42.5%", status: "todo" },
+    { id: 108, name: "Convert Sorted Array to Binary Search Tree", difficulty: "easy", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "60.4%", status: "todo" },
+    { id: 94, name: "Binary Tree Inorder Traversal", difficulty: "easy", topic: "Trees & BSTs", subcategory: "Tree DFS", acceptance: "74.8%", status: "todo" },
+    { id: 144, name: "Binary Tree Preorder Traversal", difficulty: "easy", topic: "Trees & BSTs", subcategory: "Tree DFS", acceptance: "68.2%", status: "todo" },
+    { id: 145, name: "Binary Tree Postorder Traversal", difficulty: "easy", topic: "Trees & BSTs", subcategory: "Tree DFS", acceptance: "60.1%", status: "todo" },
+    { id: 735, name: "Asteroid Collision", difficulty: "medium", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "44.8%", status: "todo" },
+    { id: 394, name: "Decode String", difficulty: "medium", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "58.2%", status: "todo" },
+    { id: 133, name: "Clone Graph", difficulty: "medium", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "55.1%", status: "todo" },
+    // --- 15. PROBLEMS FOR NEW VISUALIZERS ---
+    { id: 220, name: "Contains Duplicate III", difficulty: "hard", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "22.5%", status: "todo" },
+    { id: 1349, name: "Maximum Students Taking Exams", difficulty: "hard", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "56.0%", status: "todo" },
+    { id: 773, name: "Sliding Puzzle", difficulty: "hard", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "63.2%", status: "todo" },
+    // --- 16. ADDITIONAL PROBLEMS FOR NEW VISUALIZERS ---
+    { id: 109, name: "Convert Sorted List to Binary Search Tree", difficulty: "medium", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "60.2%", status: "todo" },
+    { id: 218, name: "The Skyline Problem", difficulty: "hard", topic: "Design & Advanced DS", subcategory: "BST Problems", acceptance: "42.8%", status: "todo" },
+    { id: 2123, name: "Minimum Operations to Remove Adjacent Ones in Matrix", difficulty: "hard", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "51.1%", status: "todo" },
+    { id: 1947, name: "Maximum Compatibility Score Sum", difficulty: "medium", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "60.4%", status: "todo" },
+    { id: 1263, name: "Minimum Moves to Move a Box to Their Target Location", difficulty: "hard", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "49.6%", status: "todo" },
+    { id: 752, name: "Open the Lock", difficulty: "medium", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "56.7%", status: "todo" },
+    { id: 127, name: "Word Ladder", difficulty: "hard", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "38.9%", status: "todo" },
+    // --- 17. SUDOKU & BACKTRACKING ---
+    { id: 52, name: "N-Queens II", difficulty: "hard", topic: "Backtracking & Recursion", subcategory: "Sudoku Backtracking", acceptance: "65.5%", status: "todo" },
+    { id: 980, name: "Unique Paths III", difficulty: "hard", topic: "Backtracking & Recursion", subcategory: "Sudoku Backtracking", acceptance: "43.2%", status: "todo" },
+    // --- 18. MORE BIT MANIPULATION ---
+    { id: 389, name: "Find the Difference", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "61.3%", status: "todo" },
+    { id: 1863, name: "Sum of All Subset XOR Totals", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "82.5%", status: "todo" },
+    // --- 20. NEW SORTING PROBLEMS ---
+    { id: 147, name: "Insertion Sort List", difficulty: "medium", topic: "Sorting & Partitioning", subcategory: "Insertion Sort Pattern", acceptance: "52.8%", status: "todo" },
+    // --- 21. MORE SORTING PROBLEMS ---
+    { id: 274, name: "H-Index", difficulty: "medium", topic: "Sorting & Partitioning", subcategory: "Insertion Sort Pattern", acceptance: "38.5%", status: "todo" },
+    // --- 19. BIT SHIFT REGISTER PROBLEMS ---
+    { id: 201, name: "Bitwise AND of Numbers Range", difficulty: "medium", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "44.6%", status: "todo" },
+    { id: 476, name: "Number Complement", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "67.9%", status: "todo" }
+
+
+
+
+
   ],
   
   badges: [
@@ -665,7 +692,14 @@ function loadProblemIntoVisualizer(prob) {
   const selector = document.getElementById('algo-select');
   
   // 1. Fine-grained visualizer routing for the canvas engines
-  if (prob.id === 37) {
+  if (prob.id === 220 || prob.id === 109 || prob.id === 218) {
+    selector.value = 'rbtree';
+  } else if (prob.id === 1349 || prob.id === 2123 || prob.id === 1947) {
+    selector.value = 'netflow';
+  } else if (prob.id === 773 || prob.id === 1263 || prob.id === 752 || prob.id === 127) {
+    selector.value = 'astar';
+  } else
+  if (prob.id === 37 || prob.id === 36 || prob.id === 52 || prob.id === 980) {
     selector.value = 'sudoku';
   } else if (prob.id === 51 || prob.subcategory === 'N-Queens Backtracking' || prob.subcategory === 'Backtracking Search') {
     selector.value = 'backtracking';
@@ -689,7 +723,11 @@ function loadProblemIntoVisualizer(prob) {
     selector.value = 'slidingmax';
   } else if (prob.id === 322) {
     selector.value = 'coinchange';
-  } else if (prob.id === 1584 || prob.id === 1135 || prob.id === 1168 || prob.id === 1489 || prob.subcategory === 'MST / Graph Greedy') {
+  } else if (prob.id === 1584) {
+    selector.value = 'prims';
+  } else if (prob.id === 1135 || prob.id === 1168 || prob.id === 1489 || prob.subcategory === 'MST / Graph Greedy') {
+    selector.value = 'prims';
+  } else if (prob.id === 1135 || prob.id === 1168 || prob.id === 1489 || prob.subcategory === 'MST / Graph Greedy') {
     selector.value = 'kruskal';
   } else if (prob.id === 1091 || prob.id === 994 || prob.id === 733) {
     selector.value = 'bfsgrid';
@@ -699,6 +737,18 @@ function loadProblemIntoVisualizer(prob) {
     selector.value = 'bellmanford';
   } else if (prob.id === 1334) {
     selector.value = 'floydwarshall';
+  } else if (prob.id === 136 || prob.id === 268 || prob.id === 389) {
+    selector.value = 'singlenumber';
+  } else if (prob.id === 78 || prob.id === 90 || prob.id === 1863) {
+    selector.value = 'bitmasksubsets';
+  } else if (prob.id === 371 || prob.id === 190 || prob.id === 338) {
+    selector.value = 'binaryaddition';
+  } else if (prob.id === 912 || prob.id === 215 || prob.id === 973 || prob.id === 179) {
+    selector.value = 'quicksortfull';
+  } else if (prob.id === 148 || prob.id === 88 || prob.id === 23) {
+    selector.value = 'mergesort';
+  } else if (prob.id === 147 || prob.id === 274) {
+    selector.value = 'insertionsort';
   } else if (prob.id === 167) {
     selector.value = 'twoSumII';
   } else if (prob.id === 142) {
@@ -5045,6 +5095,3501 @@ const patternLogicTemplates = {
   }
 };
 
+
+Object.assign(problemLogicDatabase, {
+  "2": {
+    "intuition": "Traverse both lists digit-by-digit. Add values along with a carry variable, construct a new list of sums, and carry overflow to next nodes.",
+    "formula": "Digit add:<br><code>sum = carry + l1.val + l2.val; carry = sum / 10; digit = sum % 10;</code>",
+    "time": "O(max(N, M)) - visits longer list length.",
+    "space": "O(max(N, M)) - return list elements.",
+    "dryrun": {
+      "testcase": "l1 = [2, 4], l2 = [5, 6]",
+      "headers": [
+        "Digit checked",
+        "Sum calculation",
+        "Carry output",
+        "Digit result list"
+      ],
+      "rows": [
+        [
+          "1st Digit",
+          "2 + 5 = 7",
+          "0",
+          "[7]"
+        ],
+        [
+          "2nd Digit",
+          "4 + 6 = 10",
+          "1",
+          "[7, 0]"
+        ],
+        [
+          "Carry end",
+          "1",
+          "0",
+          "[7, 0, 1]"
+        ]
+      ]
+    }
+  },
+  "4": {
+    "intuition": "Use binary search to partition the smaller of the two arrays. Find boundary splits such that elements on left are <= elements on right.",
+    "formula": "Left partition constraint:<br><code>MaxLeftX <= MinRightY && MaxLeftY <= MinRightX</code>",
+    "time": "O(log(min(M, N))) - binary search on smaller size.",
+    "space": "O(1) - auxiliary space.",
+    "dryrun": {
+      "testcase": "A = [1,3], B = [2]",
+      "headers": [
+        "Partition X",
+        "Partition Y",
+        "Left Max values",
+        "Right Min values",
+        "Median"
+      ],
+      "rows": [
+        [
+          "1",
+          "1",
+          "Max(1, 2) = 2",
+          "Min(3, inf) = 3",
+          "2"
+        ]
+      ]
+    }
+  },
+  "5": {
+    "intuition": "Expand around centers. For each index, check odd-length palindromes (center at i) and even-length palindromes (center at i, i+1) to find maximum palindrome.",
+    "formula": "Center expansions:<br><code>while (L >= 0 && R < len && s[L] == s[R]) { L--; R++; }</code>",
+    "time": "O(N^2) - N center checks, N expansion checks.",
+    "space": "O(1) - index pointers.",
+    "dryrun": {
+      "testcase": "s = 'babad'",
+      "headers": [
+        "Center i",
+        "Search Type",
+        "L boundary",
+        "R boundary",
+        "Palindromic substring"
+      ],
+      "rows": [
+        [
+          "0",
+          "Odd ('b')",
+          "0",
+          "0",
+          "'b'"
+        ],
+        [
+          "1",
+          "Odd ('a')",
+          "0",
+          "2",
+          "'bab'"
+        ]
+      ]
+    }
+  },
+  "10": {
+    "intuition": "Use 2D DP. dp[i][j] represents if prefix s[0..i-1] matches pattern p[0..j-1]. Handle wildcards '*' recursively by matching 0 or more matching characters.",
+    "formula": "Wildcard rule:<br><code>if (p[j-1] == '*') { dp[i][j] = dp[i][j-2] || (matches && dp[i-1][j]); }</code>",
+    "time": "O(M*N) - match configurations.",
+    "space": "O(M*N) - DP status matrix.",
+    "dryrun": {
+      "testcase": "s = 'aa', p = 'a*'",
+      "headers": [
+        "i",
+        "j",
+        "Pattern Char",
+        "Match status",
+        "dp[i][j]"
+      ],
+      "rows": [
+        [
+          "0",
+          "2",
+          "'*'",
+          "0 occurrences match dp[0][0]",
+          "True"
+        ],
+        [
+          "2",
+          "2",
+          "'*'",
+          "Match character repeat matches dp[1][2]",
+          "True"
+        ]
+      ]
+    }
+  },
+  "26": {
+    "intuition": "Use two pointers. A slow pointer tracks the position of unique elements, and a fast pointer scans through the array to find new unique elements.",
+    "formula": "Unique swap:<br><code>if (nums[fast] != nums[slow]) { slow++; nums[slow] = nums[fast]; }</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(1) - in-place swaps.",
+    "dryrun": {
+      "testcase": "nums = [1, 1, 2]",
+      "headers": [
+        "Fast Index",
+        "nums[fast]",
+        "nums[slow]",
+        "Action",
+        "State Array"
+      ],
+      "rows": [
+        [
+          "0",
+          "1",
+          "1",
+          "Initialize",
+          "[1, 1, 2]"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "Duplicate - skip",
+          "[1, 1, 2]"
+        ],
+        [
+          "2",
+          "2",
+          "1",
+          "Unique - copy to nums[1]",
+          "[1, 2, 2]"
+        ]
+      ]
+    }
+  },
+  "27": {
+    "intuition": "Scan array and copy elements not equal to val to a slow pointer index, skipping matching occurrences.",
+    "formula": "Filter match:<br><code>if (nums[i] != val) { nums[k] = nums[i]; k++; }</code>",
+    "time": "O(N) - linear pass.",
+    "space": "O(1) - in-place updates.",
+    "dryrun": {
+      "testcase": "nums = [3, 2, 2, 3], val = 3",
+      "headers": [
+        "Index",
+        "nums[i]",
+        "Action",
+        "k pointer",
+        "Modified Array"
+      ],
+      "rows": [
+        [
+          "0",
+          "3",
+          "Matches val - skip",
+          "0",
+          "[3, 2, 2, 3]"
+        ],
+        [
+          "1",
+          "2",
+          "No match - copy to k",
+          "1",
+          "[2, 2, 2, 3]"
+        ],
+        [
+          "2",
+          "2",
+          "No match - copy to k",
+          "2",
+          "[2, 2, 2, 3]"
+        ],
+        [
+          "3",
+          "3",
+          "Matches val - skip",
+          "2",
+          "[2, 2, 2, 3]"
+        ]
+      ]
+    }
+  },
+  "36": {
+    "intuition": "Validate row, column, and 3x3 box grid values to ensure no duplicate digits from 1-9 occur in any section.",
+    "formula": "Check sets:<br><code>row_key = 'r' + row + val</code><br><code>col_key = 'c' + col + val</code><br><code>box_key = 'b' + box + val</code>",
+    "time": "O(1) - constant grid board (81 cells).",
+    "space": "O(1) - fixed lookup set size.",
+    "dryrun": {
+      "testcase": "Grid with duplicates",
+      "headers": [
+        "Cell Row/Col",
+        "Value",
+        "Generated Keys",
+        "Has duplicate?"
+      ],
+      "rows": [
+        [
+          "(0, 0)",
+          "'5'",
+          "['r0-5', 'c0-5', 'b0-5']",
+          "No"
+        ],
+        [
+          "(0, 2)",
+          "'5'",
+          "['r0-5', 'c2-5', 'b0-5']",
+          "Yes (r0-5 duplicate)"
+        ]
+      ]
+    }
+  },
+  "47": {
+    "intuition": "Generate unique permutations by sorting the array first. Skip duplicate recursive paths if the current element is equal to the previous element and the previous element has not been visited.",
+    "formula": "Skip branch:<br><code>if (used[i] || (i > 0 && nums[i] == nums[i-1] && !used[i-1])) continue;</code>",
+    "time": "O(N! * N) - generating paths.",
+    "space": "O(N) - visited trackers.",
+    "dryrun": {
+      "testcase": "nums = [1, 1, 2]",
+      "headers": [
+        "Level",
+        "Candidate Index",
+        "Duplicate skip condition?",
+        "Action",
+        "Active Permutation"
+      ],
+      "rows": [
+        [
+          "0",
+          "0 (val 1)",
+          "No",
+          "Push 1",
+          "[1]"
+        ],
+        [
+          "1",
+          "1 (val 1)",
+          "Yes (duplicate skipped)",
+          "Skip",
+          "[1]"
+        ],
+        [
+          "1",
+          "2 (val 2)",
+          "No",
+          "Push 2",
+          "[1, 2]"
+        ]
+      ]
+    }
+  },
+  "48": {
+    "intuition": "Transpose the matrix (swap matrix[i][j] with matrix[j][i]), then reverse each row to achieve a clockwise 90 degree rotation in-place.",
+    "formula": "Transpose:<br><code>swap(matrix[i][j], matrix[j][i])</code><br>Reverse:<br><code>reverse(row)</code>",
+    "time": "O(N^2) - transpose and reverse cells.",
+    "space": "O(1) - in-place.",
+    "dryrun": {
+      "testcase": "matrix = [[1,2],[3,4]]",
+      "headers": [
+        "Step",
+        "Matrix state",
+        "Action"
+      ],
+      "rows": [
+        [
+          "Start",
+          "[[1,2],[3,4]]",
+          "Initial"
+        ],
+        [
+          "Transpose",
+          "[[1,3],[2,4]]",
+          "Swap (0,1) and (1,0)"
+        ],
+        [
+          "Reverse",
+          "[[3,1],[4,2]]",
+          "Reverse each row"
+        ]
+      ]
+    }
+  },
+  "53": {
+    "intuition": "Kadane's Algorithm. Iterate through the array, adding numbers to a local sum. Reset sum to current number if local sum falls below current number.",
+    "formula": "Maximum subarray step:<br><code>localSum = max(num, localSum + num); globalMax = max(globalMax, localSum);</code>",
+    "time": "O(N) - single pass scan.",
+    "space": "O(1) - constant tracking.",
+    "dryrun": {
+      "testcase": "nums = [-2, 1, -3]",
+      "headers": [
+        "Index",
+        "Num",
+        "localSum",
+        "globalMax"
+      ],
+      "rows": [
+        [
+          "0",
+          "-2",
+          "-2",
+          "-2"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "-3",
+          "-2",
+          "1"
+        ]
+      ]
+    }
+  },
+  "54": {
+    "intuition": "Maintain boundary pointers (top, bottom, left, right) and traverse the matrix in spiral rings, shifting boundaries inwards.",
+    "formula": "Boundaries:<br><code>top++; right--; bottom--; left++;</code>",
+    "time": "O(M*N) - visit all matrix elements.",
+    "space": "O(1) - constant auxiliary storage.",
+    "dryrun": {
+      "testcase": "matrix = [[1,2],[3,4]]",
+      "headers": [
+        "Direction",
+        "Limits",
+        "Visited Items",
+        "New boundary update"
+      ],
+      "rows": [
+        [
+          "Right",
+          "Col 0..1 (Row 0)",
+          "[1, 2]",
+          "top = 1"
+        ],
+        [
+          "Down",
+          "Row 1..1 (Col 1)",
+          "[4]",
+          "right = 0"
+        ],
+        [
+          "Left",
+          "Col 0..0 (Row 1)",
+          "[3]",
+          "bottom = 0"
+        ]
+      ]
+    }
+  },
+  "61": {
+    "intuition": "Calculate list size, make it a circular ring by connecting tail to head, then locate new tail at position length - (k % length) and break circle.",
+    "formula": "New tail position:<br><code>steps = len - (k % len)</code><br>Break link:<br><code>newHead = tail.next; tail.next = null;</code>",
+    "time": "O(N) - two traversals.",
+    "space": "O(1) - pointer updates.",
+    "dryrun": {
+      "testcase": "1 -> 2 -> 3, k = 1",
+      "headers": [
+        "List Size",
+        "Effective k",
+        "New tail val",
+        "Circle broken",
+        "Output"
+      ],
+      "rows": [
+        [
+          "3",
+          "1",
+          "2 (pos 2)",
+          "tail.next = null",
+          "3 -> 1 -> 2"
+        ]
+      ]
+    }
+  },
+  "73": {
+    "intuition": "Use the first row and first column as trackers to record if zero occurs in their respective lines. Use separate flags for first row/col themselves.",
+    "formula": "Marker flags:<br><code>if (matrix[i][j] == 0) { matrix[i][0] = 0; matrix[0][j] = 0; }</code>",
+    "time": "O(M*N) - two matrix passes.",
+    "space": "O(1) - in-place markers.",
+    "dryrun": {
+      "testcase": "matrix = [[1,0],[1,1]]",
+      "headers": [
+        "Cell Checked",
+        "Is Zero?",
+        "Updated Header Markers",
+        "Result Matrix"
+      ],
+      "rows": [
+        [
+          "(0, 1)",
+          "Yes",
+          "matrix[0][1] = 0; matrix[0][0] = 0",
+          "[[0,0],[1,1]]"
+        ],
+        [
+          "Set zeroes",
+          "-",
+          "Fill rows/cols based on markers",
+          "[[0,0],[1,0]]"
+        ]
+      ]
+    }
+  },
+  "80": {
+    "intuition": "Maintain a write pointer. Allow at most two occurrences of each element by checking nums[i] against nums[write-2].",
+    "formula": "Double duplicate rule:<br><code>if (write < 2 || nums[i] != nums[write-2]) { nums[write] = nums[i]; write++; }</code>",
+    "time": "O(N) - linear scan.",
+    "space": "O(1) - in-place modifications.",
+    "dryrun": {
+      "testcase": "nums = [1, 1, 1, 2]",
+      "headers": [
+        "Index",
+        "nums[i]",
+        "nums[write-2]",
+        "Action",
+        "Array state"
+      ],
+      "rows": [
+        [
+          "0",
+          "1",
+          "-",
+          "write < 2 - Keep",
+          "[1, 1, 1, 2] (w=1)"
+        ],
+        [
+          "1",
+          "1",
+          "-",
+          "write < 2 - Keep",
+          "[1, 1, 1, 2] (w=2)"
+        ],
+        [
+          "2",
+          "1",
+          "nums[0]=1",
+          "Equals nums[write-2] - skip",
+          "[1, 1, 1, 2] (w=2)"
+        ],
+        [
+          "3",
+          "2",
+          "nums[0]=1",
+          "Differs - Keep",
+          "[1, 1, 2, 2] (w=3)"
+        ]
+      ]
+    }
+  },
+  "82": {
+    "intuition": "Use a dummy head. Loop through list checking if adjacent nodes share duplicate values. Relink the subsegment to skip duplicates entirely.",
+    "formula": "Skip duplicate sublist:<br><code>prev.next = nextNonDupNode</code>",
+    "time": "O(N) - single list scan.",
+    "space": "O(1) - pointer links.",
+    "dryrun": {
+      "testcase": "1 -> 1 -> 2",
+      "headers": [
+        "Prev Pointer",
+        "Curr Val",
+        "Next Val",
+        "Duplicates?",
+        "Next linkage"
+      ],
+      "rows": [
+        [
+          "Dummy",
+          "1",
+          "1",
+          "Yes",
+          "Dummy -> 2"
+        ],
+        [
+          "Dummy",
+          "2",
+          "null",
+          "No",
+          "Advance prev to 2"
+        ]
+      ]
+    }
+  },
+  "83": {
+    "intuition": "Iterate through the sorted linked list. If the current node value equals the next node value, skip the next node by relinking pointer.",
+    "formula": "Deduplication link:<br><code>curr.next = curr.next.next</code>",
+    "time": "O(N) - visits each node once.",
+    "space": "O(1) - pointer modification.",
+    "dryrun": {
+      "testcase": "1 -> 1 -> 2",
+      "headers": [
+        "Current Node Val",
+        "Next Node Val",
+        "Duplicate found?",
+        "Action"
+      ],
+      "rows": [
+        [
+          "1",
+          "1",
+          "Yes",
+          "Skip next: 1 -> 2"
+        ],
+        [
+          "1",
+          "2",
+          "No",
+          "Advance pointer"
+        ],
+        [
+          "2",
+          "null",
+          "No",
+          "End traversal"
+        ]
+      ]
+    }
+  },
+  "91": {
+    "intuition": "Decode ways dp[i] sum combinations from dp[i-1] (if 1-digit valid) and dp[i-2] (if 2-digit valid, e.g. values 10-26).",
+    "formula": "DP updates:<br><code>if (valid_1_digit) dp[i] += dp[i-1];</code><br><code>if (valid_2_digit) dp[i] += dp[i-2];</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(N) - DP array sizes.",
+    "dryrun": {
+      "testcase": "s = '12'",
+      "headers": [
+        "i character",
+        "1-digit match",
+        "2-digit match",
+        "dp[i] sum"
+      ],
+      "rows": [
+        [
+          "0 (init)",
+          "-",
+          "-",
+          "dp[0]=1, dp[1]=1"
+        ],
+        [
+          "2",
+          "'2' valid",
+          "'12' valid",
+          "dp[2] = dp[1]+dp[0] = 2"
+        ]
+      ]
+    }
+  },
+  "94": {
+    "intuition": "Inorder traversal visits nodes in Left -> Root -> Right sequence. Use helper recursive calls to store visited nodes.",
+    "formula": "DFS Order:<br><code>inorder(node.left); list.push(node.val); inorder(node.right);</code>",
+    "time": "O(N) - visits each node.",
+    "space": "O(H) - recursion stack depth.",
+    "dryrun": {
+      "testcase": "Tree: [1, null, 2, 3]",
+      "headers": [
+        "Visit State",
+        "Active Stack",
+        "Stored items",
+        "Action"
+      ],
+      "rows": [
+        [
+          "Left child null",
+          "[1]",
+          "[]",
+          "Process node 1"
+        ],
+        [
+          "Collect root",
+          "[]",
+          "[1]",
+          "Process right tree [2,3]"
+        ],
+        [
+          "Left child 3",
+          "[2,3]",
+          "[1]",
+          "Collect 3 -> [1, 3]"
+        ]
+      ]
+    }
+  },
+  "105": {
+    "intuition": "Use preorder to find root, look up index in inorder. Recursively build left/right subtrees using inorder split ranges.",
+    "formula": "Root construction:<br><code>root = new Node(preorder[preIdx])</code><br>Boundary splits:<br><code>[inStart..idx-1], [idx+1..inEnd]</code>",
+    "time": "O(N) - hash lookup.",
+    "space": "O(N) - map.",
+    "dryrun": {
+      "testcase": "pre = [3,9,20], inorder = [9,3,20]",
+      "headers": [
+        "PreIdx",
+        "Inorder boundaries",
+        "Root value",
+        "Left child bounds",
+        "Right child bounds"
+      ],
+      "rows": [
+        [
+          "0",
+          "[0..2]",
+          "3",
+          "[0..0] (value 9)",
+          "[2..2] (value 20)"
+        ]
+      ]
+    }
+  },
+  "106": {
+    "intuition": "Construct from inorder and postorder lists. Postorder last element determines root. Partition inorder array like preorder scheme.",
+    "formula": "Postorder traversal index decrement:<br><code>root = new Node(postorder[postIdx--])</code>",
+    "time": "O(N) - node mapping passes.",
+    "space": "O(N) - index structures.",
+    "dryrun": {
+      "testcase": "inorder = [9,3,20], post = [9,20,3]",
+      "headers": [
+        "PostIdx value",
+        "Inorder range",
+        "Created Node",
+        "Subtree bounds"
+      ],
+      "rows": [
+        [
+          "3",
+          "[0..2]",
+          "3",
+          "Right=[2..2], Left=[0..0]"
+        ]
+      ]
+    }
+  },
+  "108": {
+    "intuition": "Choose the middle element of the sorted array as the root node to guarantee a balanced BST. Recursively construct left and right subtrees from subarrays.",
+    "formula": "Mid split BST:<br><code>mid = (L + R) / 2; root = Node(nums[mid]);</code><br><code>root.left = helper(L, mid-1); root.right = helper(mid+1, R);</code>",
+    "time": "O(N) - visits each index once.",
+    "space": "O(log N) - recursion stack.",
+    "dryrun": {
+      "testcase": "nums = [-10, -3, 0, 5]",
+      "headers": [
+        "L",
+        "R",
+        "Mid index",
+        "Created node",
+        "Subtrees split boundaries"
+      ],
+      "rows": [
+        [
+          "0",
+          "3",
+          "1",
+          "-3",
+          "Left=[0..0] (-10), Right=[2..3] (0, 5)"
+        ]
+      ]
+    }
+  },
+  "110": {
+    "intuition": "Return -1 from DFS helper if subtree is unbalanced, else return tree height. Check balance factor difference.",
+    "formula": "Subtree balance check:<br><code>if (abs(H_left - H_right) > 1) return -1</code>",
+    "time": "O(N) - single visit pass.",
+    "space": "O(H) - tree heights recursion stack.",
+    "dryrun": {
+      "testcase": "Skewed BST [1, null, 2, null, 3]",
+      "headers": [
+        "Node checked",
+        "Left depth",
+        "Right depth",
+        "Balanced?"
+      ],
+      "rows": [
+        [
+          "3",
+          "0",
+          "0",
+          "Yes (height 1)"
+        ],
+        [
+          "2",
+          "0",
+          "1",
+          "Yes (height 2)"
+        ],
+        [
+          "1",
+          "0",
+          "2",
+          "No (delta 2 > 1 -> -1)"
+        ]
+      ]
+    }
+  },
+  "121": {
+    "intuition": "Track the minimum price seen so far. For each price, compute the profit if we sell today and update the maximum profit accordingly.",
+    "formula": "Profit logic:<br><code>minPrice = min(minPrice, price)</code><br><code>maxProfit = max(maxProfit, price - minPrice)</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(1) - constant space.",
+    "dryrun": {
+      "testcase": "prices = [7, 1, 5, 3]",
+      "headers": [
+        "Price",
+        "Min Price",
+        "Current Profit",
+        "Max Profit"
+      ],
+      "rows": [
+        [
+          "7",
+          "7",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "5",
+          "1",
+          "4",
+          "4"
+        ],
+        [
+          "3",
+          "1",
+          "2",
+          "4"
+        ]
+      ]
+    }
+  },
+  "122": {
+    "intuition": "Greedy accumulation. Collect profit from all consecutive price increases in the array by buying on day i-1 and selling on day i.",
+    "formula": "Accumulate profit:<br><code>if (prices[i] > prices[i-1]) profit += prices[i] - prices[i-1];</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(1) - in-place.",
+    "dryrun": {
+      "testcase": "prices = [1, 2, 3, 2, 5]",
+      "headers": [
+        "Day index i",
+        "prices[i]",
+        "prices[i-1]",
+        "Profit increment",
+        "Total Profit"
+      ],
+      "rows": [
+        [
+          "1",
+          "2",
+          "1",
+          "2-1 = 1",
+          "1"
+        ],
+        [
+          "2",
+          "3",
+          "2",
+          "3-2 = 1",
+          "2"
+        ],
+        [
+          "3",
+          "2",
+          "3",
+          "0",
+          "2"
+        ],
+        [
+          "4",
+          "5",
+          "2",
+          "5-2 = 3",
+          "5"
+        ]
+      ]
+    }
+  },
+  "130": {
+    "intuition": "Identify uncaptured border 'O' regions by launching DFS/BFS from grid border nodes. Mark reachable nodes. Convert remaining 'O's to 'X's.",
+    "formula": "Cell marking:<br><code>if (matrix[r][c] == 'O') matrix[r][c] = 'E';</code>",
+    "time": "O(M*N) - visit cells.",
+    "space": "O(M*N) - recursion depth.",
+    "dryrun": {
+      "testcase": "Border 'O' versus middle 'O'",
+      "headers": [
+        "Border cell check",
+        "Cell",
+        "Border connected?",
+        "Flip Action"
+      ],
+      "rows": [
+        [
+          "Row 0",
+          "(0, 1) 'O'",
+          "Yes - Mark 'E'",
+          "No flip"
+        ],
+        [
+          "Center",
+          "(1, 1) 'O'",
+          "No - Remains 'O'",
+          "Flipped to 'X'"
+        ]
+      ]
+    }
+  },
+  "133": {
+    "intuition": "Use a hash map to map original nodes to their cloned copies. Perform a DFS/BFS traversal to clone node links recursively.",
+    "formula": "Cloned linkage mapping:<br><code>cloned[node] = new Node(node.val);</code><br><code>cloned[node].neighbors.push(clone(neighbor));</code>",
+    "time": "O(V + E) - visits vertices and edges.",
+    "space": "O(V) - clone map memory.",
+    "dryrun": {
+      "testcase": "Graph node 1 connected to 2",
+      "headers": [
+        "Node checked",
+        "Cloned map",
+        "Clone Created?",
+        "Cloned links built"
+      ],
+      "rows": [
+        [
+          "1",
+          "{1: clone1}",
+          "Yes",
+          "Check neighbors of 1"
+        ],
+        [
+          "2",
+          "{1: clone1, 2: clone2}",
+          "Yes",
+          "clone1.neighbors.push(clone2)"
+        ]
+      ]
+    }
+  },
+  "139": {
+    "intuition": "Use DP. dp[i] is true if a prefix substring s[0..j] is segmentable, and the suffix s[j..i] exists in wordDict dictionary lookup.",
+    "formula": "DP condition:<br><code>dp[i] = dp[j] && wordDict.has(s.substring(j, i))</code>",
+    "time": "O(N^2) - check substrings combinations.",
+    "space": "O(N) - boolean cache.",
+    "dryrun": {
+      "testcase": "s = 'leetcode', dict = ['leet','code']",
+      "headers": [
+        "Subsegment i",
+        "Valid j split",
+        "dict.has(s[j..i])?",
+        "dp[i] status"
+      ],
+      "rows": [
+        [
+          "4 ('leet')",
+          "j = 0 (dp[0]=T)",
+          "dict.has('leet') -> True",
+          "dp[4] = True"
+        ],
+        [
+          "8 ('leetcode')",
+          "j = 4 (dp[4]=T)",
+          "dict.has('code') -> True",
+          "dp[8] = True"
+        ]
+      ]
+    }
+  },
+  "144": {
+    "intuition": "Preorder traversal visits nodes in Root -> Left -> Right sequence. Record root value first, then recurse left and right subtrees.",
+    "formula": "DFS Order:<br><code>list.push(node.val); preorder(node.left); preorder(node.right);</code>",
+    "time": "O(N) - visits nodes.",
+    "space": "O(H) - call stack.",
+    "dryrun": {
+      "testcase": "Tree: [1, null, 2]",
+      "headers": [
+        "Node visited",
+        "Action",
+        "Active list output",
+        "Next candidates"
+      ],
+      "rows": [
+        [
+          "1",
+          "Record root val",
+          "[1]",
+          "Check left(null), right(2)"
+        ],
+        [
+          "2",
+          "Record node val",
+          "[1, 2]",
+          "End"
+        ]
+      ]
+    }
+  },
+  "145": {
+    "intuition": "Postorder traversal visits nodes in Left -> Right -> Root sequence. Recurse left and right subtrees first, then add the parent node value.",
+    "formula": "DFS Order:<br><code>postorder(node.left); postorder(node.right); list.push(node.val);</code>",
+    "time": "O(N) - visits nodes.",
+    "space": "O(H) - call stack.",
+    "dryrun": {
+      "testcase": "Tree: [1, null, 2]",
+      "headers": [
+        "Node visited",
+        "Action",
+        "Active list output",
+        "Stack state"
+      ],
+      "rows": [
+        [
+          "2",
+          "Record child val",
+          "[2]",
+          "Return to parent 1"
+        ],
+        [
+          "1",
+          "Record parent val",
+          "[2, 1]",
+          "Done"
+        ]
+      ]
+    }
+  },
+  "152": {
+    "intuition": "Track both maximum and minimum product ending at current index. A negative number can turn the minimum product into a new maximum product.",
+    "formula": "Product transition:<br><code>temp = max;</code><br><code>max = max(num, num*max, num*min);</code><br><code>min = min(num, num*temp, num*min);</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(1) - constant variables.",
+    "dryrun": {
+      "testcase": "nums = [2, 3, -2]",
+      "headers": [
+        "Index",
+        "Num",
+        "Max Prod",
+        "Min Prod",
+        "Global Max"
+      ],
+      "rows": [
+        [
+          "0",
+          "2",
+          "2",
+          "2",
+          "2"
+        ],
+        [
+          "1",
+          "3",
+          "6",
+          "3",
+          "6"
+        ],
+        [
+          "2",
+          "-2",
+          "-2",
+          "-12",
+          "6"
+        ]
+      ]
+    }
+  },
+  "169": {
+    "intuition": "Boyer-Moore Voting Algorithm. Maintain a candidate and a counter. Increment/decrement the counter and switch candidate if count drops to zero.",
+    "formula": "Candidate adjustment:<br><code>if (count == 0) candidate = num;</code><br><code>count += (num == candidate) ? 1 : -1;</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(1) - constant variables.",
+    "dryrun": {
+      "testcase": "nums = [2, 2, 1, 1, 1]",
+      "headers": [
+        "Index",
+        "Num",
+        "Candidate",
+        "Count"
+      ],
+      "rows": [
+        [
+          "0",
+          "2",
+          "2",
+          "1"
+        ],
+        [
+          "1",
+          "2",
+          "2",
+          "2"
+        ],
+        [
+          "2",
+          "1",
+          "2",
+          "1"
+        ],
+        [
+          "3",
+          "1",
+          "2",
+          "0"
+        ],
+        [
+          "4",
+          "1",
+          "1",
+          "1"
+        ]
+      ]
+    }
+  },
+  "187": {
+    "intuition": "Slide a window of length 10 across the DNA string. Store substrings in a set to identify recurring 10-letter subsequences.",
+    "formula": "Subsegment hash check:<br><code>sub = s.substring(i, i+10); if (seen.has(sub)) duplicates.add(sub); seen.add(sub);</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(N) - hash set storage.",
+    "dryrun": {
+      "testcase": "s = 'AAAAACCCCCAAAAACCCCC'",
+      "headers": [
+        "i",
+        "Substring window",
+        "seen?",
+        "duplicates state"
+      ],
+      "rows": [
+        [
+          "0",
+          "'AAAAACCCCC'",
+          "No - Add to seen",
+          "[]"
+        ],
+        [
+          "10",
+          "'AAAAACCCCC'",
+          "Yes - Add to duplicates",
+          "['AAAAACCCCC']"
+        ]
+      ]
+    }
+  },
+  "203": {
+    "intuition": "Iterate through the linked list with a tracker pointer. If the next node value equals val, skip it by linking the tracker to node.next.next.",
+    "formula": "Link rewrite:<br><code>if (curr.next.val == val) curr.next = curr.next.next; else curr = curr.next;</code>",
+    "time": "O(N) - visits each node once.",
+    "space": "O(1) - links rewrite.",
+    "dryrun": {
+      "testcase": "1 -> 2 -> 3, val = 2",
+      "headers": [
+        "Node checked",
+        "Next Node Val",
+        "Matches val?",
+        "Action Result"
+      ],
+      "rows": [
+        [
+          "1",
+          "2",
+          "Yes",
+          "Skip node 2: 1 -> 3"
+        ],
+        [
+          "1",
+          "3",
+          "No",
+          "Advance pointer to 3"
+        ]
+      ]
+    }
+  },
+  "225": {
+    "intuition": "Implement stack operations using a single queue. For push, add element then rotate queue elements to bring newest item to front.",
+    "formula": "Rotate items:<br><code>queue.push(val); for (0..size-1) queue.push(queue.shift())</code>",
+    "time": "O(N) push, O(1) pop.",
+    "space": "O(N) - storage.",
+    "dryrun": {
+      "testcase": "Push 1, Push 2",
+      "headers": [
+        "Action",
+        "Push item",
+        "Rotate loops",
+        "Queue state"
+      ],
+      "rows": [
+        [
+          "Push 1",
+          "1",
+          "0",
+          "[1]"
+        ],
+        [
+          "Push 2",
+          "2",
+          "1",
+          "[2, 1]"
+        ]
+      ]
+    }
+  },
+  "232": {
+    "intuition": "Use two stacks (input stack and output stack). For push, push to input. For pop/peek, transfer elements from input to output to reverse order.",
+    "formula": "Stack transfer:<br><code>if (outputStack is empty) while (inputStack): outputStack.push(inputStack.pop())</code>",
+    "time": "O(1) amortized.",
+    "space": "O(N) - queue elements storage.",
+    "dryrun": {
+      "testcase": "push(1), push(2), pop()",
+      "headers": [
+        "Step",
+        "Input Stack",
+        "Output Stack",
+        "Popped val"
+      ],
+      "rows": [
+        [
+          "Push 1",
+          "[1]",
+          "[]",
+          "-"
+        ],
+        [
+          "Push 2",
+          "[1, 2]",
+          "[]",
+          "-"
+        ],
+        [
+          "Pop()",
+          "[]",
+          "[2]",
+          "1"
+        ]
+      ]
+    }
+  },
+  "236": {
+    "intuition": "Recursively traverse tree. Return node if node is p or q. If left and right subtrees both return non-null, current node is LCA.",
+    "formula": "LCA Condition:<br><code>if (left && right) return root; return left ? left : right;</code>",
+    "time": "O(N) - visit all nodes.",
+    "space": "O(H) - call stack.",
+    "dryrun": {
+      "testcase": "root = [3,5,1], p = 5, q = 1",
+      "headers": [
+        "Node checked",
+        "Left subtree return",
+        "Right subtree return",
+        "Result"
+      ],
+      "rows": [
+        [
+          "5",
+          "5 (match)",
+          "-",
+          "5"
+        ],
+        [
+          "1",
+          "-",
+          "1 (match)",
+          "1"
+        ],
+        [
+          "3",
+          "5",
+          "1",
+          "Return 3"
+        ]
+      ]
+    }
+  },
+  "238": {
+    "intuition": "Construct prefix and suffix products in two passes. Store the product of elements before index in the output array, then multiply by elements after index.",
+    "formula": "Prefix pass:<br><code>res[i] = prefix; prefix *= nums[i];</code><br>Suffix pass:<br><code>res[i] *= suffix; suffix *= nums[i];</code>",
+    "time": "O(N) - two linear passes.",
+    "space": "O(1) - excluding output array.",
+    "dryrun": {
+      "testcase": "nums = [1, 2, 3]",
+      "headers": [
+        "Index",
+        "Num",
+        "Prefix accumulator",
+        "Suffix accumulator",
+        "Result state"
+      ],
+      "rows": [
+        [
+          "0",
+          "1",
+          "1",
+          "-",
+          "[1, -, -]"
+        ],
+        [
+          "1",
+          "2",
+          "1*1 = 1",
+          "-",
+          "[1, 1, -]"
+        ],
+        [
+          "2",
+          "3",
+          "1*2 = 2",
+          "1",
+          "[1, 1, 2]"
+        ],
+        [
+          "1 (Suffix)",
+          "2",
+          "-",
+          "1*3 = 3",
+          "[1, 3, 2]"
+        ]
+      ]
+    }
+  },
+  "240": {
+    "intuition": "Search from top-right corner. If cell value equals target, return true. If cell value is greater than target, move left. If cell value is smaller, move down.",
+    "formula": "Pointer updates:<br><code>if (val == target) return true;<br>else if (val > target) col--;<br>else row++;</code>",
+    "time": "O(M + N) - linear boundaries scan.",
+    "space": "O(1) - pointer indices.",
+    "dryrun": {
+      "testcase": "matrix = [[1,4],[2,5]], target = 2",
+      "headers": [
+        "Row",
+        "Col",
+        "Val",
+        "Val vs Target",
+        "Direction"
+      ],
+      "rows": [
+        [
+          "0",
+          "1",
+          "4",
+          "4 > 2",
+          "Go Left (col--)"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "1 < 2",
+          "Go Down (row++)"
+        ],
+        [
+          "1",
+          "0",
+          "2",
+          "2 == 2",
+          "Match!"
+        ]
+      ]
+    }
+  },
+  "261": {
+    "intuition": "A graph is a valid tree if it is connected and has no cycles. Use DSU to verify: if we try to connect two nodes with a common parent, we have a cycle.",
+    "formula": "Tree Condition:<br><code>edges == n - 1 && DSU.union(u, v) succeeds for all edges</code>",
+    "time": "O(N * alpha(N)) - DSU edge checks.",
+    "space": "O(N) - parent maps.",
+    "dryrun": {
+      "testcase": "n = 3, edges = [[0,1],[1,2]]",
+      "headers": [
+        "Edge",
+        "union(u, v)",
+        "Cycle detected?",
+        "DSU Sets"
+      ],
+      "rows": [
+        [
+          "[0,1]",
+          "union(0,1) -> success",
+          "No",
+          "{0,1}, {2}"
+        ],
+        [
+          "[1,2]",
+          "union(1,2) -> success",
+          "No",
+          "{0,1,2} (Connected tree)"
+        ]
+      ]
+    }
+  },
+  "269": {
+    "intuition": "Build a character dependency graph from adjacent sorted words. Perform topological sort using DFS or Kahn's indegree search. Detect cycles.",
+    "formula": "Graph edge:<br><code>if (w1[j] != w2[j]) addEdge(w1[j], w2[j])</code>",
+    "time": "O(C) - character count total.",
+    "space": "O(U) - unique characters.",
+    "dryrun": {
+      "testcase": "words = ['wrt','wrf','er']",
+      "headers": [
+        "Words adjacent",
+        "First mismatch",
+        "Edge created",
+        "Toposort"
+      ],
+      "rows": [
+        [
+          "wrt vs wrf",
+          "'t' vs 'f'",
+          "t -> f",
+          "-"
+        ],
+        [
+          "wrf vs er",
+          "'w' vs 'e'",
+          "w -> e",
+          "Order: w -> e -> r -> t -> f"
+        ]
+      ]
+    }
+  },
+  "278": {
+    "intuition": "Use binary search on versions 1 to N. Test midpoint; if bad, candidate is mid or smaller. If not bad, search right half.",
+    "formula": "Binary boundary:<br><code>if (isBadVersion(mid)) R = mid; else L = mid + 1;</code>",
+    "time": "O(log N) - versions halved each test.",
+    "space": "O(1) - index pointers.",
+    "dryrun": {
+      "testcase": "n = 5, first_bad = 4",
+      "headers": [
+        "L",
+        "R",
+        "Mid",
+        "isBadVersion(mid)?",
+        "Action"
+      ],
+      "rows": [
+        [
+          "1",
+          "5",
+          "3",
+          "False",
+          "L = 4"
+        ],
+        [
+          "4",
+          "5",
+          "4",
+          "True",
+          "R = 4"
+        ],
+        [
+          "Done",
+          "-",
+          "-",
+          "-",
+          "Return L = 4"
+        ]
+      ]
+    }
+  },
+  "283": {
+    "intuition": "Maintain a write pointer. As we iterate through the array, copy all non-zero elements to the write pointer. Finally, fill the remaining elements with zeros.",
+    "formula": "Write check:<br><code>if (nums[i] != 0) { nums[write] = nums[i]; write++; }</code>",
+    "time": "O(N) - linear scan.",
+    "space": "O(1) - in-place update.",
+    "dryrun": {
+      "testcase": "nums = [0, 1, 0, 3]",
+      "headers": [
+        "Index",
+        "Value",
+        "Write Index",
+        "Array state"
+      ],
+      "rows": [
+        [
+          "0",
+          "0",
+          "0",
+          "[0, 1, 0, 3]"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "[1, 1, 0, 3]"
+        ],
+        [
+          "2",
+          "0",
+          "1",
+          "[1, 1, 0, 3]"
+        ],
+        [
+          "3",
+          "3",
+          "2",
+          "[1, 3, 0, 3]"
+        ],
+        [
+          "End",
+          "-",
+          "2",
+          "[1, 3, 0, 0]"
+        ]
+      ]
+    }
+  },
+  "297": {
+    "intuition": "Serialize by pre-order traversal printing values comma-separated with '#' for null. Deserialize using string splits queue helper.",
+    "formula": "DFS String build:<br><code>str += node.val + ',' + dfs(node.left) + ',' + dfs(node.right)</code>",
+    "time": "O(N) - elements visits.",
+    "space": "O(N) - queue serialization lengths.",
+    "dryrun": {
+      "testcase": "Tree: 1 -> 2",
+      "headers": [
+        "Current Node",
+        "Serialized String output",
+        "Deserialization queue"
+      ],
+      "rows": [
+        [
+          "1",
+          "'1,2,#,#,#'",
+          "['1','2','#','#','#']"
+        ]
+      ]
+    }
+  },
+  "310": {
+    "intuition": "Repeatedly prune leaf nodes (indegree == 1) from the graph until at most two central nodes remain. These centroids represent minimum height tree roots.",
+    "formula": "Pruning leaves:<br><code>while (nodes > 2) { size = leaves.queue.size; for (size) removeLeaf(leaves.pop()); }</code>",
+    "time": "O(V + E) - linear graph reduction.",
+    "space": "O(V) - degree structures.",
+    "dryrun": {
+      "testcase": "Line graph 0-1-2",
+      "headers": [
+        "Initial Leaves",
+        "Active Node Count",
+        "Pruning Step",
+        "Remaining Node Centroids"
+      ],
+      "rows": [
+        [
+          "[0, 2]",
+          "3",
+          "Remove 0 and 2",
+          "Node [1] is centroid"
+        ]
+      ]
+    }
+  },
+  "328": {
+    "intuition": "Maintain separate odd list and even list pointers. Link odd nodes together and even nodes together, then append the even list to the end of the odd list.",
+    "formula": "Split link updates:<br><code>odd.next = even.next; odd = odd.next;</code><br><code>even.next = odd.next; even = even.next;</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(1) - pointers connection.",
+    "dryrun": {
+      "testcase": "1 -> 2 -> 3 -> 4",
+      "headers": [
+        "Odd Tail",
+        "Even Tail",
+        "Odd Link",
+        "Even Link"
+      ],
+      "rows": [
+        [
+          "1",
+          "2",
+          "1 -> 3",
+          "2 -> 4"
+        ],
+        [
+          "3",
+          "4",
+          "3 -> null",
+          "4 -> null"
+        ]
+      ]
+    }
+  },
+  "344": {
+    "intuition": "Use two pointers, left starting at 0 and right at length-1. Swap elements at left and right pointers, then move pointers toward the center.",
+    "formula": "Swap elements:<br><code>swap(s[left], s[right]); left++; right--;</code>",
+    "time": "O(N) - swaps half the array.",
+    "space": "O(1) - in-place swaps.",
+    "dryrun": {
+      "testcase": "s = ['h', 'e', 'l', 'o']",
+      "headers": [
+        "Left",
+        "Right",
+        "Swap Action",
+        "Result Array"
+      ],
+      "rows": [
+        [
+          "0 ('h')",
+          "3 ('o')",
+          "h <-> o",
+          "['o', 'e', 'l', 'h']"
+        ],
+        [
+          "1 ('e')",
+          "2 ('l')",
+          "e <-> l",
+          "['o', 'l', 'e', 'h']"
+        ]
+      ]
+    }
+  },
+  "367": {
+    "intuition": "Use binary search in range 1..num. If mid * mid matches num, it is a perfect square. Otherwise adjust search boundaries.",
+    "formula": "Square check:<br><code>square = mid * mid; if (square == num) return true; else if (square > num) R = mid - 1; else L = mid + 1;</code>",
+    "time": "O(log N) - halves range.",
+    "space": "O(1) - in-place indices.",
+    "dryrun": {
+      "testcase": "num = 16",
+      "headers": [
+        "L",
+        "R",
+        "Mid",
+        "Square (mid^2)",
+        "Action"
+      ],
+      "rows": [
+        [
+          "1",
+          "16",
+          "8",
+          "64",
+          "R = 7"
+        ],
+        [
+          "1",
+          "7",
+          "4",
+          "16",
+          "Match - Return true"
+        ]
+      ]
+    }
+  },
+  "371": {
+    "intuition": "Add two numbers without standard arithmetic operators using bitwise operations: XOR computes sum without carry, AND left shift computes carries.",
+    "formula": "Bit additions:<br><code>sum = a ^ b</code><br><code>carry = (a & b) << 1</code>",
+    "time": "O(1) - max 32 iterations.",
+    "space": "O(1) - in-place.",
+    "dryrun": {
+      "testcase": "a = 2 (0010), b = 3 (0011)",
+      "headers": [
+        "Iteration",
+        "a ^ b (Sum)",
+        "(a & b) << 1 (Carry)",
+        "New inputs"
+      ],
+      "rows": [
+        [
+          "1",
+          "0001",
+          "0100",
+          "a=1, b=4"
+        ],
+        [
+          "2",
+          "0101",
+          "0000",
+          "a=5, b=0 (Done)"
+        ]
+      ]
+    }
+  },
+  "373": {
+    "intuition": "Use a Min-Heap. Initialize heap with pairs (nums1[i], nums2[0]). Pop smallest, add to results, then push next index pair (nums1[i], nums2[j+1]) to heap.",
+    "formula": "Heap element push:<br><code>heap.push(nums1[i], nums2[j+1])</code>",
+    "time": "O(K log N) - heap size N elements limit.",
+    "space": "O(N) - heap size.",
+    "dryrun": {
+      "testcase": "nums1 = [1,2], nums2 = [3], k = 2",
+      "headers": [
+        "Step",
+        "Heap State (sums)",
+        "Popped Element",
+        "Push next candidates"
+      ],
+      "rows": [
+        [
+          "Init",
+          "[(1,3)=4, (2,3)=5]",
+          "-",
+          "Pairs initialized"
+        ],
+        [
+          "1",
+          "[(2,3)=5]",
+          "(1,3)",
+          "No more items in nums2"
+        ],
+        [
+          "2",
+          "[]",
+          "(2,3)",
+          "No more items in nums2"
+        ]
+      ]
+    }
+  },
+  "374": {
+    "intuition": "Perform binary search on search space 1..n. Query api helper API guess(mid). Shift range depending on search helper return value.",
+    "formula": "Guess checking:<br><code>if (guess(mid) == 0) return mid;<br>else if (guess(mid) < 0) R = mid - 1;<br>else L = mid + 1;</code>",
+    "time": "O(log N) - halves range.",
+    "space": "O(1) - index trackers.",
+    "dryrun": {
+      "testcase": "n = 10, pick = 6",
+      "headers": [
+        "L",
+        "R",
+        "Mid",
+        "Guess output",
+        "Next Bounds"
+      ],
+      "rows": [
+        [
+          "1",
+          "10",
+          "5",
+          "1",
+          "L = 6"
+        ],
+        [
+          "6",
+          "10",
+          "8",
+          "-1",
+          "R = 7"
+        ],
+        [
+          "6",
+          "7",
+          "6",
+          "0",
+          "Match!"
+        ]
+      ]
+    }
+  },
+  "394": {
+    "intuition": "Use two stacks: one for repeat counts (k) and one for string segments. Build substring recursively inside brackets and multiply by counts when closing bracket is met.",
+    "formula": "Bracket closure:<br><code>prevStr = strStack.pop(); count = countStack.pop(); currStr = prevStr + currStr.repeat(count);</code>",
+    "time": "O(N) - process characters.",
+    "space": "O(N) - stack storage.",
+    "dryrun": {
+      "testcase": "s = '2[a]'",
+      "headers": [
+        "Char checked",
+        "Count Stack",
+        "String Stack",
+        "Current String status"
+      ],
+      "rows": [
+        [
+          "'2'",
+          "[2]",
+          "[]",
+          "''"
+        ],
+        [
+          "'['",
+          "[2]",
+          "['']",
+          "''"
+        ],
+        [
+          "'a'",
+          "[2]",
+          "['']",
+          "'a'"
+        ],
+        [
+          "']'",
+          "[]",
+          "[]",
+          "'' + 'a'.repeat(2) = 'aa'"
+        ]
+      ]
+    }
+  },
+  "417": {
+    "intuition": "Run BFS/DFS from Pacific boundary edges and Atlantic boundary edges. The intersection of cells reachable by water flows determines coordinates.",
+    "formula": "Water flow path:<br><code>heights[neighbor] >= heights[curr]</code>",
+    "time": "O(M*N) - visit board cells twice.",
+    "space": "O(M*N) - reachability maps.",
+    "dryrun": {
+      "testcase": "Matrix heights grid",
+      "headers": [
+        "Start Edge",
+        "Search Type",
+        "Visited Cells count",
+        "Valid Overlaps"
+      ],
+      "rows": [
+        [
+          "Pacific border",
+          "BFS",
+          "Pacific reachable set",
+          "-"
+        ],
+        [
+          "Atlantic border",
+          "BFS",
+          "Atlantic reachable set",
+          "Intersection coordinates"
+        ]
+      ]
+    }
+  },
+  "421": {
+    "intuition": "Insert binary prefixes of numbers into a Trie. For each number, query Trie for the branch matching the bits opposite to current value to maximize XOR output.",
+    "formula": "XOR match digit:<br><code>target = opposite_bit; if (node.has(target)) { xor_sum += 1<<i; node = node[target]; }</code>",
+    "time": "O(32 * N) - fixed bit-width tree operations.",
+    "space": "O(32 * N) - trie node allocation.",
+    "dryrun": {
+      "testcase": "nums = [3, 10] -> binary [00011, 01010]",
+      "headers": [
+        "Bit index i",
+        "Current val",
+        "Opposite target bit",
+        "Trie match?",
+        "Max XOR path"
+      ],
+      "rows": [
+        [
+          "4",
+          "01010 (10)",
+          "1",
+          "No (match bit 0)",
+          "XOR sum = 0"
+        ],
+        [
+          "3",
+          "01010 (10)",
+          "1",
+          "Yes (match bit 1)",
+          "XOR sum = 8"
+        ]
+      ]
+    }
+  },
+  "437": {
+    "intuition": "Find paths sums by traversing tree nodes. Maintain a running sum count lookup map to find target matching prefixes in O(N).",
+    "formula": "Map lookup:<br><code>paths = prefixMap[currSum - target]</code><br>Map update:<br><code>prefixMap[currSum]++</code>",
+    "time": "O(N) - single DFS pass.",
+    "space": "O(H) - stack memory.",
+    "dryrun": {
+      "testcase": "root = [10,5,-3], target = 8",
+      "headers": [
+        "Node visited",
+        "Current Sum",
+        "Lookup Key (Sum-Target)",
+        "Match count",
+        "Prefix Map state"
+      ],
+      "rows": [
+        [
+          "10",
+          "10",
+          "10-8 = 2",
+          "0",
+          "{0:1, 10:1}"
+        ],
+        [
+          "5",
+          "15",
+          "15-8 = 7",
+          "0",
+          "{0:1, 10:1, 15:1}"
+        ]
+      ]
+    }
+  },
+  "441": {
+    "intuition": "Determine maximum complete rows. Use binary search in range 1..n. The total coins required for k rows is k * (k + 1) / 2.",
+    "formula": "Sum formula check:<br><code>sum = k * (k + 1) / 2; if (sum <= n) { ans = k; L = k + 1; } else R = k - 1;</code>",
+    "time": "O(log N) - binary answer limits.",
+    "space": "O(1) - index variables.",
+    "dryrun": {
+      "testcase": "n = 5",
+      "headers": [
+        "L",
+        "R",
+        "Mid k",
+        "Coins needed (k*(k+1)/2)",
+        "Action"
+      ],
+      "rows": [
+        [
+          "1",
+          "5",
+          "3",
+          "6",
+          "R = 2"
+        ],
+        [
+          "1",
+          "2",
+          "1",
+          "1",
+          "L = 2, ans = 1"
+        ],
+        [
+          "2",
+          "2",
+          "2",
+          "3",
+          "L = 3, ans = 2"
+        ]
+      ]
+    }
+  },
+  "451": {
+    "intuition": "Count character frequencies, then group characters by frequency in a bucket list. Join from highest bucket down to build sorted output.",
+    "formula": "Bucket index:<br><code>buckets[frequency].push(char)</code>",
+    "time": "O(N) - buckets size bounds.",
+    "space": "O(N) - frequency map.",
+    "dryrun": {
+      "testcase": "s = 'tree'",
+      "headers": [
+        "Char Count Map",
+        "Buckets [Freq]",
+        "Output Build"
+      ],
+      "rows": [
+        [
+          "{'t':1, 'r':1, 'e':2}",
+          "Buckets[2]=['e']; Buckets[1]=['t','r']",
+          "'eetr'"
+        ]
+      ]
+    }
+  },
+  "456": {
+    "intuition": "Use a monotonic stack scanning from right to left to keep track of candidates for element 'k' (num3), maintaining the prefix minimums array for 'i' (num1).",
+    "formula": "State match:<br><code>nums[i] < nums[k] && nums[k] < nums[j]</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(N) - stack storage.",
+    "dryrun": {
+      "testcase": "nums = [3, 1, 4, 2]",
+      "headers": [
+        "Index",
+        "Val",
+        "Min Prefix",
+        "Stack items",
+        "s3 value"
+      ],
+      "rows": [
+        [
+          "3",
+          "2",
+          "1",
+          "[2]",
+          "-"
+        ],
+        [
+          "2",
+          "4",
+          "1",
+          "[4]",
+          "2"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "[4]",
+          "2 (Match: 1 < 2 < 4)"
+        ]
+      ]
+    }
+  },
+  "485": {
+    "intuition": "Iterate through the array. Keep a running count of consecutive 1s and update the maximum count seen so far whenever a 0 is encountered or at the end of the array.",
+    "formula": "Update count:<br><code>if (num == 1) count++; else { maxCount = max(maxCount, count); count = 0; }</code>",
+    "time": "O(N) - single pass scan.",
+    "space": "O(1) - auxiliary space.",
+    "dryrun": {
+      "testcase": "nums = [1, 1, 0, 1]",
+      "headers": [
+        "Index",
+        "Num",
+        "Current Count",
+        "Max Count"
+      ],
+      "rows": [
+        [
+          "0",
+          "1",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "1",
+          "2",
+          "0"
+        ],
+        [
+          "2",
+          "0",
+          "0",
+          "2"
+        ],
+        [
+          "3",
+          "1",
+          "1",
+          "2"
+        ],
+        [
+          "End",
+          "-",
+          "0",
+          "2"
+        ]
+      ]
+    }
+  },
+  "516": {
+    "intuition": "The longest palindromic subsequence of a string is equivalent to the Longest Common Subsequence (LCS) of the string and its reversed version.",
+    "formula": "Subsequence DP:<br><code>if (s[i] == rev[j]) dp[i][j] = dp[i-1][j-1] + 1; else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);</code>",
+    "time": "O(N^2) - matrix cells fill.",
+    "space": "O(N^2) - DP memory matrix.",
+    "dryrun": {
+      "testcase": "s = 'bbbab'",
+      "headers": [
+        "i char",
+        "j char (reverse)",
+        "Match?",
+        "dp[i][j] score"
+      ],
+      "rows": [
+        [
+          "'b'",
+          "'b'",
+          "Yes",
+          "1"
+        ],
+        [
+          "'b'",
+          "'a'",
+          "No",
+          "max(dp[i-1][j], dp[i][j-1])"
+        ]
+      ]
+    }
+  },
+  "572": {
+    "intuition": "Recursively check if current node matches root. Compare subtree using helper isSameTree function at every matching node.",
+    "formula": "Subtree match:<br><code>isSubtree = isSame(r, s) || isSubtree(r.left, s) || isSubtree(r.right, s)</code>",
+    "time": "O(M * N) - worst case comparison.",
+    "space": "O(H) - call stack heights.",
+    "dryrun": {
+      "testcase": "tree = [3,4,5], sub = [4]",
+      "headers": [
+        "Root Node Checked",
+        "Is same tree match?",
+        "Result"
+      ],
+      "rows": [
+        [
+          "3",
+          "False",
+          "Check left"
+        ],
+        [
+          "4",
+          "True",
+          "Subtree matches!"
+        ]
+      ]
+    }
+  },
+  "647": {
+    "intuition": "Use center expansion. Count all valid palindromes that can be formed by expanding outwards from single-character and double-character centers.",
+    "formula": "Palindrome increment:<br><code>while (L >= 0 && R < len && s[L] == s[R]) { count++; L--; R++; }</code>",
+    "time": "O(N^2) - expand centers.",
+    "space": "O(1) - in-place counter.",
+    "dryrun": {
+      "testcase": "s = 'abc'",
+      "headers": [
+        "Center Index",
+        "Expansion L/R",
+        "Matching chars?",
+        "Palindromes Count"
+      ],
+      "rows": [
+        [
+          "0",
+          "(0, 0)",
+          "Yes ('a')",
+          "1"
+        ],
+        [
+          "1",
+          "(1, 1)",
+          "Yes ('b')",
+          "2"
+        ],
+        [
+          "2",
+          "(2, 2)",
+          "Yes ('c')",
+          "3"
+        ]
+      ]
+    }
+  },
+  "712": {
+    "intuition": "Define dp[i][j] as the minimum ASCII delete sum to make s1[0..i] and s2[0..j] equal. Balance deletions based on character matching.",
+    "formula": "ASCII transition:<br><code>if (s1[i-1] == s2[j-1]) dp[i][j] = dp[i-1][j-1];</code><br><code>else dp[i][j] = min(dp[i-1][j] + s1[i-1].charCodeAt, dp[i][j-1] + s2[j-1].charCodeAt);</code>",
+    "time": "O(M*N) - state space.",
+    "space": "O(M*N) - memo table.",
+    "dryrun": {
+      "testcase": "s1 = 'sea', s2 = 'eat'",
+      "headers": [
+        "i",
+        "j",
+        "s1[i-1]/s2[j-1]",
+        "Match?",
+        "Min ASCII cost"
+      ],
+      "rows": [
+        [
+          "1 ('s')",
+          "1 ('e')",
+          "No",
+          "Min(dp[0][1]+115, dp[1][0]+101)",
+          "115"
+        ]
+      ]
+    }
+  },
+  "735": {
+    "intuition": "Use a stack to model asteroid collisions. Positive asteroids move right (push to stack). Negative asteroids move left and collide with positive top items.",
+    "formula": "Collision rule:<br><code>if (top > 0 && top < abs(asteroid)) stack.pop();</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(N) - stack space.",
+    "dryrun": {
+      "testcase": "asteroids = [5, 10, -5]",
+      "headers": [
+        "Asteroid",
+        "Stack state",
+        "Collision?",
+        "Result Action"
+      ],
+      "rows": [
+        [
+          "5",
+          "[5]",
+          "No",
+          "Push 5"
+        ],
+        [
+          "10",
+          "[5, 10]",
+          "No",
+          "Push 10"
+        ],
+        [
+          "-5",
+          "[5, 10]",
+          "Yes (10 vs -5)",
+          "10 wins - discard -5"
+        ]
+      ]
+    }
+  },
+  "746": {
+    "intuition": "Calculate min cost to reach step i. The cost is the step's fee plus the minimum of costs to reach the preceding one or two steps.",
+    "formula": "Min climb step:<br><code>dp[i] = cost[i] + min(dp[i-1], dp[i-2])</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(1) - constant variable rolling array.",
+    "dryrun": {
+      "testcase": "cost = [10, 15, 20]",
+      "headers": [
+        "Step index i",
+        "dp[i-2]",
+        "dp[i-1]",
+        "cost[i]",
+        "dp[i] Value"
+      ],
+      "rows": [
+        [
+          "0",
+          "-",
+          "-",
+          "10",
+          "10"
+        ],
+        [
+          "1",
+          "-",
+          "-",
+          "15",
+          "15"
+        ],
+        [
+          "2",
+          "10",
+          "15",
+          "20",
+          "20 + Min(10, 15) = 30"
+        ]
+      ]
+    }
+  },
+  "820": {
+    "intuition": "Insert all words in reversed character order into a Trie. Count path lengths to all leaf nodes; internal matching prefixes are discarded as duplicates.",
+    "formula": "Length sum:<br><code>sum += len(word) + 1 for each leaf in Trie</code>",
+    "time": "O(S) - sum of all string lengths.",
+    "space": "O(S) - trie node memory.",
+    "dryrun": {
+      "testcase": "words = ['time', 'me'] -> reversed = ['emit', 'em']",
+      "headers": [
+        "Reversed word",
+        "Inserted Trie node path",
+        "Is leaf?",
+        "Leaf cost Contribution"
+      ],
+      "rows": [
+        [
+          "'emit'",
+          "'e'->'m'->'i'->'t'",
+          "Yes",
+          "4 + 1 = 5"
+        ],
+        [
+          "'em'",
+          "'e'->'m' (already exists)",
+          "No",
+          "0"
+        ]
+      ]
+    }
+  },
+  "907": {
+    "intuition": "Calculate PLE (Previous Less Element) and NLE (Next Less Element) arrays for each index using a monotonic stack. Sum grid boundaries contributions.",
+    "formula": "Subarray contributions:<br><code>Sum += nums[i] * (i - PLE[i]) * (NLE[i] - i)</code>",
+    "time": "O(N) - linear passes.",
+    "space": "O(N) - stack and index maps.",
+    "dryrun": {
+      "testcase": "nums = [3, 1, 2, 4]",
+      "headers": [
+        "Index",
+        "Val",
+        "PLE diff",
+        "NLE diff",
+        "Sum contribution"
+      ],
+      "rows": [
+        [
+          "0",
+          "3",
+          "1",
+          "1",
+          "3 * 1 * 1 = 3"
+        ],
+        [
+          "1",
+          "1",
+          "2",
+          "3",
+          "1 * 2 * 3 = 6"
+        ],
+        [
+          "2",
+          "2",
+          "1",
+          "2",
+          "2 * 1 * 2 = 4"
+        ]
+      ]
+    }
+  },
+  "925": {
+    "intuition": "Compare string characters with two pointers. If characters match, advance both. If mismatch, fast pointer can skip repeats of previous matched character.",
+    "formula": "Repeat character check:<br><code>if (typed[j] == typed[j-1]) j++; else return false;</code>",
+    "time": "O(N + M) - linear scans.",
+    "space": "O(1) - index pointers.",
+    "dryrun": {
+      "testcase": "name = 'alex', typed = 'aaleex'",
+      "headers": [
+        "i (name)",
+        "j (typed)",
+        "Char Match?",
+        "Action result"
+      ],
+      "rows": [
+        [
+          "0 ('a')",
+          "0 ('a')",
+          "Yes",
+          "i++, j++"
+        ],
+        [
+          "1 ('e')",
+          "1 ('a')",
+          "No",
+          "typed[1]=='a' equals previous, skip (j++)"
+        ],
+        [
+          "1 ('e')",
+          "2 ('l')",
+          "Yes (after skipping)",
+          "i++, j++"
+        ]
+      ]
+    }
+  },
+  "986": {
+    "intuition": "Use two pointers, one for each list. Calculate the overlap of intervals. Move pointer whose interval ends first to find subsequent intersections.",
+    "formula": "Overlap calculations:<br><code>start = max(A[i].start, B[j].start)</code><br><code>end = min(A[i].end, B[j].end)</code><br>Pointer increment:<br><code>if (A[i].end < B[j].end) i++; else j++;</code>",
+    "time": "O(N + M) - linear comparison.",
+    "space": "O(1) - output exclusions.",
+    "dryrun": {
+      "testcase": "A = [[1,3]], B = [[2,5]]",
+      "headers": [
+        "i",
+        "j",
+        "Start Max",
+        "End Min",
+        "Overlap saved",
+        "Pointer Move"
+      ],
+      "rows": [
+        [
+          "0",
+          "0",
+          "Max(1, 2) = 2",
+          "Min(3, 5) = 3",
+          "[2, 3]",
+          "i++ (3 < 5)"
+        ]
+      ]
+    }
+  },
+  "1019": {
+    "intuition": "Convert list to array. Use a monotonic stack storing indices to find the next strictly greater node value for each index in one pass.",
+    "formula": "Update index:<br><code>while (stack && val[stack.top] < val[i]) { res[stack.pop] = val[i]; }</code>",
+    "time": "O(N) - linear pass.",
+    "space": "O(N) - stack sizes.",
+    "dryrun": {
+      "testcase": "list = [2, 1, 5]",
+      "headers": [
+        "Index",
+        "Val",
+        "Stack contents",
+        "Action",
+        "Result State"
+      ],
+      "rows": [
+        [
+          "0",
+          "2",
+          "[0]",
+          "Push 0",
+          "[0, 0, 0]"
+        ],
+        [
+          "1",
+          "1",
+          "[0, 1]",
+          "Push 1",
+          "[0, 0, 0]"
+        ],
+        [
+          "2",
+          "5",
+          "[]",
+          "Pop 1 -> res[1]=5, Pop 0 -> res[0]=5",
+          "[5, 5, 0]"
+        ]
+      ]
+    }
+  },
+  "1052": {
+    "intuition": "Use sliding window to find the subsegment of length 'minutes' where owner is grumpy and we can maximize satisfied customers by making him non-grumpy.",
+    "formula": "Satisfaction gain:<br><code>gain = sum(customers[i] if grumpy[i] == 1)</code><br>Sliding Window max gain:<br><code>max_gain = max(max_gain, current_gain)</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(1) - constant space.",
+    "dryrun": {
+      "testcase": "customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], minutes = 3",
+      "headers": [
+        "Window",
+        "Gain added",
+        "Gain removed",
+        "Current Gain",
+        "Max Gain"
+      ],
+      "rows": [
+        [
+          "0..2",
+          "0+0+0 = 0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1..3",
+          "+2 (grumpy[3])",
+          "0",
+          "2",
+          "2"
+        ],
+        [
+          "4..6",
+          "0",
+          "0",
+          "2",
+          "2"
+        ],
+        [
+          "5..7",
+          "+5 (grumpy[7])",
+          "0",
+          "7",
+          "7"
+        ]
+      ]
+    }
+  },
+  "1208": {
+    "intuition": "Calculate absolute difference cost at each index. Use a sliding window to find the maximum length of a subarray whose cost sum is <= maxCost.",
+    "formula": "Cost increment:<br><code>currCost += abs(s[r] - t[r])</code><br>Shrink:<br><code>while (currCost > maxCost) { currCost -= abs(s[l] - t[l]); l++; }</code>",
+    "time": "O(N) - linear scan.",
+    "space": "O(1) - constant space.",
+    "dryrun": {
+      "testcase": "s = 'abcd', t = 'bcdf', maxCost = 3",
+      "headers": [
+        "Right",
+        "Cost diff",
+        "Cumulative Cost",
+        "Left",
+        "Max Length"
+      ],
+      "rows": [
+        [
+          "0 ('a'->'b')",
+          "1",
+          "1",
+          "0",
+          "1"
+        ],
+        [
+          "1 ('b'->'c')",
+          "1",
+          "2",
+          "0",
+          "2"
+        ],
+        [
+          "2 ('c'->'d')",
+          "1",
+          "3",
+          "0",
+          "3"
+        ],
+        [
+          "3 ('d'->'f')",
+          "2",
+          "5 -> (shrink) -> 4",
+          "1",
+          "3"
+        ]
+      ]
+    }
+  },
+  "1288": {
+    "intuition": "Sort intervals by start point ascending, and by end point descending. Loop through and check if current interval lies within previous bounds.",
+    "formula": "Cover condition:<br><code>if (curr.end <= max_end) covered++; else max_end = curr.end;</code>",
+    "time": "O(N log N) - interval sorting.",
+    "space": "O(1) - in-place.",
+    "dryrun": {
+      "testcase": "intervals = [[1,4],[3,6],[2,8]] -> sorted = [[1,4],[2,8],[3,6]]",
+      "headers": [
+        "Checked Interval",
+        "Max End",
+        "Is covered?",
+        "Action"
+      ],
+      "rows": [
+        [
+          "[1,4]",
+          "4",
+          "No",
+          "Update Max End to 4"
+        ],
+        [
+          "[2,8]",
+          "8",
+          "No",
+          "Update Max End to 8"
+        ],
+        [
+          "[3,6]",
+          "8",
+          "Yes (6 <= 8)",
+          "covered++ (Total = 1)"
+        ]
+      ]
+    }
+  },
+  "1456": {
+    "intuition": "Maintain a sliding window of size k and track the count of vowel characters inside it as it shifts to the right.",
+    "formula": "Vowel check:<br><code>isVowel(char)</code><br>Shift update:<br><code>vowels += isVowel(in) - isVowel(out)</code>",
+    "time": "O(N) - linear scan.",
+    "space": "O(1) - constant storage.",
+    "dryrun": {
+      "testcase": "s = 'abciiidef', k = 3",
+      "headers": [
+        "Window",
+        "Char In",
+        "Char Out",
+        "Vowel Count",
+        "Max Vowels"
+      ],
+      "rows": [
+        [
+          "0..2 ('abc')",
+          "'c'",
+          "-",
+          "1",
+          "1"
+        ],
+        [
+          "1..3 ('bci')",
+          "'i'",
+          "'a'",
+          "2",
+          "2"
+        ],
+        [
+          "2..4 ('cii')",
+          "'i'",
+          "'b'",
+          "3",
+          "3"
+        ],
+        [
+          "3..5 ('iii')",
+          "'i'",
+          "'c'",
+          "3",
+          "3"
+        ]
+      ]
+    }
+  },
+  "1493": {
+    "intuition": "Track a sliding window that contains at most one 0. The size of the window minus 1 represents the consecutive 1s after deleting one element.",
+    "formula": "Window expansion:<br><code>if (nums[right] == 0) zeros++; while (zeros > 1) { if (nums[left] == 0) zeros--; left++; }</code>",
+    "time": "O(N) - two pointers scan.",
+    "space": "O(1) - constant auxiliary variables.",
+    "dryrun": {
+      "testcase": "nums = [1, 1, 0, 1]",
+      "headers": [
+        "Right",
+        "Num",
+        "Zeros in Window",
+        "Left",
+        "Max Length"
+      ],
+      "rows": [
+        [
+          "0",
+          "1",
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1",
+          "0",
+          "0",
+          "2"
+        ],
+        [
+          "2",
+          "0",
+          "1",
+          "0",
+          "2"
+        ],
+        [
+          "3",
+          "1",
+          "1",
+          "0",
+          "3"
+        ]
+      ]
+    }
+  },
+  "1642": {
+    "intuition": "Greedily use ladders for largest height differences. Track differences using a Min-Heap; when heap size exceeds ladder count, use bricks for smallest difference.",
+    "formula": "Heap condition:<br><code>if (heap.size > ladders) bricks -= heap.poll();</code><br>Break condition:<br><code>if (bricks < 0) return current_index;</code>",
+    "time": "O(N log L) - heap transitions.",
+    "space": "O(L) - ladder limits heap.",
+    "dryrun": {
+      "testcase": "heights=[4,2,7,6,9], bricks=5, ladders=1",
+      "headers": [
+        "Step",
+        "Climb height diff",
+        "Heap (Ladders used)",
+        "Bricks remaining",
+        "Result"
+      ],
+      "rows": [
+        [
+          "4->2",
+          "- (downhill)",
+          "[]",
+          "5",
+          "Reachable"
+        ],
+        [
+          "2->7",
+          "5",
+          "[5]",
+          "5",
+          "Reachable"
+        ],
+        [
+          "7->6",
+          "- (downhill)",
+          "[5]",
+          "5",
+          "Reachable"
+        ],
+        [
+          "6->9",
+          "3",
+          "[3, 5] -> heap.poll()=3",
+          "5 - 3 = 2",
+          "Reachable"
+        ]
+      ]
+    }
+  },
+  "1658": {
+    "intuition": "Instead of finding outer ends, find the longest contiguous subarray whose sum equals totalSum - x. Total operations equals length - subarray length.",
+    "formula": "Target subsegment sum:<br><code>target = totalSum - x</code><br>Find max length:<br><code>sum == target</code>",
+    "time": "O(N) - sliding window traversal.",
+    "space": "O(1) - constant variable storage.",
+    "dryrun": {
+      "testcase": "nums = [1, 1, 4, 2, 3], x = 5",
+      "headers": [
+        "L",
+        "R",
+        "Window Sum",
+        "Target Sum (11-5=6)",
+        "Window length",
+        "Min operations"
+      ],
+      "rows": [
+        [
+          "0",
+          "1",
+          "2",
+          "6",
+          "-",
+          "-"
+        ],
+        [
+          "0",
+          "2",
+          "6",
+          "6",
+          "3 (nums[0..2])",
+          "5 - 3 = 2"
+        ]
+      ]
+    }
+  },
+  "2090": {
+    "intuition": "Use sliding window of size 2*k + 1 to compute range sums. Divide the sum by the window size to get the average, and pad outer indices with -1.",
+    "formula": "Window Sum:<br><code>sum = sum + nums[right] - nums[left-1]</code><br>Average:<br><code>avg = sum / (2*k + 1)</code>",
+    "time": "O(N) - linear window shift.",
+    "space": "O(N) - output averages array.",
+    "dryrun": {
+      "testcase": "nums = [7,4,3,9,1,8,5], k = 2",
+      "headers": [
+        "Center Index",
+        "Window [L..R]",
+        "Window Sum",
+        "Average",
+        "Output Array"
+      ],
+      "rows": [
+        [
+          "0..1",
+          "Out of bounds",
+          "-",
+          "-1",
+          "[-1, -1]"
+        ],
+        [
+          "2",
+          "[0..4]",
+          "7+4+3+9+1 = 24",
+          "24/5 = 4",
+          "[-1, -1, 4]"
+        ],
+        [
+          "3",
+          "[1..5]",
+          "24-7+8 = 25",
+          "25/5 = 5",
+          "[-1, -1, 4, 5]"
+        ]
+      ]
+    }
+  },
+  "2406": {
+    "intuition": "Divide intervals by start times. Maintain a Min-Heap of end times of groups. If current interval start > smallest end time, reuse group; otherwise create new group.",
+    "formula": "Reuse conditions:<br><code>if (start > heap.peek()) heap.poll(); heap.push(end);</code>",
+    "time": "O(N log N) - sorted intervals pass.",
+    "space": "O(N) - heap storage.",
+    "dryrun": {
+      "testcase": "intervals = [[5,10],[6,8],[1,5]] -> sorted = [[1,5],[5,10],[6,8]]",
+      "headers": [
+        "Interval",
+        "Min end time",
+        "Conflict?",
+        "Action",
+        "Active group ends"
+      ],
+      "rows": [
+        [
+          "[1,5]",
+          "-",
+          "No",
+          "Create group 1",
+          "[5]"
+        ],
+        [
+          "[5,10]",
+          "5",
+          "Yes (5 <= 5)",
+          "Create group 2",
+          "[5, 10]"
+        ],
+        [
+          "[6,8]",
+          "5",
+          "No (6 > 5)",
+          "Reuse group 1",
+          "[8, 10]"
+        ]
+      ]
+    }
+  },
+  "2530": {
+    "intuition": "Always pick largest element from Max-Heap, add value to score, then replace it with ceil(val / 3). Repeat k times.",
+    "formula": "Replacement element formula:<br><code>val = heap.poll(); score += val; heap.push(ceil(val / 3));</code>",
+    "time": "O(K log N) - K heap updates.",
+    "space": "O(N) - heap size.",
+    "dryrun": {
+      "testcase": "nums = [10, 10], k = 2",
+      "headers": [
+        "Step",
+        "Heap State",
+        "Max value popped",
+        "Ceil update",
+        "Score"
+      ],
+      "rows": [
+        [
+          "1",
+          "[10, 10]",
+          "10",
+          "ceil(10/3) = 4",
+          "10"
+        ],
+        [
+          "2",
+          "[10, 4]",
+          "10",
+          "ceil(10/3) = 4",
+          "20"
+        ]
+      ]
+    }
+  }
+});
+
+
+Object.assign(problemLogicDatabase, {
+  "220": {
+    "intuition": "Use a self-balancing binary search tree (like a Red-Black Tree) to maintain a sliding window of elements. This allows finding the ceiling and floor of the current element in O(log K) time.",
+    "formula": "BST Sliding Window Range Check:<br><code>if (BST.ceil(val) <= val + t || BST.floor(val) >= val - t) return true;</code>",
+    "time": "O(N log K) - where K is indexDiff.",
+    "space": "O(K) - to store elements in the balanced tree.",
+    "dryrun": {
+      "testcase": "nums = [1, 5, 9], indexDiff = 2, valueDiff = 3",
+      "headers": [
+        "Index",
+        "Val",
+        "Sliding Tree Values",
+        "Ceil value",
+        "Floor value",
+        "Match?"
+      ],
+      "rows": [
+        [
+          "0",
+          "1",
+          "BST: [1]",
+          "-",
+          "-",
+          "No"
+        ],
+        [
+          "1",
+          "5",
+          "BST: [1, 5]",
+          "ceil(5)=5",
+          "floor(5)=5",
+          "No (diff 4 > 3)"
+        ],
+        [
+          "2",
+          "9",
+          "BST: [5, 9]",
+          "ceil(9)=9",
+          "floor(9)=9",
+          "No (diff 4 > 3)"
+        ]
+      ]
+    }
+  },
+  "773": {
+    "intuition": "Search for the shortest path from the initial 2x3 board state to the solved state [1,2,3,4,5,0]. A* search uses Manhattan distance heuristics to explore fewer states than standard BFS.",
+    "formula": "Heuristic estimation:<br><code>f(state) = g(state) + sum(Manhattan_distance(val, target))</code>",
+    "time": "O(State Space) - guided by heuristics.",
+    "space": "O(State Space) - open/closed set maps.",
+    "dryrun": {
+      "testcase": "board = [[1,2,3],[4,0,5]]",
+      "headers": [
+        "Active State",
+        "g cost",
+        "h heuristic",
+        "f total",
+        "Action",
+        "Open Set Size"
+      ],
+      "rows": [
+        [
+          "1,2,3,4,0,5",
+          "0",
+          "1 (5 is out of place)",
+          "1",
+          "Slide 5 left",
+          "2"
+        ],
+        [
+          "1,2,3,4,5,0",
+          "1",
+          "0 (solved)",
+          "1",
+          "Goal reached!",
+          "0"
+        ]
+      ]
+    }
+  },
+  "1349": {
+    "intuition": "This problem can be modeled as finding the Maximum Independent Set on a bipartite graph. We can construct a flow network where edges connect seats that can cheat, and solve using Edmonds-Karp Max Flow.",
+    "formula": "Max Independent Set:<br><code>Max Students = Total Active Seats - Max Bipartite Matching (Max Flow)</code>",
+    "time": "O(V * E^2) - using Edmonds-Karp.",
+    "space": "O(V + E) - graph model storage.",
+    "dryrun": {
+      "testcase": "Classroom active seats count",
+      "headers": [
+        "Edge",
+        "From node",
+        "To node (can cheat)",
+        "Residual Capacity",
+        "Flow contribution"
+      ],
+      "rows": [
+        [
+          "E1",
+          "Seat (0,0)",
+          "Seat (0,1)",
+          "1 -> 0",
+          "1 (cheater blocked)"
+        ],
+        [
+          "Max Flow result",
+          "-",
+          "-",
+          "-",
+          "Bipartite match matches flow capacity"
+        ]
+      ]
+    }
+  }
+});
+
+
+Object.assign(problemLogicDatabase, {
+  "109": {
+    "intuition": "Convert a sorted linked list into a balanced BST. Since the list is sorted, find the middle element to serve as the root, then recursively build the left and right subtrees.",
+    "formula": "BST Balance Recurrence:<br><code>root = new Node(mid.val); root.left = build(start, mid); root.right = build(mid.next, end);</code>",
+    "time": "O(N log N) - where N is the number of nodes in the list.",
+    "space": "O(log N) - recursion stack space.",
+    "dryrun": {
+      "testcase": "list = [-10, -3, 0, 5, 9]",
+      "headers": [
+        "Step",
+        "Sublist Range",
+        "Mid Chosen",
+        "Left Child",
+        "Right Child"
+      ],
+      "rows": [
+        [
+          "1",
+          "[-10 to 9]",
+          "0",
+          "-3",
+          "9"
+        ],
+        [
+          "2",
+          "[-10 to -3]",
+          "-3",
+          "-10",
+          "null"
+        ],
+        [
+          "3",
+          "[5 to 9]",
+          "9",
+          "5",
+          "null"
+        ]
+      ]
+    }
+  },
+  "127": {
+    "intuition": "Find the shortest transformation sequence from a begin word to an end word. A* uses a heuristic of character character diffs (Hamming distance) between the active word and the goal word.",
+    "formula": "Word search heuristic:<br><code>h(word) = number of characters differing from endWord</code>",
+    "time": "O(N * M) - where N is word list size and M is word length.",
+    "space": "O(N * M) - vocabulary map cache.",
+    "dryrun": {
+      "testcase": "begin='hit', end='cog', list=['hot','dot','dog','lot','log','cog']",
+      "headers": [
+        "Active Word",
+        "g (steps)",
+        "h (char diff)",
+        "f total",
+        "Successors"
+      ],
+      "rows": [
+        [
+          "hit",
+          "0",
+          "3",
+          "3",
+          "hot"
+        ],
+        [
+          "hot",
+          "1",
+          "2",
+          "3",
+          "dot, lot"
+        ],
+        [
+          "dot",
+          "2",
+          "1",
+          "3",
+          "dog"
+        ],
+        [
+          "cog",
+          "4",
+          "0",
+          "4",
+          "Target reached!"
+        ]
+      ]
+    }
+  },
+  "218": {
+    "intuition": "Use a sweep-line algorithm with a self-balancing binary search tree (like a TreeMap/Red-Black Tree) to store active building heights and query the maximum height at any given x-coordinate.",
+    "formula": "Skyline Sweep Condition:<br><code>if (isStart) heights.insert(h); else heights.remove(h); maxH = heights.getMax();</code>",
+    "time": "O(N log N) - sorting and tree insertions.",
+    "space": "O(N) - to store active building heights in the tree.",
+    "dryrun": {
+      "testcase": "buildings = [[2,9,10], [3,7,15]]",
+      "headers": [
+        "X Coord",
+        "Type",
+        "Height",
+        "Active Heights Tree",
+        "Max Height",
+        "Key Point?"
+      ],
+      "rows": [
+        [
+          "2",
+          "Start",
+          "10",
+          "Tree: [10]",
+          "10",
+          "Yes: (2, 10)"
+        ],
+        [
+          "3",
+          "Start",
+          "15",
+          "Tree: [10, 15]",
+          "15",
+          "Yes: (3, 15)"
+        ],
+        [
+          "7",
+          "End",
+          "15",
+          "Tree: [10]",
+          "10",
+          "Yes: (7, 10)"
+        ],
+        [
+          "9",
+          "End",
+          "10",
+          "Tree: []",
+          "0",
+          "Yes: (9, 0)"
+        ]
+      ]
+    }
+  },
+  "752": {
+    "intuition": "Find the minimum rotation turns to open a lock from '0000' to a target sequence, avoiding deadends. A* guides search directions using the heuristic of slot character differences.",
+    "formula": "Lock state heuristic:<br><code>h(state) = sum(min_diff(state[i], target[i])) for i in 0..3</code>",
+    "time": "O(10^4) - max states limit.",
+    "space": "O(10^4) - visited cache storage.",
+    "dryrun": {
+      "testcase": "target = '0202', deadends = ['0201','0102']",
+      "headers": [
+        "Inspected Lock",
+        "g turns",
+        "h heuristic",
+        "f total",
+        "Status"
+      ],
+      "rows": [
+        [
+          "0000",
+          "0",
+          "4",
+          "4",
+          "Rotate slot 1 & 3"
+        ],
+        [
+          "0100",
+          "1",
+          "3",
+          "4",
+          "Rotate slot 3"
+        ],
+        [
+          "0202",
+          "4",
+          "0",
+          "4",
+          "Solved!"
+        ]
+      ]
+    }
+  },
+  "1263": {
+    "intuition": "Solve the push-box maze puzzle. Use A* pathfinding to find the shortest push sequence. The heuristic function estimate is the Manhattan distance from the box to the target cell.",
+    "formula": "State heuristic weight:<br><code>f(box, player) = g_pushes + Manhattan_distance(box, target)</code>",
+    "time": "O(R * C * R * C) - state space graph nodes.",
+    "space": "O(R * C) - distance map storage.",
+    "dryrun": {
+      "testcase": "Box at (1,1), Target at (1,4)",
+      "headers": [
+        "State (Box, Player)",
+        "g (Pushes)",
+        "h (Heuristic to target)",
+        "f score",
+        "Action"
+      ],
+      "rows": [
+        [
+          "(1,1) & (1,0)",
+          "0",
+          "3",
+          "3",
+          "Push right"
+        ],
+        [
+          "(1,2) & (1,1)",
+          "1",
+          "2",
+          "3",
+          "Push right"
+        ],
+        [
+          "(1,3) & (1,2)",
+          "2",
+          "1",
+          "3",
+          "Push right"
+        ]
+      ]
+    }
+  },
+  "1947": {
+    "intuition": "Maximize the compatibility scores of student-mentor pairs. This can be modeled as Maximum Weight Bipartite Matching, solvable via Min-Cost Max-Flow on a network flow diagram.",
+    "formula": "Bipartite Edge Capacity:<br><code>flow = max_flow(S -> Students -> Mentors -> T, weight=score)</code>",
+    "time": "O(N! * N) - or O(N^3) using network flow algorithms.",
+    "space": "O(N^2) - state matrix space.",
+    "dryrun": {
+      "testcase": "3 students, 3 mentors",
+      "headers": [
+        "Student",
+        "Mentor",
+        "Compatibility Score",
+        "Match Flow Allocation",
+        "Cumulative score"
+      ],
+      "rows": [
+        [
+          "S0",
+          "M1",
+          "8",
+          "1 unit flow",
+          "8"
+        ],
+        [
+          "S1",
+          "M0",
+          "7",
+          "1 unit flow",
+          "15"
+        ],
+        [
+          "S2",
+          "M2",
+          "9",
+          "1 unit flow",
+          "24"
+        ]
+      ]
+    }
+  },
+  "2123": {
+    "intuition": "Model the grid as a bipartite graph where adjacent cells have opposite colors (odd/even parity of indices). Finding the minimum operations to remove adjacent ones is equivalent to Maximum Bipartite Matching (Max Flow).",
+    "formula": "König's Theorem:<br><code>Min Vertex Cover = Max Flow / Max Bipartite Matching</code>",
+    "time": "O(V * E) - where V is grid cells and E is adjacencies.",
+    "space": "O(V + E) - network flow model storage.",
+    "dryrun": {
+      "testcase": "Grid size 2x2 with all 1s",
+      "headers": [
+        "Matching Iteration",
+        "BFS Path Found",
+        "Residual capacity",
+        "Total matching flow"
+      ],
+      "rows": [
+        [
+          "1",
+          "S -> (0,0) -> (0,1) -> T",
+          "1 -> 0",
+          "1"
+        ],
+        [
+          "2",
+          "S -> (1,1) -> (1,0) -> T",
+          "1 -> 0",
+          "2 (Full matching)"
+        ]
+      ]
+    }
+  }
+});
+
+
+Object.assign(problemLogicDatabase, {
+  "52": {
+    "intuition": "Similar to Sudoku Solver, N-Queens II uses backtracking to place queens on an N x N chessboard, counting all configurations where no two queens attack each other.",
+    "formula": "Row/Col/Diag attack verification:<br><code>if (cols.has(c) || diag1.has(r+c) || diag2.has(r-c)) return false;</code>",
+    "time": "O(N!) - search space options count.",
+    "space": "O(N) - recursion depth array.",
+    "dryrun": {
+      "testcase": "N = 4",
+      "headers": [
+        "Active Row",
+        "Placed Queens List",
+        "Attack Violation check",
+        "Matching configurations count"
+      ],
+      "rows": [
+        [
+          "Row 0",
+          "Queen placed at Col 1",
+          "No violation",
+          "Total: 0"
+        ],
+        [
+          "Row 1",
+          "Queen placed at Col 3",
+          "No violation",
+          "Total: 0"
+        ],
+        [
+          "Row 2",
+          "Queen placed at Col 0",
+          "No violation",
+          "Total: 0"
+        ],
+        [
+          "Success configuration",
+          "[1, 3, 0, 2]",
+          "All 4 queens placed",
+          "Total configurations count = 1"
+        ]
+      ]
+    }
+  },
+  "980": {
+    "intuition": "Walk through all non-obstacle squares exactly once, from start to end square. We use depth-first backtracking search to inspect all possible walking paths.",
+    "formula": "Complete Path Validation:<br><code>if (r === endR && c === endC && emptyWalked === totalEmpty) return 1;</code>",
+    "time": "O(3^N) - where N is cells count.",
+    "space": "O(N) - recursive stack frames depth.",
+    "dryrun": {
+      "testcase": "grid = [[1,0,0,0],[0,0,0,0],[0,0,2,-1]]",
+      "headers": [
+        "Step",
+        "Cell index",
+        "Unvisited remaining",
+        "Status",
+        "Matches count contribution"
+      ],
+      "rows": [
+        [
+          "1",
+          "Start (0,0)",
+          "8 cells left",
+          "Visit neighbor",
+          "0"
+        ],
+        [
+          "2",
+          "Walk (0,1)",
+          "7 cells left",
+          "Visit neighbor",
+          "0"
+        ],
+        [
+          "Success",
+          "End (2,2)",
+          "0 cells left",
+          "Goal reached with 100% path coverage",
+          "1 path found"
+        ]
+      ]
+    }
+  }
+});
+
+
+Object.assign(problemLogicDatabase, {
+  "389": {
+    "intuition": "Find the single character added to string t. By XORing the character values of both string s and string t, duplicate characters cancel out, leaving the ASCII value of the added character.",
+    "formula": "Character XOR cancellation:<br><code>charXOR = s.charCodeAt(i) ^ t.charCodeAt(j);</code>",
+    "time": "O(N) - single pass over s and t.",
+    "space": "O(1) - single accumulator register.",
+    "dryrun": {
+      "testcase": "s = 'abcd', t = 'abcde'",
+      "headers": [
+        "Char Scanned",
+        "Ascii Value",
+        "Running XOR Accumulator",
+        "Character equivalent"
+      ],
+      "rows": [
+        [
+          "Initial state",
+          "-",
+          "0",
+          "-"
+        ],
+        [
+          "s[0]='a'",
+          "97",
+          "97",
+          "'a'"
+        ],
+        [
+          "t[0]='a'",
+          "97",
+          "0 (cancels out)",
+          "null"
+        ],
+        [
+          "Final 'e'",
+          "101",
+          "101",
+          "'e'"
+        ]
+      ]
+    }
+  },
+  "1863": {
+    "intuition": "Generate all possible subsets. For each subset, compute the XOR total of its elements, then sum these totals. We can use bitmasking from 0 to 2^N - 1 to extract every subset.",
+    "formula": "XOR sum recurrence:<br><code>subsetXOR = val0 ^ val1 ^ ...; sum += subsetXOR;</code>",
+    "time": "O(N * 2^N) - subset generation and XOR sum.",
+    "space": "O(1) - constant overhead.",
+    "dryrun": {
+      "testcase": "nums = [1, 3]",
+      "headers": [
+        "Mask index",
+        "Binary Mask",
+        "Subset Selected",
+        "Subset XOR value",
+        "Running Sum"
+      ],
+      "rows": [
+        [
+          "0",
+          "00",
+          "[]",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "01",
+          "[1]",
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "10",
+          "[3]",
+          "3",
+          "4"
+        ],
+        [
+          "3",
+          "11",
+          "[1, 3]",
+          "2 (1^3)",
+          "6 (Final result)"
+        ]
+      ]
+    }
+  }
+});
+
+
+Object.assign(problemLogicDatabase, {
+  "201": {
+    "intuition": "Find the common prefix of the binary representations of range boundaries 'left' and 'right'. We shift both numbers to the right until they are equal, then shift the common prefix back to the left.",
+    "formula": "Shift common prefix:<br><code>while (left < right) { left >>= 1; right >>= 1; shift++; } return left << shift;</code>",
+    "time": "O(1) - maximum 32 shifts.",
+    "space": "O(1) - single shift counter.",
+    "dryrun": {
+      "testcase": "left = 5, right = 7",
+      "headers": [
+        "Step",
+        "Left Binary",
+        "Right Binary",
+        "Shifts Count",
+        "Equality status"
+      ],
+      "rows": [
+        [
+          "Initial state",
+          "5 (0101)",
+          "7 (0111)",
+          "0",
+          "Not Equal"
+        ],
+        [
+          "1",
+          "2 (0010)",
+          "3 (0011)",
+          "1",
+          "Not Equal"
+        ],
+        [
+          "2",
+          "1 (0001)",
+          "1 (0001)",
+          "2",
+          "Equal (Common Prefix found)"
+        ],
+        [
+          "Return result",
+          "1 << 2 = 4 (0100)",
+          "-",
+          "2",
+          "Final Range AND = 4"
+        ]
+      ]
+    }
+  },
+  "476": {
+    "intuition": "Flipped value complement of a positive integer is obtained by XORing it with a bitmask of all 1s matching the length of the integer's binary representation.",
+    "formula": "Flipping mask creation:<br><code>let mask = (1 << num.toString(2).length) - 1; return num ^ mask;</code>",
+    "time": "O(1) - proportional to bits count.",
+    "space": "O(1) - single mask register.",
+    "dryrun": {
+      "testcase": "num = 5",
+      "headers": [
+        "Input Value",
+        "Binary Representation",
+        "Bitmask Creation",
+        "XOR Result",
+        "Complement Decimal"
+      ],
+      "rows": [
+        [
+          "5",
+          "101_2 (length = 3)",
+          "mask = (1<<3)-1 = 7 (111_2)",
+          "5 ^ 7 = 101 ^ 111 = 010_2",
+          "2"
+        ]
+      ]
+    }
+  }
+});
+
+
+Object.assign(problemLogicDatabase, {
+  "147": {
+    "intuition": "Sort a linked list using insertion sort. We maintain a sorted boundary at the beginning of the list, recursively removing node by node and inserting it at the correct index.",
+    "formula": "Insertion pointers comparison:<br><code>if (curr.val < prev.next.val) { insert_node; }</code>",
+    "time": "O(N^2) - comparisons for each list element.",
+    "space": "O(1) - single auxiliary list node.",
+    "dryrun": {
+      "testcase": "head = [4,2,1,3]",
+      "headers": [
+        "Step",
+        "Unsorted Element",
+        "Sorted list state",
+        "Insertion pointer slot",
+        "Remaining List"
+      ],
+      "rows": [
+        [
+          "Initial state",
+          "4",
+          "[4]",
+          "Insert at dummy next",
+          "[2,1,3]"
+        ],
+        [
+          "1",
+          "2",
+          "[2, 4]",
+          "Insert before 4",
+          "[1,3]"
+        ],
+        [
+          "2",
+          "1",
+          "[1, 2, 4]",
+          "Insert before 2",
+          "[3]"
+        ],
+        [
+          "3",
+          "3",
+          "[1, 2, 3, 4]",
+          "Insert between 2 and 4",
+          "[]"
+        ]
+      ]
+    }
+  }
+});
+
+
+Object.assign(problemLogicDatabase, {
+  "179": {
+    "intuition": "To form the largest number from an array of integers, convert each integer to a string and sort them using a custom comparator. Two strings A and B are compared as (A + B) vs (B + A).",
+    "formula": "Custom comparator sorting condition:<br><code>compare(a, b) => (b + a).compareTo(a + b)</code>",
+    "time": "O(N log N) - standard comparison sorting complexity.",
+    "space": "O(N) - string array conversion copies.",
+    "dryrun": {
+      "testcase": "nums = [3, 30, 34]",
+      "headers": [
+        "Element A",
+        "Element B",
+        "Compare A+B vs B+A",
+        "Sorting Order status"
+      ],
+      "rows": [
+        [
+          "'3'",
+          "'30'",
+          "'330' > '303'",
+          "Keep 3 before 30"
+        ],
+        [
+          "'30'",
+          "'34'",
+          "'3034' < '3430'",
+          "Swap 34 before 30"
+        ],
+        [
+          "Final order",
+          "-",
+          "-",
+          "['34', '3', '30'] -> Output: '34330'"
+        ]
+      ]
+    }
+  },
+  "274": {
+    "intuition": "Find the H-Index. We sort the citations array in ascending order (using insertion sort or comparison sort) and scan from the right to find the threshold where papers citation counts match papers count.",
+    "formula": "H-Index validation condition:<br><code>if (citations[n - 1 - i] >= i + 1) hIndex = i + 1;</code>",
+    "time": "O(N^2) - citations sorting time.",
+    "space": "O(1) - single citations array reference.",
+    "dryrun": {
+      "testcase": "citations = [3, 0, 6, 1, 5]",
+      "headers": [
+        "Sorted citations",
+        "Index i from right",
+        "Citation count citations[n-1-i]",
+        "Threshold i+1",
+        "H-Index update"
+      ],
+      "rows": [
+        [
+          "[0, 1, 3, 5, 6]",
+          "i = 0",
+          "6",
+          "1",
+          "h = 1"
+        ],
+        [
+          "[0, 1, 3, 5, 6]",
+          "i = 1",
+          "5",
+          "2",
+          "h = 2"
+        ],
+        [
+          "[0, 1, 3, 5, 6]",
+          "i = 2",
+          "3",
+          "3",
+          "h = 3 (Final match)"
+        ],
+        [
+          "[0, 1, 3, 5, 6]",
+          "i = 3",
+          "1",
+          "4",
+          "Cannot update further"
+        ]
+      ]
+    }
+  }
+});
+
 function getProblemLogic(prob) {
   let logic = problemLogicDatabase[prob.id];
   if (!logic) {
@@ -5565,6 +9110,176 @@ function getDiscardedRange(length, low, high) {
 // ==========================================================================
 
 const codeTemplates = {
+  quicksortfull: `
+<span class="code-keyword">function</span> <span class="code-fn">quickSort</span>(arr, lo, hi) {
+  <span class="code-keyword">if</span> (lo &lt; hi) {
+    <span class="code-keyword">let</span> p = <span class="code-fn">partition</span>(arr, lo, hi); <span class="code-comment">// Pivot index</span>
+    <span class="code-fn">quickSort</span>(arr, lo, p - <span class="code-num">1</span>);
+    <span class="code-fn">quickSort</span>(arr, p + <span class="code-num">1</span>, hi);
+  }
+}
+`,
+  mergesort: `
+<span class="code-keyword">function</span> <span class="code-fn">mergeSort</span>(arr, l, r) {
+  <span class="code-keyword">if</span> (l &lt; r) {
+    <span class="code-keyword">let</span> m = Math.<span class="code-fn">floor</span>((l + r) / <span class="code-num">2</span>);
+    <span class="code-fn">mergeSort</span>(arr, l, m);
+    <span class="code-fn">mergeSort</span>(arr, m + <span class="code-num">1</span>, r);
+    <span class="code-fn">merge</span>(arr, l, m, r);
+  }
+}
+`,
+  insertionsort: `
+<span class="code-keyword">function</span> <span class="code-fn">insertionSort</span>(arr) {
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">1</span>; i &lt; arr.length; i++) {
+    <span class="code-keyword">let</span> key = arr[i], j = i - <span class="code-num">1</span>;
+    <span class="code-keyword">while</span> (j &gt;= <span class="code-num">0</span> &amp;&amp; arr[j] &gt; key) {
+      arr[j + <span class="code-num">1</span>] = arr[j];
+      j--;
+    }
+    arr[j + <span class="code-num">1</span>] = key;
+  }
+}
+`,
+  singlenumber: `
+<span class="code-keyword">function</span> <span class="code-fn">singleNumber</span>(nums) {
+  <span class="code-keyword">let</span> acc = <span class="code-num">0</span>;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> num <span class="code-keyword">of</span> nums) {
+    acc = acc ^ num; <span class="code-comment">// Duplicate pairs cancel out to 0</span>
+  }
+  <span class="code-keyword">return</span> acc;
+}
+`,
+  bitmasksubsets: `
+<span class="code-keyword">function</span> <span class="code-fn">subsets</span>(nums) {
+  <span class="code-keyword">let</span> n = nums.length;
+  <span class="code-keyword">let</span> res = [];
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> mask = <span class="code-num">0</span>; mask &lt; (<span class="code-num">1</span> &lt;&lt; n); mask++) {
+    <span class="code-keyword">let</span> subset = [];
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; n; i++) {
+      <span class="code-keyword">if</span> ((mask &amp; (<span class="code-num">1</span> &lt;&lt; i)) &gt; <span class="code-num">0</span>) {
+        subset.<span class="code-fn">push</span>(nums[i]);
+      }
+    }
+    res.<span class="code-fn">push</span>(subset);
+  }
+  <span class="code-keyword">return</span> res;
+}
+`,
+  binaryaddition: `
+<span class="code-keyword">function</span> <span class="code-fn">getSum</span>(a, b) {
+  <span class="code-keyword">while</span> (b !== <span class="code-num">0</span>) {
+    <span class="code-keyword">let</span> sum = a ^ b; <span class="code-comment">// Add without carry</span>
+    <span class="code-keyword">let</span> carry = (a &amp; b) &lt;&lt; <span class="code-num">1</span>; <span class="code-comment">// Carry bits</span>
+    a = sum;
+    b = carry;
+  }
+  <span class="code-keyword">return</span> a;
+}
+`,
+  prims: `
+<span class="code-keyword">function</span> <span class="code-fn">primsMST</span>(points) {
+  <span class="code-keyword">let</span> n = points.length;
+  <span class="code-keyword">let</span> inMST = <span class="code-keyword">new</span> <span class="code-fn">Array</span>(n).<span class="code-fn">fill</span>(<span class="code-keyword">false</span>);
+  <span class="code-keyword">let</span> minDist = <span class="code-keyword">new</span> <span class="code-fn">Array</span>(n).<span class="code-fn">fill</span>(<span class="code-num">Infinity</span>);
+  minDist[<span class="code-num">0</span>] = <span class="code-num">0</span>;
+  
+  <span class="code-keyword">let</span> totalCost = <span class="code-num">0</span>;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; n; i++) {
+    <span class="code-keyword">let</span> u = -<span class="code-num">1</span>;
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> j = <span class="code-num">0</span>; j &lt; n; j++) {
+      <span class="code-keyword">if</span> (!inMST[j] && (u === -<span class="code-num">1</span> || minDist[j] &lt; minDist[u])) {
+        u = j;
+      }
+    }
+    
+    inMST[u] = <span class="code-keyword">true</span>;
+    totalCost += minDist[u];
+    
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> v = <span class="code-num">0</span>; v &lt; n; v++) {
+      <span class="code-keyword">let</span> d = <span class="code-fn">manhattanDist</span>(points[u], points[v]);
+      <span class="code-keyword">if</span> (!inMST[v] && d &lt; minDist[v]) {
+        minDist[v] = d;
+      }
+    }
+  }
+  <span class="code-keyword">return</span> totalCost;
+}
+`,
+  rbtree: `
+<span class="code-keyword">function</span> <span class="code-fn">insertRBTree</span>(root, val) {
+  <span class="code-keyword">let</span> node = <span class="code-keyword">new</span> <span class="code-fn">Node</span>(val, <span class="code-str">'red'</span>);
+  <span class="code-fn">bstInsert</span>(root, node);
+  <span class="code-fn">balanceRBTree</span>(root, node);
+}
+
+<span class="code-keyword">function</span> <span class="code-fn">balanceRBTree</span>(root, x) {
+  <span class="code-keyword">while</span> (x !== root && x.parent.color === <span class="code-str">'red'</span>) {
+    <span class="code-keyword">if</span> (x.parent === x.parent.parent.left) {
+      <span class="code-keyword">let</span> y = x.parent.parent.right; <span class="code-comment">// Uncle</span>
+      <span class="code-keyword">if</span> (y && y.color === <span class="code-str">'red'</span>) {
+        x.parent.color = <span class="code-str">'black'</span>;
+        y.color = <span class="code-str">'black'</span>;
+        x.parent.parent.color = <span class="code-str">'red'</span>;
+        x = x.parent.parent;
+      } <span class="code-keyword">else</span> {
+        <span class="code-keyword">if</span> (x === x.parent.right) {
+          x = x.parent;
+          <span class="code-fn">leftRotate</span>(root, x);
+        }
+        x.parent.color = <span class="code-str">'black'</span>;
+        x.parent.parent.color = <span class="code-str">'red'</span>;
+        <span class="code-fn">rightRotate</span>(root, x.parent.parent);
+      }
+    }
+  }
+}
+`,
+  netflow: `
+<span class="code-keyword">function</span> <span class="code-fn">edmondsKarp</span>(capacity, source, sink) {
+  <span class="code-keyword">let</span> flow = <span class="code-num">0</span>;
+  <span class="code-keyword">let</span> parent = <span class="code-keyword">new</span> <span class="code-fn">Array</span>(n);
+  
+  <span class="code-keyword">while</span> (<span class="code-fn">bfs</span>(residualCapacity, source, sink, parent)) {
+    <span class="code-keyword">let</span> pathFlow = <span class="code-num">Infinity</span>;
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> v = sink; v !== source; v = parent[v]) {
+      <span class="code-keyword">let</span> u = parent[v];
+      pathFlow = Math.<span class="code-fn">min</span>(pathFlow, residualCapacity[u][v]);
+    }
+    
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> v = sink; v !== source; v = parent[v]) {
+      <span class="code-keyword">let</span> u = parent[v];
+      residualCapacity[u][v] -= pathFlow;
+      residualCapacity[v][u] += pathFlow;
+    }
+    flow += pathFlow;
+  }
+  <span class="code-keyword">return</span> flow;
+}
+`,
+  astar: `
+<span class="code-keyword">function</span> <span class="code-fn">aStarSearch</span>(start, goal) {
+  <span class="code-keyword">let</span> openSet = <span class="code-keyword">new</span> <span class="code-fn">MinHeap</span>();
+  openSet.<span class="code-fn">push</span>(start, <span class="code-num">0</span>);
+  
+  gScore[start] = <span class="code-num">0</span>;
+  fScore[start] = <span class="code-fn">heuristic</span>(start, goal);
+  
+  <span class="code-keyword">while</span> (!openSet.<span class="code-fn">isEmpty</span>()) {
+    <span class="code-keyword">let</span> curr = openSet.<span class="code-fn">pop</span>();
+    <span class="code-keyword">if</span> (curr === goal) <span class="code-keyword">return</span> <span class="code-fn">reconstructPath</span>(curr);
+    
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> neighbor <span class="code-keyword">of</span> <span class="code-fn">neighbors</span>(curr)) {
+      <span class="code-keyword">let</span> tempG = gScore[curr] + <span class="code-fn">dist</span>(curr, neighbor);
+      <span class="code-keyword">if</span> (tempG &lt; gScore[neighbor]) {
+        gScore[neighbor] = tempG;
+        fScore[neighbor] = tempG + <span class="code-fn">heuristic</span>(neighbor, goal);
+        openSet.<span class="code-fn">push</span>(neighbor, fScore[neighbor]);
+      }
+    }
+  }
+}
+`,
   bubble: `
 <span class="code-keyword">function</span> <span class="code-fn">bubbleSort</span>(arr) {
   <span class="code-keyword">let</span> n = arr.length;
@@ -6549,6 +10264,21 @@ function resetVisualizer() {
     appendLog("[INFO] Quick Sort: partitioning around the last element as pivot.", "info");
     generateQuickSortSteps(nums);
   }
+  else if (visualizerState.algo === 'quicksortfull') {
+    visualizerState.rawArray = [4, 2, 1, 3];
+    appendLog("[INFO] Initialized full Recursive Quick Sort.", "info");
+    generateQuickSortFullSteps();
+  }
+  else if (visualizerState.algo === 'mergesort') {
+    visualizerState.rawArray = [4, 2, 1, 3];
+    appendLog("[INFO] Initialized Recursive Merge Sort.", "info");
+    generateMergeSortSteps();
+  }
+  else if (visualizerState.algo === 'insertionsort') {
+    visualizerState.rawArray = [5, 2, 4, 6, 1, 3];
+    appendLog("[INFO] Initialized Insertion Sort.", "info");
+    generateInsertionSortSteps();
+  }
   else if (visualizerState.algo === 'bfsgrid') {
     appendLog("[INFO] BFS Grid: expanding shortest path layers around obstacles.", "info");
     generateBFSGridSteps();
@@ -6584,6 +10314,58 @@ function resetVisualizer() {
     visualizerState.rawArray = [10, 20, 30, 40, 50, 25];
     appendLog("[INFO] Initialized AVL Tree nodes insertion. Watch left/right balance factors & rotations...", "info");
     generateAVLSteps(visualizerState.rawArray);
+  }
+  else if (visualizerState.algo === 'rbtree') {
+    visualizerState.rawArray = [15, 8, 25, 5, 12, 2];
+    appendLog("[INFO] Initialized Red-Black Tree. Nodes are colored (Red/Black) and rotated to maintain properties.", "info");
+    generateRBTreeSteps(visualizerState.rawArray);
+  }
+  else if (visualizerState.algo === 'netflow') {
+    visualizerState.rawArray = [
+      { from: 'S', to: 'A', cap: 10, flow: 0 },
+      { from: 'S', to: 'B', cap: 5, flow: 0 },
+      { from: 'A', to: 'B', cap: 15, flow: 0 },
+      { from: 'A', to: 'T', cap: 10, flow: 0 },
+      { from: 'B', to: 'T', cap: 10, flow: 0 }
+    ];
+    appendLog("[INFO] Initialized Network Flow graph S -> A,B -> T. BFS computes augmenting paths.", "info");
+    generateNetFlowSteps();
+  }
+  else if (visualizerState.algo === 'astar') {
+    visualizerState.rawArray = {
+      rows: 5,
+      cols: 6,
+      start: [2, 0],
+      end: [2, 5],
+      walls: [[1, 2], [2, 2], [3, 2]]
+    };
+    appendLog("[INFO] Initialized A* Search. Green is Start, Red is Goal, Grey is wall. f = g + h is computed.", "info");
+    generateAStarSteps();
+  }
+  else if (visualizerState.algo === 'prims') {
+    visualizerState.rawArray = [
+      { x: 80, y: 80, id: 'A' },
+      { x: 320, y: 60, id: 'B' },
+      { x: 180, y: 200, id: 'C' },
+      { x: 360, y: 220, id: 'D' }
+    ];
+    appendLog("[INFO] Initialized Prim's Minimum Spanning Tree. Starting from node A.", "info");
+    generatePrimsSteps();
+  }
+  else if (visualizerState.algo === 'singlenumber') {
+    visualizerState.rawArray = [4, 1, 2, 1, 2];
+    appendLog("[INFO] Initialized Single Number Finder. Running XOR accumulator scan...", "info");
+    generateSingleNumberSteps();
+  }
+  else if (visualizerState.algo === 'bitmasksubsets') {
+    visualizerState.rawArray = ['A', 'B', 'C'];
+    appendLog("[INFO] Initialized Bitmask Subsets. Enumerating binary masks from 000 to 111...", "info");
+    generateBitmaskSubsetsSteps();
+  }
+  else if (visualizerState.algo === 'binaryaddition') {
+    visualizerState.rawArray = [3, 2];
+    appendLog("[INFO] Initialized Binary Addition. Simulating adder carry propagation for 3 + 2...", "info");
+    generateBinaryAdditionSteps();
   }
   else if (visualizerState.algo === 'huffman') {
     visualizerState.rawArray = [
@@ -6768,6 +10550,471 @@ function generateHuffmanSteps(nodes) {
   
   visualizerState.steps = steps;
 }
+
+// Red-Black Tree step generator
+function generateRBTreeSteps(arr) {
+  const steps = [];
+  // Hardcoded trace representing standard Red-Black tree insertion steps for [15, 8, 25, 5, 12, 2]
+  // showing coloring rules and left/right rotations.
+  
+  steps.push({
+    nodes: [],
+    log: "Red-Black Tree is empty. Initializing insertion..."
+  });
+  
+  steps.push({
+    nodes: [
+      { val: 15, color: 'black', x: 228, y: 30, left: null, right: null }
+    ],
+    log: "Insert 15. Root node must always be colored Black."
+  });
+  
+  steps.push({
+    nodes: [
+      { val: 15, color: 'black', x: 228, y: 30, left: 8, right: null },
+      { val: 8, color: 'red', x: 120, y: 110, left: null, right: null }
+    ],
+    log: "Insert 8 as left child of 15. New insertions default to Red. Properties satisfied."
+  });
+  
+  steps.push({
+    nodes: [
+      { val: 15, color: 'black', x: 228, y: 30, left: 8, right: 25 },
+      { val: 8, color: 'red', x: 120, y: 110, left: null, right: null },
+      { val: 25, color: 'red', x: 336, y: 110, left: null, right: null }
+    ],
+    log: "Insert 25 as right child of 15. Colored Red. Tree remains balanced."
+  });
+  
+  steps.push({
+    nodes: [
+      { val: 15, color: 'black', x: 228, y: 30, left: 8, right: 25 },
+      { val: 8, color: 'black', x: 120, y: 110, left: 5, right: null },
+      { val: 25, color: 'black', x: 336, y: 110, left: null, right: null },
+      { val: 5, color: 'red', x: 50, y: 190, left: null, right: null }
+    ],
+    log: "Insert 5. Red-Red violation at parent 8 and child 5! Uncle 25 is Red -> Recoloring: parent 8 and uncle 25 become Black, root 15 remains Black."
+  });
+  
+  steps.push({
+    nodes: [
+      { val: 15, color: 'black', x: 228, y: 30, left: 8, right: 25 },
+      { val: 8, color: 'black', x: 120, y: 110, left: 5, right: 12 },
+      { val: 25, color: 'black', x: 336, y: 110, left: null, right: null },
+      { val: 5, color: 'red', x: 50, y: 190, left: null, right: null },
+      { val: 12, color: 'red', x: 180, y: 190, left: null, right: null }
+    ],
+    log: "Insert 12 as right child of 8. Colored Red. Tree properties are valid."
+  });
+  
+  steps.push({
+    nodes: [
+      { val: 15, color: 'black', x: 228, y: 30, left: 5, right: 25 },
+      { val: 5, color: 'black', x: 120, y: 110, left: 2, right: 8 },
+      { val: 2, color: 'red', x: 50, y: 190, left: null, right: null },
+      { val: 8, color: 'red', x: 180, y: 190, left: null, right: 12 },
+      { val: 12, color: 'red', x: 240, y: 270, left: null, right: null },
+      { val: 25, color: 'black', x: 336, y: 110, left: null, right: null }
+    ],
+    log: "Insert 2. Red-Red violation! Parent 5 and grandparent 8 form a Left-Left line, and uncle is null (Black). Perform Right Rotation on 8 and swap colors of 5 and 8."
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Network Flow step generator
+function generateNetFlowSteps() {
+  const steps = [];
+  
+  steps.push({
+    flows: [
+      { u: 'S', v: 'A', cap: 10, flow: 0 },
+      { u: 'S', v: 'B', cap: 5, flow: 0 },
+      { u: 'A', v: 'B', cap: 15, flow: 0 },
+      { u: 'A', v: 'T', cap: 10, flow: 0 },
+      { u: 'B', v: 'T', cap: 10, flow: 0 }
+    ],
+    path: [],
+    activeEdges: [],
+    maxFlow: 0,
+    log: "Flow network initialized with 0 flow. BFS is triggered to find augmenting paths."
+  });
+  
+  steps.push({
+    flows: [
+      { u: 'S', v: 'A', cap: 10, flow: 0 },
+      { u: 'S', v: 'B', cap: 5, flow: 0 },
+      { u: 'A', v: 'B', cap: 15, flow: 0 },
+      { u: 'A', v: 'T', cap: 10, flow: 0 },
+      { u: 'B', v: 'T', cap: 10, flow: 0 }
+    ],
+    path: ['S', 'A', 'T'],
+    activeEdges: ['S-A', 'A-T'],
+    maxFlow: 0,
+    log: "BFS found augmenting path S -> A -> T. Bottleneck capacity along this path is min(10, 10) = 10."
+  });
+  
+  steps.push({
+    flows: [
+      { u: 'S', v: 'A', cap: 10, flow: 10 },
+      { u: 'S', v: 'B', cap: 5, flow: 0 },
+      { u: 'A', v: 'B', cap: 15, flow: 0 },
+      { u: 'A', v: 'T', cap: 10, flow: 10 },
+      { u: 'B', v: 'T', cap: 10, flow: 0 }
+    ],
+    path: ['S', 'A', 'T'],
+    activeEdges: ['S-A', 'A-T'],
+    maxFlow: 10,
+    log: "Pushed 10 units of flow along S -> A -> T. Current total flow = 10."
+  });
+  
+  steps.push({
+    flows: [
+      { u: 'S', v: 'A', cap: 10, flow: 10 },
+      { u: 'S', v: 'B', cap: 5, flow: 0 },
+      { u: 'A', v: 'B', cap: 15, flow: 0 },
+      { u: 'A', v: 'T', cap: 10, flow: 10 },
+      { u: 'B', v: 'T', cap: 10, flow: 0 }
+    ],
+    path: ['S', 'B', 'T'],
+    activeEdges: ['S-B', 'B-T'],
+    maxFlow: 10,
+    log: "BFS found next augmenting path S -> B -> T. Bottleneck capacity along this path is min(5, 10) = 5."
+  });
+  
+  steps.push({
+    flows: [
+      { u: 'S', v: 'A', cap: 10, flow: 10 },
+      { u: 'S', v: 'B', cap: 5, flow: 5 },
+      { u: 'A', v: 'B', cap: 15, flow: 0 },
+      { u: 'A', v: 'T', cap: 10, flow: 10 },
+      { u: 'B', v: 'T', cap: 10, flow: 5 }
+    ],
+    path: ['S', 'B', 'T'],
+    activeEdges: ['S-B', 'B-T'],
+    maxFlow: 15,
+    log: "Pushed 5 units of flow along S -> B -> T. Current total flow = 15."
+  });
+  
+  steps.push({
+    flows: [
+      { u: 'S', v: 'A', cap: 10, flow: 10 },
+      { u: 'S', v: 'B', cap: 5, flow: 5 },
+      { u: 'A', v: 'B', cap: 15, flow: 0 },
+      { u: 'A', v: 'T', cap: 10, flow: 10 },
+      { u: 'B', v: 'T', cap: 10, flow: 5 }
+    ],
+    path: [],
+    activeEdges: [],
+    maxFlow: 15,
+    log: "BFS runs again. Source and sink are disconnected in residual graph. Max Flow algorithm complete. Optimal Max Flow = 15."
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// A* Pathfinding step generator
+function generateAStarSteps() {
+  const steps = [];
+  
+  // start [2,0], end [2,5], walls [[1,2],[2,2],[3,2]]
+  steps.push({
+    open: [[2,0]],
+    closed: [],
+    active: null,
+    path: [],
+    f: {}, g: {}, h: {},
+    log: "A* Search initialized. Green cell is Start, Red is Goal, Grey cells are impassable Walls."
+  });
+  
+  steps.push({
+    open: [[1,0], [3,0], [2,1]],
+    closed: [[2,0]],
+    active: [2,0],
+    path: [],
+    f: {'2,1':5, '1,0':6, '3,0':6},
+    g: {'2,1':1, '1,0':1, '3,0':1},
+    h: {'2,1':4, '1,0':5, '3,0':5},
+    log: "Evaluate cell (2,0) [f=5]. Open neighbors: (2,1) [f=5], (1,0) [f=6], (3,0) [f=6]."
+  });
+  
+  steps.push({
+    open: [[1,1], [3,1], [1,0], [3,0]],
+    closed: [[2,0], [2,1]],
+    active: [2,1],
+    path: [],
+    f: {'1,1':6, '3,1':6, '1,0':6, '3,0':6},
+    g: {'1,1':2, '3,1':2, '1,0':1, '3,0':1},
+    h: {'1,1':4, '3,1':4, '1,0':5, '3,0':5},
+    log: "Evaluate lowest-F cell (2,1) [f=5]. Open neighbors (1,1) [f=6] and (3,1) [f=6]."
+  });
+  
+  steps.push({
+    open: [[0,1], [3,1], [1,0], [3,0]],
+    closed: [[2,0], [2,1], [1,1]],
+    active: [1,1],
+    path: [],
+    f: {'0,1':7, '3,1':6, '1,0':6, '3,0':6},
+    g: {'0,1':3, '3,1':2, '1,0':1, '3,0':1},
+    h: {'0,1':4, '3,1':4, '1,0':5, '3,0':5},
+    log: "Evaluate cell (1,1) [f=6]. Open neighbor (0,1) [f=7]. (Note: (1,2) is a Wall)."
+  });
+  
+  steps.push({
+    open: [[0,2], [3,1], [1,0], [3,0]],
+    closed: [[2,0], [2,1], [1,1], [0,1]],
+    active: [0,1],
+    path: [],
+    f: {'0,2':7, '3,1':6, '1,0':6, '3,0':6},
+    g: {'0,2':4, '3,1':2, '1,0':1, '3,0':1},
+    h: {'0,2':3, '3,1':4, '1,0':5, '3,0':5},
+    log: "Evaluate cell (0,1) [f=7]. Open neighbor (0,2) [f=7] (successfully bypasses wall block from above)."
+  });
+  
+  steps.push({
+    open: [[0,3], [3,1], [1,0], [3,0]],
+    closed: [[2,0], [2,1], [1,1], [0,1], [0,2]],
+    active: [0,2],
+    path: [],
+    f: {'0,3':7, '3,1':6, '1,0':6, '3,0':6},
+    g: {'0,3':5, '3,1':2, '1,0':1, '3,0':1},
+    h: {'0,3':2, '3,1':4, '1,0':5, '3,0':5},
+    log: "Evaluate cell (0,2) [f=7]. Open neighbor (0,3) [f=7]."
+  });
+  
+  steps.push({
+    open: [[0,4], [1,3], [3,1], [1,0]],
+    closed: [[2,0], [2,1], [1,1], [0,1], [0,2], [0,3]],
+    active: [0,3],
+    path: [],
+    f: {'0,4':7, '1,3':7, '3,1':6, '1,0':6},
+    g: {'0,4':6, '1,3':6, '3,1':2, '1,0':1},
+    h: {'0,4':1, '1,3':1, '3,1':4, '1,0':5},
+    log: "Evaluate cell (0,3) [f=7]. Open neighbors (0,4) [f=7] and (1,3) [f=7]."
+  });
+  
+  steps.push({
+    open: [[0,5], [1,4], [1,3], [1,0]],
+    closed: [[2,0], [2,1], [1,1], [0,1], [0,2], [0,3], [0,4]],
+    active: [0,4],
+    path: [],
+    f: {'0,5':9, '1,4':8, '1,3':7, '1,0':6},
+    g: {'0,5':7, '1,4':7, '1,3':6, '1,0':1},
+    h: {'0,5':2, '1,4':1, '1,3':1, '1,0':5},
+    log: "Evaluate cell (0,4) [f=7]. Open neighbors (0,5) [f=9] and (1,4) [f=8]."
+  });
+  
+  steps.push({
+    open: [[2,5], [1,4], [1,0]],
+    closed: [[2,0], [2,1], [1,1], [0,1], [0,2], [0,3], [0,4], [1,4]],
+    active: [1,4],
+    path: [],
+    f: {'2,5':9, '1,4':8, '1,0':6},
+    g: {'2,5':8, '1,4':7, '1,0':1},
+    h: {'2,5':0, '1,4':1, '1,0':5},
+    log: "Evaluate cell (1,4) [f=8]. Open target node (2,5) [f=9, g=8, h=0]!"
+  });
+  
+  steps.push({
+    open: [],
+    closed: [[2,0], [2,1], [1,1], [0,1], [0,2], [0,3], [0,4], [1,4], [2,5]],
+    active: [2,5],
+    path: [[2,0], [2,1], [1,1], [0,1], [0,2], [0,3], [0,4], [1,4], [2,5]],
+    f: {}, g: {}, h: {},
+    log: "Target reached! Backtrack parents to construct optimal path: (2,0) -> (2,1) -> (1,1) -> (0,1) -> (0,2) -> (0,3) -> (0,4) -> (1,4) -> (2,5)."
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Prim's MST step generator
+function generatePrimsSteps() {
+  const steps = [];
+  
+  // Hardcoded steps for points: A(80,80), B(320,60), C(180,200), D(360,220)
+  // dist(A,B) = 241, dist(A,C) = 156, dist(B,C) = 198, dist(B,D) = 165, dist(C,D) = 181
+  
+  steps.push({
+    mstEdges: [],
+    inMST: [],
+    minDist: { 'A': 0, 'B': Infinity, 'C': Infinity, 'D': Infinity },
+    candidates: [],
+    activeNode: null,
+    log: "Prim's algorithm initialized. Start node A chosen with distance 0. All other distances set to Infinity."
+  });
+  
+  steps.push({
+    mstEdges: [],
+    inMST: ['A'],
+    minDist: { 'A': 0, 'B': 241, 'C': 156, 'D': Infinity },
+    candidates: ['A-B', 'A-C'],
+    activeNode: 'A',
+    log: "Add node A to MST. Scan outgoing edges from A: candidate edge A-B (dist 241), candidate edge A-C (dist 156)."
+  });
+  
+  steps.push({
+    mstEdges: ['A-C'],
+    inMST: ['A', 'C'],
+    minDist: { 'A': 0, 'B': 198, 'C': 156, 'D': 181 },
+    candidates: ['A-B', 'C-B', 'C-D'],
+    activeNode: 'C',
+    log: "Select closest candidate node C (distance 156). Add edge A-C to MST. Scan C's neighbors: B's distance updated to 198 (via C-B), candidate edge C-D (dist 181) added."
+  });
+  
+  steps.push({
+    mstEdges: ['A-C', 'C-D'],
+    inMST: ['A', 'C', 'D'],
+    minDist: { 'A': 0, 'B': 165, 'C': 156, 'D': 181 },
+    candidates: ['C-B', 'D-B'],
+    activeNode: 'D',
+    log: "Select closest candidate node D (distance 181). Add edge C-D to MST. Scan D's neighbors: B's distance updated to 165 (via D-B)."
+  });
+  
+  steps.push({
+    mstEdges: ['A-C', 'C-D', 'D-B'],
+    inMST: ['A', 'C', 'D', 'B'],
+    minDist: { 'A': 0, 'B': 165, 'C': 156, 'D': 181 },
+    candidates: [],
+    activeNode: 'B',
+    log: "Select closest candidate node B (distance 165). Add edge D-B to MST. All nodes connected! Spanning Tree complete. Total MST cost = 156 + 181 + 165 = 502."
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Single Number step generator
+function generateSingleNumberSteps() {
+  const steps = [];
+  const arr = [4, 1, 2, 1, 2];
+  let acc = 0;
+  
+  steps.push({
+    array: arr,
+    index: -1,
+    acc: 0,
+    binaryAcc: "000",
+    binaryVal: "000",
+    log: "XOR Accumulator initialized with 0. Starting scan of elements..."
+  });
+  
+  const toBin = (v) => v.toString(2).padStart(3, '0');
+  
+  arr.forEach((val, idx) => {
+    const prevAcc = acc;
+    acc = acc ^ val;
+    steps.push({
+      array: arr,
+      index: idx,
+      acc: acc,
+      binaryAcc: toBin(acc),
+      binaryVal: toBin(val),
+      log: `XOR element index ${idx} (${val}). Acc = ${prevAcc} (${toBin(prevAcc)}) ^ ${val} (${toBin(val)}) = ${acc} (${toBin(acc)})`
+    });
+  });
+  
+  steps.push({
+    array: arr,
+    index: -1,
+    acc: acc,
+    binaryAcc: toBin(acc),
+    binaryVal: "000",
+    log: `Scan complete. The unique element left after pairs cancel out is ${acc}.`
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Bitmask Subsets step generator
+function generateBitmaskSubsetsSteps() {
+  const steps = [];
+  const arr = ['A', 'B', 'C'];
+  const n = arr.length;
+  const list = [];
+  
+  const toBin = (v) => v.toString(2).padStart(3, '0');
+  
+  for (let mask = 0; mask < (1 << n); mask++) {
+    const subset = [];
+    for (let i = 0; i < n; i++) {
+      if ((mask & (1 << i)) > 0) {
+        subset.push(arr[i]);
+      }
+    }
+    list.push([...subset]);
+    
+    steps.push({
+      mask: mask,
+      binaryMask: toBin(mask),
+      activeSubset: [...subset],
+      subsetsList: list.map(s => `[${s.join(', ')}]`),
+      log: `Mask ${mask} (${toBin(mask)}). Set bits match indices: ${subset.join(', ') || 'None'}. Subtree generated: [${subset.join(', ')}]`
+    });
+  }
+  
+  visualizerState.steps = steps;
+}
+
+// Binary Addition step generator
+function generateBinaryAdditionSteps() {
+  const steps = [];
+  let a = 3;
+  let b = 2;
+  
+  steps.push({
+    a: a,
+    b: b,
+    sum: 0,
+    carry: 0,
+    binaryA: a.toString(2).padStart(4, '0'),
+    binaryB: b.toString(2).padStart(4, '0'),
+    binarySum: "0000",
+    binaryCarry: "0000",
+    log: "Adder initialized. A = 3 (0011), B = 2 (0010)."
+  });
+  
+  let tempA = a;
+  let tempB = b;
+  let stepIdx = 0;
+  
+  while (tempB !== 0) {
+    const prevA = tempA;
+    const prevB = tempB;
+    const sumVal = tempA ^ tempB;
+    const carryVal = (tempA & tempB) << 1;
+    
+    steps.push({
+      a: prevA,
+      b: prevB,
+      sum: sumVal,
+      carry: carryVal,
+      binaryA: prevA.toString(2).padStart(4, '0'),
+      binaryB: prevB.toString(2).padStart(4, '0'),
+      binarySum: sumVal.toString(2).padStart(4, '0'),
+      binaryCarry: carryVal.toString(2).padStart(4, '0'),
+      log: `Step ${++stepIdx}: Sum (XOR) = ${prevA} ^ ${prevB} = ${sumVal}. Carry (AND<<1) = (${prevA} & ${prevB})<<1 = ${carryVal}.`
+    });
+    
+    tempA = sumVal;
+    tempB = carryVal;
+  }
+  
+  steps.push({
+    a: tempA,
+    b: tempB,
+    sum: tempA,
+    carry: 0,
+    binaryA: tempA.toString(2).padStart(4, '0'),
+    binaryB: "0000",
+    binarySum: tempA.toString(2).padStart(4, '0'),
+    binaryCarry: "0000",
+    log: `Carry is 0. Sum loop complete. Final Sum = ${tempA}.`
+  });
+  
+  visualizerState.steps = steps;
+}
+
+
+
 
 // 1. Bubble Sort
 function generateBubbleSortSteps(arr) {
@@ -8014,6 +12261,286 @@ function generateQuickSortSteps(nums) {
   visualizerState.steps = steps;
 }
 
+// Recursive Quick Sort full step generator
+function generateQuickSortFullSteps() {
+  const steps = [];
+  const initialArr = [4, 2, 1, 3];
+  
+  steps.push({
+    array: [...initialArr],
+    pivotIdx: -1,
+    left: 0,
+    right: 3,
+    sorted: [],
+    log: "Initial array loaded. Starting recursive Quick Sort."
+  });
+  
+  // Hardcoded steps for simplicity of [4, 2, 1, 3] Lomuto trace
+  // 1. Partition [0, 3], pivot value = 3, pivotIdx = 3
+  steps.push({
+    array: [4, 2, 1, 3],
+    pivotIdx: 3,
+    left: 0,
+    right: 3,
+    sorted: [],
+    log: "Partition subarray [0, 3]. Pivot value is 3."
+  });
+  // Compare 4 with 3 -> greater
+  // Compare 2 with 3 -> smaller, swap with 4 -> [2, 4, 1, 3]
+  steps.push({
+    array: [2, 4, 1, 3],
+    pivotIdx: 3,
+    left: 0,
+    right: 3,
+    sorted: [],
+    log: "Swap 2 into smaller partition. Array becomes [2, 4, 1, 3]."
+  });
+  // Compare 1 with 3 -> smaller, swap with 4 -> [2, 1, 4, 3]
+  steps.push({
+    array: [2, 1, 4, 3],
+    pivotIdx: 3,
+    left: 0,
+    right: 3,
+    sorted: [],
+    log: "Swap 1 into smaller partition. Array becomes [2, 1, 4, 3]."
+  });
+  // Swap pivot with 4 -> [2, 1, 3, 4]
+  steps.push({
+    array: [2, 1, 3, 4],
+    pivotIdx: 2,
+    left: 0,
+    right: 3,
+    sorted: [2],
+    log: "Place pivot 3 at final sorted index 2. Pivot is now locked."
+  });
+  
+  // 2. Recursively partition left half [0, 1], pivot value = 1, pivotIdx = 1
+  steps.push({
+    array: [2, 1, 3, 4],
+    pivotIdx: 1,
+    left: 0,
+    right: 1,
+    sorted: [2],
+    log: "Recurse on left subarray [0, 1]. Pivot is 1."
+  });
+  // Swap pivot 1 with 2 -> [1, 2, 3, 4]
+  steps.push({
+    array: [1, 2, 3, 4],
+    pivotIdx: 0,
+    left: 0,
+    right: 1,
+    sorted: [0, 2],
+    log: "Place pivot 1 at final index 0. Locked."
+  });
+  
+  // 3. Right half [3, 3] is single element, sorted
+  steps.push({
+    array: [1, 2, 3, 4],
+    pivotIdx: -1,
+    left: -1,
+    right: -1,
+    sorted: [0, 1, 2, 3],
+    log: "All partition recursions complete. Array is fully sorted."
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Recursive Merge Sort step generator
+function generateMergeSortSteps() {
+  const steps = [];
+  const initialArr = [4, 2, 1, 3];
+  
+  steps.push({
+    array: [...initialArr],
+    splitL: -1,
+    splitR: -1,
+    merging: false,
+    left: -1,
+    mid: -1,
+    right: -1,
+    log: "Initial array loaded. Starting recursive Merge Sort."
+  });
+  
+  // Divide phase
+  steps.push({
+    array: [4, 2, 1, 3],
+    splitL: 0,
+    splitR: 1,
+    merging: false,
+    left: 0,
+    mid: 0,
+    right: 1,
+    log: "Split left half: [4, 2]."
+  });
+  steps.push({
+    array: [4, 2, 1, 3],
+    splitL: 2,
+    splitR: 3,
+    merging: false,
+    left: 2,
+    mid: 2,
+    right: 3,
+    log: "Split right half: [1, 3]."
+  });
+  
+  // Merge left half: [4] and [2] -> [2, 4]
+  steps.push({
+    array: [4, 2, 1, 3],
+    splitL: -1,
+    splitR: -1,
+    merging: true,
+    left: 0,
+    mid: 0,
+    right: 1,
+    log: "Merge [4] and [2] into sorted subarray."
+  });
+  steps.push({
+    array: [2, 4, 1, 3],
+    splitL: -1,
+    splitR: -1,
+    merging: true,
+    left: 0,
+    mid: 0,
+    right: 1,
+    log: "Merged: [2, 4]."
+  });
+  
+  // Merge right half: [1] and [3] -> [1, 3]
+  steps.push({
+    array: [2, 4, 1, 3],
+    splitL: -1,
+    splitR: -1,
+    merging: true,
+    left: 2,
+    mid: 2,
+    right: 3,
+    log: "Merge [1] and [3] into sorted subarray."
+  });
+  
+  // Final merge: [2, 4] and [1, 3] -> [1, 2, 3, 4]
+  steps.push({
+    array: [2, 4, 1, 3],
+    splitL: -1,
+    splitR: -1,
+    merging: true,
+    left: 0,
+    mid: 1,
+    right: 3,
+    log: "Merge sorted halves: [2, 4] and [1, 3]."
+  });
+  steps.push({
+    array: [1, 2, 3, 4],
+    splitL: -1,
+    splitR: -1,
+    merging: true,
+    left: 0,
+    mid: 1,
+    right: 3,
+    log: "Final merged array fully sorted."
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Insertion Sort step generator
+function generateInsertionSortSteps() {
+  const steps = [];
+  const arr = [5, 2, 4, 6, 1, 3];
+  
+  steps.push({
+    array: [...arr],
+    activeIdx: -1,
+    compareIdx: -1,
+    sortedCount: 1,
+    log: "Insertion Sort started. Initial subarray index 0 is trivially sorted."
+  });
+  
+  // Step-by-step trace
+  // 1. Insert 2
+  steps.push({
+    array: [...arr],
+    activeIdx: 1,
+    compareIdx: 0,
+    sortedCount: 1,
+    log: "Compare element 2 at index 1 with sorted left element 5."
+  });
+  steps.push({
+    array: [2, 5, 4, 6, 1, 3],
+    activeIdx: 0,
+    compareIdx: -1,
+    sortedCount: 2,
+    log: "Shift 5 right and insert 2. Sorted portion is now [2, 5]."
+  });
+  
+  // 2. Insert 4
+  steps.push({
+    array: [2, 5, 4, 6, 1, 3],
+    activeIdx: 2,
+    compareIdx: 1,
+    sortedCount: 2,
+    log: "Compare element 4 at index 2 with sorted left element 5."
+  });
+  steps.push({
+    array: [2, 4, 5, 6, 1, 3],
+    activeIdx: 1,
+    compareIdx: -1,
+    sortedCount: 3,
+    log: "Shift 5 right and insert 4. Sorted portion is now [2, 4, 5]."
+  });
+  
+  // 3. Insert 6
+  steps.push({
+    array: [2, 4, 5, 6, 1, 3],
+    activeIdx: 3,
+    compareIdx: 2,
+    sortedCount: 3,
+    log: "Compare element 6 at index 3 with sorted left element 5. Greater, no shift needed."
+  });
+  steps.push({
+    array: [2, 4, 5, 6, 1, 3],
+    activeIdx: 3,
+    compareIdx: -1,
+    sortedCount: 4,
+    log: "Commit 6 at index 3. Sorted portion is now [2, 4, 5, 6]."
+  });
+  
+  // 4. Insert 1
+  steps.push({
+    array: [2, 4, 5, 6, 1, 3],
+    activeIdx: 4,
+    compareIdx: 3,
+    sortedCount: 4,
+    log: "Compare element 1 with sorted left elements."
+  });
+  steps.push({
+    array: [1, 2, 4, 5, 6, 3],
+    activeIdx: 0,
+    compareIdx: -1,
+    sortedCount: 5,
+    log: "Shift sorted elements right and insert 1 at index 0."
+  });
+  
+  // 5. Insert 3
+  steps.push({
+    array: [1, 2, 4, 5, 6, 3],
+    activeIdx: 5,
+    compareIdx: 4,
+    sortedCount: 5,
+    log: "Compare element 3 with sorted left elements."
+  });
+  steps.push({
+    array: [1, 2, 3, 4, 5, 6],
+    activeIdx: 2,
+    compareIdx: -1,
+    sortedCount: 6,
+    log: "Shift sorted elements and insert 3 at index 2. Sorting complete!"
+  });
+  
+  visualizerState.steps = steps;
+}
+
+
 // 34. BFS Grid Shortest Path
 function generateBFSGridSteps() {
   const grid = [
@@ -8163,26 +12690,93 @@ function generateSudokuSteps() {
     ['.','.','.','4','1','9','.','.','5'],
     ['.','.','.','.','8','.','.','7','9']
   ];
-  const empties = [[0,2], [0,3], [0,5], [1,1], [1,2], [2,0]];
-  const steps = [{ board: board.map(r => [...r]), active: null, conflict: null, log: "Sudoku sample loaded. Try early empty cells." }];
-  const valid = (r, c, val) => {
-    for (let i = 0; i < 9; i++) if (board[r][i] === val || board[i][c] === val) return false;
-    const br = Math.floor(r / 3) * 3, bc = Math.floor(c / 3) * 3;
-    for (let rr = br; rr < br + 3; rr++) for (let cc = bc; cc < bc + 3; cc++) if (board[rr][cc] === val) return false;
-    return true;
-  };
-  for (const [r, c] of empties) {
-    for (let d = 1; d <= 9; d++) {
-      const val = String(d);
-      const ok = valid(r, c, val);
-      steps.push({ board: board.map(row => [...row]), active: [r, c], conflict: ok ? null : [r, c], candidate: val, log: ok ? `Place ${val} at (${r}, ${c}).` : `Candidate ${val} conflicts at (${r}, ${c}).` });
-      if (ok) {
-        board[r][c] = val;
-        steps.push({ board: board.map(row => [...row]), active: [r, c], conflict: null, candidate: val, log: `Committed ${val}. Move to next empty cell.` });
-        break;
+  
+  const steps = [];
+  steps.push({
+    board: board.map(r => [...r]),
+    active: null,
+    conflict: null,
+    log: "Sudoku puzzle loaded. Starting recursive backtracking search..."
+  });
+  
+  function isValid(r, c, val) {
+    for (let i = 0; i < 9; i++) {
+      if (board[r][i] === val) return false;
+      if (board[i][c] === val) return false;
+    }
+    const br = Math.floor(r / 3) * 3;
+    const bc = Math.floor(c / 3) * 3;
+    for (let rr = br; rr < br + 3; rr++) {
+      for (let cc = bc; cc < bc + 3; cc++) {
+        if (board[rr][cc] === val) return false;
       }
     }
+    return true;
   }
+  
+  let stepCount = 0;
+  const maxSteps = 400; // Safe cap for visual steps density
+  
+  function solve() {
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        if (board[r][c] === '.') {
+          for (let d = 1; d <= 9; d++) {
+            const val = String(d);
+            if (stepCount < maxSteps) {
+              stepCount++;
+              const ok = isValid(r, c, val);
+              steps.push({
+                board: board.map(row => [...row]),
+                active: [r, c],
+                conflict: ok ? null : [r, c],
+                candidate: val,
+                log: ok ? `Trying ${val} at (${r}, ${c}) - Valid.` : `Trying ${val} at (${r}, ${c}) - Conflict found.`
+              });
+              
+              if (ok) {
+                board[r][c] = val;
+                if (solve()) return true;
+                
+                // Backtrack
+                board[r][c] = '.';
+                if (stepCount < maxSteps) {
+                  stepCount++;
+                  steps.push({
+                    board: board.map(row => [...row]),
+                    active: [r, c],
+                    conflict: [r, c],
+                    candidate: '.',
+                    log: `Backtracking: removing value at (${r}, ${c}) and trying next candidate.`
+                  });
+                }
+              }
+            } else {
+              // Capped steps - complete solving without visual records to prevent memory limits
+              if (isValid(r, c, val)) {
+                board[r][c] = val;
+                if (solve()) return true;
+                board[r][c] = '.';
+              }
+            }
+          }
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+  
+  solve();
+  
+  // Add final step showing completely solved grid
+  steps.push({
+    board: board.map(r => [...r]),
+    active: null,
+    conflict: null,
+    log: "Sudoku puzzle completely solved successfully!"
+  });
+  
   visualizerState.steps = steps;
 }
 
@@ -8651,6 +13245,7 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'largestRectangle') {
     const container = document.createElement('div');
     container.className = 'tp-container';
+    container.style.position = 'relative';
     const maxVal = Math.max(...visualizerState.rawArray);
     
     visualizerState.rawArray.forEach((val, idx) => {
@@ -8709,7 +13304,7 @@ function renderCanvasStep() {
       overlayLabel.style.left = '50%';
       overlayLabel.style.transform = 'translate(-50%, -50%)';
       overlayLabel.style.fontSize = '0.85rem';
-      overlayLabel.style.fontTheme = 'Space Grotesk, sans-serif';
+      overlayLabel.style.fontFamily = 'Space Grotesk, sans-serif';
       overlayLabel.style.fontWeight = '700';
       overlayLabel.style.color = '#ffffff';
       overlayLabel.style.whiteSpace = 'nowrap';
@@ -9629,29 +14224,344 @@ function renderCanvasStep() {
   }
 
   // --- AE. QUICK SORT PARTITION ---
+  else if (visualizerState.algo === 'quicksortfull') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+    container.style.paddingTop = '30px';
+    container.style.paddingBottom = '30px';
+    
+    // Draw partition segment blocks
+    const blocksWrap = document.createElement('div');
+    blocksWrap.style.display = 'flex';
+    blocksWrap.style.gap = '10px';
+    blocksWrap.style.justifyContent = 'center';
+    blocksWrap.style.marginTop = '20px';
+    blocksWrap.style.flexWrap = 'wrap';
+    
+    step.array.forEach((val, idx) => {
+      const block = document.createElement('div');
+      block.style.padding = '8px 12px';
+      block.style.borderRadius = '6px';
+      block.style.border = '1px solid var(--border-color)';
+      block.style.fontSize = '0.8rem';
+      block.style.fontWeight = 'bold';
+      block.style.fontFamily = 'monospace';
+      block.style.textAlign = 'center';
+      block.style.minWidth = '50px';
+      
+      const inPartition = idx >= step.left && idx <= step.right;
+      const isPivot = idx === step.pivotIdx;
+      const isSorted = step.sorted.includes(idx);
+      
+      let label = "Inactive";
+      let bg = "rgba(255,255,255,0.02)";
+      let borderC = "var(--border-color)";
+      let textC = "var(--text-main)";
+      
+      if (isPivot) {
+        label = "Pivot";
+        bg = "rgba(6, 182, 212, 0.15)";
+        borderC = "var(--accent-cyan)";
+        textC = "var(--accent-cyan)";
+      } else if (isSorted) {
+        label = "Sorted";
+        bg = "rgba(16, 185, 129, 0.15)";
+        borderC = "var(--easy)";
+        textC = "var(--easy)";
+      } else if (inPartition) {
+        label = "Subarray";
+        bg = "rgba(245, 158, 11, 0.15)";
+        borderC = "var(--warning)";
+        textC = "var(--warning)";
+      }
+      
+      block.style.background = bg;
+      block.style.borderColor = borderC;
+      block.style.color = textC;
+      
+      const valDiv = document.createElement('div');
+      valDiv.style.fontSize = '1.05rem';
+      valDiv.textContent = val;
+      
+      const lblDiv = document.createElement('div');
+      lblDiv.style.fontSize = '0.6rem';
+      lblDiv.style.color = textC;
+      lblDiv.style.marginTop = '4px';
+      lblDiv.textContent = label;
+      
+      block.appendChild(valDiv);
+      block.appendChild(lblDiv);
+      blocksWrap.appendChild(block);
+    });
+    container.appendChild(blocksWrap);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'mergesort') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+    container.style.paddingTop = '30px';
+    container.style.paddingBottom = '30px';
+    
+    // Draw partition segment blocks
+    const blocksWrap = document.createElement('div');
+    blocksWrap.style.display = 'flex';
+    blocksWrap.style.gap = '10px';
+    blocksWrap.style.justifyContent = 'center';
+    blocksWrap.style.marginTop = '20px';
+    blocksWrap.style.flexWrap = 'wrap';
+    
+    step.array.forEach((val, idx) => {
+      const block = document.createElement('div');
+      block.style.padding = '8px 12px';
+      block.style.borderRadius = '6px';
+      block.style.border = '1px solid var(--border-color)';
+      block.style.fontSize = '0.8rem';
+      block.style.fontWeight = 'bold';
+      block.style.fontFamily = 'monospace';
+      block.style.textAlign = 'center';
+      block.style.minWidth = '50px';
+      
+      const isMerging = step.merging && (idx >= step.left && idx <= step.right);
+      const isSplit = (idx === step.splitL || idx === step.splitR);
+      
+      let label = "Unsorted";
+      let bg = "rgba(255,255,255,0.02)";
+      let borderC = "var(--border-color)";
+      let textC = "var(--text-main)";
+      
+      if (isMerging) {
+        label = "Merge";
+        bg = "rgba(16, 185, 129, 0.15)";
+        borderC = "var(--easy)";
+        textC = "var(--easy)";
+      } else if (isSplit) {
+        label = "Split";
+        bg = "rgba(244, 63, 94, 0.15)";
+        borderC = "var(--hard)";
+        textC = "var(--hard)";
+      }
+      
+      block.style.background = bg;
+      block.style.borderColor = borderC;
+      block.style.color = textC;
+      
+      const valDiv = document.createElement('div');
+      valDiv.style.fontSize = '1.05rem';
+      valDiv.textContent = val;
+      
+      const lblDiv = document.createElement('div');
+      lblDiv.style.fontSize = '0.6rem';
+      lblDiv.style.color = textC;
+      lblDiv.style.marginTop = '4px';
+      lblDiv.textContent = label;
+      
+      block.appendChild(valDiv);
+      block.appendChild(lblDiv);
+      blocksWrap.appendChild(block);
+    });
+    container.appendChild(blocksWrap);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'insertionsort') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+    container.style.paddingTop = '50px';
+    container.style.paddingBottom = '30px';
+    
+    // Draw partition segment blocks (boxes below the bars)
+    const blocksWrap = document.createElement('div');
+    blocksWrap.style.display = 'flex';
+    blocksWrap.style.gap = '10px';
+    blocksWrap.style.margin = '20px auto 0 auto';
+    blocksWrap.style.width = 'max-content';
+    blocksWrap.style.position = 'relative';
+    
+    step.array.forEach((val, idx) => {
+      const block = document.createElement('div');
+      block.style.padding = '8px 0';
+      block.style.width = '64px';
+      block.style.boxSizing = 'border-box';
+      block.style.borderRadius = '6px';
+      block.style.border = '1px solid var(--border-color)';
+      block.style.fontSize = '0.8rem';
+      block.style.fontWeight = 'bold';
+      block.style.fontFamily = 'monospace';
+      block.style.textAlign = 'center';
+      
+      const isSorted = idx < step.sortedCount;
+      const isActive = idx === step.activeIdx;
+      const isCompare = idx === step.compareIdx;
+      
+      let label = "Unsorted";
+      let bg = "rgba(255,255,255,0.02)";
+      let borderC = "var(--border-color)";
+      let textC = "var(--text-main)";
+      
+      if (isActive) {
+        label = "Key";
+        bg = "rgba(236, 72, 153, 0.15)";
+        borderC = "var(--secondary)";
+        textC = "var(--secondary)";
+      } else if (isCompare) {
+        label = "Compare";
+        bg = "rgba(6, 182, 212, 0.15)";
+        borderC = "var(--accent-cyan)";
+        textC = "var(--accent-cyan)";
+      } else if (isSorted) {
+        label = "Sorted";
+        bg = "rgba(16, 185, 129, 0.15)";
+        borderC = "var(--easy)";
+        textC = "var(--easy)";
+      }
+      
+      block.style.background = bg;
+      block.style.borderColor = borderC;
+      block.style.color = textC;
+      
+      const valDiv = document.createElement('div');
+      valDiv.style.fontSize = '1.05rem';
+      valDiv.textContent = val;
+      
+      const lblDiv = document.createElement('div');
+      lblDiv.style.fontSize = '0.6rem';
+      lblDiv.style.color = textC;
+      lblDiv.style.marginTop = '4px';
+      lblDiv.textContent = label;
+      
+      block.appendChild(valDiv);
+      block.appendChild(lblDiv);
+      blocksWrap.appendChild(block);
+    });
+    
+    // 3. Draw insertion arrow if active & comparing
+    if (step.activeIdx >= 0 && step.compareIdx >= 0) {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.style.position = 'absolute';
+      svg.style.top = '-45px'; 
+      svg.style.left = '0';
+      svg.style.width = '100%';
+      svg.style.height = '45px';
+      svg.style.pointerEvents = 'none';
+      svg.style.zIndex = '10';
+      
+      const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      const marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+      marker.setAttribute("id", "arr-head");
+      marker.setAttribute("viewBox", "0 0 10 10");
+      marker.setAttribute("refX", "5");
+      marker.setAttribute("refY", "5");
+      marker.setAttribute("markerWidth", "6");
+      marker.setAttribute("markerHeight", "6");
+      marker.setAttribute("orient", "auto-start-reverse");
+      
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", "M 0 0 L 10 5 L 0 10 z");
+      path.setAttribute("fill", "var(--secondary)");
+      marker.appendChild(path);
+      defs.appendChild(marker);
+      svg.appendChild(defs);
+      
+      const startX = step.activeIdx * 74 + 32; 
+      const endX = step.compareIdx * 74 + 32;
+      
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      const dy = -25;
+      const dPath = `M ${startX} 43 Q ${(startX + endX)/2} 10 ${endX} 43`;
+      line.setAttribute("d", dPath);
+      line.setAttribute("stroke", "var(--secondary)");
+      line.setAttribute("stroke-width", "2.5");
+      line.setAttribute("fill", "none");
+      line.setAttribute("marker-end", "url(#arr-head)");
+      svg.appendChild(line);
+      blocksWrap.appendChild(svg);
+    }
+    
+    container.appendChild(blocksWrap);
+    canvas.appendChild(container);
+  }
   else if (visualizerState.algo === 'quicksort') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    const bars = document.createElement('div');
-    bars.className = 'bar-container';
-    const maxVal = Math.max(...step.array);
+    container.style.paddingTop = '30px';
+    container.style.paddingBottom = '30px';
+    
+    // Draw partition segment blocks
+    const blocksWrap = document.createElement('div');
+    blocksWrap.style.display = 'flex';
+    blocksWrap.style.gap = '10px';
+    blocksWrap.style.justifyContent = 'center';
+    blocksWrap.style.marginTop = '20px';
+    blocksWrap.style.flexWrap = 'wrap';
+    
     step.array.forEach((val, idx) => {
-      const bar = document.createElement('div');
-      bar.className = 'algo-bar';
-      bar.style.height = `${Math.max(18, (val / maxVal) * 82)}%`;
-      if (idx === step.pivot) bar.classList.add('sorted');
-      else if (idx === step.i || idx === step.j) bar.classList.add('compare');
-      const span = document.createElement('span');
-      span.className = 'algo-bar-val';
-      span.textContent = val;
-      bar.appendChild(span);
-      bars.appendChild(bar);
+      const block = document.createElement('div');
+      block.style.padding = '8px 12px';
+      block.style.borderRadius = '6px';
+      block.style.border = '1px solid var(--border-color)';
+      block.style.fontSize = '0.8rem';
+      block.style.fontWeight = 'bold';
+      block.style.fontFamily = 'monospace';
+      block.style.textAlign = 'center';
+      block.style.minWidth = '50px';
+      
+      let label = "";
+      let bg = "rgba(255,255,255,0.02)";
+      let borderC = "var(--border-color)";
+      let textC = "var(--text-main)";
+      
+      if (idx === step.pivot) {
+        label = "Pivot";
+        bg = "rgba(6, 182, 212, 0.15)";
+        borderC = "var(--accent-cyan)";
+        textC = "var(--accent-cyan)";
+      } else if (idx < step.i) {
+        label = "≤ Pivot";
+        bg = "rgba(16, 185, 129, 0.15)";
+        borderC = "var(--easy)";
+        textC = "var(--easy)";
+      } else if (idx >= step.i && idx < step.j) {
+        label = "> Pivot";
+        bg = "rgba(244, 63, 94, 0.15)";
+        borderC = "var(--hard)";
+        textC = "var(--hard)";
+      } else if (idx >= step.j && idx < step.pivot) {
+        label = "Unsorted";
+        bg = "rgba(255,255,255,0.04)";
+        borderC = "rgba(255,255,255,0.1)";
+        textC = "var(--text-muted)";
+      } else if (idx > step.pivot) {
+        label = "Sorted";
+        bg = "rgba(16, 185, 129, 0.25)";
+        borderC = "var(--easy)";
+        textC = "var(--easy)";
+      }
+      
+      block.style.background = bg;
+      block.style.borderColor = borderC;
+      block.style.color = textC;
+      
+      const valDiv = document.createElement('div');
+      valDiv.style.fontSize = '1.05rem';
+      valDiv.textContent = val;
+      
+      const lblDiv = document.createElement('div');
+      lblDiv.style.fontSize = '0.6rem';
+      lblDiv.style.color = textC;
+      lblDiv.style.marginTop = '4px';
+      lblDiv.textContent = label;
+      
+      block.appendChild(valDiv);
+      block.appendChild(lblDiv);
+      blocksWrap.appendChild(block);
     });
+    container.appendChild(blocksWrap);
+    
+    // 3. Draw status variables
     const status = document.createElement('div');
     status.className = 'concept-status';
-    status.innerHTML = `i <strong>${step.i}</strong> | j <strong>${step.j}</strong> | pivot index <strong>${step.pivot}</strong>`;
-    container.appendChild(bars);
+    status.innerHTML = `i = <span style="color:var(--easy);font-weight:bold">${step.i}</span> &nbsp;|&nbsp; j = <span style="color:var(--hard);font-weight:bold">${step.j}</span> &nbsp;|&nbsp; pivot = <span style="color:var(--accent-cyan);font-weight:bold">${step.pivot}</span>`;
     container.appendChild(status);
+    
     canvas.appendChild(container);
   }
 
@@ -9981,6 +14891,466 @@ function renderCanvasStep() {
     
     canvas.appendChild(container);
   }
+  else if (visualizerState.algo === 'rbtree') {
+    const container = document.createElement('div');
+    container.className = 'tree-container';
+    
+    // Create SVG container for lines
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "cycle-arrow-svg");
+    
+    // Draw links using SVG
+    step.nodes.forEach(n => {
+      if (n.left !== null) {
+        const child = step.nodes.find(c => c.val === n.left);
+        if (child) {
+          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          line.setAttribute("x1", n.x + 22);
+          line.setAttribute("y1", n.y + 22);
+          line.setAttribute("x2", child.x + 22);
+          line.setAttribute("y2", child.y + 22);
+          line.setAttribute("stroke", "rgba(255,255,255,0.15)");
+          line.setAttribute("stroke-width", "1.5");
+          svg.appendChild(line);
+        }
+      }
+      if (n.right !== null) {
+        const child = step.nodes.find(c => c.val === n.right);
+        if (child) {
+          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          line.setAttribute("x1", n.x + 22);
+          line.setAttribute("y1", n.y + 22);
+          line.setAttribute("x2", child.x + 22);
+          line.setAttribute("y2", child.y + 22);
+          line.setAttribute("stroke", "rgba(255,255,255,0.15)");
+          line.setAttribute("stroke-width", "1.5");
+          svg.appendChild(line);
+        }
+      }
+    });
+    container.appendChild(svg);
+    
+    // Draw nodes
+    step.nodes.forEach(n => {
+      const node = document.createElement('div');
+      node.className = 'tree-node ' + (n.color === 'red' ? 'rb-red' : 'rb-black');
+      node.style.left = `${n.x}px`;
+      node.style.top = `${n.y}px`;
+      node.style.position = 'absolute';
+      
+      const valSpan = document.createElement('span');
+      valSpan.className = 'tree-node-val';
+      valSpan.style.color = '#ffffff';
+      valSpan.textContent = n.val;
+      node.appendChild(valSpan);
+      
+      container.appendChild(node);
+    });
+    
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'netflow') {
+    const container = document.createElement('div');
+    container.className = 'tree-container';
+    
+    const nodeCoords = {
+      'S': { x: 40, y: 120 },
+      'A': { x: 220, y: 40 },
+      'B': { x: 220, y: 200 },
+      'T': { x: 400, y: 120 }
+    };
+    
+    // Create SVG container for lines
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "cycle-arrow-svg");
+    
+    // Draw links using SVG
+    step.flows.forEach(e => {
+      const fromC = nodeCoords[e.u];
+      const toC = nodeCoords[e.v];
+      
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      const edgeKey = `${e.u}-${e.v}`;
+      const isActive = step.activeEdges.includes(edgeKey);
+      
+      line.setAttribute("x1", fromC.x + 22);
+      line.setAttribute("y1", fromC.y + 22);
+      line.setAttribute("x2", toC.x + 22);
+      line.setAttribute("y2", toC.y + 22);
+      
+      if (isActive) {
+        line.setAttribute("stroke", "var(--accent-cyan)");
+        line.setAttribute("stroke-width", "3");
+      } else {
+        line.setAttribute("stroke", "rgba(255,255,255,0.15)");
+        line.setAttribute("stroke-width", "1.5");
+      }
+      svg.appendChild(line);
+      
+      // Label text
+      const label = document.createElement('div');
+      label.style.position = 'absolute';
+      const dx = toC.x - fromC.x;
+      const dy = toC.y - fromC.y;
+      label.style.left = `${fromC.x + dx/2 + 10}px`;
+      label.style.top = `${fromC.y + dy/2 - 10}px`;
+      label.style.fontSize = '0.75rem';
+      label.style.color = isActive ? 'var(--accent-cyan)' : 'var(--text-muted)';
+      label.style.fontFamily = 'monospace';
+      label.style.fontWeight = 'bold';
+      label.textContent = `${e.flow}/${e.cap}`;
+      container.appendChild(label);
+    });
+    container.appendChild(svg);
+    
+    // Draw node circles
+    Object.keys(nodeCoords).forEach(id => {
+      const coord = nodeCoords[id];
+      const node = document.createElement('div');
+      node.className = 'tree-node';
+      node.style.position = 'absolute';
+      node.style.left = `${coord.x}px`;
+      node.style.top = `${coord.y}px`;
+      
+      if (step.path.includes(id)) {
+        node.style.borderColor = 'var(--accent-cyan)';
+        node.style.background = 'rgba(0,188,212,0.15)';
+      }
+      
+      const valSpan = document.createElement('span');
+      valSpan.className = 'tree-node-val';
+      valSpan.textContent = id;
+      node.appendChild(valSpan);
+      container.appendChild(node);
+    });
+    
+    // Total Flow Label
+    const totalLabel = document.createElement('div');
+    totalLabel.style.position = 'absolute';
+    totalLabel.style.bottom = '10px';
+    totalLabel.style.left = '10px';
+    totalLabel.style.fontSize = '0.85rem';
+    totalLabel.style.fontWeight = 'bold';
+    totalLabel.style.color = 'var(--accent-cyan)';
+    totalLabel.textContent = `Total Flow: ${step.maxFlow}`;
+    container.appendChild(totalLabel);
+    
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'singlenumber') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+    
+    const arrayWrap = document.createElement('div');
+    arrayWrap.style.display = 'flex';
+    arrayWrap.style.gap = '10px';
+    arrayWrap.style.marginBottom = '25px';
+    
+    step.array.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'bs-element';
+      cell.textContent = val;
+      if (idx === step.index) {
+        cell.style.borderColor = 'var(--secondary)';
+        cell.style.background = 'rgba(236,72,153,0.15)';
+      }
+      arrayWrap.appendChild(cell);
+    });
+    container.appendChild(arrayWrap);
+    
+    // Register display
+    const registers = document.createElement('div');
+    registers.style.display = 'flex';
+    registers.style.flexDirection = 'column';
+    registers.style.gap = '12px';
+    registers.style.width = '240px';
+    registers.style.fontFamily = 'monospace';
+    registers.style.fontSize = '0.95rem';
+    
+    registers.innerHTML = `
+      <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:6px;">
+        <span>Active Val:</span><strong>${step.index >= 0 ? step.array[step.index] : '0'} (${step.binaryVal})</strong>
+      </div>
+      <div style="display:flex; justify-content:space-between; color:var(--accent-cyan);">
+        <span>XOR Acc:</span><strong>${step.acc} (&nbsp;${step.binaryAcc}&nbsp;)</strong>
+      </div>
+    `;
+    container.appendChild(registers);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'bitmasksubsets') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+    container.style.display = 'flex';
+    container.style.flexDirection = 'row';
+    container.style.gap = '30px';
+    container.style.width = '100%';
+    container.style.justifyContent = 'space-around';
+    
+    // Left: Active state
+    const leftPanel = document.createElement('div');
+    leftPanel.style.display = 'flex';
+    leftPanel.style.flexDirection = 'column';
+    leftPanel.style.gap = '15px';
+    leftPanel.innerHTML = `
+      <div style="font-size:0.9rem; color:var(--text-muted);">Elements: <strong>[A, B, C]</strong></div>
+      <div style="font-family:monospace; font-size:1.1rem;">
+        Mask: <span style="color:var(--accent-cyan); font-weight:bold;">${step.mask}</span> &rarr; 
+        <span style="color:var(--secondary); font-weight:bold;">${step.binaryMask}</span>
+      </div>
+      <div style="font-size:0.95rem; font-weight:bold; color:var(--easy);">
+        Active Subset: [${step.activeSubset.join(', ')}]
+      </div>
+    `;
+    container.appendChild(leftPanel);
+    
+    // Right: Subsets accumulated list
+    const rightPanel = document.createElement('div');
+    rightPanel.style.width = '200px';
+    rightPanel.style.maxHeight = '220px';
+    rightPanel.style.overflowY = 'auto';
+    rightPanel.style.border = '1px solid var(--border-color)';
+    rightPanel.style.borderRadius = '6px';
+    rightPanel.style.padding = '10px';
+    rightPanel.style.background = 'rgba(255,255,255,0.02)';
+    
+    const title = document.createElement('div');
+    title.style.fontSize = '0.75rem';
+    title.style.color = 'var(--text-muted)';
+    title.style.marginBottom = '6px';
+    title.style.fontWeight = 'bold';
+    title.textContent = "ACCUMULATED SUBSETS:";
+    rightPanel.appendChild(title);
+    
+    step.subsetsList.forEach(s => {
+      const el = document.createElement('div');
+      el.style.fontSize = '0.85rem';
+      el.style.fontFamily = 'monospace';
+      el.style.padding = '2px 0';
+      el.textContent = s;
+      rightPanel.appendChild(el);
+    });
+    container.appendChild(rightPanel);
+    
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'binaryaddition') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+    
+    const registers = document.createElement('div');
+    registers.style.display = 'flex';
+    registers.style.flexDirection = 'column';
+    registers.style.gap = '10px';
+    registers.style.width = '240px';
+    registers.style.fontFamily = 'monospace';
+    
+    registers.innerHTML = `
+      <div style="display:flex; justify-content:space-between;">
+        <span>Register A:</span><strong>${step.a} (${step.binaryA})</strong>
+      </div>
+      <div style="display:flex; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.1); padding-bottom:6px;">
+        <span>Register B:</span><strong>${step.b} (${step.binaryB})</strong>
+      </div>
+      <div style="display:flex; justify-content:space-between; color:var(--accent-cyan); font-weight:bold;">
+        <span>Sum (A ^ B):</span><strong>${step.sum} (${step.binarySum})</strong>
+      </div>
+      <div style="display:flex; justify-content:space-between; color:var(--secondary); font-weight:bold;">
+        <span>Carry ((A&B)<<1):</span><strong>${step.carry} (${step.binaryCarry})</strong>
+      </div>
+    `;
+    container.appendChild(registers);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'prims') {
+    const container = document.createElement('div');
+    container.className = 'tree-container';
+    
+    const nodeCoords = {
+      'A': { x: 80, y: 80 },
+      'B': { x: 320, y: 60 },
+      'C': { x: 180, y: 200 },
+      'D': { x: 360, y: 220 }
+    };
+    
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "cycle-arrow-svg");
+    
+    // Draw all potential edges
+    const allEdges = [
+      { u: 'A', v: 'B', d: 241 },
+      { u: 'A', v: 'C', d: 156 },
+      { u: 'B', v: 'C', d: 198 },
+      { u: 'B', v: 'D', d: 165 },
+      { u: 'C', v: 'D', d: 181 }
+    ];
+    
+    allEdges.forEach(e => {
+      const fromC = nodeCoords[e.u];
+      const toC = nodeCoords[e.v];
+      const edgeKey = `${e.u}-${e.v}`;
+      const edgeKeyRev = `${e.v}-${e.u}`;
+      
+      const isMst = step.mstEdges.includes(edgeKey) || step.mstEdges.includes(edgeKeyRev);
+      const isCandidate = step.candidates.includes(edgeKey) || step.candidates.includes(edgeKeyRev);
+      
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", fromC.x + 22);
+      line.setAttribute("y1", fromC.y + 22);
+      line.setAttribute("x2", toC.x + 22);
+      line.setAttribute("y2", toC.y + 22);
+      
+      if (isMst) {
+        line.setAttribute("stroke", "var(--easy)");
+        line.setAttribute("stroke-width", "3.5");
+      } else if (isCandidate) {
+        line.setAttribute("stroke", "rgba(245, 158, 11, 0.7)");
+        line.setAttribute("stroke-dasharray", "4,4");
+        line.setAttribute("stroke-width", "2");
+      } else {
+        line.setAttribute("stroke", "rgba(255,255,255,0.1)");
+        line.setAttribute("stroke-width", "1");
+      }
+      svg.appendChild(line);
+      
+      // Draw label
+      const dx = toC.x - fromC.x;
+      const dy = toC.y - fromC.y;
+      const label = document.createElement('div');
+      label.style.position = 'absolute';
+      label.style.left = `${fromC.x + dx/2 - 10}px`;
+      label.style.top = `${fromC.y + dy/2 - 10}px`;
+      label.style.fontSize = '0.7rem';
+      label.style.fontFamily = 'monospace';
+      label.style.color = isMst ? 'var(--easy)' : isCandidate ? 'rgba(245, 158, 11, 0.9)' : 'var(--text-muted)';
+      label.textContent = e.d;
+      container.appendChild(label);
+    });
+    container.appendChild(svg);
+    
+    // Draw Nodes
+    Object.keys(nodeCoords).forEach(id => {
+      const coord = nodeCoords[id];
+      const node = document.createElement('div');
+      node.className = 'tree-node';
+      node.style.position = 'absolute';
+      node.style.left = `${coord.x}px`;
+      node.style.top = `${coord.y}px`;
+      
+      const inMst = step.inMST.includes(id);
+      if (inMst) {
+        node.style.borderColor = 'var(--easy)';
+        node.style.background = 'rgba(16, 185, 129, 0.15)';
+        node.style.boxShadow = '0 0 10px rgba(16, 185, 129, 0.4)';
+      } else if (step.activeNode === id) {
+        node.style.borderColor = 'var(--accent-cyan)';
+        node.style.background = 'rgba(6, 182, 212, 0.2)';
+      }
+      
+      const valSpan = document.createElement('span');
+      valSpan.className = 'tree-node-val';
+      valSpan.textContent = id;
+      node.appendChild(valSpan);
+      
+      const distSpan = document.createElement('span');
+      distSpan.style.fontSize = '0.55rem';
+      distSpan.style.color = inMst ? 'var(--easy)' : 'var(--text-muted)';
+      distSpan.textContent = step.minDist[id] === Infinity ? 'd:' : `d:${step.minDist[id]}`;
+      node.appendChild(distSpan);
+      
+      container.appendChild(node);
+    });
+    
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'astar') {
+    const container = document.createElement('div');
+    container.className = 'matrix-container';
+    
+    const rows = 5;
+    const cols = 6;
+    const grid = document.createElement('div');
+    grid.style.display = 'grid';
+    grid.style.gridTemplateColumns = `repeat(${cols}, 54px)`;
+    grid.style.gap = '8px';
+    grid.style.margin = '0 auto';
+    
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'dp-cell';
+        cell.style.width = '54px';
+        cell.style.height = '54px';
+        cell.style.display = 'flex';
+        cell.style.flexDirection = 'column';
+        cell.style.justifyContent = 'space-between';
+        cell.style.padding = '4px';
+        cell.style.fontSize = '0.65rem';
+        cell.style.position = 'relative';
+        
+        const isStart = r === 2 && c === 0;
+        const isEnd = r === 2 && c === 5;
+        const isWall = (r === 1 && c === 2) || (r === 2 && c === 2) || (r === 3 && c === 2);
+        
+        const isOpen = step.open.some(x => x[0] === r && x[1] === c);
+        const isClosed = step.closed.some(x => x[0] === r && x[1] === c);
+        const isPath = step.path.some(x => x[0] === r && x[1] === c);
+        const isActive = step.active && step.active[0] === r && step.active[1] === c;
+        
+        if (isStart) {
+          cell.style.background = 'rgba(16, 185, 129, 0.2)';
+          cell.style.borderColor = 'var(--easy)';
+        } else if (isEnd) {
+          cell.style.background = 'rgba(244, 63, 94, 0.2)';
+          cell.style.borderColor = 'var(--hard)';
+        } else if (isWall) {
+          cell.style.background = '#334155';
+          cell.style.borderColor = '#475569';
+        } else if (isPath) {
+          cell.style.background = 'rgba(99, 102, 241, 0.25)';
+          cell.style.borderColor = 'var(--primary)';
+        } else if (isActive) {
+          cell.style.background = 'rgba(6, 182, 212, 0.25)';
+          cell.style.borderColor = 'var(--accent-cyan)';
+        } else if (isClosed) {
+          cell.style.background = 'rgba(30, 41, 59, 0.7)';
+          cell.style.borderColor = 'rgba(255,255,255,0.06)';
+        } else if (isOpen) {
+          cell.style.borderColor = 'rgba(245, 158, 11, 0.4)';
+          cell.style.background = 'rgba(245, 158, 11, 0.05)';
+        }
+        
+        const key = `${r},${c}`;
+        if (step.f[key] !== undefined && !isWall) {
+          const corner = document.createElement('div');
+          corner.style.display = 'flex';
+          corner.style.justifyContent = 'space-between';
+          corner.style.width = '100%';
+          corner.innerHTML = `<span>g:${step.g[key]}</span><span>h:${step.h[key]}</span>`;
+          cell.appendChild(corner);
+          
+          const center = document.createElement('div');
+          center.style.fontWeight = 'bold';
+          center.style.textAlign = 'center';
+          center.style.marginTop = '2px';
+          center.style.color = 'var(--accent-cyan)';
+          center.textContent = `f=${step.f[key]}`;
+          cell.appendChild(center);
+        } else {
+          const label = document.createElement('div');
+          label.style.textAlign = 'center';
+          label.style.width = '100%';
+          label.style.marginTop = '10px';
+          label.textContent = isStart ? 'START' : isEnd ? 'GOAL' : isWall ? 'WALL' : `(${r},${c})`;
+          cell.appendChild(label);
+        }
+        
+        grid.appendChild(cell);
+      }
+    }
+    container.appendChild(grid);
+    canvas.appendChild(container);
+  }
 }
 
 
@@ -10048,10 +15418,53 @@ function pauseVisualizer() {
 }
 
 // ==========================================================================
+// THEME MANAGEMENT (LIGHT/DARK MODE)
+// ==========================================================================
+
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  const sunIcon = document.getElementById('theme-icon-sun');
+  const moonIcon = document.getElementById('theme-icon-moon');
+  
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+    if (sunIcon && moonIcon) {
+      sunIcon.style.display = 'inline-block';
+      moonIcon.style.display = 'none';
+    }
+  } else {
+    document.body.classList.remove('light-theme');
+    if (sunIcon && moonIcon) {
+      sunIcon.style.display = 'none';
+      moonIcon.style.display = 'inline-block';
+    }
+  }
+}
+
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light-theme');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  
+  const sunIcon = document.getElementById('theme-icon-sun');
+  const moonIcon = document.getElementById('theme-icon-moon');
+  
+  if (sunIcon && moonIcon) {
+    if (isLight) {
+      sunIcon.style.display = 'inline-block';
+      moonIcon.style.display = 'none';
+    } else {
+      sunIcon.style.display = 'none';
+      moonIcon.style.display = 'inline-block';
+    }
+  }
+}
+
+// ==========================================================================
 // INIT APP
 // ==========================================================================
 
 window.addEventListener('DOMContentLoaded', () => {
+  initTheme();
   seedActivityData();
   switchTab('lobby');
   renderProblemsList();
