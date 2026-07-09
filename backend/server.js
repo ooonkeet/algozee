@@ -122,7 +122,8 @@ app.get('/api', (req, res) => {
 
 // ─── Serve frontend (static files + script injection) ────────────────────────
 // Must be AFTER API routes so /api/* is never intercepted by static serving.
-const FRONTEND_DIR = path.resolve(__dirname, '..');
+// Files live in  algozee/frontend/  (one level up from backend, then into frontend/)
+const FRONTEND_DIR = path.resolve(__dirname, '..', 'frontend');
 app.use(injectScripts);           // injects api-bridge into index.html response
 app.use(express.static(FRONTEND_DIR, {
   index: false,                   // let injectScripts handle / and /index.html
