@@ -242,6 +242,11 @@ const state = {
     { id: 1489, name: "Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree", difficulty: "hard", topic: "Graphs", subcategory: "MST / Graph Greedy", acceptance: "61.9%", status: "todo" },
     { id: 778, name: "Swim in Rising Water", difficulty: "hard", topic: "Graphs", subcategory: "MST / Graph Greedy", acceptance: "60.4%", status: "todo" },
     { id: 1102, name: "Path With Maximum Minimum Value", difficulty: "medium", topic: "Graphs", subcategory: "MST / Graph Greedy", acceptance: "53.7%", status: "todo" },
+    // Strongly Connected Components
+    { id: 1192, name: "Critical Connections in a Network", difficulty: "hard", topic: "Graphs", subcategory: "Strongly Connected Components", acceptance: "55.4%", status: "todo" },
+    { id: 2360, name: "Longest Cycle in a Graph", difficulty: "hard", topic: "Graphs", subcategory: "Strongly Connected Components", acceptance: "48.9%", status: "todo" },
+    { id: 2685, name: "Count the Number of Complete Components", difficulty: "medium", topic: "Graphs", subcategory: "Strongly Connected Components", acceptance: "72.1%", status: "todo" },
+    { id: 9999, name: "Strongly Connected Components", difficulty: "medium", topic: "Graphs", subcategory: "Strongly Connected Components", acceptance: "55.0%", status: "todo" },
 
     // --- 8. TRIES & BITS ---
     // Trie
@@ -301,6 +306,12 @@ const state = {
     { id: 516, name: "Longest Palindromic Subsequence", difficulty: "medium", topic: "Dynamic Programming", subcategory: "String DP / Sequence DP", acceptance: "61.8%", status: "todo" },
     { id: 712, name: "Minimum ASCII Delete Sum for Two Strings", difficulty: "medium", topic: "Dynamic Programming", subcategory: "String DP / Sequence DP", acceptance: "63.4%", status: "todo" },
     { id: 10, name: "Regular Expression Matching", difficulty: "hard", topic: "Dynamic Programming", subcategory: "String DP / Sequence DP", acceptance: "28.1%", status: "todo" },
+    // Bitmask DP
+    { id: 847, name: "Shortest Path Visiting All Nodes", difficulty: "hard", topic: "Dynamic Programming", subcategory: "Bitmask DP", acceptance: "60.1%", status: "todo" },
+    { id: 1125, name: "Smallest Sufficient Team", difficulty: "hard", topic: "Dynamic Programming", subcategory: "Bitmask DP", acceptance: "54.8%", status: "todo" },
+    { id: 691, name: "Stickers to Spell Word", difficulty: "hard", topic: "Dynamic Programming", subcategory: "Bitmask DP", acceptance: "47.1%", status: "todo" },
+    { id: 464, name: "Can I Win", difficulty: "medium", topic: "Dynamic Programming", subcategory: "Bitmask DP", acceptance: "30.1%", status: "todo" },
+    { id: 1434, name: "Number of Ways to Wear Different Hats to Each Other", difficulty: "hard", topic: "Dynamic Programming", subcategory: "Bitmask DP", acceptance: "41.5%", status: "todo" },
 
     // --- 10. BACKTRACKING & RECURSION ---
     { id: 17, name: "Letter Combinations of a Phone Number", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "63.5%", status: "todo" },
@@ -759,6 +770,10 @@ function loadProblemIntoVisualizer(prob) {
     selector.value = 'trie';
   } else if (prob.subcategory === 'String DP / Sequence DP') {
     selector.value = 'stringdp';
+  } else if (prob.subcategory === 'Bitmask DP') {
+    selector.value = 'bitmaskdp';
+  } else if (prob.subcategory === 'Strongly Connected Components') {
+    selector.value = 'kosaraju';
   } else if (prob.subcategory === 'Knapsack / Subset DP') {
     selector.value = 'knapsack';
   } else if (prob.subcategory === '1D DP Basics') {
@@ -1451,6 +1466,132 @@ const problemLogicDatabase = {
         ["1", "11 down to 1", "j - 1", "dp[0] is true", "dp[1] = true"],
         ["5", "11 down to 5", "j - 5", "dp[1] is true", "dp[6] = true, dp[5] = true"],
         ["11", "11", "0", "dp[0] is true", "dp[11] = true (Subset found!)"]
+      ]
+    }
+  },
+  847: {
+    intuition: "We want to find the shortest path that visits every node in a graph. Since N is small (N <= 17), we can use BFS with bitmask state (mask, u) where mask represents visited nodes, and u is the current node.",
+    formula: "State transitions:<br><code>next_mask = mask | (1 << neighbor)</code><br>Transition from <code>(mask, u)</code> to <code>(next_mask, neighbor)</code> with cost + 1.",
+    time: "O(2^N * N * E) — where N is the node count and E is the edge count.",
+    space: "O(2^N * N) — queue size and visited state space.",
+    dryrun: {
+      testcase: "N = 4, edges = [[0,1],[0,2],[0,3]]",
+      headers: ["Step", "Queue State (mask, u)", "Next States (next_mask, neighbor)", "Distance"],
+      rows: [
+        ["1", "(0001, 0), (0010, 1), ...", "(0011, 1) from 0, (0101, 2) from 0", "1"],
+        ["2", "(0011, 1)", "(0011, 0) from 1", "2"],
+        ["3", "(0101, 2)", "(0111, 0) from 2", "3"]
+      ]
+    }
+  },
+  1192: {
+    intuition: "Find all bridges (critical connections) in an undirected graph. Tarjan's bridge-finding algorithm uses DFS to find back-edges. An edge u-v is a bridge if v has no back-edge to reach any ancestor of u.",
+    formula: "Bridge condition:<br><code>low[v] > disc[u]</code><br>Updates: <code>low[u] = min(low[u], low[v])</code> (for tree edge) or <code>low[u] = min(low[u], disc[v])</code> (for back-edge)",
+    time: "O(V + E) — single pass DFS traversal.",
+    space: "O(V) — discovery, low-link, and recursive stack arrays.",
+    dryrun: {
+      testcase: "Graph A-B, B-C, A-C (cycle), C-D (bridge)",
+      headers: ["DFS step", "disc / low arrays", "Condition check", "Bridge detected?"],
+      rows: [
+        ["1. visit D", "disc[D]=4, low[D]=4", "-", "No"],
+        ["2. backtrack C-D", "C is parent of D", "low[D](4) > disc[C](3)", "Yes! C-D is a bridge."]
+      ]
+    }
+  },
+  9999: {
+    intuition: "Determine all strongly connected components in a directed graph using Kosaraju's two-pass DFS traversal algorithm.",
+    formula: "Kosaraju's phases:<br>1. DFS(u) -> push finished to Stack.<br>2. Transpose Graph.<br>3. DFS(u) on transposed graph from Stack top to extract SCC.",
+    time: "O(V + E) — linear time search.",
+    space: "O(V + E) — transposed graph representation and visited sets.",
+    dryrun: {
+      testcase: "A->B, B->C, C->A (SCC1)",
+      headers: ["Step", "Stack State", "Transposed traversal", "Strongly Connected Component"],
+      rows: [
+        ["1", "top: A, B, C", "DFS(A) -> visits C, B", "SCC: {A, C, B}"]
+      ]
+    }
+  },
+  2360: {
+    intuition: "Find the longest cycle in a directed graph. Each node has at most one outgoing edge. We can keep track of visitation timestamps during DFS. A cycle is detected when we hit a node visited in the current DFS path, and the cycle length is the timestamp difference.",
+    formula: "Cycle check:<br>If node <code>v</code> is currently in stack:<br><code>cycle_len = current_time - dist[v]</code><br>Update: <code>max_cycle = max(max_cycle, cycle_len)</code>",
+    time: "O(V) — each node is visited at most once.",
+    space: "O(V) — track distances and visited/in-stack nodes.",
+    dryrun: {
+      testcase: "edges = [3,3,4,2,3]",
+      headers: ["Node Visited", "Timestamp map", "In-stack nodes", "Max Cycle Len"],
+      rows: [
+        ["0 -> 3 -> 2 -> 4 -> 3", "dist[3]=1, dist[2]=2, dist[4]=3", "{0, 3, 2, 4}", "3 - 1 + 1 = 3"]
+      ]
+    }
+  },
+  2685: {
+    intuition: "Count the number of complete connected components in an undirected graph. A component is complete if it is a clique (every vertex is connected to every other vertex), which means <code>E_comp = V_comp * (V_comp - 1) / 2</code>.",
+    formula: "Completion check:<br>For each component, count vertices <code>V</code> and edges <code>E</code>.<br>Verify if: <code>E === V * (V - 1)</code> (since each undirected edge is counted twice as <code>deg(u)</code>).",
+    time: "O(V + E) — standard DFS to find connected components and sum degrees.",
+    space: "O(V) — recursion stack and visited array.",
+    dryrun: {
+      testcase: "V = 3, edges = [[0,1],[1,2],[2,0]]",
+      headers: ["Component", "Vertices Count V", "Total Degrees sum", "Complete Clique?"],
+      rows: [
+        ["{0, 1, 2}", "3", "deg(0)+deg(1)+deg(2) = 6", "Yes (6 == 3 * 2)"]
+      ]
+    }
+  },
+  1125: {
+    intuition: "Find the smallest subset of people whose combined skills cover all required skills. Represent the set of covered skills as a bitmask. For each person, represent their skills as a bitmask and update the DP state.",
+    formula: "Recurrence Relation:<br><code>dp[mask | personSkill] = min(dp[mask | personSkill], dp[mask] + person)</code>",
+    time: "O(P * 2^S) — where P is the number of people and S is the number of skills.",
+    space: "O(2^S) — DP cache array.",
+    dryrun: {
+      testcase: "req_skills = ['java','js'], skills = [['java'],['js']]",
+      headers: ["Person Index", "Person Skills Bitmask", "Mask (bin)", "dp[mask] (min size team)"],
+      rows: [
+        ["-", "-", "00", "[]"],
+        ["0 (java)", "01", "01", "[0]"],
+        ["1 (js)", "10", "11", "[0, 1]"]
+      ]
+    }
+  },
+  691: {
+    intuition: "Find the minimum number of stickers to spell target word. Represent target characters as indices and remaining target characters to form as a bitmask of length target.length.",
+    formula: "Transition:<br>For each sticker, try to cover unspelled characters of target. <code>dp[mask] = min(dp[mask], 1 + dp[remainingMask])</code>",
+    time: "O(S * 2^T * T) — where S is stickers count and T is target length.",
+    space: "O(2^T) — DP cache size.",
+    dryrun: {
+      testcase: "target = 'hat', sticker = 'th'",
+      headers: ["Mask (bin)", "Sticker Cover", "Next Mask (bin)", "dp[mask] min stickers"],
+      rows: [
+        ["000 (empty)", "-", "-", "0"],
+        ["111 ('hat')", "'th' covers index 1,2", "001 ('a')", "1 + dp[001]"]
+      ]
+    }
+  },
+  464: {
+    intuition: "Determine if the first player can win by choosing numbers. Since maxChoosableInteger <= 20, use a bitmask where 1 at index i means number i is already chosen. Use memoized minimax search.",
+    formula: "State search:<br><code>canWin(mask, currentSum) = any(!canWin(mask | (1 << i), currentSum + i))</code>",
+    time: "O(2^M * M) — where M is maxChoosableInteger.",
+    space: "O(2^M) — state cache.",
+    dryrun: {
+      testcase: "maxChoosableInteger = 3, desiredTotal = 4",
+      headers: ["Mask Chosen (bin)", "Sum", "Player Turn", "Result"],
+      rows: [
+        ["000", "0", "P1", "P1 wins by choosing 3 -> P2 at (100, 3) must lose"],
+        ["100", "3", "P2", "P2 chooses 2 -> sum 5 >= 4 (P2 wins, so P1 avoids)"]
+      ]
+    }
+  },
+  1434: {
+    intuition: "Assign hats to people such that no two people wear the same hat and everyone wears one. Since number of people is small (N <= 10), represent people assigned hats as a bitmask and iterate over hats.",
+    formula: "DP transition:<br><code>dp[hat][mask] = dp[hat - 1][mask] + sum(dp[hat - 1][mask \\ {p}])</code> for each person p who likes the hat.",
+    time: "O(H * 2^N * N) — where H is number of hats (40) and N is number of people.",
+    space: "O(2^N) — memory space for DP state array.",
+    dryrun: {
+      testcase: "N = 2, H = 2",
+      headers: ["Hat", "mask (bin)", "Assignments", "dp[mask] Ways"],
+      rows: [
+        ["0", "00", "{}", "1"],
+        ["1", "01", "{P0: H1}", "1"],
+        ["2", "11", "{P0: H2, P1: H1} or {P0: H1, P1: H2}", "2"]
       ]
     }
   },
@@ -4946,6 +5087,21 @@ const patternLogicTemplates = {
       ]
     }
   },
+  'Strongly Connected Components': {
+    intuition: "Identify maximal subgraphs where every vertex is reachable from every other vertex. Kosaraju's algorithm achieves this in two DFS passes by utilizing graph transposition.",
+    formula: "Transposed graph adjacency:<br><code>adjT[v].push(u)</code> for each edge <code>u -> v</code> in original graph.",
+    time: "O(V + E) — two complete DFS passes over nodes and edges.",
+    space: "O(V + E) — transposed graph storage and visited sets.",
+    dryrun: {
+      testcase: "Graph A->B, B->C, C->A (SCC1), B->D (SCC2)",
+      headers: ["Phase", "Action", "Node / Stack State", "Result"],
+      rows: [
+        ["1", "DFS(A) on original", "Finish order: C, B, A", "Stack: [C, B, A] (top is A)"],
+        ["2", "Reverse edges", "Transposed graph: B->A, C->B, A->C", "Edges reversed"],
+        ["3", "DFS from Stack top", "Pop A: DFS(A) visits C, B", "SCC 1: {A, C, B}"]
+      ]
+    }
+  },
   'Trie': {
     intuition: "Insert strings character-by-character into a multi-branch retrieval tree to support prefix searches in O(L) time.",
     formula: "Trie insertion logic:<br>node = node.children[char]<br>Check terminal:<br>node.isEnd = true",
@@ -4986,6 +5142,20 @@ const patternLogicTemplates = {
         ["1", "-", "-", "1"],
         ["2", "-", "-", "2"],
         ["3", "1", "2", "dp[1]+dp[2] = 3"]
+      ]
+    }
+  },
+  'Bitmask DP': {
+    intuition: "Solve optimization problems over small subsets (typically N <= 20) by representing subsets as binary integers (bitmasks) and using them as DP table keys.",
+    formula: "Recurrence relation (e.g. TSP):<br>dp[mask][u] = min_{v ∈ mask, v ≠ u} (dp[mask \\ {u}][v] + dist[v][u])",
+    time: "O(2^N * N^2) — where N is the number of elements/vertices.",
+    space: "O(2^N * N) — DP cache size.",
+    dryrun: {
+      testcase: "N = 4, TSP",
+      headers: ["Mask (bin)", "u (curr)", "dp[mask \\ {u}][v] + dist[v][u]", "dp[mask][u] Optimal Value"],
+      rows: [
+        ["0011 (1,0)", "1", "dp[0001][0] + dist[0][1]", "min cost visiting {0,1} ending at 1"],
+        ["0111 (2,1,0)", "2", "dp[0011][0] + dist[0][2], dp[0011][1] + dist[1][2]", "optimal cost visiting {0,1,2} ending at 2"]
       ]
     }
   },
@@ -9166,6 +9336,80 @@ const codeTemplates = {
   <span class="code-keyword">return</span> res;
 }
 `,
+  bitmaskdp: `
+<span class="code-comment">// Travelling Salesperson Problem (TSP) using Bitmask DP</span>
+<span class="code-keyword">function</span> <span class="code-fn">tsp</span>(dist) {
+  <span class="code-keyword">let</span> n = dist.length;
+  <span class="code-keyword">let</span> dp = Array.from({ length: <span class="code-num">1</span> &lt;&lt; n }, () =&gt; Array(n).fill(Infinity));
+  dp[<span class="code-num">1</span>][<span class="code-num">0</span>] = <span class="code-num">0</span>; <span class="code-comment">// Start at node 0</span>
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> mask = <span class="code-num">1</span>; mask &lt; (<span class="code-num">1</span> &lt;&lt; n); mask++) {
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> u = <span class="code-num">0</span>; u &lt; n; u++) {
+      <span class="code-keyword">if</span> (dp[mask][u] === Infinity) <span class="code-keyword">continue</span>;
+      <span class="code-keyword">for</span> (<span class="code-keyword">let</span> v = <span class="code-num">0</span>; v &lt; n; v++) {
+        <span class="code-keyword">if</span> ((mask &amp; (<span class="code-num">1</span> &lt;&lt; v)) === <span class="code-num">0</span>) {
+          <span class="code-keyword">let</span> nextMask = mask | (<span class="code-num">1</span> &lt;&lt; v);
+          dp[nextMask][v] = Math.min(dp[nextMask][v], dp[mask][u] + dist[u][v]);
+        }
+      }
+    }
+  }
+  <span class="code-keyword">let</span> minCost = Infinity;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> u = <span class="code-num">1</span>; u &lt; n; u++) {
+    minCost = Math.min(minCost, dp[(<span class="code-num">1</span> &lt;&lt; n) - <span class="code-num">1</span>][u] + dist[u][<span class="code-num">0</span>]);
+  }
+  <span class="code-keyword">return</span> minCost;
+}
+`,
+  kosaraju: `
+<span class="code-comment">// Kosaraju's SCC Algorithm</span>
+<span class="code-keyword">function</span> <span class="code-fn">kosaraju</span>(graph) {
+  <span class="code-keyword">let</span> n = graph.length;
+  <span class="code-keyword">let</span> visited = <span class="code-keyword">new</span> Set();
+  <span class="code-keyword">let</span> stack = [];
+
+  <span class="code-keyword">function</span> <span class="code-fn">dfs1</span>(u) {
+    visited.<span class="code-fn">add</span>(u);
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> v <span class="code-keyword">of</span> graph[u]) {
+      <span class="code-keyword">if</span> (!visited.<span class="code-fn">has</span>(v)) <span class="code-fn">dfs1</span>(v);
+    }
+    stack.<span class="code-fn">push</span>(u);
+  }
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; n; i++) {
+    <span class="code-keyword">if</span> (!visited.<span class="code-fn">has</span>(i)) <span class="code-fn">dfs1</span>(i);
+  }
+
+  <span class="code-comment">// Transpose Graph</span>
+  <span class="code-keyword">let</span> adjT = Array.from({ length: n }, () =&gt; []);
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> u = <span class="code-num">0</span>; u &lt; n; u++) {
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> v <span class="code-keyword">of</span> graph[u]) {
+      adjT[v].<span class="code-fn">push</span>(u);
+    }
+  }
+
+  visited.<span class="code-fn">clear</span>();
+  <span class="code-keyword">let</span> sccs = [];
+
+  <span class="code-keyword">function</span> <span class="code-fn">dfs2</span>(u, comp) {
+    visited.<span class="code-fn">add</span>(u);
+    comp.<span class="code-fn">push</span>(u);
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> v <span class="code-keyword">of</span> adjT[u]) {
+      <span class="code-keyword">if</span> (!visited.<span class="code-fn">has</span>(v)) <span class="code-fn">dfs2</span>(v, comp);
+    }
+  }
+
+  <span class="code-keyword">while</span> (stack.length &gt; <span class="code-num">0</span>) {
+    <span class="code-keyword">let</span> u = stack.<span class="code-fn">pop</span>();
+    <span class="code-keyword">if</span> (!visited.<span class="code-fn">has</span>(u)) {
+      <span class="code-keyword">let</span> comp = [];
+      <span class="code-fn">dfs2</span>(u, comp);
+      sccs.<span class="code-fn">push</span>(comp);
+    }
+  }
+  <span class="code-keyword">return</span> sccs;
+}
+`,
   binaryaddition: `
 <span class="code-keyword">function</span> <span class="code-fn">getSum</span>(a, b) {
   <span class="code-keyword">while</span> (b !== <span class="code-num">0</span>) {
@@ -10362,6 +10606,16 @@ function resetVisualizer() {
     appendLog("[INFO] Initialized Bitmask Subsets. Enumerating binary masks from 000 to 111...", "info");
     generateBitmaskSubsetsSteps();
   }
+  else if (visualizerState.algo === 'bitmaskdp') {
+    visualizerState.rawArray = { nodes: 4 };
+    appendLog("[INFO] Bitmask DP (TSP): Computing shortest Hamiltonian Cycle on a 4-node complete graph.", "info");
+    generateBitmaskDPSteps();
+  }
+  else if (visualizerState.algo === 'kosaraju') {
+    visualizerState.rawArray = { nodes: 5 };
+    appendLog("[INFO] Kosaraju's SCC: Finding Strongly Connected Components on a 5-node directed graph.", "info");
+    generateKosarajuSteps();
+  }
   else if (visualizerState.algo === 'binaryaddition') {
     visualizerState.rawArray = [3, 2];
     appendLog("[INFO] Initialized Binary Addition. Simulating adder carry propagation for 3 + 2...", "info");
@@ -10950,6 +11204,342 @@ function generateBitmaskSubsetsSteps() {
       log: `Mask ${mask} (${toBin(mask)}). Set bits match indices: ${subset.join(', ') || 'None'}. Subtree generated: [${subset.join(', ')}]`
     });
   }
+  
+  visualizerState.steps = steps;
+}
+
+// Bitmask DP step generator (TSP)
+function generateBitmaskDPSteps() {
+  const steps = [];
+  const n = 4;
+  const numStates = 1 << n;
+  
+  let dp = Array.from({ length: numStates }, () => Array(n).fill(Infinity));
+  const cloneDP = (tbl) => tbl.map(r => [...r]);
+  const toBin = (v) => v.toString(2).padStart(4, '0');
+  const nodeName = (idx) => ['A', 'B', 'C', 'D'][idx];
+  
+  const dist = [
+    [0, 10, 15, 20],
+    [10, 0, 35, 25],
+    [15, 35, 0, 30],
+    [20, 25, 30, 0]
+  ];
+  
+  dp[1][0] = 0;
+  steps.push({
+    dp: cloneDP(dp),
+    activeMask: 1,
+    activeNode: 0,
+    candidateNode: null,
+    activeEdge: null,
+    inTour: [],
+    action: 'init',
+    log: "Initialize DP table. dp[0001][A] = 0 (Start path at node A visiting only A)."
+  });
+  
+  const size1Transitions = [
+    { u: 0, v: 1, nextMask: 3 },
+    { u: 0, v: 2, nextMask: 5 },
+    { u: 0, v: 3, nextMask: 9 }
+  ];
+  
+  const size2Transitions = [
+    { mask: 3, u: 1, v: 2, nextMask: 7 },
+    { mask: 3, u: 1, v: 3, nextMask: 11 },
+    { mask: 5, u: 2, v: 1, nextMask: 7 },
+    { mask: 5, u: 2, v: 3, nextMask: 13 },
+    { mask: 9, u: 3, v: 1, nextMask: 11 },
+    { mask: 9, u: 3, v: 2, nextMask: 13 }
+  ];
+  
+  const size3Transitions = [
+    { mask: 7, u: 1, v: 3, nextMask: 15 },
+    { mask: 7, u: 2, v: 3, nextMask: 15 },
+    { mask: 11, u: 1, v: 2, nextMask: 15 },
+    { mask: 11, u: 3, v: 2, nextMask: 15 },
+    { mask: 13, u: 2, v: 1, nextMask: 15 },
+    { mask: 13, u: 3, v: 1, nextMask: 15 }
+  ];
+
+  size1Transitions.forEach(trans => {
+    const { u, v, nextMask } = trans;
+    const currentCost = dp[1][u];
+    const newCost = currentCost + dist[u][v];
+    const prevNextCost = dp[nextMask][v];
+    
+    steps.push({
+      dp: cloneDP(dp),
+      activeMask: 1,
+      activeNode: u,
+      candidateNode: v,
+      activeEdge: { from: u, to: v },
+      inTour: [],
+      action: 'evaluate',
+      log: `Evaluating path size 1: Ending at ${nodeName(u)} (visited: {A}). Trying transition to unvisited ${nodeName(v)}. Cost: dp[0001][A] (${currentCost}) + dist(${nodeName(u)},${nodeName(v)}) (${dist[u][v]}) = ${newCost}.`
+    });
+    
+    dp[nextMask][v] = Math.min(dp[nextMask][v], newCost);
+    
+    steps.push({
+      dp: cloneDP(dp),
+      activeMask: nextMask,
+      activeNode: v,
+      candidateNode: null,
+      activeEdge: null,
+      inTour: [],
+      action: 'update',
+      log: `Updated DP table: dp[${toBin(nextMask)}][${nodeName(v)}] = min(${prevNextCost === Infinity ? '∞' : prevNextCost}, ${newCost}) = ${dp[nextMask][v]}.`
+    });
+  });
+  
+  size2Transitions.forEach(trans => {
+    const { mask, u, v, nextMask } = trans;
+    const currentCost = dp[mask][u];
+    const newCost = currentCost + dist[u][v];
+    const prevNextCost = dp[nextMask][v];
+    
+    steps.push({
+      dp: cloneDP(dp),
+      activeMask: mask,
+      activeNode: u,
+      candidateNode: v,
+      activeEdge: { from: u, to: v },
+      inTour: [],
+      action: 'evaluate',
+      log: `Evaluating path size 2: Ending at ${nodeName(u)} (visited: {A,${nodeName(mask === 3 ? 1 : mask === 5 ? 2 : 3)}}). Transition to unvisited ${nodeName(v)}. Cost: dp[${toBin(mask)}][${nodeName(u)}] (${currentCost}) + dist(${nodeName(u)},${nodeName(v)}) (${dist[u][v]}) = ${newCost}.`
+    });
+    
+    dp[nextMask][v] = Math.min(dp[nextMask][v], newCost);
+    
+    steps.push({
+      dp: cloneDP(dp),
+      activeMask: nextMask,
+      activeNode: v,
+      candidateNode: null,
+      activeEdge: null,
+      inTour: [],
+      action: 'update',
+      log: `Updated DP table: dp[${toBin(nextMask)}][${nodeName(v)}] = min(${prevNextCost === Infinity ? '∞' : prevNextCost}, ${newCost}) = ${dp[nextMask][v]}.`
+    });
+  });
+  
+  size3Transitions.forEach(trans => {
+    const { mask, u, v, nextMask } = trans;
+    const currentCost = dp[mask][u];
+    const newCost = currentCost + dist[u][v];
+    const prevNextCost = dp[nextMask][v];
+    
+    const getVisitedDesc = (m) => {
+      let res = ['A'];
+      if (m & 2) res.push('B');
+      if (m & 4) res.push('C');
+      if (m & 8) res.push('D');
+      return '{' + res.join(',') + '}';
+    };
+
+    steps.push({
+      dp: cloneDP(dp),
+      activeMask: mask,
+      activeNode: u,
+      candidateNode: v,
+      activeEdge: { from: u, to: v },
+      inTour: [],
+      action: 'evaluate',
+      log: `Evaluating path size 3: Ending at ${nodeName(u)} (visited: ${getVisitedDesc(mask)}). Transition to unvisited ${nodeName(v)}. Cost: dp[${toBin(mask)}][${nodeName(u)}] (${currentCost}) + dist(${nodeName(u)},${nodeName(v)}) (${dist[u][v]}) = ${newCost}.`
+    });
+    
+    dp[nextMask][v] = Math.min(dp[nextMask][v], newCost);
+    
+    steps.push({
+      dp: cloneDP(dp),
+      activeMask: nextMask,
+      activeNode: v,
+      candidateNode: null,
+      activeEdge: null,
+      inTour: [],
+      action: 'update',
+      log: `Updated DP table: dp[${toBin(nextMask)}][${nodeName(v)}] = min(${prevNextCost === Infinity ? '∞' : prevNextCost}, ${newCost}) = ${dp[nextMask][v]}.`
+    });
+  });
+  
+  const closingNodes = [1, 2, 3];
+  let bestTourCost = Infinity;
+  
+  closingNodes.forEach(u => {
+    const cost = dp[15][u] + dist[u][0];
+    steps.push({
+      dp: cloneDP(dp),
+      activeMask: 15,
+      activeNode: u,
+      candidateNode: 0,
+      activeEdge: { from: u, to: 0 },
+      inTour: [],
+      action: 'cycle_check',
+      log: `Returning to Start A: Evaluating path completing cycle from ending node ${nodeName(u)}. Total Cost: dp[1111][${nodeName(u)}] (${dp[15][u]}) + dist(${nodeName(u)},A) (${dist[u][0]}) = ${cost}.`
+    });
+    if (cost < bestTourCost) {
+      bestTourCost = cost;
+    }
+  });
+  
+  const tourEdges = [
+    { from: 0, to: 2 },
+    { from: 2, to: 3 },
+    { from: 3, to: 1 },
+    { from: 1, to: 0 }
+  ];
+  
+  steps.push({
+    dp: cloneDP(dp),
+    activeMask: 15,
+    activeNode: null,
+    candidateNode: null,
+    activeEdge: null,
+    inTour: tourEdges,
+    action: 'done',
+    log: `TSP Complete! Optimal Hamiltonian Cycle found: A → C → D → B → A. Minimum total distance = ${bestTourCost}.`
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Kosaraju's SCC step generator
+function generateKosarajuSteps() {
+  const steps = [];
+  const n = 5;
+  const nodeNames = ['A', 'B', 'C', 'D', 'E'];
+  
+  let stack = [];
+  let visited = new Set();
+  
+  const pushStep = (phase, activeNode, scanningEdge, log, customObj = {}) => {
+    steps.push({
+      phase,
+      activeNode,
+      scanningEdge,
+      stack: [...stack],
+      visited: Array.from(visited),
+      reversed: phase >= 2,
+      log,
+      ...customObj
+    });
+  };
+  
+  pushStep(1, null, null, "Kosaraju's Algorithm Initialized. Phase 1: DFS on original graph to determine topological finish times.");
+  
+  pushStep(1, 0, null, "DFS Pass 1: Start DFS from node A (unvisited).");
+  visited.add(0);
+  
+  pushStep(1, 0, { from: 0, to: 1 }, "DFS Pass 1: Traversing edge A → B.");
+  pushStep(1, 1, null, "DFS Pass 1: Node B visited.");
+  visited.add(1);
+  
+  pushStep(1, 1, { from: 1, to: 2 }, "DFS Pass 1: Traversing edge B → C.");
+  pushStep(1, 2, null, "DFS Pass 1: Node C visited.");
+  visited.add(2);
+  
+  pushStep(1, 2, { from: 2, to: 0 }, "DFS Pass 1: Edge C → A points to visited node A. Backtracking.");
+  
+  stack.push(2);
+  pushStep(1, 2, null, "DFS Pass 1: Node C has no unvisited neighbors. Backtracking and pushing C to stack.");
+  
+  pushStep(1, 1, { from: 1, to: 3 }, "DFS Pass 1: Back to B. Traversing edge B → D.");
+  pushStep(1, 3, null, "DFS Pass 1: Node D visited.");
+  visited.add(3);
+  
+  pushStep(1, 3, { from: 3, to: 4 }, "DFS Pass 1: Traversing edge D → E.");
+  pushStep(1, 4, null, "DFS Pass 1: Node E visited.");
+  visited.add(4);
+  
+  pushStep(1, 4, { from: 4, to: 3 }, "DFS Pass 1: Edge E → D points to visited node D. Backtracking.");
+  
+  stack.push(4);
+  pushStep(1, 4, null, "DFS Pass 1: Node E has no unvisited neighbors. Backtracking and pushing E to stack.");
+  
+  stack.push(3);
+  pushStep(1, 3, null, "DFS Pass 1: Back to D. Node D has no unvisited neighbors. Backtracking and pushing D to stack.");
+  
+  stack.push(1);
+  pushStep(1, 1, null, "DFS Pass 1: Back to B. Node B has no unvisited neighbors. Backtracking and pushing B to stack.");
+  
+  stack.push(0);
+  pushStep(1, 0, null, "DFS Pass 1: Back to A. Node A has no unvisited neighbors. DFS complete. Pushing A to stack.");
+  
+  pushStep(1, null, null, `Phase 1 Complete. Finish order stack (LIFO): [${stack.map(x => nodeNames[x]).join(', ')}].`);
+  
+  pushStep(2, null, null, "Phase 2: Reversing all graph edges to construct the transposed graph (G^T).");
+  
+  visited.clear();
+  let sccs = [];
+  let nodeComponents = {};
+  
+  const getCompObj = () => ({
+    sccs: sccs.map(comp => comp.map(x => nodeNames[x])),
+    nodeComponents: { ...nodeComponents }
+  });
+  
+  pushStep(3, null, null, "Phase 3: Starting DFS on transposed graph by popping nodes from finish stack.", getCompObj());
+  
+  let poppedVal = stack.pop();
+  pushStep(3, null, null, `Phase 3: Popping ${nodeNames[poppedVal]} from stack.`, { poppingVal: poppedVal, ...getCompObj() });
+  pushStep(3, 0, null, "Node A is unvisited. Start new DFS search on transposed graph to collect SCC.", getCompObj());
+  
+  visited.add(0);
+  nodeComponents[0] = 0;
+  let comp1 = [0];
+  pushStep(3, 0, null, "DFS Pass 2: Visited node A. Added to component 1.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
+  
+  pushStep(3, 0, { from: 0, to: 2 }, "DFS Pass 2: Traversing edge A → C in transposed graph.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
+  visited.add(2);
+  nodeComponents[2] = 0;
+  comp1.push(2);
+  pushStep(3, 2, null, "DFS Pass 2: Visited node C. Added to component 1.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
+  
+  pushStep(3, 2, { from: 2, to: 1 }, "DFS Pass 2: Traversing edge C → B in transposed graph.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
+  visited.add(1);
+  nodeComponents[1] = 0;
+  comp1.push(1);
+  pushStep(3, 1, null, "DFS Pass 2: Visited node B. Added to component 1.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
+  
+  pushStep(3, 1, { from: 1, to: 0 }, "DFS Pass 2: Edge B → A points to visited node A. Backtracking.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
+  
+  sccs.push(comp1);
+  pushStep(3, null, null, `DFS Pass 2 complete. Resolved Component 1: {${comp1.map(x => nodeNames[x]).join(', ')}}.`, getCompObj());
+  
+  poppedVal = stack.pop();
+  pushStep(3, null, null, `Phase 3: Popping ${nodeNames[poppedVal]} from stack.`, { poppingVal: poppedVal, ...getCompObj() });
+  pushStep(3, null, null, "Node B is already visited. Skipping.", getCompObj());
+  
+  poppedVal = stack.pop();
+  pushStep(3, null, null, `Phase 3: Popping ${nodeNames[poppedVal]} from stack.`, { poppingVal: poppedVal, ...getCompObj() });
+  pushStep(3, 3, null, "Node D is unvisited. Start new DFS search on transposed graph to collect SCC.", getCompObj());
+  
+  visited.add(3);
+  nodeComponents[3] = 1;
+  let comp2 = [3];
+  pushStep(3, 3, null, "DFS Pass 2: Visited node D. Added to component 2.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp2.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
+  
+  pushStep(3, 3, { from: 3, to: 4 }, "DFS Pass 2: Traversing edge D → E in transposed graph.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp2.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
+  visited.add(4);
+  nodeComponents[4] = 1;
+  comp2.push(4);
+  pushStep(3, 4, null, "DFS Pass 2: Visited node E. Added to component 2.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp2.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
+  
+  pushStep(3, 4, { from: 4, to: 3 }, "DFS Pass 2: Edge E → D points to visited node D. Backtracking.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp2.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
+  
+  sccs.push(comp2);
+  pushStep(3, null, null, `DFS Pass 2 complete. Resolved Component 2: {${comp2.map(x => nodeNames[x]).join(', ')}}.`, getCompObj());
+  
+  poppedVal = stack.pop();
+  pushStep(3, null, null, `Phase 3: Popping ${nodeNames[poppedVal]} from stack.`, { poppingVal: poppedVal, ...getCompObj() });
+  pushStep(3, null, null, "Node E is already visited. Skipping.", getCompObj());
+  
+  poppedVal = stack.pop();
+  pushStep(3, null, null, `Phase 3: Popping ${nodeNames[poppedVal]} from stack.`, { poppingVal: poppedVal, ...getCompObj() });
+  pushStep(3, null, null, "Node C is already visited. Skipping.", getCompObj());
+  
+  pushStep(3, null, null, `Kosaraju SCC Complete! Found 2 Strongly Connected Components: Component 1 {A, C, B}, Component 2 {D, E}.`, getCompObj());
   
   visualizerState.steps = steps;
 }
@@ -15131,6 +15721,386 @@ function renderCanvasStep() {
       rightPanel.appendChild(el);
     });
     container.appendChild(rightPanel);
+    
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'bitmaskdp') {
+    const container = document.createElement('div');
+    container.className = 'tsp-container';
+    
+    const graphPanel = document.createElement('div');
+    graphPanel.className = 'tsp-graph-panel';
+    
+    const graphTitle = document.createElement('div');
+    graphTitle.className = 'tsp-table-header';
+    graphTitle.textContent = 'Complete Weighted Graph (TSP)';
+    graphPanel.appendChild(graphTitle);
+    
+    const graphWrapper = document.createElement('div');
+    graphWrapper.className = 'tsp-graph-wrapper';
+    
+    const coords = [
+      { x: 80, y: 30, name: 'A' },
+      { x: 320, y: 30, name: 'B' },
+      { x: 320, y: 220, name: 'C' },
+      { x: 80, y: 220, name: 'D' }
+    ];
+    
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "cycle-arrow-svg");
+    svg.style.position = 'absolute';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    
+    const edgesList = [
+      { u: 0, v: 1, w: 10, mid: { x: 222, y: 52 } },
+      { u: 0, v: 2, w: 15, mid: { x: 222, y: 165 } },
+      { u: 0, v: 3, w: 20, mid: { x: 102, y: 147 } },
+      { u: 1, v: 2, w: 35, mid: { x: 342, y: 147 } },
+      { u: 1, v: 3, w: 25, mid: { x: 222, y: 125 } },
+      { u: 2, v: 3, w: 30, mid: { x: 222, y: 242 } }
+    ];
+    
+    edgesList.forEach(e => {
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      const from = coords[e.u];
+      const to = coords[e.v];
+      
+      line.setAttribute("x1", from.x + 22);
+      line.setAttribute("y1", from.y + 22);
+      line.setAttribute("x2", to.x + 22);
+      line.setAttribute("y2", to.y + 22);
+      
+      const isInTour = step.inTour.some(te => 
+        (te.from === e.u && te.to === e.v) || (te.from === e.v && te.to === e.u)
+      );
+      
+      const isActive = step.activeEdge && (
+        (step.activeEdge.from === e.u && step.activeEdge.to === e.v) ||
+        (step.activeEdge.from === e.v && step.activeEdge.to === e.u)
+      );
+      
+      if (isInTour) {
+        line.setAttribute("stroke", "var(--easy)");
+        line.setAttribute("stroke-width", "4");
+      } else if (isActive) {
+        line.setAttribute("stroke", "var(--secondary)");
+        line.setAttribute("stroke-width", "3.5");
+        line.setAttribute("stroke-dasharray", "4,4");
+        line.innerHTML = `<animate attributeName="stroke-dashoffset" values="0;20" dur="1s" repeatCount="indefinite" />`;
+      } else {
+        line.setAttribute("stroke", "rgba(255,255,255,0.08)");
+        line.setAttribute("stroke-width", "1.5");
+      }
+      svg.appendChild(line);
+      
+      const label = document.createElement('div');
+      label.className = 'tsp-edge-label';
+      if (isInTour) label.classList.add('in-tour');
+      else if (isActive) label.classList.add('active');
+      label.style.left = `${e.mid.x}px`;
+      label.style.top = `${e.mid.y}px`;
+      label.textContent = e.w;
+      graphWrapper.appendChild(label);
+    });
+    
+    graphWrapper.appendChild(svg);
+    
+    coords.forEach((coord, idx) => {
+      const el = document.createElement('div');
+      el.className = 'tsp-node';
+      el.style.left = `${coord.x}px`;
+      el.style.top = `${coord.y}px`;
+      el.textContent = coord.name;
+      
+      const isVisited = (step.activeMask & (1 << idx)) > 0;
+      if (isVisited) el.classList.add('visited');
+      
+      if (step.activeNode === idx) {
+        el.classList.remove('visited');
+        el.classList.add('active');
+      }
+      
+      if (step.candidateNode === idx) {
+        el.classList.remove('visited');
+        el.classList.add('neighbor');
+      }
+      
+      graphWrapper.appendChild(el);
+    });
+    
+    graphPanel.appendChild(graphWrapper);
+    
+    const graphInfo = document.createElement('div');
+    graphInfo.className = 'tsp-info-box';
+    graphInfo.innerHTML = `
+      <div style="font-weight:bold; color:var(--accent-cyan); margin-bottom:4px;">Recurrence formula:</div>
+      <code>dp[mask][u] = min(dp[mask][u], dp[mask \\ {u}][v] + dist[v][u])</code>
+    `;
+    graphPanel.appendChild(graphInfo);
+    container.appendChild(graphPanel);
+    
+    const tablePanel = document.createElement('div');
+    tablePanel.className = 'tsp-table-panel';
+    
+    const tableTitle = document.createElement('div');
+    tableTitle.className = 'tsp-table-header';
+    tableTitle.textContent = 'DP Table dp[mask][u]';
+    tablePanel.appendChild(tableTitle);
+    
+    const tableScroll = document.createElement('div');
+    tableScroll.className = 'tsp-table-scroll';
+    
+    const table = document.createElement('table');
+    table.className = 'tsp-table';
+    
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+      <tr>
+        <th style="width:30%">Mask (Bin)</th>
+        <th style="width:17.5%">A (0)</th>
+        <th style="width:17.5%">B (1)</th>
+        <th style="width:17.5%">C (2)</th>
+        <th style="width:17.5%">D (3)</th>
+      </tr>
+    `;
+    table.appendChild(thead);
+    
+    const tbody = document.createElement('tbody');
+    for (let mask = 0; mask < 16; mask++) {
+      const tr = document.createElement('tr');
+      if (step.activeMask === mask) {
+        tr.className = 'active-row';
+      }
+      
+      const toBin = (v) => v.toString(2).padStart(4, '0');
+      
+      const desc = [];
+      if (mask & 1) desc.push('A');
+      if (mask & 2) desc.push('B');
+      if (mask & 4) desc.push('C');
+      if (mask & 8) desc.push('D');
+      
+      let tdMask = document.createElement('td');
+      tdMask.innerHTML = `<span style="font-family:monospace; font-weight:bold; color:var(--text-muted);">${toBin(mask)}</span> <span style="font-size:0.7rem; color:var(--text-muted); font-weight:normal;">{${desc.join(',')}}</span>`;
+      tr.appendChild(tdMask);
+      
+      for (let u = 0; u < 4; u++) {
+        const td = document.createElement('td');
+        const val = step.dp[mask][u];
+        
+        if (val === Infinity) {
+          td.textContent = '∞';
+          td.className = 'cell-infinity';
+        } else {
+          td.textContent = val;
+          if (mask === 1 && u === 0) {
+            td.className = 'cell-base';
+          }
+        }
+        
+        if (step.activeMask === mask && step.activeNode === u) {
+          td.className = 'cell-active';
+        }
+        
+        const nextMask = step.activeMask | (1 << step.candidateNode);
+        if (step.candidateNode !== null && nextMask === mask && step.candidateNode === u) {
+          td.className = 'cell-candidate';
+        }
+        
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    tableScroll.appendChild(table);
+    tablePanel.appendChild(tableScroll);
+    container.appendChild(tablePanel);
+    
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'kosaraju') {
+    const container = document.createElement('div');
+    container.className = 'scc-container';
+    
+    const graphPanel = document.createElement('div');
+    graphPanel.className = 'scc-graph-panel';
+    
+    const graphTitle = document.createElement('div');
+    graphTitle.className = 'tsp-table-header';
+    graphTitle.textContent = step.reversed ? 'Transposed Directed Graph (G^T)' : 'Original Directed Graph (G)';
+    graphPanel.appendChild(graphTitle);
+    
+    const graphWrapper = document.createElement('div');
+    graphWrapper.className = 'scc-graph-wrapper';
+    
+    const coords = [
+      { x: 30, y: 130, name: 'A' },
+      { x: 150, y: 40, name: 'B' },
+      { x: 150, y: 220, name: 'C' },
+      { x: 270, y: 130, name: 'D' },
+      { x: 390, y: 130, name: 'E' }
+    ];
+    
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "cycle-arrow-svg");
+    svg.style.position = 'absolute';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    
+    svg.innerHTML = `
+      <defs>
+        <marker id="scc-arrow" viewBox="0 0 10 10" refX="24" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(255,255,255,0.4)" />
+        </marker>
+        <marker id="scc-arrow-active" viewBox="0 0 10 10" refX="24" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--secondary)" />
+        </marker>
+      </defs>
+    `;
+    
+    let edges = [];
+    if (step.reversed) {
+      edges = [
+        { u: 1, v: 0 },
+        { u: 2, v: 1 },
+        { u: 0, v: 2 },
+        { u: 3, v: 1 },
+        { u: 4, v: 3, offset: -6 },
+        { u: 3, v: 4, offset: 6 }
+      ];
+    } else {
+      edges = [
+        { u: 0, v: 1 },
+        { u: 1, v: 2 },
+        { u: 2, v: 0 },
+        { u: 1, v: 3 },
+        { u: 3, v: 4, offset: -6 },
+        { u: 4, v: 3, offset: 6 }
+      ];
+    }
+    
+    edges.forEach(e => {
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      const from = coords[e.u];
+      const to = coords[e.v];
+      
+      const offset = e.offset || 0;
+      
+      line.setAttribute("x1", from.x + 22);
+      line.setAttribute("y1", from.y + 22 + offset);
+      line.setAttribute("x2", to.x + 22);
+      line.setAttribute("y2", to.y + 22 + offset);
+      
+      const isActive = step.scanningEdge && (step.scanningEdge.from === e.u && step.scanningEdge.to === e.v);
+      
+      if (isActive) {
+        line.setAttribute("stroke", "var(--secondary)");
+        line.setAttribute("stroke-width", "3");
+        line.setAttribute("marker-end", "url(#scc-arrow-active)");
+      } else {
+        line.setAttribute("stroke", "rgba(255,255,255,0.15)");
+        line.setAttribute("stroke-width", "1.5");
+        line.setAttribute("marker-end", "url(#scc-arrow)");
+      }
+      svg.appendChild(line);
+    });
+    
+    graphWrapper.appendChild(svg);
+    
+    coords.forEach((coord, idx) => {
+      const el = document.createElement('div');
+      el.className = 'scc-node';
+      el.style.left = `${coord.x}px`;
+      el.style.top = `${coord.y}px`;
+      el.textContent = coord.name;
+      
+      if (step.activeNode === idx) {
+        el.classList.add('active');
+      } else if (step.nodeComponents && step.nodeComponents[idx] !== undefined) {
+        el.classList.add(`scc-group-${step.nodeComponents[idx]}`);
+      } else if (step.phase === 1 && step.visited.includes(idx)) {
+        el.classList.add('visited-pass1');
+      }
+      
+      graphWrapper.appendChild(el);
+    });
+    
+    graphPanel.appendChild(graphWrapper);
+    
+    const legend = document.createElement('div');
+    legend.className = 'tsp-info-box';
+    legend.innerHTML = `
+      <div style="font-weight:bold; color:var(--accent-cyan); margin-bottom:4px;">Kosaraju's Phase Info:</div>
+      <span style="font-size:0.75rem;">
+        Phase 1: DFS tracking finish stack. <br>
+        Phase 2: Transpose (reverse) edges. <br>
+        Phase 3: Pop from stack and run DFS to group SCCs.
+      </span>
+    `;
+    graphPanel.appendChild(legend);
+    container.appendChild(graphPanel);
+    
+    const sidebar = document.createElement('div');
+    sidebar.className = 'scc-sidebar';
+    
+    const stackBox = document.createElement('div');
+    stackBox.className = 'scc-panel-box';
+    
+    const stackTitle = document.createElement('div');
+    stackTitle.className = 'tsp-table-header';
+    stackTitle.textContent = 'Finish Stack (DFS 1)';
+    stackBox.appendChild(stackTitle);
+    
+    const stackScroll = document.createElement('div');
+    stackScroll.className = 'scc-stack-scroll';
+    
+    const stackContainer = document.createElement('div');
+    stackContainer.className = 'scc-stack-container';
+    
+    step.stack.forEach((val, idx) => {
+      const el = document.createElement('div');
+      el.className = 'scc-stack-el';
+      el.textContent = coords[val].name;
+      if (step.poppingVal === val) {
+        el.classList.add('popping');
+      }
+      stackContainer.appendChild(el);
+    });
+    stackScroll.appendChild(stackContainer);
+    stackBox.appendChild(stackScroll);
+    sidebar.appendChild(stackBox);
+    
+    const sccBox = document.createElement('div');
+    sccBox.className = 'scc-panel-box';
+    
+    const sccTitle = document.createElement('div');
+    sccTitle.className = 'tsp-table-header';
+    sccTitle.textContent = 'Strongly Connected Components';
+    sccBox.appendChild(sccTitle);
+    
+    const sccContainer = document.createElement('div');
+    sccContainer.className = 'scc-groups-container';
+    
+    if (step.sccs && step.sccs.length > 0) {
+      step.sccs.forEach((comp, idx) => {
+        const el = document.createElement('div');
+        el.className = `scc-group-card group-${idx % 2}`;
+        el.innerHTML = `<strong>Component ${idx + 1}:</strong> { ${comp.join(', ')} }`;
+        sccContainer.appendChild(el);
+      });
+    } else {
+      const emptyMsg = document.createElement('div');
+      emptyMsg.style.fontSize = '0.8rem';
+      emptyMsg.style.color = 'var(--text-muted)';
+      emptyMsg.style.textAlign = 'center';
+      emptyMsg.style.marginTop = '20px';
+      emptyMsg.textContent = 'No components identified yet.';
+      sccContainer.appendChild(emptyMsg);
+    }
+    sccBox.appendChild(sccContainer);
+    sidebar.appendChild(sccBox);
+    container.appendChild(sidebar);
     
     canvas.appendChild(container);
   }
