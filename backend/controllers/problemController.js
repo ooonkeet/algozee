@@ -2,29 +2,50 @@
 const Problem = require('../models/Problem');
 const UserProblem = require('../models/UserProblem');
 
-// @desc    Get all problems
+// @desc    Get all problems with filtering, search & pagination
 // @route   GET /api/problems
 // @access  Public
 exports.getAllProblems = async (req, res) => {
   try {
-    const { difficulty, category, search } = req.query;
+    const {
+      difficulty,
+      topic,
+      search,
+      page = 1,
+      limit = 20,
+      sort = '-createdAt',
+      isActive,
+    } = req.query;
 
     // Build filter
     const filter = {};
     if (difficulty) filter.difficulty = difficulty;
-    if (category) filter.category = category;
+    if (topic) filter.topic = { $regex: topic, $options: 'i' };
+    if (isActive !== undefined) filter.isActive = isActive === 'true';
     if (search) {
       filter.$or = [
-        { title: { $regex: search, $options: 'i' } },
+        { name: { $regex: search, $options: 'i' } },
         { description: { $regex: search, $options: 'i' } },
+        { topic: { $regex: search, $options: 'i' } },
       ];
     }
 
-    const problems = await Problem.find(filter).sort({ createdAt: -1 });
+    // Pagination
+    const pageNum = Math.max(1, parseInt(page));
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit)));
+    const skip = (pageNum - 1) * limitNum;
+
+    const [problems, total] = await Promise.all([
+      Problem.find(filter).sort(sort).skip(skip).limit(limitNum).lean(),
+      Problem.countDocuments(filter),
+    ]);
 
     res.status(200).json({
       success: true,
       count: problems.length,
+      total,
+      page: pageNum,
+      pages: Math.ceil(total / limitNum),
       problems,
     });
   } catch (error) {
@@ -42,7 +63,7 @@ exports.getAllProblems = async (req, res) => {
 // @access  Public
 exports.getProblemById = async (req, res) => {
   try {
-    const problem = await Problem.findById(req.params.id);
+    const problem = await Problem.findById(req.params.id).lean();
 
     if (!problem) {
       return res.status(404).json({
@@ -65,28 +86,56 @@ exports.getProblemById = async (req, res) => {
   }
 };
 
-// @desc    Get user's problems with progress
+// @desc    Get user's problems with progress (merged)
 // @route   GET /api/problems/user/:userId
 // @access  Private
 exports.getUserProblems = async (req, res) => {
   try {
-    const userProblems = await UserProblem.find({
-      userId: req.params.userId,
-    }).populate('problemId');
+    const { status, difficulty, topic, page = 1, limit = 20 } = req.query;
 
-    const enrichedProblems = userProblems.map(up => ({
-      ...up.problemId.toObject(),
-      userProgress: {
-        status: up.status,
-        attempts: up.attempts,
-        lastAttempted: up.lastAttempted,
-        submittedAt: up.submittedAt,
-      },
-    }));
+    // Build user-problem filter
+    const upFilter = { userId: req.params.userId };
+    if (status) upFilter.status = status;
+    if (difficulty) upFilter.difficulty = difficulty;
+    if (topic) upFilter.topic = { $regex: topic, $options: 'i' };
+
+    const pageNum = Math.max(1, parseInt(page));
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit)));
+    const skip = (pageNum - 1) * limitNum;
+
+    const [userProblems, total] = await Promise.all([
+      UserProblem.find(upFilter)
+        .populate('problemId')
+        .sort({ updatedAt: -1 })
+        .skip(skip)
+        .limit(limitNum)
+        .lean(),
+      UserProblem.countDocuments(upFilter),
+    ]);
+
+    const enrichedProblems = userProblems
+      .filter(up => up.problemId) // guard against orphaned refs
+      .map(up => ({
+        ...up.problemId,
+        userProgress: {
+          userProblemId: up._id,
+          status: up.status,
+          attempts: up.attempts,
+          notes: up.notes,
+          solutionCode: up.solutionCode,
+          solutionLanguage: up.solutionLanguage,
+          timeSpent: up.timeSpent,
+          lastAttemptDate: up.lastAttemptDate,
+          solvedDate: up.solvedDate,
+        },
+      }));
 
     res.status(200).json({
       success: true,
       count: enrichedProblems.length,
+      total,
+      page: pageNum,
+      pages: Math.ceil(total / limitNum),
       problems: enrichedProblems,
     });
   } catch (error) {
@@ -99,21 +148,67 @@ exports.getUserProblems = async (req, res) => {
   }
 };
 
+// @desc    Get problems grouped by topic (for dashboard)
+// @route   GET /api/problems/topics
+// @access  Public
+exports.getProblemsByTopic = async (req, res) => {
+  try {
+    const topics = await Problem.aggregate([
+      { $match: { isActive: true } },
+      {
+        $group: {
+          _id: '$topic',
+          total: { $sum: 1 },
+          easy: { $sum: { $cond: [{ $eq: ['$difficulty', 'easy'] }, 1, 0] } },
+          medium: { $sum: { $cond: [{ $eq: ['$difficulty', 'medium'] }, 1, 0] } },
+          hard: { $sum: { $cond: [{ $eq: ['$difficulty', 'hard'] }, 1, 0] } },
+        },
+      },
+      { $sort: { total: -1 } },
+    ]);
+
+    res.status(200).json({
+      success: true,
+      count: topics.length,
+      topics,
+    });
+  } catch (error) {
+    console.error('❌ Get Problems By Topic Error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching topics',
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error',
+    });
+  }
+};
+
 // @desc    Create new problem (admin only)
 // @route   POST /api/problems
 // @access  Private (Admin)
 exports.createProblem = async (req, res) => {
   try {
-    const { title, description, difficulty, category, examples, constraints, hints } = req.body;
+    const { leetcodeId, name, difficulty, topic, subcategory, acceptance, url, description, constraints, examples } = req.body;
+
+    // Check for duplicate
+    const existing = await Problem.findOne({ leetcodeId });
+    if (existing) {
+      return res.status(400).json({
+        success: false,
+        message: `Problem with leetcodeId ${leetcodeId} already exists`,
+      });
+    }
 
     const problem = await Problem.create({
-      title,
-      description,
+      leetcodeId,
+      name,
       difficulty,
-      category,
-      examples,
+      topic,
+      subcategory,
+      acceptance,
+      url,
+      description,
       constraints,
-      hints,
+      examples,
     });
 
     res.status(201).json({
@@ -179,7 +274,7 @@ exports.deleteProblem = async (req, res) => {
       });
     }
 
-    // Delete all user progress for this problem
+    // Clean up all user progress for this problem
     await UserProblem.deleteMany({ problemId: req.params.id });
 
     res.status(200).json({

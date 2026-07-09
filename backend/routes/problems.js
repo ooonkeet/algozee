@@ -4,6 +4,7 @@ const router = express.Router();
 const {
   getAllProblems,
   getProblemById,
+  getProblemsByTopic,
   getUserProblems,
   createProblem,
   updateProblem,
@@ -13,6 +14,7 @@ const { protect } = require('../middleware/auth');
 
 // Public routes
 router.get('/', getAllProblems);
+router.get('/topics', getProblemsByTopic);  // must be before /:id
 router.get('/:id', getProblemById);
 
 // Protected routes

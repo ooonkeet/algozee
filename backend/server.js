@@ -8,95 +8,117 @@ const morgan = require('morgan');
 const { createServer } = require('http');
 const { Server: SocketIO } = require('socket.io');
 
-// Import database connection
+// Config
 const connectDB = require('./config/db');
+const { corsOptions, socketCorsOptions } = require('./config/corsConfig');
+const {
+  globalLimiter,
+  authLimiter,
+  submissionLimiter,
+  visualizationLimiter,
+} = require('./config/rateLimiter');
 
-// Import models (to ensure schemas are registered)
-const User = require('./models/User');
-const Problem = require('./models/Problem');
-const UserProblem = require('./models/UserProblem');
-const Streak = require('./models/Streak');
-const Submission = require('./models/Submission');
-const Visualization = require('./models/Visualization');
+// Models (register schemas)
+require('./models/User');
+require('./models/Problem');
+require('./models/UserProblem');
+require('./models/Streak');
+require('./models/Submission');
+require('./models/Visualization');
+require('./models/Badge');
 
-// Import routes
+// Routes
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const problemRoutes = require('./routes/problems');
+const dashboardRoutes = require('./routes/dashboard');
+const userProblemRoutes = require('./routes/userProblems');
+const submissionRoutes = require('./routes/submissions');
+const leaderboardRoutes = require('./routes/leaderboard');
+const visualizationRoutes = require('./routes/visualizations');
 
-// Initialize express app
+// Socket service
+const { initSocketService } = require('./services/socketService');
+
+// ─── App & HTTP server ────────────────────────────────────────────────────────
 const app = express();
 const httpServer = createServer(app);
 
-// Socket.io setup
-const io = new SocketIO(httpServer, {
-  cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
-    methods: ['GET', 'POST'],
-  },
-});
+// ─── Socket.IO ────────────────────────────────────────────────────────────────
+const io = new SocketIO(httpServer, { cors: socketCorsOptions });
+app.set('io', io); // make io available in controllers via req.app.get('io')
 
-// Middleware
-app.use(helmet()); // Security headers
-app.use(compression()); // Compress responses
-app.use(morgan('dev')); // Logging
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
-  credentials: true,
-}));
+// ─── Core middleware ──────────────────────────────────────────────────────────
+app.use(helmet());
+app.use(compression());
+app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
-// Connect to MongoDB
+// ─── Rate limiting ────────────────────────────────────────────────────────────
+app.use('/api', globalLimiter);
+app.use('/api/auth', authLimiter);
+app.use('/api/submissions', submissionLimiter);
+app.use('/api/visualizations', visualizationLimiter);
+
+// ─── Database ─────────────────────────────────────────────────────────────────
 connectDB();
 
-// ========================
-// ROUTES
-// ========================
-
-// Mount routes
+// ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/problems', problemRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/user-problems', userProblemRoutes);
+app.use('/api/submissions', submissionRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
+app.use('/api/visualizations', visualizationRoutes);
 
-// Health check endpoint
+// ─── Utility endpoints ────────────────────────────────────────────────────────
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     success: true,
     message: '✅ Server is running',
     timestamp: new Date().toISOString(),
+    uptime: Math.floor(process.uptime()),
+    env: process.env.NODE_ENV || 'development',
   });
 });
 
-// Welcome endpoint
 app.get('/api', (req, res) => {
   res.status(200).json({
     success: true,
     message: 'Welcome to Algozee Backend API',
-    version: '1.0.0',
+    version: '2.0.0',
     endpoints: {
       auth: '/api/auth',
       users: '/api/users',
       problems: '/api/problems',
+      dashboard: '/api/dashboard',
       'user-problems': '/api/user-problems',
       submissions: '/api/submissions',
-      dashboard: '/api/dashboard',
+      leaderboard: '/api/leaderboard',
+      visualizations: '/api/visualizations',
     },
   });
 });
 
-// 404 handler
+// ─── 404 ──────────────────────────────────────────────────────────────────────
 app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: '❌ Route not found',
-    path: req.path,
-  });
+  res.status(404).json({ success: false, message: '❌ Route not found', path: req.path });
 });
 
-// Error handling middleware
+// ─── Global error handler ─────────────────────────────────────────────────────
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  console.error('❌ Error:', err);
+  console.error('❌ Unhandled Error:', err);
+
+  // Handle CORS error explicitly
+  if (err.message?.startsWith('CORS:')) {
+    return res.status(403).json({ success: false, message: err.message });
+  }
+
   res.status(err.status || 500).json({
     success: false,
     message: err.message || 'Internal server error',
@@ -104,45 +126,10 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ========================
-// SOCKET.IO EVENTS
-// ========================
+// ─── Socket.IO service ────────────────────────────────────────────────────────
+initSocketService(io);
 
-io.on('connection', (socket) => {
-  console.log(`✅ User connected: ${socket.id}`);
-
-  // Emit welcome message
-  socket.emit('welcome', {
-    message: 'Connected to Algozee server',
-    socketId: socket.id,
-  });
-
-  // Broadcast user joined
-  socket.broadcast.emit('user-joined', {
-    message: 'A new user joined',
-    userId: socket.id,
-  });
-
-  // Handle disconnect
-  socket.on('disconnect', () => {
-    console.log(`❌ User disconnected: ${socket.id}`);
-    socket.broadcast.emit('user-left', {
-      message: 'A user left',
-      userId: socket.id,
-    });
-  });
-
-  // Listen for events (to be implemented)
-  socket.on('update-problem-status', (data) => {
-    console.log('📝 Problem status updated:', data);
-    // Will implement in Phase 4
-  });
-});
-
-// ========================
-// START SERVER
-// ========================
-
+// ─── Start ────────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 5000;
 
 httpServer.listen(PORT, () => {
@@ -151,23 +138,13 @@ httpServer.listen(PORT, () => {
 ║         🚀 Algozee Backend Server Started                 ║
 ╚════════════════════════════════════════════════════════════╝
 
-✅ Server running on port ${PORT}
-✅ Environment: ${process.env.NODE_ENV || 'development'}
-✅ MongoDB: Connecting to database...
-✅ WebSocket (Socket.io): Ready for real-time updates
-
-📍 API Base URL: http://localhost:${PORT}/api
-📍 WebSocket URL: ws://localhost:${PORT}
-
-Endpoints:
-  GET  http://localhost:${PORT}/api           - API Info
-  GET  http://localhost:${PORT}/api/health    - Health Check
-
-Press Ctrl+C to stop the server
+  Environment : ${process.env.NODE_ENV || 'development'}
+  Port        : ${PORT}
+  API         : http://localhost:${PORT}/api
+  WebSocket   : ws://localhost:${PORT}
   `);
 });
 
-// Handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
   console.error('❌ Unhandled Rejection:', err);
   process.exit(1);
