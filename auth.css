@@ -1,0 +1,243 @@
+/* auth.css — Login / Register page styles */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #090d16;
+  color: #f3f4f6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Background orbs ─────────────────────────────────────────────────────── */
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orb-float 10s ease-in-out infinite alternate;
+}
+.orb-1 {
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(99,102,241,.18), transparent 70%);
+  top: -100px; left: -80px;
+}
+.orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(236,72,153,.14), transparent 70%);
+  bottom: -80px; right: -60px;
+  animation-delay: -5s;
+}
+@keyframes orb-float {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(20px, 20px); }
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+.auth-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ── Logo ────────────────────────────────────────────────────────────────── */
+.auth-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+.auth-logo-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(99,102,241,.4);
+}
+.auth-logo-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #fff, #c7d2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.auth-card {
+  width: 100%;
+  background: rgba(13,20,38,.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 24px 60px rgba(0,0,0,.4);
+}
+
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
+.auth-tabs {
+  display: flex;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 30px;
+  padding: 4px;
+  margin-bottom: 1.75rem;
+}
+.auth-tab {
+  flex: 1;
+  padding: .5rem;
+  border: none;
+  background: transparent;
+  border-radius: 24px;
+  color: #9ca3af;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.auth-tab.active {
+  background: linear-gradient(135deg, #6366f1, rgba(99,102,241,.6));
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(99,102,241,.25);
+}
+
+/* ── Alert banner ────────────────────────────────────────────────────────── */
+.auth-alert {
+  padding: .75rem 1rem;
+  border-radius: 10px;
+  font-size: .87rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+.auth-alert.error {
+  background: rgba(244,63,94,.12);
+  border: 1px solid rgba(244,63,94,.3);
+  color: #fda4af;
+}
+.auth-alert.success {
+  background: rgba(16,185,129,.12);
+  border: 1px solid rgba(16,185,129,.3);
+  color: #6ee7b7;
+}
+
+/* ── Form ────────────────────────────────────────────────────────────────── */
+.auth-form { display: flex; flex-direction: column; gap: 1.1rem; }
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+.auth-field label {
+  font-size: .82rem;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.auth-field input {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 10px;
+  padding: .7rem 1rem;
+  color: #f3f4f6;
+  font-size: .95rem;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  width: 100%;
+}
+.auth-field input::placeholder { color: #4b5563; }
+.auth-field input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,.15);
+}
+
+.input-wrapper { position: relative; display: flex; align-items: center; }
+.input-wrapper input { padding-right: 3.5rem; }
+.toggle-pw {
+  position: absolute;
+  right: .75rem;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: .78rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: .2rem .4rem;
+  border-radius: 4px;
+  transition: color .2s;
+}
+.toggle-pw:hover { color: #a5b4fc; }
+
+/* ── Submit button ───────────────────────────────────────────────────────── */
+.auth-btn {
+  margin-top: .25rem;
+  padding: .8rem;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  box-shadow: 0 4px 18px rgba(99,102,241,.35);
+  transition: transform .2s, box-shadow .2s;
+  min-height: 48px;
+}
+.auth-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99,102,241,.5);
+}
+.auth-btn:disabled { opacity: .6; cursor: not-allowed; }
+
+/* Spinner */
+.btn-spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Footer note ─────────────────────────────────────────────────────────── */
+.auth-note {
+  text-align: center;
+  font-size: .83rem;
+  color: #6b7280;
+}
+.auth-note a { color: #818cf8; text-decoration: none; }
+.auth-note a:hover { text-decoration: underline; }
+
+.auth-footer {
+  font-size: .8rem;
+  color: #4b5563;
+  text-align: center;
+}
+.auth-footer a { color: #818cf8; text-decoration: none; }
+.auth-footer a:hover { text-decoration: underline; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .auth-wrapper { padding: 1rem; }
+  .auth-card { padding: 1.5rem; border-radius: 16px; }
+  .auth-btn { font-size: .9rem; }
+}
