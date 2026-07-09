@@ -501,6 +501,43 @@ function switchTab(tabId, skipLoad = false) {
   }
   
   lucide.createIcons();
+  
+  // Close mobile menu after navigation
+  closeMobileMenu();
+}
+
+// ==========================================================================
+// MOBILE MENU TOGGLE
+// ==========================================================================
+
+function toggleMobileMenu() {
+  const menu = document.getElementById('nav-menu');
+  const navWrapperTheme = document.querySelector('.nav-wrapper-theme');
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  
+  if (menu && hamburgerBtn) {
+    menu.classList.toggle('active');
+    hamburgerBtn.classList.toggle('active');
+    if (navWrapperTheme) {
+      navWrapperTheme.classList.toggle('active');
+    }
+    hamburgerBtn.setAttribute('aria-expanded', hamburgerBtn.classList.contains('active'));
+  }
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById('nav-menu');
+  const navWrapperTheme = document.querySelector('.nav-wrapper-theme');
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  
+  if (menu && hamburgerBtn) {
+    menu.classList.remove('active');
+    hamburgerBtn.classList.remove('active');
+    if (navWrapperTheme) {
+      navWrapperTheme.classList.remove('active');
+    }
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+  }
 }
 
 // ==========================================================================
