@@ -19,11 +19,6 @@ const Streak = require('./models/Streak');
 const Submission = require('./models/Submission');
 const Visualization = require('./models/Visualization');
 
-// Import routes
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
-const problemRoutes = require('./routes/problems');
-
 // Initialize express app
 const app = express();
 const httpServer = createServer(app);
@@ -51,13 +46,8 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 connectDB();
 
 // ========================
-// ROUTES
+// ROUTES (To be implemented)
 // ========================
-
-// Mount routes
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/problems', problemRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
