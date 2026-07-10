@@ -1,106 +1,119 @@
 // seeds/seedProblems.js
-// Reads the hardcoded problem list from app.js and upserts them into MongoDB.
-// Run with: npm run seed
-// ─────────────────────────────────────────────────────────────────────────────
 require('dotenv').config();
 const mongoose = require('mongoose');
-const path     = require('path');
-const fs       = require('fs');
-
 const connectDB = require('../config/db');
-const Problem   = require('../models/Problem');
+const Problem = require('../models/Problem');
 
-// ─── Extract problems array from app.js via regex ────────────────────────────
-function extractProblems() {
-  const appJsPath = path.resolve(__dirname, '..', '..', 'app.js');
-  if (!fs.existsSync(appJsPath)) {
-    console.error('❌ app.js not found at', appJsPath);
-    process.exit(1);
-  }
+const sampleProblems = [
+  {
+    leetcodeId: 1,
+    name: 'Two Sum',
+    difficulty: 'easy',
+    topic: 'Arrays & Hashing',
+    subcategory: 'Hashing / Frequency Maps',
+    acceptance: '49.6%',
+    url: 'https://leetcode.com/problems/two-sum/',
+    description: 'Given an array of integers nums and an integer target, return the indices of the two numbers that add up to target.',
+  },
+  {
+    leetcodeId: 3,
+    name: 'Longest Substring Without Repeating Characters',
+    difficulty: 'medium',
+    topic: 'Arrays & Hashing',
+    subcategory: 'Sliding Window',
+    acceptance: '34.1%',
+    url: 'https://leetcode.com/problems/longest-substring-without-repeating-characters/',
+    description: 'Given a string s, find the length of the longest substring without repeating characters.',
+  },
+  {
+    leetcodeId: 11,
+    name: 'Container With Most Water',
+    difficulty: 'medium',
+    topic: 'Arrays & Hashing',
+    subcategory: 'Two Pointers',
+    acceptance: '54.1%',
+    url: 'https://leetcode.com/problems/container-with-most-water/',
+    description: 'You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).',
+  },
+  {
+    leetcodeId: 15,
+    name: '3Sum',
+    difficulty: 'medium',
+    topic: 'Arrays & Hashing',
+    subcategory: 'Two Pointers',
+    acceptance: '32.8%',
+    url: 'https://leetcode.com/problems/3sum/',
+    description: 'Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.',
+  },
+  {
+    leetcodeId: 42,
+    name: 'Trapping Rain Water',
+    difficulty: 'hard',
+    topic: 'Arrays & Hashing',
+    subcategory: 'Two Pointers',
+    acceptance: '59.0%',
+    url: 'https://leetcode.com/problems/trapping-rain-water/',
+    description: 'Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.',
+  },
+  {
+    leetcodeId: 49,
+    name: 'Group Anagrams',
+    difficulty: 'medium',
+    topic: 'Arrays & Hashing',
+    subcategory: 'Hashing / Frequency Maps',
+    acceptance: '66.8%',
+    url: 'https://leetcode.com/problems/group-anagrams/',
+    description: 'Given an array of strings strs, group the anagrams together. You can return the answer in any order.',
+  },
+  {
+    leetcodeId: 125,
+    name: 'Valid Palindrome',
+    difficulty: 'easy',
+    topic: 'Arrays & Hashing',
+    subcategory: 'Two Pointers',
+    acceptance: '45.7%',
+    url: 'https://leetcode.com/problems/valid-palindrome/',
+    description: 'A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward.',
+  },
+  {
+    leetcodeId: 217,
+    name: 'Contains Duplicate',
+    difficulty: 'easy',
+    topic: 'Arrays & Hashing',
+    subcategory: 'Hashing / Frequency Maps',
+    acceptance: '61.3%',
+    url: 'https://leetcode.com/problems/contains-duplicate/',
+    description: 'Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.',
+  },
+];
 
-  const src = fs.readFileSync(appJsPath, 'utf8');
-
-  // Find the problems array block between `problems: [` and the matching `]`
-  const startMarker = 'problems: [';
-  const start = src.indexOf(startMarker);
-  if (start === -1) { console.error('❌ Could not locate problems array in app.js'); process.exit(1); }
-
-  // Walk forward, counting brackets to find the closing ]
-  let depth = 0;
-  let i = start + startMarker.length - 1; // point at '['
-  const arrayStart = i;
-  while (i < src.length) {
-    if (src[i] === '[') depth++;
-    else if (src[i] === ']') { depth--; if (depth === 0) break; }
-    i++;
-  }
-
-  const rawArray = src.slice(arrayStart, i + 1);
-
-  // Evaluate safely using Function constructor (no global scope pollution)
-  let problems;
+const seedProblems = async () => {
   try {
-    // eslint-disable-next-line no-new-func
-    problems = new Function(`"use strict"; return ${rawArray};`)();
-  } catch (err) {
-    console.error('❌ Failed to parse problems array:', err.message);
+    // Connect to MongoDB
+    await connectDB();
+
+    // Clear existing problems
+    await Problem.deleteMany({});
+    console.log('🗑️  Cleared existing problems');
+
+    // Insert sample problems
+    await Problem.insertMany(sampleProblems);
+    console.log(`✅ Successfully seeded ${sampleProblems.length} problems`);
+
+    // Show sample
+    const count = await Problem.countDocuments();
+    console.log(`📊 Total problems in database: ${count}`);
+
+    process.exit(0);
+  } catch (error) {
+    console.error('❌ Error seeding database:', error.message);
     process.exit(1);
   }
+};
 
-  return problems;
+// Run seed if executed directly
+if (require.main === module) {
+  seedProblems();
 }
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
-async function seed() {
-  await connectDB();
-
-  const problems = extractProblems();
-  console.log(`📦 Found ${problems.length} problems in app.js`);
-
-  let inserted = 0;
-  let updated  = 0;
-  let skipped  = 0;
-
-  for (const p of problems) {
-    // Skip placeholder / synthetic IDs (e.g. id=9999)
-    if (!p.id || p.id > 9000) { skipped++; continue; }
-
-    const doc = {
-      leetcodeId:  p.id,
-      name:        p.name,
-      difficulty:  p.difficulty,       // 'easy' | 'medium' | 'hard'
-      topic:       p.topic,
-      subcategory: p.subcategory || '',
-      acceptance:  p.acceptance  || '',
-      isActive:    true,
-    };
-
-    try {
-      const existing = await Problem.findOne({ leetcodeId: p.id });
-      if (existing) {
-        await Problem.findByIdAndUpdate(existing._id, doc);
-        updated++;
-      } else {
-        await Problem.create(doc);
-        inserted++;
-      }
-    } catch (err) {
-      console.warn(`⚠️  Problem ${p.id} (${p.name}): ${err.message}`);
-      skipped++;
-    }
-  }
-
-  console.log(`\n✅ Seed complete`);
-  console.log(`   Inserted : ${inserted}`);
-  console.log(`   Updated  : ${updated}`);
-  console.log(`   Skipped  : ${skipped}`);
-  console.log(`   Total    : ${problems.length}`);
-
-  await mongoose.disconnect();
-  process.exit(0);
-}
-
-seed().catch(err => {
-  console.error('❌ Seed failed:', err);
-  process.exit(1);
-});
+module.exports = seedProblems;

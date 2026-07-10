@@ -40,10 +40,6 @@ const visualizationRoutes = require('./routes/visualizations');
 // Socket service
 const { initSocketService } = require('./services/socketService');
 
-// Frontend static middleware
-const injectScripts = require('./middleware/injectScripts');
-const path = require('path');
-
 // ─── App & HTTP server ────────────────────────────────────────────────────────
 const app = express();
 const httpServer = createServer(app);
@@ -53,19 +49,7 @@ const io = new SocketIO(httpServer, { cors: socketCorsOptions });
 app.set('io', io); // make io available in controllers via req.app.get('io')
 
 // ─── Core middleware ──────────────────────────────────────────────────────────
-app.use(helmet({
-  // Allow loading local JS/CSS and the socket.io CDN
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc:  ["'self'", "'unsafe-inline'", "https://unpkg.com", "https://cdn.socket.io"],
-      styleSrc:   ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc:    ["'self'", "https://fonts.gstatic.com"],
-      connectSrc: ["'self'", "ws://localhost:5000", "http://localhost:5000"],
-      imgSrc:     ["'self'", "data:", "https://via.placeholder.com"],
-    },
-  },
-}));
+app.use(helmet());
 app.use(compression());
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(cors(corsOptions));
@@ -81,7 +65,7 @@ app.use('/api/visualizations', visualizationLimiter);
 // ─── Database ─────────────────────────────────────────────────────────────────
 connectDB();
 
-// ─── API Routes (must be before static middleware) ────────────────────────────
+// ─── Routes ───────────────────────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/problems', problemRoutes);
@@ -120,22 +104,9 @@ app.get('/api', (req, res) => {
   });
 });
 
-// ─── Serve frontend (static files + script injection) ────────────────────────
-// Must be AFTER API routes so /api/* is never intercepted by static serving.
-const FRONTEND_DIR = path.resolve(__dirname, '..');
-app.use(injectScripts);           // injects api-bridge into index.html response
-app.use(express.static(FRONTEND_DIR, {
-  index: false,                   // let injectScripts handle / and /index.html
-}));
-
-// ─── Fallback: return JSON 404 for /api/* and index.html for everything else ──
+// ─── 404 ──────────────────────────────────────────────────────────────────────
 app.use((req, res) => {
-  if (req.path.startsWith('/api')) {
-    return res.status(404).json({ success: false, message: '❌ Route not found', path: req.path });
-  }
-  // SPA fallback – serve index.html with injected scripts
-  const { injectAndSend } = require('./middleware/injectScripts');
-  injectAndSend(res);
+  res.status(404).json({ success: false, message: '❌ Route not found', path: req.path });
 });
 
 // ─── Global error handler ─────────────────────────────────────────────────────
