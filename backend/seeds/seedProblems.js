@@ -12,8 +12,7 @@ const Problem   = require('../models/Problem');
 
 // ─── Extract problems array from app.js via regex ────────────────────────────
 function extractProblems() {
-  // Frontend files now live in algozee/frontend/
-  const appJsPath = path.resolve(__dirname, '..', '..', 'frontend', 'app.js');
+  const appJsPath = path.resolve(__dirname, '..', '..', 'app.js');
   if (!fs.existsSync(appJsPath)) {
     console.error('❌ app.js not found at', appJsPath);
     process.exit(1);

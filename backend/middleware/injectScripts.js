@@ -5,8 +5,7 @@
 const path = require('path');
 const fs   = require('fs');
 
-// algozee/frontend/  (backend is algozee/backend/, so go up one level then into frontend)
-const FRONTEND_DIR = path.resolve(__dirname, '..', '..', 'frontend');
+const FRONTEND_DIR = path.resolve(__dirname, '..', '..'); // algozee root
 const INDEX_PATH   = path.join(FRONTEND_DIR, 'index.html');
 
 // Scripts injected in-memory on every request (order matters)
@@ -20,12 +19,11 @@ const INJECT_SNIPPET = `
 function buildHtml() {
   try {
     let html = fs.readFileSync(INDEX_PATH, 'utf8');
-    // Guard: never double-inject
+    // Guard: never double-inject (e.g. if the source file was manually edited)
     if (html.includes('algozee-api.js')) return html;
     return html.replace('</body>', INJECT_SNIPPET + '\n</body>');
   } catch (err) {
     console.error('[injectScripts] Cannot read index.html:', err.message);
-    console.error('[injectScripts] Expected at:', INDEX_PATH);
     return null;
   }
 }
@@ -34,7 +32,7 @@ function buildHtml() {
 function injectAndSend(res) {
   const html = buildHtml();
   if (!html) {
-    res.status(500).send('Could not load application. Make sure frontend/index.html exists.');
+    res.status(500).send('Could not load application.');
     return;
   }
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
