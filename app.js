@@ -11515,169 +11515,177 @@ function generateNetFlowSteps() {
 // A* Pathfinding step generator
 function generateAStarSteps() {
   const steps = [];
-  
-  // start [2,0], end [2,5], walls [[1,2],[2,2],[3,2]]
-  steps.push({
-    open: [[2,0]],
-    closed: [],
-    active: null,
-    path: [],
-    f: {}, g: {}, h: {},
-    log: "A* Search initialized. Green cell is Start, Red is Goal, Grey cells are impassable Walls."
-  });
-  
-  steps.push({
-    open: [[1,0], [3,0], [2,1]],
-    closed: [[2,0]],
-    active: [2,0],
-    path: [],
-    f: {'2,1':5, '1,0':6, '3,0':6},
-    g: {'2,1':1, '1,0':1, '3,0':1},
-    h: {'2,1':4, '1,0':5, '3,0':5},
-    log: "Evaluate cell (2,0) [f=5]. Open neighbors: (2,1) [f=5], (1,0) [f=6], (3,0) [f=6]."
-  });
-  
-  steps.push({
-    open: [[1,1], [3,1], [1,0], [3,0]],
-    closed: [[2,0], [2,1]],
-    active: [2,1],
-    path: [],
-    f: {'1,1':6, '3,1':6, '1,0':6, '3,0':6},
-    g: {'1,1':2, '3,1':2, '1,0':1, '3,0':1},
-    h: {'1,1':4, '3,1':4, '1,0':5, '3,0':5},
-    log: "Evaluate lowest-F cell (2,1) [f=5]. Open neighbors (1,1) [f=6] and (3,1) [f=6]."
-  });
-  
-  steps.push({
-    open: [[0,1], [3,1], [1,0], [3,0]],
-    closed: [[2,0], [2,1], [1,1]],
-    active: [1,1],
-    path: [],
-    f: {'0,1':7, '3,1':6, '1,0':6, '3,0':6},
-    g: {'0,1':3, '3,1':2, '1,0':1, '3,0':1},
-    h: {'0,1':4, '3,1':4, '1,0':5, '3,0':5},
-    log: "Evaluate cell (1,1) [f=6]. Open neighbor (0,1) [f=7]. (Note: (1,2) is a Wall)."
-  });
-  
-  steps.push({
-    open: [[0,2], [3,1], [1,0], [3,0]],
-    closed: [[2,0], [2,1], [1,1], [0,1]],
-    active: [0,1],
-    path: [],
-    f: {'0,2':7, '3,1':6, '1,0':6, '3,0':6},
-    g: {'0,2':4, '3,1':2, '1,0':1, '3,0':1},
-    h: {'0,2':3, '3,1':4, '1,0':5, '3,0':5},
-    log: "Evaluate cell (0,1) [f=7]. Open neighbor (0,2) [f=7] (successfully bypasses wall block from above)."
-  });
-  
-  steps.push({
-    open: [[0,3], [3,1], [1,0], [3,0]],
-    closed: [[2,0], [2,1], [1,1], [0,1], [0,2]],
-    active: [0,2],
-    path: [],
-    f: {'0,3':7, '3,1':6, '1,0':6, '3,0':6},
-    g: {'0,3':5, '3,1':2, '1,0':1, '3,0':1},
-    h: {'0,3':2, '3,1':4, '1,0':5, '3,0':5},
-    log: "Evaluate cell (0,2) [f=7]. Open neighbor (0,3) [f=7]."
-  });
-  
-  steps.push({
-    open: [[0,4], [1,3], [3,1], [1,0]],
-    closed: [[2,0], [2,1], [1,1], [0,1], [0,2], [0,3]],
-    active: [0,3],
-    path: [],
-    f: {'0,4':7, '1,3':7, '3,1':6, '1,0':6},
-    g: {'0,4':6, '1,3':6, '3,1':2, '1,0':1},
-    h: {'0,4':1, '1,3':1, '3,1':4, '1,0':5},
-    log: "Evaluate cell (0,3) [f=7]. Open neighbors (0,4) [f=7] and (1,3) [f=7]."
-  });
-  
-  steps.push({
-    open: [[0,5], [1,4], [1,3], [1,0]],
-    closed: [[2,0], [2,1], [1,1], [0,1], [0,2], [0,3], [0,4]],
-    active: [0,4],
-    path: [],
-    f: {'0,5':9, '1,4':8, '1,3':7, '1,0':6},
-    g: {'0,5':7, '1,4':7, '1,3':6, '1,0':1},
-    h: {'0,5':2, '1,4':1, '1,3':1, '1,0':5},
-    log: "Evaluate cell (0,4) [f=7]. Open neighbors (0,5) [f=9] and (1,4) [f=8]."
-  });
-  
-  steps.push({
-    open: [[2,5], [1,4], [1,0]],
-    closed: [[2,0], [2,1], [1,1], [0,1], [0,2], [0,3], [0,4], [1,4]],
-    active: [1,4],
-    path: [],
-    f: {'2,5':9, '1,4':8, '1,0':6},
-    g: {'2,5':8, '1,4':7, '1,0':1},
-    h: {'2,5':0, '1,4':1, '1,0':5},
-    log: "Evaluate cell (1,4) [f=8]. Open target node (2,5) [f=9, g=8, h=0]!"
-  });
-  
-  steps.push({
-    open: [],
-    closed: [[2,0], [2,1], [1,1], [0,1], [0,2], [0,3], [0,4], [1,4], [2,5]],
-    active: [2,5],
-    path: [[2,0], [2,1], [1,1], [0,1], [0,2], [0,3], [0,4], [1,4], [2,5]],
-    f: {}, g: {}, h: {},
-    log: "Target reached! Backtrack parents to construct optimal path: (2,0) -> (2,1) -> (1,1) -> (0,1) -> (0,2) -> (0,3) -> (0,4) -> (1,4) -> (2,5)."
-  });
-  
+
+  // Grid: 5 rows × 6 cols. Start = [2,0], Goal = [2,5]
+  // Walls: [1,2], [2,2], [3,2]
+  const ROWS = 5, COLS = 6;
+  const START = [2, 0], GOAL = [2, 5];
+  const WALLS = new Set(['1,2', '2,2', '3,2']);
+
+  const key  = ([r, c]) => `${r},${c}`;
+  const heur = ([r, c]) => Math.abs(r - GOAL[0]) + Math.abs(c - GOAL[1]); // Manhattan
+
+  // open set as array of {r, c, f, g, h}; parent map for path reconstruction
+  const gMap     = {};   // g[key] = cost from start
+  const fMap     = {};   // f[key]
+  const hMap     = {};   // h[key]
+  const parentMap = {};  // parent[key] = [pr, pc]
+  const openSet  = [];   // cells in open list
+  const closedSet = new Set();
+
+  const startKey = key(START);
+  gMap[startKey] = 0;
+  hMap[startKey] = heur(START);
+  fMap[startKey] = hMap[startKey];
+  openSet.push(START);
+
+  const snap = (active, path, log) => {
+    // Build plain arrays for renderer (it checks step.open, step.closed, step.f, step.g, step.h, step.path, step.active)
+    const gOut = {}, fOut = {}, hOut = {};
+    Object.keys(gMap).forEach(k => { gOut[k] = gMap[k]; fOut[k] = fMap[k]; hOut[k] = hMap[k]; });
+    steps.push({
+      open:   openSet.map(x => [...x]),
+      closed: [...closedSet].map(k => k.split(',').map(Number)),
+      active: active ? [...active] : null,
+      path:   path || [],
+      f: fOut, g: gOut, h: hOut,
+      log
+    });
+  };
+
+  snap(null, [], `A* initialized. Start = (${START}), Goal = (${GOAL}). Heuristic = Manhattan distance.`);
+
+  const dirs = [[-1,0],[1,0],[0,-1],[0,1]]; // 4-directional
+
+  while (openSet.length > 0) {
+    // Pick node with lowest f
+    openSet.sort((a, b) => fMap[key(a)] - fMap[key(b)]);
+    const current = openSet.shift();
+    const curKey  = key(current);
+
+    snap(current, [], `Expand lowest-f cell (${current[0]},${current[1]}) [f=${fMap[curKey]}, g=${gMap[curKey]}, h=${hMap[curKey]}].`);
+
+    // Goal reached
+    if (curKey === key(GOAL)) {
+      // Reconstruct path
+      const path = [];
+      let cur = curKey;
+      while (cur) {
+        path.unshift(cur.split(',').map(Number));
+        cur = parentMap[cur] || null;
+      }
+      snap(current, path, `Goal (${GOAL[0]},${GOAL[1]}) reached! Reconstructing optimal path (length ${path.length - 1} steps).`);
+      break;
+    }
+
+    closedSet.add(curKey);
+
+    for (const [dr, dc] of dirs) {
+      const nr = current[0] + dr;
+      const nc = current[1] + dc;
+      if (nr < 0 || nr >= ROWS || nc < 0 || nc >= COLS) continue;
+      const nKey = key([nr, nc]);
+      if (WALLS.has(nKey) || closedSet.has(nKey)) continue;
+
+      const tentativeG = gMap[curKey] + 1;
+      if (gMap[nKey] === undefined || tentativeG < gMap[nKey]) {
+        gMap[nKey]   = tentativeG;
+        hMap[nKey]   = heur([nr, nc]);
+        fMap[nKey]   = tentativeG + hMap[nKey];
+        parentMap[nKey] = curKey;
+        if (!openSet.some(x => key(x) === nKey)) openSet.push([nr, nc]);
+        snap(current, [],
+          `Neighbor (${nr},${nc}): g=${tentativeG}, h=${hMap[nKey]}, f=${fMap[nKey]}. ${gMap[nKey] === tentativeG ? 'Added to open set.' : 'Updated cost.'}`
+        );
+      } else {
+        snap(current, [], `Neighbor (${nr},${nc}) already has better g=${gMap[nKey]}. Skip.`);
+      }
+    }
+  }
+
   visualizerState.steps = steps;
 }
 
-// Prim's MST step generator
+// Prim's MST step generator (real algorithm on 5-node weighted graph)
 function generatePrimsSteps() {
   const steps = [];
-  
-  // Hardcoded steps for points: A(80,80), B(320,60), C(180,200), D(360,220)
-  // dist(A,B) = 241, dist(A,C) = 156, dist(B,C) = 198, dist(B,D) = 165, dist(C,D) = 181
-  
-  steps.push({
-    mstEdges: [],
-    inMST: [],
-    minDist: { 'A': 0, 'B': Infinity, 'C': Infinity, 'D': Infinity },
-    candidates: [],
-    activeNode: null,
-    log: "Prim's algorithm initialized. Start node A chosen with distance 0. All other distances set to Infinity."
-  });
-  
-  steps.push({
-    mstEdges: [],
-    inMST: ['A'],
-    minDist: { 'A': 0, 'B': 241, 'C': 156, 'D': Infinity },
-    candidates: ['A-B', 'A-C'],
-    activeNode: 'A',
-    log: "Add node A to MST. Scan outgoing edges from A: candidate edge A-B (dist 241), candidate edge A-C (dist 156)."
-  });
-  
-  steps.push({
-    mstEdges: ['A-C'],
-    inMST: ['A', 'C'],
-    minDist: { 'A': 0, 'B': 198, 'C': 156, 'D': 181 },
-    candidates: ['A-B', 'C-B', 'C-D'],
-    activeNode: 'C',
-    log: "Select closest candidate node C (distance 156). Add edge A-C to MST. Scan C's neighbors: B's distance updated to 198 (via C-B), candidate edge C-D (dist 181) added."
-  });
-  
-  steps.push({
-    mstEdges: ['A-C', 'C-D'],
-    inMST: ['A', 'C', 'D'],
-    minDist: { 'A': 0, 'B': 165, 'C': 156, 'D': 181 },
-    candidates: ['C-B', 'D-B'],
-    activeNode: 'D',
-    log: "Select closest candidate node D (distance 181). Add edge C-D to MST. Scan D's neighbors: B's distance updated to 165 (via D-B)."
-  });
-  
-  steps.push({
-    mstEdges: ['A-C', 'C-D', 'D-B'],
-    inMST: ['A', 'C', 'D', 'B'],
-    minDist: { 'A': 0, 'B': 165, 'C': 156, 'D': 181 },
-    candidates: [],
-    activeNode: 'B',
-    log: "Select closest candidate node B (distance 165). Add edge D-B to MST. All nodes connected! Spanning Tree complete. Total MST cost = 156 + 181 + 165 = 502."
-  });
-  
+
+  // Nodes and weighted edges — coordinates match the canvas renderer exactly
+  // A(80,80), B(320,60), C(180,200), D(360,220)
+  const nodes = ['A', 'B', 'C', 'D'];
+  const adjList = {
+    'A': [{ to: 'B', w: 241 }, { to: 'C', w: 156 }],
+    'B': [{ to: 'A', w: 241 }, { to: 'C', w: 198 }, { to: 'D', w: 165 }],
+    'C': [{ to: 'A', w: 156 }, { to: 'B', w: 198 }, { to: 'D', w: 181 }],
+    'D': [{ to: 'B', w: 165 }, { to: 'C', w: 181 }]
+  };
+
+  const INF = Infinity;
+  const inMST   = new Set();
+  const minDist = { A: 0, B: INF, C: INF, D: INF }; // dist to MST
+  const parent  = { A: null, B: null, C: null, D: null };
+  const mstEdges = [];
+
+  const snap = (activeNode, log) => {
+    // candidates = edges from MST nodes to non-MST nodes
+    const candidates = [];
+    for (const u of inMST) {
+      for (const { to: v, w } of adjList[u]) {
+        if (!inMST.has(v)) candidates.push(`${u}-${v}`);
+      }
+    }
+    steps.push({
+      mstEdges:  [...mstEdges],
+      inMST:     [...inMST],
+      minDist:   { ...minDist },
+      candidates,
+      activeNode: activeNode || null,
+      log
+    });
+  };
+
+  snap(null, `Prim's initialized. Start from node A (distance 0). All other nodes set to Infinity.`);
+
+  while (inMST.size < nodes.length) {
+    // Pick non-MST node with minimum distance
+    let u = null;
+    for (const node of nodes) {
+      if (!inMST.has(node)) {
+        if (u === null || minDist[node] < minDist[u]) u = node;
+      }
+    }
+
+    if (minDist[u] === INF) break; // disconnected
+
+    // Add u to MST
+    inMST.add(u);
+    if (parent[u] !== null) {
+      mstEdges.push(`${parent[u]}-${u}`);
+    }
+
+    snap(u,
+      parent[u] === null
+        ? `Add starting node ${u} to MST. Scanning its ${adjList[u].length} edges.`
+        : `Select node ${u} (min dist = ${minDist[u]} via ${parent[u]}-${u}). Add edge ${parent[u]}-${u} to MST.`
+    );
+
+    // Relax edges from u
+    for (const { to: v, w } of adjList[u]) {
+      if (!inMST.has(v) && w < minDist[v]) {
+        minDist[v] = w;
+        parent[v]  = u;
+        snap(u, `Relax: node ${v} distance updated to ${w} via edge ${u}-${v}.`);
+      }
+    }
+  }
+
+  const totalCost = mstEdges.reduce((sum, e) => {
+    const [u, v] = e.split('-');
+    return sum + adjList[u].find(x => x.to === v).w;
+  }, 0);
+
+  snap(null, `MST complete! Edges: ${mstEdges.join(', ')}. Total cost = ${totalCost}.`);
+
   visualizerState.steps = steps;
 }
 
@@ -12371,80 +12379,115 @@ function generateTwoSumIISteps(numbers, target) {
 // 6. Linked List Cycle
 function generateLinkedListCycleSteps() {
   const steps = [];
-  const path = [0, 1, 2, 3, 4, 5, 2, 3, 4, 5, 2];
-  let slowIdx = 0;
-  let fastIdx = 0;
-  
-  steps.push({ slow: path[0], fast: path[0], met: false, log: "Start. Slow and Fast pointers initialized at Node 0." });
-  
-  for (let it = 1; it <= 9; it++) {
-    slowIdx = slowIdx + 1;
-    fastIdx = fastIdx + 2;
-    const slowNode = path[slowIdx];
-    const fastNode = path[fastIdx];
-    const met = slowNode === fastNode;
-    
-    if (met) {
-      steps.push({ slow: slowNode, fast: fastNode, met: true, log: `Meeting detected at Node ${slowNode}! Cycle confirmed.` });
+  // Linked list: 0→1→2→3→4→5→2 (cycle back to node 2)
+  // next[i] = next node index for node i
+  const next = [1, 2, 3, 4, 5, 2, -1]; // node 5 points back to node 2
+  const nodeCount = 6;
+
+  let slow = 0;
+  let fast = 0;
+
+  steps.push({
+    slow, fast, met: false,
+    log: `Linked list: 0→1→2→3→4→5→(back to 2). Slow and Fast both start at Node 0.`
+  });
+
+  let iteration = 0;
+  while (true) {
+    iteration++;
+    // Advance slow by 1
+    slow = next[slow];
+    // Advance fast by 2 (check null after each step)
+    const fast1 = next[fast];
+    const fast2 = fast1 !== -1 ? next[fast1] : -1;
+    fast = fast2;
+
+    if (fast === -1) {
+      steps.push({ slow, fast, met: false, log: `Fast pointer reached end — no cycle detected.` });
       break;
-    } else {
-      steps.push({ slow: slowNode, fast: fastNode, met: false, log: `Step ${it}: Slow advanced to Node ${slowNode}. Fast advanced to Node ${fastNode}.` });
     }
+
+    const met = slow === fast;
+    steps.push({
+      slow, fast, met,
+      log: met
+        ? `Step ${iteration}: Slow = Node ${slow}, Fast = Node ${fast}. They meet! Cycle confirmed.`
+        : `Step ${iteration}: Slow → Node ${slow}. Fast → Node ${fast}. Not equal yet, continue.`
+    });
+
+    if (met) break;
+    if (iteration > 20) break; // safety cap
   }
+
   visualizerState.steps = steps;
 }
 
-// 7. Linked List Cycle II
+// 7. Linked List Cycle II (real two-phase Floyd's entry-point detection)
 function generateLinkedListCycleIISteps() {
   const steps = [];
-  const path = [0, 1, 2, 3, 4, 5, 2, 3, 4, 5, 2];
-  
-  let slowIdx = 0;
-  let fastIdx = 0;
-  steps.push({ phase: 1, slow: path[0], fast: path[0], entry: -1, met: false, log: "Phase 1: Detect cycle. Slow and Fast pointers start at Node 0." });
-  
-  let metNode = -1;
-  for (let it = 1; it <= 10; it++) {
-    slowIdx = slowIdx + 1;
-    fastIdx = fastIdx + 2;
-    const slowNode = path[slowIdx];
-    const fastNode = path[fastIdx];
-    const met = slowNode === fastNode;
-    
-    if (met) {
-      metNode = slowNode;
-      steps.push({ phase: 1, slow: slowNode, fast: fastNode, entry: -1, met: true, log: `Phase 1 met at Node ${slowNode}! Cycle detected. Reseting slow pointer to find cycle start.` });
-      break;
-    } else {
-      steps.push({ phase: 1, slow: slowNode, fast: fastNode, entry: -1, met: false, log: `Slow at Node ${slowNode}. Fast at Node ${fastNode}.` });
-    }
-  }
-  
-  let entryIdx = 0;
-  steps.push({ phase: 2, slow: metNode, fast: -1, entry: path[entryIdx], met: false, log: "Phase 2: Initialize 'entry' pointer at head (Node 0). Keep 'slow' at meeting Node." });
-  
-  while (path[entryIdx] !== path[slowIdx]) {
-    entryIdx++;
-    slowIdx++;
-    steps.push({
-      phase: 2,
-      slow: path[slowIdx],
-      fast: -1,
-      entry: path[entryIdx],
-      met: path[entryIdx] === path[slowIdx],
-      log: `Advance both pointers. Entry advances to Node ${path[entryIdx]}. Slow advances to Node ${path[slowIdx]}.`
-    });
-  }
-  
+  // Same list: 0→1→2→3→4→5→2 (cycle entry at node 2)
+  const next = [1, 2, 3, 4, 5, 2, -1];
+
+  // ── Phase 1: detect meeting point ──
+  let slow = 0;
+  let fast = 0;
+
   steps.push({
-    phase: 2,
-    slow: path[slowIdx],
-    fast: -1,
-    entry: path[entryIdx],
-    met: true,
-    log: `Intersection reached! Both pointers meet at Node ${path[entryIdx]}. This is the cycle start node.`
+    phase: 1, slow, fast, entry: -1, met: false,
+    log: `Phase 1 — Floyd's Detection. Slow and Fast both start at Node 0. Slow moves ×1, Fast moves ×2.`
   });
-  
+
+  let metNode = -1;
+  let iteration = 0;
+  while (true) {
+    iteration++;
+    slow = next[slow];
+    const f1 = next[fast];
+    fast = f1 !== -1 ? next[f1] : -1;
+
+    if (fast === -1) {
+      steps.push({ phase: 1, slow, fast, entry: -1, met: false, log: `No cycle found.` });
+      visualizerState.steps = steps;
+      return;
+    }
+
+    const met = slow === fast;
+    steps.push({
+      phase: 1, slow, fast, entry: -1, met,
+      log: met
+        ? `Phase 1 step ${iteration}: Slow = Node ${slow}, Fast = Node ${fast} — they meet! Cycle confirmed. Now find entry point.`
+        : `Phase 1 step ${iteration}: Slow → Node ${slow}, Fast → Node ${fast}.`
+    });
+
+    if (met) { metNode = slow; break; }
+    if (iteration > 20) break;
+  }
+
+  // ── Phase 2: find cycle entry ──
+  let entry = 0; // reset one pointer to head
+  // slow stays at meeting node
+
+  steps.push({
+    phase: 2, slow, fast: -1, entry, met: false,
+    log: `Phase 2 — Find Entry. Reset "entry" pointer to head Node 0. Keep slow at meeting Node ${slow}. Both advance ×1.`
+  });
+
+  iteration = 0;
+  while (entry !== slow) {
+    iteration++;
+    entry = next[entry];
+    slow  = next[slow];
+    const found = entry === slow;
+    steps.push({
+      phase: 2, slow, fast: -1, entry, met: found,
+      log: found
+        ? `Phase 2 step ${iteration}: Entry = Node ${entry}, Slow = Node ${slow} — they meet! Node ${entry} is the cycle entry point.`
+        : `Phase 2 step ${iteration}: Entry → Node ${entry}, Slow → Node ${slow}.`
+    });
+    if (found) break;
+    if (iteration > 20) break;
+  }
+
   visualizerState.steps = steps;
 }
 
@@ -12519,88 +12562,212 @@ function generateLargestRectangleSteps(heights) {
   visualizerState.steps = steps;
 }
 
-// 10. Binary Tree DFS
+// 10. Binary Tree DFS (real recursive inorder traversal)
 function generateTreeSteps(treeArray) {
   const steps = [];
-  const traversalOrder = [0, 1, 3, 4, 2, 5, 6];
-  
-  steps.push({ scanning: -1, visited: [], log: "Tree DFS loaded. Initializing search at root node 0." });
-  
+  // Tree is stored as a 0-indexed array (level-order).
+  // Children of node i: left = 2i+1, right = 2i+2.
+  const n = treeArray.length;
+
+  // Build adjacency: parent -> [leftChild, rightChild] (skip null slots)
+  function leftChild(i)  { const c = 2*i+1; return c < n && treeArray[c] !== null ? c : -1; }
+  function rightChild(i) { const c = 2*i+2; return c < n && treeArray[c] !== null ? c : -1; }
+
   const visited = [];
-  for (let i = 0; i < traversalOrder.length; i++) {
-    const node = traversalOrder[i];
-    steps.push({
-      scanning: node,
-      visited: [...visited],
-      log: `DFS traversing to Node index ${node} (Value = ${treeArray[node]})`
-    });
-    visited.push(node);
-    steps.push({
-      scanning: -1,
-      visited: [...visited],
-      log: `Visited Node index ${node}. Checking child components.`
-    });
+  const callStack = []; // tracks DFS call frames (node indices)
+
+  const snap = (scanning, log, extra = {}) =>
+    steps.push({ scanning, visited: [...visited], callStack: [...callStack], ...extra, log });
+
+  snap(-1, "Tree DFS initialized. Starting recursive inorder traversal at root (index 0).");
+
+  function dfs(idx) {
+    if (idx === -1) return;
+
+    callStack.push(idx);
+    snap(idx, `Enter dfs(${idx}) — node value = ${treeArray[idx]}. Push onto call stack.`);
+
+    // Go left
+    const lc = leftChild(idx);
+    if (lc !== -1) {
+      snap(idx, `Node ${treeArray[idx]}: recurse into LEFT child (index ${lc}, value ${treeArray[lc]}).`, { activeEdge: [idx, lc] });
+      dfs(lc);
+    } else {
+      snap(idx, `Node ${treeArray[idx]}: no left child. Returning up.`);
+    }
+
+    // Visit (inorder)
+    visited.push(idx);
+    snap(idx, `Visit node ${treeArray[idx]} (inorder). Inorder so far: [${visited.map(i => treeArray[i]).join(", ")}].`);
+
+    // Go right
+    const rc = rightChild(idx);
+    if (rc !== -1) {
+      snap(idx, `Node ${treeArray[idx]}: recurse into RIGHT child (index ${rc}, value ${treeArray[rc]}).`, { activeEdge: [idx, rc] });
+      dfs(rc);
+    } else {
+      snap(idx, `Node ${treeArray[idx]}: no right child. Returning up.`);
+    }
+
+    callStack.pop();
+    snap(-1, `Return from dfs(${idx}). Pop node ${treeArray[idx]} off call stack.`);
   }
-  steps.push({ scanning: -1, visited: [...visited], log: "DFS complete. Reached maximum depth 3." });
+
+  dfs(0);
+  snap(-1, `Inorder DFS complete! Traversal order: [${visited.map(i => treeArray[i]).join(", ")}].`);
   visualizerState.steps = steps;
 }
 
-// 11. Graph BFS
+// 11. Graph BFS (real BFS on a 6-node undirected graph)
 function generateGraphSteps() {
   const steps = [];
-  const path = [0, 1, 4, 2, 3];
-  
-  steps.push({ scanning: -1, visited: [], log: "Graph BFS search initialized. Queue: [0]" });
-  
-  const visited = [];
-  for (let i = 0; i < path.length; i++) {
-    const active = path[i];
+
+  // 6-node undirected graph: nodes 0-5, edges defined as adjacency list
+  // Layout matches the canvas coords: 0=top-left, 1=top-right, 2=right,
+  //                                   3=bottom-right, 4=bottom-left, 5=center
+  const nodeLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
+  const adjList = {
+    0: [1, 4, 5],
+    1: [0, 2],
+    2: [1, 3, 5],
+    3: [2, 4],
+    4: [0, 3],
+    5: [0, 2]
+  };
+
+  const visited  = new Set();
+  const treeEdges = []; // edges discovered by BFS
+  const queue    = [0];
+  visited.add(0);
+
+  const snap = (scanning, bfsQueue, log) =>
     steps.push({
-      scanning: active,
-      visited: [...visited],
-      log: `BFS Queue popped. Scanning node ${active}.`
+      scanning,
+      visited:   [...visited],
+      queue:     [...bfsQueue],
+      treeEdges: treeEdges.map(e => [...e]),
+      log
     });
-    visited.push(active);
-    steps.push({
-      scanning: -1,
-      visited: [...visited],
-      log: `Marked Node ${active} as visited. Adding adjacent nodes to BFS queue.`
-    });
+
+  snap(-1, queue,
+    `BFS initialized. Source node ${nodeLabels[0]}. Queue: [${nodeLabels[0]}]. Visited: {${nodeLabels[0]}}.`
+  );
+
+  while (queue.length > 0) {
+    const u = queue.shift();
+
+    snap(u, queue,
+      `Dequeue ${nodeLabels[u]}. Explore its neighbors: [${adjList[u].map(n => nodeLabels[n]).join(', ')}].`
+    );
+
+    for (const v of adjList[u]) {
+      if (!visited.has(v)) {
+        visited.add(v);
+        treeEdges.push([u, v]);
+        queue.push(v);
+        snap(v, queue,
+          `Neighbor ${nodeLabels[v]} is unvisited. Mark visited, add to queue. Queue: [${queue.map(n => nodeLabels[n]).join(', ')}].`
+        );
+      } else {
+        snap(u, queue,
+          `Neighbor ${nodeLabels[v]} already visited — skip.`
+        );
+      }
+    }
+
+    snap(-1, queue,
+      `Finished processing ${nodeLabels[u]}. Visited so far: {${[...visited].map(n => nodeLabels[n]).join(', ')}}.`
+    );
   }
-  steps.push({ scanning: -1, visited: [...visited], log: "BFS Traversal completed. All nodes reached." });
+
+  snap(-1, [],
+    `BFS complete! All ${visited.size} nodes visited in order: ${[...visited].map(n => nodeLabels[n]).join(' → ')}.`
+  );
+
   visualizerState.steps = steps;
 }
 
 // 12. Matrix DP (Unique Paths)
+// 12. Matrix / Grid DP — adapts to Unique Paths or Min Path Sum based on problem
 function generateMatrixSteps() {
   const steps = [];
-  const m = 3;
-  const n = 3;
-  const grid = Array.from({length: m}, () => new Array(n).fill(1));
-  
-  steps.push({
-    scanning: null,
-    grid: Array.from({length: m}, () => new Array(n).fill(1)),
-    log: "Matrix Grid initialized. Base row and column set to 1."
-  });
-  
-  for (let r = 1; r < m; r++) {
+  const id = visualizerState.currentProbId;
+
+  // Pick grid and mode based on active problem
+  const isMinPath = (id === 64 || id === 931 || id === 120 || id === 63);
+  const m = 4, n = 4;
+
+  // Source grid for min-path problems
+  const srcGrid = isMinPath
+    ? [[1, 3, 1, 2], [1, 5, 1, 4], [4, 2, 1, 1], [2, 1, 3, 1]]
+    : null;
+
+  const dp = Array.from({ length: m }, () => new Array(n).fill(isMinPath ? Infinity : 0));
+  const title = isMinPath ? 'Minimum Path Sum' : 'Unique Paths';
+  const modeTag = isMinPath ? 'minpath' : 'paths';
+
+  const snap = (scanning, log) =>
+    steps.push({
+      grid: dp.map(r => [...r]),
+      srcGrid: srcGrid ? srcGrid.map(r => [...r]) : null,
+      scanning,
+      mode: modeTag,
+      title,
+      m, n,
+      log
+    });
+
+  if (isMinPath) {
+    // ── Min Path Sum: dp[i][j] = srcGrid[i][j] + min(dp[i-1][j], dp[i][j-1]) ──
+    snap(null,
+      `Grid DP: Minimum Path Sum on a ${m}×${n} grid. dp[i][j] = grid[i][j] + min(from above, from left). Goal: reach (${m-1},${n-1}) with minimum cost.`);
+
+    // Fill first row
+    dp[0][0] = srcGrid[0][0];
+    snap({ r: 0, c: 0 }, `Base: dp[0][0] = ${dp[0][0]}.`);
     for (let c = 1; c < n; c++) {
-      steps.push({
-        scanning: { r, c },
-        grid: JSON.parse(JSON.stringify(grid)),
-        log: `Computing path for cell (${r}, ${c}). Adding left cell value (${grid[r][c-1]}) and top cell value (${grid[r-1][c]})`
-      });
-      grid[r][c] = grid[r-1][c] + grid[r][c-1];
-      steps.push({
-        scanning: null,
-        grid: JSON.parse(JSON.stringify(grid)),
-        log: `Cell (${r}, ${c}) computed. Value = ${grid[r][c]}`
-      });
+      dp[0][c] = dp[0][c - 1] + srcGrid[0][c];
+      snap({ r: 0, c }, `First row: dp[0][${c}] = dp[0][${c-1}](${dp[0][c-1]}) + grid[0][${c}](${srcGrid[0][c]}) = ${dp[0][c]}.`);
     }
+    // Fill first col
+    for (let r = 1; r < m; r++) {
+      dp[r][0] = dp[r - 1][0] + srcGrid[r][0];
+      snap({ r, c: 0 }, `First col: dp[${r}][0] = dp[${r-1}][0](${dp[r-1][0]}) + grid[${r}][0](${srcGrid[r][0]}) = ${dp[r][0]}.`);
+    }
+    // Fill rest
+    for (let r = 1; r < m; r++) {
+      for (let c = 1; c < n; c++) {
+        const fromTop  = dp[r - 1][c];
+        const fromLeft = dp[r][c - 1];
+        dp[r][c] = srcGrid[r][c] + Math.min(fromTop, fromLeft);
+        snap({ r, c },
+          `dp[${r}][${c}] = grid(${srcGrid[r][c]}) + min(top=${fromTop}, left=${fromLeft}) = ${dp[r][c]}.`);
+      }
+    }
+    snap(null, `Min Path Sum complete! dp[${m-1}][${n-1}] = ${dp[m-1][n-1]} — optimal cost from (0,0) to (${m-1},${n-1}).`);
+
+  } else {
+    // ── Unique Paths: dp[i][j] = dp[i-1][j] + dp[i][j-1] ──
+    snap(null,
+      `Grid DP: Unique Paths on a ${m}×${n} grid. dp[i][j] = paths from above + paths from left. Base: entire first row and column = 1.`);
+
+    // Fill first row and col with 1
+    for (let c = 0; c < n; c++) { dp[0][c] = 1; }
+    for (let r = 0; r < m; r++) { dp[r][0] = 1; }
+    snap(null, `Base cases set. All cells in row 0 and col 0 = 1 (only one way to reach them).`);
+
+    for (let r = 1; r < m; r++) {
+      for (let c = 1; c < n; c++) {
+        const fromTop  = dp[r - 1][c];
+        const fromLeft = dp[r][c - 1];
+        dp[r][c] = fromTop + fromLeft;
+        snap({ r, c },
+          `dp[${r}][${c}] = dp[${r-1}][${c}](${fromTop}) + dp[${r}][${c-1}](${fromLeft}) = ${dp[r][c]} unique paths.`);
+      }
+    }
+    snap(null, `Unique Paths complete! dp[${m-1}][${n-1}] = ${dp[m-1][n-1]} distinct paths from (0,0) to (${m-1},${n-1}).`);
   }
-  
-  steps.push({ scanning: null, grid: JSON.parse(JSON.stringify(grid)), log: `Matrix Grid computation complete! Unique paths count = ${grid[2][2]}` });
+
   visualizerState.steps = steps;
 }
 
@@ -12652,139 +12819,231 @@ function generateIntervalsSteps(intervals) {
 }
 
 // 14. Frequency Map Hash Table
+// 14. Hash Table — real bucket array with chaining + lookup
 function generateHashSteps(elements) {
   const steps = [];
-  const map = {};
-  
-  steps.push({ scanning: null, map: {}, log: "HashMap initialized. Starting word frequency count." });
-  
-  elements.forEach((word, idx) => {
+  const SIZE = 7; // bucket count (prime keeps distribution clean)
+
+  // Simple hash: sum of char codes mod SIZE
+  const hashFn = key => {
+    let h = 0;
+    for (let i = 0; i < key.length; i++) h = (h + key.charCodeAt(i)) % SIZE;
+    return h;
+  };
+
+  // table[bucket] = array of keys (chaining)
+  const table = Array.from({ length: SIZE }, () => []);
+
+  const snap = (activeKey, activeBucket, phase, log) =>
     steps.push({
-      scanning: { word, index: idx },
-      map: { ...map },
-      log: `Inspecting element ${idx}: "${word}".`
+      table: table.map(b => [...b]),
+      activeKey,
+      activeBucket,
+      phase,   // 'init' | 'hash' | 'insert' | 'collision' | 'lookup' | 'done'
+      size: SIZE,
+      log
     });
-    
-    const exist = map[word] !== undefined;
-    map[word] = (map[word] || 0) + 1;
-    
-    steps.push({
-      scanning: null,
-      map: { ...map },
-      log: exist 
-        ? `Found duplicate key "${word}". Increment frequency to ${map[word]}.`
-        : `New key "${word}" added. Initialize frequency to 1.`
-    });
+
+  snap(null, -1, 'init',
+    `Hash table initialized with ${SIZE} empty buckets. Hash function: h(key) = sum(charCodes) % ${SIZE}.`);
+
+  // ── Insert phase ──
+  elements.forEach(key => {
+    const bucket = hashFn(key);
+    snap(key, bucket, 'hash',
+      `Insert "${key}": h("${key}") = ${[...key].map(c => c.charCodeAt(0)).join('+')} mod ${SIZE} = ${bucket}. Probe bucket [${bucket}].`);
+
+    if (table[bucket].length === 0) {
+      table[bucket].push(key);
+      snap(key, bucket, 'insert',
+        `Bucket [${bucket}] is empty. Insert "${key}" directly. No collision.`);
+    } else {
+      snap(key, bucket, 'collision',
+        `Bucket [${bucket}] already has [${table[bucket].join(', ')}]. Collision! Append "${key}" to chain.`);
+      table[bucket].push(key);
+      snap(key, bucket, 'insert',
+        `"${key}" appended to bucket [${bucket}] chain → [${table[bucket].join(' → ')}].`);
+    }
   });
-  
-  steps.push({ scanning: null, map: { ...map }, log: "Completed building word frequency map." });
+
+  // ── Lookup phase: search for first element ──
+  const target = elements[0];
+  const lookupBucket = hashFn(target);
+  snap(target, lookupBucket, 'lookup',
+    `Lookup "${target}": hash → bucket [${lookupBucket}]. Scan chain [${table[lookupBucket].join(' → ')}].`);
+
+  const foundIdx = table[lookupBucket].indexOf(target);
+  snap(target, lookupBucket, 'done',
+    `Found "${target}" at bucket [${lookupBucket}], chain position ${foundIdx}. Total comparisons = ${foundIdx + 1}.`);
+
   visualizerState.steps = steps;
 }
 
-// 15. Bit Shift Register
+// 15. Bit Operations — popcount via n&(n-1) + XOR accumulation
 function generateBitSteps(bits) {
   const steps = [];
-  const tempBits = [...bits];
-  
-  steps.push({ activeIndex: -1, bits: [...tempBits], log: "8-bit register loaded." });
-  
-  let setBits = 0;
-  for (let i = 0; i < tempBits.length; i++) {
-    steps.push({
-      activeIndex: i,
-      bits: [...tempBits],
-      log: `Checking bit cell at index ${i} (value = ${tempBits[i]}) via bitwise operation: (bit & 1)`
-    });
-    
-    if (tempBits[i] === 1) {
-      setBits++;
-      steps.push({
-        activeIndex: i,
-        bits: [...tempBits],
-        log: `Bit is 1! Increment Hamming weight count to ${setBits}.`
-      });
-    } else {
-      steps.push({
-        activeIndex: i,
-        bits: [...tempBits],
-        log: `Bit is 0. Shift bit cursor to next register slot.`
-      });
-    }
+
+  // Derive a number from the bit array (MSB first)
+  const n = parseInt(bits.join(''), 2);
+  const toBin8 = v => (v >>> 0).toString(2).padStart(8, '0').split('');
+
+  const snap = (activeIndex, num, count, xorAcc, xorVal, highlight, log) =>
+    steps.push({ bits: toBin8(num), activeIndex, num, count, xorAcc, xorVal, highlight, log });
+
+  // ── Section 1: n & (n-1) popcount ──
+  snap(-1, n, 0, 0, 0, 'popcount',
+    `Number = ${n} (binary: ${toBin8(n).join('')}). Count set bits using n = n & (n-1) — each step clears the lowest set bit.`);
+
+  let cur = n;
+  let count = 0;
+  let step = 0;
+  while (cur !== 0) {
+    step++;
+    const prev = cur;
+    const lowBit = cur & (-cur);          // isolate lowest set bit
+    const lowBitIdx = Math.log2(lowBit);  // which bit position
+    cur = cur & (cur - 1);               // clear it
+    count++;
+    snap(Math.floor(lowBitIdx), cur, count, 0, 0, 'popcount',
+      `Step ${step}: n & (n-1) = ${prev} & ${prev - 1} = ${cur} (binary: ${toBin8(cur).join('')}). Cleared lowest set bit at position ${Math.floor(lowBitIdx)}. Popcount = ${count}.`);
   }
-  
-  steps.push({ activeIndex: -1, bits: [...tempBits], log: `Bit evaluation completed. Total Hamming Weight = ${setBits}` });
+
+  snap(-1, cur, count, 0, 0, 'popcount',
+    `n = 0. Loop ends. Total set bits (Hamming weight) = ${count}.`);
+
+  // ── Section 2: XOR accumulation (Single Number) ──
+  const arr = [4, 1, 2, 1, 2]; // pairs cancel, 4 remains
+  let acc = 0;
+  snap(-1, n, count, 0, 0, 'xor',
+    `Now demo XOR: array [${arr.join(', ')}]. XOR all elements — duplicate pairs cancel (a^a=0). Unique number survives.`);
+
+  arr.forEach((val, idx) => {
+    const prev = acc;
+    acc = acc ^ val;
+    snap(idx, val, count, acc, val, 'xor',
+      `XOR step ${idx + 1}: acc(${prev}) ^ ${val} = ${acc}  [${toBin8(prev).join('')} ^ ${toBin8(val).join('')} = ${toBin8(acc).join('')}]`);
+  });
+
+  snap(-1, acc, count, acc, 0, 'xor',
+    `Done. All pairs cancelled. Remaining unique number = ${acc}. Binary: ${toBin8(acc).join('')}.`);
+
   visualizerState.steps = steps;
 }
 
 // 16. Trie Prefix Map
 function generateTrieSteps(words) {
   const steps = [];
-  // Build trie structure and trace insertions
-  const trie = { char: 'ROOT', children: {}, isEnd: false, id: 0 };
+  // Each node: { char, children:{}, isEnd, id, parentId }
+  const trie = { char: 'ROOT', children: {}, isEnd: false, id: 0, parentId: null };
   let nodeCounter = 1;
-  
-  steps.push({ 
-    trie: JSON.parse(JSON.stringify(trie)), 
-    currentPath: [], 
-    currentWord: '',
-    insertingChar: '',
-    log: 'Trie initialized. Root node created. Ready to insert words.' 
-  });
-  
+  const insertedWords = [];
+
+  const snap = (phase, operation, activePath, activeWord, insertingChar, log) =>
+    steps.push({
+      trie:          JSON.parse(JSON.stringify(trie)),
+      phase,         // 'insert' | 'search' | 'done'
+      operation,     // 'start' | 'traverse' | 'create' | 'mark_end' | 'found' | 'not_found' | 'prefix_ok'
+      activePath,    // array of node IDs currently highlighted
+      activeWord,
+      insertingChar,
+      insertedWords: [...insertedWords],
+      log
+    });
+
+  snap('insert', 'start', [], '', '', 'Trie initialized. Root node ready. Will insert words then run search.');
+
+  // ── Phase 1: insertions ──
   for (const word of words) {
     let node = trie;
-    const path = [];
-    
-    steps.push({ 
-      trie: JSON.parse(JSON.stringify(trie)), 
-      currentPath: [], 
-      currentWord: word,
-      insertingChar: '',
-      log: `Starting insertion of word: "${word}"` 
-    });
-    
+    const pathIds = [0]; // root id
+
+    snap('insert', 'start', [0], word, '', `Begin inserting "${word}". Start at root.`);
+
     for (let i = 0; i < word.length; i++) {
       const ch = word[i];
-      path.push(ch);
-      
+
       if (!node.children[ch]) {
-        node.children[ch] = { char: ch, children: {}, isEnd: false, id: nodeCounter++ };
-        steps.push({ 
-          trie: JSON.parse(JSON.stringify(trie)), 
-          currentPath: [...path], 
-          currentWord: word,
-          insertingChar: ch,
-          log: `New node created for char "${ch}" (word: "${word.substring(0, i+1)}")` 
-        });
+        const newNode = { char: ch, children: {}, isEnd: false, id: nodeCounter++, parentId: node.id };
+        node.children[ch] = newNode;
+        node = node.children[ch];
+        pathIds.push(node.id);
+        snap('insert', 'create', [...pathIds], word, ch,
+          `"${ch}" not found — create new node (id=${node.id}) for prefix "${word.slice(0, i+1)}".`);
       } else {
-        steps.push({ 
-          trie: JSON.parse(JSON.stringify(trie)), 
-          currentPath: [...path], 
-          currentWord: word,
-          insertingChar: ch,
-          log: `Node for char "${ch}" already exists. Traversing to child...` 
-        });
+        node = node.children[ch];
+        pathIds.push(node.id);
+        snap('insert', 'traverse', [...pathIds], word, ch,
+          `"${ch}" already exists (id=${node.id}) — traverse to it. Prefix "${word.slice(0, i+1)}" shared.`);
+      }
+    }
+
+    node.isEnd = true;
+    insertedWords.push(word);
+    snap('insert', 'mark_end', [...pathIds], word, '✓',
+      `Mark node id=${node.id} as word-end (isEnd=true). Word "${word}" fully inserted.`);
+  }
+
+  snap('insert', 'done', [], '', '',
+    `All ${words.length} words inserted: [${insertedWords.map(w => `"${w}"`).join(', ')}].`);
+
+  // ── Phase 2: search for each inserted word ──
+  for (const word of words) {
+    let node = trie;
+    const pathIds = [0];
+    let found = true;
+
+    snap('search', 'start', [0], word, '',
+      `Search "${word}". Start at root and follow character path.`);
+
+    for (let i = 0; i < word.length; i++) {
+      const ch = word[i];
+      if (!node.children[ch]) {
+        snap('search', 'not_found', [...pathIds], word, ch,
+          `"${ch}" not found at depth ${i}. "${word}" does NOT exist in trie.`);
+        found = false;
+        break;
       }
       node = node.children[ch];
+      pathIds.push(node.id);
+      snap('search', 'traverse', [...pathIds], word, ch,
+        `Follow "${ch}" → node id=${node.id}. Prefix "${word.slice(0, i+1)}" exists.`);
     }
-    node.isEnd = true;
-    steps.push({ 
-      trie: JSON.parse(JSON.stringify(trie)), 
-      currentPath: [...path], 
-      currentWord: word,
-      insertingChar: '✓',
-      log: `Word "${word}" fully inserted. Marked terminal node (isEnd = true).` 
-    });
+
+    if (found) {
+      const result = node.isEnd ? 'found' : 'prefix_ok';
+      snap('search', result, [...pathIds], word, '',
+        result === 'found'
+          ? `isEnd=true at node id=${node.id}. "${word}" is a complete word in the trie. ✓`
+          : `Reached end of "${word}" but isEnd=false — it's only a prefix, not a complete word.`);
+    }
   }
-  
-  steps.push({ 
-    trie: JSON.parse(JSON.stringify(trie)), 
-    currentPath: [], 
-    currentWord: '',
-    insertingChar: '',
-    log: `Trie built! Inserted ${words.length} words. All prefix paths are active.` 
-  });
-  
+
+  // ── Phase 3: prefix search ──
+  const prefix = words[0].slice(0, 3);
+  let node = trie;
+  const prefixPath = [0];
+  let prefixOk = true;
+
+  snap('search', 'start', [0], prefix, '',
+    `Prefix search: does any word start with "${prefix}"?`);
+
+  for (let i = 0; i < prefix.length; i++) {
+    const ch = prefix[i];
+    if (!node.children[ch]) { prefixOk = false; break; }
+    node = node.children[ch];
+    prefixPath.push(node.id);
+    snap('search', 'traverse', [...prefixPath], prefix, ch,
+      `Follow "${ch}" → node id=${node.id}.`);
+  }
+
+  snap('search', prefixOk ? 'prefix_ok' : 'not_found', [...prefixPath], prefix, '',
+    prefixOk
+      ? `Prefix "${prefix}" found in trie. All words starting with "${prefix}" are reachable from node id=${node.id}.`
+      : `Prefix "${prefix}" not found.`);
+
+  snap('search', 'done', [], '', '',
+    `Trie operations complete. ${insertedWords.length} words stored. Search and prefix queries demonstrated.`);
+
   visualizerState.steps = steps;
   visualizerState.trieStructure = trie;
 }
@@ -13039,47 +13298,124 @@ function generateUnionFindSteps(n, edges) {
 // 22. Segment Tree Build + Range Query
 function generateSegmentTreeSteps(nums, ql, qr) {
   const steps = [];
-  const tree = new Array(nums.length * 4).fill(null);
-  const ranges = {};
+  const n = nums.length;
+  const tree   = new Array(n * 4).fill(0);
+  const ranges = {}; // node → [l, r]
+
+  // ── helpers ──
+  const snap = (phase, operation, activeNode, queryRange, covered, result, log) =>
+    steps.push({
+      nums: [...nums],
+      tree: [...tree],
+      ranges: { ...ranges },
+      phase,      // 'build' | 'query' | 'update'
+      operation,  // 'descend' | 'leaf' | 'combine' | 'out_of_range' | 'fully_covered' | 'partial' | 'update_leaf' | 'update_combine'
+      activeNode,
+      queryRange: queryRange ? [...queryRange] : null,
+      covered:    [...covered],
+      result,
+      log
+    });
+
+  // ── Phase 1: Build ──
+  const covered = [];
+  let result = 0;
 
   function build(node, l, r) {
     ranges[node] = [l, r];
-    steps.push({ nums, tree: [...tree], ranges: { ...ranges }, activeNode: node, queryRange: null, result: 0, covered: [], log: `Build node ${node} for range [${l}, ${r}].` });
+    snap('build', 'descend', node, null, covered, 0,
+      `Build node ${node} → range [${l}, ${r}].`);
+
     if (l === r) {
       tree[node] = nums[l];
-      steps.push({ nums, tree: [...tree], ranges: { ...ranges }, activeNode: node, queryRange: null, result: 0, covered: [], log: `Leaf node ${node} stores nums[${l}] = ${nums[l]}.` });
+      snap('build', 'leaf', node, null, covered, 0,
+        `Leaf node ${node}: tree[${node}] = nums[${l}] = ${nums[l]}.`);
       return tree[node];
     }
+
     const mid = Math.floor((l + r) / 2);
-    const left = build(node * 2, l, mid);
-    const right = build(node * 2 + 1, mid + 1, r);
-    tree[node] = left + right;
-    steps.push({ nums, tree: [...tree], ranges: { ...ranges }, activeNode: node, queryRange: null, result: 0, covered: [], log: `Node ${node} combines children: ${left} + ${right} = ${tree[node]}.` });
+    const leftVal  = build(node * 2,     l,     mid);
+    const rightVal = build(node * 2 + 1, mid + 1, r);
+    tree[node] = leftVal + rightVal;
+    snap('build', 'combine', node, null, covered, 0,
+      `Node ${node} [${l},${r}]: left(${leftVal}) + right(${rightVal}) = ${tree[node]}.`);
     return tree[node];
   }
 
-  let result = 0;
-  const covered = [];
+  snap('build', 'descend', null, null, [], 0,
+    `Build phase. Array: [${nums.join(', ')}]. Recursively build sum segment tree.`);
+  build(1, 0, n - 1);
+  snap('build', 'combine', null, null, [], 0,
+    `Build complete. Root tree[1] = ${tree[1]} (total sum). Tree ready for queries and updates.`);
+
+  // ── Phase 2: Range query [ql, qr] ──
+  result = 0;
+  const queryCovered = [];
+
   function query(node, l, r) {
-    steps.push({ nums, tree: [...tree], ranges: { ...ranges }, activeNode: node, queryRange: [ql, qr], result, covered: [...covered], log: `Query visits node ${node} range [${l}, ${r}].` });
+    snap('query', 'descend', node, [ql, qr], queryCovered, result,
+      `Query visits node ${node} [${l}, ${r}] for range [${ql}, ${qr}].`);
+
     if (qr < l || r < ql) {
-      steps.push({ nums, tree: [...tree], ranges: { ...ranges }, activeNode: node, queryRange: [ql, qr], result, covered: [...covered], log: `Range [${l}, ${r}] is outside [${ql}, ${qr}]. Return 0.` });
+      snap('query', 'out_of_range', node, [ql, qr], queryCovered, result,
+        `[${l}, ${r}] is completely outside [${ql}, ${qr}]. Return 0.`);
       return 0;
     }
+
     if (ql <= l && r <= qr) {
       result += tree[node];
-      covered.push(node);
-      steps.push({ nums, tree: [...tree], ranges: { ...ranges }, activeNode: node, queryRange: [ql, qr], result, covered: [...covered], log: `Range [${l}, ${r}] fully covered. Add tree[${node}] = ${tree[node]}.` });
+      queryCovered.push(node);
+      snap('query', 'fully_covered', node, [ql, qr], [...queryCovered], result,
+        `[${l}, ${r}] fully inside [${ql}, ${qr}]. Use tree[${node}]=${tree[node]}. Running sum = ${result}.`);
       return tree[node];
     }
+
+    snap('query', 'partial', node, [ql, qr], queryCovered, result,
+      `[${l}, ${r}] partially overlaps [${ql}, ${qr}]. Split at mid=${Math.floor((l+r)/2)}.`);
     const mid = Math.floor((l + r) / 2);
     return query(node * 2, l, mid) + query(node * 2 + 1, mid + 1, r);
   }
 
-  steps.push({ nums, tree: [...tree], ranges: {}, activeNode: null, queryRange: null, result: 0, covered: [], log: "Segment tree initialized. Start recursive build." });
-  build(1, 0, nums.length - 1);
-  query(1, 0, nums.length - 1);
-  steps.push({ nums, tree: [...tree], ranges: { ...ranges }, activeNode: null, queryRange: [ql, qr], result, covered: [...covered], log: `Query complete. Sum for [${ql}, ${qr}] = ${result}.` });
+  snap('query', 'descend', null, [ql, qr], [], 0,
+    `Query phase: sum of nums[${ql}..${qr}]. Expected = ${nums.slice(ql, qr+1).reduce((a,b)=>a+b,0)}.`);
+  query(1, 0, n - 1);
+  snap('query', 'fully_covered', null, [ql, qr], [...queryCovered], result,
+    `Query complete. sum(nums[${ql}..${qr}]) = ${result}. Covered nodes: [${queryCovered.join(', ')}].`);
+
+  // ── Phase 3: Point update ──
+  const updateIdx = Math.floor(n / 2); // update middle element
+  const newVal    = nums[updateIdx] + 5;
+  const oldVal    = nums[updateIdx];
+  const updateCovered = [];
+
+  function update(node, l, r, idx, val) {
+    updateCovered.push(node);
+    snap('update', 'descend', node, null, [...updateCovered], 0,
+      `Update descends to node ${node} [${l}, ${r}]. Looking for index ${idx}.`);
+
+    if (l === r) {
+      tree[node] = val;
+      snap('update', 'update_leaf', node, null, [...updateCovered], 0,
+        `Leaf node ${node}: nums[${idx}] changed ${oldVal} → ${val}. tree[${node}] = ${val}.`);
+      return;
+    }
+
+    const mid = Math.floor((l + r) / 2);
+    if (idx <= mid) update(node * 2,     l,     mid, idx, val);
+    else            update(node * 2 + 1, mid + 1, r, idx, val);
+
+    tree[node] = tree[node * 2] + tree[node * 2 + 1];
+    snap('update', 'update_combine', node, null, [...updateCovered], 0,
+      `Propagate up: node ${node} [${l},${r}] recalculated = ${tree[node]}.`);
+  }
+
+  snap('update', 'descend', null, null, [], 0,
+    `Update phase: set nums[${updateIdx}] = ${newVal} (was ${oldVal}). All ancestors must be recalculated.`);
+  nums[updateIdx] = newVal;
+  update(1, 0, n - 1, updateIdx, newVal);
+  snap('update', 'update_combine', null, null, [...updateCovered], 0,
+    `Update complete. nums[${updateIdx}] = ${newVal}. New root sum = ${tree[1]}.`);
+
   visualizerState.steps = steps;
 }
 
@@ -13217,58 +13553,98 @@ function generateHeapSteps(nums) {
 
 // 26. Dijkstra Shortest Path
 function generateDijkstraSteps() {
-  const edges = [
-    [0, 1, 4], [0, 2, 1], [2, 1, 2], [1, 3, 1], [2, 3, 5], [3, 4, 3]
-  ];
+  const nodeLabels = ['A','B','C','D','E'];
+  const edges = [[0,1,4],[0,2,1],[2,1,2],[1,3,1],[2,3,5],[3,4,3]];
   const graph = Array.from({ length: 5 }, () => []);
-  edges.forEach(([u, v, w]) => graph[u].push([v, w]));
-  const dist = [0, Infinity, Infinity, Infinity, Infinity];
+  edges.forEach(([u,v,w]) => graph[u].push([v,w]));
+
+  const dist    = [0, Infinity, Infinity, Infinity, Infinity];
   const visited = new Set();
-  const pq = [[0, 0]];
-  const steps = [{ edges, dist: [...dist], visited: [], active: null, pq: [...pq], log: "Source A distance is 0. Push A into min-heap." }];
+  const pq      = [[0,0]];
+  // settledEdges: edges whose destination is fully settled
+  // relaxedEdges: edges relaxed in THIS step (reset each step)
+  const settledEdges = new Set(); // "u-v"
+
+  const snap = (activeNode, activeEdge, relaxedEdge, log) => steps.push({
+    edges, nodeLabels,
+    dist:         [...dist],
+    visited:      [...visited],
+    pq:           pq.map(x=>[...x]),
+    activeNode,   // node index being settled, or -1
+    activeEdge,   // [u,v] currently being inspected, or null
+    relaxedEdge,  // [u,v] just improved, or null
+    settledEdges: new Set(settledEdges),
+    log
+  });
+
+  const steps = [];
+  snap(-1, null, null, `Dijkstra from A. dist = [0,∞,∞,∞,∞]. Push (A,0) into min-heap.`);
 
   while (pq.length) {
-    pq.sort((a, b) => a[0] - b[0]);
+    pq.sort((a,b) => a[0]-b[0]);
     const [d, u] = pq.shift();
     if (visited.has(u)) continue;
     visited.add(u);
-    steps.push({ edges, dist: [...dist], visited: [...visited], active: { node: u }, pq: [...pq], log: `Visit node ${String.fromCharCode(65 + u)} with settled distance ${d}.` });
-    graph[u].forEach(([v, w]) => {
-      steps.push({ edges, dist: [...dist], visited: [...visited], active: { edge: [u, v] }, pq: [...pq], log: `Relax edge ${String.fromCharCode(65 + u)} -> ${String.fromCharCode(65 + v)} with weight ${w}.` });
+    snap(u, null, null, `Settle ${nodeLabels[u]} (dist=${d}). Mark as finalized.`);
+
+    graph[u].forEach(([v,w]) => {
+      snap(-1, [u,v], null, `Inspect edge ${nodeLabels[u]}→${nodeLabels[v]} (w=${w}). Current dist[${nodeLabels[v]}]=${dist[v]===Infinity?'∞':dist[v]}.`);
       if (dist[u] + w < dist[v]) {
         dist[v] = dist[u] + w;
         pq.push([dist[v], v]);
-        steps.push({ edges, dist: [...dist], visited: [...visited], active: { node: v, edge: [u, v] }, pq: [...pq], log: `Updated ${String.fromCharCode(65 + v)} distance to ${dist[v]}.` });
+        settledEdges.add(`${u}-${v}`);
+        snap(-1, [u,v], [u,v], `Relaxed! dist[${nodeLabels[v]}] = ${dist[u]}+${w} = ${dist[v]}. Updated.`);
       }
     });
   }
-  steps.push({ edges, dist: [...dist], visited: [...visited], active: null, pq: [], log: "Dijkstra complete. All reachable shortest paths are settled." });
+
+  snap(-1, null, null, `Dijkstra complete. Final distances: ${nodeLabels.map((l,i)=>`${l}:${dist[i]}`).join(', ')}.`);
   visualizerState.steps = steps;
 }
 
 // 27. Topological Sort
+// 27. Topological Sort — with removedEdges, nodeLabels, in-degree per step
 function generateTopoSortSteps() {
-  const edges = [[0, 2], [1, 2], [1, 3], [2, 4], [3, 4], [4, 5]];
+  const nodeLabels = ['A','B','C','D','E','F'];
+  const edges = [[0,2],[1,2],[1,3],[2,4],[3,4],[4,5]];
   const n = 6;
   const graph = Array.from({ length: n }, () => []);
   const indegree = new Array(n).fill(0);
-  edges.forEach(([u, v]) => { graph[u].push(v); indegree[v]++; });
+  edges.forEach(([u,v]) => { graph[u].push(v); indegree[v]++; });
+
+  const removedEdges = new Set(); // "u-v" strings
+  const order = [];
   const queue = [];
   indegree.forEach((deg, idx) => { if (deg === 0) queue.push(idx); });
-  const order = [];
-  const steps = [{ edges, indegree: [...indegree], queue: [...queue], order: [], active: null, log: "Queue starts with all zero in-degree nodes." }];
+
+  const snap = (active, log) => steps.push({
+    edges, nodeLabels,
+    indegree: [...indegree],
+    queue:    [...queue],
+    order:    [...order],
+    active,
+    removedEdges: new Set(removedEdges),
+    n, log
+  });
+
+  const steps = [];
+  snap(null, `Kahn's Algorithm. Nodes with in-degree 0: [${queue.map(i=>nodeLabels[i]).join(', ')}]. Add to queue.`);
 
   while (queue.length) {
     const u = queue.shift();
     order.push(u);
-    steps.push({ edges, indegree: [...indegree], queue: [...queue], order: [...order], active: u, log: `Pop course ${u}. Add it to topological order.` });
+    snap(u, `Dequeue ${nodeLabels[u]}. Add to topological order. Process outgoing edges.`);
+
     graph[u].forEach(v => {
+      removedEdges.add(`${u}-${v}`);
       indegree[v]--;
-      if (indegree[v] === 0) queue.push(v);
-      steps.push({ edges, indegree: [...indegree], queue: [...queue], order: [...order], active: v, log: `Remove edge ${u}->${v}. In-degree[${v}] is now ${indegree[v]}.` });
+      const gained = indegree[v] === 0;
+      if (gained) queue.push(v);
+      snap(v, `Remove edge ${nodeLabels[u]}→${nodeLabels[v]}. in-degree[${nodeLabels[v]}] = ${indegree[v]}${gained ? ` → 0, enqueue ${nodeLabels[v]}` : ''}.`);
     });
   }
-  steps.push({ edges, indegree: [...indegree], queue: [], order: [...order], active: null, log: `Topological order complete: ${order.join(" -> ")}.` });
+
+  snap(null, `Topological order: ${order.map(i=>nodeLabels[i]).join(' → ')}. All ${n} nodes processed.`);
   visualizerState.steps = steps;
 }
 
@@ -13276,123 +13652,320 @@ function generateTopoSortSteps() {
 function generateKnapsackSteps(weights, values, capacity) {
   const n = weights.length;
   const dp = Array.from({ length: n + 1 }, () => Array(capacity + 1).fill(0));
-  const steps = [{ dp: dp.map(r => [...r]), weights, values, capacity, activeCell: null, log: "Knapsack table initialized. Rows are items, columns are capacity." }];
+
+  const snap = (activeCell, action, takeVal, skipVal, log) =>
+    steps.push({
+      dp:         dp.map(r => [...r]),
+      weights, values, capacity,
+      activeCell,
+      action,     // 'init'|'take'|'skip'|'backtrack'|'done'
+      takeVal,    // value if item is taken (or -Inf)
+      skipVal,    // value if item is skipped
+      selectedItems: [],  // filled during backtrack phase
+      log
+    });
+
+  const steps = [];
+  snap(null, 'init', 0, 0,
+    `0/1 Knapsack: ${n} items, capacity ${capacity}. dp[i][w] = max value using first i items with weight limit w.`);
+
   for (let i = 1; i <= n; i++) {
     for (let cap = 0; cap <= capacity; cap++) {
       const skip = dp[i - 1][cap];
       let take = -Infinity;
       if (weights[i - 1] <= cap) take = values[i - 1] + dp[i - 1][cap - weights[i - 1]];
-      dp[i][cap] = Math.max(skip, take);
-      const action = take > skip ? "take" : "skip";
-      steps.push({ dp: dp.map(r => [...r]), weights, values, capacity, activeCell: { r: i, c: cap }, action, log: `Item ${i} (w=${weights[i - 1]}, v=${values[i - 1]}), cap ${cap}: ${action} -> ${dp[i][cap]}.` });
+      dp[i][cap] = Math.max(skip, take === -Infinity ? -Infinity : take);
+      if (dp[i][cap] === -Infinity) dp[i][cap] = 0; // guard
+      const action = (take !== -Infinity && take > skip) ? 'take' : 'skip';
+      steps.push({
+        dp:         dp.map(r => [...r]),
+        weights, values, capacity,
+        activeCell: { r: i, c: cap },
+        action,
+        takeVal:    take === -Infinity ? null : take,
+        skipVal:    skip,
+        selectedItems: [],
+        log: action === 'take'
+          ? `Item ${i} (w=${weights[i-1]}, v=${values[i-1]}), cap=${cap}: TAKE → v[${i-1}](${values[i-1]}) + dp[${i-1}][${cap-weights[i-1]}](${dp[i-1][cap-weights[i-1]]}) = ${take} > skip(${skip}).`
+          : `Item ${i} (w=${weights[i-1]}, v=${values[i-1]}), cap=${cap}: SKIP → dp[${i-1}][${cap}](${skip})${take === null ? ' (item too heavy)' : ` >= take(${take})`}.`
+      });
     }
   }
-  steps.push({ dp: dp.map(r => [...r]), weights, values, capacity, activeCell: null, action: 'done', log: `Knapsack complete. Best value = ${dp[n][capacity]}.` });
+
+  // ── Backtrack: find selected items ──
+  const selectedItems = [];
+  let w = capacity;
+  for (let i = n; i >= 1; i--) {
+    if (dp[i][w] !== dp[i - 1][w]) {
+      selectedItems.push(i - 1); // 0-indexed item
+      w -= weights[i - 1];
+      steps.push({
+        dp:         dp.map(r => [...r]),
+        weights, values, capacity,
+        activeCell: { r: i, c: w + weights[i - 1] },
+        action:     'backtrack',
+        takeVal:    values[i - 1],
+        skipVal:    0,
+        selectedItems: [...selectedItems],
+        log: `Backtrack: dp[${i}][${w + weights[i-1]}] ≠ dp[${i-1}][${w + weights[i-1]}] → Item ${i} (w=${weights[i-1]}, v=${values[i-1]}) was TAKEN. Remaining capacity = ${w}.`
+      });
+    } else {
+      steps.push({
+        dp:         dp.map(r => [...r]),
+        weights, values, capacity,
+        activeCell: { r: i, c: w },
+        action:     'backtrack',
+        takeVal:    null,
+        skipVal:    dp[i][w],
+        selectedItems: [...selectedItems],
+        log: `Backtrack: dp[${i}][${w}] = dp[${i-1}][${w}] → Item ${i} was SKIPPED.`
+      });
+    }
+  }
+
+  steps.push({
+    dp:            dp.map(r => [...r]),
+    weights, values, capacity,
+    activeCell:    null,
+    action:        'done',
+    takeVal:       null,
+    skipVal:       null,
+    selectedItems: [...selectedItems],
+    log: `Done! Max value = ${dp[n][capacity]}. Selected items (0-indexed): [${selectedItems.join(', ')}].`
+  });
+
   visualizerState.steps = steps;
 }
 
 // 29. KMP String Matching
+// 29. KMP String Matching — with pattern offset for alignment
 function generateKMPSteps(text, pattern) {
   const steps = [];
   const lps = new Array(pattern.length).fill(0);
   let len = 0;
-  steps.push({ phase: 'lps', text, pattern, lps: [...lps], i: 1, j: 0, matchedAt: -1, log: "Build LPS array for pattern." });
+
+  const snapLPS = (i, j, log) =>
+    steps.push({ phase: 'lps', text, pattern, lps: [...lps], i, j, matchedAt: -1, patternOffset: 0, jumpFrom: -1, log });
+
+  const snapScan = (i, j, matchedAt, jumpFrom, log) =>
+    steps.push({ phase: 'scan', text, pattern, lps: [...lps], i, j, matchedAt, patternOffset: i - j, jumpFrom, log });
+
+  snapLPS(1, 0, `Phase 1 — Build LPS (Longest Proper Prefix Suffix) table for pattern "${pattern}".`);
+
+  // Build LPS
   for (let i = 1; i < pattern.length;) {
     if (pattern[i] === pattern[len]) {
       lps[i] = ++len;
-      steps.push({ phase: 'lps', text, pattern, lps: [...lps], i, j: len - 1, matchedAt: -1, log: `LPS match at pattern[${i}]. lps[${i}] = ${lps[i]}.` });
+      snapLPS(i, len - 1, `pattern[${i}]='${pattern[i]}' == pattern[${len-1}]='${pattern[len-1]}'. lps[${i}] = ${lps[i]}.`);
       i++;
     } else if (len > 0) {
+      const prev = len;
       len = lps[len - 1];
-      steps.push({ phase: 'lps', text, pattern, lps: [...lps], i, j: len, matchedAt: -1, log: `Fallback len to ${len}.` });
+      snapLPS(i, len, `Mismatch at i=${i}. Fallback: len ${prev} → ${len} via lps[${prev-1}]=${lps[prev-1]}.`);
     } else {
-      steps.push({ phase: 'lps', text, pattern, lps: [...lps], i, j: 0, matchedAt: -1, log: `No prefix match for pattern[${i}]. lps[${i}] remains 0.` });
+      lps[i] = 0;
+      snapLPS(i, 0, `No prefix match for pattern[${i}]='${pattern[i]}'. lps[${i}] = 0.`);
       i++;
     }
   }
 
+  steps.push({ phase: 'lps', text, pattern, lps: [...lps], i: -1, j: -1, matchedAt: -1, patternOffset: 0, jumpFrom: -1,
+    log: `LPS table complete: [${lps.join(', ')}]. Phase 2 — Scan text for pattern.` });
+
+  // Scan
   let i = 0, j = 0;
   while (i < text.length) {
-    steps.push({ phase: 'scan', text, pattern, lps: [...lps], i, j, matchedAt: -1, log: `Compare text[${i}] '${text[i]}' with pattern[${j}] '${pattern[j]}'.` });
+    snapScan(i, j, -1, -1, `Compare text[${i}]='${text[i]}' with pattern[${j}]='${pattern[j]}'. Pattern aligned at text offset ${i - j}.`);
+
     if (text[i] === pattern[j]) {
       i++; j++;
       if (j === pattern.length) {
-        steps.push({ phase: 'scan', text, pattern, lps: [...lps], i: i - 1, j: j - 1, matchedAt: i - j, log: `Pattern found at index ${i - j}.` });
-        break;
+        const matchAt = i - j;
+        snapScan(i - 1, j - 1, matchAt, -1, `Full match! Pattern found at text index ${matchAt}..${matchAt + pattern.length - 1}.`);
+        j = lps[j - 1]; // continue searching
       }
     } else if (j > 0) {
+      const jumpFrom = j;
       j = lps[j - 1];
-      steps.push({ phase: 'scan', text, pattern, lps: [...lps], i, j, matchedAt: -1, log: `Mismatch. Jump pattern pointer to ${j} using LPS.` });
+      snapScan(i, j, -1, jumpFrom, `Mismatch. Use LPS: jump pattern pointer from ${jumpFrom} → ${j}. Text pointer stays at ${i}.`);
     } else {
+      snapScan(i, j, -1, -1, `Mismatch at text[${i}]='${text[i]}', j=0. Advance text pointer.`);
       i++;
     }
   }
+
+  steps.push({ phase: 'scan', text, pattern, lps: [...lps], i: text.length, j, matchedAt: -1, patternOffset: 0, jumpFrom: -1,
+    log: `Scan complete. Text fully traversed.` });
+
   visualizerState.steps = steps;
 }
 
 // 30. Fenwick Tree / BIT
+// 30. Fenwick Tree / BIT — with update/query chains and lowbit annotations
 function generateFenwickSteps(nums) {
   const n = nums.length;
   const bit = new Array(n + 1).fill(0);
-  const steps = [{ nums, bit: [...bit], active: [], mode: 'init', total: 0, log: "Fenwick tree starts empty. Use 1-based indexes." }];
+
+  const lowbit = x => x & -x;
+
+  const snap = (mode, activeChain, total, srcIdx, log) =>
+    steps.push({
+      nums: [...nums],
+      bit:  [...bit],
+      mode,           // 'init'|'update'|'query'|'done'
+      activeChain,    // array of 1-based BIT indices involved in this step
+      total,
+      srcIdx,         // 0-based source array index being inserted (for update)
+      n,
+      log
+    });
+
+  const steps = [];
+
+  snap('init', [], 0, -1,
+    `Fenwick Tree (BIT) on [${nums.join(', ')}]. 1-based indexing. BIT[i] stores sum of a range whose length = lowbit(i) = i & (-i).`);
+
+  // ── Build: insert each element ──
   nums.forEach((value, idx) => {
-    for (let i = idx + 1; i <= n; i += i & -i) {
+    const chain = [];
+    for (let i = idx + 1; i <= n; i += lowbit(i)) chain.push(i);
+
+    snap('update', [], 0, idx,
+      `Insert a[${idx+1}]=${value}. Update chain: ${chain.join(' → ')} (each += ${value}).`);
+
+    for (const i of chain) {
       bit[i] += value;
-      steps.push({ nums, bit: [...bit], active: [i], mode: 'update', total: 0, log: `Add nums[${idx}] = ${value} to BIT[${i}]. Next i += lowbit(i).` });
+      snap('update', chain.slice(0, chain.indexOf(i) + 1), 0, idx,
+        `BIT[${i}] += ${value} → ${bit[i]}. lowbit(${i}) = ${lowbit(i)}. Next: ${i + lowbit(i) <= n ? i + lowbit(i) : 'done'}.`);
     }
   });
+
+  // ── Prefix query: sum of first 5 elements ──
+  const queryIdx = Math.min(5, n);
+  const queryChain = [];
   let total = 0;
-  for (let i = 5; i > 0; i -= i & -i) {
+  for (let i = queryIdx; i > 0; i -= lowbit(i)) queryChain.push(i);
+
+  snap('query', [], 0, -1,
+    `Prefix query: sum(1..${queryIdx}). Walk down chain: ${queryChain.join(' → ')} (each step: i -= lowbit(i)).`);
+
+  for (const i of queryChain) {
     total += bit[i];
-    steps.push({ nums, bit: [...bit], active: [i], mode: 'query', total, log: `Prefix query at i=${i}. Add BIT[${i}], running sum = ${total}.` });
+    snap('query', queryChain.slice(0, queryChain.indexOf(i) + 1), total, -1,
+      `Add BIT[${i}]=${bit[i]} (covers range [${i - lowbit(i) + 1}..${i}]). Running sum = ${total}.`);
   }
-  steps.push({ nums, bit: [...bit], active: [], mode: 'done', total, log: `Fenwick prefix sum(5) = ${total}.` });
+
+  snap('done', [], total, -1,
+    `Query sum(1..${queryIdx}) = ${total}. Verified: ${nums.slice(0, queryIdx).join('+')} = ${nums.slice(0, queryIdx).reduce((a,b)=>a+b,0)}.`);
+
   visualizerState.steps = steps;
 }
 
 // 31. Bellman-Ford
+// 31. Bellman-Ford — with pass tracking, relaxed flag, dist table, negative-cycle check
 function generateBellmanFordSteps() {
+  const nodeLabels = ['A','B','C','D','E'];
   const n = 5;
-  const edges = [[0, 1, 6], [0, 2, 7], [1, 3, 5], [1, 2, 8], [2, 3, -3], [3, 4, 2], [4, 1, -2]];
+  const edges = [[0,1,6],[0,2,7],[1,3,5],[1,2,8],[2,3,-3],[3,4,2],[4,1,-2]];
   const dist = [0, Infinity, Infinity, Infinity, Infinity];
-  const steps = [{ edges, dist: [...dist], activeEdge: null, pass: 0, log: "Bellman-Ford starts from source A." }];
+
+  const snap = (activeEdge, relaxed, pass, negCycle, log) => steps.push({
+    edges, nodeLabels,
+    dist:       [...dist],
+    activeEdge, // [u,v] or null
+    relaxed,    // bool — was this edge relaxed?
+    pass,
+    negCycle,
+    log
+  });
+
+  const steps = [];
+  snap(null, false, 0, false, `Bellman-Ford from A. Run V-1=${n-1} passes over all edges. Handles negative weights.`);
+
   for (let pass = 1; pass < n; pass++) {
-    edges.forEach(([u, v, w]) => {
-      steps.push({ edges, dist: [...dist], activeEdge: [u, v], pass, log: `Pass ${pass}: test edge ${String.fromCharCode(65 + u)}->${String.fromCharCode(65 + v)} (${w}).` });
+    let anyRelaxed = false;
+    snap(null, false, pass, false, `Pass ${pass}/${n-1}: scan all ${edges.length} edges for relaxations.`);
+    edges.forEach(([u,v,w]) => {
+      snap([u,v], false, pass, false,
+        `Pass ${pass}: test ${nodeLabels[u]}→${nodeLabels[v]} (w=${w}). dist[${nodeLabels[u]}]=${dist[u]===Infinity?'∞':dist[u]}.`);
       if (dist[u] !== Infinity && dist[u] + w < dist[v]) {
         dist[v] = dist[u] + w;
-        steps.push({ edges, dist: [...dist], activeEdge: [u, v], pass, log: `Relaxed ${String.fromCharCode(65 + v)} to ${dist[v]}.` });
+        anyRelaxed = true;
+        snap([u,v], true, pass, false,
+          `Relaxed! dist[${nodeLabels[v]}] = ${dist[u]}+${w} = ${dist[v]}.`);
       }
     });
+    if (!anyRelaxed) {
+      snap(null, false, pass, false, `Pass ${pass}: no relaxations. Early termination.`);
+      break;
+    }
   }
-  steps.push({ edges, dist: [...dist], activeEdge: null, pass: n - 1, log: "Bellman-Ford complete after V-1 passes." });
+
+  // Negative cycle check (extra pass)
+  let negCycle = false;
+  edges.forEach(([u,v,w]) => {
+    if (dist[u] !== Infinity && dist[u] + w < dist[v]) negCycle = true;
+  });
+  snap(null, false, n, negCycle,
+    negCycle
+      ? `⚠ Negative cycle detected! A V-th relaxation is still possible.`
+      : `No negative cycle. Final distances: ${nodeLabels.map((l,i)=>`${l}:${dist[i]===Infinity?'∞':dist[i]}`).join(', ')}.`);
+
   visualizerState.steps = steps;
 }
 
 // 32. Floyd-Warshall
+// 32. Floyd-Warshall — with k highlight, improved flag, via-path annotation
 function generateFloydWarshallSteps() {
   const inf = Infinity;
+  const nodeLabels = ['A','B','C','D'];
+  const N = 4;
   const dist = [
-    [0, 3, inf, 7],
-    [8, 0, 2, inf],
-    [5, inf, 0, 1],
-    [2, inf, inf, 0]
+    [0,   3,   inf, 7  ],
+    [8,   0,   2,   inf],
+    [5,   inf, 0,   1  ],
+    [2,   inf, inf, 0  ]
   ];
-  const steps = [{ dist: dist.map(r => [...r]), activeCell: null, k: -1, log: "Floyd-Warshall matrix initialized." }];
-  for (let k = 0; k < dist.length; k++) {
-    for (let i = 0; i < dist.length; i++) {
-      for (let j = 0; j < dist.length; j++) {
-        const via = dist[i][k] + dist[k][j];
-        if (via < dist[i][j]) {
-          dist[i][j] = via;
-          steps.push({ dist: dist.map(r => [...r]), activeCell: { r: i, c: j }, k, log: `Use ${String.fromCharCode(65 + k)} as intermediate: dist[${i}][${j}] becomes ${via}.` });
+  // via[i][j] = intermediate node used for shortest i→j path
+  const via = Array.from({length:N},()=>new Array(N).fill(null));
+
+  const snap = (activeCell, k, improved, log) => steps.push({
+    dist:       dist.map(r=>[...r]),
+    via:        via.map(r=>[...r]),
+    activeCell, // {r,c} or null
+    k,          // current intermediate node index, -1 = init
+    improved,
+    nodeLabels, N,
+    log
+  });
+
+  const steps = [];
+  snap(null, -1, false,
+    `Floyd-Warshall: all-pairs shortest paths. dist[i][j] starts as direct edge weight or ∞.`);
+
+  for (let k = 0; k < N; k++) {
+    snap(null, k, false,
+      `Intermediate node k = ${nodeLabels[k]}. Try routing all i→j paths through ${nodeLabels[k]}.`);
+    for (let i = 0; i < N; i++) {
+      for (let j = 0; j < N; j++) {
+        if (i === j) continue;
+        const through = dist[i][k] === inf || dist[k][j] === inf
+          ? inf : dist[i][k] + dist[k][j];
+        if (through < dist[i][j]) {
+          dist[i][j] = through;
+          via[i][j] = k;
+          snap({r:i,c:j}, k, true,
+            `Improved! dist[${nodeLabels[i]}][${nodeLabels[j]}] = dist[${nodeLabels[i]}][${nodeLabels[k]}](${dist[i][k]}≠via) + dist[${nodeLabels[k]}][${nodeLabels[j]}](${dist[k][j]}) = ${through}. Via ${nodeLabels[k]}.`);
         } else {
-          steps.push({ dist: dist.map(r => [...r]), activeCell: { r: i, c: j }, k, log: `Check path ${i}->${k}->${j}. No improvement.` });
+          snap({r:i,c:j}, k, false,
+            `dist[${nodeLabels[i]}][${nodeLabels[j]}]=${dist[i][j]=== inf?'∞':dist[i][j]} ≤ via ${nodeLabels[k]}(${through===inf?'∞':through}). No improvement.`);
         }
       }
     }
   }
-  steps.push({ dist: dist.map(r => [...r]), activeCell: null, k: dist.length, log: "Floyd-Warshall complete. Matrix stores all-pairs shortest paths." });
+
+  snap(null, N, false,
+    `Complete! dist[i][j] holds shortest path between every pair. Check diagonal for negative cycles.`);
   visualizerState.steps = steps;
 }
 
@@ -13506,100 +14079,77 @@ function generateQuickSortFullSteps() {
 // Recursive Merge Sort step generator
 function generateMergeSortSteps() {
   const steps = [];
-  const initialArr = [4, 2, 1, 3];
-  
-  steps.push({
-    array: [...initialArr],
-    splitL: -1,
-    splitR: -1,
-    merging: false,
-    left: -1,
-    mid: -1,
-    right: -1,
-    log: "Initial array loaded. Starting recursive Merge Sort."
-  });
-  
-  // Divide phase
-  steps.push({
-    array: [4, 2, 1, 3],
-    splitL: 0,
-    splitR: 1,
-    merging: false,
-    left: 0,
-    mid: 0,
-    right: 1,
-    log: "Split left half: [4, 2]."
-  });
-  steps.push({
-    array: [4, 2, 1, 3],
-    splitL: 2,
-    splitR: 3,
-    merging: false,
-    left: 2,
-    mid: 2,
-    right: 3,
-    log: "Split right half: [1, 3]."
-  });
-  
-  // Merge left half: [4] and [2] -> [2, 4]
-  steps.push({
-    array: [4, 2, 1, 3],
-    splitL: -1,
-    splitR: -1,
-    merging: true,
-    left: 0,
-    mid: 0,
-    right: 1,
-    log: "Merge [4] and [2] into sorted subarray."
-  });
-  steps.push({
-    array: [2, 4, 1, 3],
-    splitL: -1,
-    splitR: -1,
-    merging: true,
-    left: 0,
-    mid: 0,
-    right: 1,
-    log: "Merged: [2, 4]."
-  });
-  
-  // Merge right half: [1] and [3] -> [1, 3]
-  steps.push({
-    array: [2, 4, 1, 3],
-    splitL: -1,
-    splitR: -1,
-    merging: true,
-    left: 2,
-    mid: 2,
-    right: 3,
-    log: "Merge [1] and [3] into sorted subarray."
-  });
-  
-  // Final merge: [2, 4] and [1, 3] -> [1, 2, 3, 4]
-  steps.push({
-    array: [2, 4, 1, 3],
-    splitL: -1,
-    splitR: -1,
-    merging: true,
-    left: 0,
-    mid: 1,
-    right: 3,
-    log: "Merge sorted halves: [2, 4] and [1, 3]."
-  });
-  steps.push({
-    array: [1, 2, 3, 4],
-    splitL: -1,
-    splitR: -1,
-    merging: true,
-    left: 0,
-    mid: 1,
-    right: 3,
-    log: "Final merged array fully sorted."
-  });
-  
+  const arr = [38, 27, 43, 3, 9, 82, 10];
+  const work = [...arr];
+  const sorted = new Set();
+
+  // Each step emits: array[], phase, left, mid, right, compareL, compareR, sortedRegions[], divideDepth, log
+  const snap = (phase, left, mid, right, compareL, compareR, depth, log) =>
+    steps.push({
+      array:     [...work],
+      phase,           // 'start'|'split'|'compare'|'place'|'merge_done'|'done'
+      left, mid, right,
+      compareL,        // index being compared from left half (-1 if not comparing)
+      compareR,        // index being compared from right half (-1 if not comparing)
+      sortedRegions:   Array.from(sorted),
+      divideDepth: depth,
+      log
+    });
+
+  snap('start', -1, -1, -1, -1, -1, 0,
+    `Merge Sort on [${arr.join(', ')}]. Recursively split → sort → merge.`);
+
+  function mergeSort(l, r, depth) {
+    if (l >= r) {
+      sorted.add(l);
+      snap('split', l, l, r, -1, -1, depth,
+        `Base case: single element arr[${l}]=${work[l]}. Already sorted.`);
+      return;
+    }
+
+    const m = Math.floor((l + r) / 2);
+    snap('split', l, m, r, -1, -1, depth,
+      `Split [${l}..${r}] → left [${l}..${m}] and right [${m+1}..${r}].`);
+
+    mergeSort(l, m, depth + 1);
+    mergeSort(m + 1, r, depth + 1);
+
+    // Merge
+    snap('split', l, m, r, -1, -1, depth,
+      `Merge [${l}..${m}] + [${m+1}..${r}] — left: [${work.slice(l,m+1).join(',')}], right: [${work.slice(m+1,r+1).join(',')}].`);
+
+    const left  = work.slice(l, m + 1);
+    const right = work.slice(m + 1, r + 1);
+    let i = 0, j = 0, k = l;
+
+    while (i < left.length && j < right.length) {
+      snap('compare', l, m, r, l + i, m + 1 + j, depth,
+        `Compare left[${i}]=${left[i]} vs right[${j}]=${right[j]}.`);
+      if (left[i] <= right[j]) {
+        work[k++] = left[i++];
+        snap('place', l, m, r, l + i - 1, m + 1 + j, depth,
+          `left[${i-1}]=${left[i-1]} ≤ right[${j}]=${right[j]}. Place ${left[i-1]} at index ${k-1}.`);
+      } else {
+        work[k++] = right[j++];
+        snap('place', l, m, r, l + i, m + 1 + j - 1, depth,
+          `right[${j-1}]=${right[j-1]} < left[${i}]=${left[i]}. Place ${right[j-1]} at index ${k-1}.`);
+      }
+    }
+    while (i < left.length)  { work[k++] = left[i++]; }
+    while (j < right.length) { work[k++] = right[j++]; }
+
+    for (let x = l; x <= r; x++) sorted.add(x);
+    snap('merge_done', l, m, r, -1, -1, depth,
+      `Merged [${l}..${r}] → [${work.slice(l, r+1).join(', ')}].`);
+  }
+
+  mergeSort(0, arr.length - 1, 0);
+  snap('done', -1, -1, -1, -1, -1, 0,
+    `Merge Sort complete! Sorted: [${work.join(', ')}].`);
+
   visualizerState.steps = steps;
 }
-
+  
 // Insertion Sort step generator
 function generateInsertionSortSteps() {
   const steps = [];
@@ -13761,17 +14311,65 @@ function generateLRUCacheSteps() {
 }
 
 // 36. Sliding Window Maximum
+// 36. Sliding Window Maximum — richer deque value/window tracking
 function generateSlidingMaxSteps(nums, k) {
-  const dq = [];
+  const dq  = [];   // stores indices, monotonically decreasing by value
   const out = [];
-  const steps = [{ nums, k, dq: [], out: [], r: -1, log: "Deque stores indices in decreasing value order." }];
+  const steps = [];
+
+  const snap = (r, evictReason, log) => steps.push({
+    nums,
+    k,
+    r,
+    dq:          [...dq],
+    dqVals:      dq.map(i => nums[i]),          // values in deque (not just indices)
+    windowStart: Math.max(0, r - k + 1),
+    windowEnd:   r,
+    out:         [...out],
+    evictReason: evictReason || null,           // 'smaller' | 'expired' | null
+    log
+  });
+
+  snap(-1, null,
+    `Sliding Window Maximum. Array: [${nums.join(', ')}], k=${k}. ` +
+    `Deque stores indices in decreasing value order — front is always the window maximum.`);
+
   for (let r = 0; r < nums.length; r++) {
-    while (dq.length && nums[dq[dq.length - 1]] <= nums[r]) dq.pop();
+    // 1. Remove from back: all indices whose values are ≤ nums[r] (useless — nums[r] is bigger)
+    while (dq.length && nums[dq[dq.length - 1]] <= nums[r]) {
+      const removed = dq.pop();
+      snap(r, 'smaller',
+        `Pop back: nums[${removed}]=${nums[removed]} ≤ nums[${r}]=${nums[r]} — it can never be a future max. Remove index ${removed}.`);
+    }
+
+    // 2. Push current index
     dq.push(r);
-    if (dq[0] <= r - k) dq.shift();
-    if (r >= k - 1) out.push(nums[dq[0]]);
-    steps.push({ nums, k, dq: [...dq], out: [...out], r, log: `Window ending at ${r}. Current max = ${r >= k - 1 ? nums[dq[0]] : 'waiting'}.` });
+    snap(r, null,
+      `Push index ${r} (value ${nums[r]}) onto deque back. Deque values: [${dq.map(i => nums[i]).join(' > ')}].`);
+
+    // 3. Evict expired front (outside window)
+    if (dq[0] <= r - k) {
+      const expired = dq.shift();
+      snap(r, 'expired',
+        `Evict front: index ${expired} is outside window [${r - k + 1}, ${r}]. Remove it.`);
+    }
+
+    // 4. Record output once window is full
+    if (r >= k - 1) {
+      const windowMax = nums[dq[0]];
+      out.push(windowMax);
+      snap(r, null,
+        `Window [${r - k + 1}..${r}] = [${nums.slice(r - k + 1, r + 1).join(', ')}]. ` +
+        `Max = nums[${dq[0]}] = ${windowMax}. Output so far: [${out.join(', ')}].`);
+    } else {
+      snap(r, null,
+        `Window not full yet (need ${k} elements, have ${r + 1}). Waiting...`);
+    }
   }
+
+  snap(nums.length - 1, null,
+    `Done. All ${out.length} window maximums: [${out.join(', ')}].`);
+
   visualizerState.steps = steps;
 }
 
@@ -14474,59 +15072,56 @@ function renderCanvasStep() {
     canvas.appendChild(container);
   }
 
-  // --- I. BINARY TREE (DFS/BFS) ---
+  // --- I. BINARY TREE (DFS inorder) ---
   else if (visualizerState.algo === 'tree') {
     const container = document.createElement('div');
     container.className = 'tree-container';
-    
+    container.style.position = 'relative';
+    container.style.minHeight = '260px';
+
+    const treeArray = visualizerState.rawArray;
+
     const treeCoords = [
-      { x: 228, y: 20 },   
-      { x: 120, y: 90 },   
-      { x: 336, y: 90 },   
-      { x: 50,  y: 160 },  
-      { x: 180, y: 160 },  
-      { x: 270, y: 160 },  
-      { x: 400, y: 160 }   
+      { x: 228, y: 20  },  // 0 root
+      { x: 120, y: 90  },  // 1 left
+      { x: 336, y: 90  },  // 2 right
+      { x: 50,  y: 160 },  // 3 left-left
+      { x: 180, y: 160 },  // 4 left-right
+      { x: 270, y: 160 },  // 5 right-left
+      { x: 400, y: 160 }   // 6 right-right
     ];
-    
-    treeCoords.forEach((c, idx) => {
-      const node = document.createElement('div');
-      node.className = 'tree-node';
-      node.style.left = `${c.x}px`;
-      node.style.top = `${c.y}px`;
-      
-      const valSpan = document.createElement('span');
-      valSpan.className = 'tree-node-val';
-      valSpan.textContent = visualizerState.rawArray[idx];
-      node.appendChild(valSpan);
-      
-      if (idx === step.scanning) node.classList.add('scanning');
-      else if (step.visited.includes(idx)) node.classList.add('visited');
-      
-      container.appendChild(node);
-    });
-    
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("class", "cycle-arrow-svg");
-    
+
     const treeLinks = [
       { from: 0, to: 1 }, { from: 0, to: 2 },
       { from: 1, to: 3 }, { from: 1, to: 4 },
       { from: 2, to: 5 }, { from: 2, to: 6 }
     ];
-    
+
+    const r = 22; // node radius offset (nodes are 44px wide)
+    const activeEdge = step.activeEdge || null; // [fromIdx, toIdx]
+
+    // SVG edges — drawn first so nodes sit on top
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "cycle-arrow-svg");
+
     treeLinks.forEach(l => {
       const from = treeCoords[l.from];
-      const to = treeCoords[l.to];
+      const to   = treeCoords[l.to];
       const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      
-      const r = 22; 
+
       line.setAttribute("x1", from.x + r);
       line.setAttribute("y1", from.y + r);
       line.setAttribute("x2", to.x + r);
       line.setAttribute("y2", to.y + r);
-      
-      if (step.visited.includes(l.to) || (step.scanning === l.to && step.visited.includes(l.from))) {
+
+      const isActive   = activeEdge && activeEdge[0] === l.from && activeEdge[1] === l.to;
+      const isVisited  = step.visited.includes(l.from) && step.visited.includes(l.to);
+
+      if (isActive) {
+        line.setAttribute("stroke", "var(--primary-glow)");
+        line.setAttribute("stroke-width", "3");
+        line.setAttribute("stroke-dasharray", "6 3");
+      } else if (isVisited) {
         line.setAttribute("stroke", "var(--easy)");
         line.setAttribute("stroke-width", "2.5");
       } else {
@@ -14535,67 +15130,179 @@ function renderCanvasStep() {
       }
       svg.appendChild(line);
     });
-    
     container.appendChild(svg);
+
+    // Node circles
+    treeCoords.forEach((c, idx) => {
+      if (treeArray[idx] === null || treeArray[idx] === undefined) return;
+
+      const node = document.createElement('div');
+      node.className = 'tree-node';
+      node.style.left = `${c.x}px`;
+      node.style.top  = `${c.y}px`;
+
+      const onStack   = (step.callStack || []).includes(idx);
+      const isVisited = step.visited.includes(idx);
+      const isScanning = idx === step.scanning;
+
+      if (isScanning)      node.classList.add('scanning');
+      else if (isVisited)  node.classList.add('visited');
+      else if (onStack)    node.classList.add('active'); // on call stack but not yet visited
+
+      const valSpan = document.createElement('span');
+      valSpan.className = 'tree-node-val';
+      valSpan.textContent = treeArray[idx];
+      node.appendChild(valSpan);
+      container.appendChild(node);
+    });
+
+    // Call stack pill
+    if (step.callStack && step.callStack.length > 0) {
+      const stackPill = document.createElement('div');
+      stackPill.style.cssText = `
+        position:absolute; bottom:4px; left:50%; transform:translateX(-50%);
+        background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+        border-radius:8px; padding:5px 14px; font-family:'Space Grotesk',sans-serif;
+        font-size:0.78rem; color:var(--text-muted); white-space:nowrap;
+      `;
+      const stackVals = step.callStack.map(i => treeArray[i]).join(' → ');
+      stackPill.innerHTML = `<span style="color:var(--primary-glow);font-weight:600;">Call Stack:</span> ${stackVals}`;
+      container.appendChild(stackPill);
+    }
+
+    // Inorder result pill
+    if (step.visited && step.visited.length > 0) {
+      const visitPill = document.createElement('div');
+      visitPill.style.cssText = `
+        position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+        background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+        border-radius:8px; padding:5px 14px; font-family:'Space Grotesk',sans-serif;
+        font-size:0.78rem; color:var(--text-muted); white-space:nowrap;
+      `;
+      const visitVals = step.visited.map(i => treeArray[i]).join(', ');
+      visitPill.innerHTML = `<span style="color:var(--easy);font-weight:600;">Inorder:</span> [${visitVals}]`;
+      container.appendChild(visitPill);
+    }
+
     canvas.appendChild(container);
   }
 
-  // --- J. GRAPH NETWORK ---
+  // --- J. GRAPH NETWORK (BFS) ---
   else if (visualizerState.algo === 'graph') {
     const container = document.createElement('div');
     container.className = 'tree-container';
-    
+    container.style.position = 'relative';
+    container.style.minHeight = '270px';
+
+    const nodeLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
+    // 6-node layout: 0=top-left, 1=top-right, 2=right, 3=bottom-right, 4=bottom-left, 5=center
     const graphCoords = [
-      { x: 100, y: 35 },   
-      { x: 300, y: 35 },   
-      { x: 340, y: 155 },  
-      { x: 200, y: 200 },  
-      { x: 60,  y: 155 }   
+      { x: 80,  y: 20  },  // 0 A
+      { x: 310, y: 20  },  // 1 B
+      { x: 390, y: 130 },  // 2 C
+      { x: 310, y: 210 },  // 3 D
+      { x: 80,  y: 210 },  // 4 E
+      { x: 195, y: 110 }   // 5 F (center)
     ];
-    
+
+    // All undirected edges of the graph (must match adjList in generateGraphSteps)
+    const allEdges = [
+      [0,1],[0,4],[0,5],
+      [1,2],
+      [2,3],[2,5],
+      [3,4]
+    ];
+
+    const treeEdges = step.treeEdges || [];   // BFS tree edges discovered so far
+    const bfsQueue  = step.queue  || [];
+    const visited   = step.visited || [];
+
+    const r = 22; // node radius offset
+
+    // Helper: is edge [a,b] a BFS tree edge (either direction)?
+    const isTreeEdge = (a, b) =>
+      treeEdges.some(([u, v]) => (u === a && v === b) || (u === b && v === a));
+
+    // Helper: is edge [a,b] the active frontier (one end scanning, one queued)?
+    const isFrontierEdge = (a, b) =>
+      (a === step.scanning && bfsQueue.includes(b)) ||
+      (b === step.scanning && bfsQueue.includes(a));
+
+    // SVG edges
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "cycle-arrow-svg");
+
+    allEdges.forEach(([a, b]) => {
+      const from = graphCoords[a];
+      const to   = graphCoords[b];
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+
+      line.setAttribute("x1", from.x + r);
+      line.setAttribute("y1", from.y + r);
+      line.setAttribute("x2", to.x + r);
+      line.setAttribute("y2", to.y + r);
+
+      if (isFrontierEdge(a, b)) {
+        line.setAttribute("stroke", "var(--primary-glow)");
+        line.setAttribute("stroke-width", "3");
+        line.setAttribute("stroke-dasharray", "6 3");
+      } else if (isTreeEdge(a, b)) {
+        line.setAttribute("stroke", "var(--easy)");
+        line.setAttribute("stroke-width", "2.5");
+      } else {
+        line.setAttribute("stroke", "rgba(255,255,255,0.15)");
+        line.setAttribute("stroke-width", "1.5");
+      }
+      svg.appendChild(line);
+    });
+    container.appendChild(svg);
+
+    // Node circles
     graphCoords.forEach((c, idx) => {
       const node = document.createElement('div');
       node.className = 'tree-node';
       node.style.left = `${c.x}px`;
-      node.style.top = `${c.y}px`;
-      node.innerHTML = `<span>G${idx}</span>`;
-      
-      if (idx === step.scanning) node.classList.add('scanning');
-      else if (step.visited.includes(idx)) node.classList.add('visited');
-      
+      node.style.top  = `${c.y}px`;
+
+      const isScanning = idx === step.scanning;
+      const isVisited  = visited.includes(idx);
+      const inQueue    = bfsQueue.includes(idx);
+
+      if (isScanning)     node.classList.add('scanning');
+      else if (isVisited) node.classList.add('visited');
+      else if (inQueue)   node.classList.add('active'); // queued but not yet processed
+
+      node.innerHTML = `<span class="tree-node-val">${nodeLabels[idx]}</span>`;
       container.appendChild(node);
     });
-    
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("class", "cycle-arrow-svg");
-    
-    const edges = [
-      { from: 0, to: 1 }, { from: 1, to: 2 }, { from: 2, to: 3 },
-      { from: 3, to: 4 }, { from: 4, to: 0 }, { from: 0, to: 4 }
-    ];
-    
-    edges.forEach(e => {
-      const from = graphCoords[e.from];
-      const to = graphCoords[e.to];
-      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      const r = 22;
-      
-      line.setAttribute("x1", from.x + r);
-      line.setAttribute("y1", from.y + r);
-      line.setAttribute("x2", to.x + r);
-      line.setAttribute("y2", to.y + r);
-      
-      if (step.visited.includes(e.to) && step.visited.includes(e.from)) {
-        line.setAttribute("stroke", "var(--easy)");
-        line.setAttribute("stroke-width", "2.5");
-      } else {
-        line.setAttribute("stroke", "rgba(255,255,255,0.15)");
-        line.setAttribute("stroke-width", "1.5");
-      }
-      svg.appendChild(line);
-    });
-    
-    container.appendChild(svg);
+
+    // BFS Queue pill
+    const queuePill = document.createElement('div');
+    queuePill.style.cssText = `
+      position:absolute; bottom:4px; left:50%; transform:translateX(-50%);
+      background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+      border-radius:8px; padding:5px 14px; font-family:'Space Grotesk',sans-serif;
+      font-size:0.78rem; color:var(--text-muted); white-space:nowrap;
+    `;
+    const queueStr = bfsQueue.length > 0
+      ? bfsQueue.map(i => nodeLabels[i]).join(' → ')
+      : 'empty';
+    queuePill.innerHTML = `<span style="color:var(--primary-glow);font-weight:600;">BFS Queue:</span> [${queueStr}]`;
+    container.appendChild(queuePill);
+
+    // Visited order pill
+    if (visited.length > 0) {
+      const visitedPill = document.createElement('div');
+      visitedPill.style.cssText = `
+        position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+        background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+        border-radius:8px; padding:5px 14px; font-family:'Space Grotesk',sans-serif;
+        font-size:0.78rem; color:var(--text-muted); white-space:nowrap;
+      `;
+      visitedPill.innerHTML = `<span style="color:var(--easy);font-weight:600;">Visited:</span> ${visited.map(i => nodeLabels[i]).join(' → ')}`;
+      container.appendChild(visitedPill);
+    }
+
     canvas.appendChild(container);
   }
 
@@ -14603,28 +15310,68 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'matrix') {
     const container = document.createElement('div');
     container.className = 'matrix-container';
-    
-    const gridEl = document.createElement('div');
-    gridEl.className = 'matrix-grid';
-    gridEl.style.gridTemplateColumns = 'repeat(3, 46px)';
-    
-    step.grid.forEach((row, rIdx) => {
-      row.forEach((val, cIdx) => {
-        const cell = document.createElement('div');
-        cell.className = 'matrix-cell';
-        cell.textContent = val;
-        
-        const isScanning = step.scanning && step.scanning.r === rIdx && step.scanning.c === cIdx;
-        
-        if (isScanning) cell.classList.add('scanning');
-        else if (rIdx === 0 || cIdx === 0) cell.classList.add('active-path');
-        else if (val > 1) cell.classList.add('solved');
-        
-        gridEl.appendChild(cell);
+
+    const cols = step.n || step.grid[0].length;
+    const isMinPath = step.mode === 'minpath';
+
+    // Title pill
+    const titleEl = document.createElement('div');
+    titleEl.style.cssText = `
+      font-size:0.75rem;font-family:monospace;font-weight:700;letter-spacing:0.06em;
+      color:var(--accent-cyan);text-transform:uppercase;margin-bottom:8px;text-align:center;
+    `;
+    titleEl.textContent = step.title || 'Grid DP';
+    container.appendChild(titleEl);
+
+    // Two-panel layout for minpath: source grid | dp grid
+    const panelWrap = document.createElement('div');
+    panelWrap.style.cssText = 'display:flex;gap:20px;justify-content:center;align-items:flex-start;flex-wrap:wrap;';
+
+    const makeGrid = (data, label, isSource) => {
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:6px;';
+
+      if (label) {
+        const lbl = document.createElement('div');
+        lbl.style.cssText = 'font-size:0.68rem;color:var(--text-muted);font-family:monospace;text-transform:uppercase;letter-spacing:0.05em;';
+        lbl.textContent = label;
+        wrap.appendChild(lbl);
+      }
+
+      const gridEl = document.createElement('div');
+      gridEl.className = 'matrix-grid';
+      gridEl.style.gridTemplateColumns = `repeat(${cols}, 44px)`;
+
+      data.forEach((row, rIdx) => {
+        row.forEach((val, cIdx) => {
+          const cell = document.createElement('div');
+          cell.className = 'matrix-cell';
+
+          const isScanning = step.scanning && step.scanning.r === rIdx && step.scanning.c === cIdx;
+          const isBase     = rIdx === 0 || cIdx === 0;
+          const isSolved   = !isSource && val !== 0 && val !== Infinity && !isScanning;
+
+          if (isScanning)    cell.classList.add('scanning');
+          else if (isBase)   cell.classList.add('active-path');
+          else if (isSolved) cell.classList.add('solved');
+
+          cell.textContent = (val === Infinity) ? '∞' : val;
+          gridEl.appendChild(cell);
+        });
       });
-    });
-    
-    container.appendChild(gridEl);
+
+      wrap.appendChild(gridEl);
+      return wrap;
+    };
+
+    if (isMinPath && step.srcGrid) {
+      panelWrap.appendChild(makeGrid(step.srcGrid, 'Input Grid', true));
+      panelWrap.appendChild(makeGrid(step.grid,    'dp[ ][ ]',   false));
+    } else {
+      panelWrap.appendChild(makeGrid(step.grid, null, false));
+    }
+
+    container.appendChild(panelWrap);
     canvas.appendChild(container);
   }
 
@@ -14668,40 +15415,105 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'hash') {
     const container = document.createElement('div');
     container.className = 'hash-container';
-    
-    const numBuckets = 5;
-    for (let b = 0; b < numBuckets; b++) {
+
+    // New generator emits: step.table (array of bucket chains), step.activeKey, step.activeBucket, step.phase
+    const table        = step.table;        // array[SIZE] of string[]
+    const activeKey    = step.activeKey;
+    const activeBucket = step.activeBucket;
+    const phase        = step.phase;        // 'init'|'hash'|'insert'|'collision'|'lookup'|'done'
+
+    // Phase pill header
+    const phaseColors = {
+      init: 'var(--text-muted)', hash: 'var(--accent-cyan)',
+      insert: 'var(--primary-glow)', collision: 'var(--medium)',
+      lookup: 'var(--accent-cyan)', done: 'var(--easy)'
+    };
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
+
+    const phasePill = document.createElement('span');
+    phasePill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
+      letter-spacing:0.08em;padding:2px 8px;border-radius:20px;
+      border:1px solid ${phaseColors[phase] || 'var(--text-muted)'};
+      color:${phaseColors[phase] || 'var(--text-muted)'};`;
+    phasePill.textContent = phase;
+    hdr.appendChild(phasePill);
+
+    if (activeKey) {
+      const keyEl = document.createElement('span');
+      keyEl.style.cssText = `font-size:0.8rem;font-family:monospace;color:${phaseColors[phase]};font-weight:600;`;
+      keyEl.textContent = `"${activeKey}"`;
+      hdr.appendChild(keyEl);
+    }
+    if (activeBucket >= 0) {
+      const bEl = document.createElement('span');
+      bEl.style.cssText = 'font-size:0.75rem;font-family:monospace;color:var(--text-muted);';
+      bEl.textContent = `→ bucket [${activeBucket}]`;
+      hdr.appendChild(bEl);
+    }
+    container.appendChild(hdr);
+
+    // Render each bucket as a row
+    (table || []).forEach((chain, b) => {
       const row = document.createElement('div');
       row.className = 'hash-row';
-      
-      const idx = document.createElement('div');
-      idx.className = 'hash-bucket-idx';
-      idx.textContent = `[${b}]`;
-      row.appendChild(idx);
-      
+
+      // Bucket index label
+      const idxEl = document.createElement('div');
+      idxEl.className = 'hash-bucket-idx';
+      idxEl.style.cssText = `min-width:36px;font-family:monospace;font-size:0.75rem;
+        color:${b === activeBucket ? phaseColors[phase] : 'var(--text-muted)'};
+        font-weight:${b === activeBucket ? '700' : '400'};`;
+      idxEl.textContent = `[${b}]`;
+      row.appendChild(idxEl);
+
+      // Bucket cell
       const cell = document.createElement('div');
       cell.className = 'hash-bucket-cell';
-      
-      Object.keys(step.map).forEach(key => {
-        const hashedBucket = key.length % numBuckets;
-        if (hashedBucket === b) {
+      if (b === activeBucket) {
+        cell.style.borderColor = phaseColors[phase] || 'var(--primary-glow)';
+        cell.style.background  = `rgba(99,102,241,0.06)`;
+      }
+
+      if (chain.length === 0) {
+        const empty = document.createElement('span');
+        empty.style.cssText = 'font-size:0.72rem;color:rgba(255,255,255,0.15);font-family:monospace;padding:2px 6px;';
+        empty.textContent = 'empty';
+        cell.appendChild(empty);
+      } else {
+        chain.forEach((key, ci) => {
+          if (ci > 0) {
+            const arrow = document.createElement('span');
+            arrow.style.cssText = 'font-size:0.7rem;color:var(--text-muted);margin:0 4px;font-family:monospace;';
+            arrow.textContent = '→';
+            cell.appendChild(arrow);
+          }
           const pair = document.createElement('div');
           pair.className = 'hash-pair';
-          pair.innerHTML = `<strong>${key}</strong>: ${step.map[key]}`;
-          
-          if (step.scanning && step.scanning.word === key) {
-            pair.classList.add('scanning');
-            cell.classList.add('active');
-          } else {
-            pair.classList.add('matched');
+          pair.style.cssText = `display:inline-flex;align-items:center;padding:3px 10px;border-radius:6px;
+            font-family:monospace;font-size:0.78rem;font-weight:600;
+            border:1px solid ${key === activeKey ? phaseColors[phase] : 'rgba(255,255,255,0.1)'};
+            background:${key === activeKey
+              ? (phase === 'collision' ? 'rgba(245,158,11,0.12)' : 'rgba(99,102,241,0.12)')
+              : 'rgba(255,255,255,0.03)'};
+            color:${key === activeKey ? phaseColors[phase] : 'var(--text-main)'};`;
+          pair.textContent = key;
+
+          // Collision badge
+          if (key === activeKey && phase === 'collision') {
+            const badge = document.createElement('span');
+            badge.style.cssText = 'font-size:0.6rem;margin-left:5px;color:var(--medium);font-weight:700;';
+            badge.textContent = '⚡collision';
+            pair.appendChild(badge);
           }
           cell.appendChild(pair);
-        }
-      });
-      
+        });
+      }
+
       row.appendChild(cell);
       container.appendChild(row);
-    }
+    });
+
     canvas.appendChild(container);
   }
 
@@ -14736,49 +15548,218 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'trie') {
     const container = document.createElement('div');
     container.className = 'trie-container';
+    container.style.position = 'relative';
+    container.style.minHeight = '320px';
 
-    const title = document.createElement('div');
-    title.className = 'trie-title';
-    title.innerHTML = `Inserting: <span style="color:var(--primary-glow); font-weight:700">"${step.currentWord || '—'}"</span> &nbsp;|&nbsp; Active char: <span style="color:var(--accent-cyan); font-weight:700">${step.insertingChar || '—'}</span>`;
-    container.appendChild(title);
+    // ── Header bar: phase badge + active word + active char ──
+    const phaseColor = { insert: 'var(--primary-glow)', search: 'var(--accent-cyan)', done: 'var(--easy)' };
+    const opColor = {
+      create: 'var(--primary-glow)', traverse: 'var(--accent-cyan)',
+      mark_end: 'var(--easy)', found: 'var(--easy)',
+      not_found: 'var(--hard)', prefix_ok: 'var(--medium)', start: 'var(--text-muted)'
+    };
+    const header = document.createElement('div');
+    header.style.cssText = 'display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;';
 
-    const trieVis = document.createElement('div');
-    trieVis.className = 'trie-vis-wrapper';
+    const phasePill = document.createElement('span');
+    phasePill.style.cssText = `font-size:0.7rem;font-family:monospace;font-weight:700;text-transform:uppercase;
+      letter-spacing:0.08em;padding:2px 8px;border-radius:20px;
+      border:1px solid ${phaseColor[step.phase] || 'var(--text-muted)'};
+      color:${phaseColor[step.phase] || 'var(--text-muted)'};`;
+    phasePill.textContent = step.phase;
+    header.appendChild(phasePill);
 
-    // Render trie as a level-by-level tree using flexbox rows
-    function renderTrieNode(nodeData, depth, inActivePath) {
-      const nodeWrap = document.createElement('div');
-      nodeWrap.className = 'trie-node-wrap';
+    if (step.activeWord) {
+      const wordEl = document.createElement('span');
+      wordEl.style.cssText = 'font-size:0.82rem;font-family:monospace;';
+      wordEl.innerHTML = `Word: <strong style="color:${phaseColor[step.phase]}">"${step.activeWord}"</strong>`;
+      header.appendChild(wordEl);
+    }
+    if (step.insertingChar && step.insertingChar !== '') {
+      const charEl = document.createElement('span');
+      charEl.style.cssText = `font-size:0.82rem;font-family:monospace;color:${opColor[step.operation] || 'var(--text-muted)'};font-weight:700;`;
+      charEl.textContent = `'${step.insertingChar}'`;
+      header.appendChild(charEl);
+    }
+    if (step.operation) {
+      const opEl = document.createElement('span');
+      opEl.style.cssText = `font-size:0.68rem;font-family:monospace;text-transform:uppercase;
+        color:${opColor[step.operation] || 'var(--text-muted)'};margin-left:auto;`;
+      opEl.textContent = step.operation.replace('_', ' ');
+      header.appendChild(opEl);
+    }
+    container.appendChild(header);
 
-      const nodeEl = document.createElement('div');
-      nodeEl.className = 'trie-node';
-      nodeEl.textContent = nodeData.char === 'ROOT' ? '⬤' : nodeData.char;
+    // ── Trie tree rendering with SVG edges ──
+    // First pass: assign x/y positions level by level via BFS
+    const nodePositions = {}; // id → {x, y}
+    const NODE_W = 40, NODE_H = 40, H_GAP = 12, V_GAP = 52;
 
-      const isInPath = step.currentPath.includes(nodeData.char) && depth <= step.currentPath.length && inActivePath;
-      const isTerminal = nodeData.isEnd;
-      const isActive = step.insertingChar === nodeData.char && isInPath;
-
-      if (isActive) nodeEl.classList.add('trie-active');
-      else if (isInPath) nodeEl.classList.add('trie-path');
-      if (isTerminal) nodeEl.classList.add('trie-terminal');
-
-      nodeWrap.appendChild(nodeEl);
-
-      const children = Object.values(nodeData.children);
-      if (children.length > 0) {
-        const childRow = document.createElement('div');
-        childRow.className = 'trie-children-row';
-        children.forEach((child, ci) => {
-          const childInPath = isInPath && step.currentPath[depth] === child.char;
-          childRow.appendChild(renderTrieNode(child, depth + 1, childInPath));
-        });
-        nodeWrap.appendChild(childRow);
+    function assignPositions(root) {
+      // BFS level-by-level, pack nodes tightly
+      const levels = [];
+      const queue = [{ node: root, level: 0 }];
+      const order = [];
+      while (queue.length) {
+        const { node, level } = queue.shift();
+        if (!levels[level]) levels[level] = [];
+        levels[level].push(node);
+        order.push({ node, level });
+        Object.values(node.children).forEach(c => queue.push({ node: c, level: level + 1 }));
       }
-      return nodeWrap;
+      // Assign x within each level
+      levels.forEach((levelNodes, lv) => {
+        const totalW = levelNodes.length * NODE_W + (levelNodes.length - 1) * H_GAP;
+        levelNodes.forEach((n, i) => {
+          nodePositions[n.id] = {
+            x: i * (NODE_W + H_GAP) + NODE_W / 2,
+            y: lv * V_GAP + NODE_H / 2,
+            levelWidth: totalW,
+            levelCount: levelNodes.length
+          };
+        });
+      });
+      // Centre each level relative to max width
+      const maxW = Math.max(...levels.map(l => l.length * NODE_W + (l.length - 1) * H_GAP));
+      levels.forEach((levelNodes, lv) => {
+        const levelW = levelNodes.length * NODE_W + (levelNodes.length - 1) * H_GAP;
+        const offset = (maxW - levelW) / 2;
+        levelNodes.forEach(n => { nodePositions[n.id].x += offset; });
+      });
+      return { maxW, maxH: levels.length * V_GAP };
     }
 
-    trieVis.appendChild(renderTrieNode(step.trie, 0, true));
-    container.appendChild(trieVis);
+    const { maxW, maxH } = assignPositions(step.trie);
+    const SVG_PAD = 30;
+    const svgW = maxW + SVG_PAD * 2;
+    const svgH = maxH + SVG_PAD * 2;
+
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.style.cssText = `width:100%;max-width:${svgW}px;height:${svgH}px;display:block;margin:0 auto;overflow:visible;`;
+
+    const activePath = new Set(step.activePath || []);
+
+    // Draw edges first
+    function drawEdges(node) {
+      Object.values(node.children).forEach(child => {
+        const from = nodePositions[node.id];
+        const to   = nodePositions[child.id];
+        if (!from || !to) return;
+
+        const isOnPath = activePath.has(node.id) && activePath.has(child.id);
+        const line = document.createElementNS(svgNS, 'line');
+        line.setAttribute('x1', from.x + SVG_PAD);
+        line.setAttribute('y1', from.y + SVG_PAD + NODE_H / 2 - 4);
+        line.setAttribute('x2', to.x + SVG_PAD);
+        line.setAttribute('y2', to.y + SVG_PAD - NODE_H / 2 + 4);
+
+        if (isOnPath) {
+          const edgeColor = step.phase === 'search'
+            ? (step.operation === 'not_found' ? 'var(--hard)' : 'var(--accent-cyan)')
+            : 'var(--primary-glow)';
+          line.setAttribute('stroke', edgeColor);
+          line.setAttribute('stroke-width', '2.5');
+        } else {
+          line.setAttribute('stroke', 'rgba(255,255,255,0.12)');
+          line.setAttribute('stroke-width', '1.5');
+        }
+        svg.appendChild(line);
+        drawEdges(child);
+      });
+    }
+    drawEdges(step.trie);
+
+    // Draw nodes
+    function drawNodes(node) {
+      const pos = nodePositions[node.id];
+      if (!pos) return;
+
+      const cx = pos.x + SVG_PAD;
+      const cy = pos.y + SVG_PAD;
+      const r  = 18;
+
+      const isOnPath    = activePath.has(node.id);
+      const isActive    = isOnPath && (step.activePath || []).indexOf(node.id) === (step.activePath || []).length - 1;
+      const isRoot      = node.id === 0;
+      const isEnd       = node.isEnd;
+      const isFound     = isActive && (step.operation === 'found' || step.operation === 'mark_end');
+      const isNotFound  = isActive && step.operation === 'not_found';
+      const isSearchPath = step.phase === 'search' && isOnPath;
+
+      // Circle
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('cx', cx);
+      circle.setAttribute('cy', cy);
+      circle.setAttribute('r', r);
+
+      let fill = 'rgba(30,41,59,0.9)';
+      let stroke = 'rgba(255,255,255,0.15)';
+      let strokeW = '1.5';
+
+      if (isFound)         { fill = 'rgba(16,185,129,0.25)';  stroke = 'var(--easy)';         strokeW = '2.5'; }
+      else if (isNotFound) { fill = 'rgba(244,63,94,0.2)';    stroke = 'var(--hard)';         strokeW = '2.5'; }
+      else if (isActive && step.phase === 'insert' && step.operation === 'create')
+                           { fill = 'rgba(99,102,241,0.25)';  stroke = 'var(--primary-glow)'; strokeW = '2.5'; }
+      else if (isActive)   { fill = 'rgba(6,182,212,0.2)';    stroke = 'var(--accent-cyan)';  strokeW = '2.5'; }
+      else if (isSearchPath){ fill = 'rgba(6,182,212,0.08)';  stroke = 'var(--accent-cyan)';  strokeW = '1.5'; }
+      else if (isOnPath)   { fill = 'rgba(99,102,241,0.12)';  stroke = 'var(--primary-glow)'; strokeW = '1.5'; }
+      else if (isRoot)     { fill = 'rgba(255,255,255,0.05)'; stroke = 'rgba(255,255,255,0.3)'; }
+
+      circle.setAttribute('fill', fill);
+      circle.setAttribute('stroke', stroke);
+      circle.setAttribute('stroke-width', strokeW);
+      svg.appendChild(circle);
+
+      // Double ring for word-end nodes
+      if (isEnd) {
+        const ring = document.createElementNS(svgNS, 'circle');
+        ring.setAttribute('cx', cx); ring.setAttribute('cy', cy); ring.setAttribute('r', r - 4);
+        ring.setAttribute('fill', 'none');
+        ring.setAttribute('stroke', isFound ? 'var(--easy)' : 'rgba(16,185,129,0.5)');
+        ring.setAttribute('stroke-width', '1');
+        ring.setAttribute('stroke-dasharray', '3 2');
+        svg.appendChild(ring);
+      }
+
+      // Label
+      const text = document.createElementNS(svgNS, 'text');
+      text.setAttribute('x', cx); text.setAttribute('y', cy + 5);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('font-family', 'monospace');
+      text.setAttribute('font-size', isRoot ? '10' : '14');
+      text.setAttribute('font-weight', isActive || isOnPath ? '700' : '400');
+      text.setAttribute('fill', isFound ? 'var(--easy)' : isNotFound ? 'var(--hard)' : isActive ? 'white' : 'rgba(255,255,255,0.75)');
+      text.textContent = isRoot ? 'ROOT' : node.char;
+      svg.appendChild(text);
+
+      Object.values(node.children).forEach(drawNodes);
+    }
+    drawNodes(step.trie);
+
+    container.appendChild(svg);
+
+    // ── Inserted words summary ──
+    if (step.insertedWords && step.insertedWords.length > 0) {
+      const wordsRow = document.createElement('div');
+      wordsRow.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;';
+      const label = document.createElement('span');
+      label.style.cssText = 'font-size:0.7rem;color:var(--text-muted);font-family:monospace;align-self:center;';
+      label.textContent = 'Inserted:';
+      wordsRow.appendChild(label);
+      step.insertedWords.forEach(w => {
+        const pill = document.createElement('span');
+        const isActive = w === step.activeWord;
+        pill.style.cssText = `font-size:0.72rem;font-family:monospace;padding:2px 8px;border-radius:12px;
+          border:1px solid ${isActive ? phaseColor[step.phase] : 'rgba(255,255,255,0.12)'};
+          color:${isActive ? phaseColor[step.phase] : 'var(--text-muted)'};
+          background:${isActive ? 'rgba(99,102,241,0.08)' : 'transparent'};`;
+        pill.textContent = `"${w}"`;
+        wordsRow.appendChild(pill);
+      });
+      container.appendChild(wordsRow);
+    }
+
     canvas.appendChild(container);
   }
 
@@ -15053,35 +16034,198 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'segmenttree') {
     const container = document.createElement('div');
     container.className = 'segmenttree-container';
+    container.style.position = 'relative';
 
+    // ── Phase / operation header ──
+    const phaseColor = { build: 'var(--primary-glow)', query: 'var(--accent-cyan)', update: 'var(--medium)' };
+    const opLabels = {
+      descend: 'Descending', leaf: 'Leaf', combine: 'Combine',
+      out_of_range: 'Out of Range', fully_covered: 'Fully Covered', partial: 'Partial Overlap',
+      update_leaf: 'Update Leaf', update_combine: 'Propagate Up'
+    };
+    const opColors = {
+      leaf: 'var(--easy)', combine: 'var(--primary-glow)',
+      fully_covered: 'var(--easy)', out_of_range: 'rgba(255,255,255,0.3)',
+      partial: 'var(--medium)', update_leaf: 'var(--medium)', update_combine: 'var(--medium)',
+      descend: 'var(--text-muted)'
+    };
+
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;';
+    const phasePill = document.createElement('span');
+    phasePill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
+      letter-spacing:0.08em;padding:2px 8px;border-radius:20px;
+      border:1px solid ${phaseColor[step.phase] || 'var(--text-muted)'};
+      color:${phaseColor[step.phase] || 'var(--text-muted)'};`;
+    phasePill.textContent = step.phase;
+    hdr.appendChild(phasePill);
+    if (step.operation) {
+      const opPill = document.createElement('span');
+      opPill.style.cssText = `font-size:0.68rem;font-family:monospace;color:${opColors[step.operation] || 'var(--text-muted)'};font-weight:600;`;
+      opPill.textContent = opLabels[step.operation] || step.operation;
+      hdr.appendChild(opPill);
+    }
+    if (step.queryRange) {
+      const qPill = document.createElement('span');
+      qPill.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--accent-cyan);margin-left:auto;';
+      qPill.textContent = `Query [${step.queryRange[0]}, ${step.queryRange[1]}]  →  sum = ${step.result}`;
+      hdr.appendChild(qPill);
+    }
+    container.appendChild(hdr);
+
+    // ── Input array ──
     const inputRow = document.createElement('div');
     inputRow.className = 'dp1d-row';
+    inputRow.style.marginBottom = '10px';
     step.nums.forEach((val, idx) => {
       const cell = document.createElement('div');
       cell.className = 'dp1d-cell';
-      if (step.queryRange && idx >= step.queryRange[0] && idx <= step.queryRange[1]) cell.classList.add('dp1d-active');
+      const inQuery = step.queryRange && idx >= step.queryRange[0] && idx <= step.queryRange[1];
+      if (inQuery) cell.classList.add('dp1d-active');
+      else cell.classList.add('dp1d-filled');
       cell.innerHTML = `<div class="dp1d-cell-val">${val}</div><div class="dp1d-cell-idx">[${idx}]</div>`;
       inputRow.appendChild(cell);
     });
     container.appendChild(inputRow);
 
-    const treeGrid = document.createElement('div');
-    treeGrid.className = 'segmenttree-grid';
-    for (let node = 1; node < Math.min(step.tree.length, 16); node++) {
-      if (step.tree[node] === null && !step.ranges[node]) continue;
-      const treeNode = document.createElement('div');
-      treeNode.className = 'segmenttree-node';
-      if (node === step.activeNode) treeNode.classList.add('active');
-      if (step.covered.includes(node)) treeNode.classList.add('covered');
-      const range = step.ranges[node] ? `[${step.ranges[node][0]}, ${step.ranges[node][1]}]` : '';
-      treeNode.innerHTML = `<strong>${step.tree[node] ?? '?'}</strong><span>${range}</span><em>#${node}</em>`;
-      treeGrid.appendChild(treeNode);
+    // ── SVG tree ──
+    // Collect visible nodes (nodes with a known range, up to 4 levels deep = nodes 1..15)
+    const maxNode = Math.min(step.tree.length - 1, 31); // up to level 4
+    const visibleNodes = [];
+    for (let nd = 1; nd <= maxNode; nd++) {
+      if (step.ranges[nd]) visibleNodes.push(nd);
     }
-    container.appendChild(treeGrid);
 
+    // Compute tree layout by level
+    // node i: level = floor(log2(i)), position within level = i - 2^level
+    const NODE_R  = 22;
+    const H_SPACE = 56;
+    const V_SPACE = 68;
+
+    // Find max level
+    const maxLevel = visibleNodes.length ? Math.floor(Math.log2(Math.max(...visibleNodes))) : 0;
+    const svgW = (Math.pow(2, maxLevel)) * H_SPACE + 40;
+    const svgH = (maxLevel + 1) * V_SPACE + 20;
+
+    const getPos = (nd) => {
+      const level = Math.floor(Math.log2(nd));
+      const posInLevel = nd - Math.pow(2, level);
+      const nodesInLevel = Math.pow(2, level);
+      const cellW = svgW / nodesInLevel;
+      return {
+        x: posInLevel * cellW + cellW / 2,
+        y: level * V_SPACE + NODE_R + 10
+      };
+    };
+
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.style.cssText = `width:100%;max-width:${svgW}px;height:${svgH}px;display:block;margin:0 auto;overflow:visible;`;
+
+    const activeNode  = step.activeNode;
+    const covered     = new Set(step.covered || []);
+    const phase       = step.phase;
+
+    // Draw edges
+    visibleNodes.forEach(nd => {
+      const left  = nd * 2;
+      const right = nd * 2 + 1;
+      [left, right].forEach(child => {
+        if (!step.ranges[child]) return;
+        const from = getPos(nd);
+        const to   = getPos(child);
+        const line = document.createElementNS(svgNS, 'line');
+        line.setAttribute('x1', from.x); line.setAttribute('y1', from.y + NODE_R - 2);
+        line.setAttribute('x2', to.x);   line.setAttribute('y2', to.y - NODE_R + 2);
+
+        const bothCovered = covered.has(nd) && covered.has(child);
+        const onActivePath = (nd === activeNode || child === activeNode);
+        if (bothCovered && phase === 'query') {
+          line.setAttribute('stroke', 'var(--easy)'); line.setAttribute('stroke-width', '2');
+        } else if (onActivePath) {
+          line.setAttribute('stroke', phaseColor[phase] || 'rgba(255,255,255,0.3)');
+          line.setAttribute('stroke-width', '2');
+        } else {
+          line.setAttribute('stroke', 'rgba(255,255,255,0.1)'); line.setAttribute('stroke-width', '1.5');
+        }
+        svg.appendChild(line);
+      });
+    });
+
+    // Draw nodes
+    visibleNodes.forEach(nd => {
+      const pos      = getPos(nd);
+      const range    = step.ranges[nd];
+      const val      = step.tree[nd];
+      const isActive = nd === activeNode;
+      const isCovered = covered.has(nd);
+      const isLeaf   = range && range[0] === range[1];
+
+      let fill = 'rgba(30,41,59,0.9)', stroke = 'rgba(255,255,255,0.1)', strokeW = '1.5', textCol = 'rgba(255,255,255,0.6)';
+
+      if (isActive && phase === 'build' && step.operation === 'leaf')
+        { fill = 'rgba(99,102,241,0.3)'; stroke = 'var(--primary-glow)'; strokeW = '2.5'; textCol = 'white'; }
+      else if (isActive && phase === 'build')
+        { fill = 'rgba(99,102,241,0.15)'; stroke = 'var(--primary-glow)'; strokeW = '2'; textCol = 'white'; }
+      else if (isActive && phase === 'query' && step.operation === 'fully_covered')
+        { fill = 'rgba(16,185,129,0.25)'; stroke = 'var(--easy)'; strokeW = '2.5'; textCol = 'var(--easy)'; }
+      else if (isActive && phase === 'query' && step.operation === 'out_of_range')
+        { fill = 'rgba(255,255,255,0.03)'; stroke = 'rgba(255,255,255,0.15)'; strokeW = '1'; textCol = 'rgba(255,255,255,0.2)'; }
+      else if (isActive && phase === 'query' && step.operation === 'partial')
+        { fill = 'rgba(245,158,11,0.15)'; stroke = 'var(--medium)'; strokeW = '2'; textCol = 'var(--medium)'; }
+      else if (isActive && phase === 'query')
+        { fill = 'rgba(6,182,212,0.15)'; stroke = 'var(--accent-cyan)'; strokeW = '2'; textCol = 'white'; }
+      else if (isActive && phase === 'update' && step.operation === 'update_leaf')
+        { fill = 'rgba(245,158,11,0.25)'; stroke = 'var(--medium)'; strokeW = '2.5'; textCol = 'var(--medium)'; }
+      else if (isActive && phase === 'update')
+        { fill = 'rgba(245,158,11,0.12)'; stroke = 'var(--medium)'; strokeW = '2'; textCol = 'white'; }
+      else if (isCovered && phase === 'query')
+        { fill = 'rgba(16,185,129,0.12)'; stroke = 'var(--easy)'; strokeW = '1.5'; textCol = 'var(--easy)'; }
+      else if (isLeaf)
+        { fill = 'rgba(255,255,255,0.04)'; stroke = 'rgba(255,255,255,0.2)'; }
+
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('cx', pos.x); circle.setAttribute('cy', pos.y);
+      circle.setAttribute('r', NODE_R);
+      circle.setAttribute('fill', fill); circle.setAttribute('stroke', stroke);
+      circle.setAttribute('stroke-width', strokeW);
+      svg.appendChild(circle);
+
+      // Value
+      const valText = document.createElementNS(svgNS, 'text');
+      valText.setAttribute('x', pos.x); valText.setAttribute('y', pos.y + 4);
+      valText.setAttribute('text-anchor', 'middle');
+      valText.setAttribute('font-family', 'monospace'); valText.setAttribute('font-size', '13');
+      valText.setAttribute('font-weight', isActive || isCovered ? '700' : '400');
+      valText.setAttribute('fill', textCol);
+      valText.textContent = val ?? '?';
+      svg.appendChild(valText);
+
+      // Range label below node
+      if (range) {
+        const rangeText = document.createElementNS(svgNS, 'text');
+        rangeText.setAttribute('x', pos.x); rangeText.setAttribute('y', pos.y + NODE_R + 13);
+        rangeText.setAttribute('text-anchor', 'middle');
+        rangeText.setAttribute('font-family', 'monospace'); rangeText.setAttribute('font-size', '9');
+        rangeText.setAttribute('fill', isActive ? textCol : 'rgba(255,255,255,0.3)');
+        rangeText.textContent = `[${range[0]},${range[1]}]`;
+        svg.appendChild(rangeText);
+      }
+    });
+
+    container.appendChild(svg);
+
+    // ── Status bar ──
     const status = document.createElement('div');
     status.className = 'concept-status';
-    status.innerHTML = step.queryRange ? `Query [${step.queryRange[0]}, ${step.queryRange[1]}] | Sum <strong>${step.result}</strong>` : 'Building segment tree';
+    status.style.marginTop = '6px';
+    if (phase === 'query') {
+      status.innerHTML = `Covered nodes: <strong>${[...covered].join(', ') || '—'}</strong> &nbsp;|&nbsp; Running sum: <strong style="color:var(--easy)">${step.result}</strong>`;
+    } else if (phase === 'update') {
+      status.innerHTML = `Updating index affected nodes: <strong>${[...covered].join(' → ') || '—'}</strong> &nbsp;|&nbsp; Root sum: <strong>${step.tree[1]}</strong>`;
+    } else {
+      status.innerHTML = `Building. Root sum so far: <strong>${step.tree[1] || '—'}</strong>`;
+    }
     container.appendChild(status);
     canvas.appendChild(container);
   }
@@ -15342,53 +16486,169 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'dijkstra' || visualizerState.algo === 'bellmanford') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    const graph = document.createElement('div');
-    graph.className = 'weighted-graph';
-    const coords = [
-      { x: 40, y: 115 }, { x: 170, y: 40 }, { x: 170, y: 190 }, { x: 315, y: 115 }, { x: 450, y: 115 }
-    ];
 
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("class", "weighted-graph-svg");
-    step.edges.forEach(([u, v, w]) => {
+    const isDijk = visualizerState.algo === 'dijkstra';
+    const { edges, nodeLabels, dist, visited, activeNode, activeEdge, relaxedEdge,
+            settledEdges, pass, relaxed, negCycle } = step;
+    const labels = nodeLabels || ['A','B','C','D','E'];
+    const N = labels.length;
+    const settled  = settledEdges instanceof Set ? settledEdges : new Set(settledEdges||[]);
+    const visitedSet = new Set(visited||[]);
+
+    // ── Header badge ──
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
+
+    if (isDijk) {
+      const pq = step.pq || [];
+      const pqPill = document.createElement('span');
+      pqPill.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--accent-cyan);';
+      pqPill.textContent = `Heap: ${pq.map(([d,n])=>`${labels[n]}:${d}`).join(', ')||'empty'}`;
+      hdr.appendChild(pqPill);
+    } else {
+      const passPill = document.createElement('span');
+      passPill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
+        border:1px solid ${negCycle?'var(--hard)':'var(--primary-glow)'};
+        color:${negCycle?'var(--hard)':'var(--primary-glow)'};`;
+      passPill.textContent = negCycle ? '⚠ Negative Cycle!' : `Pass ${pass}`;
+      hdr.appendChild(passPill);
+      if (relaxed) {
+        const rPill = document.createElement('span');
+        rPill.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--easy);font-weight:700;';
+        rPill.textContent = '✓ Relaxed';
+        hdr.appendChild(rPill);
+      }
+    }
+    container.appendChild(hdr);
+
+    // ── Layout: graph on top, distance table below ──
+    const layout = document.createElement('div');
+    layout.style.cssText = 'display:flex;flex-direction:column;gap:12px;';
+
+    // ── Graph panel ──
+    const graphWrap = document.createElement('div');
+    graphWrap.style.cssText = 'width:100%;';
+
+    const R = 26; // node radius
+    const coords = [
+      {x:50,  y:130},   // A — left centre
+      {x:210, y:30 },   // B — top middle
+      {x:210, y:235},   // C — bottom middle
+      {x:380, y:130},   // D — right centre
+      {x:540, y:130}    // E — far right
+    ];
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS,'svg');
+    svg.setAttribute('viewBox','0 0 630 310');
+    svg.style.cssText = 'width:100%;display:block;overflow:visible;';
+
+    // Arrow marker
+    const defs = document.createElementNS(svgNS,'defs');
+    defs.innerHTML = `<marker id="gArr" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="rgba(255,255,255,0.25)"/>
+    </marker>`;
+    svg.appendChild(defs);
+
+    edges.forEach(([u,v,w]) => {
       const from = coords[u], to = coords[v];
-      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      line.setAttribute("x1", from.x + 24);
-      line.setAttribute("y1", from.y + 24);
-      line.setAttribute("x2", to.x + 24);
-      line.setAttribute("y2", to.y + 24);
-      const activeEdge = (step.active && step.active.edge && step.active.edge[0] === u && step.active.edge[1] === v) || (step.activeEdge && step.activeEdge[0] === u && step.activeEdge[1] === v);
-      line.setAttribute("class", activeEdge ? "weighted-edge active" : "weighted-edge");
+      if (!from || !to) return;
+
+      const isActive  = activeEdge && activeEdge[0]===u && activeEdge[1]===v;
+      const isRelaxed = (isDijk ? (relaxedEdge && relaxedEdge[0]===u && relaxedEdge[1]===v)
+                                : (relaxed && activeEdge && activeEdge[0]===u && activeEdge[1]===v));
+      const isSettled = settled.has(`${u}-${v}`);
+
+      let stroke = 'rgba(255,255,255,0.12)', sw = '1.5';
+      if (isRelaxed)     { stroke = 'var(--easy)';        sw = '2.5'; }
+      else if (isActive) { stroke = 'var(--accent-cyan)'; sw = '2'; }
+      else if (isSettled){ stroke = 'rgba(16,185,129,0.5)'; sw = '2'; }
+
+      // Edge line
+      const line = document.createElementNS(svgNS,'line');
+      line.setAttribute('x1',from.x+R); line.setAttribute('y1',from.y+R);
+      line.setAttribute('x2',to.x+R);   line.setAttribute('y2',to.y+R);
+      line.setAttribute('stroke',stroke); line.setAttribute('stroke-width',sw);
+      line.setAttribute('marker-end','url(#gArr)');
       svg.appendChild(line);
 
-      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-      label.setAttribute("x", (from.x + to.x) / 2 + 24);
-      label.setAttribute("y", (from.y + to.y) / 2 + 18);
-      label.setAttribute("class", "weighted-edge-label");
-      label.textContent = w;
-      svg.appendChild(label);
-    });
-    graph.appendChild(svg);
-
-    coords.forEach((coord, idx) => {
-      const node = document.createElement('div');
-      node.className = 'weighted-node';
-      node.style.left = `${coord.x}px`;
-      node.style.top = `${coord.y}px`;
-      const isVisited = step.visited && step.visited.includes(idx);
-      const isActive = (step.active && step.active.node === idx);
-      if (isVisited) node.classList.add('visited');
-      if (isActive) node.classList.add('active');
-      const dist = step.dist[idx] === Infinity ? '∞' : step.dist[idx];
-      node.innerHTML = `<strong>${String.fromCharCode(65 + idx)}</strong><span>${dist}</span>`;
-      graph.appendChild(node);
+      // Weight label
+      const wLabel = document.createElementNS(svgNS,'text');
+      wLabel.setAttribute('x',(from.x+to.x)/2+R); wLabel.setAttribute('y',(from.y+to.y)/2+R-6);
+      wLabel.setAttribute('text-anchor','middle');
+      wLabel.setAttribute('font-family','monospace'); wLabel.setAttribute('font-size','13');
+      wLabel.setAttribute('fill', isRelaxed?'var(--easy)': isActive?'var(--accent-cyan)':'rgba(255,255,255,0.4)');
+      wLabel.setAttribute('font-weight', isActive||isRelaxed?'700':'400');
+      wLabel.textContent = w;
+      svg.appendChild(wLabel);
     });
 
-    const status = document.createElement('div');
-    status.className = 'concept-status';
-    status.innerHTML = visualizerState.algo === 'bellmanford' ? `Pass <strong>${step.pass}</strong>` : `PQ <strong>${(step.pq || []).map(([d, n]) => `${String.fromCharCode(65 + n)}:${d}`).join(', ') || 'empty'}</strong>`;
-    container.appendChild(graph);
-    container.appendChild(status);
+    // Nodes
+    coords.slice(0,N).forEach((c,idx) => {
+      const isSettledNode = visitedSet.has(idx);
+      const isActive      = idx === activeNode;
+      const isRelaxedNode = !isDijk && relaxed && activeEdge && activeEdge[1]===idx;
+
+      const circle = document.createElementNS(svgNS,'circle');
+      circle.setAttribute('cx',c.x+R); circle.setAttribute('cy',c.y+R); circle.setAttribute('r',R);
+      circle.setAttribute('fill',
+        isActive      ? 'rgba(6,182,212,0.25)'
+        : isRelaxedNode ? 'rgba(16,185,129,0.2)'
+        : isSettledNode ? 'rgba(16,185,129,0.12)'
+        : 'rgba(30,41,59,0.9)');
+      circle.setAttribute('stroke',
+        isActive      ? 'var(--accent-cyan)'
+        : isRelaxedNode ? 'var(--easy)'
+        : isSettledNode ? 'rgba(16,185,129,0.5)'
+        : 'rgba(255,255,255,0.15)');
+      circle.setAttribute('stroke-width', isActive||isRelaxedNode ? '2.5' : '1.5');
+      svg.appendChild(circle);
+
+      const txt = document.createElementNS(svgNS,'text');
+      txt.setAttribute('x',c.x+R); txt.setAttribute('y',c.y+R+6);
+      txt.setAttribute('text-anchor','middle');
+      txt.setAttribute('font-family','monospace'); txt.setAttribute('font-size','16');
+      txt.setAttribute('font-weight','700');
+      txt.setAttribute('fill', isActive?'var(--accent-cyan)':isSettledNode?'var(--easy)':'white');
+      txt.textContent = labels[idx];
+      svg.appendChild(txt);
+    });
+
+    graphWrap.appendChild(svg);
+    layout.appendChild(graphWrap);
+
+    // ── Distance table — horizontal row below graph ──
+    const tableWrap = document.createElement('div');
+    tableWrap.style.cssText = 'display:flex;flex-direction:column;gap:6px;';
+
+    const tTitle = document.createElement('div');
+    tTitle.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);text-transform:uppercase;font-weight:700;letter-spacing:0.06em;';
+    tTitle.textContent = 'Shortest Distances';
+    tableWrap.appendChild(tTitle);
+
+    const distRow = document.createElement('div');
+    distRow.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;';
+
+    labels.slice(0,N).forEach((lbl,idx) => {
+      const d      = dist[idx];
+      const isSett = visitedSet.has(idx);
+      const isAct  = idx === activeNode;
+      const card   = document.createElement('div');
+      card.style.cssText = `display:flex;flex-direction:column;align-items:center;padding:6px 14px;
+        border-radius:8px;font-family:monospace;min-width:52px;
+        border:1px solid ${isAct?'var(--accent-cyan)':isSett?'rgba(16,185,129,0.4)':'rgba(255,255,255,0.08)'};
+        background:${isAct?'rgba(6,182,212,0.1)':isSett?'rgba(16,185,129,0.07)':'rgba(255,255,255,0.02)'};`;
+      card.innerHTML = `
+        <span style="font-size:0.65rem;font-weight:700;color:${isAct?'var(--accent-cyan)':isSett?'var(--easy)':'rgba(255,255,255,0.45)'};">${lbl}</span>
+        <span style="font-size:0.9rem;font-weight:700;margin-top:2px;
+          color:${d===Infinity?'rgba(255,255,255,0.18)':isAct?'var(--accent-cyan)':isSett?'var(--easy)':'white'};">
+          ${d===Infinity?'∞':d}
+        </span>
+        ${isSett?'<span style="font-size:0.55rem;color:var(--easy);margin-top:1px;">settled</span>':''}`;
+      distRow.appendChild(card);
+    });
+    tableWrap.appendChild(distRow);
+    layout.appendChild(tableWrap);
+    container.appendChild(layout);
     canvas.appendChild(container);
   }
 
@@ -15396,21 +16656,148 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'toposort') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    const row = document.createElement('div');
-    row.className = 'topo-row';
-    step.indegree.forEach((deg, idx) => {
-      const cell = document.createElement('div');
-      cell.className = 'topo-node';
-      if (idx === step.active) cell.classList.add('active');
-      if (step.order.includes(idx)) cell.classList.add('done');
-      cell.innerHTML = `<strong>${idx}</strong><span>in=${deg}</span>`;
-      row.appendChild(cell);
+
+    const { edges, nodeLabels, indegree, queue, order, active, removedEdges, n } = step;
+    const labels = nodeLabels || Array.from({length: n||6}, (_,i) => String.fromCharCode(65+i));
+    const removed = removedEdges instanceof Set ? removedEdges : new Set(removedEdges||[]);
+
+    // ── SVG DAG ──
+    const nodeCoords = [
+      {x:60, y:90}, {x:60, y:210}, {x:200,y:150}, {x:200,y:270},
+      {x:340,y:210}, {x:480,y:210}
+    ];
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS,'svg');
+    svg.style.cssText = 'width:100%;max-width:560px;height:300px;display:block;margin:0 auto;overflow:visible;';
+
+    // Arrow marker
+    const defs = document.createElementNS(svgNS,'defs');
+    defs.innerHTML = `
+      <marker id="tArrow" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="rgba(255,255,255,0.3)"/>
+      </marker>
+      <marker id="tArrowDim" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="rgba(255,255,255,0.08)"/>
+      </marker>`;
+    svg.appendChild(defs);
+
+    // Edges
+    edges.forEach(([u,v]) => {
+      const from = nodeCoords[u], to = nodeCoords[v];
+      if (!from || !to) return;
+      const isRemoved = removed.has(`${u}-${v}`);
+      const line = document.createElementNS(svgNS,'line');
+      line.setAttribute('x1', from.x+22); line.setAttribute('y1', from.y+22);
+      line.setAttribute('x2', to.x+22);   line.setAttribute('y2', to.y+22);
+      line.setAttribute('stroke', isRemoved ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.25)');
+      line.setAttribute('stroke-width', isRemoved ? '1' : '2');
+      line.setAttribute('stroke-dasharray', isRemoved ? '3 4' : '0');
+      line.setAttribute('marker-end', isRemoved ? 'url(#tArrowDim)' : 'url(#tArrow)');
+      svg.appendChild(line);
     });
-    const lanes = document.createElement('div');
-    lanes.className = 'topo-lanes';
-    lanes.innerHTML = `<div><span>Queue</span><strong>${step.queue.join(' -> ') || 'empty'}</strong></div><div><span>Order</span><strong>${step.order.join(' -> ') || '...'}</strong></div>`;
-    container.appendChild(row);
-    container.appendChild(lanes);
+
+    // Nodes
+    nodeCoords.slice(0, labels.length).forEach((c, idx) => {
+      const isActive  = idx === active;
+      const inOrder   = order.includes(idx);
+      const inQueue   = queue.includes(idx) && !inOrder;
+      const deg       = indegree[idx];
+
+      // Circle
+      const circle = document.createElementNS(svgNS,'circle');
+      circle.setAttribute('cx', c.x+22); circle.setAttribute('cy', c.y+22);
+      circle.setAttribute('r', 22);
+      circle.setAttribute('fill',
+        isActive ? 'rgba(6,182,212,0.25)'
+        : inOrder ? 'rgba(16,185,129,0.2)'
+        : inQueue ? 'rgba(245,158,11,0.15)'
+        : 'rgba(30,41,59,0.9)');
+      circle.setAttribute('stroke',
+        isActive ? 'var(--accent-cyan)'
+        : inOrder ? 'var(--easy)'
+        : inQueue ? 'var(--medium)'
+        : 'rgba(255,255,255,0.15)');
+      circle.setAttribute('stroke-width', isActive || inOrder ? '2.5' : '1.5');
+      svg.appendChild(circle);
+
+      // Label
+      const txt = document.createElementNS(svgNS,'text');
+      txt.setAttribute('x', c.x+22); txt.setAttribute('y', c.y+22+5);
+      txt.setAttribute('text-anchor','middle');
+      txt.setAttribute('font-family','monospace'); txt.setAttribute('font-size','14');
+      txt.setAttribute('font-weight','700');
+      txt.setAttribute('fill', isActive ? 'var(--accent-cyan)' : inOrder ? 'var(--easy)' : 'white');
+      txt.textContent = labels[idx];
+      svg.appendChild(txt);
+
+      // In-degree badge (top-right of node)
+      const bx = c.x+36, by = c.y+4;
+      const badgeCirc = document.createElementNS(svgNS,'circle');
+      badgeCirc.setAttribute('cx',bx); badgeCirc.setAttribute('cy',by);
+      badgeCirc.setAttribute('r',11);
+      badgeCirc.setAttribute('fill', deg===0 ? 'rgba(16,185,129,0.3)' : 'rgba(30,41,59,0.95)');
+      badgeCirc.setAttribute('stroke', deg===0 ? 'var(--easy)' : 'rgba(255,255,255,0.2)');
+      badgeCirc.setAttribute('stroke-width','1.5');
+      svg.appendChild(badgeCirc);
+
+      const badgeTxt = document.createElementNS(svgNS,'text');
+      badgeTxt.setAttribute('x',bx); badgeTxt.setAttribute('y',by+4);
+      badgeTxt.setAttribute('text-anchor','middle');
+      badgeTxt.setAttribute('font-family','monospace'); badgeTxt.setAttribute('font-size','10');
+      badgeTxt.setAttribute('font-weight','700');
+      badgeTxt.setAttribute('fill', deg===0 ? 'var(--easy)' : 'rgba(255,255,255,0.6)');
+      badgeTxt.textContent = deg;
+      svg.appendChild(badgeTxt);
+    });
+    container.appendChild(svg);
+
+    // ── Queue pills ──
+    const qRow = document.createElement('div');
+    qRow.style.cssText = 'display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px;';
+    const qLabel = document.createElement('span');
+    qLabel.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--text-muted);';
+    qLabel.textContent = 'Queue:';
+    qRow.appendChild(qLabel);
+    if (queue.length === 0) {
+      const empty = document.createElement('span');
+      empty.style.cssText = 'font-size:0.7rem;font-family:monospace;color:rgba(255,255,255,0.2);font-style:italic;';
+      empty.textContent = 'empty';
+      qRow.appendChild(empty);
+    } else {
+      queue.forEach(idx => {
+        const pill = document.createElement('span');
+        pill.style.cssText = `font-size:0.72rem;font-family:monospace;padding:2px 10px;border-radius:12px;
+          border:1px solid var(--medium);color:var(--medium);background:rgba(245,158,11,0.08);font-weight:700;`;
+        pill.textContent = labels[idx];
+        qRow.appendChild(pill);
+      });
+    }
+    container.appendChild(qRow);
+
+    // ── Order trail ──
+    if (order.length > 0) {
+      const oRow = document.createElement('div');
+      oRow.style.cssText = 'display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px;';
+      const oLabel = document.createElement('span');
+      oLabel.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--text-muted);';
+      oLabel.textContent = 'Order:';
+      oRow.appendChild(oLabel);
+      order.forEach((idx, i) => {
+        const pill = document.createElement('span');
+        pill.style.cssText = `font-size:0.72rem;font-family:monospace;padding:2px 10px;border-radius:12px;
+          border:1px solid var(--easy);color:var(--easy);background:rgba(16,185,129,0.08);font-weight:700;`;
+        pill.textContent = labels[idx];
+        oRow.appendChild(pill);
+        if (i < order.length-1) {
+          const arr = document.createElement('span');
+          arr.style.cssText = 'color:var(--text-muted);font-size:0.7rem;';
+          arr.textContent = '→';
+          oRow.appendChild(arr);
+        }
+      });
+      container.appendChild(oRow);
+    }
+
     canvas.appendChild(container);
   }
 
@@ -15418,22 +16805,119 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'knapsack') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    const title = document.createElement('div');
-    title.className = 'concept-status';
-    title.innerHTML = `Capacity <strong>${step.capacity}</strong> | Action <strong>${step.action || 'init'}</strong>`;
-    container.appendChild(title);
+
+    const { weights, values, capacity, activeCell, action, takeVal, skipVal, selectedItems } = step;
+    const n = weights.length;
+
+    // ── Action badge ──
+    const actionColors = { take:'var(--easy)', skip:'var(--text-muted)', backtrack:'var(--accent-cyan)', init:'var(--text-muted)', done:'var(--easy)' };
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
+
+    const badge = document.createElement('span');
+    badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
+      letter-spacing:0.08em;padding:2px 10px;border-radius:20px;
+      border:1px solid ${actionColors[action]||'var(--text-muted)'};
+      color:${actionColors[action]||'var(--text-muted)'};`;
+    badge.textContent = action;
+    hdr.appendChild(badge);
+
+    if (activeCell && action !== 'backtrack') {
+      const detail = document.createElement('span');
+      detail.style.cssText = 'font-size:0.75rem;font-family:monospace;color:var(--text-muted);';
+      const canTake = takeVal !== null;
+      detail.innerHTML = canTake
+        ? `take(${takeVal}) vs skip(${skipVal}) → <strong style="color:${actionColors[action]}">${action==='take'?takeVal:skipVal}</strong>`
+        : `item too heavy → skip(${skipVal})`;
+      hdr.appendChild(detail);
+    }
+    container.appendChild(hdr);
+
+    const layout = document.createElement('div');
+    layout.style.cssText = 'display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;';
+
+    // ── Left: item table ──
+    const itemTable = document.createElement('div');
+    itemTable.style.cssText = 'display:flex;flex-direction:column;gap:4px;min-width:120px;';
+
+    const tableHdr = document.createElement('div');
+    tableHdr.style.cssText = 'display:grid;grid-template-columns:28px 40px 40px 40px;gap:2px;font-size:0.65rem;color:var(--text-muted);font-family:monospace;font-weight:700;text-transform:uppercase;';
+    tableHdr.innerHTML = '<span>#</span><span>w</span><span>v</span><span>sel?</span>';
+    itemTable.appendChild(tableHdr);
+
+    for (let i = 0; i < n; i++) {
+      const isActiveItem = activeCell && activeCell.r === i + 1;
+      const isSelected   = selectedItems.includes(i);
+      const row = document.createElement('div');
+      row.style.cssText = `display:grid;grid-template-columns:28px 40px 40px 40px;gap:2px;
+        padding:3px 0;border-radius:4px;font-size:0.75rem;font-family:monospace;
+        background:${isActiveItem ? 'rgba(99,102,241,0.1)' : 'transparent'};
+        color:${isSelected ? 'var(--easy)' : isActiveItem ? 'var(--primary-glow)' : 'var(--text-main)'};
+        font-weight:${isActiveItem || isSelected ? '700' : '400'};`;
+      row.innerHTML = `<span>${i+1}</span><span>${weights[i]}</span><span>${values[i]}</span><span>${isSelected ? '✓' : '·'}</span>`;
+      itemTable.appendChild(row);
+    }
+
+    if (selectedItems.length > 0) {
+      const selSummary = document.createElement('div');
+      selSummary.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--easy);margin-top:4px;';
+      const totalVal = selectedItems.reduce((s, i) => s + values[i], 0);
+      const totalW   = selectedItems.reduce((s, i) => s + weights[i], 0);
+      selSummary.textContent = `val=${totalVal}, w=${totalW}`;
+      itemTable.appendChild(selSummary);
+    }
+    layout.appendChild(itemTable);
+
+    // ── Right: DP table ──
+    const tableWrap = document.createElement('div');
+    tableWrap.style.cssText = 'overflow-x:auto;flex:1;';
+
+    const CELL = 36;
     const grid = document.createElement('div');
-    grid.className = 'compact-matrix';
-    grid.style.gridTemplateColumns = `repeat(${step.capacity + 1}, 42px)`;
-    step.dp.forEach((row, r) => row.forEach((val, c) => {
-      const cell = document.createElement('div');
-      cell.className = 'compact-cell';
-      if (step.activeCell && step.activeCell.r === r && step.activeCell.c === c) cell.classList.add('active');
-      else if (val > 0) cell.classList.add('filled');
-      cell.innerHTML = `<strong>${val}</strong><span>${r},${c}</span>`;
-      grid.appendChild(cell);
-    }));
-    container.appendChild(grid);
+    grid.style.cssText = `display:grid;grid-template-columns:28px repeat(${capacity+1},${CELL}px);gap:2px;`;
+
+    // Column headers (capacities)
+    grid.appendChild(Object.assign(document.createElement('div'), { style: 'font-size:0;' }));
+    for (let c = 0; c <= capacity; c++) {
+      const h = document.createElement('div');
+      h.style.cssText = `font-size:0.6rem;text-align:center;color:var(--text-muted);font-family:monospace;`;
+      h.textContent = c;
+      grid.appendChild(h);
+    }
+
+    step.dp.forEach((row, r) => {
+      // Row header (item label)
+      const rh = document.createElement('div');
+      rh.style.cssText = `font-size:0.62rem;color:var(--text-muted);font-family:monospace;display:flex;align-items:center;justify-content:center;`;
+      rh.textContent = r === 0 ? '—' : `i${r}`;
+      grid.appendChild(rh);
+
+      row.forEach((val, c) => {
+        const cell = document.createElement('div');
+        cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;flex-direction:column;
+          align-items:center;justify-content:center;border-radius:4px;font-family:monospace;
+          font-size:0.72rem;border:1px solid rgba(255,255,255,0.06);`;
+
+        const isActive    = activeCell && activeCell.r === r && activeCell.c === c;
+        const isBacktrack = action === 'backtrack' && activeCell && activeCell.r === r && activeCell.c === c;
+        const isSelected  = action === 'done' && selectedItems.length > 0 && r > 0 &&
+                            selectedItems.includes(r - 1) && c <= capacity;
+
+        if (isBacktrack)       { cell.style.background = 'rgba(6,182,212,0.2)';   cell.style.borderColor = 'var(--accent-cyan)'; cell.style.fontWeight = '700'; cell.style.color = 'var(--accent-cyan)'; }
+        else if (isActive && action === 'take')  { cell.style.background = 'rgba(16,185,129,0.2)'; cell.style.borderColor = 'var(--easy)'; cell.style.fontWeight = '700'; cell.style.color = 'var(--easy)'; }
+        else if (isActive && action === 'skip')  { cell.style.background = 'rgba(255,255,255,0.05)'; cell.style.borderColor = 'rgba(255,255,255,0.25)'; cell.style.color = 'var(--text-muted)'; }
+        else if (isActive)     { cell.style.background = 'rgba(99,102,241,0.2)';  cell.style.borderColor = 'var(--primary-glow)'; }
+        else if (val > 0)      { cell.style.background = 'rgba(255,255,255,0.03)'; cell.style.color = 'rgba(255,255,255,0.7)'; }
+        else                   { cell.style.color = 'rgba(255,255,255,0.15)'; }
+
+        cell.innerHTML = `<strong>${val}</strong><span style="font-size:0.5rem;color:rgba(255,255,255,0.25)">${r},${c}</span>`;
+        grid.appendChild(cell);
+      });
+    });
+
+    tableWrap.appendChild(grid);
+    layout.appendChild(tableWrap);
+    container.appendChild(layout);
     canvas.appendChild(container);
   }
 
@@ -15441,30 +16925,162 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'kmp') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    const textRow = document.createElement('div');
-    textRow.className = 'kmp-row';
-    [...step.text].forEach((ch, idx) => {
+
+    const { text, pattern, lps, phase, i, j, matchedAt, patternOffset, jumpFrom } = step;
+    const CELL = 34;
+
+    // ── Phase badge ──
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
+    const phasePill = document.createElement('span');
+    phasePill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
+      letter-spacing:0.08em;padding:2px 10px;border-radius:20px;
+      border:1px solid ${phase==='lps'?'var(--primary-glow)':'var(--accent-cyan)'};
+      color:${phase==='lps'?'var(--primary-glow)':'var(--accent-cyan)'};`;
+    phasePill.textContent = phase === 'lps' ? 'Phase 1 — Build LPS' : 'Phase 2 — Scan Text';
+    hdr.appendChild(phasePill);
+    if (matchedAt >= 0) {
+      const found = document.createElement('span');
+      found.style.cssText = 'font-size:0.75rem;font-family:monospace;color:var(--easy);font-weight:700;';
+      found.textContent = `✓ Match at index ${matchedAt}`;
+      hdr.appendChild(found);
+    }
+    if (jumpFrom >= 0 && phase === 'scan') {
+      const jump = document.createElement('span');
+      jump.style.cssText = 'font-size:0.75rem;font-family:monospace;color:var(--medium);';
+      jump.textContent = `LPS jump: j ${jumpFrom} → ${j}`;
+      hdr.appendChild(jump);
+    }
+    container.appendChild(hdr);
+
+    const makeCell = (ch, label, state, extraStyle='') => {
       const cell = document.createElement('div');
-      cell.className = 'kmp-cell';
-      if (idx === step.i || (step.matchedAt >= 0 && idx >= step.matchedAt && idx < step.matchedAt + step.pattern.length)) cell.classList.add('active');
-      cell.innerHTML = `<strong>${ch}</strong><span>${idx}</span>`;
-      textRow.appendChild(cell);
-    });
-    const patternRow = document.createElement('div');
-    patternRow.className = 'kmp-row';
-    [...step.pattern].forEach((ch, idx) => {
-      const cell = document.createElement('div');
-      cell.className = 'kmp-cell pattern';
-      if (idx === step.j) cell.classList.add('active');
-      cell.innerHTML = `<strong>${ch}</strong><span>${step.lps[idx]}</span>`;
-      patternRow.appendChild(cell);
-    });
-    const status = document.createElement('div');
-    status.className = 'concept-status';
-    status.innerHTML = `Phase <strong>${step.phase}</strong> | Match <strong>${step.matchedAt >= 0 ? step.matchedAt : 'searching'}</strong>`;
-    container.appendChild(textRow);
-    container.appendChild(patternRow);
-    container.appendChild(status);
+      const colors = {
+        active:   { bg:'rgba(6,182,212,0.2)',   border:'var(--accent-cyan)',   text:'white' },
+        match:    { bg:'rgba(16,185,129,0.25)', border:'var(--easy)',          text:'var(--easy)' },
+        lps_i:    { bg:'rgba(99,102,241,0.2)',  border:'var(--primary-glow)',  text:'white' },
+        lps_j:    { bg:'rgba(245,158,11,0.15)', border:'var(--medium)',        text:'var(--medium)' },
+        found:    { bg:'rgba(16,185,129,0.15)', border:'var(--easy)',          text:'var(--easy)' },
+        normal:   { bg:'rgba(255,255,255,0.03)',border:'rgba(255,255,255,0.08)',text:'rgba(255,255,255,0.7)' },
+        blank:    { bg:'transparent',           border:'transparent',          text:'transparent' }
+      };
+      const c = colors[state] || colors.normal;
+      cell.style.cssText = `
+        width:${CELL}px;height:${CELL}px;display:inline-flex;flex-direction:column;
+        align-items:center;justify-content:center;border-radius:4px;
+        border:1px solid ${c.border};background:${c.bg};
+        font-family:monospace;flex-shrink:0;${extraStyle}`;
+      cell.innerHTML = `<span style="font-size:0.85rem;font-weight:700;color:${c.text}">${ch}</span>
+                        <span style="font-size:0.5rem;color:rgba(255,255,255,0.3)">${label}</span>`;
+      return cell;
+    };
+
+    // ── Phase 1: LPS build ──
+    if (phase === 'lps') {
+      // Pattern cells (with i/j pointers highlighted)
+      const patRow = document.createElement('div');
+      patRow.style.cssText = 'display:flex;gap:3px;margin-bottom:6px;flex-wrap:nowrap;overflow-x:auto;';
+      [...pattern].forEach((ch, idx) => {
+        let state = 'normal';
+        if (idx === i)   state = 'lps_i';
+        if (idx === j && idx !== i) state = 'lps_j';
+        if (idx === i && idx === j) state = 'active';
+        patRow.appendChild(makeCell(ch, idx, state));
+      });
+      container.appendChild(patRow);
+
+      // LPS array
+      const lpsRow = document.createElement('div');
+      lpsRow.style.cssText = 'display:flex;gap:3px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:8px;';
+      const lpsLabel = document.createElement('div');
+      lpsLabel.style.cssText = `width:${CELL}px;font-size:0.6rem;font-family:monospace;color:var(--text-muted);
+        display:inline-flex;align-items:center;flex-shrink:0;`;
+      lpsLabel.textContent = 'lps:';
+      lpsRow.appendChild(lpsLabel);
+      lps.forEach((val, idx) => {
+        const state = val > 0 ? 'match' : 'normal';
+        lpsRow.appendChild(makeCell(val, idx, idx === i ? 'lps_i' : state));
+      });
+      container.appendChild(lpsRow);
+
+      // Legend
+      const legend = document.createElement('div');
+      legend.style.cssText = 'display:flex;gap:12px;font-size:0.65rem;font-family:monospace;color:var(--text-muted);flex-wrap:wrap;';
+      legend.innerHTML = `<span style="color:var(--primary-glow)">■ i (comparing)</span>
+                          <span style="color:var(--medium)">■ j (prefix end)</span>
+                          <span style="color:var(--easy)">■ lps > 0</span>`;
+      container.appendChild(legend);
+    }
+
+    // ── Phase 2: Scan ──
+    if (phase === 'scan') {
+      const offset = (patternOffset >= 0 && patternOffset <= text.length) ? patternOffset : 0;
+
+      // Text row
+      const textRow = document.createElement('div');
+      textRow.style.cssText = 'display:flex;gap:3px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:3px;';
+      const tLabel = document.createElement('div');
+      tLabel.style.cssText = `width:52px;font-size:0.6rem;font-family:monospace;color:var(--text-muted);
+        display:inline-flex;align-items:center;flex-shrink:0;`;
+      tLabel.textContent = 'text:';
+      textRow.appendChild(tLabel);
+      [...text].forEach((ch, idx) => {
+        let state = 'normal';
+        if (matchedAt >= 0 && idx >= matchedAt && idx < matchedAt + pattern.length) state = 'found';
+        else if (idx === i) state = 'active';
+        else if (idx >= offset && idx < offset + j) state = 'match'; // matched prefix
+        textRow.appendChild(makeCell(ch, idx, state));
+      });
+      container.appendChild(textRow);
+
+      // Pattern row — offset by patternOffset blank cells
+      const patRow = document.createElement('div');
+      patRow.style.cssText = 'display:flex;gap:3px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:8px;';
+      const pLabel = document.createElement('div');
+      pLabel.style.cssText = `width:52px;font-size:0.6rem;font-family:monospace;color:var(--accent-cyan);
+        display:inline-flex;align-items:center;flex-shrink:0;`;
+      pLabel.textContent = 'pattern:';
+      patRow.appendChild(pLabel);
+
+      // blank spacer cells for alignment
+      for (let k = 0; k < offset; k++) {
+        patRow.appendChild(makeCell('', '', 'blank'));
+      }
+      [...pattern].forEach((ch, idx) => {
+        let state = 'normal';
+        if (matchedAt >= 0) state = 'found';
+        else if (idx === j) state = 'active';
+        else if (idx < j)   state = 'match';
+        patRow.appendChild(makeCell(ch, idx, state));
+      });
+      container.appendChild(patRow);
+
+      // LPS row (compact, always visible so user understands jumps)
+      const lpsRow = document.createElement('div');
+      lpsRow.style.cssText = 'display:flex;gap:3px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:8px;';
+      const llabel = document.createElement('div');
+      llabel.style.cssText = `width:52px;font-size:0.6rem;font-family:monospace;color:var(--text-muted);
+        display:inline-flex;align-items:center;flex-shrink:0;`;
+      llabel.textContent = 'lps:';
+      lpsRow.appendChild(llabel);
+      lps.forEach((val, idx) => {
+        const isJumpSrc = idx === jumpFrom - 1;
+        const isJumpDst = idx === j - 1 && jumpFrom >= 0;
+        let state = val > 0 ? 'match' : 'normal';
+        if (isJumpSrc) state = 'lps_i';
+        if (isJumpDst) state = 'lps_j';
+        lpsRow.appendChild(makeCell(val, idx, state));
+      });
+      container.appendChild(lpsRow);
+
+      // Status
+      const status = document.createElement('div');
+      status.className = 'concept-status';
+      status.innerHTML = `text[${i}] &nbsp;|&nbsp; pattern[${j}] &nbsp;|&nbsp; offset = ${offset}
+        &nbsp;|&nbsp; ${matchedAt >= 0 ? `<strong style="color:var(--easy)">MATCH at ${matchedAt}</strong>` : 'searching...'}`;
+      container.appendChild(status);
+    }
+
     canvas.appendChild(container);
   }
 
@@ -15472,30 +17088,148 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'fenwick') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
+
+    const { nums, bit, mode, activeChain, total, srcIdx, n } = step;
+    const modeColors = { init:'var(--text-muted)', update:'var(--primary-glow)', query:'var(--accent-cyan)', done:'var(--easy)' };
+    const CELL = 42;
+    const lowbit = x => x & -x;
+    const chainSet = new Set(activeChain || []);
+
+    // ── Mode badge ──
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
+    const mBadge = document.createElement('span');
+    mBadge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
+      letter-spacing:0.08em;padding:2px 10px;border-radius:20px;
+      border:1px solid ${modeColors[mode]||'var(--text-muted)'};
+      color:${modeColors[mode]||'var(--text-muted)'};`;
+    mBadge.textContent = mode === 'update' ? `Update a[${srcIdx+1}]=${nums[srcIdx]}` :
+                         mode === 'query'  ? `Prefix Query sum(1..${Math.min(5,n)})` :
+                         mode === 'done'   ? `Done — sum = ${total}` : 'Fenwick Tree';
+    hdr.appendChild(mBadge);
+    if (activeChain && activeChain.length > 0) {
+      const chainEl = document.createElement('span');
+      chainEl.style.cssText = `font-size:0.72rem;font-family:monospace;color:${modeColors[mode]};`;
+      chainEl.textContent = `chain: ${activeChain.join(' → ')}`;
+      hdr.appendChild(chainEl);
+    }
+    container.appendChild(hdr);
+
+    // ── Input array ──
+    const inputLabel = document.createElement('div');
+    inputLabel.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);margin-bottom:3px;';
+    inputLabel.textContent = 'Input array a[] (1-based):';
+    container.appendChild(inputLabel);
+
     const numsRow = document.createElement('div');
-    numsRow.className = 'dp1d-row';
-    step.nums.forEach((val, idx) => {
+    numsRow.style.cssText = 'display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:12px;';
+    nums.forEach((val, idx) => {
+      const oneBased = idx + 1;
+      const isSource = mode === 'update' && idx === srcIdx;
       const cell = document.createElement('div');
-      cell.className = 'dp1d-cell';
-      cell.innerHTML = `<div class="dp1d-cell-val">${val}</div><div class="dp1d-cell-idx">a[${idx + 1}]</div>`;
+      cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;flex-direction:column;
+        align-items:center;justify-content:center;border-radius:4px;font-family:monospace;
+        border:1px solid ${isSource?modeColors.update:'rgba(255,255,255,0.08)'};
+        background:${isSource?'rgba(99,102,241,0.15)':'rgba(255,255,255,0.03)'};
+        font-weight:${isSource?'700':'400'};`;
+      cell.innerHTML = `<span style="font-size:0.82rem;color:${isSource?'var(--primary-glow)':'rgba(255,255,255,0.7)'}">${val}</span>
+                        <span style="font-size:0.55rem;color:rgba(255,255,255,0.3)">a[${oneBased}]</span>`;
       numsRow.appendChild(cell);
     });
+    container.appendChild(numsRow);
+
+    // ── BIT array + SVG arrows ──
+    const bitLabel = document.createElement('div');
+    bitLabel.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);margin-bottom:3px;';
+    bitLabel.textContent = 'BIT[] — each cell covers lowbit(i) elements:';
+    container.appendChild(bitLabel);
+
+    // Wrapper for BIT row + SVG overlay
+    const bitWrap = document.createElement('div');
+    bitWrap.style.cssText = 'position:relative;';
+
     const bitRow = document.createElement('div');
-    bitRow.className = 'dp1d-row';
-    step.bit.slice(1).forEach((val, idx) => {
-      const bitIndex = idx + 1;
+    bitRow.style.cssText = `display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:32px;`;
+
+    const cellPositions = []; // store x-center per BIT index (1-based index = array idx+1)
+
+    bit.slice(1).forEach((val, idx) => {
+      const oneBased = idx + 1;
+      const lb = lowbit(oneBased);
+      const isActive  = chainSet.has(oneBased);
+      const isUpdate  = isActive && mode === 'update';
+      const isQuery   = isActive && mode === 'query';
+      const isDone    = mode === 'done' && val > 0;
+
+      let bg     = 'rgba(255,255,255,0.03)';
+      let border = 'rgba(255,255,255,0.08)';
+      let textC  = 'rgba(255,255,255,0.6)';
+
+      if (isUpdate) { bg = 'rgba(99,102,241,0.2)';  border = 'var(--primary-glow)'; textC = 'var(--primary-glow)'; }
+      if (isQuery)  { bg = 'rgba(6,182,212,0.18)';  border = 'var(--accent-cyan)';  textC = 'var(--accent-cyan)'; }
+      if (isDone && !isActive) { bg = 'rgba(16,185,129,0.08)'; border = 'rgba(16,185,129,0.3)'; textC = 'var(--easy)'; }
+
       const cell = document.createElement('div');
-      cell.className = 'dp1d-cell';
-      if (step.active.includes(bitIndex)) cell.classList.add('dp1d-active');
-      else if (val !== 0) cell.classList.add('dp1d-filled');
-      cell.innerHTML = `<div class="dp1d-cell-val">${val}</div><div class="dp1d-cell-idx">bit[${bitIndex}]</div>`;
+      cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;flex-direction:column;
+        align-items:center;justify-content:center;border-radius:4px;font-family:monospace;
+        border:1px solid ${border};background:${bg};flex-shrink:0;`;
+      cell.innerHTML = `<span style="font-size:0.82rem;font-weight:700;color:${textC}">${val||0}</span>
+                        <span style="font-size:0.48rem;color:rgba(255,255,255,0.25)">BIT[${oneBased}]</span>
+                        <span style="font-size:0.45rem;color:${isActive?textC:'rgba(255,255,255,0.2)'}">lb=${lb}</span>`;
       bitRow.appendChild(cell);
+
+      // Store left-center X for arrow drawing (cell width + gap per slot)
+      cellPositions[oneBased] = idx * (CELL + 4) + CELL / 2;
     });
+
+    bitWrap.appendChild(bitRow);
+
+    // SVG arrows: draw propagation chain
+    if (activeChain && activeChain.length >= 2) {
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const svgW  = nums.length * (CELL + 4);
+      const svgH  = 30;
+      const svg   = document.createElementNS(svgNS, 'svg');
+      svg.style.cssText = `position:absolute;bottom:0;left:0;width:${svgW}px;height:${svgH}px;overflow:visible;pointer-events:none;`;
+
+      const arrowColor = mode === 'query' ? 'var(--accent-cyan)' : 'var(--primary-glow)';
+
+      // Arrow marker
+      const defs = document.createElementNS(svgNS, 'defs');
+      defs.innerHTML = `<marker id="kfArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="${arrowColor}" opacity="0.8"/>
+      </marker>`;
+      svg.appendChild(defs);
+
+      for (let k = 0; k < activeChain.length - 1; k++) {
+        const fromIdx = activeChain[k];
+        const toIdx   = activeChain[k + 1];
+        const x1 = cellPositions[fromIdx];
+        const x2 = cellPositions[toIdx];
+        if (x1 === undefined || x2 === undefined) continue;
+        const line = document.createElementNS(svgNS, 'line');
+        line.setAttribute('x1', x1); line.setAttribute('y1', 10);
+        line.setAttribute('x2', x2); line.setAttribute('y2', 10);
+        line.setAttribute('stroke', arrowColor);
+        line.setAttribute('stroke-width', '1.8');
+        line.setAttribute('marker-end', 'url(#kfArrow)');
+        line.setAttribute('opacity', '0.8');
+        svg.appendChild(line);
+      }
+      bitWrap.appendChild(svg);
+    }
+
+    container.appendChild(bitWrap);
+
+    // ── Status ──
     const status = document.createElement('div');
     status.className = 'concept-status';
-    status.innerHTML = `Mode <strong>${step.mode}</strong> | Query total <strong>${step.total}</strong>`;
-    container.appendChild(numsRow);
-    container.appendChild(bitRow);
+    status.style.marginTop = '6px';
+    if (mode === 'query' || mode === 'done') {
+      status.innerHTML = `Running sum = <strong style="color:var(--accent-cyan)">${total}</strong>`;
+    } else if (mode === 'update' && srcIdx >= 0) {
+      status.innerHTML = `Inserting a[${srcIdx+1}]=${nums[srcIdx]} → updates ${(activeChain||[]).join(', ')||'—'}`;
+    }
     container.appendChild(status);
     canvas.appendChild(container);
   }
@@ -15504,22 +17238,103 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'floydwarshall') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    const status = document.createElement('div');
-    status.className = 'concept-status';
-    status.innerHTML = `Intermediate node <strong>${step.k >= 0 && step.k < step.dist.length ? String.fromCharCode(65 + step.k) : '-'}</strong>`;
+
+    const { dist, via, activeCell, k, improved, nodeLabels, N } = step;
+    const labels = nodeLabels || ['A','B','C','D'];
+    const n = N || dist.length;
+    const CELL = 52;
+
+    // ── Header ──
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
+
+    if (k >= 0 && k < n) {
+      const kPill = document.createElement('span');
+      kPill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
+        border:1px solid var(--medium);color:var(--medium);`;
+      kPill.textContent = `k = ${labels[k]} (intermediate)`;
+      hdr.appendChild(kPill);
+    }
+    if (improved) {
+      const impPill = document.createElement('span');
+      impPill.style.cssText = 'font-size:0.68rem;font-family:monospace;font-weight:700;color:var(--easy);';
+      impPill.textContent = '✓ Improved!';
+      hdr.appendChild(impPill);
+    }
+    if (activeCell && k >= 0 && k < n) {
+      const {r, c} = activeCell;
+      const viaNode = via && via[r] && via[r][c] !== null ? labels[via[r][c]] : null;
+      const pathPill = document.createElement('span');
+      pathPill.style.cssText = 'font-size:0.7rem;font-family:monospace;color:var(--text-muted);';
+      pathPill.textContent = `${labels[r]}→${labels[c]}${viaNode ? ` via ${viaNode}` : ''}`;
+      hdr.appendChild(pathPill);
+    }
+    container.appendChild(hdr);
+
+    // ── Matrix with row k / col k highlighted ──
+    const gridWrap = document.createElement('div');
+    gridWrap.style.cssText = 'overflow-x:auto;';
+
     const grid = document.createElement('div');
-    grid.className = 'compact-matrix';
-    grid.style.gridTemplateColumns = `repeat(${step.dist.length}, 48px)`;
-    step.dist.forEach((row, r) => row.forEach((val, c) => {
-      const cell = document.createElement('div');
-      cell.className = 'compact-cell';
-      if (step.activeCell && step.activeCell.r === r && step.activeCell.c === c) cell.classList.add('active');
-      else if (val !== Infinity && val !== 0) cell.classList.add('filled');
-      cell.innerHTML = `<strong>${val === Infinity ? '∞' : val}</strong><span>${String.fromCharCode(65 + r)}→${String.fromCharCode(65 + c)}</span>`;
-      grid.appendChild(cell);
-    }));
-    container.appendChild(status);
-    container.appendChild(grid);
+    grid.style.cssText = `display:inline-grid;grid-template-columns:${CELL}px repeat(${n},${CELL}px);gap:3px;`;
+
+    // Top-left corner
+    const corner = document.createElement('div');
+    corner.style.cssText = `width:${CELL}px;height:${CELL}px;`;
+    grid.appendChild(corner);
+
+    // Column headers
+    labels.slice(0,n).forEach((lbl,j) => {
+      const h = document.createElement('div');
+      h.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;align-items:center;justify-content:center;
+        font-size:0.72rem;font-family:monospace;font-weight:700;border-radius:4px;
+        background:${k===j?'rgba(245,158,11,0.1)':'transparent'};
+        color:${k===j?'var(--medium)':'var(--text-muted)'};`;
+      h.textContent = lbl;
+      grid.appendChild(h);
+    });
+
+    // Data rows
+    dist.slice(0,n).forEach((row, i) => {
+      // Row header
+      const rh = document.createElement('div');
+      rh.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;align-items:center;justify-content:center;
+        font-size:0.72rem;font-family:monospace;font-weight:700;border-radius:4px;
+        background:${k===i?'rgba(245,158,11,0.1)':'transparent'};
+        color:${k===i?'var(--medium)':'var(--text-muted)'};`;
+      rh.textContent = labels[i];
+      grid.appendChild(rh);
+
+      row.slice(0,n).forEach((val, j) => {
+        const cell = document.createElement('div');
+        const isActive   = activeCell && activeCell.r===i && activeCell.c===j;
+        const isKRow     = k >= 0 && k < n && i === k;
+        const isKCol     = k >= 0 && k < n && j === k;
+        const isDiag     = i === j;
+        const viaNode    = via && via[i] && via[i][j] !== null ? labels[via[i][j]] : null;
+
+        let bg = 'rgba(255,255,255,0.02)', border = 'rgba(255,255,255,0.06)', color = 'rgba(255,255,255,0.6)', fw = '400';
+
+        if (isActive && improved)   { bg='rgba(16,185,129,0.2)'; border='var(--easy)'; color='var(--easy)'; fw='700'; }
+        else if (isActive)          { bg='rgba(6,182,212,0.1)';  border='var(--accent-cyan)'; color='var(--accent-cyan)'; fw='700'; }
+        else if (isDiag)            { bg='rgba(255,255,255,0.03)'; color='rgba(255,255,255,0.25)'; }
+        else if (isKRow||isKCol)    { bg='rgba(245,158,11,0.06)'; border='rgba(245,158,11,0.2)'; }
+        else if (val!==Infinity && val>0) { color='rgba(255,255,255,0.8)'; }
+
+        cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;flex-direction:column;
+          align-items:center;justify-content:center;border-radius:4px;
+          border:1px solid ${border};background:${bg};font-family:monospace;`;
+
+        const valStr = val===Infinity ? '∞' : val;
+        cell.innerHTML = `<span style="font-size:0.82rem;font-weight:${fw};color:${color}">${valStr}</span>
+          ${viaNode && isActive ? `<span style="font-size:0.45rem;color:var(--easy)">via ${viaNode}</span>` : ''}
+          <span style="font-size:0.45rem;color:rgba(255,255,255,0.2)">${labels[i]}→${labels[j]}</span>`;
+        grid.appendChild(cell);
+      });
+    });
+
+    gridWrap.appendChild(grid);
+    container.appendChild(gridWrap);
     canvas.appendChild(container);
   }
 
@@ -15599,67 +17414,136 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'mergesort') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    container.style.paddingTop = '30px';
-    container.style.paddingBottom = '30px';
-    
-    // Draw partition segment blocks
-    const blocksWrap = document.createElement('div');
-    blocksWrap.style.display = 'flex';
-    blocksWrap.style.gap = '10px';
-    blocksWrap.style.justifyContent = 'center';
-    blocksWrap.style.marginTop = '20px';
-    blocksWrap.style.flexWrap = 'wrap';
-    
-    step.array.forEach((val, idx) => {
-      const block = document.createElement('div');
-      block.style.padding = '8px 12px';
-      block.style.borderRadius = '6px';
-      block.style.border = '1px solid var(--border-color)';
-      block.style.fontSize = '0.8rem';
-      block.style.fontWeight = 'bold';
-      block.style.fontFamily = 'monospace';
-      block.style.textAlign = 'center';
-      block.style.minWidth = '50px';
-      
-      const isMerging = step.merging && (idx >= step.left && idx <= step.right);
-      const isSplit = (idx === step.splitL || idx === step.splitR);
-      
-      let label = "Unsorted";
-      let bg = "rgba(255,255,255,0.02)";
-      let borderC = "var(--border-color)";
-      let textC = "var(--text-main)";
-      
-      if (isMerging) {
-        label = "Merge";
-        bg = "rgba(16, 185, 129, 0.15)";
-        borderC = "var(--easy)";
-        textC = "var(--easy)";
-      } else if (isSplit) {
-        label = "Split";
-        bg = "rgba(244, 63, 94, 0.15)";
-        borderC = "var(--hard)";
-        textC = "var(--hard)";
+
+    const { array, phase, left, mid, right, compareL, compareR, sortedRegions } = step;
+    const n = array.length;
+    const CELL = 44;
+    const GAP  = 6;
+
+    // ── Phase badge ──
+    const phaseColors = { start:'var(--text-muted)', split:'var(--medium)', compare:'var(--accent-cyan)', place:'var(--primary-glow)', merge_done:'var(--easy)', done:'var(--easy)' };
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
+    const badge = document.createElement('span');
+    badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
+      letter-spacing:0.08em;padding:2px 10px;border-radius:20px;
+      border:1px solid ${phaseColors[phase]||'var(--text-muted)'};
+      color:${phaseColors[phase]||'var(--text-muted)'};`;
+    badge.textContent = phase.replace('_',' ');
+    hdr.appendChild(badge);
+    if (left >= 0 && right >= 0) {
+      const rangeEl = document.createElement('span');
+      rangeEl.style.cssText = 'font-size:0.72rem;font-family:monospace;color:var(--text-muted);';
+      rangeEl.textContent = phase === 'split'
+        ? `[${left}..${mid}] | [${mid+1}..${right}]`
+        : `merging [${left}..${mid}] + [${mid+1}..${right}]`;
+      hdr.appendChild(rangeEl);
+    }
+    container.appendChild(hdr);
+
+    // ── Array cells ──
+    const arrRow = document.createElement('div');
+    arrRow.style.cssText = `display:flex;gap:${GAP}px;justify-content:center;flex-wrap:nowrap;overflow-x:auto;margin-bottom:14px;`;
+
+    const sortedSet = new Set(sortedRegions || []);
+
+    array.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;flex-direction:column;
+        align-items:center;justify-content:center;border-radius:6px;
+        font-family:monospace;font-size:0.88rem;font-weight:700;flex-shrink:0;`;
+
+      const inActive  = left >= 0 && idx >= left && idx <= right;
+      const inLeft    = left >= 0 && mid >= 0 && idx >= left && idx <= mid;
+      const inRight   = mid >= 0 && right >= 0 && idx > mid && idx <= right;
+      const isCompL   = idx === compareL;
+      const isCompR   = idx === compareR;
+      const isSorted  = sortedSet.has(idx);
+
+      if (isCompL || isCompR) {
+        cell.style.background   = 'rgba(6,182,212,0.25)';
+        cell.style.border       = '2px solid var(--accent-cyan)';
+        cell.style.color        = 'var(--accent-cyan)';
+      } else if (phase === 'merge_done' && inActive) {
+        cell.style.background   = 'rgba(16,185,129,0.2)';
+        cell.style.border       = '1.5px solid var(--easy)';
+        cell.style.color        = 'var(--easy)';
+      } else if (phase === 'split' && inLeft) {
+        cell.style.background   = 'rgba(99,102,241,0.15)';
+        cell.style.border       = '1.5px solid var(--primary-glow)';
+        cell.style.color        = 'var(--primary-glow)';
+      } else if (phase === 'split' && inRight) {
+        cell.style.background   = 'rgba(245,158,11,0.15)';
+        cell.style.border       = '1.5px solid var(--medium)';
+        cell.style.color        = 'var(--medium)';
+      } else if (inActive && (phase === 'compare' || phase === 'place')) {
+        const col = inLeft ? 'rgba(99,102,241,0.12)' : 'rgba(245,158,11,0.08)';
+        cell.style.background   = col;
+        cell.style.border       = `1.5px solid ${inLeft?'var(--primary-glow)':'var(--medium)'}`;
+        cell.style.color        = inLeft ? 'var(--primary-glow)' : 'var(--medium)';
+      } else if (isSorted && phase === 'done') {
+        cell.style.background   = 'rgba(16,185,129,0.12)';
+        cell.style.border       = '1px solid rgba(16,185,129,0.4)';
+        cell.style.color        = 'var(--easy)';
+      } else {
+        cell.style.background   = 'rgba(255,255,255,0.03)';
+        cell.style.border       = '1px solid rgba(255,255,255,0.08)';
+        cell.style.color        = 'rgba(255,255,255,0.6)';
       }
-      
-      block.style.background = bg;
-      block.style.borderColor = borderC;
-      block.style.color = textC;
-      
-      const valDiv = document.createElement('div');
-      valDiv.style.fontSize = '1.05rem';
-      valDiv.textContent = val;
-      
-      const lblDiv = document.createElement('div');
-      lblDiv.style.fontSize = '0.6rem';
-      lblDiv.style.color = textC;
-      lblDiv.style.marginTop = '4px';
-      lblDiv.textContent = label;
-      
-      block.appendChild(valDiv);
-      block.appendChild(lblDiv);
-      blocksWrap.appendChild(block);
+
+      cell.innerHTML = `<span>${val}</span><span style="font-size:0.45rem;color:rgba(255,255,255,0.25);margin-top:2px">[${idx}]</span>`;
+      arrRow.appendChild(cell);
     });
-    container.appendChild(blocksWrap);
+    container.appendChild(arrRow);
+
+    // ── Active subarray bracket labels (SVG, no overlap) ──
+    if (left >= 0 && right >= 0 && phase !== 'done') {
+      const svgNS2 = 'http://www.w3.org/2000/svg';
+      const bracketSvg = document.createElementNS(svgNS2,'svg');
+      const totalW = n * (CELL + GAP);
+      bracketSvg.style.cssText = `width:100%;max-width:${totalW}px;height:36px;display:block;overflow:visible;margin:0 auto 4px;`;
+
+      const startX = left * (CELL + GAP) + CELL/2;
+      const endX   = right * (CELL + GAP) + CELL/2;
+      const midX   = mid * (CELL + GAP) + CELL/2;
+
+      // Left half bracket
+      [[startX, midX, 'var(--primary-glow)', `L[${left}..${mid}]`],
+       [midX + GAP, endX, 'var(--medium)', `R[${mid+1}..${right}]`]].forEach(([x1, x2, col, lbl]) => {
+        if (x1 >= x2) return;
+        const path = document.createElementNS(svgNS2,'path');
+        path.setAttribute('d',`M${x1},4 L${x1},14 L${x2},14 L${x2},4`);
+        path.setAttribute('stroke',col); path.setAttribute('stroke-width','1.5');
+        path.setAttribute('fill','none');
+        bracketSvg.appendChild(path);
+
+        const t = document.createElementNS(svgNS2,'text');
+        t.setAttribute('x',(x1+x2)/2); t.setAttribute('y',30);
+        t.setAttribute('text-anchor','middle');
+        t.setAttribute('font-family','monospace'); t.setAttribute('font-size','10');
+        t.setAttribute('fill',col); t.setAttribute('font-weight','700');
+        t.textContent = lbl;
+        bracketSvg.appendChild(t);
+      });
+
+      container.appendChild(bracketSvg);
+    }
+
+    // ── Compare arrow ──
+    if (compareL >= 0 && compareR >= 0) {
+      const cmp = document.createElement('div');
+      cmp.style.cssText = 'font-size:0.75rem;font-family:monospace;color:var(--accent-cyan);text-align:center;margin-top:4px;';
+      cmp.textContent = `Compare arr[${compareL}]=${array[compareL]} vs arr[${compareR}]=${array[compareR]}`;
+      container.appendChild(cmp);
+    }
+
+    // ── Sorted regions status ──
+    const status = document.createElement('div');
+    status.className = 'concept-status';
+    status.style.marginTop = '8px';
+    status.innerHTML = `Sorted positions: <strong>${sortedSet.size > 0 ? [...sortedSet].sort((a,b)=>a-b).join(', ') : '—'}</strong>`;
+    container.appendChild(status);
+
     canvas.appendChild(container);
   }
   else if (visualizerState.algo === 'insertionsort') {
@@ -15916,21 +17800,80 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'slidingmax') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
+
+    // ── Array row with window highlight ──
     const row = document.createElement('div');
     row.className = 'dp1d-row';
     step.nums.forEach((val, idx) => {
       const cell = document.createElement('div');
       cell.className = 'dp1d-cell';
-      if (idx > step.r - step.k && idx <= step.r) cell.classList.add('dp1d-filled');
-      if (step.dq.includes(idx)) cell.classList.add('dp1d-active');
+
+      const inWindow = step.r >= 0 && idx >= step.windowStart && idx <= step.windowEnd;
+      const inDeque  = step.dq.includes(idx);
+      const isMax    = inDeque && idx === step.dq[0] && step.r >= step.k - 1;
+      const evicted  = step.evictReason === 'smaller' && idx === step.r - 1 && !inDeque; // rough hint
+
+      if (isMax)       { cell.classList.add('dp1d-active'); cell.style.borderColor = 'var(--easy)'; cell.style.boxShadow = '0 0 8px rgba(16,185,129,0.5)'; }
+      else if (inDeque){ cell.classList.add('dp1d-active'); }
+      else if (inWindow){ cell.classList.add('dp1d-filled'); }
+
       cell.innerHTML = `<div class="dp1d-cell-val">${val}</div><div class="dp1d-cell-idx">[${idx}]</div>`;
       row.appendChild(cell);
     });
+    container.appendChild(row);
+
+    // ── Deque visual (values, not just indices) ──
+    const dequeWrap = document.createElement('div');
+    dequeWrap.style.cssText = 'display:flex;align-items:center;gap:6px;margin-top:10px;flex-wrap:wrap;';
+
+    const dequeLabel = document.createElement('span');
+    dequeLabel.style.cssText = 'font-size:0.75rem;color:var(--text-muted);font-family:monospace;min-width:56px;';
+    dequeLabel.textContent = 'Deque:';
+    dequeWrap.appendChild(dequeLabel);
+
+    if (step.dq.length === 0) {
+      const empty = document.createElement('span');
+      empty.style.cssText = 'font-size:0.75rem;color:var(--text-muted);font-style:italic;';
+      empty.textContent = 'empty';
+      dequeWrap.appendChild(empty);
+    } else {
+      step.dq.forEach((idx, pos) => {
+        const pill = document.createElement('div');
+        pill.style.cssText = `
+          padding:3px 10px;border-radius:6px;font-size:0.78rem;font-family:monospace;font-weight:600;
+          border:1px solid ${pos === 0 ? 'var(--easy)' : 'rgba(255,255,255,0.15)'};
+          background:${pos === 0 ? 'rgba(16,185,129,0.12)' : 'rgba(255,255,255,0.04)'};
+          color:${pos === 0 ? 'var(--easy)' : 'var(--text-main)'};
+        `;
+        pill.textContent = `${step.nums[idx]}`;
+        const sub = document.createElement('sub');
+        sub.style.cssText = 'font-size:0.6rem;color:var(--text-muted);margin-left:2px;';
+        sub.textContent = `[${idx}]`;
+        pill.appendChild(sub);
+        dequeWrap.appendChild(pill);
+
+        if (pos < step.dq.length - 1) {
+          const arr = document.createElement('span');
+          arr.style.cssText = 'color:var(--text-muted);font-size:0.7rem;';
+          arr.textContent = '>';
+          dequeWrap.appendChild(arr);
+        }
+      });
+    }
+    container.appendChild(dequeWrap);
+
+    // ── Output + window info ──
     const status = document.createElement('div');
     status.className = 'concept-status';
-    status.innerHTML = `Deque indexes <strong>${step.dq.join(' -> ') || 'empty'}</strong> | Output <strong>${step.out.join(', ') || '-'}</strong>`;
-    container.appendChild(row);
+    const winStr = step.r >= 0
+      ? `[${step.nums.slice(step.windowStart, step.windowEnd + 1).join(', ')}]`
+      : '—';
+    status.innerHTML =
+      `Window <strong>${winStr}</strong> &nbsp;|&nbsp; ` +
+      `Max <strong>${step.r >= step.k - 1 ? step.nums[step.dq[0]] : '—'}</strong> &nbsp;|&nbsp; ` +
+      `Output <strong>[${step.out.join(', ') || '—'}]</strong>`;
     container.appendChild(status);
+
     canvas.appendChild(container);
   }
 
