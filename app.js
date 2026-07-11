@@ -765,15 +765,17 @@ function loadProblemIntoVisualizer(prob) {
     selector.value = 'fenwick';
   } else if (prob.id === 28 || prob.id === 214 || prob.id === 459 || prob.subcategory === 'KMP String Matching' || prob.subcategory === 'Rolling Hash / KMP' || prob.subcategory === 'Rolling Hash' || prob.topic === 'Strings & Pattern Matching') {
     selector.value = 'kmp';
-  } else if (prob.id === 912 || prob.subcategory === 'Quick Sort / Merge Sort' || prob.subcategory === 'Partitioning' || prob.subcategory === 'Custom Sort' || prob.subcategory === 'Merge Sort Pattern' || prob.subcategory === 'Two Pointers Sorting' || prob.topic === 'Sorting & Partitioning') {
+  } else if (prob.id === 912) {
+    selector.value = 'quicksortfull';
+  } else if (prob.id === 215 || prob.id === 973) {
+    selector.value = 'quicksortfull';
+  } else if (prob.subcategory === 'Quick Sort / Merge Sort' || prob.subcategory === 'Partitioning' || prob.subcategory === 'Custom Sort' || prob.subcategory === 'Merge Sort Pattern' || prob.subcategory === 'Two Pointers Sorting' || prob.topic === 'Sorting & Partitioning') {
     selector.value = 'quicksort';
   } else if (prob.id === 239) {
     selector.value = 'slidingmax';
   } else if (prob.id === 322) {
     selector.value = 'coinchange';
-  } else if (prob.id === 1584) {
-    selector.value = 'prims';
-  } else if (prob.id === 1135 || prob.id === 1168 || prob.id === 1489 || prob.subcategory === 'MST / Graph Greedy') {
+  } else if (prob.id === 1584 || prob.id === 1102 || prob.id === 778) {
     selector.value = 'prims';
   } else if (prob.id === 1135 || prob.id === 1168 || prob.id === 1489 || prob.subcategory === 'MST / Graph Greedy') {
     selector.value = 'kruskal';
@@ -791,8 +793,6 @@ function loadProblemIntoVisualizer(prob) {
     selector.value = 'bitmasksubsets';
   } else if (prob.id === 371 || prob.id === 190 || prob.id === 338) {
     selector.value = 'binaryaddition';
-  } else if (prob.id === 912 || prob.id === 215 || prob.id === 973 || prob.id === 179) {
-    selector.value = 'quicksortfull';
   } else if (prob.id === 148 || prob.id === 88 || prob.id === 23) {
     selector.value = 'mergesort';
   } else if (prob.id === 147 || prob.id === 274) {
@@ -805,6 +805,8 @@ function loadProblemIntoVisualizer(prob) {
     selector.value = 'largestRectangle';
   } else if (prob.subcategory === 'Trie') {
     selector.value = 'trie';
+  } else if (prob.id === 72) {
+    selector.value = 'editdistance';
   } else if (prob.subcategory === 'String DP / Sequence DP') {
     selector.value = 'stringdp';
   } else if (prob.subcategory === 'Bitmask DP') {
@@ -894,7 +896,18 @@ function updateProblemBanner(prob) {
   diffBadge.textContent = prob.difficulty;
   diffBadge.className = `difficulty-badge ${prob.difficulty}`;
   const lcLink = document.getElementById('pib-lc-link');
-  lcLink.href = `https://leetcode.com/problems/${prob.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}/`;
+  if (prob.id === 9999 || prob.id > 9000) {
+    // Fake/placeholder problem — hide the LeetCode link
+    lcLink.style.display = 'none';
+  } else {
+    // Build slug: lowercase, collapse non-alphanumeric runs to hyphens, trim edge hyphens
+    const slug = prob.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+    lcLink.href = `https://leetcode.com/problems/${slug}/`;
+    lcLink.style.display = '';
+  }
   lucide.createIcons();
 }
 
@@ -953,22 +966,255 @@ function generateSnippetForProblem(prob) {
   };
   
   const hint = patternComments[prob.subcategory] || `// Pattern: ${prob.subcategory}`;
-  
+
+  // Pattern-specific skeleton bodies
+  const patternBodies = {
+    'Sliding Window': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(s) {
+  <span class="code-keyword">let</span> left = <span class="code-num">0</span>, maxLen = <span class="code-num">0</span>;
+  <span class="code-keyword">const</span> map = <span class="code-keyword">new</span> Map();
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> right = <span class="code-num">0</span>; right &lt; s.length; right++) {
+    map.set(s[right], (map.get(s[right]) || <span class="code-num">0</span>) + <span class="code-num">1</span>);
+    <span class="code-keyword">while</span> (map.get(s[right]) &gt; <span class="code-num">1</span>) {
+      map.set(s[left], map.get(s[left]) - <span class="code-num">1</span>);
+      left++;
+    }
+    maxLen = Math.max(maxLen, right - left + <span class="code-num">1</span>);
+  }
+  <span class="code-keyword">return</span> maxLen;
+}`,
+    'Two Pointers': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(nums) {
+  <span class="code-keyword">let</span> left = <span class="code-num">0</span>, right = nums.length - <span class="code-num">1</span>;
+  <span class="code-keyword">let</span> result = <span class="code-num">0</span>;
+
+  <span class="code-keyword">while</span> (left &lt; right) {
+    <span class="code-comment">// evaluate pair</span>
+    result = Math.max(result, nums[left] + nums[right]);
+    <span class="code-keyword">if</span> (nums[left] &lt; nums[right]) left++;
+    <span class="code-keyword">else</span> right--;
+  }
+  <span class="code-keyword">return</span> result;
+}`,
+    'Hashing / Frequency Maps': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(nums) {
+  <span class="code-keyword">const</span> freq = <span class="code-keyword">new</span> Map();
+  <span class="code-keyword">for</span> (<span class="code-keyword">const</span> n <span class="code-keyword">of</span> nums) freq.set(n, (freq.get(n) || <span class="code-num">0</span>) + <span class="code-num">1</span>);
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">const</span> [key, count] <span class="code-keyword">of</span> freq) {
+    <span class="code-comment">// process frequency entries</span>
+  }
+  <span class="code-keyword">return</span> freq;
+}`,
+    'Prefix Sum / Running Sum': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(nums) {
+  <span class="code-keyword">const</span> prefix = <span class="code-keyword">new</span> Array(nums.length + <span class="code-num">1</span>).fill(<span class="code-num">0</span>);
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; nums.length; i++) prefix[i + <span class="code-num">1</span>] = prefix[i] + nums[i];
+
+  <span class="code-comment">// rangeSum(l, r) = prefix[r+1] - prefix[l]</span>
+  <span class="code-keyword">return</span> prefix;
+}`,
+    'Difference Array / Range Updates': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(n, updates) {
+  <span class="code-keyword">const</span> diff = <span class="code-keyword">new</span> Array(n + <span class="code-num">1</span>).fill(<span class="code-num">0</span>);
+  <span class="code-keyword">for</span> (<span class="code-keyword">const</span> [l, r, val] <span class="code-keyword">of</span> updates) { diff[l] += val; diff[r + <span class="code-num">1</span>] -= val; }
+
+  <span class="code-keyword">let</span> cur = <span class="code-num">0</span>;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; n; i++) { cur += diff[i]; diff[i] = cur; }
+  <span class="code-keyword">return</span> diff.slice(<span class="code-num">0</span>, n);
+}`,
+    'Tree DFS': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(root) {
+  <span class="code-keyword">function</span> <span class="code-fn">dfs</span>(node) {
+    <span class="code-keyword">if</span> (!node) <span class="code-keyword">return</span> <span class="code-num">0</span>;
+    <span class="code-keyword">const</span> left = dfs(node.left);
+    <span class="code-keyword">const</span> right = dfs(node.right);
+    <span class="code-comment">// combine results</span>
+    <span class="code-keyword">return</span> <span class="code-num">1</span> + Math.max(left, right);
+  }
+  <span class="code-keyword">return</span> dfs(root);
+}`,
+    'Tree BFS / Level Order': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(root) {
+  <span class="code-keyword">if</span> (!root) <span class="code-keyword">return</span> [];
+  <span class="code-keyword">const</span> result = [], queue = [root];
+
+  <span class="code-keyword">while</span> (queue.length) {
+    <span class="code-keyword">const</span> level = [];
+    <span class="code-keyword">const</span> size = queue.length;
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; size; i++) {
+      <span class="code-keyword">const</span> node = queue.shift();
+      level.push(node.val);
+      <span class="code-keyword">if</span> (node.left) queue.push(node.left);
+      <span class="code-keyword">if</span> (node.right) queue.push(node.right);
+    }
+    result.push(level);
+  }
+  <span class="code-keyword">return</span> result;
+}`,
+    'Graph BFS / DFS': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(grid) {
+  <span class="code-keyword">const</span> rows = grid.length, cols = grid[<span class="code-num">0</span>].length;
+  <span class="code-keyword">const</span> visited = <span class="code-keyword">new</span> Set();
+  <span class="code-keyword">let</span> result = <span class="code-num">0</span>;
+
+  <span class="code-keyword">function</span> <span class="code-fn">dfs</span>(r, c) {
+    <span class="code-keyword">if</span> (r &lt; <span class="code-num">0</span> || c &lt; <span class="code-num">0</span> || r >= rows || c >= cols || visited.has(\`\${r},\${c}\`)) <span class="code-keyword">return</span>;
+    visited.add(\`\${r},\${c}\`);
+    dfs(r + <span class="code-num">1</span>, c); dfs(r - <span class="code-num">1</span>, c); dfs(r, c + <span class="code-num">1</span>); dfs(r, c - <span class="code-num">1</span>);
+  }
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> r = <span class="code-num">0</span>; r &lt; rows; r++)
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> c = <span class="code-num">0</span>; c &lt; cols; c++)
+      <span class="code-keyword">if</span> (!visited.has(\`\${r},\${c}\`)) { dfs(r, c); result++; }
+  <span class="code-keyword">return</span> result;
+}`,
+    'Topological Sort / DAG': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(numNodes, prereqs) {
+  <span class="code-keyword">const</span> adj = Array.from({length: numNodes}, () => []);
+  <span class="code-keyword">const</span> indegree = <span class="code-keyword">new</span> Array(numNodes).fill(<span class="code-num">0</span>);
+  <span class="code-keyword">for</span> (<span class="code-keyword">const</span> [a, b] <span class="code-keyword">of</span> prereqs) { adj[b].push(a); indegree[a]++; }
+
+  <span class="code-keyword">const</span> queue = [];
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; numNodes; i++) <span class="code-keyword">if</span> (indegree[i] === <span class="code-num">0</span>) queue.push(i);
+  <span class="code-keyword">const</span> order = [];
+  <span class="code-keyword">while</span> (queue.length) {
+    <span class="code-keyword">const</span> node = queue.shift(); order.push(node);
+    <span class="code-keyword">for</span> (<span class="code-keyword">const</span> nb <span class="code-keyword">of</span> adj[node]) <span class="code-keyword">if</span> (--indegree[nb] === <span class="code-num">0</span>) queue.push(nb);
+  }
+  <span class="code-keyword">return</span> order.length === numNodes ? order : [];
+}`,
+    'Union Find / DSU': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(n, edges) {
+  <span class="code-keyword">const</span> parent = Array.from({length: n}, (_, i) => i);
+  <span class="code-keyword">const</span> rank = <span class="code-keyword">new</span> Array(n).fill(<span class="code-num">0</span>);
+
+  <span class="code-keyword">function</span> <span class="code-fn">find</span>(x) { <span class="code-keyword">return</span> parent[x] === x ? x : (parent[x] = find(parent[x])); }
+  <span class="code-keyword">function</span> <span class="code-fn">union</span>(a, b) {
+    <span class="code-keyword">const</span> [ra, rb] = [find(a), find(b)];
+    <span class="code-keyword">if</span> (ra === rb) <span class="code-keyword">return false</span>;
+    rank[ra] >= rank[rb] ? (parent[rb] = ra) : (parent[ra] = rb);
+    <span class="code-keyword">if</span> (rank[ra] === rank[rb]) rank[ra]++;
+    <span class="code-keyword">return true</span>;
+  }
+  <span class="code-keyword">for</span> (<span class="code-keyword">const</span> [a, b] <span class="code-keyword">of</span> edges) union(a, b);
+}`,
+    '1D DP Basics': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(n) {
+  <span class="code-keyword">const</span> dp = <span class="code-keyword">new</span> Array(n + <span class="code-num">1</span>).fill(<span class="code-num">0</span>);
+  dp[<span class="code-num">0</span>] = <span class="code-num">1</span>; dp[<span class="code-num">1</span>] = <span class="code-num">1</span>;
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">2</span>; i &lt;= n; i++) {
+    dp[i] = dp[i - <span class="code-num">1</span>] + dp[i - <span class="code-num">2</span>]; <span class="code-comment">// base recurrence — adapt per problem</span>
+  }
+  <span class="code-keyword">return</span> dp[n];
+}`,
+    'Knapsack / Subset DP': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(nums, target) {
+  <span class="code-keyword">const</span> dp = <span class="code-keyword">new</span> Array(target + <span class="code-num">1</span>).fill(<span class="code-num">0</span>);
+  dp[<span class="code-num">0</span>] = <span class="code-num">1</span>;
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">const</span> num <span class="code-keyword">of</span> nums)
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> w = target; w >= num; w--)
+      dp[w] += dp[w - num];
+  <span class="code-keyword">return</span> dp[target];
+}`,
+    'Grid DP': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(grid) {
+  <span class="code-keyword">const</span> m = grid.length, n = grid[<span class="code-num">0</span>].length;
+  <span class="code-keyword">const</span> dp = Array.from({length: m}, (_, i) => [...grid[i]]);
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; m; i++)
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> j = <span class="code-num">0</span>; j &lt; n; j++) {
+      <span class="code-keyword">if</span> (i === <span class="code-num">0</span> && j === <span class="code-num">0</span>) <span class="code-keyword">continue</span>;
+      <span class="code-keyword">const</span> top = i > <span class="code-num">0</span> ? dp[i - <span class="code-num">1</span>][j] : Infinity;
+      <span class="code-keyword">const</span> left = j > <span class="code-num">0</span> ? dp[i][j - <span class="code-num">1</span>] : Infinity;
+      dp[i][j] += Math.min(top, left);
+    }
+  <span class="code-keyword">return</span> dp[m - <span class="code-num">1</span>][n - <span class="code-num">1</span>];
+}`,
+    'String DP / Sequence DP': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(s1, s2) {
+  <span class="code-keyword">const</span> m = s1.length, n = s2.length;
+  <span class="code-keyword">const</span> dp = Array.from({length: m + <span class="code-num">1</span>}, () => <span class="code-keyword">new</span> Array(n + <span class="code-num">1</span>).fill(<span class="code-num">0</span>));
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">1</span>; i &lt;= m; i++)
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> j = <span class="code-num">1</span>; j &lt;= n; j++)
+      dp[i][j] = s1[i - <span class="code-num">1</span>] === s2[j - <span class="code-num">1</span>]
+        ? dp[i - <span class="code-num">1</span>][j - <span class="code-num">1</span>] + <span class="code-num">1</span>
+        : Math.max(dp[i - <span class="code-num">1</span>][j], dp[i][j - <span class="code-num">1</span>]);
+  <span class="code-keyword">return</span> dp[m][n];
+}`,
+    'Monotonic Stack': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(nums) {
+  <span class="code-keyword">const</span> stack = [], result = <span class="code-keyword">new</span> Array(nums.length).fill(<span class="code-num">-1</span>);
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; nums.length; i++) {
+    <span class="code-keyword">while</span> (stack.length && nums[stack[stack.length - <span class="code-num">1</span>]] &lt; nums[i]) {
+      result[stack.pop()] = nums[i];
+    }
+    stack.push(i);
+  }
+  <span class="code-keyword">return</span> result;
+}`,
+    'Heap / Top K': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(nums, k) {
+  <span class="code-comment">// Min-heap simulation via sorted structure</span>
+  <span class="code-keyword">const</span> heap = nums.slice(<span class="code-num">0</span>, k).sort((a, b) => a - b);
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = k; i &lt; nums.length; i++) {
+    <span class="code-keyword">if</span> (nums[i] > heap[<span class="code-num">0</span>]) {
+      heap[<span class="code-num">0</span>] = nums[i];
+      heap.sort((a, b) => a - b);
+    }
+  }
+  <span class="code-keyword">return</span> heap[<span class="code-num">0</span>];
+}`,
+    'Trie': `<span class="code-keyword">class</span> <span class="code-fn">TrieNode</span> {
+  <span class="code-fn">constructor</span>() { <span class="code-keyword">this</span>.children = {}; <span class="code-keyword">this</span>.isEnd = <span class="code-keyword">false</span>; }
+}
+<span class="code-keyword">class</span> <span class="code-fn">Trie</span> {
+  <span class="code-fn">constructor</span>() { <span class="code-keyword">this</span>.root = <span class="code-keyword">new</span> TrieNode(); }
+  <span class="code-fn">insert</span>(word) {
+    <span class="code-keyword">let</span> node = <span class="code-keyword">this</span>.root;
+    <span class="code-keyword">for</span> (<span class="code-keyword">const</span> ch <span class="code-keyword">of</span> word) { <span class="code-keyword">if</span> (!node.children[ch]) node.children[ch] = <span class="code-keyword">new</span> TrieNode(); node = node.children[ch]; }
+    node.isEnd = <span class="code-keyword">true</span>;
+  }
+  <span class="code-fn">search</span>(word) {
+    <span class="code-keyword">let</span> node = <span class="code-keyword">this</span>.root;
+    <span class="code-keyword">for</span> (<span class="code-keyword">const</span> ch <span class="code-keyword">of</span> word) { <span class="code-keyword">if</span> (!node.children[ch]) <span class="code-keyword">return false</span>; node = node.children[ch]; }
+    <span class="code-keyword">return</span> node.isEnd;
+  }
+}`,
+    'Bit Manipulation': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(n) {
+  <span class="code-keyword">let</span> count = <span class="code-num">0</span>;
+  <span class="code-keyword">while</span> (n !== <span class="code-num">0</span>) {
+    n &= n - <span class="code-num">1</span>; <span class="code-comment">// clear lowest set bit</span>
+    count++;
+  }
+  <span class="code-keyword">return</span> count;
+}`,
+    'Shortest Path': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(n, edges, src) {
+  <span class="code-keyword">const</span> adj = Array.from({length: n}, () => []);
+  <span class="code-keyword">for</span> (<span class="code-keyword">const</span> [u, v, w] <span class="code-keyword">of</span> edges) adj[u].push([v, w]);
+
+  <span class="code-keyword">const</span> dist = <span class="code-keyword">new</span> Array(n).fill(Infinity); dist[src] = <span class="code-num">0</span>;
+  <span class="code-keyword">const</span> pq = [[<span class="code-num">0</span>, src]]; <span class="code-comment">// [cost, node]</span>
+
+  <span class="code-keyword">while</span> (pq.length) {
+    pq.sort((a, b) => a[<span class="code-num">0</span>] - b[<span class="code-num">0</span>]);
+    <span class="code-keyword">const</span> [cost, u] = pq.shift();
+    <span class="code-keyword">if</span> (cost > dist[u]) <span class="code-keyword">continue</span>;
+    <span class="code-keyword">for</span> (<span class="code-keyword">const</span> [v, w] <span class="code-keyword">of</span> adj[u])
+      <span class="code-keyword">if</span> (dist[u] + w &lt; dist[v]) { dist[v] = dist[u] + w; pq.push([dist[v], v]); }
+  }
+  <span class="code-keyword">return</span> dist;
+}`,
+    'Intervals': `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(intervals) {
+  intervals.sort((a, b) => a[<span class="code-num">0</span>] - b[<span class="code-num">0</span>]);
+  <span class="code-keyword">const</span> merged = [intervals[<span class="code-num">0</span>]];
+
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">1</span>; i &lt; intervals.length; i++) {
+    <span class="code-keyword">const</span> last = merged[merged.length - <span class="code-num">1</span>];
+    <span class="code-keyword">if</span> (intervals[i][<span class="code-num">0</span>] &lt;= last[<span class="code-num">1</span>]) last[<span class="code-num">1</span>] = Math.max(last[<span class="code-num">1</span>], intervals[i][<span class="code-num">1</span>]);
+    <span class="code-keyword">else</span> merged.push(intervals[i]);
+  }
+  <span class="code-keyword">return</span> merged;
+}`
+  };
+
+  const body = patternBodies[prob.subcategory] ||
+    `<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(input) {\n  <span class="code-comment">// ${prob.subcategory} — implement solution here</span>\n  <span class="code-keyword">return</span> <span class="code-keyword">null</span>;\n}`;
+
   const generatedCode = `<span class="code-comment">// LC ${prob.id}: ${prob.name}</span>
 <span class="code-comment">// Topic: ${prob.topic} | Pattern: ${prob.subcategory}</span>
 <span class="code-comment">${hint}</span>
 
-<span class="code-keyword">function</span> <span class="code-fn">${fn}</span>(nums) {
-  <span class="code-keyword">let</span> result = <span class="code-num">0</span>;
-  <span class="code-keyword">let</span> left = <span class="code-num">0</span>, right = nums.length - <span class="code-num">1</span>;
-
-  <span class="code-keyword">while</span> (left &lt; right) {
-    <span class="code-comment">// Core logic — pattern-specific</span>
-    left++;
-  }
-
-  <span class="code-keyword">return</span> result;
-}`;
+${body}`;
   editorCode.innerHTML = generatedCode;
 }
 
@@ -10484,16 +10730,38 @@ function resetVisualizer() {
   }
   else if (visualizerState.algo === 'greedy') {
     const id = visualizerState.currentProbId;
-    let intervals;
-    if (id === 45) intervals = [[2,3],[1,4],[1,2],[2,2],[3,1]];
-    else if (id === 55) intervals = [[3,2],[1,4],[0,1],[2,2],[3,1]];
-    else if (id === 406) intervals = [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]];
-    else if (id === 621) intervals = [[1,2],[2,3],[3,1],[4,1],[5,1]];
-    else if (id === 763) intervals = [[0,8],[1,4],[4,7],[5,6],[6,7]];
-    else if (id === 134) intervals = [[1,3],[2,4],[3,2],[4,1],[5,2]];
-    else intervals = [[1, 3], [2, 4], [3, 5], [0, 6], [5, 7], [8, 9]];
+    let intervals, label;
+    // All inputs are proper [start, end] intervals sorted by context
+    if (id === 56) {
+      // LC 56 Merge Intervals
+      intervals = [[1,3],[2,6],[5,8],[8,10],[12,15],[14,18]];
+      label = 'LC 56 — Merge Intervals';
+    } else if (id === 435) {
+      // LC 435 Non-overlapping Intervals — classic greedy scheduling
+      intervals = [[1,4],[2,5],[3,6],[0,2],[5,7],[6,9],[8,10]];
+      label = 'LC 435 — Non-overlapping Intervals';
+    } else if (id === 452) {
+      // LC 452 Minimum Arrows to Burst Balloons
+      intervals = [[1,6],[2,8],[7,12],[10,16],[14,20]];
+      label = 'LC 452 — Minimum Arrows';
+    } else if (id === 253) {
+      // LC 253 Meeting Rooms II
+      intervals = [[0,30],[5,10],[15,20],[10,25],[20,35]];
+      label = 'LC 253 — Meeting Rooms II';
+    } else if (id === 252) {
+      intervals = [[0,30],[5,10],[15,20]];
+      label = 'LC 252 — Meeting Rooms';
+    } else if (id === 986 || id === 1288) {
+      intervals = [[0,4],[1,5],[3,7],[6,9],[8,12]];
+      label = `LC ${id} — Interval Intersection`;
+    } else {
+      // Default standalone: 8 intervals, good mix of overlaps and gaps
+      intervals = [[0,3],[1,5],[2,4],[5,8],[6,9],[8,11],[10,14],[13,16]];
+      label = 'Greedy Interval Scheduling';
+    }
     visualizerState.rawArray = intervals.map(([start, end]) => ({ start, end }));
-    appendLog(`[INFO] Greedy: selecting non-overlapping intervals for problem #${id}.`, "info");
+    visualizerState.greedyLabel = label;
+    appendLog(`[INFO] ${label}: ${intervals.length} intervals, selecting max non-overlapping set.`, "info");
     generateGreedySteps(visualizerState.rawArray);
   }
   else if (visualizerState.algo === 'editdistance') {
@@ -10592,24 +10860,30 @@ function resetVisualizer() {
   }
 
   else if (visualizerState.algo === 'avl') {
-    visualizerState.rawArray = [10, 20, 30, 40, 50, 25];
-    appendLog("[INFO] Initialized AVL Tree nodes insertion. Watch left/right balance factors & rotations...", "info");
+    visualizerState.rawArray = [30, 20, 40, 10, 25, 35, 50, 5];
+    appendLog("[INFO] AVL insertion: [30,20,40,10,25,35,50,5]. Triggers LL, RR, LR, RL rotations.", "info");
     generateAVLSteps(visualizerState.rawArray);
   }
   else if (visualizerState.algo === 'rbtree') {
-    visualizerState.rawArray = [15, 8, 25, 5, 12, 2];
-    appendLog("[INFO] Initialized Red-Black Tree. Nodes are colored (Red/Black) and rotated to maintain properties.", "info");
+    visualizerState.rawArray = [10, 20, 30, 15, 25, 5, 35, 1];
+    appendLog("[INFO] RB Tree: inserting [10,20,30,15,25,5,35,1]. Triggers recoloring + all rotation types.", "info");
     generateRBTreeSteps(visualizerState.rawArray);
   }
   else if (visualizerState.algo === 'netflow') {
-    visualizerState.rawArray = [
-      { from: 'S', to: 'A', cap: 10, flow: 0 },
-      { from: 'S', to: 'B', cap: 5, flow: 0 },
-      { from: 'A', to: 'B', cap: 15, flow: 0 },
-      { from: 'A', to: 'T', cap: 10, flow: 0 },
-      { from: 'B', to: 'T', cap: 10, flow: 0 }
-    ];
-    appendLog("[INFO] Initialized Network Flow graph S -> A,B -> T. BFS computes augmenting paths.", "info");
+    visualizerState.rawArray = {
+      nodes: ['S', 'A', 'B', 'C', 'D', 'T'],
+      edges: [
+        { u: 'S', v: 'A', cap: 15 },
+        { u: 'S', v: 'B', cap: 10 },
+        { u: 'A', v: 'B', cap: 5  },
+        { u: 'A', v: 'C', cap: 10 },
+        { u: 'B', v: 'D', cap: 10 },
+        { u: 'C', v: 'D', cap: 4  },
+        { u: 'C', v: 'T', cap: 10 },
+        { u: 'D', v: 'T', cap: 15 }
+      ]
+    };
+    appendLog("[INFO] Network Flow (Edmonds-Karp): 6-node graph S→{A,B}→{C,D}→T. BFS finds augmenting paths in residual graph.", "info");
     generateNetFlowSteps();
   }
   else if (visualizerState.algo === 'astar') {
@@ -10660,14 +10934,16 @@ function resetVisualizer() {
   }
   else if (visualizerState.algo === 'huffman') {
     visualizerState.rawArray = [
-      { char: 'A', freq: 5 },
-      { char: 'B', freq: 9 },
-      { char: 'C', freq: 12 },
-      { char: 'D', freq: 13 },
-      { char: 'E', freq: 16 },
-      { char: 'F', freq: 45 }
+      { char: 'space', freq: 40 },
+      { char: 'e',     freq: 35 },
+      { char: 't',     freq: 28 },
+      { char: 'a',     freq: 22 },
+      { char: 'o',     freq: 18 },
+      { char: 'n',     freq: 15 },
+      { char: 's',     freq: 10 },
+      { char: 'i',     freq: 7  }
     ];
-    appendLog("[INFO] Loaded Huffman frequency map. Building prefix tree...", "info");
+    appendLog("[INFO] Loaded Huffman frequency map (8 chars). Building prefix-free encoding tree...", "info");
     generateHuffmanSteps(visualizerState.rawArray);
   }
 
@@ -10684,323 +10960,555 @@ function resetVisualizer() {
 function generateAVLSteps(nums) {
   const steps = [];
   let root = null;
-  
-  function getHeight(n) {
-    return n ? n.height : 0;
-  }
-  
-  function getBalance(n) {
-    return n ? getHeight(n.left) - getHeight(n.right) : 0;
-  }
-  
+
+  function getHeight(n) { return n ? n.height : 0; }
+  function getBalance(n) { return n ? getHeight(n.left) - getHeight(n.right) : 0; }
   function updateHeight(n) {
-    if (n) {
-      n.height = Math.max(getHeight(n.left), getHeight(n.right)) + 1;
-    }
+    if (n) n.height = Math.max(getHeight(n.left), getHeight(n.right)) + 1;
   }
-  
+
   function serializeTree(n) {
     if (!n) return null;
-    return {
-      val: n.val,
-      height: n.height,
-      bf: getBalance(n),
-      left: serializeTree(n.left),
-      right: serializeTree(n.right)
-    };
+    return { val: n.val, height: n.height, bf: getBalance(n), left: serializeTree(n.left), right: serializeTree(n.right) };
   }
-  
+
   function rotateRight(y) {
-    const x = y.left;
-    const T2 = x.right;
-    x.right = y;
-    y.left = T2;
-    updateHeight(y);
-    updateHeight(x);
+    const x = y.left, T2 = x.right;
+    x.right = y; y.left = T2;
+    updateHeight(y); updateHeight(x);
     return x;
   }
-  
   function rotateLeft(x) {
-    const y = x.right;
-    const T2 = y.left;
-    y.left = x;
-    x.right = T2;
-    updateHeight(x);
-    updateHeight(y);
+    const y = x.right, T2 = y.left;
+    y.left = x; x.right = T2;
+    updateHeight(x); updateHeight(y);
     return y;
   }
-  
-  function insert(node, val) {
+
+  function insert(node, val, path) {
     if (!node) {
       const newNode = { val, left: null, right: null, height: 1 };
-      steps.push({ tree: serializeTree(root || newNode), activeNode: val, status: 'insert', log: `Inserted node ${val}.` });
+      steps.push({
+        tree: serializeTree(newNode), activeNode: val, path: [...path],
+        status: 'insert', rotationType: null,
+        log: `Insert ${val}. Path: ${path.length ? path.join(' → ') + ' → ' + val : val}. New leaf node created with height=1, BF=0.`
+      });
       return newNode;
     }
-    
-    if (val < node.val) {
-      node.left = insert(node.left, val);
-    } else if (val > node.val) {
-      node.right = insert(node.right, val);
-    } else {
-      return node;
-    }
-    
+
+    path.push(node.val);
+    if (val < node.val) node.left = insert(node.left, val, path);
+    else if (val > node.val) node.right = insert(node.right, val, path);
+    else return node;
+
     updateHeight(node);
     const balance = getBalance(node);
-    
+
+    // LL
     if (balance > 1 && val < node.left.val) {
-      steps.push({ tree: serializeTree(root), activeNode: node.val, status: 'unbalanced-LL', log: `Node ${node.val} is unbalanced (BF = ${balance}). Left-Left violation. Rotate Right.` });
+      steps.push({
+        tree: serializeTree(root), activeNode: node.val, path: [...path],
+        status: 'unbalanced', rotationType: 'LL',
+        log: `⚠ Node ${node.val} unbalanced — BF=${balance}. Left-Left case: new node ${val} < left child ${node.left.val}. Fix: single Right Rotation on ${node.val}.`
+      });
       const newSub = rotateRight(node);
-      steps.push({ tree: serializeTree(newSub), activeNode: newSub.val, status: 'rotated-LL', log: `Rotated Right around node ${node.val} to rebalance.` });
+      steps.push({
+        tree: serializeTree(newSub), activeNode: newSub.val, path: [],
+        status: 'rotated', rotationType: 'LL',
+        log: `✓ Right Rotation done. ${newSub.val} is new subtree root (BF=${getBalance(newSub)}). ${newSub.right ? newSub.right.val : '—'} moved to right child.`
+      });
       return newSub;
     }
-    
+
+    // RR
     if (balance < -1 && val > node.right.val) {
-      steps.push({ tree: serializeTree(root), activeNode: node.val, status: 'unbalanced-RR', log: `Node ${node.val} is unbalanced (BF = ${balance}). Right-Right violation. Rotate Left.` });
+      steps.push({
+        tree: serializeTree(root), activeNode: node.val, path: [...path],
+        status: 'unbalanced', rotationType: 'RR',
+        log: `⚠ Node ${node.val} unbalanced — BF=${balance}. Right-Right case: new node ${val} > right child ${node.right.val}. Fix: single Left Rotation on ${node.val}.`
+      });
       const newSub = rotateLeft(node);
-      steps.push({ tree: serializeTree(newSub), activeNode: newSub.val, status: 'rotated-RR', log: `Rotated Left around node ${node.val} to rebalance.` });
+      steps.push({
+        tree: serializeTree(newSub), activeNode: newSub.val, path: [],
+        status: 'rotated', rotationType: 'RR',
+        log: `✓ Left Rotation done. ${newSub.val} is new subtree root (BF=${getBalance(newSub)}). ${newSub.left ? newSub.left.val : '—'} moved to left child.`
+      });
       return newSub;
     }
-    
+
+    // LR
     if (balance > 1 && val > node.left.val) {
-      steps.push({ tree: serializeTree(root), activeNode: node.left.val, status: 'unbalanced-LR-1', log: `Node ${node.val} is unbalanced (BF = ${balance}). Left-Right violation. Rotate Left on child ${node.left.val}.` });
+      steps.push({
+        tree: serializeTree(root), activeNode: node.left.val, path: [...path],
+        status: 'unbalanced', rotationType: 'LR',
+        log: `⚠ Node ${node.val} unbalanced — BF=${balance}. Left-Right case: new node ${val} > left child ${node.left.val}. Fix step 1: Left Rotation on child ${node.left.val}.`
+      });
       node.left = rotateLeft(node.left);
-      steps.push({ tree: serializeTree(root), activeNode: node.val, status: 'unbalanced-LR-2', log: `Rotate Right on node ${node.val} to complete rebalance.` });
+      steps.push({
+        tree: serializeTree(root), activeNode: node.val, path: [],
+        status: 'unbalanced', rotationType: 'LR',
+        log: `Left Rotation on child done. Fix step 2: Right Rotation on ${node.val}.`
+      });
       const newSub = rotateRight(node);
+      steps.push({
+        tree: serializeTree(newSub), activeNode: newSub.val, path: [],
+        status: 'rotated', rotationType: 'LR',
+        log: `✓ LR Double Rotation done. ${newSub.val} is new subtree root (BF=${getBalance(newSub)}).`
+      });
       return newSub;
     }
-    
+
+    // RL
     if (balance < -1 && val < node.right.val) {
-      steps.push({ tree: serializeTree(root), activeNode: node.right.val, status: 'unbalanced-RL-1', log: `Node ${node.val} is unbalanced (BF = ${balance}). Right-Left violation. Rotate Right on child ${node.right.val}.` });
+      steps.push({
+        tree: serializeTree(root), activeNode: node.right.val, path: [...path],
+        status: 'unbalanced', rotationType: 'RL',
+        log: `⚠ Node ${node.val} unbalanced — BF=${balance}. Right-Left case: new node ${val} < right child ${node.right.val}. Fix step 1: Right Rotation on child ${node.right.val}.`
+      });
       node.right = rotateRight(node.right);
-      steps.push({ tree: serializeTree(root), activeNode: node.val, status: 'unbalanced-RL-2', log: `Rotate Left on node ${node.val} to complete rebalance.` });
+      steps.push({
+        tree: serializeTree(root), activeNode: node.val, path: [],
+        status: 'unbalanced', rotationType: 'RL',
+        log: `Right Rotation on child done. Fix step 2: Left Rotation on ${node.val}.`
+      });
       const newSub = rotateLeft(node);
+      steps.push({
+        tree: serializeTree(newSub), activeNode: newSub.val, path: [],
+        status: 'rotated', rotationType: 'RL',
+        log: `✓ RL Double Rotation done. ${newSub.val} is new subtree root (BF=${getBalance(newSub)}).`
+      });
       return newSub;
     }
-    
+
     return node;
   }
-  
-  steps.push({ tree: null, activeNode: null, status: 'start', log: "Start AVL Tree Insertion. Input sequence: [" + nums.join(", ") + "]" });
-  
-  for (let num of nums) {
-    root = insert(root, num);
-    steps.push({ tree: serializeTree(root), activeNode: null, status: 'stable', log: `AVL Tree is stable after inserting ${num}.` });
+
+  steps.push({ tree: null, activeNode: null, path: [], status: 'start', rotationType: null, log: `AVL Insertion sequence: [${nums.join(', ')}]. Each insert maintains |BF| ≤ 1 at every node.` });
+
+  for (const num of nums) {
+    root = insert(root, num, []);
+    steps.push({
+      tree: serializeTree(root), activeNode: null, path: [],
+      status: 'stable', rotationType: null,
+      log: `Tree stable after inserting ${num}. Height=${root.height}, Root BF=${getBalance(root)}.`
+    });
   }
-  
+
   visualizerState.steps = steps;
 }
 
 // Huffman Coding Step Generation
 function generateHuffmanSteps(nodes) {
   const steps = [];
-  
+
+  function serializeNode(n) {
+    if (!n) return null;
+    return { val: n.val, freq: n.freq, left: serializeNode(n.left), right: serializeNode(n.right) };
+  }
+
+  // Build encoding table by traversing the final tree
+  function buildEncodingTable(root) {
+    const table = {};
+    function traverse(node, bits) {
+      if (!node) return;
+      if (!node.left && !node.right) { table[node.val] = bits || '0'; return; }
+      traverse(node.left,  bits + '0');
+      traverse(node.right, bits + '1');
+    }
+    traverse(root, '');
+    return table;
+  }
+
   let queue = nodes.map(n => ({
     val: n.char,
     freq: n.freq,
     left: null,
-    right: null
+    right: null,
+    isLeaf: true
   })).sort((a, b) => a.freq - b.freq);
-  
-  function cloneQueue(q) {
-    return q.map(n => serializeNode(n));
-  }
-  
-  function serializeNode(n) {
-    if (!n) return null;
-    return {
-      val: n.val,
-      freq: n.freq,
-      left: serializeNode(n.left),
-      right: serializeNode(n.right)
-    };
-  }
-  
-  steps.push({ queue: cloneQueue(queue), mergedNode: null, log: "Huffman initialized. Sorted frequency nodes: " + queue.map(n => `${n.val}:${n.freq}`).join(", ") });
-  
+
+  // Step 0 — initial state
+  steps.push({
+    queue: queue.map(n => serializeNode(n)),
+    mergeLeft: null,
+    mergeRight: null,
+    mergedVal: null,
+    encodingTable: null,
+    phase: 'init',
+    log: `Huffman initialized. ${queue.length} leaf nodes sorted by frequency (ascending): ` +
+         queue.map(n => `'${n.val}'=${n.freq}`).join(' | ')
+  });
+
+  let mergeCount = 0;
+
   while (queue.length > 1) {
-    const left = queue.shift();
+    const left  = queue.shift();
     const right = queue.shift();
-    
+    mergeCount++;
+
+    // Pre-merge highlight step: show which two nodes are about to be merged
+    steps.push({
+      queue: [serializeNode(left), serializeNode(right), ...queue.map(n => serializeNode(n))],
+      mergeLeft:  left.val,
+      mergeRight: right.val,
+      mergedVal:  null,
+      encodingTable: null,
+      phase: 'selecting',
+      log: `Step ${mergeCount}: Select two lowest-frequency nodes — ` +
+           `'${left.val}' (freq=${left.freq}) and '${right.val}' (freq=${right.freq}). ` +
+           `New internal node cost = ${left.freq} + ${right.freq} = ${left.freq + right.freq}.`
+    });
+
     const parent = {
-      val: left.val + right.val,
+      val: `[${left.val}+${right.val}]`,
       freq: left.freq + right.freq,
       left,
-      right
+      right,
+      isLeaf: false
     };
-    
+
     queue.push(parent);
     queue.sort((a, b) => a.freq - b.freq);
-    
+
     steps.push({
-      queue: cloneQueue(queue),
-      mergedNode: parent.val,
-      log: `Merged '${left.val}' (${left.freq}) and '${right.val}' (${right.freq}) into parent '${parent.val}' (${parent.freq}).`
+      queue: queue.map(n => serializeNode(n)),
+      mergeLeft:  left.val,
+      mergeRight: right.val,
+      mergedVal:  parent.val,
+      encodingTable: null,
+      phase: 'merged',
+      log: `Merged '${left.val}' (${left.freq}) + '${right.val}' (${right.freq}) → internal node '${parent.val}' (freq=${parent.freq}). ` +
+           `Priority queue now has ${queue.length} node${queue.length !== 1 ? 's' : ''}: ` +
+           queue.map(n => `'${n.val}'=${n.freq}`).join(' | ')
     });
   }
-  
+
+  // Final step — show the complete tree and encoding table
+  const root = queue[0];
+  const encodingTable = buildEncodingTable(root);
+  const totalBits = nodes.reduce((sum, n) => sum + n.freq * encodingTable[n.char].length, 0);
+  const totalChars = nodes.reduce((sum, n) => sum + n.freq, 0);
+  const naiveBits = totalChars * 8;
+
+  steps.push({
+    queue: [serializeNode(root)],
+    mergeLeft:  null,
+    mergeRight: null,
+    mergedVal:  null,
+    encodingTable,
+    encodingNodes: nodes,
+    totalBits,
+    naiveBits,
+    phase: 'complete',
+    log: `Huffman tree complete! Root frequency = ${root.freq}. ` +
+         `Encoding uses ${totalBits} bits vs ${naiveBits} bits (fixed 8-bit). ` +
+         `Space saved: ${((1 - totalBits / naiveBits) * 100).toFixed(1)}%. ` +
+         `Codes: ` + nodes.map(n => `'${n.char}'→${encodingTable[n.char]}`).join(', ')
+  });
+
   visualizerState.steps = steps;
 }
 
-// Red-Black Tree step generator
+// Red-Black Tree step generator — fully computed, handles all 4 fix-up cases
 function generateRBTreeSteps(arr) {
   const steps = [];
-  // Hardcoded trace representing standard Red-Black tree insertion steps for [15, 8, 25, 5, 12, 2]
-  // showing coloring rules and left/right rotations.
-  
-  steps.push({
-    nodes: [],
-    log: "Red-Black Tree is empty. Initializing insertion..."
-  });
-  
-  steps.push({
-    nodes: [
-      { val: 15, color: 'black', x: 228, y: 30, left: null, right: null }
-    ],
-    log: "Insert 15. Root node must always be colored Black."
-  });
-  
-  steps.push({
-    nodes: [
-      { val: 15, color: 'black', x: 228, y: 30, left: 8, right: null },
-      { val: 8, color: 'red', x: 120, y: 110, left: null, right: null }
-    ],
-    log: "Insert 8 as left child of 15. New insertions default to Red. Properties satisfied."
-  });
-  
-  steps.push({
-    nodes: [
-      { val: 15, color: 'black', x: 228, y: 30, left: 8, right: 25 },
-      { val: 8, color: 'red', x: 120, y: 110, left: null, right: null },
-      { val: 25, color: 'red', x: 336, y: 110, left: null, right: null }
-    ],
-    log: "Insert 25 as right child of 15. Colored Red. Tree remains balanced."
-  });
-  
-  steps.push({
-    nodes: [
-      { val: 15, color: 'black', x: 228, y: 30, left: 8, right: 25 },
-      { val: 8, color: 'black', x: 120, y: 110, left: 5, right: null },
-      { val: 25, color: 'black', x: 336, y: 110, left: null, right: null },
-      { val: 5, color: 'red', x: 50, y: 190, left: null, right: null }
-    ],
-    log: "Insert 5. Red-Red violation at parent 8 and child 5! Uncle 25 is Red -> Recoloring: parent 8 and uncle 25 become Black, root 15 remains Black."
-  });
-  
-  steps.push({
-    nodes: [
-      { val: 15, color: 'black', x: 228, y: 30, left: 8, right: 25 },
-      { val: 8, color: 'black', x: 120, y: 110, left: 5, right: 12 },
-      { val: 25, color: 'black', x: 336, y: 110, left: null, right: null },
-      { val: 5, color: 'red', x: 50, y: 190, left: null, right: null },
-      { val: 12, color: 'red', x: 180, y: 190, left: null, right: null }
-    ],
-    log: "Insert 12 as right child of 8. Colored Red. Tree properties are valid."
-  });
-  
-  steps.push({
-    nodes: [
-      { val: 15, color: 'black', x: 228, y: 30, left: 5, right: 25 },
-      { val: 5, color: 'black', x: 120, y: 110, left: 2, right: 8 },
-      { val: 2, color: 'red', x: 50, y: 190, left: null, right: null },
-      { val: 8, color: 'red', x: 180, y: 190, left: null, right: 12 },
-      { val: 12, color: 'red', x: 240, y: 270, left: null, right: null },
-      { val: 25, color: 'black', x: 336, y: 110, left: null, right: null }
-    ],
-    log: "Insert 2. Red-Red violation! Parent 5 and grandparent 8 form a Left-Left line, and uncle is null (Black). Perform Right Rotation on 8 and swap colors of 5 and 8."
-  });
-  
+  const RED = 'red', BLACK = 'black';
+
+  // Each node: { val, color, left, right, parent }
+  let root = null;
+
+  function makeNode(val) {
+    return { val, color: RED, left: null, right: null, parent: null };
+  }
+
+  function uncle(n) {
+    if (!n || !n.parent || !n.parent.parent) return null;
+    const gp = n.parent.parent;
+    return n.parent === gp.left ? gp.right : gp.left;
+  }
+
+  function rotateLeft(x) {
+    const y = x.right;
+    x.right = y.left;
+    if (y.left) y.left.parent = x;
+    y.parent = x.parent;
+    if (!x.parent) root = y;
+    else if (x === x.parent.left) x.parent.left = y;
+    else x.parent.right = y;
+    y.left = x;
+    x.parent = y;
+  }
+
+  function rotateRight(x) {
+    const y = x.left;
+    x.left = y.right;
+    if (y.right) y.right.parent = x;
+    y.parent = x.parent;
+    if (!x.parent) root = y;
+    else if (x === x.parent.right) x.parent.right = y;
+    else x.parent.left = y;
+    y.right = x;
+    x.parent = y;
+  }
+
+  // Serialise tree for snapshot — also computes in-order x positions
+  function serialize(node) {
+    if (!node) return null;
+    return {
+      val: node.val, color: node.color,
+      left: serialize(node.left),
+      right: serialize(node.right)
+    };
+  }
+
+  // Compute display positions by in-order traversal
+  function computePositions(node, depth, counter) {
+    if (!node) return;
+    computePositions(node.left, depth + 1, counter);
+    counter.x += 56;
+    node._x = counter.x;
+    node._y = depth * 70 + 28;
+    computePositions(node.right, depth + 1, counter);
+  }
+
+  function snapshotPositions(node, map) {
+    if (!node) return;
+    map[node.val] = { x: node._x, y: node._y };
+    snapshotPositions(node.left, map);
+    snapshotPositions(node.right, map);
+  }
+
+  function snap(activeVal, uncleVal, fixCase, log) {
+    computePositions(root, 0, { x: 0 });
+    const pos = {};
+    snapshotPositions(root, pos);
+    steps.push({ tree: serialize(root), positions: pos, activeVal, uncleVal, fixCase, log });
+  }
+
+  function fixInsert(n) {
+    while (n !== root && n.parent && n.parent.color === RED) {
+      const p = n.parent;
+      const gp = p.parent;
+      if (!gp) break;
+      const u = uncle(n);
+      const uColor = u ? u.color : BLACK;
+
+      if (uColor === RED) {
+        // Case 1: Uncle is Red — recolor
+        p.color = BLACK;
+        u.color = BLACK;
+        gp.color = RED;
+        snap(gp.val, u.val, 'recolor',
+          `Red-Red conflict: node ${n.val}, parent ${p.val}, uncle ${u.val} (Red). ` +
+          `Case 1 — Recolor: parent ${p.val} → Black, uncle ${u.val} → Black, grandparent ${gp.val} → Red. Move up.`);
+        n = gp;
+      } else {
+        if (p === gp.left) {
+          if (n === p.right) {
+            // Case 2a: Left-Right triangle → rotate left on parent first
+            snap(n.val, u ? u.val : null, 'LR-step1',
+              `Red-Red conflict: node ${n.val} is RIGHT child, parent ${p.val} is LEFT child (triangle). ` +
+              `Case 2 — Left-Right: rotate Left on parent ${p.val} to convert to Line case.`);
+            n = p;
+            rotateLeft(n);
+          }
+          // Case 3a: Left-Left line → rotate right on grandparent
+          const newP = n.parent;
+          snap(n.val, u ? u.val : null, 'LL-step2',
+            `Left-Left line: node ${n.val}, parent ${newP.val}, grandparent ${gp.val}. ` +
+            `Case 3 — Rotate Right on grandparent ${gp.val}, swap colors of ${newP.val} ↔ ${gp.val}.`);
+          newP.color = BLACK;
+          gp.color = RED;
+          rotateRight(gp);
+          snap(newP.val, u ? u.val : null, 'rotated',
+            `✓ Right Rotation done. ${newP.val} (Black) is new subtree root. ${gp.val} becomes Red right child.`);
+        } else {
+          if (n === p.left) {
+            // Case 2b: Right-Left triangle → rotate right on parent first
+            snap(n.val, u ? u.val : null, 'RL-step1',
+              `Red-Red conflict: node ${n.val} is LEFT child, parent ${p.val} is RIGHT child (triangle). ` +
+              `Case 2 — Right-Left: rotate Right on parent ${p.val} to convert to Line case.`);
+            n = p;
+            rotateRight(n);
+          }
+          // Case 3b: Right-Right line → rotate left on grandparent
+          const newP = n.parent;
+          snap(n.val, u ? u.val : null, 'RR-step2',
+            `Right-Right line: node ${n.val}, parent ${newP.val}, grandparent ${gp.val}. ` +
+            `Case 3 — Rotate Left on grandparent ${gp.val}, swap colors of ${newP.val} ↔ ${gp.val}.`);
+          newP.color = BLACK;
+          gp.color = RED;
+          rotateLeft(gp);
+          snap(newP.val, u ? u.val : null, 'rotated',
+            `✓ Left Rotation done. ${newP.val} (Black) is new subtree root. ${gp.val} becomes Red left child.`);
+        }
+      }
+    }
+    root.color = BLACK;
+  }
+
+  function insert(val) {
+    const node = makeNode(val);
+    if (!root) {
+      root = node;
+      root.color = BLACK;
+      snap(val, null, 'insert',
+        `Insert ${val} as root. Root is always colored Black. Tree height = 1.`);
+      return;
+    }
+
+    // BST insert
+    let cur = root, par = null;
+    while (cur) {
+      par = cur;
+      if (val < cur.val) cur = cur.left;
+      else cur = cur.right;
+    }
+    node.parent = par;
+    if (val < par.val) par.left = node;
+    else par.right = node;
+
+    snap(val, null, 'insert',
+      `Insert ${val} as Red child of ${par.val}. ` +
+      (par.color === RED ? `Red-Red conflict detected — starting fix-up.` : `No violation (parent is Black).`));
+
+    if (par.color === RED) fixInsert(node);
+
+    root.color = BLACK;
+    snap(val, null, 'stable',
+      `Tree stable after inserting ${val}. Root ${root.val} is Black. RB properties satisfied.`);
+  }
+
+  steps.push({ tree: null, positions: {}, activeVal: null, uncleVal: null, fixCase: 'start',
+    log: `Red-Black Tree insertion: [${arr.join(', ')}]. Rules: root=Black, new nodes=Red, no two consecutive Red nodes, equal Black-height on all paths.` });
+
+  for (const val of arr) insert(val);
+
   visualizerState.steps = steps;
 }
 
 // Network Flow step generator
+// Network Flow step generator — Edmonds-Karp (BFS-based Ford-Fulkerson)
 function generateNetFlowSteps() {
+  const { nodes, edges } = visualizerState.rawArray;
   const steps = [];
-  
+
+  // Build adjacency and capacity/flow maps
+  // cap[u][v] = capacity, flow[u][v] = current flow
+  const cap  = {};
+  const flow = {};
+  nodes.forEach(u => { cap[u] = {}; flow[u] = {}; });
+  nodes.forEach(u => nodes.forEach(v => { cap[u][v] = 0; flow[u][v] = 0; }));
+  edges.forEach(e => { cap[e.u][e.v] += e.cap; });
+
+  const source = nodes[0];
+  const sink   = nodes[nodes.length - 1];
+
+  function snapshotFlows() {
+    return edges.map(e => ({
+      u: e.u, v: e.v, cap: e.cap,
+      flow: flow[e.u][e.v],
+      residual: cap[e.u][e.v] - flow[e.u][e.v]
+    }));
+  }
+
+  function bfs() {
+    const parent = {};
+    const visited = new Set([source]);
+    const queue = [source];
+    while (queue.length) {
+      const u = queue.shift();
+      if (u === sink) {
+        // reconstruct path
+        const path = [];
+        let cur = sink;
+        while (cur !== source) { path.unshift(cur); cur = parent[cur]; }
+        path.unshift(source);
+        return path;
+      }
+      for (const v of nodes) {
+        if (!visited.has(v) && cap[u][v] - flow[u][v] > 0) {
+          visited.add(v);
+          parent[v] = u;
+          queue.push(v);
+        }
+      }
+    }
+    return null;
+  }
+
+  // Snapshot of residual edges for display
+  function snapshotResidual() {
+    const res = [];
+    nodes.forEach(u => nodes.forEach(v => {
+      const r = cap[u][v] - flow[u][v];
+      if (r > 0) res.push({ u, v, residual: r, isBackward: flow[v] && flow[v][u] > 0 && cap[u][v] === 0 });
+    }));
+    return res;
+  }
+
+  let maxFlow = 0;
+  let iteration = 0;
+
+  // Initial state
   steps.push({
-    flows: [
-      { u: 'S', v: 'A', cap: 10, flow: 0 },
-      { u: 'S', v: 'B', cap: 5, flow: 0 },
-      { u: 'A', v: 'B', cap: 15, flow: 0 },
-      { u: 'A', v: 'T', cap: 10, flow: 0 },
-      { u: 'B', v: 'T', cap: 10, flow: 0 }
-    ],
-    path: [],
-    activeEdges: [],
-    maxFlow: 0,
-    log: "Flow network initialized with 0 flow. BFS is triggered to find augmenting paths."
+    flows: snapshotFlows(), residual: snapshotResidual(),
+    path: [], pathEdges: [], bottleneck: 0,
+    maxFlow, phase: 'init',
+    log: `Edmonds-Karp initialized. Graph has ${nodes.length} nodes, ${edges.length} edges. Source=${source}, Sink=${sink}. Max flow = 0. Starting BFS to find augmenting paths.`
   });
-  
+
+  while (true) {
+    const path = bfs();
+    if (!path) break;
+    iteration++;
+
+    // Compute bottleneck
+    let bottleneck = Infinity;
+    const pathEdges = [];
+    for (let i = 0; i < path.length - 1; i++) {
+      const u = path[i], v = path[i + 1];
+      const r = cap[u][v] - flow[u][v];
+      if (r < bottleneck) bottleneck = r;
+      pathEdges.push(`${u}-${v}`);
+    }
+
+    // BFS found path — show it before augmenting
+    steps.push({
+      flows: snapshotFlows(), residual: snapshotResidual(),
+      path, pathEdges, bottleneck,
+      maxFlow, phase: 'found',
+      log: `Iteration ${iteration}: BFS found augmenting path ${path.join(' → ')}. ` +
+           `Bottleneck = min(${pathEdges.map(e => { const [u,v] = e.split('-'); return cap[u][v] - flow[u][v]; }).join(', ')}) = ${bottleneck}.`
+    });
+
+    // Augment flow along path
+    for (let i = 0; i < path.length - 1; i++) {
+      const u = path[i], v = path[i + 1];
+      flow[u][v] += bottleneck;
+      flow[v][u] -= bottleneck;
+    }
+    maxFlow += bottleneck;
+
+    steps.push({
+      flows: snapshotFlows(), residual: snapshotResidual(),
+      path, pathEdges, bottleneck,
+      maxFlow, phase: 'augmented',
+      log: `Pushed ${bottleneck} units along ${path.join(' → ')}. ` +
+           `Updated flows: ${pathEdges.map(e => { const [u,v] = e.split('-'); return `${e} → ${flow[u][v]}/${cap[u][v]}`; }).join(', ')}. ` +
+           `Total max flow so far = ${maxFlow}.`
+    });
+  }
+
+  // Final — no more augmenting paths
   steps.push({
-    flows: [
-      { u: 'S', v: 'A', cap: 10, flow: 0 },
-      { u: 'S', v: 'B', cap: 5, flow: 0 },
-      { u: 'A', v: 'B', cap: 15, flow: 0 },
-      { u: 'A', v: 'T', cap: 10, flow: 0 },
-      { u: 'B', v: 'T', cap: 10, flow: 0 }
-    ],
-    path: ['S', 'A', 'T'],
-    activeEdges: ['S-A', 'A-T'],
-    maxFlow: 0,
-    log: "BFS found augmenting path S -> A -> T. Bottleneck capacity along this path is min(10, 10) = 10."
+    flows: snapshotFlows(), residual: snapshotResidual(),
+    path: [], pathEdges: [], bottleneck: 0,
+    maxFlow, phase: 'done',
+    log: `BFS found no augmenting path. Residual graph has no S→T path. ` +
+         `Algorithm complete. Maximum flow = ${maxFlow}.`
   });
-  
-  steps.push({
-    flows: [
-      { u: 'S', v: 'A', cap: 10, flow: 10 },
-      { u: 'S', v: 'B', cap: 5, flow: 0 },
-      { u: 'A', v: 'B', cap: 15, flow: 0 },
-      { u: 'A', v: 'T', cap: 10, flow: 10 },
-      { u: 'B', v: 'T', cap: 10, flow: 0 }
-    ],
-    path: ['S', 'A', 'T'],
-    activeEdges: ['S-A', 'A-T'],
-    maxFlow: 10,
-    log: "Pushed 10 units of flow along S -> A -> T. Current total flow = 10."
-  });
-  
-  steps.push({
-    flows: [
-      { u: 'S', v: 'A', cap: 10, flow: 10 },
-      { u: 'S', v: 'B', cap: 5, flow: 0 },
-      { u: 'A', v: 'B', cap: 15, flow: 0 },
-      { u: 'A', v: 'T', cap: 10, flow: 10 },
-      { u: 'B', v: 'T', cap: 10, flow: 0 }
-    ],
-    path: ['S', 'B', 'T'],
-    activeEdges: ['S-B', 'B-T'],
-    maxFlow: 10,
-    log: "BFS found next augmenting path S -> B -> T. Bottleneck capacity along this path is min(5, 10) = 5."
-  });
-  
-  steps.push({
-    flows: [
-      { u: 'S', v: 'A', cap: 10, flow: 10 },
-      { u: 'S', v: 'B', cap: 5, flow: 5 },
-      { u: 'A', v: 'B', cap: 15, flow: 0 },
-      { u: 'A', v: 'T', cap: 10, flow: 10 },
-      { u: 'B', v: 'T', cap: 10, flow: 5 }
-    ],
-    path: ['S', 'B', 'T'],
-    activeEdges: ['S-B', 'B-T'],
-    maxFlow: 15,
-    log: "Pushed 5 units of flow along S -> B -> T. Current total flow = 15."
-  });
-  
-  steps.push({
-    flows: [
-      { u: 'S', v: 'A', cap: 10, flow: 10 },
-      { u: 'S', v: 'B', cap: 5, flow: 5 },
-      { u: 'A', v: 'B', cap: 15, flow: 0 },
-      { u: 'A', v: 'T', cap: 10, flow: 10 },
-      { u: 'B', v: 'T', cap: 10, flow: 5 }
-    ],
-    path: [],
-    activeEdges: [],
-    maxFlow: 15,
-    log: "BFS runs again. Source and sink are disconnected in residual graph. Max Flow algorithm complete. Optimal Max Flow = 15."
-  });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -12580,26 +13088,48 @@ function generateGreedySteps(intervals) {
   const sorted = intervals
     .map((interval, idx) => ({ ...interval, originalIndex: idx }))
     .sort((a, b) => a.end - b.end || a.start - b.start);
+
+  const maxEnd = Math.max(...sorted.map(iv => iv.end));
   const steps = [];
   const selected = [];
+  const rejected = [];
   let lastEnd = -Infinity;
 
-  steps.push({ intervals: sorted, scanning: -1, selected: [], rejected: [], lastEnd, log: "Sort intervals by earliest finish time." });
+  const snap = (scanning, phase, log) => steps.push({
+    intervals: sorted, scanning, selected: [...selected],
+    rejected: [...rejected], lastEnd, maxEnd, phase, log
+  });
+
+  snap(-1, 'sort',
+    `Sort ${sorted.length} intervals by earliest finish time: ` +
+    sorted.map(iv => `[${iv.start},${iv.end}]`).join(' → '));
 
   sorted.forEach((interval, idx) => {
     const canTake = interval.start >= lastEnd;
-    steps.push({ intervals: sorted, scanning: idx, selected: [...selected], rejected: canTake ? [] : [idx], lastEnd, log: `Inspect [${interval.start}, ${interval.end}]. Current lastEnd = ${lastEnd === -Infinity ? '-inf' : lastEnd}.` });
+    snap(idx, 'inspect',
+      `Inspect [${interval.start}, ${interval.end}]. lastEnd = ${lastEnd === -Infinity ? '-∞' : lastEnd}. ` +
+      (canTake
+        ? `start(${interval.start}) ≥ lastEnd(${lastEnd === -Infinity ? '-∞' : lastEnd}) → no overlap.`
+        : `start(${interval.start}) < lastEnd(${lastEnd}) → overlaps — reject.`));
 
     if (canTake) {
       selected.push(idx);
       lastEnd = interval.end;
-      steps.push({ intervals: sorted, scanning: idx, selected: [...selected], rejected: [], lastEnd, log: `Selected [${interval.start}, ${interval.end}]. Update lastEnd to ${lastEnd}.` });
+      snap(idx, 'select',
+        `✓ Select [${interval.start}, ${interval.end}]. Advance lastEnd → ${lastEnd}. ` +
+        `${selected.length} interval${selected.length > 1 ? 's' : ''} selected so far.`);
     } else {
-      steps.push({ intervals: sorted, scanning: idx, selected: [...selected], rejected: [idx], lastEnd, log: `Overlap detected. Reject [${interval.start}, ${interval.end}].` });
+      rejected.push(idx);
+      snap(idx, 'reject',
+        `✗ Reject [${interval.start}, ${interval.end}] — overlaps with lastEnd=${lastEnd}. ` +
+        `Skipping; greedy keeps earlier-ending choice.`);
     }
   });
 
-  steps.push({ intervals: sorted, scanning: -1, selected: [...selected], rejected: [], lastEnd, log: `Greedy complete. Selected ${selected.length} compatible intervals.` });
+  snap(-1, 'done',
+    `Greedy complete. Selected ${selected.length} non-overlapping intervals out of ${sorted.length}. ` +
+    `Rejected: ${sorted.length - selected.length}.`);
+
   visualizerState.steps = steps;
 }
 
@@ -14558,30 +15088,173 @@ function renderCanvasStep() {
 
   // --- V. GREEDY INTERVAL SELECTION ---
   else if (visualizerState.algo === 'greedy') {
+    const scrollWrapper = document.createElement('div');
+    scrollWrapper.className = 'viz-scroll-wrapper';
     const container = document.createElement('div');
-    container.className = 'greedy-container';
-    const maxEnd = Math.max(...step.intervals.map(interval => interval.end));
+    container.className = 'concept-vis-container';
+
+    // Title + phase badge
+    const phaseColors = { sort: 'var(--text-muted)', inspect: 'var(--medium)', select: 'var(--easy)', reject: 'var(--hard)', done: 'var(--accent-cyan)' };
+    const phaseLabels = { sort: 'Sorted by finish time', inspect: 'Inspecting', select: '✓ Selected', reject: '✗ Rejected', done: '✓ Complete' };
+    const titleRow = document.createElement('div');
+    titleRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;width:100%;flex-wrap:wrap;gap:0.5rem;';
+    const titleEl = document.createElement('div');
+    titleEl.style.cssText = 'font-size:0.8rem;font-weight:600;color:var(--text-muted);font-family:monospace;';
+    titleEl.textContent = visualizerState.greedyLabel || 'Greedy Interval Scheduling';
+    const phaseBadge = document.createElement('div');
+    phaseBadge.style.cssText = `font-size:0.72rem;font-weight:700;font-family:monospace;color:${phaseColors[step.phase]};letter-spacing:0.07em;text-transform:uppercase;`;
+    phaseBadge.textContent = `● ${phaseLabels[step.phase] || step.phase}`;
+    titleRow.appendChild(titleEl);
+    titleRow.appendChild(phaseBadge);
+    container.appendChild(titleRow);
+
+    const maxEnd = step.maxEnd || Math.max(...step.intervals.map(iv => iv.end));
+    const RULER_PAD = 36; // px left offset for index labels
+
+    // Timeline ruler
+    const rulerWrap = document.createElement('div');
+    rulerWrap.style.cssText = `position:relative;width:100%;height:24px;margin-bottom:2px;`;
+
+    const tickCount = maxEnd + 1;
+    for (let t = 0; t <= maxEnd; t++) {
+      const tick = document.createElement('div');
+      const pct = (t / maxEnd) * 100;
+      tick.style.cssText = `
+        position:absolute;
+        left:calc(${RULER_PAD}px + ${pct}% * (100% - ${RULER_PAD}px) / 100);
+        bottom:0;
+        display:flex;flex-direction:column;align-items:center;
+        font-size:${tickCount > 14 && t % 2 !== 0 ? '0' : '0.6rem'};
+        color:var(--text-muted);font-family:monospace;
+        transform:translateX(-50%);
+      `;
+      const tickLine = document.createElement('div');
+      tickLine.style.cssText = `width:1px;height:${t % 5 === 0 ? '8px' : '4px'};background:rgba(255,255,255,${t % 5 === 0 ? '0.25' : '0.1'});margin-bottom:1px;`;
+      tick.appendChild(tickLine);
+      if (tickCount <= 20 || t % Math.ceil(maxEnd / 10) === 0) {
+        const label = document.createElement('span');
+        label.textContent = t;
+        tick.appendChild(label);
+      }
+      rulerWrap.appendChild(tick);
+    }
+
+    // lastEnd vertical marker
+    if (step.lastEnd !== -Infinity && step.lastEnd > 0) {
+      const markerPct = (step.lastEnd / maxEnd) * 100;
+      const marker = document.createElement('div');
+      marker.style.cssText = `
+        position:absolute;
+        left:calc(${RULER_PAD}px + ${markerPct}% * (100% - ${RULER_PAD}px) / 100);
+        top:0;bottom:0;
+        width:2px;background:var(--accent-cyan);
+        transform:translateX(-50%);
+        box-shadow:0 0 6px rgba(6,182,212,0.5);
+      `;
+      // Extend marker down through all rows — we'll use a full-height overlay instead
+      rulerWrap.appendChild(marker);
+    }
+    container.appendChild(rulerWrap);
+
+    // Interval rows
+    const rowsWrap = document.createElement('div');
+    rowsWrap.style.cssText = `position:relative;width:100%;display:flex;flex-direction:column;gap:3px;`;
+
+    // Full-height lastEnd line overlay
+    if (step.lastEnd !== -Infinity && step.lastEnd > 0) {
+      const markerPct = (step.lastEnd / maxEnd) * 100;
+      const fullLine = document.createElement('div');
+      fullLine.style.cssText = `
+        position:absolute;top:0;bottom:0;
+        left:calc(${RULER_PAD}px + ${markerPct}% * (100% - ${RULER_PAD}px) / 100);
+        width:2px;background:rgba(6,182,212,0.35);
+        transform:translateX(-50%);pointer-events:none;z-index:1;
+      `;
+      const markerLabel = document.createElement('div');
+      markerLabel.style.cssText = `
+        position:absolute;top:-18px;
+        left:calc(${RULER_PAD}px + ${markerPct}% * (100% - ${RULER_PAD}px) / 100);
+        transform:translateX(-50%);
+        font-size:0.6rem;font-family:monospace;font-weight:700;
+        color:var(--accent-cyan);white-space:nowrap;
+      `;
+      markerLabel.textContent = `lastEnd=${step.lastEnd}`;
+      rowsWrap.appendChild(fullLine);
+      rowsWrap.appendChild(markerLabel);
+    }
 
     step.intervals.forEach((interval, idx) => {
+      const isScanning = idx === step.scanning;
+      const isSelected = step.selected.includes(idx);
+      const isRejected = step.rejected.includes(idx);
+
       const row = document.createElement('div');
-      row.className = 'interval-row-block';
+      row.style.cssText = `position:relative;width:100%;height:28px;display:flex;align-items:center;`;
+
+      // Index label
+      const indexLabel = document.createElement('div');
+      indexLabel.style.cssText = `
+        width:${RULER_PAD - 6}px;flex-shrink:0;
+        font-size:0.65rem;font-family:monospace;
+        color:${isScanning ? 'var(--medium)' : isSelected ? 'var(--easy)' : isRejected ? 'var(--hard)' : 'var(--text-muted)'};
+        text-align:right;padding-right:6px;font-weight:${isScanning ? '700' : '400'};
+      `;
+      indexLabel.textContent = `i${idx}`;
+      row.appendChild(indexLabel);
+
+      // Bar track
+      const track = document.createElement('div');
+      track.style.cssText = `position:relative;flex:1;height:100%;`;
+
       const bar = document.createElement('div');
-      bar.className = 'interval-bar-block';
-      bar.style.left = `${(interval.start / maxEnd) * 100}%`;
-      bar.style.width = `${((interval.end - interval.start) / maxEnd) * 100}%`;
-      bar.textContent = `[${interval.start}, ${interval.end}]`;
-      if (idx === step.scanning) bar.classList.add('scanning');
-      if (step.selected.includes(idx)) bar.classList.add('merged');
-      if (step.rejected.includes(idx)) bar.classList.add('rejected');
-      row.appendChild(bar);
-      container.appendChild(row);
+      const leftPct  = (interval.start / maxEnd) * 100;
+      const widthPct = ((interval.end - interval.start) / maxEnd) * 100;
+      bar.style.cssText = `
+        position:absolute;
+        left:${leftPct}%;width:${widthPct}%;
+        height:20px;top:4px;
+        border-radius:4px;
+        display:flex;align-items:center;justify-content:center;
+        font-size:0.68rem;font-weight:600;
+        transition:all 0.25s ease;
+        ${isScanning
+          ? 'background:linear-gradient(to right,var(--secondary),#db2777);border:1px solid var(--secondary);color:#fff;box-shadow:0 0 8px rgba(236,72,153,0.4);'
+          : isSelected
+            ? 'background:linear-gradient(to right,var(--easy),#059669);border:1px solid var(--easy);color:#fff;box-shadow:0 0 6px rgba(16,185,129,0.3);'
+            : isRejected
+              ? 'background:rgba(244,63,94,0.18);border:1px solid rgba(244,63,94,0.5);color:var(--hard);'
+              : 'background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:var(--text-muted);'}
+      `;
+      bar.textContent = `[${interval.start},${interval.end}]`;
+      track.appendChild(bar);
+      row.appendChild(track);
+      rowsWrap.appendChild(row);
     });
 
-    const status = document.createElement('div');
-    status.className = 'concept-status';
-    status.innerHTML = `Selected <strong>${step.selected.length}</strong> | lastEnd <strong>${step.lastEnd === -Infinity ? '-inf' : step.lastEnd}</strong>`;
-    container.appendChild(status);
-    canvas.appendChild(container);
+    container.appendChild(rowsWrap);
+
+    // Stats row
+    const statsRow = document.createElement('div');
+    statsRow.style.cssText = 'display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;font-size:0.72rem;font-family:monospace;margin-top:0.25rem;';
+    statsRow.innerHTML =
+      `<span>Total: <strong style="color:var(--text-main)">${step.intervals.length}</strong></span>` +
+      `<span style="color:var(--easy)">Selected: <strong>${step.selected.length}</strong></span>` +
+      `<span style="color:var(--hard)">Rejected: <strong>${step.rejected.length}</strong></span>` +
+      `<span style="color:var(--accent-cyan)">lastEnd: <strong>${step.lastEnd === -Infinity ? '-∞' : step.lastEnd}</strong></span>`;
+    container.appendChild(statsRow);
+
+    // Legend
+    const legend = document.createElement('div');
+    legend.style.cssText = 'display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;font-size:0.65rem;color:var(--text-muted);';
+    legend.innerHTML =
+      `<span style="color:var(--secondary)">■ Scanning</span>` +
+      `<span style="color:var(--easy)">■ Selected</span>` +
+      `<span style="color:var(--hard)">■ Rejected</span>` +
+      `<span style="color:var(--accent-cyan)">| lastEnd marker</span>`;
+    container.appendChild(legend);
+
+    scrollWrapper.appendChild(container);
+    canvas.appendChild(scrollWrapper);
   }
 
   // --- W. EDIT DISTANCE DP ---
@@ -15364,305 +16037,594 @@ function renderCanvasStep() {
 
   // --- AVL Tree Drawer ---
   else if (visualizerState.algo === 'avl') {
+    const scrollWrapper = document.createElement('div');
+    scrollWrapper.className = 'viz-scroll-wrapper';
     const container = document.createElement('div');
-    container.className = 'tree-container';
-    
-    const treeCoords = [
-      { x: 228, y: 20 },   
-      { x: 110, y: 85 },   
-      { x: 346, y: 85 },   
-      { x: 50,  y: 155 },  
-      { x: 170, y: 155 },  
-      { x: 286, y: 155 },  
-      { x: 406, y: 155 }   
-    ];
-    
-    const flatTree = new Array(7).fill(null);
-    function flatten(node, idx) {
-      if (!node || idx >= 7) return;
-      flatTree[idx] = node;
-      flatten(node.left, idx * 2 + 1);
-      flatten(node.right, idx * 2 + 2);
+    container.className = 'concept-vis-container';
+
+    // Rotation type badge
+    if (step.rotationType) {
+      const rotColors = { LL: '#10b981', RR: '#10b981', LR: '#f59e0b', RL: '#f59e0b' };
+      const rotDesc  = { LL: 'Left-Left → Right Rotation', RR: 'Right-Right → Left Rotation', LR: 'Left-Right → Double Rotation', RL: 'Right-Left → Double Rotation' };
+      const badge = document.createElement('div');
+      badge.style.cssText = `font-size:0.72rem;font-weight:700;font-family:monospace;letter-spacing:0.07em;color:${rotColors[step.rotationType]};text-transform:uppercase;`;
+      badge.textContent = `⟳ ${step.rotationType}: ${rotDesc[step.rotationType]}`;
+      container.appendChild(badge);
     }
-    flatten(step.tree, 0);
-    
-    flatTree.forEach((nodeData, idx) => {
-      if (!nodeData) return;
-      const c = treeCoords[idx];
-      const node = document.createElement('div');
-      node.className = 'tree-node';
-      node.style.left = `${c.x}px`;
-      node.style.top = `${c.y}px`;
-      
-      const valSpan = document.createElement('span');
-      valSpan.className = 'tree-node-val';
-      valSpan.textContent = nodeData.val;
-      node.appendChild(valSpan);
-      
-      const bfSpan = document.createElement('span');
-      bfSpan.style.fontSize = '0.65rem';
-      bfSpan.style.color = Math.abs(nodeData.bf) > 1 ? 'var(--accent-red)' : 'var(--text-muted)';
-      bfSpan.textContent = `BF:${nodeData.bf}`;
-      bfSpan.style.marginTop = '2px';
-      node.appendChild(bfSpan);
-      
-      if (nodeData.val === step.activeNode) node.classList.add('scanning');
-      
-      container.appendChild(node);
-    });
-    
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("class", "cycle-arrow-svg");
-    
-    const treeLinks = [
-      { from: 0, to: 1 }, { from: 0, to: 2 },
-      { from: 1, to: 3 }, { from: 1, to: 4 },
-      { from: 2, to: 5 }, { from: 2, to: 6 }
-    ];
-    
-    treeLinks.forEach(l => {
-      if (!flatTree[l.from] || !flatTree[l.to]) return;
-      const from = treeCoords[l.from];
-      const to = treeCoords[l.to];
-      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      
-      const r = 22; 
-      line.setAttribute("x1", from.x + r);
-      line.setAttribute("y1", from.y + r);
-      line.setAttribute("x2", to.x + r);
-      line.setAttribute("y2", to.y + r);
-      line.setAttribute("stroke", "rgba(255,255,255,0.15)");
-      line.setAttribute("stroke-width", "1.5");
-      svg.appendChild(line);
-    });
-    
-    container.appendChild(svg);
-    canvas.appendChild(container);
+
+    // Status badge
+    if (step.status !== 'start') {
+      const statusColors = { insert: 'var(--primary-glow)', stable: 'var(--easy)', unbalanced: 'var(--hard)', rotated: 'var(--accent-cyan)' };
+      const statusLabels = { insert: 'Inserting', stable: 'Balanced', unbalanced: 'Unbalanced!', rotated: 'Rotated' };
+      const sb = document.createElement('div');
+      sb.style.cssText = `font-size:0.72rem;font-weight:700;font-family:monospace;color:${statusColors[step.status] || 'var(--text-muted)'};`;
+      sb.textContent = `● ${statusLabels[step.status] || step.status}`;
+      container.appendChild(sb);
+    }
+
+    if (!step.tree) { scrollWrapper.appendChild(container); canvas.appendChild(scrollWrapper); return; }
+
+    // Compute layout positions by traversing the serialized tree
+    const NODE_R = 22;
+    const H_GAP  = 52;
+    const V_GAP  = 64;
+    const positions = new Map(); // val → {x, y}
+
+    function computeLayout(node, depth, counter) {
+      if (!node) return;
+      computeLayout(node.left, depth + 1, counter);
+      counter.x += H_GAP;
+      positions.set(node.val, { x: counter.x, y: depth * V_GAP + NODE_R });
+      computeLayout(node.right, depth + 1, counter);
+    }
+    computeLayout(step.tree, 0, { x: 0 });
+
+    const allX = [...positions.values()].map(p => p.x);
+    const allY = [...positions.values()].map(p => p.y);
+    const svgW = Math.max(...allX) + H_GAP;
+    const svgH = Math.max(...allY) + V_GAP;
+
+    const treeWrap = document.createElement('div');
+    treeWrap.style.cssText = `position:relative;width:${svgW}px;height:${svgH}px;flex-shrink:0;`;
+
+    // Draw edges
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', svgW);
+    svg.setAttribute('height', svgH);
+    svg.style.cssText = 'position:absolute;top:0;left:0;overflow:visible;pointer-events:none;';
+
+    function drawEdges(node) {
+      if (!node) return;
+      const p = positions.get(node.val);
+      if (node.left) {
+        const c = positions.get(node.left.val);
+        if (p && c) {
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', p.x); line.setAttribute('y1', p.y);
+          line.setAttribute('x2', c.x); line.setAttribute('y2', c.y);
+          const isPath = step.path && step.path.includes(node.val) && step.path.includes(node.left.val);
+          line.setAttribute('stroke', isPath ? 'rgba(99,102,241,0.6)' : 'rgba(255,255,255,0.15)');
+          line.setAttribute('stroke-width', isPath ? '2' : '1.5');
+          svg.appendChild(line);
+        }
+        drawEdges(node.left);
+      }
+      if (node.right) {
+        const c = positions.get(node.right.val);
+        if (p && c) {
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', p.x); line.setAttribute('y1', p.y);
+          line.setAttribute('x2', c.x); line.setAttribute('y2', c.y);
+          const isPath = step.path && step.path.includes(node.val) && step.path.includes(node.right.val);
+          line.setAttribute('stroke', isPath ? 'rgba(99,102,241,0.6)' : 'rgba(255,255,255,0.15)');
+          line.setAttribute('stroke-width', isPath ? '2' : '1.5');
+          svg.appendChild(line);
+        }
+        drawEdges(node.right);
+      }
+    }
+    drawEdges(step.tree);
+    treeWrap.appendChild(svg);
+
+    // Draw nodes
+    function drawNodes(node) {
+      if (!node) return;
+      const p = positions.get(node.val);
+      if (!p) return;
+      const isActive  = node.val === step.activeNode;
+      const isOnPath  = step.path && step.path.includes(node.val);
+      const isUnbal   = step.status === 'unbalanced' && isActive;
+      const bfAbs     = Math.abs(node.bf);
+
+      const nodeEl = document.createElement('div');
+      nodeEl.style.cssText = `
+        position:absolute;
+        left:${p.x - NODE_R}px;top:${p.y - NODE_R}px;
+        width:${NODE_R * 2}px;height:${NODE_R * 2}px;
+        border-radius:50%;
+        display:flex;flex-direction:column;justify-content:center;align-items:center;
+        font-size:0.72rem;font-weight:700;
+        border:${isUnbal ? '2px solid var(--hard)' : isActive ? '2px solid var(--accent-cyan)' : isOnPath ? '1.5px solid rgba(99,102,241,0.7)' : '1px solid rgba(255,255,255,0.15)'};
+        background:${isUnbal ? 'rgba(244,63,94,0.18)' : isActive ? 'rgba(6,182,212,0.18)' : isOnPath ? 'rgba(99,102,241,0.12)' : 'rgba(255,255,255,0.04)'};
+        transition:border 0.2s, background 0.2s;
+      `;
+      const valEl = document.createElement('span');
+      valEl.style.cssText = `color:${isActive ? 'var(--accent-cyan)' : 'var(--text-main)'};line-height:1;`;
+      valEl.textContent = node.val;
+
+      const bfEl = document.createElement('span');
+      bfEl.style.cssText = `font-size:0.55rem;color:${bfAbs > 1 ? 'var(--hard)' : bfAbs === 1 ? 'var(--medium)' : 'var(--easy)'};margin-top:1px;font-family:monospace;`;
+      bfEl.textContent = `BF:${node.bf}`;
+
+      nodeEl.appendChild(valEl);
+      nodeEl.appendChild(bfEl);
+      treeWrap.appendChild(nodeEl);
+
+      drawNodes(node.left);
+      drawNodes(node.right);
+    }
+    drawNodes(step.tree);
+
+    const outerWrap = document.createElement('div');
+    outerWrap.style.cssText = 'overflow-x:auto;padding:0.5rem 0;width:100%;';
+    outerWrap.appendChild(treeWrap);
+    container.appendChild(outerWrap);
+
+    // BF legend
+    const legend = document.createElement('div');
+    legend.style.cssText = 'font-size:0.68rem;color:var(--text-muted);font-family:monospace;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;';
+    legend.innerHTML = `<span style="color:var(--easy)">BF=0 balanced</span><span style="color:var(--medium)">|BF|=1 ok</span><span style="color:var(--hard)">|BF|>1 violation</span>`;
+    container.appendChild(legend);
+
+    scrollWrapper.appendChild(container);
+    canvas.appendChild(scrollWrapper);
   }
 
   // --- Huffman Tree Drawer ---
   else if (visualizerState.algo === 'huffman') {
     const container = document.createElement('div');
     container.className = 'concept-vis-container';
-    container.style.flexDirection = 'column';
-    container.style.gap = '1rem';
-    
+
+    // Phase badge
+    const phaseColors = { init: 'var(--text-muted)', selecting: 'var(--medium)', merged: 'var(--accent-cyan)', complete: 'var(--easy)' };
+    const phaseLabels = { init: 'Initialized', selecting: 'Selecting Pair', merged: 'Merged', complete: 'Complete' };
+    const phaseBadge = document.createElement('div');
+    phaseBadge.style.cssText = `font-size:0.72rem;font-weight:700;font-family:monospace;color:${phaseColors[step.phase]};letter-spacing:0.08em;text-transform:uppercase;`;
+    phaseBadge.textContent = `● ${phaseLabels[step.phase]}`;
+    container.appendChild(phaseBadge);
+
+    // Priority queue row
     const queueTitle = document.createElement('div');
     queueTitle.className = 'prefixsum-label';
-    queueTitle.innerHTML = `Priority Queue (Sorted Forests):`;
+    queueTitle.innerHTML = `Priority Queue — ${step.queue.length} node${step.queue.length !== 1 ? 's' : ''} remaining:`;
     container.appendChild(queueTitle);
-    
+
     const queueRow = document.createElement('div');
-    queueRow.style.display = 'flex';
-    queueRow.style.flexWrap = 'wrap';
-    queueRow.style.gap = '0.5rem';
-    queueRow.style.justifyContent = 'center';
-    
-    step.queue.forEach(node => {
+    queueRow.style.cssText = 'display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;';
+
+    step.queue.forEach((node, qi) => {
+      const isLeft  = node.val === step.mergeLeft;
+      const isRight = node.val === step.mergeRight;
+      const isMerged = node.val === step.mergedVal;
       const card = document.createElement('div');
       card.className = 'hash-pair';
-      if (node.val === step.mergedNode) card.classList.add('scanning');
-      card.innerHTML = `<strong style="color:var(--accent-cyan)">${node.val}</strong> : ${node.freq}`;
+      if (isLeft || isRight) {
+        card.style.border = '1.5px solid var(--medium)';
+        card.style.background = 'rgba(245,158,11,0.12)';
+      } else if (isMerged) {
+        card.style.border = '1.5px solid var(--accent-cyan)';
+        card.style.background = 'rgba(6,182,212,0.12)';
+      }
+      const label = isLeft ? ' ←L' : isRight ? ' ←R' : isMerged ? ' ✓' : '';
+      const isLeaf = !node.left && !node.right;
+      card.innerHTML = `<strong style="color:${isLeaf ? 'var(--primary-glow)' : 'var(--accent-cyan)'}">'${node.val}'</strong> <span style="color:var(--text-muted);font-size:0.75rem;">freq=${node.freq}${label}</span>`;
       queueRow.appendChild(card);
     });
     container.appendChild(queueRow);
-    
-    if (step.queue.length > 0) {
+
+    // On final step: show encoding table instead of tree
+    if (step.phase === 'complete' && step.encodingTable) {
+      const tableTitle = document.createElement('div');
+      tableTitle.className = 'prefixsum-label';
+      tableTitle.innerHTML = `Prefix-Free Encoding Table:`;
+      container.appendChild(tableTitle);
+
+      const tableWrap = document.createElement('div');
+      tableWrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;';
+
+      // Sort by code length ascending for a clean display
+      const sorted = [...step.encodingNodes].sort((a, b) =>
+        step.encodingTable[a.char].length - step.encodingTable[b.char].length ||
+        b.freq - a.freq
+      );
+      sorted.forEach(n => {
+        const code = step.encodingTable[n.char];
+        const bits = step.encodingTable[n.char].length;
+        const entry = document.createElement('div');
+        entry.className = 'hash-pair';
+        entry.style.cssText = 'flex-direction:column;align-items:flex-start;min-width:90px;';
+        entry.innerHTML =
+          `<span style="font-size:0.9rem;font-weight:700;color:var(--primary-glow);">'${n.char}'</span>` +
+          `<span style="font-family:monospace;font-size:0.85rem;color:var(--accent-cyan);letter-spacing:0.1em;">${code}</span>` +
+          `<span style="font-size:0.68rem;color:var(--text-muted);">freq=${n.freq} · ${bits} bit${bits !== 1 ? 's' : ''}</span>`;
+        tableWrap.appendChild(entry);
+      });
+      container.appendChild(tableWrap);
+
+      const savings = document.createElement('div');
+      savings.style.cssText = 'font-size:0.78rem;color:var(--text-muted);text-align:center;margin-top:0.25rem;font-family:monospace;';
+      const saved = ((1 - step.totalBits / step.naiveBits) * 100).toFixed(1);
+      savings.innerHTML =
+        `Huffman: <strong style="color:var(--easy)">${step.totalBits} bits</strong> &nbsp;|&nbsp; ` +
+        `Fixed 8-bit: <strong style="color:var(--hard)">${step.naiveBits} bits</strong> &nbsp;|&nbsp; ` +
+        `Compression: <strong style="color:var(--easy)">${saved}% saved</strong>`;
+      container.appendChild(savings);
+    }
+
+    // Draw the largest subtree (highest freq node in queue) as the in-progress tree
+    const treeRoot = step.queue.reduce((best, n) => (!best || n.freq > best.freq) ? n : best, null);
+    if (treeRoot && (treeRoot.left || treeRoot.right)) {
       const treeTitle = document.createElement('div');
       treeTitle.className = 'prefixsum-label';
-      treeTitle.innerHTML = `Active Huffman Tree:`;
+      treeTitle.innerHTML = step.phase === 'complete'
+        ? `Complete Huffman Tree (root freq=${treeRoot.freq}):`
+        : `Largest Subtree Being Built (freq=${treeRoot.freq}):`;
       container.appendChild(treeTitle);
-      
+
       const treeContainer = document.createElement('div');
-      treeContainer.style.display = 'flex';
-      treeContainer.style.justifyContent = 'center';
-      treeContainer.style.width = '100%';
-      
-      const rootNode = step.queue[step.queue.length - 1];
-      
-      function drawHuffmanNode(n) {
+      treeContainer.style.cssText = 'display:flex;justify-content:center;width:100%;overflow-x:auto;padding-bottom:0.5rem;';
+
+      function drawHuffmanNode(n, isHighlighted) {
         if (!n) return '';
-        const hasChildren = n.left || n.right;
+        const isLeaf = !n.left && !n.right;
+        const isMergePart = n.val === step.mergeLeft || n.val === step.mergeRight || n.val === step.mergedVal;
+        const nodeColor = isLeaf
+          ? '1px solid var(--primary-glow);background:rgba(99,102,241,0.12)'
+          : isMergePart
+            ? '1.5px solid var(--medium);background:rgba(245,158,11,0.15)'
+            : '1px solid var(--accent-cyan);background:rgba(6,182,212,0.08)';
+        const labelColor = isLeaf ? 'var(--primary-glow)' : isMergePart ? 'var(--medium)' : 'var(--text-main)';
+
         const leftHtml = n.left ? `
-          <div style="display:flex; flex-direction:column; align-items:center; position:relative;">
-            <span style="position:absolute; top:-12px; left:-5px; font-size:0.65rem; color:var(--text-muted);">0</span>
-            ${drawHuffmanNode(n.left)}
-          </div>
-        ` : '';
+          <div style="display:flex;flex-direction:column;align-items:center;position:relative;">
+            <span style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:0.62rem;color:var(--easy);font-weight:700;">0</span>
+            ${drawHuffmanNode(n.left, false)}
+          </div>` : '';
         const rightHtml = n.right ? `
-          <div style="display:flex; flex-direction:column; align-items:center; position:relative;">
-            <span style="position:absolute; top:-12px; right:-5px; font-size:0.65rem; color:var(--text-muted);">1</span>
-            ${drawHuffmanNode(n.right)}
-          </div>
-        ` : '';
-        
+          <div style="display:flex;flex-direction:column;align-items:center;position:relative;">
+            <span style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:0.62rem;color:var(--secondary);font-weight:700;">1</span>
+            ${drawHuffmanNode(n.right, false)}
+          </div>` : '';
+
         return `
-          <div style="display:flex; flex-direction:column; align-items:center; margin: 0 0.4rem;">
-            <div class="uf-node root" style="width: 44px; height: 44px; border-radius: 50%; font-size: 0.72rem; border:1px solid var(--accent-cyan); background:rgba(0,188,212,0.08); display:flex; flex-direction:column; justify-content:center; align-items:center;">
-              <strong>${n.val}</strong>
-              <span style="font-size:0.58rem; color:var(--text-muted); integrity: 100%;">${n.freq}</span>
+          <div style="display:flex;flex-direction:column;align-items:center;margin:0 0.3rem;">
+            <div style="width:46px;height:46px;border-radius:50%;border:${nodeColor};display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:${n.val.length > 5 ? '0.52rem' : '0.68rem'};">
+              <strong style="color:${labelColor};overflow:hidden;max-width:42px;text-overflow:ellipsis;white-space:nowrap;">${n.val}</strong>
+              <span style="font-size:0.56rem;color:var(--text-muted);">${n.freq}</span>
             </div>
-            ${hasChildren ? `
-              <div style="display:flex; gap:0.8rem; margin-top:1rem; border-top:1px dashed rgba(255,255,255,0.15); padding-top:0.4rem;">
-                ${leftHtml}
-                ${rightHtml}
-              </div>
-            ` : ''}
-          </div>
-        `;
+            ${(leftHtml || rightHtml) ? `
+              <div style="width:1px;height:12px;background:rgba(255,255,255,0.15);"></div>
+              <div style="display:flex;gap:0.6rem;border-top:1px dashed rgba(255,255,255,0.1);padding-top:0.3rem;">
+                ${leftHtml}${rightHtml}
+              </div>` : ''}
+          </div>`;
       }
-      
-      treeContainer.innerHTML = drawHuffmanNode(rootNode);
+
+      treeContainer.innerHTML = drawHuffmanNode(treeRoot, true);
       container.appendChild(treeContainer);
     }
-    
-    canvas.appendChild(container);
+
+    const scrollWrapper = document.createElement('div');
+    scrollWrapper.className = 'viz-scroll-wrapper';
+    scrollWrapper.appendChild(container);
+    canvas.appendChild(scrollWrapper);
   }
   else if (visualizerState.algo === 'rbtree') {
+    const scrollWrapper = document.createElement('div');
+    scrollWrapper.className = 'viz-scroll-wrapper';
     const container = document.createElement('div');
-    container.className = 'tree-container';
-    
-    // Create SVG container for lines
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("class", "cycle-arrow-svg");
-    
-    // Draw links using SVG
-    step.nodes.forEach(n => {
-      if (n.left !== null) {
-        const child = step.nodes.find(c => c.val === n.left);
+    container.className = 'concept-vis-container';
+
+    // Fix-case badge
+    const caseLabels = {
+      start:    { label: 'Ready',               color: 'var(--text-muted)' },
+      insert:   { label: 'Inserted (Red)',       color: 'var(--primary-glow)' },
+      recolor:  { label: 'Case 1 — Recolor',     color: 'var(--medium)' },
+      'LR-step1': { label: 'Case 2 — LR Triangle → Rotate', color: 'var(--secondary)' },
+      'RL-step1': { label: 'Case 2 — RL Triangle → Rotate', color: 'var(--secondary)' },
+      'LL-step2': { label: 'Case 3 — LL Line → Right Rotate', color: 'var(--accent-cyan)' },
+      'RR-step2': { label: 'Case 3 — RR Line → Left Rotate',  color: 'var(--accent-cyan)' },
+      rotated:  { label: '✓ Rotation Done',      color: 'var(--easy)' },
+      stable:   { label: '✓ Tree Balanced',       color: 'var(--easy)' },
+    };
+    const caseInfo = caseLabels[step.fixCase] || { label: step.fixCase, color: 'var(--text-muted)' };
+    const badge = document.createElement('div');
+    badge.style.cssText = `font-size:0.72rem;font-weight:700;font-family:monospace;color:${caseInfo.color};letter-spacing:0.07em;text-transform:uppercase;`;
+    badge.textContent = `● ${caseInfo.label}`;
+    container.appendChild(badge);
+
+    // Legend
+    const legend = document.createElement('div');
+    legend.style.cssText = 'font-size:0.68rem;font-family:monospace;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;';
+    legend.innerHTML =
+      `<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ef4444;margin-right:4px;"></span>Red node</span>` +
+      `<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#374151;border:1px solid #6b7280;margin-right:4px;"></span>Black node</span>` +
+      `<span style="color:var(--medium);">■ Active/inserted</span>` +
+      `<span style="color:var(--secondary);">■ Uncle</span>`;
+    container.appendChild(legend);
+
+    if (!step.tree) { scrollWrapper.appendChild(container); canvas.appendChild(scrollWrapper); return; }
+
+    const pos = step.positions;
+    const allX = Object.values(pos).map(p => p.x);
+    const allY = Object.values(pos).map(p => p.y);
+    const svgW = Math.max(...allX) + 56;
+    const svgH = Math.max(...allY) + 56;
+    const NODE_R = 22;
+
+    const treeWrap = document.createElement('div');
+    treeWrap.style.cssText = `position:relative;width:${svgW}px;height:${svgH}px;flex-shrink:0;`;
+
+    // Draw edges via SVG
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', svgW);
+    svg.setAttribute('height', svgH);
+    svg.style.cssText = 'position:absolute;top:0;left:0;pointer-events:none;';
+
+    function drawEdgesSvg(node) {
+      if (!node) return;
+      const p = pos[node.val];
+      if (!p) return;
+      for (const child of [node.left, node.right]) {
         if (child) {
-          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-          line.setAttribute("x1", n.x + 22);
-          line.setAttribute("y1", n.y + 22);
-          line.setAttribute("x2", child.x + 22);
-          line.setAttribute("y2", child.y + 22);
-          line.setAttribute("stroke", "rgba(255,255,255,0.15)");
-          line.setAttribute("stroke-width", "1.5");
-          svg.appendChild(line);
+          const c = pos[child.val];
+          if (c) {
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', p.x); line.setAttribute('y1', p.y);
+            line.setAttribute('x2', c.x); line.setAttribute('y2', c.y);
+            line.setAttribute('stroke', 'rgba(255,255,255,0.18)');
+            line.setAttribute('stroke-width', '1.5');
+            svg.appendChild(line);
+          }
+          drawEdgesSvg(child);
         }
       }
-      if (n.right !== null) {
-        const child = step.nodes.find(c => c.val === n.right);
-        if (child) {
-          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-          line.setAttribute("x1", n.x + 22);
-          line.setAttribute("y1", n.y + 22);
-          line.setAttribute("x2", child.x + 22);
-          line.setAttribute("y2", child.y + 22);
-          line.setAttribute("stroke", "rgba(255,255,255,0.15)");
-          line.setAttribute("stroke-width", "1.5");
-          svg.appendChild(line);
-        }
-      }
-    });
-    container.appendChild(svg);
-    
+    }
+    drawEdgesSvg(step.tree);
+    treeWrap.appendChild(svg);
+
     // Draw nodes
-    step.nodes.forEach(n => {
-      const node = document.createElement('div');
-      node.className = 'tree-node ' + (n.color === 'red' ? 'rb-red' : 'rb-black');
-      node.style.left = `${n.x}px`;
-      node.style.top = `${n.y}px`;
-      node.style.position = 'absolute';
-      
-      const valSpan = document.createElement('span');
-      valSpan.className = 'tree-node-val';
-      valSpan.style.color = '#ffffff';
-      valSpan.textContent = n.val;
-      node.appendChild(valSpan);
-      
-      container.appendChild(node);
-    });
-    
-    canvas.appendChild(container);
+    function drawNodeEl(node) {
+      if (!node) return;
+      const p = pos[node.val];
+      if (!p) return;
+      const isActive = node.val === step.activeVal;
+      const isUncle  = node.val === step.uncleVal;
+      const isRed    = node.color === 'red';
+
+      const el = document.createElement('div');
+      el.style.cssText = `
+        position:absolute;
+        left:${p.x - NODE_R}px;top:${p.y - NODE_R}px;
+        width:${NODE_R * 2}px;height:${NODE_R * 2}px;
+        border-radius:50%;
+        display:flex;flex-direction:column;justify-content:center;align-items:center;
+        font-size:0.75rem;font-weight:700;
+        background:${isRed ? 'rgba(239,68,68,0.75)' : 'rgba(30,40,58,0.92)'};
+        border:${isActive ? '2.5px solid var(--medium)' : isUncle ? '2.5px solid var(--secondary)' : isRed ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(107,114,128,0.5)'};
+        box-shadow:${isActive ? '0 0 10px rgba(245,158,11,0.4)' : isUncle ? '0 0 10px rgba(236,72,153,0.4)' : 'none'};
+      `;
+      const valEl = document.createElement('span');
+      valEl.style.cssText = `color:#fff;line-height:1;`;
+      valEl.textContent = node.val;
+
+      const colorEl = document.createElement('span');
+      colorEl.style.cssText = `font-size:0.52rem;color:${isRed ? 'rgba(255,200,200,0.8)' : 'rgba(156,163,175,0.8)'};margin-top:1px;font-family:monospace;`;
+      colorEl.textContent = isRed ? 'R' : 'B';
+
+      el.appendChild(valEl);
+      el.appendChild(colorEl);
+      treeWrap.appendChild(el);
+
+      drawNodeEl(node.left);
+      drawNodeEl(node.right);
+    }
+    drawNodeEl(step.tree);
+
+    const outerWrap = document.createElement('div');
+    outerWrap.style.cssText = 'overflow-x:auto;padding:0.5rem 0;width:100%;';
+    outerWrap.appendChild(treeWrap);
+    container.appendChild(outerWrap);
+
+    scrollWrapper.appendChild(container);
+    canvas.appendChild(scrollWrapper);
   }
   else if (visualizerState.algo === 'netflow') {
+    const scrollWrapper = document.createElement('div');
+    scrollWrapper.className = 'viz-scroll-wrapper';
     const container = document.createElement('div');
-    container.className = 'tree-container';
-    
-    const nodeCoords = {
-      'S': { x: 40, y: 120 },
-      'A': { x: 220, y: 40 },
-      'B': { x: 220, y: 200 },
-      'T': { x: 400, y: 120 }
+    container.className = 'concept-vis-container';
+
+    // Phase badge
+    const phaseColors = { init: 'var(--text-muted)', found: 'var(--medium)', augmented: 'var(--easy)', done: 'var(--accent-cyan)' };
+    const phaseLabels = { init: 'Initializing', found: `BFS Path Found — bottleneck: ${step.bottleneck}`, augmented: `Augmented +${step.bottleneck} units`, done: '✓ Max Flow Complete' };
+    const badge = document.createElement('div');
+    badge.style.cssText = `font-size:0.72rem;font-weight:700;font-family:monospace;color:${phaseColors[step.phase]};letter-spacing:0.07em;text-transform:uppercase;`;
+    badge.textContent = `● ${phaseLabels[step.phase] || step.phase}`;
+    container.appendChild(badge);
+
+    // Node layout for 6 nodes: S left, A/B middle-top/bottom, C/D right-middle, T far right
+    const nodePos = {
+      'S': { x: 60,  y: 130 },
+      'A': { x: 210, y: 55  },
+      'B': { x: 210, y: 205 },
+      'C': { x: 360, y: 55  },
+      'D': { x: 360, y: 205 },
+      'T': { x: 510, y: 130 }
     };
-    
-    // Create SVG container for lines
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("class", "cycle-arrow-svg");
-    
-    // Draw links using SVG
+    const NODE_R = 24;
+    const SVG_W  = 590;
+    const SVG_H  = 280;
+
+    const graphWrap = document.createElement('div');
+    graphWrap.style.cssText = `position:relative;width:${SVG_W}px;height:${SVG_H}px;flex-shrink:0;`;
+
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', SVG_W);
+    svg.setAttribute('height', SVG_H);
+    svg.style.cssText = 'position:absolute;top:0;left:0;overflow:visible;';
+
+    // Arrowhead marker definitions
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    const mkMarker = (id, color) => {
+      const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+      marker.setAttribute('id', id);
+      marker.setAttribute('markerWidth', '8');
+      marker.setAttribute('markerHeight', '8');
+      marker.setAttribute('refX', '6');
+      marker.setAttribute('refY', '3');
+      marker.setAttribute('orient', 'auto');
+      const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      poly.setAttribute('points', '0 0, 8 3, 0 6');
+      poly.setAttribute('fill', color);
+      marker.appendChild(poly);
+      return marker;
+    };
+    defs.appendChild(mkMarker('arr-default', 'rgba(255,255,255,0.25)'));
+    defs.appendChild(mkMarker('arr-active',  '#f59e0b'));
+    defs.appendChild(mkMarker('arr-full',    '#ef4444'));
+    defs.appendChild(mkMarker('arr-partial', '#10b981'));
+    svg.appendChild(defs);
+
+    // Draw edges
     step.flows.forEach(e => {
-      const fromC = nodeCoords[e.u];
-      const toC = nodeCoords[e.v];
-      
-      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      const edgeKey = `${e.u}-${e.v}`;
-      const isActive = step.activeEdges.includes(edgeKey);
-      
-      line.setAttribute("x1", fromC.x + 22);
-      line.setAttribute("y1", fromC.y + 22);
-      line.setAttribute("x2", toC.x + 22);
-      line.setAttribute("y2", toC.y + 22);
-      
-      if (isActive) {
-        line.setAttribute("stroke", "var(--accent-cyan)");
-        line.setAttribute("stroke-width", "3");
-      } else {
-        line.setAttribute("stroke", "rgba(255,255,255,0.15)");
-        line.setAttribute("stroke-width", "1.5");
-      }
+      const from = nodePos[e.u], to = nodePos[e.v];
+      if (!from || !to) return;
+      const isOnPath = step.pathEdges && step.pathEdges.includes(`${e.u}-${e.v}`);
+      const isFull   = e.residual === 0;
+      const hasFlow  = e.flow > 0;
+
+      // Vector from center to center, shorten to node radius
+      const dx = to.x - from.x, dy = to.y - from.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const ux = dx / dist, uy = dy / dist;
+      const x1 = from.x + ux * NODE_R;
+      const y1 = from.y + uy * NODE_R;
+      const x2 = to.x   - ux * (NODE_R + 8); // 8px before node for arrowhead
+      const y2 = to.y   - uy * (NODE_R + 8);
+
+      const markerId = isOnPath ? 'arr-active' : isFull ? 'arr-full' : hasFlow ? 'arr-partial' : 'arr-default';
+      const strokeColor = isOnPath ? '#f59e0b' : isFull ? '#ef4444' : hasFlow ? '#10b981' : 'rgba(255,255,255,0.2)';
+      const strokeW = isOnPath ? 3 : 2;
+
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+      line.setAttribute('stroke', strokeColor);
+      line.setAttribute('stroke-width', strokeW);
+      line.setAttribute('marker-end', `url(#${markerId})`);
+      if (isOnPath) line.setAttribute('stroke-dasharray', '6 3');
       svg.appendChild(line);
-      
-      // Label text
-      const label = document.createElement('div');
-      label.style.position = 'absolute';
-      const dx = toC.x - fromC.x;
-      const dy = toC.y - fromC.y;
-      label.style.left = `${fromC.x + dx/2 + 10}px`;
-      label.style.top = `${fromC.y + dy/2 - 10}px`;
-      label.style.fontSize = '0.75rem';
-      label.style.color = isActive ? 'var(--accent-cyan)' : 'var(--text-muted)';
-      label.style.fontFamily = 'monospace';
-      label.style.fontWeight = 'bold';
-      label.textContent = `${e.flow}/${e.cap}`;
-      container.appendChild(label);
+
+      // Flow label on edge midpoint
+      const mx = (from.x + to.x) / 2;
+      const my = (from.y + to.y) / 2;
+      // Perpendicular offset so label doesn't sit on the line
+      const ox = -uy * 14, oy = ux * 14;
+
+      const labelEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      labelEl.setAttribute('x', mx + ox);
+      labelEl.setAttribute('y', my + oy);
+      labelEl.setAttribute('text-anchor', 'middle');
+      labelEl.setAttribute('dominant-baseline', 'middle');
+      labelEl.setAttribute('font-size', '11');
+      labelEl.setAttribute('font-family', 'monospace');
+      labelEl.setAttribute('font-weight', isOnPath ? 'bold' : 'normal');
+      labelEl.setAttribute('fill', isOnPath ? '#f59e0b' : isFull ? '#ef4444' : hasFlow ? '#10b981' : 'rgba(255,255,255,0.45)');
+      labelEl.textContent = `${e.flow}/${e.cap}`;
+      svg.appendChild(labelEl);
     });
-    container.appendChild(svg);
-    
-    // Draw node circles
-    Object.keys(nodeCoords).forEach(id => {
-      const coord = nodeCoords[id];
-      const node = document.createElement('div');
-      node.className = 'tree-node';
-      node.style.position = 'absolute';
-      node.style.left = `${coord.x}px`;
-      node.style.top = `${coord.y}px`;
-      
-      if (step.path.includes(id)) {
-        node.style.borderColor = 'var(--accent-cyan)';
-        node.style.background = 'rgba(0,188,212,0.15)';
-      }
-      
-      const valSpan = document.createElement('span');
-      valSpan.className = 'tree-node-val';
-      valSpan.textContent = id;
-      node.appendChild(valSpan);
-      container.appendChild(node);
+
+    graphWrap.appendChild(svg);
+
+    // Draw nodes
+    const { nodes: nodeList } = visualizerState.rawArray;
+    nodeList.forEach(id => {
+      const p = nodePos[id];
+      if (!p) return;
+      const isOnPath  = step.path && step.path.includes(id);
+      const isSource  = id === nodeList[0];
+      const isSink    = id === nodeList[nodeList.length - 1];
+
+      const el = document.createElement('div');
+      el.style.cssText = `
+        position:absolute;
+        left:${p.x - NODE_R}px;top:${p.y - NODE_R}px;
+        width:${NODE_R * 2}px;height:${NODE_R * 2}px;
+        border-radius:50%;
+        display:flex;justify-content:center;align-items:center;
+        font-size:0.85rem;font-weight:700;font-family:monospace;
+        border:${isOnPath ? '2.5px solid #f59e0b' : isSource || isSink ? '2px solid var(--primary-glow)' : '1.5px solid rgba(255,255,255,0.2)'};
+        background:${isOnPath ? 'rgba(245,158,11,0.2)' : isSource || isSink ? 'rgba(99,102,241,0.2)' : 'rgba(255,255,255,0.06)'};
+        box-shadow:${isOnPath ? '0 0 10px rgba(245,158,11,0.4)' : 'none'};
+        color:${isOnPath ? '#f59e0b' : isSource || isSink ? 'var(--primary-glow)' : 'var(--text-main)'};
+        z-index:2;
+      `;
+      el.textContent = id;
+      graphWrap.appendChild(el);
     });
-    
-    // Total Flow Label
-    const totalLabel = document.createElement('div');
-    totalLabel.style.position = 'absolute';
-    totalLabel.style.bottom = '10px';
-    totalLabel.style.left = '10px';
-    totalLabel.style.fontSize = '0.85rem';
-    totalLabel.style.fontWeight = 'bold';
-    totalLabel.style.color = 'var(--accent-cyan)';
-    totalLabel.textContent = `Total Flow: ${step.maxFlow}`;
-    container.appendChild(totalLabel);
-    
-    canvas.appendChild(container);
+
+    const outerWrap = document.createElement('div');
+    outerWrap.style.cssText = 'overflow-x:auto;width:100%;padding:0.5rem 0;';
+    outerWrap.appendChild(graphWrap);
+    container.appendChild(outerWrap);
+
+    // Stats row
+    const stats = document.createElement('div');
+    stats.style.cssText = 'display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;font-size:0.72rem;font-family:monospace;margin-top:0.25rem;';
+    stats.innerHTML =
+      `<span style="color:var(--accent-cyan)">Max Flow: <strong>${step.maxFlow}</strong></span>` +
+      (step.path.length ? `<span style="color:var(--medium)">Path: <strong>${step.path.join(' → ')}</strong></span>` : '') +
+      (step.bottleneck ? `<span style="color:var(--easy)">Bottleneck: <strong>+${step.bottleneck}</strong></span>` : '');
+    container.appendChild(stats);
+
+    // Residual edges table
+    if (step.residual && step.residual.length) {
+      const resTitle = document.createElement('div');
+      resTitle.style.cssText = 'font-size:0.68rem;font-weight:700;color:var(--text-muted);font-family:monospace;text-transform:uppercase;letter-spacing:0.05em;margin-top:0.25rem;';
+      resTitle.textContent = 'Residual Graph — available capacity:';
+      container.appendChild(resTitle);
+
+      const resWrap = document.createElement('div');
+      resWrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:center;';
+      step.residual.forEach(r => {
+        const onPath = step.pathEdges && step.pathEdges.includes(`${r.u}-${r.v}`);
+        const card = document.createElement('div');
+        card.style.cssText = `
+          font-size:0.65rem;font-family:monospace;padding:0.2rem 0.5rem;border-radius:4px;
+          border:1px solid ${onPath ? 'rgba(245,158,11,0.6)' : r.isBackward ? 'rgba(236,72,153,0.4)' : 'rgba(255,255,255,0.1)'};
+          background:${onPath ? 'rgba(245,158,11,0.1)' : r.isBackward ? 'rgba(236,72,153,0.06)' : 'rgba(255,255,255,0.03)'};
+          color:${onPath ? '#f59e0b' : r.isBackward ? 'var(--secondary)' : 'var(--text-muted)'};
+        `;
+        card.textContent = `${r.u}→${r.v}: ${r.residual}${r.isBackward ? ' ↩' : ''}`;
+        resWrap.appendChild(card);
+      });
+      container.appendChild(resWrap);
+    }
+
+    // Legend
+    const legend = document.createElement('div');
+    legend.style.cssText = 'display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;font-size:0.65rem;color:var(--text-muted);margin-top:0.25rem;';
+    legend.innerHTML =
+      `<span style="color:#f59e0b">— Active path</span>` +
+      `<span style="color:#10b981">— Has flow</span>` +
+      `<span style="color:#ef4444">— Saturated</span>` +
+      `<span style="color:rgba(255,255,255,0.3)">— Empty</span>` +
+      `<span style="color:var(--secondary)">↩ Backward edge</span>`;
+    container.appendChild(legend);
+
+    scrollWrapper.appendChild(container);
+    canvas.appendChild(scrollWrapper);
   }
   else if (visualizerState.algo === 'singlenumber') {
     const container = document.createElement('div');
