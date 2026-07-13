@@ -751,9 +751,12 @@ function loadProblemIntoVisualizer(prob) {
     selector.value = 'sudoku';
   } else if (prob.id === 51 || prob.subcategory === 'N-Queens Backtracking' || prob.subcategory === 'Backtracking Search') {
     selector.value = 'backtracking';
-  } else if (prob.id === 146 || prob.subcategory === 'LRU Cache' || prob.subcategory === 'Cache Design') {
+  } else if (prob.id === 460 || prob.subcategory === 'Cache Design') {
+    selector.value = 'lfucache';
+  } else if (prob.id === 146 || prob.subcategory === 'LRU Cache') {
     selector.value = 'lrucache';
   } else if (prob.id === 295 || prob.subcategory === 'Two Heaps / Median') {
+    selector.value = 'medianfinder';
     selector.value = 'medianfinder';
   } else if (prob.id === 1382 || prob.id === 669 || prob.id === 701 || prob.subcategory === 'BST Rotation / Balance') {
     selector.value = 'avl';
@@ -832,11 +835,19 @@ function loadProblemIntoVisualizer(prob) {
   } else if (prob.topic === 'Design & Advanced DS') {
     selector.value = 'hash';
   } else if (prob.topic === 'Linked Lists') {
-    selector.value = 'cycle';
+    // Fast/Slow pointer problems stay on cycle visualizer
+    if (prob.id === 141 || prob.subcategory === 'Fast/Slow Pointers (Linked List)') {
+      selector.value = 'cycle';
+    } else if (prob.id === 142) {
+      selector.value = 'cycleII';
+    } else {
+      // All Linked List Manipulation problems get the new visualizer
+      selector.value = 'linkedlist';
+    }
   } else if (prob.subcategory === 'Monotonic Stack') {
     selector.value = 'stack';
   } else if (prob.subcategory === 'Monotonic Queue / Deque') {
-    selector.value = 'slidingmax';
+    selector.value = 'deque';
   } else if (prob.subcategory === 'Heap / Top K') {
     selector.value = 'heap';
   } else if (prob.subcategory === 'BST Problems') {
@@ -10623,6 +10634,62 @@ function resetVisualizer() {
     appendLog("[INFO] Loading Two Sum II sorted array: [" + arr.join(", ") + "], Target = 9", "info");
     generateTwoSumIISteps(arr, 9);
   }
+  else if (visualizerState.algo === 'linkedlist' ||
+           visualizerState.algo === 'll-reverse' ||
+           visualizerState.algo === 'll-reverse-range' ||
+           visualizerState.algo === 'll-remove-nth' ||
+           visualizerState.algo === 'll-remove-dups' ||
+           visualizerState.algo === 'll-merge' ||
+           visualizerState.algo === 'll-swap-pairs' ||
+           visualizerState.algo === 'll-rotate') {
+    const id = visualizerState.currentProbId;
+    let config;
+
+    // Direct dropdown selection — use algo key to pick operation
+    const algoKey = visualizerState.algo;
+    if (algoKey === 'll-reverse') {
+      config = { op: 'reverse', list: [1,2,3,4,5] };
+    } else if (algoKey === 'll-reverse-range') {
+      config = { op: 'reverse_range', list: [1,2,3,4,5], left: 2, right: 4 };
+    } else if (algoKey === 'll-remove-nth') {
+      config = { op: 'remove_nth', list: [1,2,3,4,5], n: 2 };
+    } else if (algoKey === 'll-remove-dups') {
+      config = { op: 'remove_dups', list: [1,1,2,3,3,4] };
+    } else if (algoKey === 'll-merge') {
+      config = { op: 'merge', list: [1,3,5,7], list2: [2,4,6,8] };
+    } else if (algoKey === 'll-swap-pairs') {
+      config = { op: 'swap_pairs', list: [1,2,3,4,5,6] };
+    } else if (algoKey === 'll-rotate') {
+      config = { op: 'rotate', list: [1,2,3,4,5], k: 2 };
+    } else {
+      // linkedlist — pick by problem ID (problem explorer click)
+      if (id === 92) {
+        config = { op: 'reverse_range', list: [1,2,3,4,5], left: 2, right: 4 };
+      } else if (id === 24 || id === 25 || id === 328) {
+        config = { op: 'swap_pairs', list: [1,2,3,4,5,6] };
+      } else if (id === 21 || id === 23) {
+        config = { op: 'merge', list: [1,3,5], list2: [2,4,6] };
+      } else if (id === 2) {
+        config = { op: 'merge', list: [2,4,3], list2: [5,6,4] };
+      } else if (id === 19) {
+        config = { op: 'remove_nth', list: [1,2,3,4,5], n: 2 };
+      } else if (id === 203) {
+        config = { op: 'remove_nth', list: [1,2,6,3,4,5,6], n: 3 };
+      } else if (id === 83) {
+        config = { op: 'remove_dups', list: [1,1,2,3,3,4] };
+      } else if (id === 82) {
+        config = { op: 'remove_dups', list: [1,1,2,2,3,4,4] };
+      } else if (id === 61) {
+        config = { op: 'rotate', list: [1,2,3,4,5], k: 2 };
+      } else {
+        config = { op: 'reverse', list: [1,2,3,4,5] };
+      }
+    }
+
+    visualizerState.rawArray = config.list;
+    appendLog(`[INFO] Linked List: ${config.op} on [${config.list.join(', ')}]`, 'info');
+    generateLinkedListSteps(config);
+  }
   else if (visualizerState.algo === 'cycle') {
     visualizerState.rawArray = [10, 20, 30, 40, 50, 60];
     appendLog("[INFO] Initializing Linked List containing a cycle: 5 -> 2", "info");
@@ -10835,6 +10902,14 @@ function resetVisualizer() {
   else if (visualizerState.algo === 'lrucache') {
     appendLog("[INFO] LRU Cache: moving accessed keys to most-recent position.", "info");
     generateLRUCacheSteps();
+  }
+  else if (visualizerState.algo === 'lfucache') {
+    appendLog("[INFO] LFU Cache (LC 460): frequency buckets with LFU eviction.", "info");
+    generateLFUCacheSteps();
+  }
+  else if (visualizerState.algo === 'deque') {
+    appendLog("[INFO] Monotonic Deque: general deque step visualizer.", "info");
+    generateMonotonicDequeSteps();
   }
   else if (visualizerState.algo === 'slidingmax') {
     const nums = [1, 3, -1, -3, 5, 3, 6, 7];
@@ -12486,6 +12561,236 @@ function generateLinkedListCycleIISteps() {
     });
     if (found) break;
     if (iteration > 20) break;
+  }
+
+  visualizerState.steps = steps;
+}
+
+// 7b. Linked List Manipulation — multi-operation visualizer
+function generateLinkedListSteps(config) {
+  // config: { op, list, list2, left, right, k, n }
+  // op: 'reverse' | 'reverse_range' | 'remove_nth' | 'remove_dups' | 'merge' | 'swap_pairs' | 'rotate'
+  const steps = [];
+  const { op, list, list2, left, right, k, n } = config;
+
+  // Each node: { val, id }
+  // Step shape: { nodes[], next[]{from,to}, pointers{}, removed[], done[], phase, op, log }
+  // nodes[] = current array of {val,id}; next[] = directed arrow pairs; pointers = {name:id}; removed/done = id sets
+
+  let nodes    = list.map((v,i) => ({ val: v, id: i }));
+  const idOf   = v => nodes.find(n => n.val === v)?.id ?? -1;
+
+  const snap = (phase, ptrs, removed, done, arrows, log) =>
+    steps.push({
+      nodes:    nodes.map(n => ({...n})),
+      arrows:   arrows ? arrows.map(a=>({...a})) : buildSeqArrows(nodes),
+      pointers: ptrs   || {},
+      removed:  new Set(removed || []),
+      done:     new Set(done    || []),
+      phase, op, log
+    });
+
+  // Build sequential arrows for a node array
+  function buildSeqArrows(ns, cycleBack) {
+    const arr = ns.map((n,i) => i < ns.length-1 ? { from: n.id, to: ns[i+1].id } : null).filter(Boolean);
+    if (cycleBack != null) arr.push(cycleBack);
+    return arr;
+  }
+
+  snap('init', {head: nodes[0].id}, [], [],
+    null, `${op.replace(/_/g,' ').toUpperCase()}: Initial list [${list.join(' → ')}].`);
+
+  // ── REVERSE ──
+  if (op === 'reverse') {
+    snap('explain', {head: nodes[0].id}, [], [],
+      null, `Reverse linked list. Use three pointers: prev=null, curr=head, next=null.`);
+    let prev = null; // id or null
+    let curr = 0;    // index in nodes
+    const result = [];
+
+    for (let i = 0; i < nodes.length; i++) {
+      const currId  = nodes[curr].id;
+      const nextIdx = curr + 1 < nodes.length ? curr + 1 : null;
+      const nextId  = nextIdx !== null ? nodes[nextIdx].id : null;
+
+      snap('work',
+        { prev: prev !== null ? prev : null, curr: currId, next: nextId !== null ? nextId : null },
+        [], result.map(id => id),
+        null, `curr=${nodes[curr].val}. Save next. Point curr.next → prev(${prev !== null ? nodes.find(n=>n.id===prev)?.val : 'null'}).`
+      );
+
+      result.push(currId);
+      prev = currId;
+      curr = nextIdx !== null ? nextIdx : curr;
+
+      // Draw reversed arrows so far
+      const revArrows = result.slice(0).reverse().map((id,i,arr) =>
+        i < arr.length-1 ? { from: id, to: arr[i+1] } : null
+      ).filter(Boolean);
+      const fwdArrows = nextIdx !== null
+        ? nodes.slice(nextIdx).map((n,i,arr) => i<arr.length-1 ? {from:n.id,to:arr[i+1].id} : null).filter(Boolean)
+        : [];
+
+      snap('work',
+        { prev: currId, curr: nextId !== null ? nextId : null },
+        [], result.map(id => id),
+        [...revArrows, ...fwdArrows],
+        `Reversed so far: [${result.map(id=>nodes.find(n=>n.id===id)?.val).join(' ← ')}].`
+      );
+    }
+
+    nodes = [...nodes].reverse();
+    snap('done', {head: nodes[0].id}, [], nodes.map(n=>n.id),
+      buildSeqArrows(nodes),
+      `Reversal complete! List: [${nodes.map(n=>n.val).join(' → ')}].`);
+  }
+
+  // ── REVERSE RANGE [left, right] ──
+  else if (op === 'reverse_range') {
+    const l = (left||1) - 1, r = (right||nodes.length) - 1;
+    snap('explain', {head: nodes[0].id}, [], [],
+      null, `Reverse sublist from position ${l+1} to ${r+1}. Traverse to node before left, then reverse the sublist in-place.`);
+
+    // Highlight range
+    const rangeIds = nodes.slice(l, r+1).map(n=>n.id);
+    snap('work',
+      { left: nodes[l].id, right: nodes[r].id },
+      [], [], null,
+      `Identified range: [${nodes.slice(l,r+1).map(n=>n.val).join(' → ')}]. Will reverse this segment.`
+    );
+
+    // Reverse the slice
+    const before = nodes.slice(0, l);
+    const segment = nodes.slice(l, r+1).reverse();
+    const after   = nodes.slice(r+1);
+    nodes = [...before, ...segment, ...after];
+
+    snap('done', {head: nodes[0].id}, [], nodes.slice(l,r+1).map(n=>n.id),
+      buildSeqArrows(nodes),
+      `Reversed! Sublist [${segment.map(n=>n.val).join(' → ')}]. Full: [${nodes.map(n=>n.val).join(' → ')}].`
+    );
+  }
+
+  // ── REMOVE NTH FROM END ──
+  else if (op === 'remove_nth') {
+    const nth = n || 2;
+    snap('explain', {head: nodes[0].id}, [], [],
+      null, `Remove ${nth}-th node from end. Use two-pointer gap technique: advance fast ${nth+1} steps, then advance both until fast=null.`);
+
+    const targetIdx = nodes.length - nth;
+    const targetId  = nodes[targetIdx].id;
+
+    // Show fast pointer advancing
+    let fast = nth;
+    snap('work', {fast: nodes[Math.min(fast, nodes.length-1)].id, slow: nodes[0].id}, [], [], null,
+      `Fast pointer advanced ${nth} steps ahead of slow. Now advance both until fast.next = null.`);
+
+    // Advance both
+    for (let step2 = 0; fast < nodes.length - 1; step2++) {
+      fast++;
+      const slowId = nodes[targetIdx - (nodes.length - 1 - fast) - 1]?.id ?? nodes[0].id;
+      snap('work', {fast: nodes[fast].id, slow: slowId}, [], [], null,
+        `Fast at ${nodes[fast].val}. Slow at ${nodes.find(n=>n.id===slowId)?.val ?? '?'}.`);
+    }
+
+    snap('work', {target: targetId}, [targetId], [], null,
+      `Remove node ${nodes[targetIdx].val} (${nth}-th from end).`);
+
+    nodes = nodes.filter(n => n.id !== targetId);
+    snap('done', {head: nodes[0]?.id}, [], nodes.map(n=>n.id),
+      buildSeqArrows(nodes),
+      `Removed. Result: [${nodes.map(n=>n.val).join(' → ')}${nodes.length===0?'(empty)':''}].`);
+  }
+
+  // ── REMOVE DUPLICATES ──
+  else if (op === 'remove_dups') {
+    snap('explain', {head: nodes[0].id}, [], [],
+      null, `Remove duplicates from sorted list. Walk with curr pointer; skip nodes while curr.val === curr.next.val.`);
+
+    const removedIds = [];
+    let i = 0;
+    while (i < nodes.length - 1) {
+      snap('work', {curr: nodes[i].id, next: nodes[i+1].id}, removedIds, [], null,
+        `curr=${nodes[i].val}. next=${nodes[i+1].val}. ${nodes[i].val===nodes[i+1].val?'Duplicate! Skip next.':'No duplicate. Advance.'}`);
+      if (nodes[i].val === nodes[i+1].val) {
+        removedIds.push(nodes[i+1].id);
+        nodes.splice(i+1, 1);
+      } else {
+        i++;
+      }
+    }
+    snap('done', {head: nodes[0].id}, removedIds, nodes.map(n=>n.id),
+      buildSeqArrows(nodes),
+      `Deduplication done. Result: [${nodes.map(n=>n.val).join(' → ')}].`);
+  }
+
+  // ── MERGE TWO SORTED LISTS ──
+  else if (op === 'merge') {
+    const b = (list2||[]).map((v,i) => ({ val: v, id: nodes.length + i }));
+    snap('explain', {h1: nodes[0].id, h2: b[0].id}, [], [],
+      [...buildSeqArrows(nodes), ...buildSeqArrows(b)],
+      `Merge two sorted lists. Compare heads, pick smaller, advance that pointer.`);
+
+    let ia = 0, ib = 0;
+    const merged = [];
+    const allNodes = [...nodes, ...b];
+    while (ia < nodes.length && ib < b.length) {
+      const aNode = nodes[ia], bNode = b[ib];
+      snap('work',
+        {p1: aNode.id, p2: bNode.id},
+        [], merged.map(n=>n.id),
+        [...buildSeqArrows(nodes.slice(ia)), ...buildSeqArrows(b.slice(ib)),
+         ...buildSeqArrows(merged)],
+        `Compare p1=${aNode.val} vs p2=${bNode.val}. Pick ${aNode.val <= bNode.val ? aNode.val+' (L)' : bNode.val+' (R)'}.`
+      );
+      if (aNode.val <= bNode.val) { merged.push(aNode); ia++; }
+      else                        { merged.push(bNode); ib++; }
+    }
+    while (ia < nodes.length) { merged.push(nodes[ia++]); }
+    while (ib < b.length)     { merged.push(b[ib++]); }
+
+    nodes = merged;
+    snap('done', {head: nodes[0].id}, [], nodes.map(n=>n.id),
+      buildSeqArrows(nodes),
+      `Merged: [${nodes.map(n=>n.val).join(' → ')}].`);
+  }
+
+  // ── SWAP NODES IN PAIRS ──
+  else if (op === 'swap_pairs') {
+    snap('explain', {head: nodes[0].id}, [], [],
+      null, `Swap every adjacent pair. Use dummy head. For each pair: dummy.next=second, second.next=first, first.next=nextPair.`);
+
+    for (let i = 0; i + 1 < nodes.length; i += 2) {
+      snap('work', {first: nodes[i].id, second: nodes[i+1].id}, [], [], null,
+        `Pair: (${nodes[i].val}, ${nodes[i+1].val}). Swap them.`);
+      [nodes[i], nodes[i+1]] = [nodes[i+1], nodes[i]];
+      snap('work', {}, [], nodes.slice(0, i+2).map(n=>n.id),
+        buildSeqArrows(nodes), `Swapped. So far: [${nodes.map(n=>n.val).join(' → ')}].`);
+    }
+    snap('done', {head: nodes[0].id}, [], nodes.map(n=>n.id),
+      buildSeqArrows(nodes), `All pairs swapped: [${nodes.map(n=>n.val).join(' → ')}].`);
+  }
+
+  // ── ROTATE LIST ──
+  else if (op === 'rotate') {
+    const kk = ((k || 2) % nodes.length) || 0;
+    snap('explain', {head: nodes[0].id}, [], [],
+      null, `Rotate list right by k=${k||2} positions. Effective rotation = ${kk} (k mod length). Find new tail at position ${nodes.length - kk - 1}.`);
+
+    if (kk === 0) {
+      snap('done', {head: nodes[0].id}, [], nodes.map(n=>n.id), null, `k is multiple of length — no change.`);
+    } else {
+      const splitIdx = nodes.length - kk;
+      const newTailId = nodes[splitIdx - 1].id;
+      const newHeadId = nodes[splitIdx].id;
+      snap('work', {newTail: newTailId, newHead: newHeadId}, [], [], null,
+        `New tail at index ${splitIdx-1} (val=${nodes[splitIdx-1].val}). New head at index ${splitIdx} (val=${nodes[splitIdx].val}). Connect tail→original-head to form ring, then break.`
+      );
+      const rotated = [...nodes.slice(splitIdx), ...nodes.slice(0, splitIdx)];
+      nodes = rotated;
+      snap('done', {head: nodes[0].id}, [], nodes.map(n=>n.id),
+        buildSeqArrows(nodes), `Rotated ${kk} right: [${nodes.map(n=>n.val).join(' → ')}].`);
+    }
   }
 
   visualizerState.steps = steps;
@@ -14279,6 +14584,221 @@ function generateBFSGridSteps() {
   visualizerState.steps = steps;
 }
 
+// 35b. LFU Cache (LC 460) — freq buckets + DLL per bucket
+function generateLFUCacheSteps() {
+  const capacity = 3;
+  const ops = [
+    ['put',1,'A'], ['put',2,'B'], ['put',3,'C'],
+    ['get',1],
+    ['put',4,'D'],   // evicts min-freq, least-recent in that freq bucket
+    ['get',2],
+    ['get',1],
+    ['put',5,'E'],   // evicts again
+    ['get',3]
+  ];
+
+  // Internal state: key -> {val, freq}
+  const cache  = new Map();             // key -> {val, freq}
+  const freqMap = new Map();            // freq -> [key, ...] (ordered LRU within same freq)
+  let minFreq = 0;
+
+  const snapBuckets = () => {
+    const buckets = {};
+    freqMap.forEach((keys, f) => { if (keys.length) buckets[f] = [...keys]; });
+    return buckets;
+  };
+
+  const snap = (op, key, val, hit, evictedKey, log) =>
+    steps.push({
+      op, key, val: val ?? null, hit,
+      cache:    [...cache.entries()].map(([k,v]) => ({ key:k, val:v.val, freq:v.freq })),
+      buckets:  snapBuckets(),
+      minFreq,
+      activeKey:  key,
+      evictedKey: evictedKey ?? null,
+      capacity,
+      log
+    });
+
+  const steps = [];
+  snap(null, null, null, null, null,
+    `LFU Cache (capacity=${capacity}). Each key has a frequency count. Evict lowest-freq key; ties broken by LRU.`);
+
+  const touch = (k) => {
+    const entry = cache.get(k);
+    const oldFreq = entry.freq;
+    entry.freq++;
+    // remove from old bucket
+    freqMap.set(oldFreq, freqMap.get(oldFreq).filter(x => x !== k));
+    if (freqMap.get(oldFreq).length === 0) {
+      freqMap.delete(oldFreq);
+      if (minFreq === oldFreq) minFreq = entry.freq;
+    }
+    // add to new bucket (front = most recent)
+    if (!freqMap.has(entry.freq)) freqMap.set(entry.freq, []);
+    freqMap.get(entry.freq).unshift(k);
+  };
+
+  ops.forEach(op => {
+    if (op[0] === 'get') {
+      const k = op[1];
+      if (!cache.has(k)) {
+        snap('get', k, null, false, null,
+          `get(${k}) → MISS. Key ${k} not in cache.`);
+      } else {
+        const oldFreq = cache.get(k).freq;
+        touch(k);
+        snap('get', k, cache.get(k).val, true, null,
+          `get(${k}) → HIT (val=${cache.get(k).val}). Freq ${oldFreq} → ${cache.get(k).freq}. Move to bucket[${cache.get(k).freq}].`);
+      }
+    } else {
+      const [, k, v] = op;
+      let evicted = null;
+      if (cache.size >= capacity) {
+        // evict LFU (least-freq, then least-recent in that bucket)
+        const bucket = freqMap.get(minFreq);
+        evicted = bucket.pop();
+        if (bucket.length === 0) freqMap.delete(minFreq);
+        cache.delete(evicted);
+      }
+      cache.set(k, { val: v, freq: 1 });
+      if (!freqMap.has(1)) freqMap.set(1, []);
+      freqMap.get(1).unshift(k);
+      minFreq = 1;
+      snap('put', k, v, null, evicted,
+        evicted
+          ? `put(${k},'${v}') — cache full. Evict key ${evicted} (freq=${minFreq}, LRU in bucket). Insert ${k} with freq=1.`
+          : `put(${k},'${v}') — space available. Insert with freq=1.`);
+    }
+  });
+
+  visualizerState.steps = steps;
+}
+
+// 35c. Monotonic Deque (deep) — general deque visualizer for LC 239, 862, 1425, 1438, 1696
+function generateMonotonicDequeSteps() {
+  const id = visualizerState.currentProbId;
+
+  // Pick problem-specific config
+  let nums, k, mode, title, problemNote;
+  if (id === 862) {
+    nums  = [2, -1, 2];  k = 3;
+    mode  = 'prefix_deque';
+    title = 'Shortest Subarray with Sum ≥ K (LC 862)';
+    problemNote = 'Use prefix sums + monotonic deque. For each j, find smallest i where prefix[j]-prefix[i] >= K.';
+  } else if (id === 1425 || id === 1696) {
+    nums  = [10, -2, -10, -5, 20];  k = 2;
+    mode  = 'dp_deque';
+    title = id === 1425 ? 'Constrained Subsequence Sum (LC 1425)' : 'Jump Game VI (LC 1696)';
+    problemNote = 'dp[i] = nums[i] + max(dp[i-k..i-1]). Use decreasing deque to track max dp in window.';
+  } else if (id === 1438) {
+    nums  = [8, 2, 4, 7];  k = 4;
+    mode  = 'minmax_deque';
+    title = 'Longest Subarray With Abs Diff ≤ Limit (LC 1438)';
+    problemNote = 'Two deques: one max-deque, one min-deque. Valid window: maxDeque.front - minDeque.front ≤ limit.';
+  } else {
+    // Default: LC 239 sliding window max
+    nums  = [1, 3, -1, -3, 5, 3, 6, 7];  k = 3;
+    mode  = 'sliding_max';
+    title = 'Sliding Window Maximum (LC 239)';
+    problemNote = 'Monotonic decreasing deque. Front = window max. Pop back when smaller, pop front when expired.';
+  }
+
+  const steps = [];
+  const snap = (r, deque, minDeque, out, action, log) =>
+    steps.push({
+      nums, k, mode, title, problemNote,
+      r,
+      deque:    [...deque],           // primary deque (indices, decreasing values)
+      dequeVals: deque.map(i => nums[i] ?? i),
+      minDeque: minDeque ? [...minDeque] : null,
+      minDequeVals: minDeque ? minDeque.map(i => nums[i] ?? i) : null,
+      out:      [...out],
+      windowStart: Math.max(0, r - k + 1),
+      windowEnd:   r,
+      action,   // 'pop_back' | 'pop_front' | 'push' | 'output' | 'init'
+      log
+    });
+
+  snap(-1, [], null, [], 'init',
+    `${title}. ${problemNote} Array: [${nums.join(', ')}], k=${k}.`);
+
+  if (mode === 'sliding_max') {
+    const dq = [], out = [];
+    for (let r = 0; r < nums.length; r++) {
+      while (dq.length && nums[dq[dq.length-1]] <= nums[r]) {
+        const popped = dq.pop();
+        snap(r, [...dq], null, [...out], 'pop_back',
+          `Pop back: deque top nums[${popped}]=${nums[popped]} ≤ nums[${r}]=${nums[r]} — stale max.`);
+      }
+      dq.push(r);
+      snap(r, [...dq], null, [...out], 'push',
+        `Push idx ${r} (val=${nums[r]}) to back. Deque front = max of window.`);
+      if (dq[0] <= r - k) {
+        const exp = dq.shift();
+        snap(r, [...dq], null, [...out], 'pop_front',
+          `Front idx ${exp} is outside window [${r-k+1},${r}]. Evict from front.`);
+      }
+      if (r >= k - 1) {
+        out.push(nums[dq[0]]);
+        snap(r, [...dq], null, [...out], 'output',
+          `Window [${r-k+1}..${r}]: max = nums[${dq[0]}] = ${nums[dq[0]]}. Output: [${out.join(',')}].`);
+      }
+    }
+
+  } else if (mode === 'dp_deque') {
+    const dq = [], out = [], dp = [...nums];
+    snap(-1, [], null, [], 'init',
+      `Build dp[] where dp[i] = nums[i] + max(dp[j] for j in [i-k, i-1]).`);
+    for (let i = 0; i < nums.length; i++) {
+      while (dq.length && dq[0] < i - k) {
+        const exp = dq.shift();
+        snap(i, [...dq], null, [...out], 'pop_front',
+          `Deque front idx ${exp} is outside window of size ${k}. Remove.`);
+      }
+      if (dq.length) dp[i] = nums[i] + Math.max(0, dp[dq[0]]);
+      out.push(dp[i]);
+      snap(i, [...dq], null, [...out], 'output',
+        `dp[${i}] = nums[${i}](${nums[i]}) + max(dp[deque_front]=${dp[dq[0]] ?? 0}) = ${dp[i]}.`);
+      while (dq.length && dp[dq[dq.length-1]] <= dp[i]) {
+        const popped = dq.pop();
+        snap(i, [...dq], null, [...out], 'pop_back',
+          `Pop back: dp[${popped}]=${dp[popped]} ≤ dp[${i}]=${dp[i]}. Maintain decreasing order.`);
+      }
+      dq.push(i);
+      snap(i, [...dq], null, [...out], 'push',
+        `Push idx ${i} to back. Deque now holds potential max-dp indices.`);
+    }
+
+  } else if (mode === 'minmax_deque') {
+    const limit = k;  // reusing k as limit for this problem
+    const maxDq = [], minDq = [], out = [];
+    let left = 0;
+    for (let r = 0; r < nums.length; r++) {
+      while (maxDq.length && nums[maxDq[maxDq.length-1]] <= nums[r]) maxDq.pop();
+      while (minDq.length && nums[minDq[minDq.length-1]] >= nums[r]) minDq.pop();
+      maxDq.push(r); minDq.push(r);
+      snap(r, [...maxDq], [...minDq], [...out], 'push',
+        `Push idx ${r} (${nums[r]}). max-deque front=${nums[maxDq[0]]}, min-deque front=${nums[minDq[0]]}.`);
+      while (maxDq.length && minDq.length && nums[maxDq[0]] - nums[minDq[0]] > limit) {
+        snap(r, [...maxDq], [...minDq], [...out], 'pop_front',
+          `Diff ${nums[maxDq[0]]}-${nums[minDq[0]]}=${nums[maxDq[0]]-nums[minDq[0]]} > limit ${limit}. Shrink left.`);
+        left++;
+        if (maxDq[0] < left) maxDq.shift();
+        if (minDq[0] < left) minDq.shift();
+      }
+      out.push(r - left + 1);
+      snap(r, [...maxDq], [...minDq], [...out], 'output',
+        `Valid window [${left}..${r}], length = ${r-left+1}.`);
+    }
+  }
+
+  snap(nums.length-1, [], null, [], 'init',
+    `Done! Monotonic deque processed all elements.`);
+
+  visualizerState.steps = steps;
+}
+
 // 35. LRU Cache
 function generateLRUCacheSteps() {
   const capacity = 3;
@@ -14413,22 +14933,70 @@ function generateKruskalSteps() {
 }
 
 // 39. Median Finder
+// 39. Median Finder (deep) — emits heap tree nodes with parent-child positions
 function generateMedianFinderSteps(nums) {
-  const small = [];
-  const large = [];
-  const steps = [{ small: [], large: [], active: null, median: null, log: "Two heaps start empty: lower half and upper half." }];
-  nums.forEach(num => {
-    small.push(num);
-    small.sort((a, b) => b - a);
-    large.push(small.shift());
-    large.sort((a, b) => a - b);
-    if (large.length > small.length) {
-      small.push(large.shift());
-      small.sort((a, b) => b - a);
-    }
-    const median = small.length > large.length ? small[0] : (small[0] + large[0]) / 2;
-    steps.push({ small: [...small], large: [...large], active: num, median, log: `Insert ${num}. Rebalance heaps. Median = ${median}.` });
+  const small = [];  // max-heap (lower half) — stored as sorted desc array
+  const large = [];  // min-heap (upper half) — stored as sorted asc array
+  const steps = [];
+
+  // Build a heap-tree representation for rendering (index-based, 1-based)
+  const heapTree = (arr, isMaxHeap) => arr.map((val, i) => ({
+    val,
+    idx: i + 1,
+    parentIdx: i > 0 ? Math.floor((i + 1) / 2) : null,
+    isMaxHeap
+  }));
+
+  const snap = (activeVal, action, log) => steps.push({
+    small:       [...small],
+    large:       [...large],
+    smallTree:   heapTree(small, true),
+    largeTree:   heapTree(large, false),
+    active:      activeVal,
+    action,      // 'insert'|'rebalance'|'query'
+    median:      small.length === 0 ? null
+                 : small.length > large.length ? small[0]
+                 : (small[0] + large[0]) / 2,
+    log
   });
+
+  snap(null, 'init',
+    `Two-heap Median Finder. small[] = max-heap (lower half). large[] = min-heap (upper half). |small| >= |large| always.`);
+
+  nums.forEach(num => {
+    // Step 1: insert into correct heap
+    if (small.length === 0 || num <= small[0]) {
+      small.push(num);
+      small.sort((a, b) => b - a);
+      snap(num, 'insert', `${num} ≤ small.top(${small[0]}) (or small empty). Push to max-heap small[].`);
+    } else {
+      large.push(num);
+      large.sort((a, b) => a - b);
+      snap(num, 'insert', `${num} > small.top. Push to min-heap large[].`);
+    }
+
+    // Step 2: rebalance
+    if (small.length > large.length + 1) {
+      const moved = small.shift();
+      small.sort((a,b) => b-a);
+      large.push(moved);
+      large.sort((a,b) => a-b);
+      snap(moved, 'rebalance',
+        `small has ${small.length+1} > large ${large.length-1} + 1. Move small.top(${moved}) → large.`);
+    } else if (large.length > small.length) {
+      const moved = large.shift();
+      large.sort((a,b) => a-b);
+      small.push(moved);
+      small.sort((a,b) => b-a);
+      snap(moved, 'rebalance',
+        `large has ${large.length+1} > small ${small.length-1}. Move large.top(${moved}) → small.`);
+    }
+
+    const median = small.length > large.length ? small[0] : (small[0] + large[0]) / 2;
+    snap(num, 'query',
+      `Heaps balanced: small.size=${small.length}, large.size=${large.length}. Median = ${median}.`);
+  });
+
   visualizerState.steps = steps;
 }
 
@@ -14796,6 +15364,205 @@ function renderCanvasStep() {
     canvas.appendChild(bsContainer);
   }
   
+  // --- F-NEW. LINKED LIST MANIPULATION ---
+  else if (visualizerState.algo === 'linkedlist' ||
+           visualizerState.algo === 'll-reverse' ||
+           visualizerState.algo === 'll-reverse-range' ||
+           visualizerState.algo === 'll-remove-nth' ||
+           visualizerState.algo === 'll-remove-dups' ||
+           visualizerState.algo === 'll-merge' ||
+           visualizerState.algo === 'll-swap-pairs' ||
+           visualizerState.algo === 'll-rotate') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+    container.style.minHeight = '220px';
+
+    const { nodes, arrows, pointers, removed, done, phase, op } = step;
+    const removedSet = removed instanceof Set ? removed : new Set(removed || []);
+    const doneSet    = done    instanceof Set ? done    : new Set(done    || []);
+    const ptrs       = pointers || {};
+
+    // ── Operation + phase pill ──
+    const opLabels = {
+      reverse: 'Reverse List', reverse_range: 'Reverse Sublist',
+      remove_nth: 'Remove Nth from End', remove_dups: 'Remove Duplicates',
+      merge: 'Merge Two Lists', swap_pairs: 'Swap Pairs', rotate: 'Rotate List'
+    };
+    const phaseColors = { init:'var(--text-muted)', explain:'var(--accent-cyan)', work:'var(--primary-glow)', done:'var(--easy)' };
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px;';
+    const opPill = document.createElement('span');
+    opPill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
+      letter-spacing:0.07em;padding:2px 10px;border-radius:20px;
+      border:1px solid ${phaseColors[phase]||'var(--text-muted)'};
+      color:${phaseColors[phase]||'var(--text-muted)'};`;
+    opPill.textContent = opLabels[op] || op;
+    hdr.appendChild(opPill);
+    // Pointer legend pills
+    Object.entries(ptrs).forEach(([name, id]) => {
+      if (id === null || id === undefined) return;
+      const node = nodes.find(n => n.id === id);
+      if (!node) return;
+      const p = document.createElement('span');
+      p.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--accent-cyan);';
+      p.textContent = `${name} → ${node.val}`;
+      hdr.appendChild(p);
+    });
+    container.appendChild(hdr);
+
+    // ── Build SVG — use viewBox for responsive scaling ──
+    // Layout: each node = 52px wide circle (r=22), 14px gap between, 40px top margin for pointer labels
+    const R = 22, GAP = 18, TOP = 45, BOTTOM = 20;
+    const nodeCount = nodes.length;
+    const svgW = nodeCount * (R*2 + GAP) + GAP;
+    const svgH = TOP + R*2 + BOTTOM;
+
+    // x-centre of node at index i
+    const cx = i => GAP + i * (R*2 + GAP) + R;
+    const cy = TOP + R;
+
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', `0 0 ${svgW} ${svgH}`);
+    svg.style.cssText = 'width:100%;display:block;overflow:visible;';
+
+    // Arrow marker
+    const defs = document.createElementNS(svgNS, 'defs');
+    defs.innerHTML = `
+      <marker id="llArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="rgba(255,255,255,0.4)"/>
+      </marker>
+      <marker id="llArrGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="var(--easy)"/>
+      </marker>
+      <marker id="llArrCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="var(--accent-cyan)"/>
+      </marker>`;
+    svg.appendChild(defs);
+
+    // Build id→index map for arrow drawing
+    const idToIdx = {};
+    nodes.forEach((n, i) => { idToIdx[n.id] = i; });
+
+    // Draw arrows
+    (arrows || []).forEach(({ from, to }) => {
+      const fi = idToIdx[from], ti = idToIdx[to];
+      if (fi === undefined || ti === undefined) return;
+      const x1 = cx(fi) + R - 2, y1 = cy;
+      const x2 = cx(ti) - R + 2, y2 = cy;
+      const isDone  = doneSet.has(from) && doneSet.has(to);
+      const isBack  = ti < fi; // reversed arrow — draw curved below
+
+      const line = document.createElementNS(svgNS, isBack ? 'path' : 'line');
+      const col   = isDone ? 'var(--easy)' : 'rgba(255,255,255,0.3)';
+      const mId   = isDone ? 'llArrGreen' : 'llArr';
+
+      if (isBack) {
+        const mx = (x1 + x2) / 2;
+        line.setAttribute('d', `M ${x1} ${y1} C ${x1+10} ${y1+30}, ${x2-10} ${y2+30}, ${x2} ${y2}`);
+        line.setAttribute('fill', 'none');
+      } else {
+        line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+      }
+      line.setAttribute('stroke', col);
+      line.setAttribute('stroke-width', isDone ? '2' : '1.5');
+      line.setAttribute('marker-end', `url(#${mId})`);
+      svg.appendChild(line);
+    });
+
+    // Build pointer name per node id
+    const ptrNames = {};
+    Object.entries(ptrs).forEach(([name, id]) => {
+      if (id !== null && id !== undefined) {
+        ptrNames[id] = ptrNames[id] ? ptrNames[id] + '/' + name : name;
+      }
+    });
+
+    // Draw nodes
+    nodes.forEach((node, i) => {
+      const x = cx(i), y = cy;
+      const isRemoved = removedSet.has(node.id);
+      const isDoneNode = doneSet.has(node.id);
+      const hasPtr     = ptrNames[node.id] !== undefined;
+
+      // Determine colours
+      let fill   = 'rgba(30,41,59,0.9)';
+      let stroke = 'rgba(255,255,255,0.15)';
+      let sw     = '1.5';
+      let textCol = 'white';
+
+      if (isRemoved)       { fill='rgba(244,63,94,0.15)';     stroke='var(--hard)';         sw='2';   textCol='var(--hard)'; }
+      else if (hasPtr)     { fill='rgba(6,182,212,0.2)';      stroke='var(--accent-cyan)';  sw='2.5'; textCol='var(--accent-cyan)'; }
+      else if (isDoneNode) { fill='rgba(16,185,129,0.15)';    stroke='var(--easy)';         sw='2';   textCol='var(--easy)'; }
+
+      // Circle
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('cx', x); circle.setAttribute('cy', y); circle.setAttribute('r', R);
+      circle.setAttribute('fill', fill); circle.setAttribute('stroke', stroke);
+      circle.setAttribute('stroke-width', sw);
+      svg.appendChild(circle);
+
+      // Strikethrough for removed nodes
+      if (isRemoved) {
+        const line = document.createElementNS(svgNS, 'line');
+        line.setAttribute('x1', x-R+4); line.setAttribute('y1', y-R+4);
+        line.setAttribute('x2', x+R-4); line.setAttribute('y2', y+R-4);
+        line.setAttribute('stroke', 'var(--hard)'); line.setAttribute('stroke-width', '1.5');
+        svg.appendChild(line);
+      }
+
+      // Value text
+      const txt = document.createElementNS(svgNS, 'text');
+      txt.setAttribute('x', x); txt.setAttribute('y', y + 5);
+      txt.setAttribute('text-anchor', 'middle');
+      txt.setAttribute('font-family', 'monospace'); txt.setAttribute('font-size', '14');
+      txt.setAttribute('font-weight', '700'); txt.setAttribute('fill', textCol);
+      txt.textContent = node.val;
+      svg.appendChild(txt);
+
+      // NULL sentinel after last node
+      if (i === nodes.length - 1 && !isRemoved) {
+        const nullX = x + R + 4;
+        const nullLine = document.createElementNS(svgNS, 'line');
+        nullLine.setAttribute('x1', nullX); nullLine.setAttribute('y1', y);
+        nullLine.setAttribute('x2', nullX + 18); nullLine.setAttribute('y2', y);
+        nullLine.setAttribute('stroke', 'rgba(255,255,255,0.2)'); nullLine.setAttribute('stroke-width', '1.5');
+        nullLine.setAttribute('marker-end', 'url(#llArr)');
+        svg.appendChild(nullLine);
+        const nullTxt = document.createElementNS(svgNS, 'text');
+        nullTxt.setAttribute('x', nullX + 22); nullTxt.setAttribute('y', y + 4);
+        nullTxt.setAttribute('font-family', 'monospace'); nullTxt.setAttribute('font-size', '10');
+        nullTxt.setAttribute('fill', 'rgba(255,255,255,0.2)');
+        nullTxt.textContent = 'null';
+        svg.appendChild(nullTxt);
+      }
+
+      // Pointer label above node
+      if (ptrNames[node.id]) {
+        // Draw downward arrow from label to node
+        const labelY = y - R - 18;
+        const arrow = document.createElementNS(svgNS, 'line');
+        arrow.setAttribute('x1', x); arrow.setAttribute('y1', labelY + 12);
+        arrow.setAttribute('x2', x); arrow.setAttribute('y2', y - R);
+        arrow.setAttribute('stroke', 'var(--accent-cyan)'); arrow.setAttribute('stroke-width', '1.5');
+        arrow.setAttribute('marker-end', 'url(#llArrCyan)');
+        svg.appendChild(arrow);
+
+        const lbl = document.createElementNS(svgNS, 'text');
+        lbl.setAttribute('x', x); lbl.setAttribute('y', labelY);
+        lbl.setAttribute('text-anchor', 'middle');
+        lbl.setAttribute('font-family', 'monospace'); lbl.setAttribute('font-size', '10');
+        lbl.setAttribute('font-weight', '700'); lbl.setAttribute('fill', 'var(--accent-cyan)');
+        lbl.textContent = ptrNames[node.id];
+        svg.appendChild(lbl);
+      }
+    });
+
+    container.appendChild(svg);
+    canvas.appendChild(container);
+  }
+
   // --- F. LINKED LIST CYCLE (Fast / Slow Pointers) ---
   else if (visualizerState.algo === 'cycle' || visualizerState.algo === 'cycleII') {
     const container = document.createElement('div');
@@ -17753,24 +18520,196 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'bfsgrid') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    const grid = document.createElement('div');
-    grid.className = 'bfs-grid';
-    grid.style.gridTemplateColumns = `repeat(${step.grid[0].length}, 46px)`;
-    step.grid.forEach((row, r) => row.forEach((val, c) => {
-      const cell = document.createElement('div');
-      cell.className = 'bfs-cell';
-      if (val === 1) cell.classList.add('wall');
-      if (step.dist[r][c] >= 0) cell.classList.add('visited');
-      if (step.active && step.active[0] === r && step.active[1] === c) cell.classList.add('active');
-      if (step.target && step.target[0] === r && step.target[1] === c) cell.classList.add('target');
-      cell.textContent = val === 1 ? '' : (step.dist[r][c] >= 0 ? step.dist[r][c] : '');
-      grid.appendChild(cell);
+
+    const { grid, dist, active, queue, target } = step;
+    const rows = grid.length, cols = grid[0].length;
+    const queueSet = new Set((queue||[]).map(([r,c])=>`${r},${c}`));
+    const CELL = 48;
+
+    // ── Grid ──
+    const gridEl = document.createElement('div');
+    gridEl.style.cssText = `display:inline-grid;grid-template-columns:repeat(${cols},${CELL}px);gap:4px;margin-bottom:12px;`;
+
+    grid.forEach((row, r) => row.forEach((val, c) => {
+      const cell  = document.createElement('div');
+      const key   = `${r},${c}`;
+      const d     = dist[r][c];
+      const isWall    = val === 1;
+      const isStart   = r === 0 && c === 0;
+      const isTarget  = target && target[0]===r && target[1]===c;
+      const isActive  = active && active[0]===r && active[1]===c;
+      const isQueue   = queueSet.has(key);
+      const isVisited = d >= 0 && !isActive && !isQueue;
+
+      let bg = 'rgba(255,255,255,0.03)', border = 'rgba(255,255,255,0.08)', color = 'rgba(255,255,255,0.3)', content = '';
+
+      if (isWall)        { bg='rgba(30,41,59,0.9)';        border='rgba(255,255,255,0.06)'; content=''; color='transparent'; }
+      else if (isTarget) { bg='rgba(244,63,94,0.2)';       border='var(--hard)';            color='var(--hard)'; content='▶'; }
+      else if (isStart)  { bg='rgba(16,185,129,0.2)';      border='var(--easy)';            color='var(--easy)'; content='S'; }
+      else if (isActive) { bg='rgba(6,182,212,0.3)';       border='var(--accent-cyan)';     color='var(--accent-cyan)'; content=d>=0?String(d):''; }
+      else if (isQueue)  { bg='rgba(245,158,11,0.15)';     border='var(--medium)';          color='var(--medium)'; content=d>=0?String(d):''; }
+      else if (isVisited){ bg='rgba(99,102,241,0.12)';     border='rgba(99,102,241,0.3)';   color='rgba(255,255,255,0.7)'; content=String(d); }
+
+      cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;align-items:center;justify-content:center;
+        border-radius:6px;border:1.5px solid ${border};background:${bg};
+        font-family:monospace;font-size:0.88rem;font-weight:700;color:${color};`;
+      cell.textContent = isWall ? '' : content;
+      gridEl.appendChild(cell);
     }));
-    const status = document.createElement('div');
-    status.className = 'concept-status';
-    status.innerHTML = `Queue <strong>${step.queue.map(([r,c]) => `(${r},${c})`).join(' ') || 'empty'}</strong>`;
-    container.appendChild(grid);
-    container.appendChild(status);
+
+    container.appendChild(gridEl);
+
+    // ── Legend ──
+    const legend = document.createElement('div');
+    legend.style.cssText = 'display:flex;gap:12px;flex-wrap:wrap;font-size:0.65rem;font-family:monospace;margin-bottom:8px;';
+    [
+      ['S', 'var(--easy)',        'Start'],
+      ['▶', 'var(--hard)',        'Goal'],
+      ['n', 'var(--accent-cyan)', 'Active'],
+      ['n', 'var(--medium)',      'In Queue'],
+      ['n', 'rgba(99,102,241,0.8)','Visited'],
+      ['■', 'rgba(255,255,255,0.2)','Wall'],
+    ].forEach(([sym, col, lbl]) => {
+      const item = document.createElement('span');
+      item.style.cssText = `display:flex;align-items:center;gap:4px;color:var(--text-muted);`;
+      item.innerHTML = `<span style="color:${col};font-weight:700;">${sym}</span>${lbl}`;
+      legend.appendChild(item);
+    });
+    container.appendChild(legend);
+
+    // ── Queue frontier ──
+    const qRow = document.createElement('div');
+    qRow.style.cssText = 'display:flex;align-items:center;gap:6px;flex-wrap:wrap;';
+    const qLabel = document.createElement('span');
+    qLabel.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--text-muted);';
+    qLabel.textContent = 'Queue:';
+    qRow.appendChild(qLabel);
+    if (!queue || queue.length === 0) {
+      const e = document.createElement('span');
+      e.style.cssText = 'font-size:0.7rem;font-family:monospace;color:rgba(255,255,255,0.2);font-style:italic;';
+      e.textContent = 'empty';
+      qRow.appendChild(e);
+    } else {
+      (queue||[]).slice(0,10).forEach(([r,c]) => {
+        const pill = document.createElement('span');
+        pill.style.cssText = 'font-size:0.7rem;font-family:monospace;padding:2px 7px;border-radius:6px;border:1px solid var(--medium);color:var(--medium);background:rgba(245,158,11,0.08);';
+        pill.textContent = `(${r},${c})`;
+        qRow.appendChild(pill);
+      });
+      if (queue.length > 10) {
+        const more = document.createElement('span');
+        more.style.cssText = 'font-size:0.68rem;color:var(--text-muted);font-family:monospace;';
+        more.textContent = `+${queue.length-10} more`;
+        qRow.appendChild(more);
+      }
+    }
+    container.appendChild(qRow);
+    canvas.appendChild(container);
+  }
+
+  // --- AF-NEW. LFU CACHE ---
+  else if (visualizerState.algo === 'lfucache') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+
+    const { op, key, val, hit, cache, buckets, minFreq, activeKey, evictedKey, capacity } = step;
+    const opColors = { put:'var(--primary-glow)', get:'var(--accent-cyan)' };
+
+    // ── Header ──
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;';
+    if (op) {
+      const opPill = document.createElement('span');
+      opPill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
+        border:1px solid ${opColors[op]||'var(--text-muted)'};color:${opColors[op]||'var(--text-muted)'};`;
+      opPill.textContent = `${op}(${key}${val !== null && val !== undefined ? `,'${val}'` : ''})`;
+      hdr.appendChild(opPill);
+      if (op === 'get') {
+        const hitPill = document.createElement('span');
+        hitPill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;color:${hit?'var(--easy)':'var(--hard)'};`;
+        hitPill.textContent = hit ? '✓ HIT' : '✗ MISS';
+        hdr.appendChild(hitPill);
+      }
+      if (evictedKey !== null) {
+        const evPill = document.createElement('span');
+        evPill.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--hard);';
+        evPill.textContent = `⚠ Evicted key ${evictedKey}`;
+        hdr.appendChild(evPill);
+      }
+    }
+    const mfPill = document.createElement('span');
+    mfPill.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--text-muted);margin-left:auto;';
+    mfPill.textContent = `minFreq = ${minFreq} | size = ${(cache||[]).length}/${capacity}`;
+    hdr.appendChild(mfPill);
+    container.appendChild(hdr);
+
+    // ── Frequency bucket columns ──
+    const maxFreq = Math.max(...Object.keys(buckets||{}).map(Number), 1);
+    const bucketsWrap = document.createElement('div');
+    bucketsWrap.style.cssText = 'display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:12px;';
+
+    for (let f = 1; f <= maxFreq + 1; f++) {
+      const bkeys = (buckets||{})[f] || [];
+      if (f > maxFreq && bkeys.length === 0) continue;
+
+      const col = document.createElement('div');
+      col.style.cssText = `display:flex;flex-direction:column;gap:6px;min-width:72px;`;
+
+      const freqLabel = document.createElement('div');
+      freqLabel.style.cssText = `font-size:0.65rem;font-family:monospace;font-weight:700;text-align:center;
+        color:${f === minFreq ? 'var(--hard)' : 'var(--text-muted)'};
+        border-bottom:1px solid ${f === minFreq ? 'var(--hard)' : 'rgba(255,255,255,0.1)'};
+        padding-bottom:4px;margin-bottom:2px;`;
+      freqLabel.textContent = `freq=${f}${f === minFreq ? ' ← min' : ''}`;
+      col.appendChild(freqLabel);
+
+      if (bkeys.length === 0) {
+        const empty = document.createElement('div');
+        empty.style.cssText = 'font-size:0.65rem;font-family:monospace;color:rgba(255,255,255,0.15);text-align:center;font-style:italic;';
+        empty.textContent = 'empty';
+        col.appendChild(empty);
+      } else {
+        bkeys.forEach((k, pos) => {
+          const cacheEntry = (cache||[]).find(e => e.key === k);
+          const isActive   = k === activeKey;
+          const isEvicted  = k === evictedKey;
+          const card = document.createElement('div');
+          card.style.cssText = `padding:5px 10px;border-radius:7px;font-family:monospace;font-size:0.78rem;
+            font-weight:700;text-align:center;
+            border:1.5px solid ${isEvicted?'var(--hard)':isActive?opColors[op]||'var(--accent-cyan)':'rgba(255,255,255,0.12)'};
+            background:${isEvicted?'rgba(244,63,94,0.15)':isActive?'rgba(99,102,241,0.15)':'rgba(255,255,255,0.04)'};
+            color:${isEvicted?'var(--hard)':isActive?opColors[op]||'var(--accent-cyan)':'rgba(255,255,255,0.7)'};
+            position:relative;`;
+          card.innerHTML = `<div>${k}</div>
+            <div style="font-size:0.55rem;font-weight:400;color:rgba(255,255,255,0.35)">'${cacheEntry?.val ?? '?'}'</div>
+            ${pos===0?'<div style="font-size:0.48rem;color:rgba(255,255,255,0.25)">MRU</div>':''}
+            ${pos===bkeys.length-1&&bkeys.length>1?'<div style="font-size:0.48rem;color:rgba(255,255,255,0.25)">LRU</div>':''}`;
+          col.appendChild(card);
+        });
+      }
+      bucketsWrap.appendChild(col);
+    }
+    container.appendChild(bucketsWrap);
+
+    // ── Cache state table ──
+    if ((cache||[]).length > 0) {
+      const tableRow = document.createElement('div');
+      tableRow.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;';
+      const tLabel = document.createElement('span');
+      tLabel.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);align-self:center;';
+      tLabel.textContent = 'Cache:';
+      tableRow.appendChild(tLabel);
+      (cache||[]).forEach(e => {
+        const pill = document.createElement('span');
+        pill.style.cssText = `font-size:0.72rem;font-family:monospace;padding:2px 9px;border-radius:6px;
+          border:1px solid ${e.key===activeKey?opColors[op]:'rgba(255,255,255,0.1)'};
+          color:${e.key===activeKey?opColors[op]:'var(--text-main)'};
+          background:${e.key===activeKey?'rgba(99,102,241,0.08)':'transparent'};`;
+        pill.textContent = `${e.key}:'${e.val}' (f${e.freq})`;
+        tableRow.appendChild(pill);
+      });
+      container.appendChild(tableRow);
+    }
     canvas.appendChild(container);
   }
 
@@ -17930,29 +18869,274 @@ function renderCanvasStep() {
     canvas.appendChild(container);
   }
 
-  // --- AK. MEDIAN FINDER ---
+  // --- AJ-NEW. MONOTONIC DEQUE (deep) ---
+  else if (visualizerState.algo === 'deque') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+
+    const { nums, k, title, problemNote, r, deque, dequeVals, minDeque, minDequeVals, out, windowStart, windowEnd, action } = step;
+
+    // ── Title + problem note ──
+    const titleEl = document.createElement('div');
+    titleEl.style.cssText = 'font-size:0.72rem;font-family:monospace;font-weight:700;color:var(--accent-cyan);margin-bottom:4px;';
+    titleEl.textContent = title || 'Monotonic Deque';
+    container.appendChild(titleEl);
+
+    if (problemNote) {
+      const noteEl = document.createElement('div');
+      noteEl.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);margin-bottom:10px;line-height:1.4;';
+      noteEl.textContent = problemNote;
+      container.appendChild(noteEl);
+    }
+
+    // ── Action badge ──
+    const actionColors = { pop_back:'var(--hard)', pop_front:'var(--medium)', push:'var(--primary-glow)', output:'var(--easy)', init:'var(--text-muted)' };
+    const actionLabels = { pop_back:'Pop Back', pop_front:'Pop Front', push:'Push Back', output:'Window Output', init:'Init' };
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
+    const badge = document.createElement('span');
+    badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
+      border:1px solid ${actionColors[action]||'var(--text-muted)'};color:${actionColors[action]||'var(--text-muted)'};`;
+    badge.textContent = actionLabels[action] || action;
+    hdr.appendChild(badge);
+    if (r >= 0) {
+      const rPill = document.createElement('span');
+      rPill.style.cssText = 'font-size:0.7rem;font-family:monospace;color:var(--text-muted);';
+      rPill.textContent = `idx=${r}, val=${nums ? nums[r] : ''}`;
+      hdr.appendChild(rPill);
+    }
+    container.appendChild(hdr);
+
+    // ── Array row ──
+    if (nums) {
+      const arrRow = document.createElement('div');
+      arrRow.style.cssText = 'display:flex;gap:4px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:10px;';
+      nums.forEach((val, idx) => {
+        const cell = document.createElement('div');
+        const inWindow = r >= 0 && idx >= windowStart && idx <= windowEnd;
+        const inDeque  = deque && deque.includes(idx);
+        const isCurr   = idx === r;
+        cell.style.cssText = `width:42px;height:42px;flex-shrink:0;display:flex;flex-direction:column;
+          align-items:center;justify-content:center;border-radius:6px;font-family:monospace;font-size:0.82rem;font-weight:700;
+          border:${isCurr?'2px solid var(--primary-glow)':inDeque?'1.5px solid var(--accent-cyan)':inWindow?'1px solid rgba(99,102,241,0.4)':'1px solid rgba(255,255,255,0.08)'};
+          background:${isCurr?'rgba(99,102,241,0.2)':inDeque?'rgba(6,182,212,0.12)':inWindow?'rgba(99,102,241,0.06)':'rgba(255,255,255,0.02)'};
+          color:${isCurr?'var(--primary-glow)':inDeque?'var(--accent-cyan)':'rgba(255,255,255,0.7)'};`;
+        cell.innerHTML = `<span>${val}</span><span style="font-size:0.45rem;color:rgba(255,255,255,0.25)">[${idx}]</span>`;
+        arrRow.appendChild(cell);
+      });
+      container.appendChild(arrRow);
+    }
+
+    // ── Deque rail — horizontal with FRONT on left, BACK on right ──
+    const drawDeque = (dq, dqVals, label, color) => {
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;align-items:center;gap:0;margin-bottom:8px;';
+
+      const lbl = document.createElement('span');
+      lbl.style.cssText = `font-size:0.65rem;font-family:monospace;font-weight:700;color:${color};min-width:60px;`;
+      lbl.textContent = label + ':';
+      wrap.appendChild(lbl);
+
+      if (!dq || dq.length === 0) {
+        const empty = document.createElement('span');
+        empty.style.cssText = 'font-size:0.7rem;font-family:monospace;color:rgba(255,255,255,0.2);font-style:italic;';
+        empty.textContent = '[ empty ]';
+        wrap.appendChild(empty);
+      } else {
+        // FRONT label
+        const frontLbl = document.createElement('span');
+        frontLbl.style.cssText = `font-size:0.55rem;font-family:monospace;color:${color};margin-right:4px;`;
+        frontLbl.textContent = 'FRONT';
+        wrap.appendChild(frontLbl);
+
+        dq.forEach((idx, pos) => {
+          const val = dqVals ? dqVals[pos] : idx;
+          const isFront = pos === 0;
+          const isBack  = pos === dq.length - 1;
+          const pill = document.createElement('div');
+          pill.style.cssText = `padding:4px 12px;font-family:monospace;font-size:0.8rem;font-weight:700;
+            border-top:2px solid ${color};border-bottom:2px solid ${color};
+            border-left:${isFront?'2px solid '+color:'1px solid rgba(255,255,255,0.1)'};
+            border-right:${isBack?'2px solid '+color:'1px solid rgba(255,255,255,0.1)'};
+            border-radius:${isFront?'6px 0 0 6px':isBack?'0 6px 6px 0':'0'};
+            background:${isFront?'rgba(6,182,212,0.15)':'rgba(255,255,255,0.03)'};
+            color:${isFront?color:'rgba(255,255,255,0.8)'};`;
+          pill.innerHTML = `${val}<sub style="font-size:0.45rem;color:rgba(255,255,255,0.3)">[${idx}]</sub>`;
+          wrap.appendChild(pill);
+        });
+
+        // BACK label
+        const backLbl = document.createElement('span');
+        backLbl.style.cssText = `font-size:0.55rem;font-family:monospace;color:rgba(255,255,255,0.4);margin-left:4px;`;
+        backLbl.textContent = 'BACK';
+        wrap.appendChild(backLbl);
+      }
+      return wrap;
+    };
+
+    container.appendChild(drawDeque(deque, dequeVals, 'Max-Deque', 'var(--accent-cyan)'));
+    if (minDeque !== null && minDeque !== undefined) {
+      container.appendChild(drawDeque(minDeque, minDequeVals, 'Min-Deque', 'var(--medium)'));
+    }
+
+    // ── Output ──
+    if (out && out.length > 0) {
+      const outRow = document.createElement('div');
+      outRow.style.cssText = 'display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px;';
+      const oLbl = document.createElement('span');
+      oLbl.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);';
+      oLbl.textContent = 'Output:';
+      outRow.appendChild(oLbl);
+      out.forEach(v => {
+        const chip = document.createElement('span');
+        chip.style.cssText = 'font-size:0.72rem;font-family:monospace;padding:2px 8px;border-radius:6px;border:1px solid var(--easy);color:var(--easy);background:rgba(16,185,129,0.08);font-weight:700;';
+        chip.textContent = v;
+        outRow.appendChild(chip);
+      });
+      container.appendChild(outRow);
+    }
+
+    canvas.appendChild(container);
+  }
+
+  // --- AK. MEDIAN FINDER (heap tree view) ---
   else if (visualizerState.algo === 'medianfinder') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    const heaps = document.createElement('div');
-    heaps.className = 'median-heaps';
-    [['Lower max-heap', step.small], ['Upper min-heap', step.large]].forEach(([label, heap]) => {
-      const box = document.createElement('div');
-      box.className = 'median-heap-box';
-      box.innerHTML = `<span>${label}</span>`;
-      heap.forEach(val => {
-        const item = document.createElement('strong');
-        item.textContent = val;
-        if (val === step.active) item.classList.add('active');
-        box.appendChild(item);
+
+    const { small, large, smallTree, largeTree, active, action, median } = step;
+    const actionColors = { insert:'var(--primary-glow)', rebalance:'var(--medium)', query:'var(--easy)', init:'var(--text-muted)' };
+    const actionLabels = { insert:'Insert', rebalance:'Rebalance', query:'Query Median', init:'Init' };
+
+    // ── Header ──
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;';
+    const badge = document.createElement('span');
+    badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
+      border:1px solid ${actionColors[action]||'var(--text-muted)'};color:${actionColors[action]||'var(--text-muted)'};`;
+    badge.textContent = `${actionLabels[action]||action}${active!==null?' → '+active:''}`;
+    hdr.appendChild(badge);
+    if (median !== null && median !== undefined) {
+      const medPill = document.createElement('span');
+      medPill.style.cssText = 'font-size:0.75rem;font-family:monospace;color:var(--easy);font-weight:700;margin-left:auto;';
+      medPill.textContent = `Median = ${median}`;
+      hdr.appendChild(medPill);
+    }
+    container.appendChild(hdr);
+
+    // ── Heap tree renderer (SVG) ──
+    const drawHeapTree = (nodes, isMax, color, label) => {
+      if (!nodes || nodes.length === 0) return null;
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;flex:1;min-width:160px;';
+
+      const titleEl = document.createElement('div');
+      titleEl.style.cssText = `font-size:0.65rem;font-family:monospace;font-weight:700;color:${color};
+        text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;`;
+      titleEl.textContent = label;
+      wrap.appendChild(titleEl);
+
+      const R   = 20, H_GAP = 52, V_GAP = 52;
+      const svgNS = 'http://www.w3.org/2000/svg';
+
+      // Compute positions: 1-based heap index → x,y
+      const levels = Math.floor(Math.log2(nodes.length)) + 1;
+      const svgW = Math.pow(2, levels - 1) * H_GAP + 20;
+      const svgH = levels * V_GAP + 10;
+
+      const getPos = (oneIdx) => {
+        const level = Math.floor(Math.log2(oneIdx));
+        const posInLevel = oneIdx - Math.pow(2, level);
+        const nodesInLevel = Math.pow(2, level);
+        const cellW = svgW / nodesInLevel;
+        return { x: posInLevel * cellW + cellW / 2, y: level * V_GAP + R + 5 };
+      };
+
+      const svg = document.createElementNS(svgNS, 'svg');
+      svg.setAttribute('viewBox', `0 0 ${svgW} ${svgH}`);
+      svg.style.cssText = 'width:100%;display:block;overflow:visible;';
+
+      // Edges
+      nodes.forEach(n => {
+        if (!n.parentIdx) return;
+        const from = getPos(n.parentIdx), to = getPos(n.idx);
+        const line = document.createElementNS(svgNS, 'line');
+        line.setAttribute('x1', from.x); line.setAttribute('y1', from.y);
+        line.setAttribute('x2', to.x);   line.setAttribute('y2', to.y);
+        line.setAttribute('stroke', 'rgba(255,255,255,0.12)');
+        line.setAttribute('stroke-width', '1.5');
+        svg.appendChild(line);
       });
-      heaps.appendChild(box);
+
+      // Nodes
+      nodes.forEach(n => {
+        const pos   = getPos(n.idx);
+        const isTop = n.idx === 1;
+        const isActive = n.val === active;
+        const fill  = isActive ? `rgba(${isMax?'99,102,241':'6,182,212'},0.25)` : isTop ? `rgba(${isMax?'99,102,241':'6,182,212'},0.15)` : 'rgba(30,41,59,0.9)';
+        const stroke = isActive ? color : isTop ? color : 'rgba(255,255,255,0.2)';
+
+        const circle = document.createElementNS(svgNS, 'circle');
+        circle.setAttribute('cx', pos.x); circle.setAttribute('cy', pos.y); circle.setAttribute('r', R);
+        circle.setAttribute('fill', fill); circle.setAttribute('stroke', stroke);
+        circle.setAttribute('stroke-width', isActive || isTop ? '2.5' : '1.5');
+        svg.appendChild(circle);
+
+        const txt = document.createElementNS(svgNS, 'text');
+        txt.setAttribute('x', pos.x); txt.setAttribute('y', pos.y + 5);
+        txt.setAttribute('text-anchor', 'middle');
+        txt.setAttribute('font-family', 'monospace'); txt.setAttribute('font-size', '13');
+        txt.setAttribute('font-weight', '700');
+        txt.setAttribute('fill', isActive || isTop ? color : 'white');
+        txt.textContent = n.val;
+        svg.appendChild(txt);
+
+        // Heap property arrows (parent > children for max, parent < for min)
+        if (isTop) {
+          const indicator = document.createElementNS(svgNS, 'text');
+          indicator.setAttribute('x', pos.x + R + 4); indicator.setAttribute('y', pos.y + 5);
+          indicator.setAttribute('font-family', 'monospace'); indicator.setAttribute('font-size', '10');
+          indicator.setAttribute('fill', color);
+          indicator.textContent = isMax ? 'max' : 'min';
+          svg.appendChild(indicator);
+        }
+      });
+
+      wrap.appendChild(svg);
+      return wrap;
+    };
+
+    const heapsRow = document.createElement('div');
+    heapsRow.style.cssText = 'display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;';
+
+    const maxHeap = drawHeapTree(smallTree, true, 'var(--primary-glow)', `Max-Heap (lower) [${small.length}]`);
+    const minHeap = drawHeapTree(largeTree, false, 'var(--accent-cyan)', `Min-Heap (upper) [${large.length}]`);
+    if (maxHeap) heapsRow.appendChild(maxHeap);
+    if (minHeap) heapsRow.appendChild(minHeap);
+    container.appendChild(heapsRow);
+
+    // ── Arrays as flat row (secondary) ──
+    const arrSection = document.createElement('div');
+    arrSection.style.cssText = 'display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;';
+    [['small (max-heap)', small, 'var(--primary-glow)'], ['large (min-heap)', large, 'var(--accent-cyan)']].forEach(([lbl, arr, col]) => {
+      const w = document.createElement('div');
+      w.style.cssText = 'display:flex;align-items:center;gap:4px;';
+      const l = document.createElement('span');
+      l.style.cssText = `font-size:0.65rem;font-family:monospace;color:${col};min-width:120px;`;
+      l.textContent = lbl + ':';
+      w.appendChild(l);
+      arr.forEach(v => {
+        const chip = document.createElement('span');
+        chip.style.cssText = `font-size:0.72rem;font-family:monospace;padding:2px 7px;border-radius:6px;
+          border:1px solid ${v===active?col:'rgba(255,255,255,0.1)'};
+          color:${v===active?col:'rgba(255,255,255,0.7)'};
+          background:${v===active?'rgba(99,102,241,0.08)':'transparent'};font-weight:${v===active?'700':'400'};`;
+        chip.textContent = v;
+        w.appendChild(chip);
+      });
+      arrSection.appendChild(w);
     });
-    const status = document.createElement('div');
-    status.className = 'concept-status';
-    status.innerHTML = `Inserted <strong>${step.active ?? '-'}</strong> | Median <strong>${step.median ?? '-'}</strong>`;
-    container.appendChild(heaps);
-    container.appendChild(status);
+    container.appendChild(arrSection);
     canvas.appendChild(container);
   }
 
@@ -18128,79 +19312,107 @@ function renderCanvasStep() {
     const container = document.createElement('div');
     container.className = 'concept-vis-container';
 
-    // Phase badge
-    const phaseColors = { init: 'var(--text-muted)', selecting: 'var(--medium)', merged: 'var(--accent-cyan)', complete: 'var(--easy)' };
-    const phaseLabels = { init: 'Initialized', selecting: 'Selecting Pair', merged: 'Merged', complete: 'Complete' };
+    const phaseColors = { init:'var(--text-muted)', selecting:'var(--medium)', merged:'var(--accent-cyan)', complete:'var(--easy)' };
+    const phaseLabels = { init:'Initialized', selecting:'Selecting Pair', merged:'Merged', complete:'Complete' };
+
+    // ── Phase badge ──
     const phaseBadge = document.createElement('div');
-    phaseBadge.style.cssText = `font-size:0.72rem;font-weight:700;font-family:monospace;color:${phaseColors[step.phase]};letter-spacing:0.08em;text-transform:uppercase;`;
+    phaseBadge.style.cssText = `font-size:0.72rem;font-weight:700;font-family:monospace;
+      color:${phaseColors[step.phase]};letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;`;
     phaseBadge.textContent = `● ${phaseLabels[step.phase]}`;
     container.appendChild(phaseBadge);
 
-    // Priority queue row
-    const queueTitle = document.createElement('div');
-    queueTitle.className = 'prefixsum-label';
-    queueTitle.innerHTML = `Priority Queue — ${step.queue.length} node${step.queue.length !== 1 ? 's' : ''} remaining:`;
-    container.appendChild(queueTitle);
+    // ── Priority Queue ──
+    const qTitle = document.createElement('div');
+    qTitle.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);text-transform:uppercase;font-weight:700;letter-spacing:0.05em;margin-bottom:8px;';
+    qTitle.textContent = `Priority Queue (${step.queue.length} node${step.queue.length!==1?'s':''} — sorted by freq ↑)`;
+    container.appendChild(qTitle);
 
+    const maxFreq = Math.max(...step.queue.map(n=>n.freq), 1);
     const queueRow = document.createElement('div');
-    queueRow.style.cssText = 'display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;';
+    queueRow.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;';
 
-    step.queue.forEach((node, qi) => {
-      const isLeft  = node.val === step.mergeLeft;
-      const isRight = node.val === step.mergeRight;
+    step.queue.forEach(node => {
+      const isLeft   = node.val === step.mergeLeft;
+      const isRight  = node.val === step.mergeRight;
       const isMerged = node.val === step.mergedVal;
+      const isLeaf   = !node.left && !node.right;
+      const pct      = Math.round((node.freq / maxFreq) * 100);
+
+      let borderCol = isLeft||isRight ? 'var(--medium)' : isMerged ? 'var(--accent-cyan)' : isLeaf ? 'var(--primary-glow)' : 'rgba(255,255,255,0.15)';
+      let bgCol     = isLeft||isRight ? 'rgba(245,158,11,0.1)' : isMerged ? 'rgba(6,182,212,0.1)' : 'rgba(255,255,255,0.03)';
+
       const card = document.createElement('div');
-      card.className = 'hash-pair';
-      if (isLeft || isRight) {
-        card.style.border = '1.5px solid var(--medium)';
-        card.style.background = 'rgba(245,158,11,0.12)';
-      } else if (isMerged) {
-        card.style.border = '1.5px solid var(--accent-cyan)';
-        card.style.background = 'rgba(6,182,212,0.12)';
-      }
-      const label = isLeft ? ' ←L' : isRight ? ' ←R' : isMerged ? ' ✓' : '';
-      const isLeaf = !node.left && !node.right;
-      card.innerHTML = `<strong style="color:${isLeaf ? 'var(--primary-glow)' : 'var(--accent-cyan)'}">'${node.val}'</strong> <span style="color:var(--text-muted);font-size:0.75rem;">freq=${node.freq}${label}</span>`;
+      card.style.cssText = `display:flex;flex-direction:column;align-items:center;gap:4px;
+        padding:8px 12px;border-radius:8px;min-width:60px;
+        border:1.5px solid ${borderCol};background:${bgCol};font-family:monospace;`;
+
+      // Char label
+      const charEl = document.createElement('div');
+      charEl.style.cssText = `font-size:0.9rem;font-weight:700;
+        color:${isLeaf?'var(--primary-glow)':isMerged?'var(--accent-cyan)':'rgba(255,255,255,0.7)'};`;
+      charEl.textContent = isLeaf ? `'${node.val}'` : node.val;
+      card.appendChild(charEl);
+
+      // Freq
+      const freqEl = document.createElement('div');
+      freqEl.style.cssText = 'font-size:0.75rem;color:var(--text-muted);';
+      freqEl.textContent = `f=${node.freq}`;
+      card.appendChild(freqEl);
+
+      // Freq bar
+      const barWrap = document.createElement('div');
+      barWrap.style.cssText = 'width:100%;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;';
+      const bar = document.createElement('div');
+      bar.style.cssText = `height:100%;width:${pct}%;border-radius:2px;
+        background:${isLeft||isRight?'var(--medium)':isMerged?'var(--accent-cyan)':'var(--primary-glow)'};`;
+      barWrap.appendChild(bar);
+      card.appendChild(barWrap);
+
+      // Merge arrow tag
+      if (isLeft)   { const t=document.createElement('div'); t.style.cssText='font-size:0.55rem;color:var(--medium);font-weight:700;'; t.textContent='← L'; card.appendChild(t); }
+      if (isRight)  { const t=document.createElement('div'); t.style.cssText='font-size:0.55rem;color:var(--medium);font-weight:700;'; t.textContent='R →'; card.appendChild(t); }
+      if (isMerged) { const t=document.createElement('div'); t.style.cssText='font-size:0.55rem;color:var(--accent-cyan);font-weight:700;'; t.textContent='✓ new'; card.appendChild(t); }
+
       queueRow.appendChild(card);
     });
     container.appendChild(queueRow);
 
-    // On final step: show encoding table instead of tree
+    // ── Encoding table — always visible once available ──
     if (step.phase === 'complete' && step.encodingTable) {
-      const tableTitle = document.createElement('div');
-      tableTitle.className = 'prefixsum-label';
-      tableTitle.innerHTML = `Prefix-Free Encoding Table:`;
-      container.appendChild(tableTitle);
+      const tTitle = document.createElement('div');
+      tTitle.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);text-transform:uppercase;font-weight:700;letter-spacing:0.05em;margin-bottom:8px;';
+      tTitle.textContent = 'Prefix-Free Encoding Table';
+      container.appendChild(tTitle);
 
       const tableWrap = document.createElement('div');
-      tableWrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;';
+      tableWrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;';
 
-      // Sort by code length ascending for a clean display
-      const sorted = [...step.encodingNodes].sort((a, b) =>
-        step.encodingTable[a.char].length - step.encodingTable[b.char].length ||
-        b.freq - a.freq
-      );
+      const sorted = [...step.encodingNodes].sort((a,b) =>
+        step.encodingTable[a.char].length - step.encodingTable[b.char].length || b.freq - a.freq);
+
       sorted.forEach(n => {
         const code = step.encodingTable[n.char];
-        const bits = step.encodingTable[n.char].length;
         const entry = document.createElement('div');
-        entry.className = 'hash-pair';
-        entry.style.cssText = 'flex-direction:column;align-items:flex-start;min-width:90px;';
+        entry.style.cssText = `display:flex;flex-direction:column;align-items:center;gap:3px;
+          padding:8px 14px;border-radius:8px;min-width:70px;
+          border:1px solid rgba(99,102,241,0.3);background:rgba(99,102,241,0.06);font-family:monospace;`;
         entry.innerHTML =
-          `<span style="font-size:0.9rem;font-weight:700;color:var(--primary-glow);">'${n.char}'</span>` +
-          `<span style="font-family:monospace;font-size:0.85rem;color:var(--accent-cyan);letter-spacing:0.1em;">${code}</span>` +
-          `<span style="font-size:0.68rem;color:var(--text-muted);">freq=${n.freq} · ${bits} bit${bits !== 1 ? 's' : ''}</span>`;
+          `<span style="font-size:1rem;font-weight:700;color:var(--primary-glow);">'${n.char}'</span>` +
+          `<span style="font-size:0.85rem;font-weight:700;color:var(--accent-cyan);letter-spacing:0.12em;">${code}</span>` +
+          `<span style="font-size:0.6rem;color:var(--text-muted);">f=${n.freq} · ${code.length}b</span>`;
         tableWrap.appendChild(entry);
       });
       container.appendChild(tableWrap);
 
-      const savings = document.createElement('div');
-      savings.style.cssText = 'font-size:0.78rem;color:var(--text-muted);text-align:center;margin-top:0.25rem;font-family:monospace;';
+      // Savings bar
       const saved = ((1 - step.totalBits / step.naiveBits) * 100).toFixed(1);
+      const savings = document.createElement('div');
+      savings.style.cssText = 'font-size:0.75rem;font-family:monospace;color:var(--text-muted);display:flex;gap:14px;flex-wrap:wrap;';
       savings.innerHTML =
-        `Huffman: <strong style="color:var(--easy)">${step.totalBits} bits</strong> &nbsp;|&nbsp; ` +
-        `Fixed 8-bit: <strong style="color:var(--hard)">${step.naiveBits} bits</strong> &nbsp;|&nbsp; ` +
-        `Compression: <strong style="color:var(--easy)">${saved}% saved</strong>`;
+        `<span>Huffman: <strong style="color:var(--easy)">${step.totalBits} bits</strong></span>` +
+        `<span>Fixed 8-bit: <strong style="color:var(--hard)">${step.naiveBits} bits</strong></span>` +
+        `<span>Saved: <strong style="color:var(--easy)">${saved}%</strong></span>`;
       container.appendChild(savings);
     }
 
@@ -18613,57 +19825,103 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'bitmasksubsets') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    container.style.display = 'flex';
-    container.style.flexDirection = 'row';
-    container.style.gap = '30px';
-    container.style.width = '100%';
-    container.style.justifyContent = 'space-around';
-    
-    // Left: Active state
-    const leftPanel = document.createElement('div');
-    leftPanel.style.display = 'flex';
-    leftPanel.style.flexDirection = 'column';
-    leftPanel.style.gap = '15px';
-    leftPanel.innerHTML = `
-      <div style="font-size:0.9rem; color:var(--text-muted);">Elements: <strong>[A, B, C]</strong></div>
-      <div style="font-family:monospace; font-size:1.1rem;">
-        Mask: <span style="color:var(--accent-cyan); font-weight:bold;">${step.mask}</span> &rarr; 
-        <span style="color:var(--secondary); font-weight:bold;">${step.binaryMask}</span>
-      </div>
-      <div style="font-size:0.95rem; font-weight:bold; color:var(--easy);">
-        Active Subset: [${step.activeSubset.join(', ')}]
-      </div>
-    `;
-    container.appendChild(leftPanel);
-    
-    // Right: Subsets accumulated list
-    const rightPanel = document.createElement('div');
-    rightPanel.style.width = '200px';
-    rightPanel.style.maxHeight = '220px';
-    rightPanel.style.overflowY = 'auto';
-    rightPanel.style.border = '1px solid var(--border-color)';
-    rightPanel.style.borderRadius = '6px';
-    rightPanel.style.padding = '10px';
-    rightPanel.style.background = 'rgba(255,255,255,0.02)';
-    
-    const title = document.createElement('div');
-    title.style.fontSize = '0.75rem';
-    title.style.color = 'var(--text-muted)';
-    title.style.marginBottom = '6px';
-    title.style.fontWeight = 'bold';
-    title.textContent = "ACCUMULATED SUBSETS:";
-    rightPanel.appendChild(title);
-    
-    step.subsetsList.forEach(s => {
-      const el = document.createElement('div');
-      el.style.fontSize = '0.85rem';
-      el.style.fontFamily = 'monospace';
-      el.style.padding = '2px 0';
-      el.textContent = s;
-      rightPanel.appendChild(el);
+
+    const { mask, binaryMask, activeSubset, subsetsList } = step;
+    const arr = ['A', 'B', 'C'];
+    const n = arr.length;
+    const CELL = 58;
+
+    // ── Header ──
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;';
+    const maskPill = document.createElement('span');
+    maskPill.style.cssText = 'font-size:0.75rem;font-family:monospace;font-weight:700;padding:3px 12px;border-radius:20px;border:1px solid var(--accent-cyan);color:var(--accent-cyan);';
+    maskPill.textContent = `mask = ${mask}`;
+    hdr.appendChild(maskPill);
+    const binPill = document.createElement('span');
+    binPill.style.cssText = 'font-size:0.85rem;font-family:monospace;font-weight:700;color:var(--primary-glow);letter-spacing:0.15em;';
+    binPill.textContent = binaryMask;
+    hdr.appendChild(binPill);
+    container.appendChild(hdr);
+
+    // ── Bit-grid: one column per element, MSB on right (bit 0 = A, bit 1 = B, bit 2 = C) ──
+    const bitGrid = document.createElement('div');
+    bitGrid.style.cssText = `display:flex;gap:10px;justify-content:center;margin-bottom:16px;`;
+
+    for (let i = n - 1; i >= 0; i--) {
+      const bitOn = (mask >> i) & 1;
+      const col = document.createElement('div');
+      col.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:6px;';
+
+      // Bit position label
+      const posLabel = document.createElement('div');
+      posLabel.style.cssText = 'font-size:0.6rem;font-family:monospace;color:var(--text-muted);';
+      posLabel.textContent = `bit ${i}`;
+      col.appendChild(posLabel);
+
+      // Bit cell
+      const cell = document.createElement('div');
+      cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;flex-direction:column;
+        align-items:center;justify-content:center;border-radius:8px;font-family:monospace;
+        border:2px solid ${bitOn ? 'var(--primary-glow)' : 'rgba(255,255,255,0.1)'};
+        background:${bitOn ? 'rgba(99,102,241,0.2)' : 'rgba(255,255,255,0.03)'};
+        transition:all 0.15s;`;
+      cell.innerHTML = `<span style="font-size:1.4rem;font-weight:900;color:${bitOn ? 'var(--primary-glow)' : 'rgba(255,255,255,0.2)'};">${bitOn}</span>`;
+      col.appendChild(cell);
+
+      // Element label
+      const elLabel = document.createElement('div');
+      elLabel.style.cssText = `font-size:0.82rem;font-family:monospace;font-weight:700;
+        color:${bitOn ? 'var(--easy)' : 'rgba(255,255,255,0.2)'};`;
+      elLabel.textContent = arr[i];
+      col.appendChild(elLabel);
+
+      bitGrid.appendChild(col);
+    }
+    container.appendChild(bitGrid);
+
+    // ── Active subset pills ──
+    const subsetRow = document.createElement('div');
+    subsetRow.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px;';
+    const subLabel = document.createElement('span');
+    subLabel.style.cssText = 'font-size:0.7rem;font-family:monospace;color:var(--text-muted);';
+    subLabel.textContent = 'Subset:';
+    subsetRow.appendChild(subLabel);
+    if (activeSubset.length === 0) {
+      const empty = document.createElement('span');
+      empty.style.cssText = 'font-size:0.78rem;font-family:monospace;color:rgba(255,255,255,0.25);font-style:italic;';
+      empty.textContent = '∅  (empty set)';
+      subsetRow.appendChild(empty);
+    } else {
+      activeSubset.forEach(el => {
+        const pill = document.createElement('span');
+        pill.style.cssText = 'font-size:0.82rem;font-family:monospace;font-weight:700;padding:3px 12px;border-radius:8px;border:1px solid var(--easy);color:var(--easy);background:rgba(16,185,129,0.1);';
+        pill.textContent = el;
+        subsetRow.appendChild(pill);
+      });
+    }
+    container.appendChild(subsetRow);
+
+    // ── Accumulated subsets list ──
+    const listTitle = document.createElement('div');
+    listTitle.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);text-transform:uppercase;font-weight:700;margin-bottom:6px;';
+    listTitle.textContent = `All subsets so far (${subsetsList.length}/${1 << n}):`;
+    container.appendChild(listTitle);
+
+    const listWrap = document.createElement('div');
+    listWrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;';
+    subsetsList.forEach((s, idx) => {
+      const isLatest = idx === subsetsList.length - 1;
+      const chip = document.createElement('span');
+      chip.style.cssText = `font-size:0.72rem;font-family:monospace;padding:2px 8px;border-radius:6px;
+        border:1px solid ${isLatest ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.08)'};
+        color:${isLatest ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.5)'};
+        background:${isLatest ? 'rgba(6,182,212,0.08)' : 'transparent'};
+        font-weight:${isLatest ? '700' : '400'};`;
+      chip.textContent = s;
+      listWrap.appendChild(chip);
     });
-    container.appendChild(rightPanel);
-    
+    container.appendChild(listWrap);
     canvas.appendChild(container);
   }
   else if (visualizerState.algo === 'bitmaskdp') {
@@ -18947,7 +20205,46 @@ function renderCanvasStep() {
       }
       svg.appendChild(line);
     });
-    
+
+    // ── SCC group outlines (drawn before nodes so they appear behind) ──
+    if (step.nodeComponents && step.sccs && step.sccs.length > 0) {
+      const sccColors = ['rgba(99,102,241,0.7)', 'rgba(16,185,129,0.7)', 'rgba(245,158,11,0.7)', 'rgba(244,63,94,0.7)'];
+      const sccFills  = ['rgba(99,102,241,0.08)', 'rgba(16,185,129,0.08)', 'rgba(245,158,11,0.08)', 'rgba(244,63,94,0.08)'];
+
+      step.sccs.forEach((compNodes, compIdx) => {
+        // Map component node names back to coord indices
+        const nodeIndices = compNodes.map(name => coords.findIndex(c => c.name === name)).filter(i => i >= 0);
+        if (nodeIndices.length === 0) return;
+
+        // Compute bounding box of the group
+        const xs = nodeIndices.map(i => coords[i].x + 22);
+        const ys = nodeIndices.map(i => coords[i].y + 22);
+        const cx = xs.reduce((s,v)=>s+v,0)/xs.length;
+        const cy = ys.reduce((s,v)=>s+v,0)/ys.length;
+        const rx = Math.max(...xs.map(x=>Math.abs(x-cx))) + 32;
+        const ry = Math.max(...ys.map(y=>Math.abs(y-cy))) + 32;
+
+        const ellipse = document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+        ellipse.setAttribute('cx', cx); ellipse.setAttribute('cy', cy);
+        ellipse.setAttribute('rx', rx); ellipse.setAttribute('ry', ry);
+        ellipse.setAttribute('fill', sccFills[compIdx % sccFills.length]);
+        ellipse.setAttribute('stroke', sccColors[compIdx % sccColors.length]);
+        ellipse.setAttribute('stroke-width', '2');
+        ellipse.setAttribute('stroke-dasharray', '6 3');
+        svg.insertBefore(ellipse, svg.firstChild.nextSibling); // after defs, before edges
+
+        // Label
+        const label = document.createElementNS('http://www.w3.org/2000/svg','text');
+        label.setAttribute('x', cx); label.setAttribute('y', cy - ry + 14);
+        label.setAttribute('text-anchor','middle');
+        label.setAttribute('font-family','monospace'); label.setAttribute('font-size','11');
+        label.setAttribute('font-weight','700');
+        label.setAttribute('fill', sccColors[compIdx % sccColors.length]);
+        label.textContent = `SCC ${compIdx + 1}`;
+        svg.appendChild(label);
+      });
+    }
+
     graphWrapper.appendChild(svg);
     
     coords.forEach((coord, idx) => {
@@ -19049,29 +20346,87 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'binaryaddition') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    
-    const registers = document.createElement('div');
-    registers.style.display = 'flex';
-    registers.style.flexDirection = 'column';
-    registers.style.gap = '10px';
-    registers.style.width = '240px';
-    registers.style.fontFamily = 'monospace';
-    
-    registers.innerHTML = `
-      <div style="display:flex; justify-content:space-between;">
-        <span>Register A:</span><strong>${step.a} (${step.binaryA})</strong>
-      </div>
-      <div style="display:flex; justify-content:space-between; border-bottom:1px dashed rgba(255,255,255,0.1); padding-bottom:6px;">
-        <span>Register B:</span><strong>${step.b} (${step.binaryB})</strong>
-      </div>
-      <div style="display:flex; justify-content:space-between; color:var(--accent-cyan); font-weight:bold;">
-        <span>Sum (A ^ B):</span><strong>${step.sum} (${step.binarySum})</strong>
-      </div>
-      <div style="display:flex; justify-content:space-between; color:var(--secondary); font-weight:bold;">
-        <span>Carry ((A&B)<<1):</span><strong>${step.carry} (${step.binaryCarry})</strong>
-      </div>
-    `;
-    container.appendChild(registers);
+
+    const { binaryA, binaryB, binarySum, binaryCarry, a, b, sum, carry } = step;
+    const BITS = 4;
+    const CELL = 52;
+    const GAP  = 6;
+
+    const makeRow = (label, binStr, color, highlightBits) => {
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;align-items:center;gap:10px;margin-bottom:6px;';
+
+      const lbl = document.createElement('div');
+      lbl.style.cssText = `width:130px;font-size:0.72rem;font-family:monospace;color:${color};font-weight:700;text-align:right;flex-shrink:0;`;
+      lbl.textContent = label;
+      wrap.appendChild(lbl);
+
+      const cells = document.createElement('div');
+      cells.style.cssText = `display:flex;gap:${GAP}px;`;
+
+      for (let i = 0; i < BITS; i++) {
+        const bit = binStr[i];
+        const isSet = bit === '1';
+        const isHighlight = highlightBits && highlightBits.includes(i);
+        const cell = document.createElement('div');
+        cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;align-items:center;justify-content:center;
+          border-radius:8px;font-family:monospace;font-size:1.3rem;font-weight:900;flex-shrink:0;
+          border:2px solid ${isHighlight ? color : isSet ? color.replace(')', ',0.6)').replace('var(--','rgba(') : 'rgba(255,255,255,0.08)'};
+          background:${isHighlight ? color.replace('var(--accent-cyan)','rgba(6,182,212,0.2)').replace('var(--primary-glow)','rgba(99,102,241,0.2)').replace('var(--easy)','rgba(16,185,129,0.2)').replace('var(--medium)','rgba(245,158,11,0.2)') : isSet ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.02)'};
+          color:${isSet ? color : 'rgba(255,255,255,0.2)'};`;
+        cell.textContent = bit;
+        cells.appendChild(cell);
+      }
+      wrap.appendChild(cells);
+
+      // Decimal value
+      const dec = document.createElement('div');
+      dec.style.cssText = `font-family:monospace;font-size:0.82rem;color:${color};font-weight:700;margin-left:4px;`;
+      const num = parseInt(binStr, 2);
+      dec.textContent = `= ${num}`;
+      wrap.appendChild(dec);
+
+      return wrap;
+    };
+
+    // Determine which bits changed between A XOR B = sum (highlight bits where both were 1 → carry)
+    const carryBits = [];
+    const sumBits   = [];
+    for (let i = 0; i < BITS; i++) {
+      if (binaryA[i] === '1' && binaryB[i] === '1') carryBits.push(i);
+      if (binaryA[i] !== binaryB[i]) sumBits.push(i);
+    }
+
+    // Title
+    const title = document.createElement('div');
+    title.style.cssText = 'font-size:0.7rem;font-family:monospace;color:var(--text-muted);text-transform:uppercase;font-weight:700;letter-spacing:0.06em;margin-bottom:12px;';
+    title.textContent = 'Bitwise Addition: A + B using XOR + AND<<1 (no arithmetic +)';
+    container.appendChild(title);
+
+    // Rows
+    container.appendChild(makeRow('A  (accumulator)', binaryA, 'var(--primary-glow)', []));
+    container.appendChild(makeRow('B  (carry bits)', binaryB, 'var(--medium)', carryBits));
+
+    // Separator
+    const sep = document.createElement('div');
+    sep.style.cssText = 'display:flex;align-items:center;gap:10px;margin-bottom:6px;';
+    sep.innerHTML = `<div style="width:130px;text-align:right;font-size:0.7rem;font-family:monospace;color:rgba(255,255,255,0.2);flex-shrink:0;">─────────</div>
+      <div style="width:${BITS*(CELL+GAP)-GAP}px;height:1px;background:rgba(255,255,255,0.12);"></div>`;
+    container.appendChild(sep);
+
+    container.appendChild(makeRow('Sum  = A XOR B', binarySum, 'var(--accent-cyan)', sumBits));
+    container.appendChild(makeRow('Carry = (A AND B)<<1', binaryCarry, 'var(--easy)', carryBits));
+
+    // Status: next iteration or done
+    const isDone = parseInt(binaryB, 2) === 0;
+    const status = document.createElement('div');
+    status.style.cssText = `margin-top:10px;font-family:monospace;font-size:0.78rem;
+      color:${isDone ? 'var(--easy)' : 'var(--text-muted)'};font-weight:${isDone ? '700' : '400'};`;
+    status.textContent = isDone
+      ? `✓ Carry = 0. Final result: ${a} + ${b} = ${parseInt(binaryA, 2)}`
+      : `Next: A ← Sum (${binarySum}), B ← Carry (${binaryCarry}). Repeat until B = 0.`;
+    container.appendChild(status);
+
     canvas.appendChild(container);
   }
   else if (visualizerState.algo === 'prims') {
