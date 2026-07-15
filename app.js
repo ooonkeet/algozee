@@ -810,6 +810,8 @@ function loadProblemIntoVisualizer(prob) {
     selector.value = 'trie';
   } else if (prob.id === 72) {
     selector.value = 'editdistance';
+  } else if (prob.id === 5 || prob.id === 647 || prob.id === 516 || prob.id === 1312) {
+    selector.value = 'palindrome';
   } else if (prob.subcategory === 'String DP / Sequence DP') {
     selector.value = 'stringdp';
   } else if (prob.subcategory === 'Bitmask DP') {
@@ -844,6 +846,8 @@ function loadProblemIntoVisualizer(prob) {
       // All Linked List Manipulation problems get the new visualizer
       selector.value = 'linkedlist';
     }
+  } else if (prob.id === 503 || prob.id === 907 || prob.id === 496 || prob.id === 1019) {
+    selector.value = 'monostack';
   } else if (prob.subcategory === 'Monotonic Stack') {
     selector.value = 'stack';
   } else if (prob.subcategory === 'Monotonic Queue / Deque') {
@@ -856,6 +860,8 @@ function loadProblemIntoVisualizer(prob) {
     selector.value = 'tree';
   } else if (prob.subcategory === 'Graph BFS / DFS') {
     selector.value = 'graph';
+  } else if (prob.id === 207 || prob.id === 210 || prob.id === 802) {
+    selector.value = 'dfs-cycle';
   } else if (prob.subcategory === 'Topological Sort / DAG') {
     selector.value = 'toposort';
   } else if (prob.subcategory === 'Union Find / DSU') {
@@ -10700,6 +10706,18 @@ function resetVisualizer() {
     appendLog("[INFO] Loading Linked List for Cycle II detection.", "info");
     generateLinkedListCycleIISteps();
   }
+  else if (visualizerState.algo === 'monostack') {
+    appendLog("[INFO] Monotonic Stack: NGE / Circular / Contribution.", "info");
+    generateMonoStackSteps();
+  }
+  else if (visualizerState.algo === 'dfs-cycle') {
+    appendLog("[INFO] DFS Cycle Detection: WHITE/GRAY/BLACK coloring.", "info");
+    generateDFSCycleSteps();
+  }
+  else if (visualizerState.algo === 'palindrome') {
+    appendLog("[INFO] Palindrome: expand-around-center or DP table.", "info");
+    generatePalindromeSteps();
+  }
   else if (visualizerState.algo === 'stack') {
     const temps = [73, 74, 75, 71, 69, 72, 76];
     visualizerState.rawArray = [...temps];
@@ -12821,6 +12839,344 @@ function generateMonotonicStackSteps(temps) {
     steps.push({ scanning: i, stack: [...stack], resolved: {}, result: [...ans], log: `Push index ${i} onto stack.` });
   }
   steps.push({ scanning: -1, stack: [...stack], resolved: {}, result: [...ans], log: "Completed scanning. Remainder elements in stack resolve to 0." });
+  visualizerState.steps = steps;
+}
+
+// 8b. Monotonic Stack — NGE-II circular / contribution counting (LC 503, 907, 496, 1019)
+function generateMonoStackSteps() {
+  const id = visualizerState.currentProbId;
+  const steps = [];
+
+  // Pick mode and data based on problem
+  let nums, mode, title, note;
+  if (id === 503) {
+    nums = [1, 2, 1]; mode = 'nge_circular';
+    title = 'Next Greater Element II — Circular (LC 503)';
+    note  = 'Double the array conceptually (2N loop, index mod N). Dequeue when nums[i] > nums[stack.top].';
+  } else if (id === 907) {
+    nums = [3, 1, 2, 4]; mode = 'contribution';
+    title = 'Sum of Subarray Minimums (LC 907)';
+    note  = 'For each element, find left/right boundaries where it is the minimum. Contribution = val × left_span × right_span.';
+  } else if (id === 496) {
+    nums = [1, 3, 4, 2];  mode = 'nge';
+    title = 'Next Greater Element I (LC 496)';
+    note  = 'Monotonic decreasing stack. Pop when larger element found; that is the NGE.';
+  } else {
+    nums = [2, 1, 2, 4, 3]; mode = 'nge';
+    title = 'Next Greater Element (NGE) — Monotonic Stack';
+    note  = 'Pop from stack whenever a larger element is encountered. Remaining stack elements have no NGE.';
+  }
+
+  const n = nums.length;
+  const result = new Array(n).fill(-1);
+  const stack  = [];    // indices
+
+  const snap = (phase, i, activeIdx, poppedIdx, contribution, log) =>
+    steps.push({
+      nums, n, mode, title, note,
+      phase,          // 'init'|'scan'|'pop'|'push'|'contribution'|'done'
+      i,              // current scan position (may be >= n for circular second pass)
+      activeIdx,      // index in 0..n-1 currently being processed
+      poppedIdx,      // index just popped (-1 if none)
+      contribution,   // {idx, left, right, val} for contribution mode
+      stack:    [...stack],
+      result:   [...result],
+      log
+    });
+
+  snap('init', -1, -1, -1, null,
+    `${title}. Array: [${nums.join(', ')}]. ${note}`);
+
+  if (mode === 'nge' || mode === 'nge_circular') {
+    const limit = mode === 'nge_circular' ? 2 * n : n;
+
+    for (let i = 0; i < limit; i++) {
+      const idx = i % n;
+      snap('scan', i, idx, -1, null,
+        `${mode === 'nge_circular' ? `Pass ${i >= n ? 2 : 1}, ` : ''}Index ${idx} (val=${nums[idx]}). Check stack top.`);
+
+      while (stack.length > 0 && nums[stack[stack.length - 1]] < nums[idx]) {
+        const popped = stack.pop();
+        result[popped] = nums[idx];
+        snap('pop', i, idx, popped, null,
+          `Pop idx ${popped} (val=${nums[popped]}). NGE found: ${nums[idx]}. result[${popped}] = ${nums[idx]}.`);
+      }
+
+      if (i < n) {
+        stack.push(idx);
+        snap('push', i, idx, -1, null,
+          `Push idx ${idx} onto stack. Stack: [${stack.map(s=>`${s}(${nums[s]})`).join(', ')}].`);
+      } else {
+        snap('scan', i, idx, -1, null,
+          `Second pass idx ${idx} — only popping, not pushing new indices.`);
+      }
+    }
+
+    snap('done', -1, -1, -1, null,
+      `Done! NGE result: [${result.join(', ')}]. Remaining stack elements have no NGE (-1).`);
+
+  } else if (mode === 'contribution') {
+    // For each element find prevLess and nextLess
+    const prevLess = new Array(n).fill(-1);
+    const nextLess = new Array(n).fill(n);
+
+    snap('scan', -1, -1, -1, null,
+      `Step 1: Find prevLess[] — nearest smaller to the left using monotonic stack.`);
+
+    // prevLess pass
+    for (let i = 0; i < n; i++) {
+      snap('scan', i, i, -1, null,
+        `Find prevLess[${i}] for val=${nums[i]}. Stack: [${stack.map(s=>nums[s]).join(',')||'empty'}].`);
+      while (stack.length > 0 && nums[stack[stack.length-1]] >= nums[i]) {
+        const p = stack.pop();
+        snap('pop', i, i, p, null,
+          `Pop ${p} (val=${nums[p]}) ≥ ${nums[i]}. Not the prev-less.`);
+      }
+      prevLess[i] = stack.length > 0 ? stack[stack.length-1] : -1;
+      stack.push(i);
+      snap('push', i, i, -1, null,
+        `prevLess[${i}] = ${prevLess[i]}. Push ${i}. Stack: [${stack.map(s=>nums[s]).join(',')}].`);
+    }
+
+    stack.length = 0;
+    snap('scan', -1, -1, -1, null,
+      `Step 2: Find nextLess[] — nearest smaller to the right.`);
+
+    // nextLess pass
+    for (let i = n - 1; i >= 0; i--) {
+      while (stack.length > 0 && nums[stack[stack.length-1]] > nums[i]) {
+        const p = stack.pop();
+        snap('pop', i, i, p, null,
+          `Pop ${p} (val=${nums[p]}) > ${nums[i]}. Not the next-less.`);
+      }
+      nextLess[i] = stack.length > 0 ? stack[stack.length-1] : n;
+      stack.push(i);
+      snap('push', i, i, -1, null,
+        `nextLess[${i}] = ${nextLess[i]}. Push ${i}.`);
+    }
+
+    // Contribution
+    let total = 0;
+    snap('contribution', -1, -1, -1, null,
+      `Step 3: Compute contribution of each element as minimum of its subarray range.`);
+
+    for (let i = 0; i < n; i++) {
+      const left  = i - prevLess[i];          // subarrays where nums[i] is min, from left
+      const right = nextLess[i] - i;          // subarrays where nums[i] is min, to right
+      const contrib = nums[i] * left * right;
+      total += contrib;
+      snap('contribution', i, i, -1, { idx: i, left, right, val: nums[i], contrib, total },
+        `nums[${i}]=${nums[i]}: left_span=${left} × right_span=${right} × val=${nums[i]} = ${contrib}. Running total = ${total}.`);
+    }
+
+    snap('done', -1, -1, -1, null,
+      `Sum of Subarray Minimums = ${total} (mod 10^9+7 = ${total % (1e9+7)}).`);
+  }
+
+  visualizerState.steps = steps;
+}
+
+// 8c. DFS Cycle Detection — directed graph with WHITE/GRAY/BLACK coloring
+function generateDFSCycleSteps() {
+  const id = visualizerState.currentProbId;
+
+  // Directed graph: edges adapted per problem
+  let edges, n, nodeLabels, title, note;
+  if (id === 207 || id === 210) {
+    n = 4; nodeLabels = ['0','1','2','3'];
+    edges = [[0,1],[1,2],[2,0],[3,1]];  // cycle: 0→1→2→0
+    title = id === 207 ? 'Course Schedule (LC 207)' : 'Course Schedule II (LC 210)';
+    note  = 'DFS on prerequisites graph. GRAY node = in current DFS path. Back edge to GRAY = cycle = impossible schedule.';
+  } else if (id === 802) {
+    n = 5; nodeLabels = ['0','1','2','3','4'];
+    edges = [[1,2],[2,3],[3,1],[0,4]];  // cycle 1→2→3→1; safe: 0,4
+    title = 'Find Eventual Safe States (LC 802)';
+    note  = 'Nodes that only lead to terminals are "safe". Cycle detection via DFS coloring identifies unsafe nodes.';
+  } else {
+    n = 5; nodeLabels = ['A','B','C','D','E'];
+    edges = [[0,1],[1,2],[2,3],[3,1],[0,4]];  // cycle B→C→D→B
+    title = 'Directed Graph — DFS Cycle Detection';
+    note  = 'WHITE=unvisited, GRAY=in DFS stack (current path), BLACK=fully processed. Back edge to GRAY node = cycle.';
+  }
+
+  // WHITE=0, GRAY=1, BLACK=2
+  const color = new Array(n).fill(0);
+  const steps = [];
+  const callStack = [];
+  let cycleEdge = null;
+  let cycleFound = false;
+
+  // adjacency
+  const adj = Array.from({length:n}, ()=>[]);
+  edges.forEach(([u,v]) => adj[u].push(v));
+
+  const snap = (activeNode, activeEdge, log) =>
+    steps.push({
+      n, nodeLabels, edges, title, note,
+      color:      [...color],
+      callStack:  [...callStack],
+      activeNode,
+      activeEdge,   // [u,v] being examined or null
+      cycleEdge:    cycleEdge ? [...cycleEdge] : null,
+      hasCycle:     cycleFound,
+      log
+    });
+
+  snap(-1, null, `${title}. Colors: WHITE=unvisited, GRAY=in DFS path, BLACK=done. Start DFS from every unvisited node.`);
+
+  function dfs(u) {
+    if (cycleFound) return true;
+    color[u] = 1; // GRAY
+    callStack.push(u);
+    snap(u, null, `Enter DFS(${nodeLabels[u]}). Color ${nodeLabels[u]} GRAY (in current path). Stack: [${callStack.map(x=>nodeLabels[x]).join('→')}].`);
+
+    for (const v of adj[u]) {
+      snap(u, [u,v], `Examine edge ${nodeLabels[u]}→${nodeLabels[v]}. Neighbor color = ${['WHITE','GRAY','BLACK'][color[v]]}.`);
+
+      if (color[v] === 1) {
+        // Back edge — cycle detected
+        cycleEdge = [u, v];
+        cycleFound = true;
+        snap(u, [u,v], `⚠ BACK EDGE! ${nodeLabels[u]}→${nodeLabels[v]} (${nodeLabels[v]} is GRAY = in current path). CYCLE DETECTED!`);
+        return true;
+      }
+      if (color[v] === 0) {
+        snap(v, [u,v], `${nodeLabels[v]} is WHITE. Recurse DFS(${nodeLabels[v]}).`);
+        if (dfs(v)) return true;
+      } else {
+        snap(u, [u,v], `${nodeLabels[v]} is BLACK (fully processed). Safe edge — no cycle via this path.`);
+      }
+    }
+
+    color[u] = 2; // BLACK
+    callStack.pop();
+    snap(u, null, `DFS(${nodeLabels[u]}) complete. Color ${nodeLabels[u]} BLACK. Stack: [${callStack.map(x=>nodeLabels[x]).join('→')||'empty'}].`);
+    return false;
+  }
+
+  for (let i = 0; i < n && !cycleFound; i++) {
+    if (color[i] === 0) {
+      snap(i, null, `Node ${nodeLabels[i]} is WHITE. Start new DFS from ${nodeLabels[i]}.`);
+      dfs(i);
+    }
+  }
+
+  snap(-1, null, cycleFound
+    ? `Cycle detected via back edge ${nodeLabels[cycleEdge[0]]}→${nodeLabels[cycleEdge[1]]}. Graph has a cycle — task scheduling IMPOSSIBLE.`
+    : `No cycle found. All nodes processed BLACK. Graph is a DAG — task scheduling POSSIBLE.`);
+
+  visualizerState.steps = steps;
+}
+
+// 8d. Palindrome DP — expand-around-center (LC 5, 647) and DP table (LC 516)
+function generatePalindromeSteps() {
+  const id = visualizerState.currentProbId;
+  const steps = [];
+
+  let s, mode, title, note;
+  if (id === 516 || id === 1312) {
+    s = 'babad'; mode = 'dp_table';
+    title = id === 516 ? 'Longest Palindromic Subsequence (LC 516)' : 'Min Insertions to Make Palindrome (LC 1312)';
+    note  = 'dp[i][j] = LPS length of s[i..j]. If s[i]==s[j]: dp[i][j]=dp[i+1][j-1]+2, else max(dp[i+1][j],dp[i][j-1]).';
+  } else if (id === 647) {
+    s = 'aaa'; mode = 'expand';
+    title = 'Palindromic Substrings — Count (LC 647)';
+    note  = 'Expand around each center (n odd centers + n-1 even centers). Every successful expansion = one palindrome.';
+  } else {
+    s = 'babad'; mode = 'expand';
+    title = 'Longest Palindromic Substring (LC 5)';
+    note  = 'Expand around each center outward. Track the longest palindrome found.';
+  }
+
+  const n = s.length;
+
+  const snap = (center, L, R, bestStart, bestLen, dpTable, phase, log) =>
+    steps.push({
+      s, n, mode, title, note,
+      center,       // center index (or 'c-0.5' for even)
+      L, R,         // current expansion bounds
+      bestStart,    // start of best palindrome so far
+      bestLen,      // length of best palindrome so far
+      dp: dpTable ? dpTable.map(r=>[...r]) : null,
+      phase,        // 'init'|'center'|'expand'|'found'|'dp_fill'|'done'
+      log
+    });
+
+  snap(-1, -1, -1, 0, 1, null, 'init',
+    `${title}. String: "${s}" (len=${n}). ${note}`);
+
+  if (mode === 'expand') {
+    let bestStart = 0, bestLen = 1, totalCount = 0;
+
+    for (let c = 0; c < n; c++) {
+      // Odd-length palindromes (single center)
+      snap(c, c, c, bestStart, bestLen, null, 'center',
+        `Center at index ${c} ('${s[c]}'). Try expanding odd-length palindromes.`);
+
+      let L = c, R = c;
+      while (L >= 0 && R < n && s[L] === s[R]) {
+        const isNew = (R - L + 1) > bestLen;
+        if (isNew) { bestStart = L; bestLen = R - L + 1; }
+        totalCount++;
+        snap(c, L, R, bestStart, bestLen, null, 'expand',
+          `Expand: s[${L}]='${s[L]}' == s[${R}]='${s[R]}'. Palindrome "${s.slice(L,R+1)}" (len=${R-L+1}).${isNew?' ← New best!':''}`);
+        L--; R++;
+      }
+      if (L+1 <= R-1 || (L+1 === R))
+        snap(c, L+1, R-1, bestStart, bestLen, null, 'center',
+          `Expansion stopped: s[${Math.max(0,L)}]='${s[Math.max(0,L)]}' ≠ s[${Math.min(n-1,R)}]='${s[Math.min(n-1,R)]}' or boundary reached.`);
+
+      // Even-length palindromes (center between c and c+1)
+      if (c + 1 < n) {
+        snap(c, c, c+1, bestStart, bestLen, null, 'center',
+          `Even center between ${c} and ${c+1}. Check s[${c}]='${s[c]}' == s[${c+1}]='${s[c+1]}'.`);
+        L = c; R = c + 1;
+        while (L >= 0 && R < n && s[L] === s[R]) {
+          const isNew = (R - L + 1) > bestLen;
+          if (isNew) { bestStart = L; bestLen = R - L + 1; }
+          totalCount++;
+          snap(c, L, R, bestStart, bestLen, null, 'expand',
+            `Expand: s[${L}]='${s[L]}' == s[${R}]='${s[R]}'. Palindrome "${s.slice(L,R+1)}" (len=${R-L+1}).${isNew?' ← New best!':''}`);
+          L--; R++;
+        }
+      }
+    }
+
+    snap(-1, bestStart, bestStart+bestLen-1, bestStart, bestLen, null, 'done',
+      mode === 'expand' && id === 647
+        ? `Total palindromic substrings = ${totalCount}.`
+        : `Longest palindrome = "${s.slice(bestStart, bestStart+bestLen)}" (len=${bestLen}).`);
+
+  } else if (mode === 'dp_table') {
+    // dp[i][j] = LPS length of s[i..j]
+    const dp = Array.from({length:n}, ()=>new Array(n).fill(0));
+    // base: single chars
+    for (let i=0;i<n;i++) dp[i][i]=1;
+
+    snap(-1, -1, -1, 0, 1, dp, 'init',
+      `dp[i][i]=1 (single chars are palindromes). Fill diagonally by increasing length.`);
+
+    for (let len=2; len<=n; len++) {
+      for (let i=0; i<=n-len; i++) {
+        const j=i+len-1;
+        snap(-1, i, j, 0, 0, dp, 'dp_fill',
+          `dp[${i}][${j}]: s[${i}]='${s[i]}' vs s[${j}]='${s[j]}'. ${s[i]===s[j]?'Match!':'No match.'}`);
+        if (s[i]===s[j]) {
+          dp[i][j] = (len===2)?2:dp[i+1][j-1]+2;
+          snap(-1, i, j, 0, dp[i][j], dp, 'found',
+            `s[${i}]==s[${j}]. dp[${i}][${j}] = ${len===2?2:`dp[${i+1}][${j-1}]+2`} = ${dp[i][j]}.`);
+        } else {
+          dp[i][j] = Math.max(dp[i+1][j], dp[i][j-1]);
+          snap(-1, i, j, 0, dp[i][j], dp, 'dp_fill',
+            `dp[${i}][${j}] = max(dp[${i+1}][${j}]=${dp[i+1][j]}, dp[${i}][${j-1}]=${dp[i][j-1]}) = ${dp[i][j]}.`);
+        }
+      }
+    }
+
+    snap(-1, 0, n-1, 0, dp[0][n-1], dp, 'done',
+      `LPS of "${s}" = dp[0][${n-1}] = ${dp[0][n-1]}.`);
+  }
+
   visualizerState.steps = steps;
 }
 
@@ -15680,6 +16036,125 @@ function renderCanvasStep() {
     canvas.appendChild(container);
   }
   
+  // --- G-NEW. MONOTONIC STACK (NGE / circular / contribution) ---
+  else if (visualizerState.algo === 'monostack') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+
+    const { nums, n, mode, title, note, phase, i, activeIdx, poppedIdx, contribution, stack: stk, result } = step;
+
+    // ── Title + note ──
+    const titleEl = document.createElement('div');
+    titleEl.style.cssText = 'font-size:0.72rem;font-family:monospace;font-weight:700;color:var(--accent-cyan);margin-bottom:4px;';
+    titleEl.textContent = title || 'Monotonic Stack';
+    container.appendChild(titleEl);
+    if (note) {
+      const noteEl = document.createElement('div');
+      noteEl.style.cssText = 'font-size:0.63rem;font-family:monospace;color:var(--text-muted);margin-bottom:10px;line-height:1.4;';
+      noteEl.textContent = note;
+      container.appendChild(noteEl);
+    }
+
+    // ── Phase badge ──
+    const phaseColors = { init:'var(--text-muted)', scan:'var(--accent-cyan)', pop:'var(--hard)', push:'var(--primary-glow)', contribution:'var(--medium)', done:'var(--easy)' };
+    const phaseLabels = { init:'Init', scan:'Scan', pop:'Pop (NGE found)', push:'Push', contribution:'Contribution', done:'Done' };
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
+    const badge = document.createElement('span');
+    badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
+      border:1px solid ${phaseColors[phase]||'var(--text-muted)'};color:${phaseColors[phase]||'var(--text-muted)'};`;
+    badge.textContent = phaseLabels[phase] || phase;
+    hdr.appendChild(badge);
+    if (phase === 'scan' && i >= n && mode === 'nge_circular') {
+      const p2 = document.createElement('span');
+      p2.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--medium);';
+      p2.textContent = 'Pass 2 (circular)';
+      hdr.appendChild(p2);
+    }
+    container.appendChild(hdr);
+
+    // ── Array row ──
+    const CELL = 44;
+    const arrRow = document.createElement('div');
+    arrRow.style.cssText = 'display:flex;gap:5px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:8px;';
+
+    nums.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      const isActive  = idx === activeIdx;
+      const isPopped  = idx === poppedIdx;
+      const inStack   = (stk||[]).includes(idx);
+      const hasResult = result && result[idx] !== -1;
+
+      cell.style.cssText = `width:${CELL}px;height:${CELL}px;flex-shrink:0;display:flex;flex-direction:column;
+        align-items:center;justify-content:center;border-radius:6px;font-family:monospace;font-size:0.85rem;font-weight:700;
+        border:${isPopped?'2px solid var(--hard)':isActive?'2px solid var(--accent-cyan)':inStack?'1.5px solid var(--primary-glow)':'1px solid rgba(255,255,255,0.1)'};
+        background:${isPopped?'rgba(244,63,94,0.15)':isActive?'rgba(6,182,212,0.15)':inStack?'rgba(99,102,241,0.12)':'rgba(255,255,255,0.02)'};
+        color:${isPopped?'var(--hard)':isActive?'var(--accent-cyan)':inStack?'var(--primary-glow)':'rgba(255,255,255,0.7)'};`;
+      cell.innerHTML = `<span>${val}</span><span style="font-size:0.45rem;color:rgba(255,255,255,0.25)">[${idx}]</span>`;
+      arrRow.appendChild(cell);
+    });
+    container.appendChild(arrRow);
+
+    // ── Contribution overlay ──
+    if (mode === 'contribution' && contribution && contribution.idx !== undefined) {
+      const { idx: ci, left, right, val: cv, contrib, total } = contribution;
+      const contribRow = document.createElement('div');
+      contribRow.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;';
+      contribRow.innerHTML = `
+        <span style="font-size:0.72rem;font-family:monospace;color:var(--medium);">
+          nums[${ci}]=${cv} is min in <strong>${left}×${right}=${left*right}</strong> subarrays →
+          contribution = ${cv}×${left}×${right} = <strong style="color:var(--easy)">${contrib}</strong>
+        </span>
+        <span style="font-size:0.68rem;font-family:monospace;color:var(--text-muted);">total = ${total}</span>`;
+      container.appendChild(contribRow);
+    }
+
+    // ── NGE result row ──
+    if (result && mode !== 'contribution') {
+      const resRow = document.createElement('div');
+      resRow.style.cssText = 'display:flex;gap:5px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:8px;';
+      result.forEach((r, idx) => {
+        const cell = document.createElement('div');
+        cell.style.cssText = `width:${CELL}px;height:${CELL}px;flex-shrink:0;display:flex;flex-direction:column;
+          align-items:center;justify-content:center;border-radius:6px;font-family:monospace;font-size:0.85rem;font-weight:700;
+          border:1px solid ${r!==-1?'rgba(16,185,129,0.4)':'rgba(255,255,255,0.06)'};
+          background:${r!==-1?'rgba(16,185,129,0.08)':'transparent'};
+          color:${r!==-1?'var(--easy)':'rgba(255,255,255,0.2)'};`;
+        cell.innerHTML = `<span>${r === -1 ? '?' : r}</span><span style="font-size:0.45rem;color:rgba(255,255,255,0.2)">NGE</span>`;
+        resRow.appendChild(cell);
+      });
+      const resLabel = document.createElement('div');
+      resLabel.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);margin-bottom:3px;';
+      resLabel.textContent = 'Next Greater Element result:';
+      container.appendChild(resLabel);
+      container.appendChild(resRow);
+    }
+
+    // ── Stack panel ──
+    const stackWrap = document.createElement('div');
+    stackWrap.style.cssText = 'display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px;';
+    const sLabel = document.createElement('span');
+    sLabel.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);min-width:54px;';
+    sLabel.textContent = 'Stack:';
+    stackWrap.appendChild(sLabel);
+    if (!stk || stk.length === 0) {
+      const empty = document.createElement('span');
+      empty.style.cssText = 'font-size:0.7rem;font-family:monospace;color:rgba(255,255,255,0.2);font-style:italic;';
+      empty.textContent = 'empty';
+      stackWrap.appendChild(empty);
+    } else {
+      stk.forEach(idx => {
+        const pill = document.createElement('span');
+        pill.style.cssText = `font-size:0.72rem;font-family:monospace;padding:2px 9px;border-radius:6px;
+          border:1px solid var(--primary-glow);color:var(--primary-glow);background:rgba(99,102,241,0.08);font-weight:700;`;
+        pill.textContent = `${nums[idx]}[${idx}]`;
+        stackWrap.appendChild(pill);
+      });
+    }
+    container.appendChild(stackWrap);
+    canvas.appendChild(container);
+  }
+
   // --- G. MONOTONIC STACK ---
   else if (visualizerState.algo === 'stack') {
     const container = document.createElement('div');
@@ -15951,6 +16426,174 @@ function renderCanvasStep() {
       container.appendChild(visitPill);
     }
 
+    canvas.appendChild(container);
+  }
+
+  // --- J-NEW. DFS CYCLE DETECTION ---
+  else if (visualizerState.algo === 'dfs-cycle') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+
+    const { n, nodeLabels, edges, title, note, color, callStack, activeNode, activeEdge, cycleEdge, hasCycle } = step;
+
+    // ── Title + note ──
+    const titleEl = document.createElement('div');
+    titleEl.style.cssText = 'font-size:0.72rem;font-family:monospace;font-weight:700;color:var(--accent-cyan);margin-bottom:4px;';
+    titleEl.textContent = title || 'DFS Cycle Detection';
+    container.appendChild(titleEl);
+    if (note) {
+      const noteEl = document.createElement('div');
+      noteEl.style.cssText = 'font-size:0.63rem;font-family:monospace;color:var(--text-muted);margin-bottom:10px;line-height:1.4;';
+      noteEl.textContent = note;
+      container.appendChild(noteEl);
+    }
+
+    // ── SVG directed graph ──
+    // Layout: n nodes in a circle
+    const CX = 230, CY = 130, RADIUS = 100, R = 24;
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS,'svg');
+    svg.setAttribute('viewBox','0 0 460 270');
+    svg.style.cssText = 'width:100%;display:block;overflow:visible;';
+
+    const nodePos = Array.from({length: n}, (_, i) => {
+      const angle = (2 * Math.PI * i / n) - Math.PI / 2;
+      return { x: CX + RADIUS * Math.cos(angle), y: CY + RADIUS * Math.sin(angle) };
+    });
+
+    // Arrow markers
+    const defs = document.createElementNS(svgNS,'defs');
+    defs.innerHTML = `
+      <marker id="dcArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="rgba(255,255,255,0.3)"/>
+      </marker>
+      <marker id="dcArrBack" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="var(--hard)"/>
+      </marker>
+      <marker id="dcArrActive" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="var(--accent-cyan)"/>
+      </marker>`;
+    svg.appendChild(defs);
+
+    // Edges
+    edges.forEach(([u, v]) => {
+      const from = nodePos[u], to = nodePos[v];
+      const isActive = activeEdge && activeEdge[0]===u && activeEdge[1]===v;
+      const isBack   = cycleEdge && cycleEdge[0]===u && cycleEdge[1]===v;
+
+      // Offset line slightly so bidirectional edges don't overlap
+      const dx = to.x - from.x, dy = to.y - from.y;
+      const len = Math.sqrt(dx*dx+dy*dy);
+      const nx = -dy/len*4, ny = dx/len*4;
+
+      const line = document.createElementNS(svgNS,'line');
+      line.setAttribute('x1', from.x + nx); line.setAttribute('y1', from.y + ny);
+      line.setAttribute('x2', to.x + nx);   line.setAttribute('y2', to.y + ny);
+      line.setAttribute('stroke', isBack?'var(--hard)':isActive?'var(--accent-cyan)':'rgba(255,255,255,0.2)');
+      line.setAttribute('stroke-width', isBack||isActive ? '2.5' : '1.5');
+      line.setAttribute('marker-end', isBack?'url(#dcArrBack)':isActive?'url(#dcArrActive)':'url(#dcArr)');
+      if (isBack) line.setAttribute('stroke-dasharray','5 3');
+      svg.appendChild(line);
+
+      // Edge label
+      const mx = (from.x+to.x)/2+nx+4, my = (from.y+to.y)/2+ny-4;
+      const etxt = document.createElementNS(svgNS,'text');
+      etxt.setAttribute('x',mx); etxt.setAttribute('y',my);
+      etxt.setAttribute('font-family','monospace'); etxt.setAttribute('font-size','9');
+      etxt.setAttribute('fill', isBack?'var(--hard)':isActive?'var(--accent-cyan)':'rgba(255,255,255,0.3)');
+      etxt.setAttribute('text-anchor','middle');
+      etxt.textContent = isBack ? '⚠ back edge' : '';
+      svg.appendChild(etxt);
+    });
+
+    // Nodes — WHITE=0(default), GRAY=1(primary-glow), BLACK=2(easy)
+    const nodeColors = ['rgba(30,41,59,0.9)', 'rgba(245,158,11,0.2)', 'rgba(16,185,129,0.15)'];
+    const nodeStrokes= ['rgba(255,255,255,0.2)', 'var(--medium)', 'var(--easy)'];
+    const colorLabels = ['WHITE', 'GRAY', 'BLACK'];
+
+    nodePos.forEach((pos, idx) => {
+      const c      = (color && color[idx]) ?? 0;
+      const isAct  = idx === activeNode;
+      const inStack = (callStack||[]).includes(idx);
+
+      const circle = document.createElementNS(svgNS,'circle');
+      circle.setAttribute('cx',pos.x); circle.setAttribute('cy',pos.y); circle.setAttribute('r',R);
+      circle.setAttribute('fill', isAct?'rgba(6,182,212,0.3)' : nodeColors[c]);
+      circle.setAttribute('stroke', isAct?'var(--accent-cyan)' : nodeStrokes[c]);
+      circle.setAttribute('stroke-width', isAct||inStack?'2.5':'1.5');
+      svg.appendChild(circle);
+
+      const txt = document.createElementNS(svgNS,'text');
+      txt.setAttribute('x',pos.x); txt.setAttribute('y',pos.y+5);
+      txt.setAttribute('text-anchor','middle');
+      txt.setAttribute('font-family','monospace'); txt.setAttribute('font-size','14');
+      txt.setAttribute('font-weight','700');
+      txt.setAttribute('fill', isAct?'var(--accent-cyan)':c===2?'var(--easy)':c===1?'var(--medium)':'white');
+      txt.textContent = nodeLabels[idx];
+      svg.appendChild(txt);
+
+      // Color badge
+      const badgeTxt = document.createElementNS(svgNS,'text');
+      badgeTxt.setAttribute('x',pos.x); badgeTxt.setAttribute('y',pos.y+R+13);
+      badgeTxt.setAttribute('text-anchor','middle');
+      badgeTxt.setAttribute('font-family','monospace'); badgeTxt.setAttribute('font-size','8');
+      badgeTxt.setAttribute('fill', c===1?'var(--medium)':c===2?'var(--easy)':'rgba(255,255,255,0.25)');
+      badgeTxt.textContent = colorLabels[c];
+      svg.appendChild(badgeTxt);
+    });
+
+    container.appendChild(svg);
+
+    // ── Call stack + result ──
+    const infoRow = document.createElement('div');
+    infoRow.style.cssText = 'display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;';
+
+    // DFS call stack
+    const stackDiv = document.createElement('div');
+    stackDiv.style.cssText = 'display:flex;align-items:center;gap:6px;';
+    const sLbl = document.createElement('span');
+    sLbl.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);';
+    sLbl.textContent = 'DFS stack:';
+    stackDiv.appendChild(sLbl);
+    if (callStack && callStack.length > 0) {
+      callStack.forEach((ci, pi) => {
+        const pill = document.createElement('span');
+        pill.style.cssText = `font-size:0.7rem;font-family:monospace;padding:2px 8px;border-radius:6px;
+          border:1px solid var(--medium);color:var(--medium);background:rgba(245,158,11,0.08);font-weight:700;`;
+        pill.textContent = nodeLabels[ci];
+        stackDiv.appendChild(pill);
+        if (pi < callStack.length-1) {
+          const ar = document.createElement('span');
+          ar.style.cssText = 'font-size:0.6rem;color:var(--text-muted);';
+          ar.textContent = '→';
+          stackDiv.appendChild(ar);
+        }
+      });
+    } else {
+      const e = document.createElement('span');
+      e.style.cssText = 'font-size:0.7rem;font-family:monospace;color:rgba(255,255,255,0.2);';
+      e.textContent = 'empty';
+      stackDiv.appendChild(e);
+    }
+    infoRow.appendChild(stackDiv);
+
+    if (hasCycle) {
+      const cycPill = document.createElement('span');
+      cycPill.style.cssText = 'font-size:0.72rem;font-family:monospace;font-weight:700;color:var(--hard);margin-left:auto;';
+      cycPill.textContent = `⚠ CYCLE via ${nodeLabels[cycleEdge[0]]}→${nodeLabels[cycleEdge[1]]}`;
+      infoRow.appendChild(cycPill);
+    }
+
+    container.appendChild(infoRow);
+
+    // Legend
+    const legend = document.createElement('div');
+    legend.style.cssText = 'display:flex;gap:12px;flex-wrap:wrap;font-size:0.63rem;font-family:monospace;color:var(--text-muted);margin-top:6px;';
+    legend.innerHTML = `<span style="color:rgba(255,255,255,0.4)">● WHITE unvisited</span>
+      <span style="color:var(--medium)">● GRAY in stack</span>
+      <span style="color:var(--easy)">● BLACK done</span>
+      <span style="color:var(--hard)">⚡ back edge = cycle</span>`;
+    container.appendChild(legend);
     canvas.appendChild(container);
   }
 
@@ -16525,6 +17168,141 @@ function renderCanvasStep() {
         wordsRow.appendChild(pill);
       });
       container.appendChild(wordsRow);
+    }
+
+    canvas.appendChild(container);
+  }
+
+  // --- P-NEW. PALINDROME DP (expand-around-center / table) ---
+  else if (visualizerState.algo === 'palindrome') {
+    const container = document.createElement('div');
+    container.className = 'advanced-vis-container';
+
+    const { s, n, mode, title, note, center, L, R, bestStart, bestLen, dp, phase } = step;
+
+    // ── Title ──
+    const titleEl = document.createElement('div');
+    titleEl.style.cssText = 'font-size:0.72rem;font-family:monospace;font-weight:700;color:var(--accent-cyan);margin-bottom:4px;';
+    titleEl.textContent = title || 'Palindrome';
+    container.appendChild(titleEl);
+    if (note) {
+      const noteEl = document.createElement('div');
+      noteEl.style.cssText = 'font-size:0.63rem;font-family:monospace;color:var(--text-muted);margin-bottom:10px;line-height:1.4;';
+      noteEl.textContent = note;
+      container.appendChild(noteEl);
+    }
+
+    // ── Phase badge ──
+    const phaseColors = { init:'var(--text-muted)', center:'var(--medium)', expand:'var(--accent-cyan)', found:'var(--easy)', dp_fill:'var(--primary-glow)', done:'var(--easy)' };
+    const hdr = document.createElement('div');
+    hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
+    const badge = document.createElement('span');
+    badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
+      border:1px solid ${phaseColors[phase]||'var(--text-muted)'};color:${phaseColors[phase]||'var(--text-muted)'};`;
+    badge.textContent = phase;
+    hdr.appendChild(badge);
+    if (bestLen > 1 && s) {
+      const bestPill = document.createElement('span');
+      bestPill.style.cssText = 'font-size:0.72rem;font-family:monospace;color:var(--easy);font-weight:700;margin-left:auto;';
+      bestPill.textContent = `Best: "${s.slice(bestStart, bestStart+bestLen)}" (len=${bestLen})`;
+      hdr.appendChild(bestPill);
+    }
+    container.appendChild(hdr);
+
+    if (mode === 'expand' && s) {
+      const CELL = 46;
+      // ── String row with expansion highlight ──
+      const arrRow = document.createElement('div');
+      arrRow.style.cssText = 'display:flex;gap:5px;justify-content:center;flex-wrap:nowrap;overflow-x:auto;margin-bottom:14px;';
+
+      [...s].forEach((ch, idx) => {
+        const cell = document.createElement('div');
+        const isL   = idx === L;
+        const isR   = idx === R;
+        const inPalin = L >= 0 && R >= 0 && idx >= L && idx <= R;
+        const isBest  = bestLen > 1 && idx >= bestStart && idx < bestStart + bestLen;
+        const isCenter = idx === center;
+
+        cell.style.cssText = `width:${CELL}px;height:${CELL}px;flex-shrink:0;display:flex;flex-direction:column;
+          align-items:center;justify-content:center;border-radius:6px;font-family:monospace;font-size:1rem;font-weight:700;
+          border:${isL||isR?'2.5px solid var(--accent-cyan)':inPalin?'1.5px solid var(--primary-glow)':isBest?'1px solid rgba(16,185,129,0.5)':'1px solid rgba(255,255,255,0.1)'};
+          background:${isL||isR?'rgba(6,182,212,0.2)':inPalin?'rgba(99,102,241,0.12)':isBest?'rgba(16,185,129,0.08)':'rgba(255,255,255,0.02)'};
+          color:${isL||isR?'var(--accent-cyan)':inPalin?'var(--primary-glow)':isBest?'var(--easy)':'rgba(255,255,255,0.7)'};`;
+        cell.innerHTML = `<span>${ch}</span><span style="font-size:0.45rem;color:rgba(255,255,255,0.25)">[${idx}]</span>`;
+        arrRow.appendChild(cell);
+      });
+      container.appendChild(arrRow);
+
+      // ── Pointer labels below ──
+      if (L >= 0 && R >= 0) {
+        const ptrRow = document.createElement('div');
+        ptrRow.style.cssText = `display:flex;gap:5px;justify-content:center;margin-bottom:8px;`;
+        [...s].forEach((_, idx) => {
+          const lbl = document.createElement('div');
+          lbl.style.cssText = `width:${CELL}px;flex-shrink:0;text-align:center;font-size:0.55rem;font-family:monospace;font-weight:700;`;
+          lbl.style.color = idx===L && idx===R ? 'var(--accent-cyan)' : idx===L ? 'var(--primary-glow)' : idx===R ? 'var(--medium)' : 'transparent';
+          lbl.textContent = idx===L && idx===R ? '⬆ L=R' : idx===L ? '⬆ L' : idx===R ? '⬆ R' : '.';
+          ptrRow.appendChild(lbl);
+        });
+        container.appendChild(ptrRow);
+      }
+
+      // ── Current palindrome status ──
+      if (L >= 0 && R >= 0 && R < s.length && L <= R) {
+        const palDiv = document.createElement('div');
+        palDiv.style.cssText = 'font-size:0.78rem;font-family:monospace;text-align:center;margin-top:4px;';
+        palDiv.innerHTML = `Current: <strong style="color:var(--accent-cyan)">"${s.slice(L,R+1)}"</strong> ${phase==='found'?'← New best!':''}`;
+        container.appendChild(palDiv);
+      }
+
+    } else if (mode === 'dp_table' && dp && s) {
+      // ── DP table (diagonal fill) ──
+      const DCELL = 36;
+      const gridWrap = document.createElement('div');
+      gridWrap.style.cssText = 'overflow-x:auto;';
+
+      const grid = document.createElement('div');
+      grid.style.cssText = `display:inline-grid;grid-template-columns:${DCELL}px repeat(${n},${DCELL}px);gap:2px;`;
+
+      // corner
+      grid.appendChild(Object.assign(document.createElement('div'),{style:`width:${DCELL}px;height:${DCELL}px;`}));
+      // col headers
+      [...s].forEach(ch => {
+        const h = document.createElement('div');
+        h.style.cssText = `width:${DCELL}px;height:${DCELL}px;display:flex;align-items:center;justify-content:center;
+          font-family:monospace;font-size:0.72rem;font-weight:700;color:var(--accent-cyan);`;
+        h.textContent = ch;
+        grid.appendChild(h);
+      });
+
+      dp.forEach((row, i) => {
+        const rh = document.createElement('div');
+        rh.style.cssText = `width:${DCELL}px;height:${DCELL}px;display:flex;align-items:center;justify-content:center;
+          font-family:monospace;font-size:0.72rem;font-weight:700;color:var(--primary-glow);`;
+        rh.textContent = s[i];
+        grid.appendChild(rh);
+
+        row.forEach((val, j) => {
+          const cell = document.createElement('div');
+          const isActive = L===i && R===j;
+          const isDiag   = i === j;
+          cell.style.cssText = `width:${DCELL}px;height:${DCELL}px;display:flex;align-items:center;justify-content:center;
+            border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;
+            border:1px solid ${isActive?'var(--easy)':isDiag?'rgba(255,255,255,0.1)':'rgba(255,255,255,0.05)'};
+            background:${isActive?'rgba(16,185,129,0.2)':isDiag?'rgba(255,255,255,0.03)':'transparent'};
+            color:${isActive?'var(--easy)':val>1?'rgba(255,255,255,0.8)':val===1?'rgba(255,255,255,0.4)':'rgba(255,255,255,0.12)'};`;
+          cell.textContent = j < i ? '' : val || '';
+          grid.appendChild(cell);
+        });
+      });
+
+      gridWrap.appendChild(grid);
+      container.appendChild(gridWrap);
+
+      const status = document.createElement('div');
+      status.style.cssText = 'font-size:0.7rem;font-family:monospace;color:var(--text-muted);margin-top:6px;';
+      status.textContent = phase === 'done' ? `LPS = dp[0][${n-1}] = ${dp[0]?.[n-1] ?? ''}` : `Filling dp[${L}][${R}] = ${dp[L]?.[R] ?? ''}`;
+      container.appendChild(status);
     }
 
     canvas.appendChild(container);
