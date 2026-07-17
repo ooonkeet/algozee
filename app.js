@@ -10534,6 +10534,65 @@ codeTemplates['sudoku'] = `<span class="code-comment">// Sudoku backtracking</sp
       board[r][c] = <span class="code-str">'.'</span>;
     }`;
 
+codeTemplates['wordsearch2'] = `<span class="code-comment">// Word Search II (Trie + Backtracking DFS)</span>
+<span class="code-keyword">function</span> <span class="code-fn">findWords</span>(board, words) {
+  <span class="code-keyword">let</span> trie = <span class="code-fn">buildTrie</span>(words);
+  <span class="code-keyword">let</span> res = <span class="code-keyword">new</span> Set();
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> r = <span class="code-num">0</span>; r &lt; board.length; r++)
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> c = <span class="code-num">0</span>; c &lt; board[<span class="code-num">0</span>].length; c++)
+      <span class="code-fn">dfs</span>(board, r, c, trie, <span class="code-str">""</span>, res);
+  <span class="code-keyword">return</span> Array.<span class="code-fn">from</span>(res);
+}`;
+
+codeTemplates['generateparentheses'] = `<span class="code-comment">// Generate Parentheses Backtracking</span>
+<span class="code-keyword">function</span> <span class="code-fn">generateParenthesis</span>(n) {
+  <span class="code-keyword">let</span> res = [];
+  <span class="code-keyword">function</span> <span class="code-fn">backtrack</span>(str, open, close) {
+    <span class="code-keyword">if</span> (str.length === n * <span class="code-num">2</span>) {
+      res.<span class="code-fn">push</span>(str); <span class="code-keyword">return</span>;
+    }
+    <span class="code-keyword">if</span> (open &lt; n) <span class="code-fn">backtrack</span>(str + <span class="code-str">"("</span>, open + <span class="code-num">1</span>, close);
+    <span class="code-keyword">if</span> (close &lt; open) <span class="code-fn">backtrack</span>(str + <span class="code-str">")"</span>, open, close + <span class="code-num">1</span>);
+  }
+  <span class="code-fn">backtrack</span>(<span class="code-str">""</span>, <span class="code-num">0</span>, <span class="code-num">0</span>);
+  <span class="code-keyword">return</span> res;
+}`;
+
+codeTemplates['lis'] = `<span class="code-comment">// LIS Patience Sorting - O(N log N)</span>
+<span class="code-keyword">function</span> <span class="code-fn">lengthOfLIS</span>(nums) {
+  <span class="code-keyword">let</span> piles = [];
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> x <span class="code-keyword">of</span> nums) {
+    <span class="code-keyword">let</span> idx = <span class="code-fn">binarySearch</span>(piles, x);
+    <span class="code-keyword">if</span> (idx === piles.length) piles.<span class="code-fn">push</span>(x);
+    <span class="code-keyword">else</span> piles[idx] = x;
+  }
+  <span class="code-keyword">return</span> piles.length;
+}`;
+
+codeTemplates['trappingwater'] = `<span class="code-comment">// Trapping Rain Water (Two Pointers)</span>
+<span class="code-keyword">let</span> left = <span class="code-num">0</span>, right = height.length - <span class="code-num">1</span>;
+<span class="code-keyword">let</span> leftMax = <span class="code-num">0</span>, rightMax = <span class="code-num">0</span>, ans = <span class="code-num">0</span>;
+<span class="code-keyword">while</span> (left &lt; right) {
+  <span class="code-keyword">if</span> (height[left] &lt; height[right]) {
+    height[left] &gt;= leftMax ? (leftMax = height[left]) : (ans += leftMax - height[left]);
+    left++;
+  } <span class="code-keyword">else</span> {
+    height[right] &gt;= rightMax ? (rightMax = height[right]) : (ans += rightMax - height[right]);
+    right--;
+  }
+}`;
+
+codeTemplates['burstballoons'] = `<span class="code-comment">// Burst Balloons Interval DP - O(N^3)</span>
+<span class="code-keyword">for</span> (<span class="code-keyword">let</span> len = <span class="code-num">1</span>; len &lt;= n; len++) {
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">1</span>; i &lt;= n - len + <span class="code-num">1</span>; i++) {
+    <span class="code-keyword">let</span> j = i + len - <span class="code-num">1</span>;
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> k = i; k &lt;= j; k++) {
+      dp[i][j] = Math.<span class="code-fn">max</span>(dp[i][j], 
+        nums[i-<span class="code-num">1</span>] * nums[k] * nums[j+<span class="code-num">1</span>] + dp[i][k-<span class="code-num">1</span>] + dp[k+<span class="code-num">1</span>][j]);
+    }
+  }
+}`;
+
 const visualizerState = {
   algo: 'bubble',
   isPlaying: false,
@@ -11039,6 +11098,41 @@ function resetVisualizer() {
     appendLog("[INFO] Loaded Huffman frequency map (8 chars). Building prefix-free encoding tree...", "info");
     generateHuffmanSteps(visualizerState.rawArray);
   }
+  else if (visualizerState.algo === 'wordsearch2') {
+    const board = [
+      ['o', 'a', 'a', 'n'],
+      ['e', 't', 'a', 'e'],
+      ['i', 'h', 'k', 'r'],
+      ['i', 'f', 'l', 'v']
+    ];
+    const words = ["oath", "pea", "eat", "rain"];
+    visualizerState.rawArray = { board, words };
+    appendLog("[INFO] Word Search II: loading a 4x4 letter board & dictionary.", "info");
+    generateWordSearchIISteps(board, words);
+  }
+  else if (visualizerState.algo === 'generateparentheses') {
+    visualizerState.rawArray = { n: 3 };
+    appendLog("[INFO] Generate Parentheses: computing backtracking recursion for n=3 pairs.", "info");
+    generateGenerateParenthesesSteps(3);
+  }
+  else if (visualizerState.algo === 'lis') {
+    const nums = [10, 9, 2, 5, 3, 7, 101, 18];
+    visualizerState.rawArray = [...nums];
+    appendLog("[INFO] Longest Increasing Subsequence: patience sorting card piles.", "info");
+    generateLISSteps(nums);
+  }
+  else if (visualizerState.algo === 'trappingwater') {
+    const height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+    visualizerState.rawArray = [...height];
+    appendLog("[INFO] Trapping Rain Water: initial terrain boundaries set.", "info");
+    generateTrappingWaterSteps(height);
+  }
+  else if (visualizerState.algo === 'burstballoons') {
+    const nums = [3, 1, 5, 8];
+    visualizerState.rawArray = [...nums];
+    appendLog("[INFO] Burst Balloons: loading balloon line coefficients.", "info");
+    generateBurstBalloonsSteps(nums);
+  }
 
   
   renderCanvasStep();
@@ -11048,6 +11142,429 @@ function resetVisualizer() {
 // DYNAMIC SNAPSHOT STEP GENERATION ROUTINES
 // ==========================================================================
 
+
+// Word Search II Step Generation
+function generateWordSearchIISteps(board, words) {
+  const steps = [];
+  
+  // Build Trie
+  const trie = {};
+  for (const word of words) {
+    let curr = trie;
+    for (const char of word) {
+      if (!curr[char]) curr[char] = {};
+      curr = curr[char];
+    }
+    curr.isWord = word;
+  }
+  
+  const m = board.length;
+  const n = board[0].length;
+  const visited = Array.from({ length: m }, () => Array(n).fill(false));
+  const foundWords = new Set();
+  
+  steps.push({
+    board: board.map(r => [...r]),
+    activePath: [],
+    visited: visited.map(r => [...r]),
+    found: [],
+    log: "Word Search II: Trie populated. Starting search from grid cell (0, 0)..."
+  });
+  
+  function dfs(r, c, node, prefix, path) {
+    const char = board[r][c];
+    if (!node[char]) return;
+    
+    const nextNode = node[char];
+    const newPrefix = prefix + char;
+    const newPath = [...path, [r, c]];
+    visited[r][c] = true;
+    
+    steps.push({
+      board: board.map(row => [...row]),
+      activePath: [...newPath],
+      visited: visited.map(row => [...row]),
+      found: Array.from(foundWords),
+      log: `Visited cell (${r}, ${c}) containing '${char}'. Prefix string: "${newPrefix}".`
+    });
+    
+    if (nextNode.isWord) {
+      foundWords.add(nextNode.isWord);
+      steps.push({
+        board: board.map(row => [...row]),
+        activePath: [...newPath],
+        visited: visited.map(row => [...row]),
+        found: Array.from(foundWords),
+        log: `Success! Word "${nextNode.isWord}" found!`
+      });
+    }
+    
+    const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+    for (const [dr, dc] of dirs) {
+      const nr = r + dr;
+      const nc = c + dc;
+      if (nr >= 0 && nr < m && nc >= 0 && nc < n && !visited[nr][nc]) {
+        dfs(nr, nc, nextNode, newPrefix, newPath);
+      }
+    }
+    
+    visited[r][c] = false;
+    steps.push({
+      board: board.map(row => [...row]),
+      activePath: [...path],
+      visited: visited.map(row => [...row]),
+      found: Array.from(foundWords),
+      log: `Backtracking: leaving cell (${r}, ${c}) containing '${char}'.`
+    });
+  }
+  
+  for (let r = 0; r < m; r++) {
+    for (let c = 0; c < n; c++) {
+      dfs(r, c, trie, "", []);
+    }
+  }
+  
+  steps.push({
+    board: board.map(row => [...row]),
+    activePath: [],
+    visited: visited.map(row => [...row]),
+    found: Array.from(foundWords),
+    log: `Word Search II completed! Words found: ${Array.from(foundWords).join(', ') || 'none'}`
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Generate Parentheses Step Generation
+function generateGenerateParenthesesSteps(n) {
+  const steps = [];
+  const results = [];
+  
+  steps.push({
+    tree: [],
+    stack: [],
+    found: [],
+    log: `Generate Parentheses: Starting recursion for n = ${n} pairs.`
+  });
+  
+  const treeNodes = [];
+  let nodeIdCounter = 0;
+  
+  function backtrack(str, open, close, parentId, path) {
+    const nodeId = nodeIdCounter++;
+    const nodeObj = { id: nodeId, label: str || "root", parentId, status: 'active', open, close };
+    treeNodes.push(nodeObj);
+    
+    const activePathIds = [...path, nodeId];
+    
+    steps.push({
+      tree: treeNodes.map(node => {
+        const copy = { ...node };
+        if (copy.id === nodeId) copy.status = 'active';
+        else if (activePathIds.includes(copy.id)) copy.status = 'path';
+        else copy.status = 'visited';
+        return copy;
+      }),
+      stack: activePathIds.map(id => treeNodes.find(n => n.id === id)),
+      found: [...results],
+      log: `Inspecting state "${str || 'empty'}": open count = ${open}, close count = ${close}`
+    });
+    
+    if (str.length === n * 2) {
+      results.push(str);
+      nodeObj.status = 'valid';
+      steps.push({
+        tree: treeNodes.map(node => ({ ...node, status: node.id === nodeId ? 'valid' : node.status })),
+        stack: activePathIds.map(id => treeNodes.find(n => n.id === id)),
+        found: [...results],
+        log: `Found valid combination: "${str}"`
+      });
+      return;
+    }
+    
+    if (open < n) {
+      backtrack(str + "(", open + 1, close, nodeId, activePathIds);
+    }
+    
+    if (close < open) {
+      backtrack(str + ")", open, close + 1, nodeId, activePathIds);
+    } else if (close > open || (open === n && close < n)) {
+      const pruneId = nodeIdCounter++;
+      treeNodes.push({ id: pruneId, label: str + ")", parentId: nodeId, status: 'pruned', open, close: close + 1 });
+      steps.push({
+        tree: treeNodes.map(node => ({ ...node })),
+        stack: activePathIds.map(id => treeNodes.find(n => n.id === id)),
+        found: [...results],
+        log: `Pruning path: placing ')' at "${str}" is invalid because open count (${open}) <= close count (${close}).`
+      });
+    }
+  }
+  
+  backtrack("", 0, 0, null, []);
+  
+  steps.push({
+    tree: treeNodes.map(node => {
+      const copy = { ...node };
+      if (copy.status === 'active') copy.status = 'visited';
+      return copy;
+    }),
+    stack: [],
+    found: [...results],
+    log: `Generate Parentheses completed! Produced all ${results.length} valid combinations.`
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// LIS Step Generation
+function generateLISSteps(nums) {
+  const steps = [];
+  const piles = [];
+  
+  steps.push({
+    piles: [],
+    activeIndex: -1,
+    activeVal: null,
+    searchBounds: null,
+    log: `LIS Patience Sorting start. Source sequence: [${nums.join(', ')}]`
+  });
+  
+  for (let i = 0; i < nums.length; i++) {
+    const x = nums[i];
+    
+    steps.push({
+      piles: piles.map(p => [...p]),
+      activeIndex: i,
+      activeVal: x,
+      searchBounds: null,
+      log: `Processing element at index ${i}: value = ${x}. Finding target pile...`
+    });
+    
+    let low = 0;
+    let high = piles.length - 1;
+    let foundIdx = piles.length;
+    
+    while (low <= high) {
+      const mid = Math.floor((low + high) / 2);
+      const topOfPile = piles[mid][piles[mid].length - 1];
+      
+      steps.push({
+        piles: piles.map(p => [...p]),
+        activeIndex: i,
+        activeVal: x,
+        searchBounds: { low, high, mid },
+        log: `Binary Searching piles: Checking top of Pile ${mid + 1} (${topOfPile}) with candidate ${x}`
+      });
+      
+      if (topOfPile >= x) {
+        foundIdx = mid;
+        high = mid - 1;
+      } else {
+        low = mid + 1;
+      }
+    }
+    
+    if (foundIdx === piles.length) {
+      piles.push([x]);
+      steps.push({
+        piles: piles.map(p => [...p]),
+        activeIndex: i,
+        activeVal: x,
+        searchBounds: null,
+        log: `Candidate ${x} is greater than all pile tops. Creating new Pile ${piles.length}: [${x}]`
+      });
+    } else {
+      piles[foundIdx].push(x);
+      steps.push({
+        piles: piles.map(p => [...p]),
+        activeIndex: i,
+        activeVal: x,
+        searchBounds: null,
+        log: `Candidate ${x} <= pile top. Placing on top of Pile ${foundIdx + 1}.`
+      });
+    }
+  }
+  
+  steps.push({
+    piles: piles.map(p => [...p]),
+    activeIndex: -1,
+    activeVal: null,
+    searchBounds: null,
+    log: `LIS Patience Sorting complete. Longest Increasing Subsequence length = ${piles.length}`
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Trapping Rain Water Step Generation
+function generateTrappingWaterSteps(height) {
+  const steps = [];
+  const n = height.length;
+  let left = 0;
+  let right = n - 1;
+  let leftMax = 0;
+  let rightMax = 0;
+  let volume = 0;
+  
+  const water = Array(n).fill(0);
+  
+  steps.push({
+    left,
+    right,
+    leftMax,
+    rightMax,
+    water: [...water],
+    volume,
+    log: `Trapping Rain Water: Initialize double pointers. L=0, R=${n - 1}.`
+  });
+  
+  while (left < right) {
+    steps.push({
+      left,
+      right,
+      leftMax,
+      rightMax,
+      water: [...water],
+      volume,
+      log: `Comparing heights: height[L=${left}] = ${height[left]} vs height[R=${right}] = ${height[right]}`
+    });
+    
+    if (height[left] < height[right]) {
+      if (height[left] >= leftMax) {
+        leftMax = height[left];
+        steps.push({
+          left,
+          right,
+          leftMax,
+          rightMax,
+          water: [...water],
+          volume,
+          log: `L index height (${height[left]}) >= leftMax (${leftMax}). Updating leftMax to ${leftMax}.`
+        });
+      } else {
+        const waterTrapped = leftMax - height[left];
+        water[left] = waterTrapped;
+        volume += waterTrapped;
+        steps.push({
+          left,
+          right,
+          leftMax,
+          rightMax,
+          water: [...water],
+          volume,
+          log: `Trapped ${waterTrapped} units of water at L=${left} (leftMax ${leftMax} - height ${height[left]}). Total water = ${volume}.`
+        });
+      }
+      left++;
+    } else {
+      if (height[right] >= rightMax) {
+        rightMax = height[right];
+        steps.push({
+          left,
+          right,
+          leftMax,
+          rightMax,
+          water: [...water],
+          volume,
+          log: `R index height (${height[right]}) >= rightMax (${rightMax}). Updating rightMax to ${rightMax}.`
+        });
+      } else {
+        const waterTrapped = rightMax - height[right];
+        water[right] = waterTrapped;
+        volume += waterTrapped;
+        steps.push({
+          left,
+          right,
+          leftMax,
+          rightMax,
+          water: [...water],
+          volume,
+          log: `Trapped ${waterTrapped} units of water at R=${right} (rightMax ${rightMax} - height ${height[right]}). Total water = ${volume}.`
+        });
+      }
+      right--;
+    }
+  }
+  
+  steps.push({
+    left,
+    right,
+    leftMax,
+    rightMax,
+    water: [...water],
+    volume,
+    log: `Trapping Rain Water completed! Pointers met at index ${left}. Total water trapped = ${volume} units.`
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Burst Balloons Step Generation
+function generateBurstBalloonsSteps(nums) {
+  const steps = [];
+  const n = nums.length;
+  const val = [1, ...nums, 1];
+  const dp = Array.from({ length: n + 2 }, () => Array(n + 2).fill(0));
+  
+  steps.push({
+    dp: dp.map(row => [...row]),
+    balloons: [...nums],
+    activeInterval: null,
+    k: -1,
+    log: `Burst Balloons: Initialize DP grid table of size ${n+2}x${n+2}. Boundary pads [1, ..., 1] added.`
+  });
+  
+  for (let len = 1; len <= n; len++) {
+    for (let i = 1; i <= n - len + 1; i++) {
+      const j = i + len - 1;
+      
+      steps.push({
+        dp: dp.map(row => [...row]),
+        balloons: [...nums],
+        activeInterval: [i, j],
+        k: -1,
+        log: `Solving interval of length ${len}: range [${i}, ${j}] (balloons: ${nums.slice(i-1, j).join(', ')})`
+      });
+      
+      for (let k = i; k <= j; k++) {
+        const cost = val[i - 1] * val[k] * val[j + 1];
+        const leftDP = dp[i][k - 1];
+        const rightDP = dp[k + 1][j];
+        const total = cost + leftDP + rightDP;
+        
+        if (total > dp[i][j]) {
+          dp[i][j] = total;
+        }
+        
+        steps.push({
+          dp: dp.map(row => [...row]),
+          balloons: [...nums],
+          activeInterval: [i, j],
+          k,
+          log: `Testing balloon index k=${k} (val=${val[k]}) to pop last in range [${i}, ${j}]. Coins: ${val[i-1]} * ${val[k]} * ${val[j+1]} (${cost}) + left DP (${leftDP}) + right DP (${rightDP}) = ${total}.`
+        });
+      }
+      
+      steps.push({
+        dp: dp.map(row => [...row]),
+        balloons: [...nums],
+        activeInterval: [i, j],
+        k: -1,
+        log: `Completed range [${i}, ${j}]. Max coins stored in dp[${i}][${j}] = ${dp[i][j]}.`
+      });
+    }
+  }
+  
+  steps.push({
+    dp: dp.map(row => [...row]),
+    balloons: [...nums],
+    activeInterval: null,
+    k: -1,
+    log: `Burst Balloons completed! Maximum coins: ${dp[1][n]}.`
+  });
+  
+  visualizerState.steps = steps;
+}
 
 // AVL Tree Step Generation
 function generateAVLSteps(nums) {
@@ -21394,6 +21911,408 @@ function renderCanvasStep() {
       }
     }
     container.appendChild(grid);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'wordsearch2') {
+    const container = document.createElement('div');
+    container.className = 'wordsearch-container';
+    
+    const boardPanel = document.createElement('div');
+    boardPanel.className = 'ws-board-panel';
+    boardPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem; text-align:center;">Grid Board</h3>';
+    
+    const grid = document.createElement('div');
+    grid.className = 'ws-grid';
+    
+    const activePathSet = new Set(step.activePath.map(([r, c]) => `${r},${c}`));
+    
+    for (let r = 0; r < step.board.length; r++) {
+      for (let c = 0; c < step.board[0].length; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'ws-cell';
+        cell.textContent = step.board[r][c];
+        
+        const key = `${r},${c}`;
+        if (activePathSet.has(key)) {
+          cell.classList.add('active-path');
+          const idx = step.activePath.findIndex(([pr, pc]) => pr === r && pc === c);
+          const seq = document.createElement('div');
+          seq.style.position = 'absolute';
+          seq.style.top = '2px';
+          seq.style.left = '4px';
+          seq.style.fontSize = '0.6rem';
+          seq.style.color = 'var(--primary-glow)';
+          seq.textContent = idx + 1;
+          cell.appendChild(seq);
+        } else if (step.visited[r][c]) {
+          cell.classList.add('visited-path');
+        }
+        
+        grid.appendChild(cell);
+      }
+    }
+    boardPanel.appendChild(grid);
+    container.appendChild(boardPanel);
+    
+    const triePanel = document.createElement('div');
+    triePanel.className = 'ws-trie-panel';
+    triePanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem;">Found Words & Trie State</h3>';
+    
+    const activeWordStr = step.activePath.map(([r, c]) => step.board[r][c]).join('');
+    const pathText = document.createElement('p');
+    pathText.innerHTML = `<strong>Current Prefix:</strong> <span style="font-family:monospace; color:var(--primary-glow); font-size:1.1rem; letter-spacing:1px;">"${activeWordStr || 'empty'}"</span>`;
+    triePanel.appendChild(pathText);
+    
+    const wordsList = document.createElement('div');
+    wordsList.style.marginTop = '1rem';
+    wordsList.innerHTML = '<strong>Dictionary Check:</strong>';
+    
+    const listContainer = document.createElement('ul');
+    listContainer.style.paddingLeft = '20px';
+    listContainer.style.marginTop = '0.5rem';
+    
+    const rawWords = visualizerState.rawArray.words || [];
+    rawWords.forEach(w => {
+      const li = document.createElement('li');
+      li.style.fontSize = '0.9rem';
+      li.style.marginBottom = '4px';
+      
+      const isFound = step.found.includes(w);
+      if (isFound) {
+        li.innerHTML = `<span style="color:var(--easy); text-decoration:line-through;">${w}</span> <span style="color:var(--easy);">✓</span>`;
+      } else {
+        li.textContent = w;
+      }
+      listContainer.appendChild(li);
+    });
+    
+    wordsList.appendChild(listContainer);
+    triePanel.appendChild(wordsList);
+    container.appendChild(triePanel);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'generateparentheses') {
+    const container = document.createElement('div');
+    container.className = 'parentheses-container';
+    
+    const panelsRow = document.createElement('div');
+    panelsRow.style.display = 'flex';
+    panelsRow.style.gap = '20px';
+    panelsRow.style.width = '100%';
+    panelsRow.style.flexWrap = 'wrap';
+    
+    const stackPanel = document.createElement('div');
+    stackPanel.className = 'ws-board-panel';
+    stackPanel.style.flex = '1';
+    stackPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem; text-align:center;">Recursion Stack</h3>';
+    
+    const stackList = document.createElement('div');
+    stackList.style.display = 'flex';
+    stackList.style.flexDirection = 'column-reverse';
+    stackList.style.gap = '8px';
+    stackList.style.alignItems = 'center';
+    
+    if (step.stack && step.stack.length > 0) {
+      step.stack.forEach((frame, idx) => {
+        const item = document.createElement('div');
+        item.className = 'rec-node';
+        item.classList.add('active');
+        item.style.width = '180px';
+        item.innerHTML = `<strong>Depth ${idx}</strong><br>str: "${frame.label}"<br>open: ${frame.open}, close: ${frame.close}`;
+        stackList.appendChild(item);
+      });
+    } else {
+      const empty = document.createElement('div');
+      empty.style.color = 'var(--text-muted)';
+      empty.textContent = 'Stack empty.';
+      stackList.appendChild(empty);
+    }
+    stackPanel.appendChild(stackList);
+    panelsRow.appendChild(stackPanel);
+    
+    const foundPanel = document.createElement('div');
+    foundPanel.className = 'ws-trie-panel';
+    foundPanel.style.flex = '1';
+    foundPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem;">Valid Combinations</h3>';
+    
+    const foundList = document.createElement('div');
+    foundList.style.display = 'flex';
+    foundList.style.gap = '8px';
+    foundList.style.flexWrap = 'wrap';
+    
+    if (step.found && step.found.length > 0) {
+      step.found.forEach(combo => {
+        const pill = document.createElement('div');
+        pill.className = 'rec-node valid';
+        pill.textContent = combo;
+        foundList.appendChild(pill);
+      });
+    } else {
+      const empty = document.createElement('div');
+      empty.style.color = 'var(--text-muted)';
+      empty.textContent = 'None generated yet.';
+      foundList.appendChild(empty);
+    }
+    foundPanel.appendChild(foundList);
+    panelsRow.appendChild(foundPanel);
+    
+    container.appendChild(panelsRow);
+    
+    const trailPanel = document.createElement('div');
+    trailPanel.className = 'glass-card';
+    trailPanel.style.width = '100%';
+    trailPanel.style.padding = '1rem';
+    trailPanel.style.border = '1px solid var(--border-color)';
+    
+    const activePathLabels = step.stack ? step.stack.map(n => `"${n.label}"`) : [];
+    trailPanel.innerHTML = `<strong>Decision Trail:</strong> <span style="font-family:monospace; color:var(--accent-cyan);">${activePathLabels.join(' ➔ ') || 'root'}</span>`;
+    container.appendChild(trailPanel);
+    
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'lis') {
+    const container = document.createElement('div');
+    container.className = 'lis-container';
+    
+    const pilesRow = document.createElement('div');
+    pilesRow.className = 'lis-piles-row';
+    
+    const maxPilesLength = Math.max(1, step.piles.length);
+    for (let pIdx = 0; pIdx < maxPilesLength + 1; pIdx++) {
+      if (pIdx < step.piles.length || pIdx === step.piles.length) {
+        const pile = document.createElement('div');
+        pile.className = 'lis-pile';
+        
+        if (step.searchBounds && pIdx >= step.searchBounds.low && pIdx <= step.searchBounds.high) {
+          pile.classList.add('active-search');
+          if (pIdx === step.searchBounds.mid) {
+            pile.style.borderColor = 'var(--secondary)';
+            pile.style.background = 'rgba(236,72,153,0.05)';
+          }
+        }
+        
+        const pileData = step.piles[pIdx] || [];
+        if (pileData.length > 0) {
+          pileData.forEach((val, idx) => {
+            const card = document.createElement('div');
+            card.className = 'lis-card';
+            card.textContent = val;
+            
+            if (idx === pileData.length - 1) {
+              card.style.borderColor = 'var(--accent-cyan)';
+              card.style.boxShadow = '0 0 8px rgba(6,182,212,0.3)';
+            }
+            pile.appendChild(card);
+          });
+        } else if (pIdx === step.piles.length && step.activeVal !== null) {
+          pile.style.borderStyle = 'dashed';
+          pile.style.borderColor = 'rgba(255,255,255,0.1)';
+        }
+        
+        const label = document.createElement('div');
+        label.style.fontSize = '0.7rem';
+        label.style.color = 'var(--text-muted)';
+        label.style.marginTop = '4px';
+        label.style.textAlign = 'center';
+        
+        let labelText = `Pile ${pIdx + 1}`;
+        if (step.searchBounds) {
+          if (pIdx === step.searchBounds.low) labelText += ' (L)';
+          if (pIdx === step.searchBounds.high) labelText += ' (H)';
+          if (pIdx === step.searchBounds.mid) labelText += ' (MID)';
+        }
+        label.textContent = labelText;
+        pile.appendChild(label);
+        
+        pilesRow.appendChild(pile);
+      }
+    }
+    container.appendChild(pilesRow);
+    
+    const sourcePanel = document.createElement('div');
+    sourcePanel.style.display = 'flex';
+    sourcePanel.style.gap = '8px';
+    sourcePanel.style.marginTop = '1rem';
+    
+    visualizerState.rawArray.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'lis-card';
+      cell.textContent = val;
+      cell.style.width = '48px';
+      cell.style.height = '48px';
+      cell.style.fontSize = '1.1rem';
+      
+      if (idx === step.activeIndex) {
+        cell.classList.add('active-card');
+      } else if (idx < step.activeIndex) {
+        cell.style.opacity = '0.35';
+      }
+      
+      const idxSpan = document.createElement('div');
+      idxSpan.style.position = 'absolute';
+      idxSpan.style.bottom = '2px';
+      idxSpan.style.fontSize = '0.6rem';
+      idxSpan.style.color = 'var(--text-muted)';
+      idxSpan.textContent = idx;
+      cell.appendChild(idxSpan);
+      
+      sourcePanel.appendChild(cell);
+    });
+    
+    container.appendChild(sourcePanel);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'trappingwater') {
+    const container = document.createElement('div');
+    container.className = 'water-container';
+    
+    const chart = document.createElement('div');
+    chart.className = 'water-chart';
+    
+    const maxVal = Math.max(...visualizerState.rawArray, 1);
+    
+    visualizerState.rawArray.forEach((val, idx) => {
+      const col = document.createElement('div');
+      col.className = 'water-bar-column';
+      
+      const wall = document.createElement('div');
+      wall.className = 'elevation-wall';
+      const wallPct = (val / maxVal) * 60;
+      wall.style.height = `${wallPct}%`;
+      wall.textContent = val > 0 ? val : '';
+      
+      if (idx === step.left || idx === step.right) {
+        wall.classList.add('highlight-wall');
+      }
+      
+      const wVal = step.water[idx] || 0;
+      const water = document.createElement('div');
+      water.className = 'water-block';
+      const waterPct = (wVal / maxVal) * 60;
+      water.style.height = `${waterPct}%`;
+      
+      col.appendChild(water);
+      col.appendChild(wall);
+      
+      if (idx === step.left) {
+        const pLabel = document.createElement('div');
+        pLabel.className = 'water-pointer-label left';
+        pLabel.textContent = 'L';
+        col.appendChild(pLabel);
+      }
+      if (idx === step.right) {
+        const pLabel = document.createElement('div');
+        pLabel.className = 'water-pointer-label right';
+        pLabel.textContent = 'R';
+        col.appendChild(pLabel);
+      }
+      
+      chart.appendChild(col);
+    });
+    
+    container.appendChild(chart);
+    
+    const statsRow = document.createElement('div');
+    statsRow.style.display = 'flex';
+    statsRow.style.gap = '20px';
+    statsRow.style.width = '100%';
+    statsRow.style.justifyContent = 'center';
+    
+    statsRow.innerHTML = `
+      <div class="glass-card" style="padding: 10px 20px; border: 1px solid var(--border-color); text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">leftMax</span>
+        <strong style="font-size: 1.25rem; color: var(--easy);">${step.leftMax}</strong>
+      </div>
+      <div class="glass-card" style="padding: 10px 20px; border: 1px solid var(--border-color); text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Trapped Water</span>
+        <strong style="font-size: 1.25rem; color: var(--primary-glow);">${step.volume} units</strong>
+      </div>
+      <div class="glass-card" style="padding: 10px 20px; border: 1px solid var(--border-color); text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">rightMax</span>
+        <strong style="font-size: 1.25rem; color: var(--secondary);">${step.rightMax}</strong>
+      </div>
+    `;
+    container.appendChild(statsRow);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'burstballoons') {
+    const container = document.createElement('div');
+    container.className = 'bb-container';
+    
+    const balloonsRow = document.createElement('div');
+    balloonsRow.className = 'balloons-row';
+    
+    const padL = document.createElement('div');
+    padL.className = 'lis-card';
+    padL.style.opacity = '0.3';
+    padL.textContent = '1';
+    balloonsRow.appendChild(padL);
+    
+    step.balloons.forEach((val, idx) => {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon-element';
+      balloon.textContent = val;
+      
+      const realIdx = idx + 1;
+      
+      if (step.activeInterval) {
+        const [i, j] = step.activeInterval;
+        if (realIdx >= i && realIdx <= j) {
+          balloon.classList.add('active-balloon');
+          if (realIdx === step.k) {
+            balloon.style.background = 'linear-gradient(135deg, var(--accent-cyan), #0891b2)';
+            balloon.style.boxShadow = '0 0 15px rgba(6,182,212,0.6)';
+          }
+        }
+      }
+      balloonsRow.appendChild(balloon);
+    });
+    
+    const padR = document.createElement('div');
+    padR.className = 'lis-card';
+    padR.style.opacity = '0.3';
+    padR.textContent = '1';
+    balloonsRow.appendChild(padR);
+    
+    container.appendChild(balloonsRow);
+    
+    const tablePanel = document.createElement('div');
+    tablePanel.className = 'dp-table-wrapper';
+    
+    const table = document.createElement('table');
+    table.className = 'dp-matrix-table';
+    
+    const headerRow = document.createElement('tr');
+    headerRow.innerHTML = '<th>i \\ j</th>';
+    for (let j = 0; j < step.dp[0].length; j++) {
+      headerRow.innerHTML += `<th>${j}</th>`;
+    }
+    table.appendChild(headerRow);
+    
+    for (let i = 0; i < step.dp.length; i++) {
+      const row = document.createElement('tr');
+      row.innerHTML += `<td><strong>${i}</strong></td>`;
+      for (let j = 0; j < step.dp[0].length; j++) {
+        const cell = document.createElement('td');
+        const cellVal = step.dp[i][j];
+        cell.textContent = cellVal === 0 ? '' : cellVal;
+        
+        if (step.activeInterval) {
+          const [ai, aj] = step.activeInterval;
+          if (i === ai && j === aj) {
+            cell.className = 'active-cell';
+          } else if (step.k !== -1) {
+            if ((i === ai && j === step.k - 1) || (i === step.k + 1 && j === aj)) {
+              cell.className = 'dep-cell';
+            }
+          }
+        }
+        row.appendChild(cell);
+      }
+      table.appendChild(row);
+    }
+    tablePanel.appendChild(table);
+    container.appendChild(tablePanel);
     canvas.appendChild(container);
   }
 }
