@@ -10593,6 +10593,122 @@ codeTemplates['burstballoons'] = `<span class="code-comment">// Burst Balloons I
   }
 }`;
 
+codeTemplates['minwindow'] = `<span class="code-comment">// Minimum Window Substring - O(N)</span>
+<span class="code-keyword">let</span> map = {}, need = {}, have = <span class="code-num">0</span>;
+<span class="code-keyword">for</span> (<span class="code-keyword">let</span> c <span class="code-keyword">of</span> T) need[c] = (need[c] || <span class="code-num">0</span>) + <span class="code-num">1</span>;
+<span class="code-keyword">let</span> l = <span class="code-num">0</span>, ans = [-<span class="code-num">1</span>, -<span class="code-num">1</span>], len = Infinity;
+<span class="code-keyword">for</span> (<span class="code-keyword">let</span> r = <span class="code-num">0</span>; r &lt; S.length; r++) {
+  <span class="code-keyword">let</span> c = S[r];
+  map[c] = (map[c] || <span class="code-num">0</span>) + <span class="code-num">1</span>;
+  <span class="code-keyword">if</span> (need[c] &amp;&amp; map[c] === need[c]) have++;
+  <span class="code-keyword">while</span> (have === Object.keys(need).length) {
+    <span class="code-keyword">if</span> (r - l + <span class="code-num">1</span> &lt; len) {
+      len = r - l + <span class="code-num">1</span>; ans = [l, r];
+    }
+    map[S[l]]--;
+    <span class="code-keyword">if</span> (need[S[l]] &amp;&amp; map[S[l]] &lt; need[S[l]]) have--;
+    l++;
+  }
+}`;
+
+codeTemplates['wordladder'] = `<span class="code-comment">// Word Ladder BFS - O(M^2 * N)</span>
+<span class="code-keyword">let</span> queue = [[beginWord, <span class="code-num">1</span>]];
+<span class="code-keyword">let</span> visited = <span class="code-keyword">new</span> Set([beginWord]);
+<span class="code-keyword">while</span> (queue.length) {
+  <span class="code-keyword">let</span> [word, level] = queue.<span class="code-fn">shift</span>();
+  <span class="code-keyword">if</span> (word === endWord) <span class="code-keyword">return</span> level;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; word.length; i++) {
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> c = <span class="code-num">97</span>; c &lt;= <span class="code-num">122</span>; c++) {
+      <span class="code-keyword">let</span> newWord = word.<span class="code-fn">slice</span>(<span class="code-num">0</span>,i) + String.<span class="code-fn">fromCharCode</span>(c) + word.<span class="code-fn">slice</span>(i+<span class="code-num">1</span>);
+      <span class="code-keyword">if</span> (wordSet.<span class="code-fn">has</span>(newWord) &amp;&amp; !visited.<span class="code-fn">has</span>(newWord)) {
+        visited.<span class="code-fn">add</span>(newWord);
+        queue.<span class="code-fn">push</span>([newWord, level + <span class="code-num">1</span>]);
+      }
+    }
+  }
+}`;
+
+codeTemplates['waterflow'] = `<span class="code-comment">// Pacific Atlantic Water Flow DFS</span>
+<span class="code-keyword">for</span> (<span class="code-keyword">let</span> r = <span class="code-num">0</span>; r &lt; R; r++) {
+  <span class="code-fn">dfs</span>(r, <span class="code-num">0</span>, pac); <span class="code-comment">// Pacific boundary</span>
+  <span class="code-fn">dfs</span>(r, C-<span class="code-num">1</span>, atl); <span class="code-comment">// Atlantic boundary</span>
+}
+<span class="code-keyword">for</span> (<span class="code-keyword">let</span> c = <span class="code-num">0</span>; c &lt; C; c++) {
+  <span class="code-fn">dfs</span>(<span class="code-num">0</span>, c, pac);
+  <span class="code-fn">dfs</span>(R-<span class="code-num">1</span>, c, atl);
+}
+<span class="code-keyword">function</span> <span class="code-fn">dfs</span>(r, c, reach) {
+  reach[r][c] = <span class="code-keyword">true</span>;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> [dr,dc] <span class="code-keyword">of</span> dirs) {
+    <span class="code-keyword">let</span> nr = r+dr, nc = c+dc;
+    <span class="code-keyword">if</span> (nr&gt;=0 &amp;&amp; nr&lt;R &amp;&amp; nc&gt;=0 &amp;&amp; nc&lt;C &amp;&amp; !reach[nr][nc] &amp;&amp; heights[nr][nc] &gt;= heights[r][c])
+      <span class="code-fn">dfs</span>(nr, nc, reach);
+  }
+}`;
+
+codeTemplates['aliendictionary'] = `<span class="code-comment">// Alien Dictionary Topological Sort</span>
+<span class="code-keyword">let</span> adj = {}, indegree = {};
+<span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; words.length - <span class="code-num">1</span>; i++) {
+  <span class="code-keyword">let</span> w1 = words[i], w2 = words[i+<span class="code-num">1</span>];
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> j = <span class="code-num">0</span>; j &lt; Math.<span class="code-fn">min</span>(w1.length, w2.length); j++) {
+    <span class="code-keyword">if</span> (w1[j] !== w2[j]) {
+      adj[w1[j]].<span class="code-fn">push</span>(w2[j]);
+      indegree[w2[j]]++;
+      <span class="code-keyword">break</span>;
+    }
+  }
+}
+<span class="code-keyword">let</span> queue = Object.<span class="code-fn">keys</span>(indegree).<span class="code-fn">filter</span>(k =&gt; indegree[k] === <span class="code-num">0</span>);
+<span class="code-keyword">while</span> (queue.length) {
+  <span class="code-keyword">let</span> char = queue.<span class="code-fn">shift</span>(); res.<span class="code-fn">push</span>(char);
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> neighbor <span class="code-keyword">of</span> adj[char]) {
+    indegree[neighbor]--;
+    <span class="code-keyword">if</span> (indegree[neighbor] === <span class="code-num">0</span>) queue.<span class="code-fn">push</span>(neighbor);
+  }
+}`;
+
+codeTemplates['designtwitter'] = `<span class="code-comment">// Design Twitter - LC 355</span>
+<span class="code-keyword">class</span> Twitter {
+  <span class="code-fn">postTweet</span>(userId, tweetId) {
+    <span class="code-keyword">this</span>.tweets.<span class="code-fn">push</span>({ userId, tweetId, time: <span class="code-keyword">this</span>.time++ });
+  }
+  <span class="code-fn">getNewsFeed</span>(userId) {
+    <span class="code-keyword">let</span> followers = <span class="code-keyword">this</span>.follows[userId] || <span class="code-keyword">new</span> Set([userId]);
+    <span class="code-keyword">return</span> <span class="code-keyword">this</span>.tweets
+      .<span class="code-fn">filter</span>(t =&gt; followers.<span class="code-fn">has</span>(t.userId))
+      .<span class="code-fn">sort</span>((a, b) =&gt; b.time - a.time)
+      .<span class="code-fn">slice</span>(<span class="code-num">0</span>, <span class="code-num">10</span>);
+  }
+  <span class="code-fn">follow</span>(followerId, followeeId) {
+    <span class="code-keyword">this</span>.follows[followerId].<span class="code-fn">add</span>(followeeId);
+  }
+  <span class="code-fn">unfollow</span>(followerId, followeeId) {
+    <span class="code-keyword">this</span>.follows[followerId].<span class="code-fn">delete</span>(followeeId);
+  }
+}`;
+
+codeTemplates['serializedeserialize'] = `<span class="code-comment">// Serialize & Deserialize Binary Tree - LC 297</span>
+<span class="code-fn">serialize</span>(root) {
+  <span class="code-keyword">let</span> res = [];
+  <span class="code-keyword">function</span> <span class="code-fn">dfs</span>(node) {
+    <span class="code-keyword">if</span> (!node) { res.<span class="code-fn">push</span>(<span class="code-str">"N"</span>); <span class="code-keyword">return</span>; }
+    res.<span class="code-fn">push</span>(node.val);
+    <span class="code-fn">dfs</span>(node.left); <span class="code-fn">dfs</span>(node.right);
+  }
+  <span class="code-fn">dfs</span>(root);
+  <span class="code-keyword">return</span> res.<span class="code-fn">join</span>(<span class="code-str">","</span>);
+}
+<span class="code-fn">deserialize</span>(data) {
+  <span class="code-keyword">let</span> vals = data.<span class="code-fn">split</span>(<span class="code-str">","</span>), i = <span class="code-num">0</span>;
+  <span class="code-keyword">function</span> <span class="code-fn">dfs</span>() {
+    <span class="code-keyword">if</span> (vals[i] === <span class="code-str">"N"</span>) { i++; <span class="code-keyword">return</span> <span class="code-keyword">null</span>; }
+    <span class="code-keyword">let</span> node = <span class="code-keyword">new</span> TreeNode(parseInt(vals[i++]));
+    node.left = <span class="code-fn">dfs</span>(); node.right = <span class="code-fn">dfs</span>();
+    <span class="code-keyword">return</span> node;
+  }
+  <span class="code-keyword">return</span> <span class="code-fn">dfs</span>();
+}`;
+
 const visualizerState = {
   algo: 'bubble',
   isPlaying: false,
@@ -11133,6 +11249,60 @@ function resetVisualizer() {
     appendLog("[INFO] Burst Balloons: loading balloon line coefficients.", "info");
     generateBurstBalloonsSteps(nums);
   }
+  else if (visualizerState.algo === 'minwindow') {
+    const S = "ADOBECODEBANC";
+    const T = "ABC";
+    visualizerState.rawArray = { S, T };
+    appendLog(`[INFO] Minimum Window Substring: S="${S}", T="${T}".`, "info");
+    generateMinWindowSteps(S, T);
+  }
+  else if (visualizerState.algo === 'wordladder') {
+    const beginWord = "hit";
+    const endWord = "cog";
+    const wordList = ["hot","dot","dog","lot","log","cog"];
+    visualizerState.rawArray = { beginWord, endWord, wordList };
+    appendLog(`[INFO] Word Ladder: begin="${beginWord}", end="${endWord}", dict=[${wordList.join(', ')}].`, "info");
+    generateWordLadderSteps(beginWord, endWord, wordList);
+  }
+  else if (visualizerState.algo === 'waterflow') {
+    const heights = [
+      [1, 2, 2, 3, 5],
+      [3, 2, 3, 4, 4],
+      [2, 4, 5, 3, 1],
+      [6, 7, 1, 4, 5],
+      [5, 1, 1, 2, 4]
+    ];
+    visualizerState.rawArray = heights;
+    appendLog("[INFO] Pacific Atlantic Water Flow: loaded 5x5 height map.", "info");
+    generateWaterFlowSteps(heights);
+  }
+  else if (visualizerState.algo === 'aliendictionary') {
+    const words = ["wrt","wrf","er","ett","rftt"];
+    visualizerState.rawArray = words;
+    appendLog(`[INFO] Alien Dictionary: words=[${words.join(', ')}].`, "info");
+    generateAlienDictSteps(words);
+  }
+  else if (visualizerState.algo === 'designtwitter') {
+    const actions = [
+      { type: 'postTweet', userId: 1, tweetId: 101, details: 'User 1 posted Tweet 101' },
+      { type: 'postTweet', userId: 2, tweetId: 201, details: 'User 2 posted Tweet 201' },
+      { type: 'getNewsFeed', userId: 1, details: 'User 1 requested feed' },
+      { type: 'follow', followerId: 1, followeeId: 2, details: 'User 1 followed User 2' },
+      { type: 'postTweet', userId: 2, tweetId: 202, details: 'User 2 posted Tweet 202' },
+      { type: 'getNewsFeed', userId: 1, details: 'User 1 requested feed' },
+      { type: 'unfollow', followerId: 1, followeeId: 2, details: 'User 1 unfollowed User 2' },
+      { type: 'getNewsFeed', userId: 1, details: 'User 1 requested feed' }
+    ];
+    visualizerState.rawArray = actions;
+    appendLog("[INFO] Design Twitter: transaction operations queue loaded.", "info");
+    generateTwitterSteps(actions);
+  }
+  else if (visualizerState.algo === 'serializedeserialize') {
+    const treeVals = [1, 2, 3, null, null, 4, 5];
+    visualizerState.rawArray = [...treeVals];
+    appendLog("[INFO] Serialize & Deserialize Binary Tree: initial level order representation loaded.", "info");
+    generateSerializeSteps(treeVals);
+  }
 
   
   renderCanvasStep();
@@ -11142,6 +11312,646 @@ function resetVisualizer() {
 // DYNAMIC SNAPSHOT STEP GENERATION ROUTINES
 // ==========================================================================
 
+
+// Minimum Window Substring Step Generation
+function generateMinWindowSteps(S, T) {
+  const steps = [];
+  const need = {};
+  for (const c of T) need[c] = (need[c] || 0) + 1;
+  
+  const map = {};
+  let have = 0;
+  const needCount = Object.keys(need).length;
+  let l = 0;
+  let minLen = Infinity;
+  let ans = [-1, -1];
+  
+  steps.push({
+    l: 0,
+    r: -1,
+    map: { ...map },
+    need: { ...need },
+    have,
+    ans: [...ans],
+    minLen,
+    log: `Minimum Window Substring: need map initialized: ${JSON.stringify(need)}`
+  });
+  
+  for (let r = 0; r < S.length; r++) {
+    const c = S[r];
+    map[c] = (map[c] || 0) + 1;
+    
+    if (need[c] && map[c] === need[c]) {
+      have++;
+    }
+    
+    steps.push({
+      l,
+      r,
+      map: { ...map },
+      need: { ...need },
+      have,
+      ans: [...ans],
+      minLen,
+      log: `Expanded right pointer to S[r=${r}]='${c}'. Window count: ${map[c]}. satisfied: ${have}/${needCount}.`
+    });
+    
+    while (have === needCount) {
+      const windowLen = r - l + 1;
+      if (windowLen < minLen) {
+        minLen = windowLen;
+        ans = [l, r];
+        steps.push({
+          l,
+          r,
+          map: { ...map },
+          need: { ...need },
+          have,
+          ans: [...ans],
+          minLen,
+          log: `Found a smaller valid window: "${S.substring(l, r + 1)}" (length ${windowLen}).`
+        });
+      }
+      
+      const leftChar = S[l];
+      map[leftChar]--;
+      if (need[leftChar] && map[leftChar] < need[leftChar]) {
+        have--;
+      }
+      
+      l++;
+      steps.push({
+        l,
+        r,
+        map: { ...map },
+        need: { ...need },
+        have,
+        ans: [...ans],
+        minLen,
+        log: `Shrunk left pointer from S[l=${l-1}]='${leftChar}'. satisfied: ${have}/${needCount}.`
+      });
+    }
+  }
+  
+  steps.push({
+    l,
+    r: S.length - 1,
+    map: { ...map },
+    need: { ...need },
+    have,
+    ans: [...ans],
+    minLen,
+    log: `Sliding Window search complete. Minimum Window Substring is "${ans[0] === -1 ? 'None' : S.substring(ans[0], ans[1] + 1)}"`
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Word Ladder Step Generation
+function generateWordLadderSteps(beginWord, endWord, wordList) {
+  const steps = [];
+  const wordSet = new Set(wordList);
+  wordSet.add(beginWord);
+  
+  const nodes = Array.from(wordSet).map((w, idx) => {
+    let x = 100, y = 175;
+    if (w === "hit") { x = 60; y = 175; }
+    else if (w === "hot") { x = 160; y = 175; }
+    else if (w === "dot") { x = 260; y = 90; }
+    else if (w === "lot") { x = 260; y = 260; }
+    else if (w === "dog") { x = 360; y = 90; }
+    else if (w === "log") { x = 360; y = 260; }
+    else if (w === "cog") { x = 460; y = 175; }
+    return { id: w, x, y };
+  });
+  
+  const edges = [];
+  const nodeIds = nodes.map(n => n.id);
+  for (let i = 0; i < nodeIds.length; i++) {
+    for (let j = i + 1; j < nodeIds.length; j++) {
+      const w1 = nodeIds[i];
+      const w2 = nodeIds[j];
+      let diff = 0;
+      for (let k = 0; k < w1.length; k++) {
+        if (w1[k] !== w2[k]) diff++;
+      }
+      if (diff === 1) {
+        edges.push({ u: w1, v: w2 });
+      }
+    }
+  }
+  
+  const queue = [[beginWord, [beginWord]]];
+  const visited = new Set([beginWord]);
+  
+  steps.push({
+    nodes,
+    edges,
+    queue: queue.map(q => [...q[1]]),
+    activeNode: null,
+    visited: Array.from(visited),
+    shortestPath: [],
+    log: `Word Ladder BFS starting. beginWord="${beginWord}" pushed to queue.`
+  });
+  
+  let targetPath = [];
+  while (queue.length > 0) {
+    const [currWord, path] = queue.shift();
+    
+    steps.push({
+      nodes,
+      edges,
+      queue: queue.map(q => [...q[1]]),
+      activeNode: currWord,
+      visited: Array.from(visited),
+      shortestPath: [],
+      log: `Dequeued "${currWord}". Path so far: ${path.join(' → ')}`
+    });
+    
+    if (currWord === endWord) {
+      targetPath = path;
+      break;
+    }
+    
+    for (let i = 0; i < currWord.length; i++) {
+      for (let c = 97; c <= 122; c++) {
+        const char = String.fromCharCode(c);
+        const nextWord = currWord.slice(0, i) + char + currWord.slice(i + 1);
+        if (wordSet.has(nextWord) && !visited.has(nextWord)) {
+          visited.add(nextWord);
+          const nextPath = [...path, nextWord];
+          queue.push([nextWord, nextPath]);
+          
+          steps.push({
+            nodes,
+            edges,
+            queue: queue.map(q => [...q[1]]),
+            activeNode: currWord,
+            visited: Array.from(visited),
+            shortestPath: [],
+            log: `Neighbor "${nextWord}" is valid and unvisited. Enqueueing path: [${nextPath.join(', ')}]`
+          });
+        }
+      }
+    }
+  }
+  
+  steps.push({
+    nodes,
+    edges,
+    queue: queue.map(q => [...q[1]]),
+    activeNode: null,
+    visited: Array.from(visited),
+    shortestPath: targetPath,
+    log: targetPath.length > 0 
+      ? `Word Ladder found shortest path of length ${targetPath.length}: ${targetPath.join(' → ')}`
+      : `Word Ladder complete. No path exists between ${beginWord} and ${endWord}.`
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Pacific Atlantic Water Flow Step Generation
+function generateWaterFlowSteps(heights) {
+  const steps = [];
+  const R = heights.length;
+  const C = heights[0].length;
+  
+  const pacReach = Array.from({ length: R }, () => Array(C).fill(false));
+  const atlReach = Array.from({ length: R }, () => Array(C).fill(false));
+  
+  steps.push({
+    heights,
+    pacReach: pacReach.map(row => [...row]),
+    atlReach: atlReach.map(row => [...row]),
+    activeCell: null,
+    log: "Pacific Atlantic Water Flow: Grid loaded. Starting BFS expansion from Pacific ocean boundaries (top/left)..."
+  });
+  
+  const pacQueue = [];
+  for (let r = 0; r < R; r++) {
+    pacReach[r][0] = true;
+    pacQueue.push([r, 0]);
+  }
+  for (let c = 1; c < C; c++) {
+    pacReach[0][c] = true;
+    pacQueue.push([0, c]);
+  }
+  
+  const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+  
+  while (pacQueue.length > 0) {
+    const [r, c] = pacQueue.shift();
+    steps.push({
+      heights,
+      pacReach: pacReach.map(row => [...row]),
+      atlReach: atlReach.map(row => [...row]),
+      activeCell: [r, c],
+      log: `Pacific BFS: Dequeued cell (${r}, ${c}) [height=${heights[r][c]}]. Checking neighbors...`
+    });
+    
+    for (const [dr, dc] of dirs) {
+      const nr = r + dr;
+      const nc = c + dc;
+      if (nr >= 0 && nr < R && nc >= 0 && nc < C && !pacReach[nr][nc]) {
+        if (heights[nr][nc] >= heights[r][c]) {
+          pacReach[nr][nc] = true;
+          pacQueue.push([nr, nc]);
+          steps.push({
+            heights,
+            pacReach: pacReach.map(row => [...row]),
+            atlReach: atlReach.map(row => [...row]),
+            activeCell: [nr, nc],
+            log: `Pacific reach expanded to (${nr}, ${nc}) [height=${heights[nr][nc]} >= heights[${r}][${c}]=${heights[r][c]}].`
+          });
+        }
+      }
+    }
+  }
+  
+  steps.push({
+    heights,
+    pacReach: pacReach.map(row => [...row]),
+    atlReach: atlReach.map(row => [...row]),
+    activeCell: null,
+    log: "Pacific boundary BFS complete. Starting BFS expansion from Atlantic ocean boundaries (bottom/right)..."
+  });
+  
+  const atlQueue = [];
+  for (let r = 0; r < R; r++) {
+    atlReach[r][C - 1] = true;
+    atlQueue.push([r, C - 1]);
+  }
+  for (let c = 0; c < C - 1; c++) {
+    atlReach[R - 1][c] = true;
+    atlQueue.push([R - 1, c]);
+  }
+  
+  while (atlQueue.length > 0) {
+    const [r, c] = atlQueue.shift();
+    steps.push({
+      heights,
+      pacReach: pacReach.map(row => [...row]),
+      atlReach: atlReach.map(row => [...row]),
+      activeCell: [r, c],
+      log: `Atlantic BFS: Dequeued cell (${r}, ${c}) [height=${heights[r][c]}]. Checking neighbors...`
+    });
+    
+    for (const [dr, dc] of dirs) {
+      const nr = r + dr;
+      const nc = c + dc;
+      if (nr >= 0 && nr < R && nc >= 0 && nc < C && !atlReach[nr][nc]) {
+        if (heights[nr][nc] >= heights[r][c]) {
+          atlReach[nr][nc] = true;
+          atlQueue.push([nr, nc]);
+          steps.push({
+            heights,
+            pacReach: pacReach.map(row => [...row]),
+            atlReach: atlReach.map(row => [...row]),
+            activeCell: [nr, nc],
+            log: `Atlantic reach expanded to (${nr}, ${nc}) [height=${heights[nr][nc]} >= heights[${r}][${c}]=${heights[r][c]}].`
+          });
+        }
+      }
+    }
+  }
+  
+  const results = [];
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      if (pacReach[r][c] && atlReach[r][c]) {
+        results.push([r, c]);
+      }
+    }
+  }
+  
+  steps.push({
+    heights,
+    pacReach: pacReach.map(row => [...row]),
+    atlReach: atlReach.map(row => [...row]),
+    activeCell: null,
+    log: `Water Flow complete. Found ${results.length} cells that flow to both oceans: [${results.map(([r,c]) => `(${r},${c})`).join(', ')}]`
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Alien Dictionary Step Generation
+function generateAlienDictSteps(words) {
+  const steps = [];
+  const adj = {};
+  const indegree = {};
+  
+  for (const w of words) {
+    for (const char of w) {
+      if (!adj[char]) adj[char] = [];
+      if (indegree[char] === undefined) indegree[char] = 0;
+    }
+  }
+  
+  const comparisons = [];
+  
+  steps.push({
+    adj: JSON.parse(JSON.stringify(adj)),
+    indegree: { ...indegree },
+    queue: [],
+    res: [],
+    comparisons: [],
+    activeCompare: null,
+    log: "Alien Dictionary: Building relation graph from adjacent words..."
+  });
+  
+  for (let i = 0; i < words.length - 1; i++) {
+    const w1 = words[i];
+    const w2 = words[i + 1];
+    let len = Math.min(w1.length, w2.length);
+    let diffFound = false;
+    
+    for (let j = 0; j < len; j++) {
+      if (w1[j] !== w2[j]) {
+        const u = w1[j];
+        const v = w2[j];
+        
+        diffFound = true;
+        comparisons.push({ u, v, w1, w2 });
+        
+        if (!adj[u].includes(v)) {
+          adj[u].push(v);
+          indegree[v]++;
+        }
+        
+        steps.push({
+          adj: JSON.parse(JSON.stringify(adj)),
+          indegree: { ...indegree },
+          queue: [],
+          res: [],
+          comparisons: [...comparisons],
+          activeCompare: { u, v, w1, w2 },
+          log: `Comparing "${w1}" vs "${w2}": first difference is '${u}' vs '${v}'. Added directed edge '${u}' ➔ '${v}'.`
+        });
+        break;
+      }
+    }
+    
+    if (!diffFound && w1.length > w2.length) {
+      steps.push({
+        adj: JSON.parse(JSON.stringify(adj)),
+        indegree: { ...indegree },
+        queue: [],
+        res: [],
+        comparisons: [...comparisons],
+        activeCompare: null,
+        log: `⚠ Invalid ordering rule: "${w1}" comes before prefix "${w2}". Impossible dictionary.`
+      });
+      visualizerState.steps = steps;
+      return;
+    }
+  }
+  
+  const queue = Object.keys(indegree).filter(char => indegree[char] === 0).sort();
+  const res = [];
+  
+  steps.push({
+    adj: JSON.parse(JSON.stringify(adj)),
+    indegree: { ...indegree },
+    queue: [...queue],
+    res: [...res],
+    comparisons: [...comparisons],
+    activeCompare: null,
+    log: `Graph construction complete. In-degree 0 nodes: [${queue.join(', ')}]. Adding them to queue.`
+  });
+  
+  while (queue.length > 0) {
+    const char = queue.shift();
+    res.push(char);
+    
+    steps.push({
+      adj: JSON.parse(JSON.stringify(adj)),
+      indegree: { ...indegree },
+      queue: [...queue],
+      res: [...res],
+      comparisons: [...comparisons],
+      activeNode: char,
+      log: `Dequeued character '${char}' and appended it to result alphabet. decrementing neighbor in-degrees...`
+    });
+    
+    const neighbors = adj[char] || [];
+    for (const neighbor of neighbors) {
+      indegree[neighbor]--;
+      
+      steps.push({
+        adj: JSON.parse(JSON.stringify(adj)),
+        indegree: { ...indegree },
+        queue: [...queue],
+        res: [...res],
+        comparisons: [...comparisons],
+        activeNode: char,
+        log: `Edge '${char}' ➔ '${neighbor}' relaxed. in-degree[${neighbor}] = ${indegree[neighbor]}.`
+      });
+      
+      if (indegree[neighbor] === 0) {
+        queue.push(neighbor);
+        steps.push({
+          adj: JSON.parse(JSON.stringify(adj)),
+          indegree: { ...indegree },
+          queue: [...queue],
+          res: [...res],
+          comparisons: [...comparisons],
+          activeNode: char,
+          log: `Neighbor '${neighbor}' in-degree hit 0! Adding to queue.`
+        });
+      }
+    }
+  }
+  
+  const allCharsCount = Object.keys(indegree).length;
+  const complete = res.length === allCharsCount;
+  
+  steps.push({
+    adj: JSON.parse(JSON.stringify(adj)),
+    indegree: { ...indegree },
+    queue: [...queue],
+    res: [...res],
+    comparisons: [...comparisons],
+    activeNode: null,
+    log: complete 
+      ? `Topological Sort complete! Valid alphabet character ordering: "${res.join('')}"`
+      : `Topological Sort complete, but cycle detected! Result string "${res.join('')}" is incomplete. Invalid dictionary.`
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Design Twitter Step Generation
+function generateTwitterSteps(actions) {
+  const steps = [];
+  const tweets = [];
+  const follows = {
+    1: new Set([1]),
+    2: new Set([2])
+  };
+  let time = 0;
+  
+  steps.push({
+    tweets: [],
+    follows: { 1: [1], 2: [2] },
+    feed: [],
+    activeAction: null,
+    log: "Design Twitter database initialized. Users 1 and 2 follow themselves by default."
+  });
+  
+  actions.forEach((act, idx) => {
+    let logMsg = "";
+    let feed = [];
+    
+    if (act.type === 'postTweet') {
+      tweets.push({ userId: act.userId, tweetId: act.tweetId, time: time++ });
+      logMsg = `User ${act.userId} posted Tweet ${act.tweetId}.`;
+    }
+    else if (act.type === 'follow') {
+      if (!follows[act.followerId]) follows[act.followerId] = new Set([act.followerId]);
+      follows[act.followerId].add(act.followeeId);
+      logMsg = `User ${act.followerId} followed User ${act.followeeId}.`;
+    }
+    else if (act.type === 'unfollow') {
+      if (follows[act.followerId]) {
+        follows[act.followerId].delete(act.followeeId);
+      }
+      logMsg = `User ${act.followerId} unfollowed User ${act.followeeId}.`;
+    }
+    else if (act.type === 'getNewsFeed') {
+      const followers = follows[act.userId] || new Set([act.userId]);
+      feed = tweets
+        .filter(t => followers.has(t.userId))
+        .sort((a, b) => b.time - a.time)
+        .slice(0, 10);
+      logMsg = `Retrieved news feed for User ${act.userId}. Returned: [${feed.map(t => t.tweetId).join(', ')}].`;
+    }
+    
+    const followsMap = {};
+    Object.keys(follows).forEach(u => {
+      followsMap[u] = Array.from(follows[u]);
+    });
+    
+    steps.push({
+      tweets: [...tweets],
+      follows: followsMap,
+      feed: [...feed],
+      activeAction: { ...act, index: idx },
+      log: logMsg
+    });
+  });
+  
+  visualizerState.steps = steps;
+}
+
+// Serialize and Deserialize Step Generation
+function generateSerializeSteps(treeVals) {
+  const steps = [];
+  const nodes = [
+    { id: 1, val: 1, x: 250, y: 60, parent: null },
+    { id: 2, val: 2, x: 160, y: 140, parent: 1, left: true },
+    { id: 3, val: 3, x: 340, y: 140, parent: 1, right: true },
+    { id: 4, val: 4, x: 290, y: 220, parent: 3, left: true },
+    { id: 5, val: 5, x: 390, y: 220, parent: 3, right: true }
+  ];
+  
+  const edges = [
+    { u: 1, v: 2 },
+    { u: 1, v: 3 },
+    { u: 3, v: 4 },
+    { u: 3, v: 5 }
+  ];
+  
+  steps.push({
+    nodes,
+    edges,
+    phase: 'serialize',
+    activeNode: null,
+    serializedTokens: [],
+    serializedString: "",
+    log: "Starting Serialization Phase (Preorder DFS traversal)..."
+  });
+  
+  const preorderLog = [
+    { node: 1, tokens: ["1"], log: "Visit Root (1)." },
+    { node: 2, tokens: ["1", "2"], log: "Go left from 1 to 2. Visit 2." },
+    { node: null, tokens: ["1", "2", "N"], log: "Go left from 2. Node is Null (N)." },
+    { node: null, tokens: ["1", "2", "N", "N"], log: "Go right from 2. Node is Null (N). Backtrack to 1." },
+    { node: 3, tokens: ["1", "2", "N", "N", "3"], log: "Go right from 1 to 3. Visit 3." },
+    { node: 4, tokens: ["1", "2", "N", "N", "3", "4"], log: "Go left from 3 to 4. Visit 4." },
+    { node: null, tokens: ["1", "2", "N", "N", "3", "4", "N"], log: "Go left from 4. Node is Null (N)." },
+    { node: null, tokens: ["1", "2", "N", "N", "3", "4", "N", "N"], log: "Go right from 4. Node is Null (N). Backtrack to 3." },
+    { node: 5, tokens: ["1", "2", "N", "N", "3", "4", "N", "N", "5"], log: "Go right from 3 to 5. Visit 5." },
+    { node: null, tokens: ["1", "2", "N", "N", "3", "4", "N", "N", "5", "N"], log: "Go left from 5. Node is Null (N)." },
+    { node: null, tokens: ["1", "2", "N", "N", "3", "4", "N", "N", "5", "N", "N"], log: "Go right from 5. Node is Null (N). Preorder DFS traversal complete." }
+  ];
+  
+  preorderLog.forEach(item => {
+    steps.push({
+      nodes,
+      edges,
+      phase: 'serialize',
+      activeNode: item.node,
+      serializedTokens: [...item.tokens],
+      serializedString: item.tokens.join(','),
+      log: item.log
+    });
+  });
+  
+  const finalSerialized = "1,2,N,N,3,4,N,N,5,N,N";
+  
+  steps.push({
+    nodes,
+    edges,
+    phase: 'deserialize',
+    activeNode: null,
+    serializedTokens: finalSerialized.split(','),
+    activeTokenIndex: -1,
+    deserializedNodes: [],
+    log: `Starting Deserialization Phase using string: "${finalSerialized}"`
+  });
+  
+  const deserializationSteps = [
+    { idx: 0, val: "1", nodes: [1], log: "Parse token '1': Recreate root Node (1)." },
+    { idx: 1, val: "2", nodes: [1, 2], log: "Parse token '2': Recreate Node (2) and attach as left child of 1." },
+    { idx: 2, val: "N", nodes: [1, 2], log: "Parse token 'N': Left child of 2 is Null." },
+    { idx: 3, val: "N", nodes: [1, 2], log: "Parse token 'N': Right child of 2 is Null. Completed subtree of 2." },
+    { idx: 4, val: "3", nodes: [1, 2, 3], log: "Parse token '3': Recreate Node (3) and attach as right child of 1." },
+    { idx: 5, val: "4", nodes: [1, 2, 3, 4], log: "Parse token '4': Recreate Node (4) and attach as left child of 3." },
+    { idx: 6, val: "N", nodes: [1, 2, 3, 4], log: "Parse token 'N': Left child of 4 is Null." },
+    { idx: 7, val: "N", nodes: [1, 2, 3, 4], log: "Parse token 'N': Right child of 4 is Null. Completed subtree of 4." },
+    { idx: 8, val: "5", nodes: [1, 2, 3, 4, 5], log: "Parse token '5': Recreate Node (5) and attach as right child of 3." },
+    { idx: 9, val: "N", nodes: [1, 2, 3, 4, 5], log: "Parse token 'N': Left child of 5 is Null." },
+    { idx: 10, val: "N", nodes: [1, 2, 3, 4, 5], log: "Parse token 'N': Right child of 5 is Null. Completed subtree of 5." }
+  ];
+  
+  deserializationSteps.forEach(item => {
+    steps.push({
+      nodes,
+      edges,
+      phase: 'deserialize',
+      activeNode: parseInt(item.val) || null,
+      serializedTokens: finalSerialized.split(','),
+      activeTokenIndex: item.idx,
+      deserializedNodes: [...item.nodes],
+      log: item.log
+    });
+  });
+  
+  steps.push({
+    nodes,
+    edges,
+    phase: 'complete',
+    activeNode: null,
+    serializedTokens: finalSerialized.split(','),
+    activeTokenIndex: -1,
+    deserializedNodes: [1, 2, 3, 4, 5],
+    log: "Deserialization complete! Binary Tree reconstructed successfully."
+  });
+  
+  visualizerState.steps = steps;
+}
 
 // Word Search II Step Generation
 function generateWordSearchIISteps(board, words) {
@@ -22313,6 +23123,588 @@ function renderCanvasStep() {
     }
     tablePanel.appendChild(table);
     container.appendChild(tablePanel);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'minwindow') {
+    const container = document.createElement('div');
+    container.className = 'water-container';
+    
+    const charRow = document.createElement('div');
+    charRow.className = 'window-char-container';
+    
+    const S = visualizerState.rawArray.S;
+    for (let i = 0; i < S.length; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'window-char-cell';
+      cell.textContent = S[i];
+      
+      const inWin = i >= step.l && i <= step.r;
+      if (inWin) {
+        cell.classList.add('in-window');
+        if (i === step.l || i === step.r) {
+          cell.classList.add('window-edge');
+        }
+      }
+      
+      if (i === step.l) {
+        const p = document.createElement('div');
+        p.className = 'window-char-pointer-label l-ptr';
+        p.textContent = 'L';
+        cell.appendChild(p);
+      }
+      if (i === step.r) {
+        const p = document.createElement('div');
+        p.className = 'window-char-pointer-label r-ptr';
+        p.textContent = 'R';
+        cell.appendChild(p);
+      }
+      
+      const idxSpan = document.createElement('div');
+      idxSpan.style.position = 'absolute';
+      idxSpan.style.top = '2px';
+      idxSpan.style.right = '4px';
+      idxSpan.style.fontSize = '0.55rem';
+      idxSpan.style.color = 'var(--text-muted)';
+      idxSpan.textContent = i;
+      cell.appendChild(idxSpan);
+      
+      charRow.appendChild(cell);
+    }
+    container.appendChild(charRow);
+    
+    const table = document.createElement('table');
+    table.className = 'map-compare-table';
+    table.innerHTML = `
+      <tr>
+        <th>Char</th>
+        <th>Need Count</th>
+        <th>Window Count</th>
+        <th>Status</th>
+      </tr>
+    `;
+    
+    Object.keys(step.need).forEach(char => {
+      const needVal = step.need[char];
+      const winVal = step.map[char] || 0;
+      const matched = winVal >= needVal;
+      
+      const tr = document.createElement('tr');
+      if (matched) tr.className = 'matched-cell';
+      tr.innerHTML = `
+        <td><strong>${char}</strong></td>
+        <td>${needVal}</td>
+        <td>${winVal}</td>
+        <td>${matched ? 'OK ✓' : 'Lacking'}</td>
+      `;
+      table.appendChild(tr);
+    });
+    
+    const tablePanel = document.createElement('div');
+    tablePanel.style.marginTop = '1rem';
+    tablePanel.appendChild(table);
+    container.appendChild(tablePanel);
+    
+    const stats = document.createElement('div');
+    stats.style.display = 'flex';
+    stats.style.gap = '20px';
+    stats.style.marginTop = '1.5rem';
+    
+    const winStr = step.ans[0] === -1 ? 'None' : S.substring(step.ans[0], step.ans[1] + 1);
+    stats.innerHTML = `
+      <div class="glass-card" style="padding: 10px 20px; border: 1px solid var(--border-color); text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Min Window String</span>
+        <strong style="font-size: 1.15rem; color: var(--easy);">${winStr}</strong>
+      </div>
+      <div class="glass-card" style="padding: 10px 20px; border: 1px solid var(--border-color); text-align: center;">
+        <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Min Length</span>
+        <strong style="font-size: 1.15rem; color: var(--primary-glow);">${step.minLen === Infinity ? '∞' : step.minLen}</strong>
+      </div>
+    `;
+    container.appendChild(stats);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'wordladder') {
+    const container = document.createElement('div');
+    container.className = 'wl-container';
+    
+    const graphPanel = document.createElement('div');
+    graphPanel.style.flex = '2';
+    graphPanel.style.minWidth = '300px';
+    
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "wl-graph-svg");
+    
+    const shortestPathEdges = [];
+    if (step.shortestPath && step.shortestPath.length > 1) {
+      for (let i = 0; i < step.shortestPath.length - 1; i++) {
+        shortestPathEdges.push(`${step.shortestPath[i]}-${step.shortestPath[i+1]}`);
+        shortestPathEdges.push(`${step.shortestPath[i+1]}-${step.shortestPath[i]}`);
+      }
+    }
+    
+    step.edges.forEach(e => {
+      const uNode = step.nodes.find(n => n.id === e.u);
+      const vNode = step.nodes.find(n => n.id === e.v);
+      if (uNode && vNode) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", uNode.x);
+        line.setAttribute("y1", uNode.y);
+        line.setAttribute("x2", vNode.x);
+        line.setAttribute("y2", vNode.y);
+        line.setAttribute("class", "wl-link-line");
+        
+        const edgeKey = `${e.u}-${e.v}`;
+        const isShortest = shortestPathEdges.includes(edgeKey);
+        const isActive = step.activeNode === e.u || step.activeNode === e.v;
+        
+        if (isShortest) {
+          line.classList.add('shortest-path');
+        } else if (isActive && step.visited.includes(e.u) && step.visited.includes(e.v)) {
+          line.classList.add('active');
+        }
+        
+        svg.appendChild(line);
+      }
+    });
+    
+    step.nodes.forEach(n => {
+      const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", n.x);
+      circle.setAttribute("cy", n.y);
+      circle.setAttribute("r", "20");
+      circle.setAttribute("class", "wl-node-circle");
+      circle.setAttribute("fill", "rgba(30, 41, 59, 0.95)");
+      circle.setAttribute("stroke", "var(--border-color)");
+      circle.setAttribute("stroke-width", "1.5");
+      
+      const isShortest = step.shortestPath.includes(n.id);
+      const isActive = step.activeNode === n.id;
+      const isVisited = step.visited.includes(n.id);
+      
+      if (isShortest) {
+        circle.classList.add('shortest-path');
+        circle.setAttribute("stroke", "var(--easy)");
+      } else if (isActive) {
+        circle.classList.add('active');
+        circle.setAttribute("stroke", "var(--secondary)");
+      } else if (isVisited) {
+        circle.classList.add('visited');
+        circle.setAttribute("stroke", "var(--primary)");
+      }
+      
+      g.appendChild(circle);
+      
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", n.x);
+      text.setAttribute("y", n.y);
+      text.setAttribute("class", "wl-node-text");
+      text.textContent = n.id;
+      g.appendChild(text);
+      
+      svg.appendChild(g);
+    });
+    
+    graphPanel.appendChild(svg);
+    container.appendChild(graphPanel);
+    
+    const queuePanel = document.createElement('div');
+    queuePanel.className = 'ws-trie-panel';
+    queuePanel.style.flex = '1';
+    queuePanel.style.minWidth = '220px';
+    queuePanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem;">BFS Path Queue</h3>';
+    
+    const qList = document.createElement('div');
+    qList.style.display = 'flex';
+    qList.style.flexDirection = 'column';
+    qList.style.gap = '8px';
+    
+    if (step.queue && step.queue.length > 0) {
+      step.queue.forEach((path, idx) => {
+        const item = document.createElement('div');
+        item.className = 'rec-node';
+        if (idx === 0) item.classList.add('active');
+        item.style.fontSize = '0.75rem';
+        item.innerHTML = `<strong>Path ${idx + 1}</strong><br>${path.join(' ➔ ')}`;
+        qList.appendChild(item);
+      });
+    } else {
+      const empty = document.createElement('div');
+      empty.style.color = 'var(--text-muted)';
+      empty.textContent = 'Queue empty.';
+      qList.appendChild(empty);
+    }
+    queuePanel.appendChild(qList);
+    container.appendChild(queuePanel);
+    
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'waterflow') {
+    const container = document.createElement('div');
+    container.className = 'wordsearch-container';
+    
+    const gridPanel = document.createElement('div');
+    gridPanel.className = 'ws-board-panel';
+    gridPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem; text-align:center;">Height Grid Map</h3>';
+    
+    const grid = document.createElement('div');
+    grid.className = 'wf-grid-layout';
+    
+    const R = step.heights.length;
+    const C = step.heights[0].length;
+    
+    for (let r = 0; r < R; r++) {
+      for (let c = 0; c < C; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'wf-grid-cell';
+        cell.textContent = step.heights[r][c];
+        
+        const isPac = r === 0 || c === 0;
+        const isAtl = r === R - 1 || c === C - 1;
+        if (isPac) cell.classList.add('pacific-border');
+        if (isAtl) cell.classList.add('atlantic-border');
+        
+        const reachPac = step.pacReach[r][c];
+        const reachAtl = step.atlReach[r][c];
+        
+        if (reachPac && reachAtl) {
+          cell.classList.add('both-reach');
+        } else if (reachPac) {
+          cell.classList.add('pacific-reach');
+        } else if (reachAtl) {
+          cell.classList.add('atlantic-reach');
+        }
+        
+        if (step.activeCell && step.activeCell[0] === r && step.activeCell[1] === c) {
+          cell.style.borderColor = 'white';
+          cell.style.boxShadow = '0 0 12px white';
+          cell.style.transform = 'scale(1.05)';
+        }
+        
+        grid.appendChild(cell);
+      }
+    }
+    gridPanel.appendChild(grid);
+    container.appendChild(gridPanel);
+    
+    const legendPanel = document.createElement('div');
+    legendPanel.className = 'ws-trie-panel';
+    legendPanel.innerHTML = `
+      <h3 style="margin-top:0; margin-bottom:1rem;">Ocean Legend</h3>
+      <div style="display:flex; flex-direction:column; gap:8px; font-size:0.9rem;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="width:20px; height:20px; border-radius:4px; background:rgba(6,182,212,0.35); border:1px solid var(--accent-cyan); display:inline-block;"></span>
+          <span>Flows to Pacific (Blue Overlay)</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="width:20px; height:20px; border-radius:4px; background:rgba(236,72,153,0.35); border:1px solid var(--secondary); display:inline-block;"></span>
+          <span>Flows to Atlantic (Red Overlay)</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="width:20px; height:20px; border-radius:4px; background:rgba(16,185,129,0.5); border:1px solid var(--easy); display:inline-block;"></span>
+          <span>Flows to BOTH Oceans (Green reach)</span>
+        </div>
+      </div>
+      <p style="margin-top:1.5rem; font-size:0.8rem; color:var(--text-muted);">
+        Water can only flow to adjacent cells with equal or lower height. The algorithm expands outwards (backwards) from ocean cells to trace reachability.
+      </p>
+    `;
+    container.appendChild(legendPanel);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'aliendictionary') {
+    const container = document.createElement('div');
+    container.className = 'parentheses-container';
+    
+    const topRow = document.createElement('div');
+    topRow.style.display = 'flex';
+    topRow.style.gap = '20px';
+    topRow.style.width = '100%';
+    topRow.style.flexWrap = 'wrap';
+    
+    const rulesPanel = document.createElement('div');
+    rulesPanel.className = 'ws-board-panel';
+    rulesPanel.style.flex = '1';
+    rulesPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem;">Alphabet Ordering Rules</h3>';
+    
+    if (step.comparisons && step.comparisons.length > 0) {
+      step.comparisons.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'ad-relation-card';
+        if (step.activeCompare && step.activeCompare.u === c.u && step.activeCompare.v === c.v) {
+          card.classList.add('active');
+        }
+        card.textContent = `"${c.w1}" vs "${c.w2}" ➔ ${c.u} < ${c.v}`;
+        rulesPanel.appendChild(card);
+      });
+    } else {
+      rulesPanel.innerHTML += '<p style="color:var(--text-muted);">Analyzing word pairs...</p>';
+    }
+    topRow.appendChild(rulesPanel);
+    
+    const resultPanel = document.createElement('div');
+    resultPanel.className = 'ws-trie-panel';
+    resultPanel.style.flex = '1';
+    resultPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem;">Result Alphabet</h3>';
+    
+    const charRow = document.createElement('div');
+    charRow.style.display = 'flex';
+    charRow.style.gap = '6px';
+    charRow.style.marginTop = '1rem';
+    
+    if (step.res && step.res.length > 0) {
+      step.res.forEach(char => {
+        const item = document.createElement('div');
+        item.className = 'window-char-cell';
+        item.style.borderColor = 'var(--easy)';
+        item.style.background = 'rgba(16, 185, 129, 0.08)';
+        item.textContent = char;
+        charRow.appendChild(item);
+      });
+    } else {
+      charRow.innerHTML = '<span style="color:var(--text-muted);">Topological sort in progress...</span>';
+    }
+    resultPanel.appendChild(charRow);
+    topRow.appendChild(resultPanel);
+    container.appendChild(topRow);
+    
+    const indegreePanel = document.createElement('div');
+    indegreePanel.className = 'glass-card';
+    indegreePanel.style.width = '100%';
+    indegreePanel.style.padding = '1.5rem';
+    indegreePanel.style.border = '1px solid var(--border-color)';
+    indegreePanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem; text-align:center;">Graph Nodes & In-Degrees</h3>';
+    
+    const degBox = document.createElement('div');
+    degBox.className = 'ad-indegree-box';
+    
+    Object.keys(step.indegree).sort().forEach(char => {
+      const node = document.createElement('div');
+      node.className = 'ad-indegree-node';
+      
+      const count = step.indegree[char];
+      if (count === 0) node.classList.add('zero');
+      if (step.queue.includes(char)) node.classList.add('active-queue');
+      
+      node.innerHTML = `
+        <strong style="font-size:1.1rem; display:block;">${char}</strong>
+        <span style="font-size:0.6rem; color:var(--text-muted);">in-deg: ${count}</span>
+      `;
+      degBox.appendChild(node);
+    });
+    indegreePanel.appendChild(degBox);
+    container.appendChild(indegreePanel);
+    
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'designtwitter') {
+    const container = document.createElement('div');
+    container.className = 'tw-grid-layout';
+    
+    const colTimeline = document.createElement('div');
+    colTimeline.className = 'tw-panel-card';
+    colTimeline.innerHTML = '<h3 class="tw-header">Action Timeline</h3>';
+    
+    const actionTimeline = document.createElement('div');
+    actionTimeline.className = 'tw-action-timeline';
+    
+    visualizerState.rawArray.forEach((act, idx) => {
+      const item = document.createElement('div');
+      item.className = 'tw-action-item';
+      if (step.activeAction && step.activeAction.index === idx) {
+        item.classList.add('active');
+      }
+      item.innerHTML = `<strong>Step ${idx + 1}</strong>: ${act.details}`;
+      actionTimeline.appendChild(item);
+    });
+    colTimeline.appendChild(actionTimeline);
+    container.appendChild(colTimeline);
+    
+    const colFollows = document.createElement('div');
+    colFollows.className = 'tw-panel-card';
+    colFollows.innerHTML = '<h3 class="tw-header">Follow DB Maps</h3>';
+    
+    Object.keys(step.follows).forEach(userId => {
+      const followees = step.follows[userId];
+      const row = document.createElement('div');
+      row.className = 'tw-user-row';
+      row.innerHTML = `
+        <span style="font-weight:bold;">User ${userId}</span>
+        <span style="color:var(--text-muted);">follows [${followees.join(', ')}]</span>
+      `;
+      colFollows.appendChild(row);
+    });
+    container.appendChild(colFollows);
+    
+    const colTweets = document.createElement('div');
+    colTweets.className = 'tw-panel-card';
+    colTweets.innerHTML = '<h3 class="tw-header">Global Tweets DB</h3>';
+    
+    const tweetsList = document.createElement('div');
+    tweetsList.style.display = 'flex';
+    tweetsList.style.flexDirection = 'column';
+    tweetsList.style.gap = '8px';
+    
+    if (step.tweets.length > 0) {
+      step.tweets.forEach(t => {
+        const item = document.createElement('div');
+        item.style.padding = '6px 10px';
+        item.style.background = 'rgba(255,255,255,0.02)';
+        item.style.border = '1px solid var(--border-color)';
+        item.style.borderRadius = '6px';
+        item.style.fontSize = '0.75rem';
+        
+        const highlight = step.activeAction && step.activeAction.type === 'postTweet' && step.activeAction.tweetId === t.tweetId;
+        if (highlight) {
+          item.style.borderColor = 'var(--easy)';
+          item.style.background = 'rgba(16, 185, 129, 0.08)';
+        }
+        
+        item.innerHTML = `<strong>User ${t.userId}</strong>: Tweet #${t.tweetId} <span style="float:right; opacity:0.6;">t=${t.time}</span>`;
+        tweetsList.appendChild(item);
+      });
+    } else {
+      tweetsList.innerHTML = '<div style="color:var(--text-muted); font-size:0.8rem; text-align:center;">No tweets posted.</div>';
+    }
+    colTweets.appendChild(tweetsList);
+    container.appendChild(colTweets);
+    
+    const colFeed = document.createElement('div');
+    colFeed.className = 'tw-panel-card';
+    colFeed.innerHTML = '<h3 class="tw-header">News Feed</h3>';
+    
+    const feedContainer = document.createElement('div');
+    feedContainer.className = 'tw-feed-container';
+    
+    if (step.feed.length > 0) {
+      step.feed.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'tw-tweet-card';
+        
+        const highlight = step.activeAction && step.activeAction.type === 'getNewsFeed';
+        if (highlight) {
+          card.classList.add('highlight');
+        }
+        
+        card.innerHTML = `
+          <div class="tw-avatar">U${t.userId}</div>
+          <div class="tw-tweet-content">
+            <div class="tw-tweet-meta">
+              <span style="font-weight:bold; color:white;">User ${t.userId}</span>
+              <span>t=${t.time}</span>
+            </div>
+            <div class="tw-tweet-body">
+              This is a tweet with ID #${t.tweetId} posted on my timeline feed.
+            </div>
+          </div>
+        `;
+        feedContainer.appendChild(card);
+      });
+    } else {
+      feedContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.8rem; text-align:center; margin-top:20px;">No feed content.</div>';
+    }
+    colFeed.appendChild(feedContainer);
+    container.appendChild(colFeed);
+    
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'serializedeserialize') {
+    const container = document.createElement('div');
+    container.style.width = '100%';
+    
+    const treePanel = document.createElement('div');
+    treePanel.style.position = 'relative';
+    treePanel.style.height = '280px';
+    treePanel.style.width = '100%';
+    
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("style", "width:100%; height:280px; background:rgba(255,255,255,0.01); border:1px solid var(--border-color); border-radius:12px;");
+    
+    step.edges.forEach(e => {
+      const uNode = step.nodes.find(n => n.id === e.u);
+      const vNode = step.nodes.find(n => n.id === e.v);
+      if (uNode && vNode) {
+        const drawEdge = step.phase === 'serialize' || (step.deserializedNodes.includes(e.u) && step.deserializedNodes.includes(e.v));
+        if (drawEdge) {
+          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          line.setAttribute("x1", uNode.x);
+          line.setAttribute("y1", uNode.y);
+          line.setAttribute("x2", vNode.x);
+          line.setAttribute("y2", vNode.y);
+          line.setAttribute("stroke", "var(--border-color)");
+          line.setAttribute("stroke-opacity", "0.4");
+          line.setAttribute("stroke-width", "2");
+          svg.appendChild(line);
+        }
+      }
+    });
+    
+    step.nodes.forEach(n => {
+      const drawNode = step.phase === 'serialize' || step.deserializedNodes.includes(n.id);
+      if (drawNode) {
+        const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", n.x);
+        circle.setAttribute("cy", n.y);
+        circle.setAttribute("r", "18");
+        circle.setAttribute("fill", "rgba(30, 41, 59, 0.95)");
+        circle.setAttribute("stroke", "var(--border-color)");
+        circle.setAttribute("stroke-width", "2");
+        
+        if (step.activeNode === n.val) {
+          circle.setAttribute("stroke", "var(--secondary)");
+          circle.setAttribute("fill", "rgba(236, 72, 153, 0.15)");
+        } else if (step.phase === 'deserialize' && step.deserializedNodes.includes(n.id)) {
+          circle.setAttribute("stroke", "var(--easy)");
+          circle.setAttribute("fill", "rgba(16, 185, 129, 0.15)");
+        }
+        
+        g.appendChild(circle);
+        
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", n.x);
+        text.setAttribute("y", n.y);
+        text.setAttribute("fill", "white");
+        text.setAttribute("font-family", "sans-serif");
+        text.setAttribute("font-size", "12px");
+        text.setAttribute("font-weight", "bold");
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dominant-baseline", "middle");
+        text.textContent = n.val;
+        g.appendChild(text);
+        
+        svg.appendChild(g);
+      }
+    });
+    
+    treePanel.appendChild(svg);
+    container.appendChild(treePanel);
+    
+    const listContainer = document.createElement('div');
+    listContainer.className = 'ser-string-container';
+    
+    step.serializedTokens.forEach((token, idx) => {
+      const box = document.createElement('div');
+      box.className = 'ser-token-box';
+      box.textContent = token;
+      
+      if (token === 'N') box.classList.add('null-token');
+      if (step.phase === 'deserialize' && idx <= step.activeTokenIndex) {
+        box.classList.add('built-token');
+      }
+      if (step.phase === 'deserialize' && idx === step.activeTokenIndex) {
+        box.classList.add('active');
+      }
+      if (step.phase === 'serialize' && idx === step.serializedTokens.length - 1) {
+        box.classList.add('active');
+      }
+      
+      listContainer.appendChild(box);
+    });
+    container.appendChild(listContainer);
+    
     canvas.appendChild(container);
   }
 }
