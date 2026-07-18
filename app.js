@@ -4,13 +4,13 @@
 
 const state = {
   activeTab: 'lobby',
-  streak: 0, 
+  streak: 0,
   points: 0,
   rank: 'Coding Padawan',
   selectedCategory: 'all',
   searchQuery: '',
   difficultyQuery: 'all',
-  
+
   problems: [
     // --- 1. ARRAYS & HASHING ---
     // Sliding Window
@@ -410,14 +410,106 @@ const state = {
     { id: 274, name: "H-Index", difficulty: "medium", topic: "Sorting & Partitioning", subcategory: "Insertion Sort Pattern", acceptance: "38.5%", status: "todo" },
     // --- 19. BIT SHIFT REGISTER PROBLEMS ---
     { id: 201, name: "Bitwise AND of Numbers Range", difficulty: "medium", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "44.6%", status: "todo" },
-    { id: 476, name: "Number Complement", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "67.9%", status: "todo" }
+    { id: 476, name: "Number Complement", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "67.9%", status: "todo" },
 
+    // --- 22. NEW PROBLEMS TO REACH 400 ---
+    // Arrays & Hashing
+    { id: 448, name: "Find All Numbers Disappeared in an Array", difficulty: "easy", topic: "Arrays & Hashing", subcategory: "Hashing / Frequency Maps", acceptance: "60.2%", status: "todo" },
+    { id: 525, name: "Contiguous Array", difficulty: "medium", topic: "Arrays & Hashing", subcategory: "Prefix Sum / Running Sum", acceptance: "47.5%", status: "todo" },
+    { id: 896, name: "Monotonic Array", difficulty: "easy", topic: "Arrays & Hashing", subcategory: "Two Pointers", acceptance: "58.9%", status: "todo" },
+    { id: 1929, name: "Concatenation of Array", difficulty: "easy", topic: "Arrays & Hashing", subcategory: "Hashing / Frequency Maps", acceptance: "89.8%", status: "todo" },
 
+    // Binary Search
+    { id: 278, name: "First Bad Version", difficulty: "easy", topic: "Binary Search", subcategory: "Binary Search", acceptance: "43.8%", status: "todo" },
+    { id: 540, name: "Single Element in a Sorted Array", difficulty: "medium", topic: "Binary Search", subcategory: "Binary Search", acceptance: "58.9%", status: "todo" },
+    { id: 875, name: "Koko Eating Bananas", difficulty: "medium", topic: "Binary Search", subcategory: "Binary Search", acceptance: "49.5%", status: "todo" },
+    { id: 1539, name: "Kth Missing Positive Number", difficulty: "easy", topic: "Binary Search", subcategory: "Binary Search", acceptance: "60.1%", status: "todo" },
 
+    // Linked Lists
+    { id: 61, name: "Rotate List", difficulty: "medium", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "37.2%", status: "todo" },
+    { id: 86, name: "Partition List", difficulty: "medium", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "55.1%", status: "todo" },
+    { id: 328, name: "Odd Even Linked List", difficulty: "medium", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "61.5%", status: "todo" },
+    { id: 707, name: "Design Linked List", difficulty: "medium", topic: "Linked Lists", subcategory: "Linked List Manipulation", acceptance: "27.8%", status: "todo" },
 
+    // Stacks & Queues
+    { id: 394, name: "Decode String", difficulty: "medium", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "58.9%", status: "todo" },
+    { id: 402, name: "Remove K Digits", difficulty: "medium", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "31.4%", status: "todo" },
+    { id: 946, name: "Validate Stack Sequences", difficulty: "medium", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "69.2%", status: "todo" },
+    { id: 1700, name: "Number of Students Unable to Eat Lunch", difficulty: "easy", topic: "Stacks & Queues", subcategory: "Monotonic Stack", acceptance: "77.9%", status: "todo" },
 
+    // Trees & BSTs
+    { id: 110, name: "Balanced Binary Tree", difficulty: "easy", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "50.8%", status: "todo" },
+    { id: 111, name: "Minimum Depth of Binary Tree", difficulty: "easy", topic: "Trees & BSTs", subcategory: "Tree DFS", acceptance: "46.5%", status: "todo" },
+    { id: 199, name: "Binary Tree Right Side View", difficulty: "medium", topic: "Trees & BSTs", subcategory: "Tree DFS", acceptance: "62.9%", status: "todo" },
+    { id: 1008, name: "Construct Binary Search Tree from Preorder Traversal", difficulty: "medium", topic: "Trees & BSTs", subcategory: "BST Problems", acceptance: "81.9%", status: "todo" },
+
+    // Heaps & Intervals
+    { id: 252, name: "Meeting Rooms", difficulty: "easy", topic: "Heaps & Intervals", subcategory: "Intervals", acceptance: "57.9%", status: "todo" },
+    { id: 253, name: "Meeting Rooms II", difficulty: "medium", topic: "Heaps & Intervals", subcategory: "Intervals", acceptance: "50.9%", status: "todo" },
+    { id: 378, name: "Kth Smallest Element in a Sorted Matrix", difficulty: "medium", topic: "Heaps & Intervals", subcategory: "Heap / Top K", acceptance: "62.5%", status: "todo" },
+    { id: 973, name: "K Closest Points to Origin", difficulty: "medium", topic: "Heaps & Intervals", subcategory: "Heap / Top K", acceptance: "66.2%", status: "todo" },
+
+    // Graphs
+    { id: 133, name: "Clone Graph", difficulty: "medium", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "55.8%", status: "todo" },
+    { id: 1791, name: "Find Center of Star Graph", difficulty: "easy", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "84.2%", status: "todo" },
+    { id: 1971, name: "Find if Path Exists in Graph", difficulty: "easy", topic: "Graphs", subcategory: "Union Find / DSU", acceptance: "53.9%", status: "todo" },
+    { id: 997, name: "Find the Town Judge", difficulty: "easy", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "49.5%", status: "todo" },
+
+    // Tries & Bits
+    { id: 231, name: "Power of Two", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "46.5%", status: "todo" },
+    { id: 260, name: "Single Number III", difficulty: "medium", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "68.2%", status: "todo" },
+    { id: 461, name: "Hamming Distance", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "75.2%", status: "todo" },
+    { id: 1356, name: "Sort Integers by The Number of 1 Bits", difficulty: "easy", topic: "Tries & Bits", subcategory: "Bit Manipulation", acceptance: "70.1%", status: "todo" },
+
+    // Dynamic Programming
+    { id: 91, name: "Decode Ways", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "34.5%", status: "todo" },
+    { id: 139, name: "Word Break", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "46.5%", status: "todo" },
+    { id: 221, name: "Maximal Square", difficulty: "medium", topic: "Dynamic Programming", subcategory: "Grid DP", acceptance: "46.0%", status: "todo" },
+    { id: 1137, name: "N-th Tribonacci Number", difficulty: "easy", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "63.9%", status: "todo" },
+
+    // Backtracking & Recursion
+    { id: 47, name: "Permutations II", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "58.9%", status: "todo" },
+    { id: 77, name: "Combinations", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "69.2%", status: "todo" },
+    { id: 131, name: "Palindrome Partitioning", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "67.5%", status: "todo" },
+    { id: 216, name: "Combination Sum III", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "69.1%", status: "todo" },
+
+    // Sorting & Partitioning
+    { id: 75, name: "Sort Colors", difficulty: "medium", topic: "Sorting & Partitioning", subcategory: "Two Pointers Sorting", acceptance: "61.5%", status: "todo" },
+    { id: 905, name: "Sort Array By Parity", difficulty: "easy", topic: "Sorting & Partitioning", subcategory: "Two Pointers Sorting", acceptance: "76.5%", status: "todo" },
+    { id: 1051, name: "Height Checker", difficulty: "easy", topic: "Sorting & Partitioning", subcategory: "Custom Sort", acceptance: "76.2%", status: "todo" },
+    { id: 1122, name: "Relative Sort Array", difficulty: "easy", topic: "Sorting & Partitioning", subcategory: "Custom Sort", acceptance: "70.1%", status: "todo" },
+
+    // Design & Advanced DS
+    { id: 384, name: "Shuffle an Array", difficulty: "medium", topic: "Design & Advanced DS", subcategory: "Cache Design", acceptance: "57.9%", status: "todo" },
+    { id: 622, name: "Design Circular Queue", difficulty: "medium", topic: "Design & Advanced DS", subcategory: "Cache Design", acceptance: "51.5%", status: "todo" },
+    { id: 641, name: "Design Circular Deque", difficulty: "medium", topic: "Design & Advanced DS", subcategory: "Cache Design", acceptance: "61.9%", status: "todo" },
+    { id: 1603, name: "Design Parking System", difficulty: "easy", topic: "Design & Advanced DS", subcategory: "Cache Design", acceptance: "88.5%", status: "todo" },
+
+    // Strings & Pattern Matching
+    { id: 14, name: "Longest Common Prefix", difficulty: "easy", topic: "Strings & Pattern Matching", subcategory: "Rolling Hash / KMP", acceptance: "41.9%", status: "todo" },
+    { id: 28, name: "Find the Index of the First Occurrence in a String", difficulty: "easy", topic: "Strings & Pattern Matching", subcategory: "KMP String Matching", acceptance: "41.8%", status: "todo" },
+    { id: 43, name: "Multiply Strings", difficulty: "medium", topic: "Strings & Pattern Matching", subcategory: "Rolling Hash", acceptance: "39.9%", status: "todo" },
+    { id: 680, name: "Valid Palindrome II", difficulty: "easy", topic: "Strings & Pattern Matching", subcategory: "Rolling Hash", acceptance: "40.2%", status: "todo" },
+
+    // Greedy Algorithms
+    { id: 45, name: "Jump Game II", difficulty: "medium", topic: "Greedy Algorithms", subcategory: "Greedy Scheduling / Sorting", acceptance: "40.2%", status: "todo" },
+    { id: 55, name: "Jump Game", difficulty: "medium", topic: "Greedy Algorithms", subcategory: "Greedy Scheduling / Sorting", acceptance: "38.5%", status: "todo" },
+    { id: 134, name: "Gas Station", difficulty: "medium", topic: "Greedy Algorithms", subcategory: "Greedy Scheduling / Sorting", acceptance: "45.8%", status: "todo" },
+    { id: 406, name: "Queue Reconstruction by Height", difficulty: "medium", topic: "Greedy Algorithms", subcategory: "Greedy Scheduling / Sorting", acceptance: "73.5%", status: "todo" },
+    { id: 605, name: "Can Place Flowers", difficulty: "easy", topic: "Greedy Algorithms", subcategory: "Greedy Scheduling / Sorting", acceptance: "29.9%", status: "todo" },
+    { id: 860, name: "Lemonade Change", difficulty: "easy", topic: "Greedy Algorithms", subcategory: "Greedy Scheduling / Sorting", acceptance: "54.5%", status: "todo" },
+    { id: 1710, name: "Maximum Units on a Truck", difficulty: "easy", topic: "Greedy Algorithms", subcategory: "Greedy Scheduling / Sorting", acceptance: "74.1%", status: "todo" },
+
+    // Math & Geometry
+    { id: 7, name: "Reverse Integer", difficulty: "medium", topic: "Math & Geometry", subcategory: "Bit Manipulation", acceptance: "28.2%", status: "todo" },
+    { id: 9, name: "Palindrome Number", difficulty: "easy", topic: "Math & Geometry", subcategory: "Bit Manipulation", acceptance: "55.2%", status: "todo" },
+    { id: 50, name: "Pow(x, n)", difficulty: "medium", topic: "Math & Geometry", subcategory: "Bit Manipulation", acceptance: "34.9%", status: "todo" },
+    { id: 204, name: "Count Primes", difficulty: "medium", topic: "Math & Geometry", subcategory: "Bit Manipulation", acceptance: "33.2%", status: "todo" },
+    { id: 223, name: "Rectangle Area", difficulty: "medium", topic: "Math & Geometry", subcategory: "Bit Manipulation", acceptance: "45.1%", status: "todo" },
+    { id: 836, name: "Rectangle Overlap", difficulty: "easy", topic: "Math & Geometry", subcategory: "Bit Manipulation", acceptance: "44.5%", status: "todo" },
+    { id: 1281, name: "Subtract the Product and Sum of Digits of an Integer", difficulty: "easy", topic: "Math & Geometry", subcategory: "Bit Manipulation", acceptance: "86.5%", status: "todo" }
   ],
-  
+
   badges: [
     { id: 'first', name: 'First Milestone', desc: 'Solve your first problem', icon: '🚀', check: (probs) => probs.filter(p => p.status === 'done').length >= 1 },
     { id: 'arrays', name: 'Array Tactician', desc: 'Solve 3 Array problems', icon: '⚡', check: (probs) => probs.filter(p => p.topic === 'Arrays & Hashing' && p.status === 'done').length >= 3 },
@@ -428,9 +520,17 @@ const state = {
     { id: 'advanced-ds', name: 'Systems Tactician', desc: 'Solve 2 Advanced DS problems', icon: '🧠', check: (probs) => probs.filter(p => p.topic === 'Design & Advanced DS' && p.status === 'done').length >= 2 },
     { id: 'strings', name: 'Pattern Hunter', desc: 'Solve 2 string-pattern problems', icon: '🔎', check: (probs) => probs.filter(p => p.topic === 'Strings & Pattern Matching' && p.status === 'done').length >= 2 },
     { id: 'streak-badge', name: 'Dedicated Scholar', desc: 'Maintain a 5+ day streak', icon: '🔥', check: () => state.streak >= 5 },
-    { id: 'master', name: 'Algorithm Overlord', desc: 'Solve 15+ roadmap problems', icon: '👑', check: (probs) => probs.filter(p => p.status === 'done').length >= 15 }
+    { id: 'master', name: 'Algorithm Overlord', desc: 'Solve 15+ roadmap problems', icon: '👑', check: (probs) => probs.filter(p => p.status === 'done').length >= 15 },
+    { id: 'greedy', name: 'Greedy Guru', desc: 'Solve 2 Greedy problems', icon: '💰', check: (probs) => probs.filter(p => p.topic === 'Greedy Algorithms' && p.status === 'done').length >= 2 },
+    { id: 'math', name: 'Math Magician', desc: 'Solve 2 Math & Geometry problems', icon: '📐', check: (probs) => probs.filter(p => p.topic === 'Math & Geometry' && p.status === 'done').length >= 2 },
+    { id: 'century', name: 'DSA Century', desc: 'Solve 100+ problems', icon: '💯', check: (probs) => probs.filter(p => p.status === 'done').length >= 100 },
+    { id: 'grandmaster', name: 'DSA Grandmaster', desc: 'Solve 50+ problems', icon: '🏆', check: (probs) => probs.filter(p => p.status === 'done').length >= 50 },
+    { id: 'elitesolver', name: 'Elite Solver', desc: 'Solve 20+ Medium/Hard problems', icon: '⭐', check: (probs) => probs.filter(p => (p.difficulty === 'medium' || p.difficulty === 'hard') && p.status === 'done').length >= 20 },
+    { id: 'hardcore', name: 'Hardcore Champ', desc: 'Solve 5 Hard problems', icon: '💀', check: (probs) => probs.filter(p => p.difficulty === 'hard' && p.status === 'done').length >= 5 },
+    { id: 'consistency', name: 'Consistent Coder', desc: 'Maintain a 15+ day streak', icon: '🐉', check: () => state.streak >= 15 },
+    { id: 'multitasker', name: 'Multi-tasker', desc: 'Solve 3+ problems in 4+ topics', icon: '🧩', check: (probs) => { const solvedPerTopic = {}; probs.filter(p => p.status === 'done').forEach(p => { solvedPerTopic[p.topic] = (solvedPerTopic[p.topic] || 0) + 1; }); return Object.values(solvedPerTopic).filter(count => count >= 3).length >= 4; } }
   ],
-  
+
   activityLog: {}
 };
 
@@ -447,7 +547,9 @@ const DSA_TOPICS = [
   'Backtracking & Recursion',
   'Sorting & Partitioning',
   'Design & Advanced DS',
-  'Strings & Pattern Matching'
+  'Strings & Pattern Matching',
+  'Greedy Algorithms',
+  'Math & Geometry'
 ];
 
 function getUnlockedBadgeIds() {
@@ -484,20 +586,20 @@ function seedActivityData() {
 
 function switchTab(tabId, skipLoad = false) {
   state.activeTab = tabId;
-  
+
   document.querySelectorAll('.page-view').forEach(view => {
     view.classList.remove('active');
   });
-  
+
   const targetView = document.getElementById(`page-${tabId}`);
   if (targetView) targetView.classList.add('active');
-  
+
   document.querySelectorAll('.nav-tab-btn').forEach(btn => {
     btn.classList.remove('active');
   });
   const activeBtn = document.getElementById(`tab-btn-${tabId}`);
   if (activeBtn) activeBtn.classList.add('active');
-  
+
   if (tabId === 'dashboard') {
     renderDashboard();
   } else if (tabId === 'explorer') {
@@ -507,9 +609,9 @@ function switchTab(tabId, skipLoad = false) {
       loadSelectedAlgorithm();
     }
   }
-  
+
   lucide.createIcons();
-  
+
   // Close mobile menu after navigation
   closeMobileMenu();
 }
@@ -522,7 +624,7 @@ function toggleMobileMenu() {
   const menu = document.getElementById('nav-menu');
   const navWrapperTheme = document.querySelector('.nav-wrapper-theme');
   const hamburgerBtn = document.getElementById('hamburger-btn');
-  
+
   if (menu && hamburgerBtn) {
     menu.classList.toggle('active');
     hamburgerBtn.classList.toggle('active');
@@ -537,7 +639,7 @@ function closeMobileMenu() {
   const menu = document.getElementById('nav-menu');
   const navWrapperTheme = document.querySelector('.nav-wrapper-theme');
   const hamburgerBtn = document.getElementById('hamburger-btn');
-  
+
   if (menu && hamburgerBtn) {
     menu.classList.remove('active');
     hamburgerBtn.classList.remove('active');
@@ -569,33 +671,33 @@ function rollAlgoDice() {
   const topicEl = document.getElementById('decider-topic');
   const promptEl = document.getElementById('decider-prompt');
   const btn = document.getElementById('decider-roll-btn');
-  
+
   if (deciderInterval) return;
-  
+
   screen.classList.add('rolling');
   btn.disabled = true;
-  
+
   let count = 0;
   deciderInterval = setInterval(() => {
     const tempTopic = topicsList[Math.floor(Math.random() * topicsList.length)];
-    topicEl.textContent = tempTopic.split(" ")[0]; 
+    topicEl.textContent = tempTopic.split(" ")[0];
     promptEl.textContent = "...rolling the code blocks...";
     count++;
-    
+
     if (count > 12) {
       clearInterval(deciderInterval);
       deciderInterval = null;
       screen.classList.remove('rolling');
       btn.disabled = false;
-      
+
       const finalTopic = topicsList[Math.floor(Math.random() * topicsList.length)];
       const relatedProbs = state.problems.filter(p => p.topic === finalTopic);
       const chosenProb = relatedProbs[Math.floor(Math.random() * relatedProbs.length)] || state.problems[0];
       const randomPrompt = dicePrompts[Math.floor(Math.random() * dicePrompts.length)];
-      
+
       topicEl.textContent = chosenProb.name;
       promptEl.innerHTML = `Pattern: <strong>${chosenProb.subcategory}</strong><br>"${randomPrompt}"`;
-      
+
       const actionSpan = document.createElement('span');
       actionSpan.style.display = 'block';
       actionSpan.style.marginTop = '0.5rem';
@@ -618,12 +720,12 @@ function rollAlgoDice() {
 
 function selectCategory(category, element) {
   state.selectedCategory = category;
-  
+
   document.querySelectorAll('#category-pills .pill-btn').forEach(btn => {
     btn.classList.remove('active');
   });
   element.classList.add('active');
-  
+
   renderProblemsList();
 }
 
@@ -636,37 +738,37 @@ function filterProblems() {
 function renderProblemsList() {
   const tbody = document.getElementById('problems-tbody');
   tbody.innerHTML = '';
-  
+
   const filtered = state.problems.filter(p => {
     const matchesSearch = p.name.toLowerCase().includes(state.searchQuery) || String(p.id).includes(state.searchQuery);
     const matchesDiff = state.difficultyQuery === 'all' || p.difficulty === state.difficultyQuery;
     const matchesCat = state.selectedCategory === 'all' || p.topic === state.selectedCategory;
     return matchesSearch && matchesDiff && matchesCat;
   });
-  
+
   if (filtered.length === 0) {
     tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">No matching problems found. Try another query!</td></tr>`;
     return;
   }
-  
+
   filtered.forEach(p => {
     const tr = document.createElement('tr');
-    
+
     const nameCell = `
       <div class="problem-title-cell">
         <a class="problem-name" onclick="onProblemClick(${p.id})">#${p.id} ${p.name}</a>
         <span class="problem-topic">${p.topic} • ${p.subcategory}</span>
       </div>
     `;
-    
+
     const diffCell = `<span class="difficulty-badge ${p.difficulty}">${p.difficulty}</span>`;
     const acceptCell = `<span style="color: var(--text-muted); font-size: 0.9rem;">${p.acceptance}</span>`;
-    
+
     let statusClass = 'todo';
     let statusLabel = 'Todo';
     if (p.status === 'progress') { statusClass = 'progress'; statusLabel = 'In Progress'; }
     if (p.status === 'done') { statusClass = 'done'; statusLabel = 'Solved'; }
-    
+
     const statusCell = `
       <div style="text-align: right;">
         <div class="status-dropdown">
@@ -689,14 +791,14 @@ function renderProblemsList() {
         </div>
       </div>
     `;
-    
+
     tr.innerHTML = `
       <td>${nameCell}</td>
       <td>${diffCell}</td>
       <td>${acceptCell}</td>
       <td>${statusCell}</td>
     `;
-    
+
     tbody.appendChild(tr);
   });
 }
@@ -706,7 +808,7 @@ function toggleStatusDropdownMenu(event, probId) {
   document.querySelectorAll('.status-options').forEach(el => {
     if (el.id !== `dropdown-opts-${probId}`) el.classList.remove('show');
   });
-  
+
   const el = document.getElementById(`dropdown-opts-${probId}`);
   if (el) el.classList.toggle('show');
 }
@@ -722,10 +824,10 @@ function updateProblemStatus(probId, newStatus) {
   if (prob) {
     const previouslyUnlockedBadges = getUnlockedBadgeIds();
     prob.status = newStatus;
-    
+
     const todayStr = formatDateKey(new Date());
     state.activityLog[todayStr] = state.problems.filter(p => p.status === 'done').length;
-    
+
     calculatePoints();
     renderProblemsList();
     showNotification(`Problem "${prob.name}" marked as ${newStatus.toUpperCase()}`);
@@ -746,9 +848,23 @@ function onProblemClick(probId) {
 
 function loadProblemIntoVisualizer(prob) {
   const selector = document.getElementById('algo-select');
-  
+
   // 1. Fine-grained visualizer routing for the canvas engines
-  if (prob.id === 212 || prob.id === 79) {
+  if (prob.id === 4) {
+    selector.value = 'twoarraybinary';
+  } else if (prob.id === 287) {
+    selector.value = 'arraycycle';
+  } else if (prob.id === 143) {
+    selector.value = 'reorderlist';
+  } else if (prob.id === 124) {
+    selector.value = 'treepathsum';
+  } else if (prob.id === 399) {
+    selector.value = 'equationsolver';
+  } else if (prob.id === 1192) {
+    selector.value = 'tarjanbridge';
+  } else if (prob.id === 39) {
+    selector.value = 'combinationtree';
+  } else if (prob.id === 212 || prob.id === 79) {
     selector.value = 'wordsearch2';
   } else if (prob.id === 22 || prob.id === 17) {
     selector.value = 'generateparentheses';
@@ -777,157 +893,157 @@ function loadProblemIntoVisualizer(prob) {
   } else if (prob.id === 773 || prob.id === 1263 || prob.id === 752 || prob.id === 127) {
     selector.value = 'astar';
   } else
-  if (prob.id === 37 || prob.id === 36 || prob.id === 52 || prob.id === 980) {
-    selector.value = 'sudoku';
-  } else if (prob.id === 51 || prob.subcategory === 'N-Queens Backtracking' || prob.subcategory === 'Backtracking Search') {
-    selector.value = 'backtracking';
-  } else if (prob.id === 460 || prob.subcategory === 'Cache Design') {
-    selector.value = 'lfucache';
-  } else if (prob.id === 146 || prob.subcategory === 'LRU Cache') {
-    selector.value = 'lrucache';
-  } else if (prob.id === 295 || prob.subcategory === 'Two Heaps / Median') {
-    selector.value = 'medianfinder';
-    selector.value = 'medianfinder';
-  } else if (prob.id === 1382 || prob.id === 669 || prob.id === 701 || prob.subcategory === 'BST Rotation / Balance') {
-    selector.value = 'avl';
-  } else if (prob.subcategory === 'Huffman / Greedy Merge' || prob.id === 1167 || prob.id === 871) {
-    selector.value = 'huffman';
-  } else if (prob.id === 307 || prob.id === 315 || prob.id === 308 || prob.subcategory === 'Segment Tree') {
-    selector.value = 'segmenttree';
-  } else if (prob.id === 493 || prob.subcategory === 'Fenwick Tree / Segment Tree') {
-    selector.value = 'fenwick';
-  } else if (prob.id === 28 || prob.id === 214 || prob.id === 459 || prob.subcategory === 'KMP String Matching' || prob.subcategory === 'Rolling Hash / KMP' || prob.subcategory === 'Rolling Hash' || prob.topic === 'Strings & Pattern Matching') {
-    selector.value = 'kmp';
-  } else if (prob.id === 912) {
-    selector.value = 'quicksortfull';
-  } else if (prob.id === 215 || prob.id === 973) {
-    selector.value = 'quicksortfull';
-  } else if (prob.subcategory === 'Quick Sort / Merge Sort' || prob.subcategory === 'Partitioning' || prob.subcategory === 'Custom Sort' || prob.subcategory === 'Merge Sort Pattern' || prob.subcategory === 'Two Pointers Sorting' || prob.topic === 'Sorting & Partitioning') {
-    selector.value = 'quicksort';
-  } else if (prob.id === 239) {
-    selector.value = 'slidingmax';
-  } else if (prob.id === 322) {
-    selector.value = 'coinchange';
-  } else if (prob.id === 1584 || prob.id === 1102 || prob.id === 778) {
-    selector.value = 'prims';
-  } else if (prob.id === 1135 || prob.id === 1168 || prob.id === 1489 || prob.subcategory === 'MST / Graph Greedy') {
-    selector.value = 'kruskal';
-  } else if (prob.id === 1091 || prob.id === 994 || prob.id === 733) {
-    selector.value = 'bfsgrid';
-  } else if (prob.id === 743 || prob.id === 1514 || prob.id === 1631) {
-    selector.value = 'dijkstra';
-  } else if (prob.id === 787) {
-    selector.value = 'bellmanford';
-  } else if (prob.id === 1334) {
-    selector.value = 'floydwarshall';
-  } else if (prob.id === 136 || prob.id === 268 || prob.id === 389) {
-    selector.value = 'singlenumber';
-  } else if (prob.id === 78 || prob.id === 90 || prob.id === 1863) {
-    selector.value = 'bitmasksubsets';
-  } else if (prob.id === 371 || prob.id === 190 || prob.id === 338) {
-    selector.value = 'binaryaddition';
-  } else if (prob.id === 148 || prob.id === 88 || prob.id === 23) {
-    selector.value = 'mergesort';
-  } else if (prob.id === 147 || prob.id === 274) {
-    selector.value = 'insertionsort';
-  } else if (prob.id === 167) {
-    selector.value = 'twoSumII';
-  } else if (prob.id === 142) {
-    selector.value = 'cycleII';
-  } else if (prob.id === 84 || prob.id === 85) {
-    selector.value = 'largestRectangle';
-  } else if (prob.subcategory === 'Trie') {
-    selector.value = 'trie';
-  } else if (prob.id === 72) {
-    selector.value = 'editdistance';
-  } else if (prob.id === 5 || prob.id === 647 || prob.id === 516 || prob.id === 1312) {
-    selector.value = 'palindrome';
-  } else if (prob.subcategory === 'String DP / Sequence DP') {
-    selector.value = 'stringdp';
-  } else if (prob.subcategory === 'Bitmask DP') {
-    selector.value = 'bitmaskdp';
-  } else if (prob.subcategory === 'Strongly Connected Components') {
-    selector.value = 'kosaraju';
-  } else if (prob.subcategory === 'Knapsack / Subset DP') {
-    selector.value = 'knapsack';
-  } else if (prob.subcategory === '1D DP Basics') {
-    selector.value = 'dp1d';
-  } else if (prob.subcategory === 'Prefix Sum / Running Sum') {
-    selector.value = 'prefixsum';
-  } else if (prob.subcategory === 'Difference Array / Range Updates') {
-    selector.value = 'prefixsum';
-  } else if (prob.subcategory === 'Sliding Window') {
-    selector.value = 'window';
-  } else if (prob.subcategory === 'Two Pointers') {
-    selector.value = 'pointer';
-  } else if (prob.subcategory === 'Hashing / Frequency Maps') {
-    selector.value = 'hash';
-  } else if (prob.subcategory === 'Intervals' || prob.subcategory === 'Interval Design') {
-    selector.value = 'intervals';
-  } else if (prob.topic === 'Design & Advanced DS') {
-    selector.value = 'hash';
-  } else if (prob.topic === 'Linked Lists') {
-    // Fast/Slow pointer problems stay on cycle visualizer
-    if (prob.id === 141 || prob.subcategory === 'Fast/Slow Pointers (Linked List)') {
-      selector.value = 'cycle';
+    if (prob.id === 37 || prob.id === 36 || prob.id === 52 || prob.id === 980) {
+      selector.value = 'sudoku';
+    } else if (prob.id === 51 || prob.subcategory === 'N-Queens Backtracking' || prob.subcategory === 'Backtracking Search') {
+      selector.value = 'backtracking';
+    } else if (prob.id === 460 || prob.subcategory === 'Cache Design') {
+      selector.value = 'lfucache';
+    } else if (prob.id === 146 || prob.subcategory === 'LRU Cache') {
+      selector.value = 'lrucache';
+    } else if (prob.id === 295 || prob.subcategory === 'Two Heaps / Median') {
+      selector.value = 'medianfinder';
+      selector.value = 'medianfinder';
+    } else if (prob.id === 1382 || prob.id === 669 || prob.id === 701 || prob.subcategory === 'BST Rotation / Balance') {
+      selector.value = 'avl';
+    } else if (prob.subcategory === 'Huffman / Greedy Merge' || prob.id === 1167 || prob.id === 871) {
+      selector.value = 'huffman';
+    } else if (prob.id === 307 || prob.id === 315 || prob.id === 308 || prob.subcategory === 'Segment Tree') {
+      selector.value = 'segmenttree';
+    } else if (prob.id === 493 || prob.subcategory === 'Fenwick Tree / Segment Tree') {
+      selector.value = 'fenwick';
+    } else if (prob.id === 28 || prob.id === 214 || prob.id === 459 || prob.subcategory === 'KMP String Matching' || prob.subcategory === 'Rolling Hash / KMP' || prob.subcategory === 'Rolling Hash' || prob.topic === 'Strings & Pattern Matching') {
+      selector.value = 'kmp';
+    } else if (prob.id === 912) {
+      selector.value = 'quicksortfull';
+    } else if (prob.id === 215 || prob.id === 973) {
+      selector.value = 'quicksortfull';
+    } else if (prob.subcategory === 'Quick Sort / Merge Sort' || prob.subcategory === 'Partitioning' || prob.subcategory === 'Custom Sort' || prob.subcategory === 'Merge Sort Pattern' || prob.subcategory === 'Two Pointers Sorting' || prob.topic === 'Sorting & Partitioning') {
+      selector.value = 'quicksort';
+    } else if (prob.id === 239) {
+      selector.value = 'slidingmax';
+    } else if (prob.id === 322) {
+      selector.value = 'coinchange';
+    } else if (prob.id === 1584 || prob.id === 1102 || prob.id === 778) {
+      selector.value = 'prims';
+    } else if (prob.id === 1135 || prob.id === 1168 || prob.id === 1489 || prob.subcategory === 'MST / Graph Greedy') {
+      selector.value = 'kruskal';
+    } else if (prob.id === 1091 || prob.id === 994 || prob.id === 733) {
+      selector.value = 'bfsgrid';
+    } else if (prob.id === 743 || prob.id === 1514 || prob.id === 1631) {
+      selector.value = 'dijkstra';
+    } else if (prob.id === 787) {
+      selector.value = 'bellmanford';
+    } else if (prob.id === 1334) {
+      selector.value = 'floydwarshall';
+    } else if (prob.id === 136 || prob.id === 268 || prob.id === 389) {
+      selector.value = 'singlenumber';
+    } else if (prob.id === 78 || prob.id === 90 || prob.id === 1863) {
+      selector.value = 'bitmasksubsets';
+    } else if (prob.id === 371 || prob.id === 190 || prob.id === 338) {
+      selector.value = 'binaryaddition';
+    } else if (prob.id === 148 || prob.id === 88 || prob.id === 23) {
+      selector.value = 'mergesort';
+    } else if (prob.id === 147 || prob.id === 274) {
+      selector.value = 'insertionsort';
+    } else if (prob.id === 167) {
+      selector.value = 'twoSumII';
     } else if (prob.id === 142) {
       selector.value = 'cycleII';
+    } else if (prob.id === 84 || prob.id === 85) {
+      selector.value = 'largestRectangle';
+    } else if (prob.subcategory === 'Trie') {
+      selector.value = 'trie';
+    } else if (prob.id === 72) {
+      selector.value = 'editdistance';
+    } else if (prob.id === 5 || prob.id === 647 || prob.id === 516 || prob.id === 1312) {
+      selector.value = 'palindrome';
+    } else if (prob.subcategory === 'String DP / Sequence DP') {
+      selector.value = 'stringdp';
+    } else if (prob.subcategory === 'Bitmask DP') {
+      selector.value = 'bitmaskdp';
+    } else if (prob.subcategory === 'Strongly Connected Components') {
+      selector.value = 'kosaraju';
+    } else if (prob.subcategory === 'Knapsack / Subset DP') {
+      selector.value = 'knapsack';
+    } else if (prob.subcategory === '1D DP Basics') {
+      selector.value = 'dp1d';
+    } else if (prob.subcategory === 'Prefix Sum / Running Sum') {
+      selector.value = 'prefixsum';
+    } else if (prob.subcategory === 'Difference Array / Range Updates') {
+      selector.value = 'prefixsum';
+    } else if (prob.subcategory === 'Sliding Window') {
+      selector.value = 'window';
+    } else if (prob.subcategory === 'Two Pointers') {
+      selector.value = 'pointer';
+    } else if (prob.subcategory === 'Hashing / Frequency Maps') {
+      selector.value = 'hash';
+    } else if (prob.subcategory === 'Intervals' || prob.subcategory === 'Interval Design') {
+      selector.value = 'intervals';
+    } else if (prob.topic === 'Design & Advanced DS') {
+      selector.value = 'hash';
+    } else if (prob.topic === 'Linked Lists') {
+      // Fast/Slow pointer problems stay on cycle visualizer
+      if (prob.id === 141 || prob.subcategory === 'Fast/Slow Pointers (Linked List)') {
+        selector.value = 'cycle';
+      } else if (prob.id === 142) {
+        selector.value = 'cycleII';
+      } else {
+        // All Linked List Manipulation problems get the new visualizer
+        selector.value = 'linkedlist';
+      }
+    } else if (prob.id === 503 || prob.id === 907 || prob.id === 496 || prob.id === 1019) {
+      selector.value = 'monostack';
+    } else if (prob.subcategory === 'Monotonic Stack') {
+      selector.value = 'stack';
+    } else if (prob.subcategory === 'Monotonic Queue / Deque') {
+      selector.value = 'deque';
+    } else if (prob.subcategory === 'Heap / Top K') {
+      selector.value = 'heap';
+    } else if (prob.subcategory === 'BST Problems') {
+      selector.value = 'avl';
+    } else if (prob.topic === 'Trees & BSTs') {
+      selector.value = 'tree';
+    } else if (prob.subcategory === 'Graph BFS / DFS') {
+      selector.value = 'graph';
+    } else if (prob.id === 207 || prob.id === 210 || prob.id === 802) {
+      selector.value = 'dfs-cycle';
+    } else if (prob.subcategory === 'Topological Sort / DAG') {
+      selector.value = 'toposort';
+    } else if (prob.subcategory === 'Union Find / DSU') {
+      selector.value = 'unionfind';
+    } else if (prob.subcategory === 'Shortest Path') {
+      selector.value = 'dijkstra';
+    } else if (prob.subcategory === 'Grid DP') {
+      selector.value = 'matrix';
+    } else if (prob.subcategory === 'Greedy Scheduling / Sorting') {
+      selector.value = 'greedy';
+    } else if (prob.subcategory === 'Bit Manipulation') {
+      selector.value = 'bits';
+    } else if (prob.topic === 'Binary Search') {
+      selector.value = 'binary';
     } else {
-      // All Linked List Manipulation problems get the new visualizer
-      selector.value = 'linkedlist';
+      selector.value = 'bubble';
     }
-  } else if (prob.id === 503 || prob.id === 907 || prob.id === 496 || prob.id === 1019) {
-    selector.value = 'monostack';
-  } else if (prob.subcategory === 'Monotonic Stack') {
-    selector.value = 'stack';
-  } else if (prob.subcategory === 'Monotonic Queue / Deque') {
-    selector.value = 'deque';
-  } else if (prob.subcategory === 'Heap / Top K') {
-    selector.value = 'heap';
-  } else if (prob.subcategory === 'BST Problems') {
-    selector.value = 'avl';
-  } else if (prob.topic === 'Trees & BSTs') {
-    selector.value = 'tree';
-  } else if (prob.subcategory === 'Graph BFS / DFS') {
-    selector.value = 'graph';
-  } else if (prob.id === 207 || prob.id === 210 || prob.id === 802) {
-    selector.value = 'dfs-cycle';
-  } else if (prob.subcategory === 'Topological Sort / DAG') {
-    selector.value = 'toposort';
-  } else if (prob.subcategory === 'Union Find / DSU') {
-    selector.value = 'unionfind';
-  } else if (prob.subcategory === 'Shortest Path') {
-    selector.value = 'dijkstra';
-  } else if (prob.subcategory === 'Grid DP') {
-    selector.value = 'matrix';
-  } else if (prob.subcategory === 'Greedy Scheduling / Sorting') {
-    selector.value = 'greedy';
-  } else if (prob.subcategory === 'Bit Manipulation') {
-    selector.value = 'bits';
-  } else if (prob.topic === 'Binary Search') {
-    selector.value = 'binary';
-  } else {
-    selector.value = 'bubble';
-  }
-  
+
   visualizerState.algo = selector.value;
   visualizerState.currentProbId = prob.id;
-  
+
   // 2. Update the problem info banner
   updateProblemBanner(prob);
-  
+
   // 3. Generate customized Code Snippet for this problem
   generateSnippetForProblem(prob);
-  
+
   // 3b. Update the logic section
   updateProblemLogicPanel(prob);
-  
+
   // 4. Navigate to visualizer tab
   switchTab('visualizer', true);
-  
+
   // 5. Reset the visualizer steps and render
   resetVisualizer();
-  
+
   appendLog(`[LOAD] Playground: #${prob.id} — "${prob.name}" | Pattern: ${prob.subcategory}`, 'info');
 }
 
@@ -963,7 +1079,7 @@ function generateSnippetForProblem(prob) {
   const editorCode = document.getElementById('code-snippet-box');
   const langLabel = document.getElementById('editor-language');
   langLabel.textContent = 'javascript';
-  
+
   // Priority 1: Specific problem ID overrides
   if (codeTemplates[prob.id]) {
     editorCode.innerHTML = codeTemplates[prob.id];
@@ -974,13 +1090,13 @@ function generateSnippetForProblem(prob) {
     editorCode.innerHTML = codeTemplates[visualizerState.algo];
     return;
   }
-  
+
   // Priority 3: Pattern-level dynamic generation (rich, context-specific skeleton)
   const fn = prob.name
     .replace(/(?:^|\s|-)([a-zA-Z])/g, (_, c) => c.toUpperCase())
     .replace(/[^a-zA-Z0-9]/g, '')
     .replace(/^(.)/, c => c.toLowerCase());
-  
+
   const patternComments = {
     'Sliding Window': '// Use a HashMap/Set + two pointers to maintain window state',
     'Two Pointers': '// Converge left & right pointers based on comparison condition',
@@ -1011,7 +1127,7 @@ function generateSnippetForProblem(prob) {
     'Grid DP': '// dp[i][j] = dp[i-1][j] + dp[i][j-1] (paths) or min/max',
     'String DP / Sequence DP': '// dp[i][j] = LCS(s1[0..i], s2[0..j]); fill 2D table'
   };
-  
+
   const hint = patternComments[prob.subcategory] || `// Pattern: ${prob.subcategory}`;
 
   // Pattern-specific skeleton bodies
@@ -1286,11 +1402,11 @@ const problemLogicDatabase = {
     space: "O(L) — DFS call stack depth.",
     dryrun: {
       testcase: "board = [['A','B'],['C','D']], word = 'ABD'",
-      headers: ["DFS Level","(r, c)","Grid Char","Word Char","Match?"],
+      headers: ["DFS Level", "(r, c)", "Grid Char", "Word Char", "Match?"],
       rows: [
-        ["0","(0,0)","A","A","Match"],
-        ["1","(0,1)","B","B","Match"],
-        ["2","(1,1)","D","D","Match -> Word Found!"]
+        ["0", "(0,0)", "A", "A", "Match"],
+        ["1", "(0,1)", "B", "B", "Match"],
+        ["2", "(1,1)", "D", "D", "Match -> Word Found!"]
       ]
     }
   },
@@ -1301,10 +1417,10 @@ const problemLogicDatabase = {
     space: "O(N) — recursion depth.",
     dryrun: {
       testcase: "digits = '23'",
-      headers: ["Depth","Digit","Options","Path Build","Status"],
+      headers: ["Depth", "Digit", "Options", "Path Build", "Status"],
       rows: [
-        ["0","2","[a,b,c]","'a'","Recurse"],
-        ["1","3","[d,e,f]","'ad'","Leaf -> Added to Result"]
+        ["0", "2", "[a,b,c]", "'a'", "Recurse"],
+        ["1", "3", "[d,e,f]", "'ad'", "Leaf -> Added to Result"]
       ]
     }
   },
@@ -1315,10 +1431,10 @@ const problemLogicDatabase = {
     space: "O(N) — dp array storage.",
     dryrun: {
       testcase: "envelopes = [[5,4],[6,4],[6,7]]",
-      headers: ["Sorted Envelopes","Height LIS array","Decisions","Max Nested"],
+      headers: ["Sorted Envelopes", "Height LIS array", "Decisions", "Max Nested"],
       rows: [
-        ["[5,4], [6,7], [6,4] (w tie h desc)","[]","Process [5,4] -> LIS=[4]","1"],
-        ["-","[4]","Process [6,7] -> LIS=[4,7]","2"]
+        ["[5,4], [6,7], [6,4] (w tie h desc)", "[]", "Process [5,4] -> LIS=[4]", "1"],
+        ["-", "[4]", "Process [6,7] -> LIS=[4,7]", "2"]
       ]
     }
   },
@@ -1329,10 +1445,10 @@ const problemLogicDatabase = {
     space: "O(1) — constant variables.",
     dryrun: {
       testcase: "height = [1,8,6,2,5,4,8,3,7]",
-      headers: ["L","R","h[L]","h[R]","Width","Area","Next Shift"],
+      headers: ["L", "R", "h[L]", "h[R]", "Width", "Area", "Next Shift"],
       rows: [
-        ["0","8","1","7","8","8","L++"],
-        ["1","8","8","7","7","49","R--"]
+        ["0", "8", "1", "7", "8", "8", "L++"],
+        ["1", "8", "8", "7", "7", "49", "R--"]
       ]
     }
   },
@@ -1343,9 +1459,9 @@ const problemLogicDatabase = {
     space: "O(C²) — DP transition table.",
     dryrun: {
       testcase: "cuts = [1,3,4,5], n=7",
-      headers: ["Segment [i, j]","Cuts in range","Optimal partition cut k","Transition Sum","Cost"],
+      headers: ["Segment [i, j]", "Cuts in range", "Optimal partition cut k", "Transition Sum", "Cost"],
       rows: [
-        ["[0, 5]","1, 3, 4","k=3 (cut val 3)","dp[0][3] + dp[3][5]","12"]
+        ["[0, 5]", "1, 3, 4", "k=3 (cut val 3)", "dp[0][3] + dp[3][5]", "12"]
       ]
     }
   },
@@ -1356,10 +1472,10 @@ const problemLogicDatabase = {
     space: "O(1) — 26 lowercase letter hashes.",
     dryrun: {
       testcase: "s1 = 'ab', s2 = 'eidbaooo'",
-      headers: ["L","R","s2[R]","Window Map","s1 Map","Match?"],
+      headers: ["L", "R", "s2[R]", "Window Map", "s1 Map", "Match?"],
       rows: [
-        ["0","1","i","{e:1,i:1}","{a:1,b:1}","No"],
-        ["3","4","a","{d:1,b:1,a:1}","{a:1,b:1}","Yes (at slide 'ba')"]
+        ["0", "1", "i", "{e:1,i:1}", "{a:1,b:1}", "No"],
+        ["3", "4", "a", "{d:1,b:1,a:1}", "{a:1,b:1}", "Yes (at slide 'ba')"]
       ]
     }
   },
@@ -1370,10 +1486,10 @@ const problemLogicDatabase = {
     space: "O(1) — alphabet map size.",
     dryrun: {
       testcase: "s = 'cbaebabacd', p = 'abc'",
-      headers: ["L","R","Added Char","Deleted Char","Window Match?","Indexes Added"],
+      headers: ["L", "R", "Added Char", "Deleted Char", "Window Match?", "Indexes Added"],
       rows: [
-        ["0","2","a","None","Yes ('cba')","[0]"],
-        ["3","5","b","c","No ('bae')","[]"]
+        ["0", "2", "a", "None", "Yes ('cba')", "[0]"],
+        ["3", "5", "b", "c", "No ('bae')", "[]"]
       ]
     }
   },
@@ -1384,10 +1500,10 @@ const problemLogicDatabase = {
     space: "O(N * P) — where P is total paths stored.",
     dryrun: {
       testcase: "begin='hit', end='cog', list=['hot','dot','dog','cog']",
-      headers: ["Queue BFS","Neighbors","Distance Levels","Valid Paths"],
+      headers: ["Queue BFS", "Neighbors", "Distance Levels", "Valid Paths"],
       rows: [
-        ["['hit']","'hot'","{'hit':0, 'hot':1}","[['hit','hot']]"],
-        ["['hot']","'dot'","{'dot':2}","[['hit','hot','dot'...]]"]
+        ["['hit']", "'hot'", "{'hit':0, 'hot':1}", "[['hit','hot']]"],
+        ["['hot']", "'dot'", "{'dot':2}", "[['hit','hot','dot'...]]"]
       ]
     }
   },
@@ -1398,10 +1514,10 @@ const problemLogicDatabase = {
     space: "O(M * N) — recursion stack size.",
     dryrun: {
       testcase: "board = [['X','O'],['X','O']]",
-      headers: ["Border Cell","DFS Mark","Final Pass Grid","Status"],
+      headers: ["Border Cell", "DFS Mark", "Final Pass Grid", "Status"],
       rows: [
-        ["(0,1)","Marked Escaped 'E'","[[X, E], [X, E]]","Unsurrounded"],
-        ["All Cells","Scan","[[X, O], [X, O]]","Complete"]
+        ["(0,1)", "Marked Escaped 'E'", "[[X, E], [X, E]]", "Unsurrounded"],
+        ["All Cells", "Scan", "[[X, O], [X, O]]", "Complete"]
       ]
     }
   },
@@ -1412,10 +1528,10 @@ const problemLogicDatabase = {
     space: "O(V + E) — adjacency graph lists.",
     dryrun: {
       testcase: "numCourses=2, prereqs=[[1,0]]",
-      headers: ["Nodes Queue","Popped Course","Decremented inDegree","Course Count","Cycle status"],
+      headers: ["Nodes Queue", "Popped Course", "Decremented inDegree", "Course Count", "Cycle status"],
       rows: [
-        ["[0]","0","inDeg[1] = 0 -> push","1","Ok"],
-        ["[1]","1","None","2","Ok (2 == 2)"]
+        ["[0]", "0", "inDeg[1] = 0 -> push", "1", "Ok"],
+        ["[1]", "1", "None", "2", "Ok (2 == 2)"]
       ]
     }
   },
@@ -1426,10 +1542,10 @@ const problemLogicDatabase = {
     space: "O(V + E) — queue and result storage.",
     dryrun: {
       testcase: "4 courses, prereqs=[[1,0],[2,0],[3,1]]",
-      headers: ["Queue","Popped","Next InDegree Reduction","Result List"],
+      headers: ["Queue", "Popped", "Next InDegree Reduction", "Result List"],
       rows: [
-        ["[0]","0","inDeg[1]--, inDeg[2]--","[0]"],
-        ["[1,2]","1","inDeg[3]--","[0,1]"]
+        ["[0]", "0", "inDeg[1]--, inDeg[2]--", "[0]"],
+        ["[1,2]", "1", "inDeg[3]--", "[0,1]"]
       ]
     }
   },
@@ -1440,10 +1556,10 @@ const problemLogicDatabase = {
     space: "O(U + T) — user relationships and posts.",
     dryrun: {
       testcase: "postTweet(1, 5), getNewsFeed(1)",
-      headers: ["Operation","Followers","Tweets Database","News Feed Output"],
+      headers: ["Operation", "Followers", "Tweets Database", "News Feed Output"],
       rows: [
-        ["postTweet(1,5)","{1}","[{userId:1, id:5, time:0}]","−"],
-        ["getNewsFeed(1)","{1}","[{userId:1, id:5, time:0}]","[5]"]
+        ["postTweet(1,5)", "{1}", "[{userId:1, id:5, time:0}]", "−"],
+        ["getNewsFeed(1)", "{1}", "[{userId:1, id:5, time:0}]", "[5]"]
       ]
     }
   },
@@ -1454,10 +1570,10 @@ const problemLogicDatabase = {
     space: "O(N) — tree recursion depth stack.",
     dryrun: {
       testcase: "root = [2,1,3]",
-      headers: ["DFS Postorder","Serialized String","Parse Range","Rebuilt Nodes"],
+      headers: ["DFS Postorder", "Serialized String", "Parse Range", "Rebuilt Nodes"],
       rows: [
-        ["1 -> 3 -> 2","'1,3,2'","[-Inf, Inf]","Root 2"],
-        ["-","'1,3'","[2, Inf]","Right child 3"]
+        ["1 -> 3 -> 2", "'1,3,2'", "[-Inf, Inf]", "Root 2"],
+        ["-", "'1,3'", "[2, Inf]", "Right child 3"]
       ]
     }
   },
@@ -2168,7 +2284,7 @@ const problemLogicDatabase = {
       ]
     }
   }
-,
+  ,
   // ===== ADDITIONAL PROBLEM DRY RUNS =====
 
   16: {
@@ -2178,10 +2294,10 @@ const problemLogicDatabase = {
     space: "O(log N) — sorting auxiliary space.",
     dryrun: {
       testcase: "nums = [1,1,1,0], target = 0",
-      headers: ["i","j","Low","High","Sum","Diff","Closest Sum"],
+      headers: ["i", "j", "Low", "High", "Sum", "Diff", "Closest Sum"],
       rows: [
-        ["0","1","2","3","1+1+1+0=3","3","3"],
-        ["0","1","2","3","all combos checked","-","1+1+1+0=3→ best"]
+        ["0", "1", "2", "3", "1+1+1+0=3", "3", "3"],
+        ["0", "1", "2", "3", "all combos checked", "-", "1+1+1+0=3→ best"]
       ]
     }
   },
@@ -2192,12 +2308,12 @@ const problemLogicDatabase = {
     space: "O(log N) — sorting recursion stack.",
     dryrun: {
       testcase: "nums = [1,0,-1,0,-2,2], target = 0",
-      headers: ["i (fixed)","j (fixed)","Low","High","Sum","Action"],
+      headers: ["i (fixed)", "j (fixed)", "Low", "High", "Sum", "Action"],
       rows: [
-        ["Sorted","→","-2,-1,0,0,1,2","-","−","Sort complete"],
-        ["i=-2","j=-1","Low=0","High=2","-2-1+0+2=-1","Sum < 0 → Low++"],
-        ["i=-2","j=-1","Low=1","High=2","-2-1+0+2=−1","Sum<0 → Low++"],
-        ["i=-2","j=0","Low=1","High=2","-2+0+0+2=0","Match! Save [-2,0,0,2]"]
+        ["Sorted", "→", "-2,-1,0,0,1,2", "-", "−", "Sort complete"],
+        ["i=-2", "j=-1", "Low=0", "High=2", "-2-1+0+2=-1", "Sum < 0 → Low++"],
+        ["i=-2", "j=-1", "Low=1", "High=2", "-2-1+0+2=−1", "Sum<0 → Low++"],
+        ["i=-2", "j=0", "Low=1", "High=2", "-2+0+0+2=0", "Match! Save [-2,0,0,2]"]
       ]
     }
   },
@@ -2208,12 +2324,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "1→2→3→4→5, n = 2",
-      headers: ["Step","Fast Pointer","Slow Pointer","Action"],
+      headers: ["Step", "Fast Pointer", "Slow Pointer", "Action"],
       rows: [
-        ["Fast advance n+1","Moves to node 3","dummy (before 1)","Fast 3 ahead"],
-        ["Advance both","Fast=4","Slow=1","Both move"],
-        ["Advance both","Fast=5","Slow=2","Both move"],
-        ["Fast.next=null","null","Slow=3","Slow.next=3.next=5. Node 4 removed."]
+        ["Fast advance n+1", "Moves to node 3", "dummy (before 1)", "Fast 3 ahead"],
+        ["Advance both", "Fast=4", "Slow=1", "Both move"],
+        ["Advance both", "Fast=5", "Slow=2", "Both move"],
+        ["Fast.next=null", "null", "Slow=3", "Slow.next=3.next=5. Node 4 removed."]
       ]
     }
   },
@@ -2224,13 +2340,13 @@ const problemLogicDatabase = {
     space: "O(1) — constant in-place pointer updates.",
     dryrun: {
       testcase: "L1: 1→2→4, L2: 1→3→4",
-      headers: ["Step","L1 Head","L2 Head","Comparison","Merged List So Far"],
+      headers: ["Step", "L1 Head", "L2 Head", "Comparison", "Merged List So Far"],
       rows: [
-        ["1","1","1","1 == 1 → pick L1","1→"],
-        ["2","2","1","1 < 2 → pick L2","1→1→"],
-        ["3","2","3","2 < 3 → pick L1","1→1→2→"],
-        ["4","4","3","3 < 4 → pick L2","1→1→2→3→"],
-        ["5","4","4","4 == 4 → pick L1","1→1→2→3→4→4"]
+        ["1", "1", "1", "1 == 1 → pick L1", "1→"],
+        ["2", "2", "1", "1 < 2 → pick L2", "1→1→"],
+        ["3", "2", "3", "2 < 3 → pick L1", "1→1→2→"],
+        ["4", "4", "3", "3 < 4 → pick L2", "1→1→2→3→"],
+        ["5", "4", "4", "4 == 4 → pick L1", "1→1→2→3→4→4"]
       ]
     }
   },
@@ -2241,13 +2357,13 @@ const problemLogicDatabase = {
     space: "O(K) — heap storage for K list heads.",
     dryrun: {
       testcase: "Lists: [1→4], [1→3], [2→6]",
-      headers: ["Step","Heap State (values)","Popped Node","Result So Far"],
+      headers: ["Step", "Heap State (values)", "Popped Node", "Result So Far"],
       rows: [
-        ["Init","[1,1,2]","−","−"],
-        ["1","[1,2,4]","1 (from L1)","1"],
-        ["2","[2,3,4]","1 (from L2)","1→1"],
-        ["3","[3,4,6]","2 (from L3)","1→1→2"],
-        ["4","[4,6]","3 (from L2)","1→1→2→3"]
+        ["Init", "[1,1,2]", "−", "−"],
+        ["1", "[1,2,4]", "1 (from L1)", "1"],
+        ["2", "[2,3,4]", "1 (from L2)", "1→1"],
+        ["3", "[3,4,6]", "2 (from L3)", "1→1→2"],
+        ["4", "[4,6]", "3 (from L2)", "1→1→2→3"]
       ]
     }
   },
@@ -2258,10 +2374,10 @@ const problemLogicDatabase = {
     space: "O(1) — constant in-place pointer updates.",
     dryrun: {
       testcase: "1→2→3→4",
-      headers: ["Pair","First Node","Second Node","Link Change","Result"],
+      headers: ["Pair", "First Node", "Second Node", "Link Change", "Result"],
       rows: [
-        ["Pair 1","1","2","2.next = 1, 1.next = 3","2→1→3→4"],
-        ["Pair 2","3","4","4.next = 3, 3.next = null","2→1→4→3"]
+        ["Pair 1", "1", "2", "2.next = 1, 1.next = 3", "2→1→3→4"],
+        ["Pair 2", "3", "4", "4.next = 3, 3.next = null", "2→1→4→3"]
       ]
     }
   },
@@ -2272,11 +2388,11 @@ const problemLogicDatabase = {
     space: "O(1) — constant space in-place reversal.",
     dryrun: {
       testcase: "1→2→3→4→5, k = 2",
-      headers: ["Group","Nodes","Reversed","Connected Result"],
+      headers: ["Group", "Nodes", "Reversed", "Connected Result"],
       rows: [
-        ["Group 1","1, 2","2→1","2→1→"],
-        ["Group 2","3, 4","4→3","2→1→4→3→"],
-        ["Group 3","5","5 (< k, unchanged)","2→1→4→3→5"]
+        ["Group 1", "1, 2", "2→1", "2→1→"],
+        ["Group 2", "3, 4", "4→3", "2→1→4→3→"],
+        ["Group 3", "5", "5 (< k, unchanged)", "2→1→4→3→5"]
       ]
     }
   },
@@ -2287,14 +2403,14 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums = [5,7,7,8,8,10], target = 8",
-      headers: ["Search","Low","Mid","High","nums[mid]","Decision","Result"],
+      headers: ["Search", "Low", "Mid", "High", "nums[mid]", "Decision", "Result"],
       rows: [
-        ["First","0","2","5","7","7 < 8 → Low = 3","−"],
-        ["First","3","4","5","8","8 >= 8 → High = 4","−"],
-        ["First","3","3","4","8","8 >= 8 → High = 3","First = 3"],
-        ["Last","0","2","5","7","7 <= 8 → Low = 3","−"],
-        ["Last","3","4","5","8","8 <= 8 → Low = 5","−"],
-        ["Last","5","5","5","10","10 > 8 → High = 4","Last = 4"]
+        ["First", "0", "2", "5", "7", "7 < 8 → Low = 3", "−"],
+        ["First", "3", "4", "5", "8", "8 >= 8 → High = 4", "−"],
+        ["First", "3", "3", "4", "8", "8 >= 8 → High = 3", "First = 3"],
+        ["Last", "0", "2", "5", "7", "7 <= 8 → Low = 3", "−"],
+        ["Last", "3", "4", "5", "8", "8 <= 8 → Low = 5", "−"],
+        ["Last", "5", "5", "5", "10", "10 > 8 → High = 4", "Last = 4"]
       ]
     }
   },
@@ -2305,13 +2421,13 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums = [2,3,1,1,4]",
-      headers: ["i","nums[i]","Farthest Reach","Current Window End","Jumps","Action"],
+      headers: ["i", "nums[i]", "Farthest Reach", "Current Window End", "Jumps", "Action"],
       rows: [
-        ["0","2","0+2=2","0","0","Window ends → Jump! Jumps=1, windowEnd=2"],
-        ["1","3","1+3=4","2","1","Farthest = 4"],
-        ["2","1","2+1=3","2","1","Window ends → Jump! Jumps=2, windowEnd=4"],
-        ["3","1","3+1=4","4","2","Farthest = 4"],
-        ["4","4","4+4=8","4","2","Reached end"]
+        ["0", "2", "0+2=2", "0", "0", "Window ends → Jump! Jumps=1, windowEnd=2"],
+        ["1", "3", "1+3=4", "2", "1", "Farthest = 4"],
+        ["2", "1", "2+1=3", "2", "1", "Window ends → Jump! Jumps=2, windowEnd=4"],
+        ["3", "1", "3+1=4", "4", "2", "Farthest = 4"],
+        ["4", "4", "4+4=8", "4", "2", "Reached end"]
       ]
     }
   },
@@ -2322,14 +2438,14 @@ const problemLogicDatabase = {
     space: "O(N * K) — map stores all words.",
     dryrun: {
       testcase: "words = ['eat','tea','tan','ate','nat','bat']",
-      headers: ["Word","Sorted Key","Map Group Updated","Groups So Far"],
+      headers: ["Word", "Sorted Key", "Map Group Updated", "Groups So Far"],
       rows: [
-        ["eat","aet","{aet: [eat]}","[[eat]]"],
-        ["tea","aet","{aet: [eat,tea]}","[[eat,tea]]"],
-        ["tan","ant","{aet:[eat,tea], ant:[tan]}","[[eat,tea],[tan]]"],
-        ["ate","aet","{aet:[eat,tea,ate]}","[[eat,tea,ate],[tan]]"],
-        ["nat","ant","{ant:[tan,nat]}","[[eat,tea,ate],[tan,nat]]"],
-        ["bat","abt","{abt:[bat]}","[[eat,tea,ate],[tan,nat],[bat]]"]
+        ["eat", "aet", "{aet: [eat]}", "[[eat]]"],
+        ["tea", "aet", "{aet: [eat,tea]}", "[[eat,tea]]"],
+        ["tan", "ant", "{aet:[eat,tea], ant:[tan]}", "[[eat,tea],[tan]]"],
+        ["ate", "aet", "{aet:[eat,tea,ate]}", "[[eat,tea,ate],[tan]]"],
+        ["nat", "ant", "{ant:[tan,nat]}", "[[eat,tea,ate],[tan,nat]]"],
+        ["bat", "abt", "{abt:[bat]}", "[[eat,tea,ate],[tan,nat],[bat]]"]
       ]
     }
   },
@@ -2340,13 +2456,13 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums = [2,3,1,1,4]",
-      headers: ["i","nums[i]","Max Reach","i > maxReach?","Action"],
+      headers: ["i", "nums[i]", "Max Reach", "i > maxReach?", "Action"],
       rows: [
-        ["0","2","max(0, 0+2)=2","No","Continue"],
-        ["1","3","max(2, 1+3)=4","No","Continue"],
-        ["2","1","max(4, 2+1)=4","No","Continue"],
-        ["3","1","max(4, 3+1)=4","No","Continue"],
-        ["4","4","max(4, 4+4)=8","No","Reached end → Return true"]
+        ["0", "2", "max(0, 0+2)=2", "No", "Continue"],
+        ["1", "3", "max(2, 1+3)=4", "No", "Continue"],
+        ["2", "1", "max(4, 2+1)=4", "No", "Continue"],
+        ["3", "1", "max(4, 3+1)=4", "No", "Continue"],
+        ["4", "4", "max(4, 4+4)=8", "No", "Reached end → Return true"]
       ]
     }
   },
@@ -2357,11 +2473,11 @@ const problemLogicDatabase = {
     space: "O(N) — output result list.",
     dryrun: {
       testcase: "intervals = [[1,3],[6,9]], newInterval = [2,5]",
-      headers: ["Step","Current Interval","Overlap With New?","Result State"],
+      headers: ["Step", "Current Interval", "Overlap With New?", "Result State"],
       rows: [
-        ["1","[1,3]","Yes (3 >= 2 and 1 <= 5)","Merge: newInterval = [1,5]"],
-        ["2","[6,9]","No (6 > 5)","Append [1,5] then [6,9]"],
-        ["Final","-","-","[[1,5],[6,9]]"]
+        ["1", "[1,3]", "Yes (3 >= 2 and 1 <= 5)", "Merge: newInterval = [1,5]"],
+        ["2", "[6,9]", "No (6 > 5)", "Append [1,5] then [6,9]"],
+        ["Final", "-", "-", "[[1,5],[6,9]]"]
       ]
     }
   },
@@ -2372,17 +2488,17 @@ const problemLogicDatabase = {
     space: "O(N) — optimized to a single row.",
     dryrun: {
       testcase: "m = 3, n = 3 (3x3 grid)",
-      headers: ["(r,c)","From Above","From Left","dp[r][c]"],
+      headers: ["(r,c)", "From Above", "From Left", "dp[r][c]"],
       rows: [
-        ["(0,0)","−","−","1"],
-        ["(0,1)","−","1","1"],
-        ["(0,2)","−","1","1"],
-        ["(1,0)","1","−","1"],
-        ["(1,1)","1","1","2"],
-        ["(1,2)","1","2","3"],
-        ["(2,0)","1","−","1"],
-        ["(2,1)","1","1","2"],
-        ["(2,2)","3","2","6"]
+        ["(0,0)", "−", "−", "1"],
+        ["(0,1)", "−", "1", "1"],
+        ["(0,2)", "−", "1", "1"],
+        ["(1,0)", "1", "−", "1"],
+        ["(1,1)", "1", "1", "2"],
+        ["(1,2)", "1", "2", "3"],
+        ["(2,0)", "1", "−", "1"],
+        ["(2,1)", "1", "1", "2"],
+        ["(2,2)", "3", "2", "6"]
       ]
     }
   },
@@ -2393,17 +2509,17 @@ const problemLogicDatabase = {
     space: "O(M * N) — dp table.",
     dryrun: {
       testcase: "grid = [[0,0,0],[0,1,0],[0,0,0]]",
-      headers: ["(r,c)","Grid Val","dp[r-1][c]+dp[r][c-1]","dp[r][c]"],
+      headers: ["(r,c)", "Grid Val", "dp[r-1][c]+dp[r][c-1]", "dp[r][c]"],
       rows: [
-        ["(0,0)","0","−","1"],
-        ["(0,1)","0","0+1=1","1"],
-        ["(0,2)","0","1+0=1","1"],
-        ["(1,0)","0","1+0=1","1"],
-        ["(1,1)","1 (blocked)","−","0"],
-        ["(1,2)","0","0+1=1","1"],
-        ["(2,0)","0","1+0=1","1"],
-        ["(2,1)","0","1+1=2","2"],
-        ["(2,2)","0","2+1=3","3"]
+        ["(0,0)", "0", "−", "1"],
+        ["(0,1)", "0", "0+1=1", "1"],
+        ["(0,2)", "0", "1+0=1", "1"],
+        ["(1,0)", "0", "1+0=1", "1"],
+        ["(1,1)", "1 (blocked)", "−", "0"],
+        ["(1,2)", "0", "0+1=1", "1"],
+        ["(2,0)", "0", "1+0=1", "1"],
+        ["(2,1)", "0", "1+1=2", "2"],
+        ["(2,2)", "0", "2+1=3", "3"]
       ]
     }
   },
@@ -2414,17 +2530,17 @@ const problemLogicDatabase = {
     space: "O(1) — modifies grid in-place.",
     dryrun: {
       testcase: "grid = [[1,3,1],[1,5,1],[4,2,1]]",
-      headers: ["(r,c)","grid[r][c]","min(up,left)","dp[r][c]"],
+      headers: ["(r,c)", "grid[r][c]", "min(up,left)", "dp[r][c]"],
       rows: [
-        ["(0,0)","1","−","1"],
-        ["(0,1)","3","left=1","4"],
-        ["(0,2)","1","left=4","5"],
-        ["(1,0)","1","up=1","2"],
-        ["(1,1)","5","min(4,2)=2","7"],
-        ["(1,2)","1","min(7,5)=5","6"],
-        ["(2,0)","4","up=2","6"],
-        ["(2,1)","2","min(6,6)=6","8"],
-        ["(2,2)","1","min(8,6)=6","7"]
+        ["(0,0)", "1", "−", "1"],
+        ["(0,1)", "3", "left=1", "4"],
+        ["(0,2)", "1", "left=4", "5"],
+        ["(1,0)", "1", "up=1", "2"],
+        ["(1,1)", "5", "min(4,2)=2", "7"],
+        ["(1,2)", "1", "min(7,5)=5", "6"],
+        ["(2,0)", "4", "up=2", "6"],
+        ["(2,1)", "2", "min(6,6)=6", "8"],
+        ["(2,2)", "1", "min(8,6)=6", "7"]
       ]
     }
   },
@@ -2435,14 +2551,14 @@ const problemLogicDatabase = {
     space: "O(M * N) — dp table (can optimize to O(N)).",
     dryrun: {
       testcase: "s1 = 'horse', s2 = 'ros'",
-      headers: ["i","j","s1[i-1]","s2[j-1]","Match?","dp[i][j]"],
+      headers: ["i", "j", "s1[i-1]", "s2[j-1]", "Match?", "dp[i][j]"],
       rows: [
-        ["1","1","h","r","No","1+min(dp[0][1]=1,dp[1][0]=1,dp[0][0]=0)=1"],
-        ["1","2","h","o","No","1+min(dp[0][2]=2,dp[1][1]=1,dp[0][1]=1)=2"],
-        ["1","3","h","s","No","1+min(dp[0][3]=3,dp[1][2]=2,dp[0][2]=2)=3"],
-        ["2","1","o","r","No","1+min(dp[1][1]=1,dp[2][0]=2,dp[1][0]=1)=2"],
-        ["2","2","o","o","Yes","dp[1][1]=1"],
-        ["2","3","o","s","No","1+min(dp[1][3]=3,dp[2][2]=1,dp[1][2]=2)=2"]
+        ["1", "1", "h", "r", "No", "1+min(dp[0][1]=1,dp[1][0]=1,dp[0][0]=0)=1"],
+        ["1", "2", "h", "o", "No", "1+min(dp[0][2]=2,dp[1][1]=1,dp[0][1]=1)=2"],
+        ["1", "3", "h", "s", "No", "1+min(dp[0][3]=3,dp[1][2]=2,dp[0][2]=2)=3"],
+        ["2", "1", "o", "r", "No", "1+min(dp[1][1]=1,dp[2][0]=2,dp[1][0]=1)=2"],
+        ["2", "2", "o", "o", "Yes", "dp[1][1]=1"],
+        ["2", "3", "o", "s", "No", "1+min(dp[1][3]=3,dp[2][2]=1,dp[1][2]=2)=2"]
       ]
     }
   },
@@ -2453,10 +2569,10 @@ const problemLogicDatabase = {
     space: "O(N) — heights array and stack.",
     dryrun: {
       testcase: "matrix = [['1','0'],['1','1']]",
-      headers: ["Row i","Heights Array","Max Rectangle Area (Histogram)","Running Max"],
+      headers: ["Row i", "Heights Array", "Max Rectangle Area (Histogram)", "Running Max"],
       rows: [
-        ["0","[1, 0]","Area = 1 (height[0]=1)","1"],
-        ["1","[2, 1]","Area = 2 (height[1]=1, width=2)","2"]
+        ["0", "[1, 0]", "Area = 1 (height[0]=1)", "1"],
+        ["1", "[2, 1]", "Area = 2 (height[1]=1, width=2)", "2"]
       ]
     }
   },
@@ -2467,12 +2583,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant pointer variables.",
     dryrun: {
       testcase: "1→2→3→4→5, left=2, right=4",
-      headers: ["Iteration","curr","next","Action","List State"],
+      headers: ["Iteration", "curr", "next", "Action", "List State"],
       rows: [
-        ["Setup","node 2","node 3","Traverse to left boundary","1→2→3→4→5"],
-        ["1","node 2","node 3","Insert 3 after prev(1)","1→3→2→4→5"],
-        ["2","node 2","node 4","Insert 4 after prev(1)","1→4→3→2→5"],
-        ["Done","-","-","Reversed [2,4]","1→4→3→2→5"]
+        ["Setup", "node 2", "node 3", "Traverse to left boundary", "1→2→3→4→5"],
+        ["1", "node 2", "node 3", "Insert 3 after prev(1)", "1→3→2→4→5"],
+        ["2", "node 2", "node 4", "Insert 4 after prev(1)", "1→4→3→2→5"],
+        ["Done", "-", "-", "Reversed [2,4]", "1→4→3→2→5"]
       ]
     }
   },
@@ -2483,12 +2599,12 @@ const problemLogicDatabase = {
     space: "O(M * N) — dp table.",
     dryrun: {
       testcase: "s1='aab', s2='axy', s3='aaxaby'",
-      headers: ["i","j","s1[i-1]","s2[j-1]","s3[i+j-1]","dp[i][j]"],
+      headers: ["i", "j", "s1[i-1]", "s2[j-1]", "s3[i+j-1]", "dp[i][j]"],
       rows: [
-        ["0","0","−","−","−","true (base)"],
-        ["1","0","a","−","a","a==a && dp[0][0]=true → true"],
-        ["0","1","−","a","a","a==a && dp[0][0]=true → true"],
-        ["1","1","a","a","a","(a==a && dp[0][1]=true) → true"]
+        ["0", "0", "−", "−", "−", "true (base)"],
+        ["1", "0", "a", "−", "a", "a==a && dp[0][0]=true → true"],
+        ["0", "1", "−", "a", "a", "a==a && dp[0][0]=true → true"],
+        ["1", "1", "a", "a", "a", "(a==a && dp[0][1]=true) → true"]
       ]
     }
   },
@@ -2499,12 +2615,12 @@ const problemLogicDatabase = {
     space: "O(H) — recursion stack bounded by tree height H.",
     dryrun: {
       testcase: "BST in-order expected: [1,2,3] but swapped: [3,2,1]",
-      headers: ["Visited Node","prev.val","curr.val","Violation?","first/second Candidates"],
+      headers: ["Visited Node", "prev.val", "curr.val", "Violation?", "first/second Candidates"],
       rows: [
-        ["1st visit","null","3","No","−"],
-        ["2nd visit","3","2","Yes (3>2)","first=3, second=2"],
-        ["3rd visit","2","1","Yes (2>1)","second updated to 1"],
-        ["Fix","-","-","-","Swap 3↔1 → BST fixed"]
+        ["1st visit", "null", "3", "No", "−"],
+        ["2nd visit", "3", "2", "Yes (3>2)", "first=3, second=2"],
+        ["3rd visit", "2", "1", "Yes (2>1)", "second updated to 1"],
+        ["Fix", "-", "-", "-", "Swap 3↔1 → BST fixed"]
       ]
     }
   },
@@ -2515,11 +2631,11 @@ const problemLogicDatabase = {
     space: "O(W) — max width of tree in queue.",
     dryrun: {
       testcase: "[3, 9, 20, null, null, 15, 7]",
-      headers: ["Level","Queue State","Direction","Level Values"],
+      headers: ["Level", "Queue State", "Direction", "Level Values"],
       rows: [
-        ["0 (even)","[3]","Left→Right","[3]"],
-        ["1 (odd)","[9, 20]","Right→Left","[20, 9]"],
-        ["2 (even)","[15, 7]","Left→Right","[15, 7]"]
+        ["0 (even)", "[3]", "Left→Right", "[3]"],
+        ["1 (odd)", "[9, 20]", "Right→Left", "[20, 9]"],
+        ["2 (even)", "[15, 7]", "Left→Right", "[15, 7]"]
       ]
     }
   },
@@ -2530,13 +2646,13 @@ const problemLogicDatabase = {
     space: "O(H) — recursion stack bounded by tree height H.",
     dryrun: {
       testcase: "root = [5,4,8,11,null,null,4,7,2,null,null,null,1], targetSum = 22",
-      headers: ["Node","Remaining Target","At Leaf?","Action"],
+      headers: ["Node", "Remaining Target", "At Leaf?", "Action"],
       rows: [
-        ["5","22","No","Recurse: rem-5=17"],
-        ["4","17","No","Recurse: rem-4=13"],
-        ["11","13","No","Recurse: rem-11=2"],
-        ["7","2","Yes (leaf)","2 != 0 → return false"],
-        ["2","2","Yes (leaf)","2 == 0 → return true!"]
+        ["5", "22", "No", "Recurse: rem-5=17"],
+        ["4", "17", "No", "Recurse: rem-4=13"],
+        ["11", "13", "No", "Recurse: rem-11=2"],
+        ["7", "2", "Yes (leaf)", "2 != 0 → return false"],
+        ["2", "2", "Yes (leaf)", "2 == 0 → return true!"]
       ]
     }
   },
@@ -2547,13 +2663,13 @@ const problemLogicDatabase = {
     space: "O(N) — recursion depth and path storage.",
     dryrun: {
       testcase: "root = [5,4,8,11], target = 22, path: 5→4→11→?",
-      headers: ["Node","Path","Sum So Far","At Leaf?","Action"],
+      headers: ["Node", "Path", "Sum So Far", "At Leaf?", "Action"],
       rows: [
-        ["5","[5]","5","No","Recurse down"],
-        ["4","[5,4]","9","No","Recurse down"],
-        ["11","[5,4,11]","20","No","Recurse down"],
-        ["7","[5,4,11,7]","27","Yes","27 != 22 → pop 7, try next"],
-        ["2","[5,4,11,2]","22","Yes","22 == 22 → save [5,4,11,2]"]
+        ["5", "[5]", "5", "No", "Recurse down"],
+        ["4", "[5,4]", "9", "No", "Recurse down"],
+        ["11", "[5,4,11]", "20", "No", "Recurse down"],
+        ["7", "[5,4,11,7]", "27", "Yes", "27 != 22 → pop 7, try next"],
+        ["2", "[5,4,11,2]", "22", "Yes", "22 == 22 → save [5,4,11,2]"]
       ]
     }
   },
@@ -2564,13 +2680,13 @@ const problemLogicDatabase = {
     space: "O(M * N) — table storage.",
     dryrun: {
       testcase: "s = 'rabbbit', t = 'rabbit'",
-      headers: ["i (s)","j (t)","s[i-1]","t[j-1]","Match?","dp[i][j]"],
+      headers: ["i (s)", "j (t)", "s[i-1]", "t[j-1]", "Match?", "dp[i][j]"],
       rows: [
-        ["1","1","r","r","Yes","dp[0][0]+dp[0][1]=1+0=1"],
-        ["2","1","a","r","No","dp[1][1]=1"],
-        ["2","2","a","a","Yes","dp[1][1]+dp[1][2]=1+0=1"],
-        ["3","2","b","a","No","dp[2][2]=1"],
-        ["3","3","b","b","Yes","dp[2][2]+dp[2][3]=1+0=1"]
+        ["1", "1", "r", "r", "Yes", "dp[0][0]+dp[0][1]=1+0=1"],
+        ["2", "1", "a", "r", "No", "dp[1][1]=1"],
+        ["2", "2", "a", "a", "Yes", "dp[1][1]+dp[1][2]=1+0=1"],
+        ["3", "2", "b", "a", "No", "dp[2][2]=1"],
+        ["3", "3", "b", "b", "Yes", "dp[2][2]+dp[2][3]=1+0=1"]
       ]
     }
   },
@@ -2581,11 +2697,11 @@ const problemLogicDatabase = {
     space: "O(W) — queue width at each level.",
     dryrun: {
       testcase: "Perfect binary tree: [1, 2, 3, 4, 5, 6, 7]",
-      headers: ["Level","Nodes in Level","Next Pointers Set","Result"],
+      headers: ["Level", "Nodes in Level", "Next Pointers Set", "Result"],
       rows: [
-        ["0","[1]","1→null","1→#"],
-        ["1","[2, 3]","2→3→null","2→3→#"],
-        ["2","[4,5,6,7]","4→5→6→7→null","4→5→6→7→#"]
+        ["0", "[1]", "1→null", "1→#"],
+        ["1", "[2, 3]", "2→3→null", "2→3→#"],
+        ["2", "[4,5,6,7]", "4→5→6→7→null", "4→5→6→7→#"]
       ]
     }
   },
@@ -2596,12 +2712,12 @@ const problemLogicDatabase = {
     space: "O(N) — single row optimization.",
     dryrun: {
       testcase: "[[2],[3,4],[6,5,7],[4,1,8,3]]",
-      headers: ["Row (bottom-up)","dp State","Min Path Calculation"],
+      headers: ["Row (bottom-up)", "dp State", "Min Path Calculation"],
       rows: [
-        ["Bottom row","[4,1,8,3]","Base case"],
-        ["Row 2","[6,5,7]","6+min(4,1)=7, 5+min(1,8)=6, 7+min(8,3)=10 → [7,6,10]"],
-        ["Row 1","[3,4]","3+min(7,6)=9, 4+min(6,10)=10 → [9,10]"],
-        ["Root","[2]","2+min(9,10)=11 → Answer: 11"]
+        ["Bottom row", "[4,1,8,3]", "Base case"],
+        ["Row 2", "[6,5,7]", "6+min(4,1)=7, 5+min(1,8)=6, 7+min(8,3)=10 → [7,6,10]"],
+        ["Row 1", "[3,4]", "3+min(7,6)=9, 4+min(6,10)=10 → [9,10]"],
+        ["Root", "[2]", "2+min(9,10)=11 → Answer: 11"]
       ]
     }
   },
@@ -2612,13 +2728,13 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "gas=[1,2,3,4,5], cost=[3,4,5,1,2]",
-      headers: ["Station i","gas[i]","cost[i]","Net Gain","Tank","Action"],
+      headers: ["Station i", "gas[i]", "cost[i]", "Net Gain", "Tank", "Action"],
       rows: [
-        ["0","1","3","-2","0→-2","Tank<0 → Reset, start=1"],
-        ["1","2","4","-2","0→-2","Tank<0 → Reset, start=2"],
-        ["2","3","5","-2","0→-2","Tank<0 → Reset, start=3"],
-        ["3","4","1","3","0→3","OK"],
-        ["4","5","2","3","3→6","OK, start=3 is answer"]
+        ["0", "1", "3", "-2", "0→-2", "Tank<0 → Reset, start=1"],
+        ["1", "2", "4", "-2", "0→-2", "Tank<0 → Reset, start=2"],
+        ["2", "3", "5", "-2", "0→-2", "Tank<0 → Reset, start=3"],
+        ["3", "4", "1", "3", "0→3", "OK"],
+        ["4", "5", "2", "3", "3→6", "OK, start=3 is answer"]
       ]
     }
   },
@@ -2629,12 +2745,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums = [2,2,3,2]",
-      headers: ["Bit Position","nums bit values","Sum of bits","Sum % 3","Bit in result"],
+      headers: ["Bit Position", "nums bit values", "Sum of bits", "Sum % 3", "Bit in result"],
       rows: [
-        ["bit 0 (LSB)","0,0,1,0","1","1","1 (set)"],
-        ["bit 1","1,1,1,1","4","1","1 (set)"],
-        ["bit 2+","0,0,0,0","0","0","0 (not set)"],
-        ["Result","-","binary 11 = 3","-","3"]
+        ["bit 0 (LSB)", "0,0,1,0", "1", "1", "1 (set)"],
+        ["bit 1", "1,1,1,1", "4", "1", "1 (set)"],
+        ["bit 2+", "0,0,0,0", "0", "0", "0 (not set)"],
+        ["Result", "-", "binary 11 = 3", "-", "3"]
       ]
     }
   },
@@ -2645,12 +2761,12 @@ const problemLogicDatabase = {
     space: "O(N) — hash map stores all original-to-clone mappings.",
     dryrun: {
       testcase: "Node1(val=7, random→Node2) → Node2(val=13, random→Node1)",
-      headers: ["Pass","Node","Action","Map State"],
+      headers: ["Pass", "Node", "Action", "Map State"],
       rows: [
-        ["Pass 1","Node1","Create Clone1","Map={Node1:Clone1}"],
-        ["Pass 1","Node2","Create Clone2","Map={Node1:Clone1, Node2:Clone2}"],
-        ["Pass 2","Node1","Clone1.next=Clone2, Clone1.random=Clone2","Linked"],
-        ["Pass 2","Node2","Clone2.next=null, Clone2.random=Clone1","Linked"]
+        ["Pass 1", "Node1", "Create Clone1", "Map={Node1:Clone1}"],
+        ["Pass 1", "Node2", "Create Clone2", "Map={Node1:Clone1, Node2:Clone2}"],
+        ["Pass 2", "Node1", "Clone1.next=Clone2, Clone1.random=Clone2", "Linked"],
+        ["Pass 2", "Node2", "Clone2.next=null, Clone2.random=Clone1", "Linked"]
       ]
     }
   },
@@ -2661,12 +2777,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant pointer usage.",
     dryrun: {
       testcase: "List A: 4→1→8→4→5, List B: 5→6→1→8→4→5 (merge at node 8)",
-      headers: ["Step","Pointer A","Pointer B","Action"],
+      headers: ["Step", "Pointer A", "Pointer B", "Action"],
       rows: [
-        ["1-3","4,1,8","5,6,1","Advance normally"],
-        ["4-6","4,5,null→5","8,4,5","A redirected to headB"],
-        ["7-9","6,1,8","null→4","B redirected to headA"],
-        ["Meet","8","8","pA == pB → Intersection at node 8"]
+        ["1-3", "4,1,8", "5,6,1", "Advance normally"],
+        ["4-6", "4,5,null→5", "8,4,5", "A redirected to headB"],
+        ["7-9", "6,1,8", "null→4", "B redirected to headA"],
+        ["Meet", "8", "8", "pA == pB → Intersection at node 8"]
       ]
     }
   },
@@ -2677,11 +2793,11 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums = [1, 2, 3, 1]",
-      headers: ["Step","Low","Mid","High","nums[mid]","nums[mid+1]","Comparison","Action"],
+      headers: ["Step", "Low", "Mid", "High", "nums[mid]", "nums[mid+1]", "Comparison", "Action"],
       rows: [
-        ["1","0","1","3","2","3","2 < 3","Low = 2"],
-        ["2","2","2","3","3","1","3 > 1","High = 2"],
-        ["Done","2","−","2","−","−","Low==High","Peak at index 2 (value 3)"]
+        ["1", "0", "1", "3", "2", "3", "2 < 3", "Low = 2"],
+        ["2", "2", "2", "3", "3", "1", "3 > 1", "High = 2"],
+        ["Done", "2", "−", "2", "−", "−", "Low==High", "Peak at index 2 (value 3)"]
       ]
     }
   },
@@ -2692,11 +2808,11 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "numbers = [2,7,11,15], target = 9",
-      headers: ["Step","Left","Right","nums[L]","nums[R]","Sum","Action"],
+      headers: ["Step", "Left", "Right", "nums[L]", "nums[R]", "Sum", "Action"],
       rows: [
-        ["1","0","3","2","15","17","17 > 9 → Right--"],
-        ["2","0","2","2","11","13","13 > 9 → Right--"],
-        ["3","0","1","2","7","9","9 == 9 → Return [1,2]"]
+        ["1", "0", "3", "2", "15", "17", "17 > 9 → Right--"],
+        ["2", "0", "2", "2", "11", "13", "13 > 9 → Right--"],
+        ["3", "0", "1", "2", "7", "9", "9 == 9 → Return [1,2]"]
       ]
     }
   },
@@ -2707,13 +2823,13 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "n = 00000010100101000001111010011100 (43261596)",
-      headers: ["Bit Step","n (LSB)","Bit Extracted","Result (binary shift)"],
+      headers: ["Bit Step", "n (LSB)", "Bit Extracted", "Result (binary shift)"],
       rows: [
-        ["1","00..100","0","0"],
-        ["2","...010","0","00"],
-        ["3","...001","1","001"],
-        ["...","...","...","..."],
-        ["32","Done","−","00111001010000001011010010100000 = 964176192"]
+        ["1", "00..100", "0", "0"],
+        ["2", "...010", "0", "00"],
+        ["3", "...001", "1", "001"],
+        ["...", "...", "...", "..."],
+        ["32", "Done", "−", "00111001010000001011010010100000 = 964176192"]
       ]
     }
   },
@@ -2724,12 +2840,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "n = 11 (binary: 1011)",
-      headers: ["Step","n (binary)","n-1 (binary)","n & (n-1)","Count"],
+      headers: ["Step", "n (binary)", "n-1 (binary)", "n & (n-1)", "Count"],
       rows: [
-        ["1","1011","1010","1010","1"],
-        ["2","1010","1001","1000","2"],
-        ["3","1000","0111","0000","3"],
-        ["Done","0000","−","−","Result: 3"]
+        ["1", "1011", "1010", "1010", "1"],
+        ["2", "1010", "1001", "1000", "2"],
+        ["3", "1000", "0111", "0000", "3"],
+        ["Done", "0000", "−", "−", "Result: 3"]
       ]
     }
   },
@@ -2740,11 +2856,11 @@ const problemLogicDatabase = {
     space: "O(W) — queue size equals maximum tree width.",
     dryrun: {
       testcase: "[1, 2, 3, null, 5, null, 4]",
-      headers: ["Level","Queue State","Last Node (Rightmost)","Right View"],
+      headers: ["Level", "Queue State", "Last Node (Rightmost)", "Right View"],
       rows: [
-        ["0","[1]","1","[1]"],
-        ["1","[2, 3]","3","[1, 3]"],
-        ["2","[5, 4]","4","[1, 3, 4]"]
+        ["0", "[1]", "1", "[1]"],
+        ["1", "[2, 3]", "3", "[1, 3]"],
+        ["2", "[5, 4]", "4", "[1, 3, 4]"]
       ]
     }
   },
@@ -2755,16 +2871,16 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums = [2,3,1,2,4,3], target = 7",
-      headers: ["L","R","nums[R]","Window Sum","Sum >= 7?","Min Length","Action"],
+      headers: ["L", "R", "nums[R]", "Window Sum", "Sum >= 7?", "Min Length", "Action"],
       rows: [
-        ["0","0","2","2","No","∞","Expand R"],
-        ["0","1","3","5","No","∞","Expand R"],
-        ["0","2","1","6","No","∞","Expand R"],
-        ["0","3","2","8","Yes","4","Shrink: L++, sum=6"],
-        ["1","3","−","6","No","4","Expand R"],
-        ["1","4","4","10","Yes","4","Shrink → 3"],
-        ["2","4","−","7","Yes","3","Shrink → 3 again"],
-        ["2","5","3","8","Yes","3","Shrink → 4? No, 2 (R-L+1)=4→3"]
+        ["0", "0", "2", "2", "No", "∞", "Expand R"],
+        ["0", "1", "3", "5", "No", "∞", "Expand R"],
+        ["0", "2", "1", "6", "No", "∞", "Expand R"],
+        ["0", "3", "2", "8", "Yes", "4", "Shrink: L++, sum=6"],
+        ["1", "3", "−", "6", "No", "4", "Expand R"],
+        ["1", "4", "4", "10", "Yes", "4", "Shrink → 3"],
+        ["2", "4", "−", "7", "Yes", "3", "Shrink → 3 again"],
+        ["2", "5", "3", "8", "Yes", "3", "Shrink → 4? No, 2 (R-L+1)=4→3"]
       ]
     }
   },
@@ -2775,12 +2891,12 @@ const problemLogicDatabase = {
     space: "O(V + E) — adjacency list and in-degree map.",
     dryrun: {
       testcase: "4 courses, prerequisites = [[1,0],[2,0],[3,1],[3,2]]",
-      headers: ["Step","Queue","Popped","inDegree updates","Order So Far"],
+      headers: ["Step", "Queue", "Popped", "inDegree updates", "Order So Far"],
       rows: [
-        ["1","[0]","0","inDeg[1]--, inDeg[2]--","[0]"],
-        ["2","[1,2]","1","inDeg[3]--","[0,1]"],
-        ["3","[2]","2","inDeg[3]--=0→push","[0,1,2]"],
-        ["4","[3]","3","None","[0,1,2,3]"]
+        ["1", "[0]", "0", "inDeg[1]--, inDeg[2]--", "[0]"],
+        ["2", "[1,2]", "1", "inDeg[3]--", "[0,1]"],
+        ["3", "[2]", "2", "inDeg[3]--=0→push", "[0,1,2]"],
+        ["4", "[3]", "3", "None", "[0,1,2,3]"]
       ]
     }
   },
@@ -2791,11 +2907,11 @@ const problemLogicDatabase = {
     space: "O(S) — trie storage for all inserted words.",
     dryrun: {
       testcase: "addWord('bad'), search('b.d')",
-      headers: ["Char","Node","Match Rule","Children Tried","Result"],
+      headers: ["Char", "Node", "Match Rule", "Children Tried", "Result"],
       rows: [
-        ["'b'","Root","Exact match b","b node found","Advance"],
-        ["'.'","b-node","Wildcard → try all children","Try 'a'","Advance to a-node"],
-        ["'d'","a-node","Exact match d","d node found, isEnd=true","True!"]
+        ["'b'", "Root", "Exact match b", "b node found", "Advance"],
+        ["'.'", "b-node", "Wildcard → try all children", "Try 'a'", "Advance to a-node"],
+        ["'d'", "a-node", "Exact match d", "d node found, isEnd=true", "True!"]
       ]
     }
   },
@@ -2806,13 +2922,13 @@ const problemLogicDatabase = {
     space: "O(W * L) — Trie storage for W words of length L.",
     dryrun: {
       testcase: "board = [['o','a'],['e','t']], words = ['eat']",
-      headers: ["Step","Cell (r,c)","Char","Trie Node","Action"],
+      headers: ["Step", "Cell (r,c)", "Char", "Trie Node", "Action"],
       rows: [
-        ["1","(0,0)","o","Root → no 'o' path","Skip"],
-        ["2","(0,1)","a","Root → no 'a' as start of eat","Skip"],
-        ["3","(1,0)","e","Root → 'e' exists","DFS continues to neighbors"],
-        ["4","(0,0)","a","e-node → 'a' exists","DFS continues"],
-        ["5","(0,1)","t","ea-node → 't' exists, isEnd=true","'eat' found!"]
+        ["1", "(0,0)", "o", "Root → no 'o' path", "Skip"],
+        ["2", "(0,1)", "a", "Root → no 'a' as start of eat", "Skip"],
+        ["3", "(1,0)", "e", "Root → 'e' exists", "DFS continues to neighbors"],
+        ["4", "(0,0)", "a", "e-node → 'a' exists", "DFS continues"],
+        ["5", "(0,1)", "t", "ea-node → 't' exists, isEnd=true", "'eat' found!"]
       ]
     }
   },
@@ -2823,11 +2939,11 @@ const problemLogicDatabase = {
     space: "O(1) — constant variables.",
     dryrun: {
       testcase: "nums = [2,3,2]",
-      headers: ["Subproblem","Houses Considered","Max Robbed","Final Answer"],
+      headers: ["Subproblem", "Houses Considered", "Max Robbed", "Final Answer"],
       rows: [
-        ["Case 1","nums[0..1] = [2,3]","max(2,3)=3","−"],
-        ["Case 2","nums[1..2] = [3,2]","max(3,2)=3","−"],
-        ["Result","-","max(3,3)=3","3"]
+        ["Case 1", "nums[0..1] = [2,3]", "max(2,3)=3", "−"],
+        ["Case 2", "nums[1..2] = [3,2]", "max(3,2)=3", "−"],
+        ["Result", "-", "max(3,3)=3", "3"]
       ]
     }
   },
@@ -2838,14 +2954,14 @@ const problemLogicDatabase = {
     space: "O(M * N) — dp table (can optimize to O(N)).",
     dryrun: {
       testcase: "matrix = [['1','0','1'],['1','1','1'],['1','1','1']]",
-      headers: ["(r,c)","matrix[r][c]","min(up,left,diag)","dp[r][c]","Max Area"],
+      headers: ["(r,c)", "matrix[r][c]", "min(up,left,diag)", "dp[r][c]", "Max Area"],
       rows: [
-        ["(0,0)","1","−","1","1"],
-        ["(0,2)","1","−","1","1"],
-        ["(1,1)","1","min(0,1,0)=0","1","1"],
-        ["(1,2)","1","min(1,1,1)=1","2","4"],
-        ["(2,1)","1","min(1,1,1)=1","2","4"],
-        ["(2,2)","1","min(2,2,1)=1","2","4 (max square = 2×2)"]
+        ["(0,0)", "1", "−", "1", "1"],
+        ["(0,2)", "1", "−", "1", "1"],
+        ["(1,1)", "1", "min(0,1,0)=0", "1", "1"],
+        ["(1,2)", "1", "min(1,1,1)=1", "2", "4"],
+        ["(2,1)", "1", "min(1,1,1)=1", "2", "4"],
+        ["(2,2)", "1", "min(2,2,1)=1", "2", "4 (max square = 2×2)"]
       ]
     }
   },
@@ -2856,11 +2972,11 @@ const problemLogicDatabase = {
     space: "O(1) — constant in-place manipulation.",
     dryrun: {
       testcase: "1→2→2→1",
-      headers: ["Step","Action","Result"],
+      headers: ["Step", "Action", "Result"],
       rows: [
-        ["Find mid","Slow stops at 2 (mid)","List: 1→2 | 2→1"],
-        ["Reverse 2nd half","1→2 becomes reversed to 1→2","2nd half: 1→2"],
-        ["Compare","1==1 ✓, 2==2 ✓","Return true"]
+        ["Find mid", "Slow stops at 2 (mid)", "List: 1→2 | 2→1"],
+        ["Reverse 2nd half", "1→2 becomes reversed to 1→2", "2nd half: 1→2"],
+        ["Compare", "1==1 ✓, 2==2 ✓", "Return true"]
       ]
     }
   },
@@ -2871,9 +2987,9 @@ const problemLogicDatabase = {
     space: "O(H) — recursion stack height.",
     dryrun: {
       testcase: "BST = [6,2,8,0,4], p=2, q=8",
-      headers: ["Node","p=2 position","q=8 position","Decision","Result"],
+      headers: ["Node", "p=2 position", "q=8 position", "Decision", "Result"],
       rows: [
-        ["6","2 < 6 → left","8 > 6 → right","Split! LCA = 6","Return 6"]
+        ["6", "2 < 6 → left", "8 > 6 → right", "Split! LCA = 6", "Return 6"]
       ]
     }
   },
@@ -2884,10 +3000,10 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "intervals = [[0,30],[5,10],[15,20]]",
-      headers: ["After Sort","Interval i","Prev End","Start >= Prev End?","Conflict?"],
+      headers: ["After Sort", "Interval i", "Prev End", "Start >= Prev End?", "Conflict?"],
       rows: [
-        ["Sorted","[0,30]","−","−","First interval"],
-        ["-","[5,10]","30","5 < 30","Yes! Can't attend all. Return false"]
+        ["Sorted", "[0,30]", "−", "−", "First interval"],
+        ["-", "[5,10]", "30", "5 < 30", "Yes! Can't attend all. Return false"]
       ]
     }
   },
@@ -2898,11 +3014,11 @@ const problemLogicDatabase = {
     space: "O(N) — heap stores end times.",
     dryrun: {
       testcase: "intervals = [[0,30],[5,10],[15,20]]",
-      headers: ["Meeting","Start","End","Heap (room end times)","Rooms Used"],
+      headers: ["Meeting", "Start", "End", "Heap (room end times)", "Rooms Used"],
       rows: [
-        ["1","0","30","[30]","1"],
-        ["2","5","10","5 < 30, no free room → [10,30]","2"],
-        ["3","15","20","15 >= 10, reuse → pop 10, push 20 → [20,30]","2"]
+        ["1", "0", "30", "[30]", "1"],
+        ["2", "5", "10", "5 < 30, no free room → [10,30]", "2"],
+        ["3", "15", "20", "15 >= 10, reuse → pop 10, push 20 → [20,30]", "2"]
       ]
     }
   },
@@ -2913,9 +3029,9 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums = [3,0,1]",
-      headers: ["n","Expected Sum n*(n+1)/2","Actual Sum","Missing Number"],
+      headers: ["n", "Expected Sum n*(n+1)/2", "Actual Sum", "Missing Number"],
       rows: [
-        ["3","3*4/2 = 6","3+0+1 = 4","6 - 4 = 2"]
+        ["3", "3*4/2 = 6", "3+0+1 = 4", "6 - 4 = 2"]
       ]
     }
   },
@@ -2926,13 +3042,13 @@ const problemLogicDatabase = {
     space: "O(N) — dp cache array.",
     dryrun: {
       testcase: "n = 12",
-      headers: ["i","Squares tried (j²)","dp[i-j²]+1","dp[i] Optimal"],
+      headers: ["i", "Squares tried (j²)", "dp[i-j²]+1", "dp[i] Optimal"],
       rows: [
-        ["1","1","dp[0]+1=1","1"],
-        ["2","1","dp[1]+1=2","2"],
-        ["3","1","dp[2]+1=3","3"],
-        ["4","1,4","min(dp[3]+1=4, dp[0]+1=1)","1"],
-        ["12","1,4,9","min(dp[11]+1=4, dp[8]+1=2, dp[3]+1=4)","3"]
+        ["1", "1", "dp[0]+1=1", "1"],
+        ["2", "1", "dp[1]+1=2", "2"],
+        ["3", "1", "dp[2]+1=3", "3"],
+        ["4", "1,4", "min(dp[3]+1=4, dp[0]+1=1)", "1"],
+        ["12", "1,4,9", "min(dp[11]+1=4, dp[8]+1=2, dp[3]+1=4)", "3"]
       ]
     }
   },
@@ -2943,12 +3059,12 @@ const problemLogicDatabase = {
     space: "O(N) — prefix sum array.",
     dryrun: {
       testcase: "nums = [-2,0,3,-5,2,-1], query(0,2)",
-      headers: ["Index i","nums[i]","prefix[i+1]","Query(0,2) = prefix[3]-prefix[0]"],
+      headers: ["Index i", "nums[i]", "prefix[i+1]", "Query(0,2) = prefix[3]-prefix[0]"],
       rows: [
-        ["0","-2","-2","−"],
-        ["1","0","-2","−"],
-        ["2","3","1","prefix[3]-prefix[0]=1-0=1"],
-        ["3","-5","-4","−"]
+        ["0", "-2", "-2", "−"],
+        ["1", "0", "-2", "−"],
+        ["2", "3", "1", "prefix[3]-prefix[0]=1-0=1"],
+        ["3", "-5", "-4", "−"]
       ]
     }
   },
@@ -2959,14 +3075,14 @@ const problemLogicDatabase = {
     space: "O(N) — dp array storage.",
     dryrun: {
       testcase: "n = 5 → output [0,1,1,2,1,2]",
-      headers: ["i","Binary","i>>1","i&1","dp[i>>1]","dp[i]"],
+      headers: ["i", "Binary", "i>>1", "i&1", "dp[i>>1]", "dp[i]"],
       rows: [
-        ["0","0","−","−","0","0"],
-        ["1","1","0","1","0","1"],
-        ["2","10","1","0","1","1"],
-        ["3","11","1","1","1","2"],
-        ["4","100","2","0","1","1"],
-        ["5","101","2","1","1","2"]
+        ["0", "0", "−", "−", "0", "0"],
+        ["1", "1", "0", "1", "0", "1"],
+        ["2", "10", "1", "0", "1", "1"],
+        ["3", "11", "1", "1", "1", "2"],
+        ["4", "100", "2", "0", "1", "1"],
+        ["5", "101", "2", "1", "1", "2"]
       ]
     }
   },
@@ -2977,11 +3093,11 @@ const problemLogicDatabase = {
     space: "O(N)",
     dryrun: {
       testcase: "nums = [1,1,1,2,2,3], k = 2",
-      headers: ["Step","Frequency Map","Buckets","Result"],
+      headers: ["Step", "Frequency Map", "Buckets", "Result"],
       rows: [
-        ["1","{1:3,2:2,3:1}","−","−"],
-        ["2","−","bucket[3]=[1],bucket[2]=[2],bucket[1]=[3]","−"],
-        ["3","−","Collect from highest","[1,2]"]
+        ["1", "{1:3,2:2,3:1}", "−", "−"],
+        ["2", "−", "bucket[3]=[1],bucket[2]=[2],bucket[1]=[3]", "−"],
+        ["3", "−", "Collect from highest", "[1,2]"]
       ]
     }
   },
@@ -2992,12 +3108,12 @@ const problemLogicDatabase = {
     space: "O(N) — difference array.",
     dryrun: {
       testcase: "length=5, updates=[[1,3,2],[2,4,3],[0,2,-2]]",
-      headers: ["Update","Start","End","Val","Diff Array After Update"],
+      headers: ["Update", "Start", "End", "Val", "Diff Array After Update"],
       rows: [
-        ["1","1","3","2","[0,2,0,0,-2,0]"],
-        ["2","2","4","3","[0,2,3,0,-2,-3]"],
-        ["3","0","2","-2","[-2,2,3,2,-2,-3]"],
-        ["Prefix Sum","-","-","-","[-2,0,3,5,3]"]
+        ["1", "1", "3", "2", "[0,2,0,0,-2,0]"],
+        ["2", "2", "4", "3", "[0,2,3,0,-2,-3]"],
+        ["3", "0", "2", "-2", "[-2,2,3,2,-2,-3]"],
+        ["Prefix Sum", "-", "-", "-", "[-2,0,3,5,3]"]
       ]
     }
   },
@@ -3008,14 +3124,14 @@ const problemLogicDatabase = {
     space: "O(N) — result list.",
     dryrun: {
       testcase: "people = [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]]",
-      headers: ["Person (sorted)","k (insert at)","Result State"],
+      headers: ["Person (sorted)", "k (insert at)", "Result State"],
       rows: [
-        ["[7,0]","0","[[7,0]]"],
-        ["[7,1]","1","[[7,0],[7,1]]"],
-        ["[6,1]","1","[[7,0],[6,1],[7,1]]"],
-        ["[5,0]","0","[[5,0],[7,0],[6,1],[7,1]]"],
-        ["[5,2]","2","[[5,0],[7,0],[5,2],[6,1],[7,1]]"],
-        ["[4,4]","4","[[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]]"]
+        ["[7,0]", "0", "[[7,0]]"],
+        ["[7,1]", "1", "[[7,0],[7,1]]"],
+        ["[6,1]", "1", "[[7,0],[6,1],[7,1]]"],
+        ["[5,0]", "0", "[[5,0],[7,0],[6,1],[7,1]]"],
+        ["[5,2]", "2", "[[5,0],[7,0],[5,2],[6,1],[7,1]]"],
+        ["[4,4]", "4", "[[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]]"]
       ]
     }
   },
@@ -3026,13 +3142,13 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums=[7,2,5,10,8], m=2",
-      headers: ["Low","High","Mid","Feasible splits?","Action"],
+      headers: ["Low", "High", "Mid", "Feasible splits?", "Action"],
       rows: [
-        ["10","32","21","split [7,2,5]sum=14,split[10,8]=18 → 2 splits ≤ 2","Yes → High=21"],
-        ["10","21","15","[7,2,5]sum=14 ok, [10] → [8] → 3 splits > 2","No → Low=16"],
-        ["16","21","18","[7,2,5]sum=14,[10,8]=18 → 2 splits ≤ 2","Yes → High=18"],
-        ["16","18","17","[7,2,5]=[14 ok],[10]ok,[8]ok → 3 > 2","No → Low=18"],
-        ["18","18","-","Low==High","Answer: 18"]
+        ["10", "32", "21", "split [7,2,5]sum=14,split[10,8]=18 → 2 splits ≤ 2", "Yes → High=21"],
+        ["10", "21", "15", "[7,2,5]sum=14 ok, [10] → [8] → 3 splits > 2", "No → Low=16"],
+        ["16", "21", "18", "[7,2,5]sum=14,[10,8]=18 → 2 splits ≤ 2", "Yes → High=18"],
+        ["16", "18", "17", "[7,2,5]=[14 ok],[10]ok,[8]ok → 3 > 2", "No → Low=18"],
+        ["18", "18", "-", "Low==High", "Answer: 18"]
       ]
     }
   },
@@ -3043,11 +3159,11 @@ const problemLogicDatabase = {
     space: "O(S)",
     dryrun: {
       testcase: "nums=[1,5,11,5], target=11",
-      headers: ["num","j downwards","dp[j-num]","dp[j]"],
+      headers: ["num", "j downwards", "dp[j-num]", "dp[j]"],
       rows: [
-        ["1","j=1 to 11","dp[0]=true","dp[1]=true"],
-        ["5","j=11 to 5","dp[6],dp[1]=true","dp[11]=true? → dp[6]=true,dp[5]=true"],
-        ["11","j=11","dp[0]=true","dp[11]=true → Found!"]
+        ["1", "j=1 to 11", "dp[0]=true", "dp[1]=true"],
+        ["5", "j=11 to 5", "dp[6],dp[1]=true", "dp[11]=true? → dp[6]=true,dp[5]=true"],
+        ["11", "j=11", "dp[0]=true", "dp[11]=true → Found!"]
       ]
     }
   },
@@ -3058,12 +3174,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "intervals = [[1,2],[2,3],[3,4],[1,3]]",
-      headers: ["Sorted Interval","Prev End","Overlap?","Action","Removals"],
+      headers: ["Sorted Interval", "Prev End", "Overlap?", "Action", "Removals"],
       rows: [
-        ["[1,2]","−","No","Keep, prevEnd=2","0"],
-        ["[1,3]","2","Yes (1<2)","Remove [1,3]","1"],
-        ["[2,3]","2","No (2>=2)","Keep, prevEnd=3","1"],
-        ["[3,4]","3","No (3>=3)","Keep, prevEnd=4","1"]
+        ["[1,2]", "−", "No", "Keep, prevEnd=2", "0"],
+        ["[1,3]", "2", "Yes (1<2)", "Remove [1,3]", "1"],
+        ["[2,3]", "2", "No (2>=2)", "Keep, prevEnd=3", "1"],
+        ["[3,4]", "3", "No (3>=3)", "Keep, prevEnd=4", "1"]
       ]
     }
   },
@@ -3074,11 +3190,11 @@ const problemLogicDatabase = {
     space: "O(H) — recursion stack.",
     dryrun: {
       testcase: "BST = [5,3,6,2,4], delete 3",
-      headers: ["Node","Children","Case","Action","Tree After"],
+      headers: ["Node", "Children", "Case", "Action", "Tree After"],
       rows: [
-        ["5","left=3, right=6","Has target in left subtree","Recurse left","−"],
-        ["3","left=2, right=4","Two children","Find in-order successor: min(right)=4","−"],
-        ["Replace","−","-","node.val = 4; delete 4 from right subtree","[5,4,6,2]"]
+        ["5", "left=3, right=6", "Has target in left subtree", "Recurse left", "−"],
+        ["3", "left=2, right=4", "Two children", "Find in-order successor: min(right)=4", "−"],
+        ["Replace", "−", "-", "node.val = 4; delete 4 from right subtree", "[5,4,6,2]"]
       ]
     }
   },
@@ -3089,12 +3205,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "points = [[10,16],[2,8],[1,6],[7,12]]",
-      headers: ["Sorted by End","Arrow At","Burst All Overlapping","Arrows Count"],
+      headers: ["Sorted by End", "Arrow At", "Burst All Overlapping", "Arrows Count"],
       rows: [
-        ["[1,6]","Shoot at 6","Bursts [1,6],[2,8]?(2<=6✓)","1"],
-        ["[2,8]","6 already shot","7 <= 6? No → shoot at 12","2"],
-        ["[7,12]","−","−","Included in arrow at 12"],
-        ["[10,16]","12 → 10<=12? Yes","Burst by arrow at 12","2"]
+        ["[1,6]", "Shoot at 6", "Bursts [1,6],[2,8]?(2<=6✓)", "1"],
+        ["[2,8]", "6 already shot", "7 <= 6? No → shoot at 12", "2"],
+        ["[7,12]", "−", "−", "Included in arrow at 12"],
+        ["[10,16]", "12 → 10<=12? Yes", "Burst by arrow at 12", "2"]
       ]
     }
   },
@@ -3105,12 +3221,12 @@ const problemLogicDatabase = {
     space: "O(M * N) — 2D dp table.",
     dryrun: {
       testcase: "strs=['10','0001','111001','1','0'], m=5, n=3",
-      headers: ["String","Zeros","Ones","dp[5][3] update","Max Strings"],
+      headers: ["String", "Zeros", "Ones", "dp[5][3] update", "Max Strings"],
       rows: [
-        ["'10'","1","1","dp[1][1] = max(0,dp[0][0]+1) = 1","1"],
-        ["'0001'","3","1","dp[4][2] = max(0,dp[1][1]+1) = 2","2"],
-        ["'1'","0","1","dp[1][1] already 1, but dp[5][2]=max(dp[5][1]+1)","3"],
-        ["'0'","1","0","dp[5][3]=max(3,dp[4][3]+1)","4"]
+        ["'10'", "1", "1", "dp[1][1] = max(0,dp[0][0]+1) = 1", "1"],
+        ["'0001'", "3", "1", "dp[4][2] = max(0,dp[1][1]+1) = 2", "2"],
+        ["'1'", "0", "1", "dp[1][1] already 1, but dp[5][2]=max(dp[5][1]+1)", "3"],
+        ["'0'", "1", "0", "dp[5][3]=max(3,dp[4][3]+1)", "4"]
       ]
     }
   },
@@ -3121,13 +3237,13 @@ const problemLogicDatabase = {
     space: "O(Sum) — 1D dp array.",
     dryrun: {
       testcase: "nums=[1,1,1,1,1], target=3, subset sum target=(3+5)/2=4",
-      headers: ["num","j (downward)","dp[j] += dp[j-1]","dp State"],
+      headers: ["num", "j (downward)", "dp[j] += dp[j-1]", "dp State"],
       rows: [
-        ["1 (1st)","j=1","dp[1]+=dp[0]=1","[1,1,0,0,0]"],
-        ["1 (2nd)","j=2,1","dp[2]+=1,dp[1]+=1","[1,2,1,0,0]"],
-        ["1 (3rd)","j=3,2,1","dp[3]+=1,dp[2]+=2,dp[1]+=1","[1,3,3,1,0]"],
-        ["1 (4th)","j=4,3,2,1","dp[4]+=dp[3]=1","[1,4,6,4,1]"],
-        ["1 (5th)","j=4,3,2,1","dp[4]+=dp[3]=4 → 5","dp[4]=5"]
+        ["1 (1st)", "j=1", "dp[1]+=dp[0]=1", "[1,1,0,0,0]"],
+        ["1 (2nd)", "j=2,1", "dp[2]+=1,dp[1]+=1", "[1,2,1,0,0]"],
+        ["1 (3rd)", "j=3,2,1", "dp[3]+=1,dp[2]+=2,dp[1]+=1", "[1,3,3,1,0]"],
+        ["1 (4th)", "j=4,3,2,1", "dp[4]+=dp[3]=1", "[1,4,6,4,1]"],
+        ["1 (5th)", "j=4,3,2,1", "dp[4]+=dp[3]=4 → 5", "dp[4]=5"]
       ]
     }
   },
@@ -3138,13 +3254,13 @@ const problemLogicDatabase = {
     space: "O(N) — map and stack for nums2.",
     dryrun: {
       testcase: "nums1=[4,1,2], nums2=[1,3,4,2]",
-      headers: ["nums2[i]","Stack Before","Popped (NGE found)","Stack After","Map Update"],
+      headers: ["nums2[i]", "Stack Before", "Popped (NGE found)", "Stack After", "Map Update"],
       rows: [
-        ["1","[]","−","[1]","−"],
-        ["3","[1]","1 (3>1)","[3]","map[1]=3"],
-        ["4","[3]","3 (4>3)","[4]","map[3]=4"],
-        ["2","[4]","−","[4,2]","−"],
-        ["Result","-","nums1[4]=map[4]=-1, nums1[1]=map[1]=3, nums1[2]=map[2]=-1","-","[-1,3,-1]"]
+        ["1", "[]", "−", "[1]", "−"],
+        ["3", "[1]", "1 (3>1)", "[3]", "map[1]=3"],
+        ["4", "[3]", "3 (4>3)", "[4]", "map[3]=4"],
+        ["2", "[4]", "−", "[4,2]", "−"],
+        ["Result", "-", "nums1[4]=map[4]=-1, nums1[1]=map[1]=3, nums1[2]=map[2]=-1", "-", "[-1,3,-1]"]
       ]
     }
   },
@@ -3155,15 +3271,15 @@ const problemLogicDatabase = {
     space: "O(N) — stack size.",
     dryrun: {
       testcase: "nums = [1,2,1]",
-      headers: ["i","nums[i%3]","Stack (indices)","Popped + NGE set","result"],
+      headers: ["i", "nums[i%3]", "Stack (indices)", "Popped + NGE set", "result"],
       rows: [
-        ["0","1","[0]","−","[-1,-1,-1]"],
-        ["1","2","[]","pop 0 → result[0]=2","[2,-1,-1]"],
-        ["1 push","−","[1]","−","−"],
-        ["2","1","[1,2]","−","[2,-1,-1]"],
-        ["3","1","[1,2]","−","−"],
-        ["4","2","[1]","pop 2 → result[2]=2","[2,-1,2]"],
-        ["4 push","−","[1,4%3=1]","pop 1 → result[1]=2","[2,2,2]"]
+        ["0", "1", "[0]", "−", "[-1,-1,-1]"],
+        ["1", "2", "[]", "pop 0 → result[0]=2", "[2,-1,-1]"],
+        ["1 push", "−", "[1]", "−", "−"],
+        ["2", "1", "[1,2]", "−", "[2,-1,-1]"],
+        ["3", "1", "[1,2]", "−", "−"],
+        ["4", "2", "[1]", "pop 2 → result[2]=2", "[2,-1,2]"],
+        ["4 push", "−", "[1,4%3=1]", "pop 1 → result[1]=2", "[2,2,2]"]
       ]
     }
   },
@@ -3174,11 +3290,11 @@ const problemLogicDatabase = {
     space: "O(W) — queue stores at most W nodes (max tree width).",
     dryrun: {
       testcase: "[1, 3, 2, 5, 3, null, 9]",
-      headers: ["Level","Nodes in Level","Max Value","Result"],
+      headers: ["Level", "Nodes in Level", "Max Value", "Result"],
       rows: [
-        ["0","[1]","1","[1]"],
-        ["1","[3, 2]","3","[1, 3]"],
-        ["2","[5, 3, 9]","9","[1, 3, 9]"]
+        ["0", "[1]", "1", "[1]"],
+        ["1", "[3, 2]", "3", "[1, 3]"],
+        ["2", "[5, 3, 9]", "9", "[1, 3, 9]"]
       ]
     }
   },
@@ -3189,13 +3305,13 @@ const problemLogicDatabase = {
     space: "O(N) — dp array.",
     dryrun: {
       testcase: "coins=[1,2,5], amount=5",
-      headers: ["Amount i","Coin","dp[i-coin]","dp[i] After"],
+      headers: ["Amount i", "Coin", "dp[i-coin]", "dp[i] After"],
       rows: [
-        ["1","coin=1","dp[0]=1","dp[1]=1"],
-        ["2","coin=1","dp[1]=1","dp[2]=1"],
-        ["2","coin=2","dp[0]=1","dp[2]=2"],
-        ["3","coin=1,2","dp[2]+dp[1]=3","dp[3]=2→3? 1+2=2,3=2+1=3? Let's check: dp[3]=2"],
-        ["5","all coins","dp[4]+dp[3]+dp[0]","dp[5]=4"]
+        ["1", "coin=1", "dp[0]=1", "dp[1]=1"],
+        ["2", "coin=1", "dp[1]=1", "dp[2]=1"],
+        ["2", "coin=2", "dp[0]=1", "dp[2]=2"],
+        ["3", "coin=1,2", "dp[2]+dp[1]=3", "dp[3]=2→3? 1+2=2,3=2+1=3? Let's check: dp[3]=2"],
+        ["5", "all coins", "dp[4]+dp[3]+dp[0]", "dp[5]=4"]
       ]
     }
   },
@@ -3206,12 +3322,12 @@ const problemLogicDatabase = {
     space: "O(K) — map stores at most K remainders.",
     dryrun: {
       testcase: "nums=[23,2,4,6,7], k=6",
-      headers: ["i","nums[i]","Prefix Sum","Rem = sum % 6","Map State","Match?"],
+      headers: ["i", "nums[i]", "Prefix Sum", "Rem = sum % 6", "Map State", "Match?"],
       rows: [
-        ["-1","-","0","0","{0: -1}","−"],
-        ["0","23","23","5","{0:-1, 5:0}","−"],
-        ["1","2","25","1","{0:-1,5:0,1:1}","−"],
-        ["2","4","29","5","Map has 5 at index 0","i-0=2 >= 2 → True!"]
+        ["-1", "-", "0", "0", "{0: -1}", "−"],
+        ["0", "23", "23", "5", "{0:-1, 5:0}", "−"],
+        ["1", "2", "25", "1", "{0:-1,5:0,1:1}", "−"],
+        ["2", "4", "29", "5", "Map has 5 at index 0", "i-0=2 >= 2 → True!"]
       ]
     }
   },
@@ -3222,11 +3338,11 @@ const problemLogicDatabase = {
     space: "O(N) — visited array.",
     dryrun: {
       testcase: "isConnected = [[1,1,0],[1,1,0],[0,0,1]]",
-      headers: ["Node","Visited Before?","DFS Explores","Provinces After"],
+      headers: ["Node", "Visited Before?", "DFS Explores", "Provinces After"],
       rows: [
-        ["0","No","Visits 0,1 (connected)","1"],
-        ["1","Yes (visited)","Skip","1"],
-        ["2","No","Only visits 2","2"]
+        ["0", "No", "Visits 0,1 (connected)", "1"],
+        ["1", "Yes (visited)", "Skip", "1"],
+        ["2", "No", "Only visits 2", "2"]
       ]
     }
   },
@@ -3237,12 +3353,12 @@ const problemLogicDatabase = {
     space: "O(1) — two fixed-size frequency arrays.",
     dryrun: {
       testcase: "s1 = 'ab', s2 = 'eidbaooo'",
-      headers: ["Window in s2","Freq Window","Freq s1","Matches","Valid Permutation?"],
+      headers: ["Window in s2", "Freq Window", "Freq s1", "Matches", "Valid Permutation?"],
       rows: [
-        ["ei","e:1,i:1","a:1,b:1","0","No"],
-        ["id","i:1,d:1","a:1,b:1","0","No"],
-        ["db","d:1,b:1","a:1,b:1","1","No"],
-        ["ba","b:1,a:1","a:1,b:1","2","Yes! Return true"]
+        ["ei", "e:1,i:1", "a:1,b:1", "0", "No"],
+        ["id", "i:1,d:1", "a:1,b:1", "0", "No"],
+        ["db", "d:1,b:1", "a:1,b:1", "1", "No"],
+        ["ba", "b:1,a:1", "a:1,b:1", "2", "Yes! Return true"]
       ]
     }
   },
@@ -3253,10 +3369,10 @@ const problemLogicDatabase = {
     space: "O(M * N) — DP table.",
     dryrun: {
       testcase: "s1 = 'sea', s2 = 'eat'",
-      headers: ["LCS Computation","dp table entry","LCS length","Deletions = 3+3-2*2"],
+      headers: ["LCS Computation", "dp table entry", "LCS length", "Deletions = 3+3-2*2"],
       rows: [
-        ["LCS('sea','eat')","match 'e','a' → LCS=2","2","6-4=2"],
-        ["Result","-","-","Delete 's' from sea, delete 't' from eat → 2"]
+        ["LCS('sea','eat')", "match 'e','a' → LCS=2", "2", "6-4=2"],
+        ["Result", "-", "-", "Delete 's' from sea, delete 't' from eat → 2"]
       ]
     }
   },
@@ -3267,9 +3383,9 @@ const problemLogicDatabase = {
     space: "O(1) — fixed 26-char freq array.",
     dryrun: {
       testcase: "tasks = ['A','A','A','B','B','B'], n = 2",
-      headers: ["maxFreq","maxCount","partCount","partLength","Idles","Result"],
+      headers: ["maxFreq", "maxCount", "partCount", "partLength", "Idles", "Result"],
       rows: [
-        ["3","2 (A and B both freq 3)","2","3","2*(3)-4=2","max(6, 6+2)=8"]
+        ["3", "2 (A and B both freq 3)", "2", "3", "2*(3)-4=2", "max(6, 6+2)=8"]
       ]
     }
   },
@@ -3280,11 +3396,11 @@ const problemLogicDatabase = {
     space: "O(W) — queue at most W nodes wide.",
     dryrun: {
       testcase: "[3, 9, 20, 15, 7]",
-      headers: ["Level","Queue","Sum","Count","Average"],
+      headers: ["Level", "Queue", "Sum", "Count", "Average"],
       rows: [
-        ["0","[3]","3","1","3.0"],
-        ["1","[9, 20]","29","2","14.5"],
-        ["2","[15, 7]","22","2","11.0"]
+        ["0", "[3]", "3", "1", "3.0"],
+        ["1", "[9, 20]", "29", "2", "14.5"],
+        ["2", "[15, 7]", "22", "2", "11.0"]
       ]
     }
   },
@@ -3295,12 +3411,12 @@ const problemLogicDatabase = {
     space: "O(D * L) — Trie storage.",
     dryrun: {
       testcase: "dictionary=['cat','bat','rat'], sentence='the cattle was rattled by the battery'",
-      headers: ["Word","Trie Prefix Search","Shortest Root Found","Replaced With"],
+      headers: ["Word", "Trie Prefix Search", "Shortest Root Found", "Replaced With"],
       rows: [
-        ["the","t → not in trie","None","the"],
-        ["cattle","c → ca → cat (isEnd!)","cat","cat"],
-        ["rattled","r → ra → rat (isEnd!)","rat","rat"],
-        ["battery","b → ba → bat (isEnd!)","bat","bat"]
+        ["the", "t → not in trie", "None", "the"],
+        ["cattle", "c → ca → cat (isEnd!)", "cat", "cat"],
+        ["rattled", "r → ra → rat (isEnd!)", "rat", "rat"],
+        ["battery", "b → ba → bat (isEnd!)", "bat", "bat"]
       ]
     }
   },
@@ -3311,11 +3427,11 @@ const problemLogicDatabase = {
     space: "O(S) — total characters stored in Trie.",
     dryrun: {
       testcase: "insert('apple', 3), insert('app', 2), sum('ap')",
-      headers: ["Operation","Chars Traversed","Nodes Updated","Sum Query Result"],
+      headers: ["Operation", "Chars Traversed", "Nodes Updated", "Sum Query Result"],
       rows: [
-        ["insert apple=3","a,p,p,l,e","Each node += 3","−"],
-        ["insert app=2","a,p,p","Each node += 2","−"],
-        ["sum('ap')","a,p","End at 'p' node","val at p = 3+2+3+2 = 5? → prefix 'ap' sums all words starting with 'ap': 3+2=5"]
+        ["insert apple=3", "a,p,p,l,e", "Each node += 3", "−"],
+        ["insert app=2", "a,p,p", "Each node += 2", "−"],
+        ["sum('ap')", "a,p", "End at 'p' node", "val at p = 3+2+3+2 = 5? → prefix 'ap' sums all words starting with 'ap': 3+2=5"]
       ]
     }
   },
@@ -3326,11 +3442,11 @@ const problemLogicDatabase = {
     space: "O(N) — parent and rank arrays.",
     dryrun: {
       testcase: "edges = [[1,2],[1,3],[2,3]]",
-      headers: ["Edge","Find(u)","Find(v)","Same Component?","Action"],
+      headers: ["Edge", "Find(u)", "Find(v)", "Same Component?", "Action"],
       rows: [
-        ["[1,2]","1","2","No","union(1,2)"],
-        ["[1,3]","1","3","No","union(1,3)"],
-        ["[2,3]","1","1","Yes!","Return [2,3] (redundant edge)"]
+        ["[1,2]", "1", "2", "No", "union(1,2)"],
+        ["[1,3]", "1", "3", "No", "union(1,3)"],
+        ["[2,3]", "1", "1", "Yes!", "Return [2,3] (redundant edge)"]
       ]
     }
   },
@@ -3341,9 +3457,9 @@ const problemLogicDatabase = {
     space: "O(N) — frequency map + heap.",
     dryrun: {
       testcase: "words=['i','love','leetcode','i','love','coding'], k=2",
-      headers: ["Freq Map","Sorted Heap Candidates","Top K Result"],
+      headers: ["Freq Map", "Sorted Heap Candidates", "Top K Result"],
       rows: [
-        ["{i:2,love:2,leetcode:1,coding:1}","(2,i),(2,love),(1,coding),(1,leetcode)","Top 2: [i,love]"]
+        ["{i:2,love:2,leetcode:1,coding:1}", "(2,i),(2,love),(1,coding),(1,leetcode)", "Top 2: [i,love]"]
       ]
     }
   },
@@ -3354,12 +3470,12 @@ const problemLogicDatabase = {
     space: "O(M * N) — recursion stack in worst case.",
     dryrun: {
       testcase: "grid = [[0,0,1],[0,1,1],[0,0,0]]",
-      headers: ["Cell","Grid Val","DFS Triggered?","Area Counted","Max Area"],
+      headers: ["Cell", "Grid Val", "DFS Triggered?", "Area Counted", "Max Area"],
       rows: [
-        ["(0,2)","1","Yes","Start DFS","−"],
-        ["(1,1)","1","From DFS","Continue","−"],
-        ["(1,2)","1","From DFS","End of component","Area=3"],
-        ["All others","0","No","−","Max = 3"]
+        ["(0,2)", "1", "Yes", "Start DFS", "−"],
+        ["(1,1)", "1", "From DFS", "Continue", "−"],
+        ["(1,2)", "1", "From DFS", "End of component", "Area=3"],
+        ["All others", "0", "No", "−", "Max = 3"]
       ]
     }
   },
@@ -3370,10 +3486,10 @@ const problemLogicDatabase = {
     space: "O(H) — recursion depth.",
     dryrun: {
       testcase: "BST = [4,2,7,1,3], val = 2",
-      headers: ["Node","val","Comparison","Direction"],
+      headers: ["Node", "val", "Comparison", "Direction"],
       rows: [
-        ["4","2","2 < 4","Go Left"],
-        ["2","2","2 == 2","Found! Return subtree rooted at 2"]
+        ["4", "2", "2 < 4", "Go Left"],
+        ["2", "2", "2 == 2", "Found! Return subtree rooted at 2"]
       ]
     }
   },
@@ -3384,13 +3500,13 @@ const problemLogicDatabase = {
     space: "O(K) — heap stores K elements.",
     dryrun: {
       testcase: "k=3, nums=[4,5,8,2], then add(3)",
-      headers: ["Operation","Heap State","Size","Action","Kth Largest"],
+      headers: ["Operation", "Heap State", "Size", "Action", "Kth Largest"],
       rows: [
-        ["init [4]","[4]","1","Size < 3, keep","−"],
-        ["init [5]","[4,5]","2","Size < 3, keep","−"],
-        ["init [8]","[4,5,8]","3","Heap full","4"],
-        ["init [2]","[2,4,5,8]","4","Pop min(2)","4"],
-        ["add(3)","[3,4,5,8]","4","Pop min(3) → [4,5,8]","4"]
+        ["init [4]", "[4]", "1", "Size < 3, keep", "−"],
+        ["init [5]", "[4,5]", "2", "Size < 3, keep", "−"],
+        ["init [8]", "[4,5,8]", "3", "Heap full", "4"],
+        ["init [2]", "[2,4,5,8]", "4", "Pop min(2)", "4"],
+        ["add(3)", "[3,4,5,8]", "4", "Pop min(3) → [4,5,8]", "4"]
       ]
     }
   },
@@ -3401,12 +3517,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums = [1,7,3,6,5,6]",
-      headers: ["Index i","nums[i]","leftSum","rightSum (total-L-nums[i])","Match?"],
+      headers: ["Index i", "nums[i]", "leftSum", "rightSum (total-L-nums[i])", "Match?"],
       rows: [
-        ["0","1","0","28-0-1=27","No, L+=1"],
-        ["1","7","1","28-1-7=20","No, L+=7"],
-        ["2","3","8","28-8-3=17","No, L+=3"],
-        ["3","6","11","28-11-6=11","Yes! Return 3"]
+        ["0", "1", "0", "28-0-1=27", "No, L+=1"],
+        ["1", "7", "1", "28-1-7=20", "No, L+=7"],
+        ["2", "3", "8", "28-8-3=17", "No, L+=3"],
+        ["3", "6", "11", "28-11-6=11", "Yes! Return 3"]
       ]
     }
   },
@@ -3417,14 +3533,14 @@ const problemLogicDatabase = {
     space: "O(M * N) — recursion stack.",
     dryrun: {
       testcase: "image = [[1,1,1],[1,1,0],[1,0,1]], sr=1, sc=1, color=2",
-      headers: ["Cell","Original Color","Action","Image After"],
+      headers: ["Cell", "Original Color", "Action", "Image After"],
       rows: [
-        ["(1,1)","1","Change to 2, DFS neighbors","[[1,1,1],[1,2,0],[1,0,1]]"],
-        ["(0,1)","1","Change to 2, DFS neighbors","[[1,2,1],[1,2,0],[1,0,1]]"],
-        ["(0,0)","1","Change to 2","[[2,2,1],...] etc."],
-        ["(1,0)","1","Change to 2","Continue flood"],
-        ["(2,0)","1","Change to 2","Continue"],
-        ["All connected 1s","-","Changed to 2","[[2,2,2],[2,2,0],[2,0,1]]"]
+        ["(1,1)", "1", "Change to 2, DFS neighbors", "[[1,1,1],[1,2,0],[1,0,1]]"],
+        ["(0,1)", "1", "Change to 2, DFS neighbors", "[[1,2,1],[1,2,0],[1,0,1]]"],
+        ["(0,0)", "1", "Change to 2", "[[2,2,1],...] etc."],
+        ["(1,0)", "1", "Change to 2", "Continue flood"],
+        ["(2,0)", "1", "Change to 2", "Continue"],
+        ["All connected 1s", "-", "Changed to 2", "[[2,2,2],[2,2,0],[2,0,1]]"]
       ]
     }
   },
@@ -3435,14 +3551,14 @@ const problemLogicDatabase = {
     space: "O(N) — stack stores pending indices.",
     dryrun: {
       testcase: "temperatures = [73,74,75,71,69,72]",
-      headers: ["i","T[i]","Stack (indices)","Popped + Days Set","Result"],
+      headers: ["i", "T[i]", "Stack (indices)", "Popped + Days Set", "Result"],
       rows: [
-        ["0","73","[0]","−","[0,0,0,0,0,0]"],
-        ["1","74","[1]","0 popped: result[0]=1","[1,0,0,0,0,0]"],
-        ["2","75","[2]","1 popped: result[1]=1","[1,1,0,0,0,0]"],
-        ["3","71","[2,3]","−","[1,1,0,0,0,0]"],
-        ["4","69","[2,3,4]","−","[1,1,0,0,0,0]"],
-        ["5","72","[2,5]","4 popped: result[4]=1, 3 popped: result[3]=2","[1,1,0,2,1,0]"]
+        ["0", "73", "[0]", "−", "[0,0,0,0,0,0]"],
+        ["1", "74", "[1]", "0 popped: result[0]=1", "[1,0,0,0,0,0]"],
+        ["2", "75", "[2]", "1 popped: result[1]=1", "[1,1,0,0,0,0]"],
+        ["3", "71", "[2,3]", "−", "[1,1,0,0,0,0]"],
+        ["4", "69", "[2,3,4]", "−", "[1,1,0,0,0,0]"],
+        ["5", "72", "[2,5]", "4 popped: result[4]=1, 3 popped: result[3]=2", "[1,1,0,2,1,0]"]
       ]
     }
   },
@@ -3453,13 +3569,13 @@ const problemLogicDatabase = {
     space: "O(V + E) — adjacency list and distance array.",
     dryrun: {
       testcase: "times=[[2,1,1],[2,3,1],[3,4,1]], N=4, K=2",
-      headers: ["Heap Pop","Node","Dist","Neighbors","Updates"],
+      headers: ["Heap Pop", "Node", "Dist", "Neighbors", "Updates"],
       rows: [
-        ["(0,2)","2","0","1 via w=1, 3 via w=1","dist[1]=1,dist[3]=1"],
-        ["(1,1)","1","1","No outgoing","Done"],
-        ["(1,3)","3","1","4 via w=1","dist[4]=2"],
-        ["(2,4)","4","2","No outgoing","Done"],
-        ["Max dist","−","max(1,0,1,2)=2","−","Result: 2"]
+        ["(0,2)", "2", "0", "1 via w=1, 3 via w=1", "dist[1]=1,dist[3]=1"],
+        ["(1,1)", "1", "1", "No outgoing", "Done"],
+        ["(1,3)", "3", "1", "4 via w=1", "dist[4]=2"],
+        ["(2,4)", "4", "2", "No outgoing", "Done"],
+        ["Max dist", "−", "max(1,0,1,2)=2", "−", "Result: 2"]
       ]
     }
   },
@@ -3470,16 +3586,16 @@ const problemLogicDatabase = {
     space: "O(1) — fixed 26-char last index map.",
     dryrun: {
       testcase: "s = 'ababcbacadefegdehijhklij'",
-      headers: ["i","s[i]","Last[s[i]]","Boundary (last)","Partition End?","Sizes"],
+      headers: ["i", "s[i]", "Last[s[i]]", "Boundary (last)", "Partition End?", "Sizes"],
       rows: [
-        ["0","a","8","8","No","−"],
-        ["1","b","5","8","No","−"],
-        ["2","a","8","8","No","−"],
-        ["...","...","...","8","...","−"],
-        ["8","a","8","8","Yes! i==8","[9]"],
-        ["9","d","14","14","No","−"],
-        ["14","e","15","15","No","−"],
-        ["15","f","11 < 15","15","Yes! i==15","[9,7]"]
+        ["0", "a", "8", "8", "No", "−"],
+        ["1", "b", "5", "8", "No", "−"],
+        ["2", "a", "8", "8", "No", "−"],
+        ["...", "...", "...", "8", "...", "−"],
+        ["8", "a", "8", "8", "Yes! i==8", "[9]"],
+        ["9", "d", "14", "14", "No", "−"],
+        ["14", "e", "15", "15", "No", "−"],
+        ["15", "f", "11 < 15", "15", "Yes! i==15", "[9,7]"]
       ]
     }
   },
@@ -3490,12 +3606,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "stations=[1,2,3,4,5,6,7,8,9,10], K=9",
-      headers: ["Low","High","Mid","Stations Needed","Feasible?","Action"],
+      headers: ["Low", "High", "Mid", "Stations Needed", "Feasible?", "Action"],
       rows: [
-        ["0","9","4.5","Each gap=1, need 0 extra → 0 stations needed","Yes","High=4.5"],
-        ["0","4.5","2.25","0 needed per gap","Yes","High=2.25"],
-        ["0","2.25","1.125","0 stations per gap (gaps=1, 1/1.125<2)","Yes","High=1.125"],
-        ["0","1.125","0.5625","Each gap=1 needs 1 station → 9 stations = K","Yes → converge","~0.5"]
+        ["0", "9", "4.5", "Each gap=1, need 0 extra → 0 stations needed", "Yes", "High=4.5"],
+        ["0", "4.5", "2.25", "0 needed per gap", "Yes", "High=2.25"],
+        ["0", "2.25", "1.125", "0 stations per gap (gaps=1, 1/1.125<2)", "Yes", "High=1.125"],
+        ["0", "1.125", "0.5625", "Each gap=1 needs 1 station → 9 stations = K", "Yes → converge", "~0.5"]
       ]
     }
   },
@@ -3506,11 +3622,11 @@ const problemLogicDatabase = {
     space: "O(N²) — visited matrix.",
     dryrun: {
       testcase: "grid = [[0,2],[1,3]]",
-      headers: ["Low","High","Mid (water level)","Path (0,0)→(1,1)?","Action"],
+      headers: ["Low", "High", "Mid (water level)", "Path (0,0)→(1,1)?", "Action"],
       rows: [
-        ["0","3","1","grid: 0≤1,1≤1 but 2>1 → blocked","No → Low=2"],
-        ["2","3","2","0≤2, 1≤2 but 3>2 → blocked","No → Low=3"],
-        ["3","3","−","All cells ≤ 3","Yes → answer=3"]
+        ["0", "3", "1", "grid: 0≤1,1≤1 but 2>1 → blocked", "No → Low=2"],
+        ["2", "3", "2", "0≤2, 1≤2 but 3>2 → blocked", "No → Low=3"],
+        ["3", "3", "−", "All cells ≤ 3", "Yes → answer=3"]
       ]
     }
   },
@@ -3521,12 +3637,12 @@ const problemLogicDatabase = {
     space: "O(V) — price arrays.",
     dryrun: {
       testcase: "cities=3, flights=[[0,1,100],[1,2,100],[0,2,500]], src=0, dst=2, K=1",
-      headers: ["Stop","From","To","Price","Cumulative Price to dst","Best Price"],
+      headers: ["Stop", "From", "To", "Price", "Cumulative Price to dst", "Best Price"],
       rows: [
-        ["0 stops","−","−","−","prices=[0,∞,∞]","500 (direct 0→2)"],
-        ["1 stop","0","1","100","prices[1]=100","−"],
-        ["1 stop","0","2","500","prices[2]=500","−"],
-        ["1 stop extended","1","2","200","prices[2]=min(500,200)=200","200 (0→1→2)"]
+        ["0 stops", "−", "−", "−", "prices=[0,∞,∞]", "500 (direct 0→2)"],
+        ["1 stop", "0", "1", "100", "prices[1]=100", "−"],
+        ["1 stop", "0", "2", "500", "prices[2]=500", "−"],
+        ["1 stop extended", "1", "2", "200", "prices[2]=min(500,200)=200", "200 (0→1→2)"]
       ]
     }
   },
@@ -3537,14 +3653,14 @@ const problemLogicDatabase = {
     space: "O(V + E) — reverse adjacency list.",
     dryrun: {
       testcase: "graph = [[1,2],[2,3],[5],[0],[5],[],[]]",
-      headers: ["Node","Out-degree","Terminal?","Becomes Safe?","Reason"],
+      headers: ["Node", "Out-degree", "Terminal?", "Becomes Safe?", "Reason"],
       rows: [
-        ["5","0","Yes (terminal)","Yes","No outgoing edges"],
-        ["6","0","Yes (terminal)","Yes","No outgoing edges"],
-        ["2","1→5","All neighbors safe","Yes","Only goes to safe 5"],
-        ["4","1→5","All neighbors safe","Yes","Only goes to safe 5"],
-        ["1","2→[2,3]","3 has 0→dangerous","No","Has path to cycle"],
-        ["0","2→[1,2]","1 unsafe","No","Has path via 1 to cycle"]
+        ["5", "0", "Yes (terminal)", "Yes", "No outgoing edges"],
+        ["6", "0", "Yes (terminal)", "Yes", "No outgoing edges"],
+        ["2", "1→5", "All neighbors safe", "Yes", "Only goes to safe 5"],
+        ["4", "1→5", "All neighbors safe", "Yes", "Only goes to safe 5"],
+        ["1", "2→[2,3]", "3 has 0→dangerous", "No", "Has path to cycle"],
+        ["0", "2→[1,2]", "1 unsafe", "No", "Has path via 1 to cycle"]
       ]
     }
   },
@@ -3555,12 +3671,12 @@ const problemLogicDatabase = {
     space: "O(N) — deque and prefix sum array.",
     dryrun: {
       testcase: "nums = [2,-1,2], K = 3",
-      headers: ["j","P[j]","Deque State","Check P[j]-P[front]>=K","Answer Update"],
+      headers: ["j", "P[j]", "Deque State", "Check P[j]-P[front]>=K", "Answer Update"],
       rows: [
-        ["0","0","[0]","−","−"],
-        ["1","2","[0,1]","2-0=2 < 3","−"],
-        ["2","1","[0,2]","1-0=1<3; pop 1 (P[2]=1<P[1]=2)","−"],
-        ["3","3","[0,3]","3-0=3>=3 → ans=3-0=3","ans=3"]
+        ["0", "0", "[0]", "−", "−"],
+        ["1", "2", "[0,1]", "2-0=2 < 3", "−"],
+        ["2", "1", "[0,2]", "1-0=1<3; pop 1 (P[2]=1<P[1]=2)", "−"],
+        ["3", "3", "[0,3]", "3-0=3>=3 → ans=3-0=3", "ans=3"]
       ]
     }
   },
@@ -3571,13 +3687,13 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "piles=[3,6,7,11], H=8",
-      headers: ["Low","High","Mid (speed)","Hours Needed","H=8 feasible?","Action"],
+      headers: ["Low", "High", "Mid (speed)", "Hours Needed", "H=8 feasible?", "Action"],
       rows: [
-        ["1","11","6","ceil(3/6)+ceil(6/6)+ceil(7/6)+ceil(11/6)=1+1+2+2=6","Yes","High=6"],
-        ["1","6","3","1+2+3+4=10","No","Low=4"],
-        ["4","6","5","1+2+2+3=8","Yes","High=5"],
-        ["4","5","4","1+2+2+3=8","Yes","High=4"],
-        ["4","4","−","Low==High","Answer: 4","4"]
+        ["1", "11", "6", "ceil(3/6)+ceil(6/6)+ceil(7/6)+ceil(11/6)=1+1+2+2=6", "Yes", "High=6"],
+        ["1", "6", "3", "1+2+3+4=10", "No", "Low=4"],
+        ["4", "6", "5", "1+2+2+3=8", "Yes", "High=5"],
+        ["4", "5", "4", "1+2+2+3=8", "Yes", "High=4"],
+        ["4", "4", "−", "Low==High", "Answer: 4", "4"]
       ]
     }
   },
@@ -3588,12 +3704,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "1→2→3→4→5",
-      headers: ["Step","Slow","Fast","Action"],
+      headers: ["Step", "Slow", "Fast", "Action"],
       rows: [
-        ["0","1","1","Initial"],
-        ["1","2","3","slow.next, fast.next.next"],
-        ["2","3","5","slow.next, fast.next.next"],
-        ["Done","3","5 (fast.next = null)","Return slow = node 3 (middle)"]
+        ["0", "1", "1", "Initial"],
+        ["1", "2", "3", "slow.next, fast.next.next"],
+        ["2", "3", "5", "slow.next, fast.next.next"],
+        ["Done", "3", "5 (fast.next = null)", "Return slow = node 3 (middle)"]
       ]
     }
   },
@@ -3604,12 +3720,12 @@ const problemLogicDatabase = {
     space: "O(N * minProfit) — 2D dp table.",
     dryrun: {
       testcase: "n=5, minProfit=3, group=[2,2], profit=[2,3]",
-      headers: ["Crime","Group Size","Profit","dp State Update"],
+      headers: ["Crime", "Group Size", "Profit", "dp State Update"],
       rows: [
-        ["Init","−","−","dp[0][0]=1 (empty scheme)"],
-        ["Crime 1","2","2","For j=5→2, k=3→0: dp[j][k] += dp[j-2][max(0,k-2)]"],
-        ["Crime 2","2","3","For j=5→2, k=3→0: dp[j][k] += dp[j-2][max(0,k-3)]"],
-        ["Result","-","Sum dp[j][minProfit] for all j","Count of valid schemes"]
+        ["Init", "−", "−", "dp[0][0]=1 (empty scheme)"],
+        ["Crime 1", "2", "2", "For j=5→2, k=3→0: dp[j][k] += dp[j-2][max(0,k-2)]"],
+        ["Crime 2", "2", "3", "For j=5→2, k=3→0: dp[j][k] += dp[j-2][max(0,k-3)]"],
+        ["Result", "-", "Sum dp[j][minProfit] for all j", "Count of valid schemes"]
       ]
     }
   },
@@ -3620,15 +3736,15 @@ const problemLogicDatabase = {
     space: "O(N) — stack storage.",
     dryrun: {
       testcase: "prices sequence: 100, 80, 60, 70, 60, 75, 85",
-      headers: ["Price","Stack Before","Popped (span)","Stack After","Span"],
+      headers: ["Price", "Stack Before", "Popped (span)", "Stack After", "Span"],
       rows: [
-        ["100","[]","−","[(100,1)]","1"],
-        ["80","[(100,1)]","−","[(100,1),(80,1)]","1"],
-        ["60","[(100,1),(80,1)]","−","[...,(60,1)]","1"],
-        ["70","[...,(60,1)]","60 (span=1)","[...,(80,1),(70,2)]","2"],
-        ["60","[...,(70,2)]","−","[...,(70,2),(60,1)]","1"],
-        ["75","[...,(60,1),(70,2? No)],try","60,70 popped (1+2=3)","[(100,1),(80,1),(75,4)]","4"],
-        ["85","[(100,1),(80,1),(75,4)]","75,80 popped (4+1=5)","[(100,1),(85,6)]","6"]
+        ["100", "[]", "−", "[(100,1)]", "1"],
+        ["80", "[(100,1)]", "−", "[(100,1),(80,1)]", "1"],
+        ["60", "[(100,1),(80,1)]", "−", "[...,(60,1)]", "1"],
+        ["70", "[...,(60,1)]", "60 (span=1)", "[...,(80,1),(70,2)]", "2"],
+        ["60", "[...,(70,2)]", "−", "[...,(70,2),(60,1)]", "1"],
+        ["75", "[...,(60,1),(70,2? No)],try", "60,70 popped (1+2=3)", "[(100,1),(80,1),(75,4)]", "4"],
+        ["85", "[(100,1),(80,1),(75,4)]", "75,80 popped (4+1=5)", "[(100,1),(85,6)]", "6"]
       ]
     }
   },
@@ -3639,14 +3755,14 @@ const problemLogicDatabase = {
     space: "O(1) — map has at most 3 entries.",
     dryrun: {
       testcase: "fruits = [1, 2, 1, 2, 3]",
-      headers: ["R","fruits[R]","Map State","Map Size > 2?","L","Window Length"],
+      headers: ["R", "fruits[R]", "Map State", "Map Size > 2?", "L", "Window Length"],
       rows: [
-        ["0","1","{1:1}","No","0","1"],
-        ["1","2","{1:1,2:1}","No","0","2"],
-        ["2","1","{1:2,2:1}","No","0","3"],
-        ["3","2","{1:2,2:2}","No","0","4"],
-        ["4","3","{1:2,2:2,3:1}","Yes! Shrink","−","−"],
-        ["−","−","{2:1,3:1} (L=3)","No","3","2"]
+        ["0", "1", "{1:1}", "No", "0", "1"],
+        ["1", "2", "{1:1,2:1}", "No", "0", "2"],
+        ["2", "1", "{1:2,2:1}", "No", "0", "3"],
+        ["3", "2", "{1:2,2:2}", "No", "0", "4"],
+        ["4", "3", "{1:2,2:2,3:1}", "Yes! Shrink", "−", "−"],
+        ["−", "−", "{2:1,3:1} (L=3)", "No", "3", "2"]
       ]
     }
   },
@@ -3657,14 +3773,14 @@ const problemLogicDatabase = {
     space: "O(N) — prefix count map.",
     dryrun: {
       testcase: "nums=[1,0,1,0,1], goal=2",
-      headers: ["i","nums[i]","Prefix Sum","Prefix - 2","map[prefix-2]","Count","Map"],
+      headers: ["i", "nums[i]", "Prefix Sum", "Prefix - 2", "map[prefix-2]", "Count", "Map"],
       rows: [
-        ["-","-","0","-","0","0","{0:1}"],
-        ["0","1","1","-1","0","0","{0:1,1:1}"],
-        ["1","0","1","-1","0","0","{0:1,1:2}"],
-        ["2","1","2","0","1","1","{0:1,1:2,2:1}"],
-        ["3","0","2","0","1","2","{0:1,1:2,2:2}"],
-        ["4","1","3","1","2","4","{...3:1}"]
+        ["-", "-", "0", "-", "0", "0", "{0:1}"],
+        ["0", "1", "1", "-1", "0", "0", "{0:1,1:1}"],
+        ["1", "0", "1", "-1", "0", "0", "{0:1,1:2}"],
+        ["2", "1", "2", "0", "1", "1", "{0:1,1:2,2:1}"],
+        ["3", "0", "2", "0", "1", "2", "{0:1,1:2,2:2}"],
+        ["4", "1", "3", "1", "2", "4", "{...3:1}"]
       ]
     }
   },
@@ -3675,18 +3791,18 @@ const problemLogicDatabase = {
     space: "O(1) — modifies matrix in-place.",
     dryrun: {
       testcase: "matrix = [[2,1,3],[6,5,4],[7,8,9]]",
-      headers: ["(r,c)","matrix[r][c]","min of above neighbors","dp[r][c]"],
+      headers: ["(r,c)", "matrix[r][c]", "min of above neighbors", "dp[r][c]"],
       rows: [
-        ["(0,0)","2","−","2"],
-        ["(0,1)","1","−","1"],
-        ["(0,2)","3","−","3"],
-        ["(1,0)","6","min(−,2,1)=1","7"],
-        ["(1,1)","5","min(2,1,3)=1","6"],
-        ["(1,2)","4","min(1,3,−)=1","5"],
-        ["(2,0)","7","min(−,7,6)=6","13"],
-        ["(2,1)","8","min(7,6,5)=5","13"],
-        ["(2,2)","9","min(6,5,−)=5","14"],
-        ["Min in last row","-","min(13,13,14)=13","-"]
+        ["(0,0)", "2", "−", "2"],
+        ["(0,1)", "1", "−", "1"],
+        ["(0,2)", "3", "−", "3"],
+        ["(1,0)", "6", "min(−,2,1)=1", "7"],
+        ["(1,1)", "5", "min(2,1,3)=1", "6"],
+        ["(1,2)", "4", "min(1,3,−)=1", "5"],
+        ["(2,0)", "7", "min(−,7,6)=6", "13"],
+        ["(2,1)", "8", "min(7,6,5)=5", "13"],
+        ["(2,2)", "9", "min(6,5,−)=5", "14"],
+        ["Min in last row", "-", "min(13,13,14)=13", "-"]
       ]
     }
   },
@@ -3697,11 +3813,11 @@ const problemLogicDatabase = {
     space: "O(K) — heap storage.",
     dryrun: {
       testcase: "points=[[1,3],[-2,2]], K=1",
-      headers: ["Point","x²+y²","Heap State","Heap Size","Action"],
+      headers: ["Point", "x²+y²", "Heap State", "Heap Size", "Action"],
       rows: [
-        ["[1,3]","1+9=10","[(10,[1,3])]","1","Push"],
-        ["[-2,2]","4+4=8","[(10,[1,3]),(8,[-2,2])]","2","Size>K, pop max(10)"],
-        ["Result","−","[(8,[-2,2])]","1","Return [[-2,2]]"]
+        ["[1,3]", "1+9=10", "[(10,[1,3])]", "1", "Push"],
+        ["[-2,2]", "4+4=8", "[(10,[1,3]),(8,[-2,2])]", "2", "Size>K, pop max(10)"],
+        ["Result", "−", "[(8,[-2,2])]", "1", "Return [[-2,2]]"]
       ]
     }
   },
@@ -3712,15 +3828,15 @@ const problemLogicDatabase = {
     space: "O(K) — at most K distinct remainders.",
     dryrun: {
       testcase: "nums=[4,5,0,-2,-3,1], k=5",
-      headers: ["i","nums[i]","Prefix Sum","Rem (mod 5)","map[rem]","Count","Map Update"],
+      headers: ["i", "nums[i]", "Prefix Sum", "Rem (mod 5)", "map[rem]", "Count", "Map Update"],
       rows: [
-        ["-","−","0","0","1","1","{0:1}"],
-        ["0","4","4","4","0","1","{0:1,4:1}"],
-        ["1","5","9","4","1","2","{0:1,4:2}"],
-        ["2","0","9","4","2","4","{0:1,4:3}"],
-        ["3","-2","7","2","0","4","{0:1,4:3,2:1}"],
-        ["4","-3","4","4","3","7","{0:1,4:4,...}"],
-        ["5","1","5","0","1","8","Result=7"]
+        ["-", "−", "0", "0", "1", "1", "{0:1}"],
+        ["0", "4", "4", "4", "0", "1", "{0:1,4:1}"],
+        ["1", "5", "9", "4", "1", "2", "{0:1,4:2}"],
+        ["2", "0", "9", "4", "2", "4", "{0:1,4:3}"],
+        ["3", "-2", "7", "2", "0", "4", "{0:1,4:3,2:1}"],
+        ["4", "-3", "4", "4", "3", "7", "{0:1,4:4,...}"],
+        ["5", "1", "5", "0", "1", "8", "Result=7"]
       ]
     }
   },
@@ -3731,10 +3847,10 @@ const problemLogicDatabase = {
     space: "O(26) — at most 26 character union-find.",
     dryrun: {
       testcase: "equations = ['a==b','b!=a']",
-      headers: ["Step","Equation","Operation","Union-Find State","Contradiction?"],
+      headers: ["Step", "Equation", "Operation", "Union-Find State", "Contradiction?"],
       rows: [
-        ["1","a==b","union(a,b)","parent[b]=a","No"],
-        ["2","b!=a","find(b)=a, find(a)=a","Same root!","Yes! Return false"]
+        ["1", "a==b", "union(a,b)", "parent[b]=a", "No"],
+        ["2", "b!=a", "find(b)=a, find(a)=a", "Same root!", "Yes! Return false"]
       ]
     }
   },
@@ -3745,14 +3861,14 @@ const problemLogicDatabase = {
     space: "O(M * N) — BFS queue in worst case.",
     dryrun: {
       testcase: "grid = [[2,1,1],[1,1,0],[0,1,1]]",
-      headers: ["Minute","Rotten Queue","New Rotten Cells","Fresh Left"],
+      headers: ["Minute", "Rotten Queue", "New Rotten Cells", "Fresh Left"],
       rows: [
-        ["0","[(0,0)]","−","7"],
-        ["1","[(0,1),(1,0)]","(0,1),(1,0) rot","5"],
-        ["2","[(0,2),(1,1)]","(0,2),(1,1) rot","3"],
-        ["3","[(2,1)]","(2,1) rot","2"],
-        ["4","[(2,2)]","(2,2) rot","1"],
-        ["5","[]","(1,2)? No path → fresh remains","1 → return -1? No: all reachable → 4"]
+        ["0", "[(0,0)]", "−", "7"],
+        ["1", "[(0,1),(1,0)]", "(0,1),(1,0) rot", "5"],
+        ["2", "[(0,2),(1,1)]", "(0,2),(1,1) rot", "3"],
+        ["3", "[(2,1)]", "(2,1) rot", "2"],
+        ["4", "[(2,2)]", "(2,2) rot", "1"],
+        ["5", "[]", "(1,2)? No path → fresh remains", "1 → return -1? No: all reachable → 4"]
       ]
     }
   },
@@ -3763,15 +3879,15 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "weights=[1,2,3,4,5,6,7,8,9,10], D=5",
-      headers: ["Low","High","Mid","Days Needed","Feasible?","Action"],
+      headers: ["Low", "High", "Mid", "Days Needed", "Feasible?", "Action"],
       rows: [
-        ["10","55","32","5 days: [1-10 all fit?] → yes 1 day","1 ≤ 5","Yes → High=32"],
-        ["10","32","21","2 days: [1-10 sum=55, each day < 21 splits]","2 ≤ 5","Yes → High=21"],
-        ["10","21","15","5 days needed","5 ≤ 5","Yes → High=15"],
-        ["10","15","12","6 days: 12 too small","6 > 5","No → Low=13"],
-        ["13","15","14","5 days","5 ≤ 5","Yes → High=14"],
-        ["13","14","13","6 days","6 > 5","No → Low=14"],
-        ["14","14","-","Low==High","Answer: 15","15"]
+        ["10", "55", "32", "5 days: [1-10 all fit?] → yes 1 day", "1 ≤ 5", "Yes → High=32"],
+        ["10", "32", "21", "2 days: [1-10 sum=55, each day < 21 splits]", "2 ≤ 5", "Yes → High=21"],
+        ["10", "21", "15", "5 days needed", "5 ≤ 5", "Yes → High=15"],
+        ["10", "15", "12", "6 days: 12 too small", "6 > 5", "No → Low=13"],
+        ["13", "15", "14", "5 days", "5 ≤ 5", "Yes → High=14"],
+        ["13", "14", "13", "6 days", "6 > 5", "No → Low=14"],
+        ["14", "14", "-", "Low==High", "Answer: 15", "15"]
       ]
     }
   },
@@ -3782,13 +3898,13 @@ const problemLogicDatabase = {
     space: "O(N) — heap storage.",
     dryrun: {
       testcase: "stones = [2,7,4,1,8,1]",
-      headers: ["Heap State","Smash (x,y)","Result","New Heap"],
+      headers: ["Heap State", "Smash (x,y)", "Result", "New Heap"],
       rows: [
-        ["[8,7,4,2,1,1]","8,7","8-7=1","[4,2,1,1,1]"],
-        ["[4,2,1,1,1]","4,2","4-2=2","[2,1,1,1]"],
-        ["[2,1,1,1]","2,1","2-1=1","[1,1,1]"],
-        ["[1,1,1]","1,1","0 (equal)","[1]"],
-        ["[1]","Only 1 stone","−","Return 1"]
+        ["[8,7,4,2,1,1]", "8,7", "8-7=1", "[4,2,1,1,1]"],
+        ["[4,2,1,1,1]", "4,2", "4-2=2", "[2,1,1,1]"],
+        ["[2,1,1,1]", "2,1", "2-1=1", "[1,1,1]"],
+        ["[1,1,1]", "1,1", "0 (equal)", "[1]"],
+        ["[1]", "Only 1 stone", "−", "Return 1"]
       ]
     }
   },
@@ -3799,12 +3915,12 @@ const problemLogicDatabase = {
     space: "O(sum) — 1D dp array.",
     dryrun: {
       testcase: "stones=[2,7,4,1,8,1], sum=23, target=11",
-      headers: ["Stone","j (downward)","dp[j-stone]+stone","dp[j]","Best subset ≤ 11"],
+      headers: ["Stone", "j (downward)", "dp[j-stone]+stone", "dp[j]", "Best subset ≤ 11"],
       rows: [
-        ["2","j=11 to 2","dp[j-2]+2","dp[2]=2,dp[11]=2","−"],
-        ["7","j=11 to 7","dp[j-7]+7","dp[9]=9,dp[11]=9","−"],
-        ["4","j=11 to 4","dp[7]+4=11","dp[11]=11","Subset=11!"],
-        ["Result","-","totalSum - 2*11 = 23-22=1","-","Answer: 1"]
+        ["2", "j=11 to 2", "dp[j-2]+2", "dp[2]=2,dp[11]=2", "−"],
+        ["7", "j=11 to 7", "dp[j-7]+7", "dp[9]=9,dp[11]=9", "−"],
+        ["4", "j=11 to 4", "dp[7]+4=11", "dp[11]=11", "Subset=11!"],
+        ["Result", "-", "totalSum - 2*11 = 23-22=1", "-", "Answer: 1"]
       ]
     }
   },
@@ -3815,11 +3931,11 @@ const problemLogicDatabase = {
     space: "O(N²) — queue and visited set.",
     dryrun: {
       testcase: "grid = [[0,0],[0,0]] (2x2)",
-      headers: ["Step","Queue","Popped Cell","New Cells Added","Path Length"],
+      headers: ["Step", "Queue", "Popped Cell", "New Cells Added", "Path Length"],
       rows: [
-        ["0","[(0,0,1)]","(0,0,1)","(0,1,2),(1,0,2),(1,1,2)","−"],
-        ["1","[(0,1,2),(1,0,2),(1,1,2)]","(0,1,2)","Explore","−"],
-        ["2","[...,(1,1,2)]","(1,1,2)","Goal reached!","2"]
+        ["0", "[(0,0,1)]", "(0,0,1)", "(0,1,2),(1,0,2),(1,1,2)", "−"],
+        ["1", "[(0,1,2),(1,0,2),(1,1,2)]", "(0,1,2)", "Explore", "−"],
+        ["2", "[...,(1,1,2)]", "(1,1,2)", "Goal reached!", "2"]
       ]
     }
   },
@@ -3830,11 +3946,11 @@ const problemLogicDatabase = {
     space: "O(locations) — difference array.",
     dryrun: {
       testcase: "trips=[[2,1,5],[3,3,7]], capacity=4",
-      headers: ["Trip","Passengers","From","To","Diff Array After"],
+      headers: ["Trip", "Passengers", "From", "To", "Diff Array After"],
       rows: [
-        ["[2,1,5]","2","1","5","diff[1]+=2, diff[5]-=2"],
-        ["[3,3,7]","3","3","7","diff[3]+=3, diff[7]-=3"],
-        ["Prefix Sum","-","-","-","pos 1: 2, pos 3: 5 > capacity 4 → False"]
+        ["[2,1,5]", "2", "1", "5", "diff[1]+=2, diff[5]-=2"],
+        ["[3,3,7]", "3", "3", "7", "diff[3]+=3, diff[7]-=3"],
+        ["Prefix Sum", "-", "-", "-", "pos 1: 2, pos 3: 5 > capacity 4 → False"]
       ]
     }
   },
@@ -3845,12 +3961,12 @@ const problemLogicDatabase = {
     space: "O(N²) — visited array.",
     dryrun: {
       testcase: "grid = [[5,4,5],[1,2,6],[7,4,6]]",
-      headers: ["Low","High","Mid","Path from (0,0)→(2,2)?","Action"],
+      headers: ["Low", "High", "Mid", "Path from (0,0)→(2,2)?", "Action"],
       rows: [
-        ["0","7","3","Can reach using ≥3 cells","Yes → Low=4"],
-        ["4","7","5","5→5→6 (right+down) exists?","Yes → Low=6"],
-        ["6","7","6","6→6 path? only (2,0)=7→(0,2)=5<6","No → High=5"],
-        ["6","5","−","Low > High (Termination)","Answer = 5"]
+        ["0", "7", "3", "Can reach using ≥3 cells", "Yes → Low=4"],
+        ["4", "7", "5", "5→5→6 (right+down) exists?", "Yes → Low=6"],
+        ["6", "7", "6", "6→6 path? only (2,0)=7→(0,2)=5<6", "No → High=5"],
+        ["6", "5", "−", "Low > High (Termination)", "Answer = 5"]
       ]
     }
   },
@@ -3861,12 +3977,12 @@ const problemLogicDatabase = {
     space: "O(N) — difference array.",
     dryrun: {
       testcase: "bookings=[[1,2,10],[2,3,20],[2,5,25]], n=5",
-      headers: ["Booking","First","Last","Seats","Diff Array State"],
+      headers: ["Booking", "First", "Last", "Seats", "Diff Array State"],
       rows: [
-        ["[1,2,10]","1","2","10","[10,0,-10,0,0,0]"],
-        ["[2,3,20]","2","3","20","[10,20,-10,-20,0,0]"],
-        ["[2,5,25]","2","5","25","[10,45,-10,-20,0,-25]"],
-        ["Prefix Sum","-","-","-","[10,55,45,25,25]"]
+        ["[1,2,10]", "1", "2", "10", "[10,0,-10,0,0,0]"],
+        ["[2,3,20]", "2", "3", "20", "[10,20,-10,-20,0,0]"],
+        ["[2,5,25]", "2", "5", "25", "[10,45,-10,-20,0,-25]"],
+        ["Prefix Sum", "-", "-", "-", "[10,55,45,25,25]"]
       ]
     }
   },
@@ -3877,11 +3993,11 @@ const problemLogicDatabase = {
     space: "O(V) — union-find arrays.",
     dryrun: {
       testcase: "edges sorted by cost: (1-2,1),(2-3,2),(1-3,5)",
-      headers: ["Edge","Cost","find(u)","find(v)","Same?","Action","Total Cost"],
+      headers: ["Edge", "Cost", "find(u)", "find(v)", "Same?", "Action", "Total Cost"],
       rows: [
-        ["1-2","1","1","2","No","Union 1-2","1"],
-        ["2-3","2","1","3","No","Union 2-3","3"],
-        ["1-3","5","1","1","Yes","Skip (cycle)","3"]
+        ["1-2", "1", "1", "2", "No", "Union 1-2", "1"],
+        ["2-3", "2", "1", "3", "No", "Union 2-3", "3"],
+        ["1-3", "5", "1", "1", "Yes", "Skip (cycle)", "3"]
       ]
     }
   },
@@ -3892,11 +4008,11 @@ const problemLogicDatabase = {
     space: "O(M * N)",
     dryrun: {
       testcase: "s1='abc', s2='ace'",
-      headers: ["i","j","s1[i-1]","s2[j-1]","Match?","dp[i][j]"],
+      headers: ["i", "j", "s1[i-1]", "s2[j-1]", "Match?", "dp[i][j]"],
       rows: [
-        ["1","1","a","a","Yes","1"],
-        ["2","2","b","c","No","1"],
-        ["3","3","c","e","No","2"]
+        ["1", "1", "a", "a", "Yes", "1"],
+        ["2", "2", "b", "c", "No", "1"],
+        ["3", "3", "c", "e", "No", "2"]
       ]
     }
   },
@@ -3907,13 +4023,13 @@ const problemLogicDatabase = {
     space: "O(N) — union-find.",
     dryrun: {
       testcase: "wells=[1,2,2], pipes=[[1,2,1],[2,3,1]]",
-      headers: ["All Edges (sorted)","u","v","Cost","Action","Total"],
+      headers: ["All Edges (sorted)", "u", "v", "Cost", "Action", "Total"],
       rows: [
-        ["well house 1","0","1","1","Union 0,1","1"],
-        ["pipe 1-2","1","2","1","Union 1,2","2"],
-        ["pipe 2-3","2","3","1","Union 2,3","3"],
-        ["well house 2","0","2","2","1-2 already connected (skip)","3"],
-        ["well house 3","0","3","2","1-3 already connected (skip)","3"]
+        ["well house 1", "0", "1", "1", "Union 0,1", "1"],
+        ["pipe 1-2", "1", "2", "1", "Union 1,2", "2"],
+        ["pipe 2-3", "2", "3", "1", "Union 2,3", "3"],
+        ["well house 2", "0", "2", "2", "1-2 already connected (skip)", "3"],
+        ["well house 3", "0", "3", "2", "1-3 already connected (skip)", "3"]
       ]
     }
   },
@@ -3924,12 +4040,12 @@ const problemLogicDatabase = {
     space: "O(N) — parent and char group maps.",
     dryrun: {
       testcase: "s='dcab', pairs=[[0,3],[1,2]]",
-      headers: ["Edge","Union","Groups","Sorted Chars","Result"],
+      headers: ["Edge", "Union", "Groups", "Sorted Chars", "Result"],
       rows: [
-        ["[0,3]","union(0,3)","group: {0,3}→chars d,b","−","−"],
-        ["[1,2]","union(1,2)","group: {1,2}→chars c,a","−","−"],
-        ["Sort groups","-","group {0,3}→sorted: b,d; group {1,2}→sorted: a,c","−","−"],
-        ["Assign","-","idx 0=b, idx 3=d; idx 1=a, idx 2=c","−","bacd"]
+        ["[0,3]", "union(0,3)", "group: {0,3}→chars d,b", "−", "−"],
+        ["[1,2]", "union(1,2)", "group: {1,2}→chars c,a", "−", "−"],
+        ["Sort groups", "-", "group {0,3}→sorted: b,d; group {1,2}→sorted: a,c", "−", "−"],
+        ["Assign", "-", "idx 0=b, idx 3=d; idx 1=a, idx 2=c", "−", "bacd"]
       ]
     }
   },
@@ -3940,11 +4056,11 @@ const problemLogicDatabase = {
     space: "O(G + N + E) — adjacency lists.",
     dryrun: {
       testcase: "n=6, m=2, groups=[-1,-1,1,0,0,1], beforeItems=[[],[],[3],[],[3,4],[]]",
-      headers: ["Phase","Source","Process Order","Cycle?","Result"],
+      headers: ["Phase", "Source", "Process Order", "Cycle?", "Result"],
       rows: [
-        ["Item sort within groups","3,4 first (no deps)","Items: 3→4→0,1","No","−"],
-        ["Group sort","Group 0 after group 1? No dependency","Groups: any order","No","−"],
-        ["Output","−","−","No","[3,4,0,1,5,2] or similar valid order"]
+        ["Item sort within groups", "3,4 first (no deps)", "Items: 3→4→0,1", "No", "−"],
+        ["Group sort", "Group 0 after group 1? No dependency", "Groups: any order", "No", "−"],
+        ["Output", "−", "−", "No", "[3,4,0,1,5,2] or similar valid order"]
       ]
     }
   },
@@ -3955,11 +4071,11 @@ const problemLogicDatabase = {
     space: "O(M * N) — visited array.",
     dryrun: {
       testcase: "grid = [[1,1,1],[1,0,1],[1,1,1]]",
-      headers: ["Pass","Cell","Action","Closed Islands"],
+      headers: ["Pass", "Cell", "Action", "Closed Islands"],
       rows: [
-        ["Pass 1","All border 1s","Marked as visited","−"],
-        ["Pass 2","(1,1)=0","Interior 0 cell, surrounded by 1s","Count=1"],
-        ["Result","−","1 closed island","1"]
+        ["Pass 1", "All border 1s", "Marked as visited", "−"],
+        ["Pass 2", "(1,1)=0", "Interior 0 cell, surrounded by 1s", "Count=1"],
+        ["Result", "−", "1 closed island", "1"]
       ]
     }
   },
@@ -3970,13 +4086,13 @@ const problemLogicDatabase = {
     space: "O(W * L) — Trie storage.",
     dryrun: {
       testcase: "products=['mobile','mouse','moneypot','monitor','mousepad'], searchWord='mouse'",
-      headers: ["Typed Prefix","Trie Node","Suggestions (up to 3)"],
+      headers: ["Typed Prefix", "Trie Node", "Suggestions (up to 3)"],
       rows: [
-        ["m","m-node","mobile, moneypot, monitor"],
-        ["mo","mo-node","mobile, moneypot, monitor"],
-        ["mou","mou-node","mouse, mousepad"],
-        ["mous","mous-node","mouse, mousepad"],
-        ["mouse","mouse-node","mouse, mousepad"]
+        ["m", "m-node", "mobile, moneypot, monitor"],
+        ["mo", "mo-node", "mobile, moneypot, monitor"],
+        ["mou", "mou-node", "mouse, mousepad"],
+        ["mous", "mous-node", "mouse, mousepad"],
+        ["mouse", "mouse-node", "mouse, mousepad"]
       ]
     }
   },
@@ -3987,12 +4103,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums=[1,2,5,9], threshold=6",
-      headers: ["Low","High","Mid","Sum(ceil)","<=6?","Action"],
+      headers: ["Low", "High", "Mid", "Sum(ceil)", "<=6?", "Action"],
       rows: [
-        ["1","9","5","1+1+1+2=5","Yes","High=5"],
-        ["1","5","3","1+1+2+3=7","No","Low=4"],
-        ["4","5","4","1+1+2+3=7? No: 1+1+2+3=7","No","Low=5"],
-        ["5","5","−","1+1+1+2=5","Yes","Answer=5"]
+        ["1", "9", "5", "1+1+1+2=5", "Yes", "High=5"],
+        ["1", "5", "3", "1+1+2+3=7", "No", "Low=4"],
+        ["4", "5", "4", "1+1+2+3=7? No: 1+1+2+3=7", "No", "Low=5"],
+        ["5", "5", "−", "1+1+1+2=5", "Yes", "Answer=5"]
       ]
     }
   },
@@ -4003,14 +4119,14 @@ const problemLogicDatabase = {
     space: "O(N²) — dp table.",
     dryrun: {
       testcase: "s = 'mbadm'",
-      headers: ["i","j","s[i]","s[j]","Match?","dp[i][j]"],
+      headers: ["i", "j", "s[i]", "s[j]", "Match?", "dp[i][j]"],
       rows: [
-        ["0","4","m","m","Yes","dp[1][3] = ?"],
-        ["1","3","b","d","No","1 + min(dp[2][3], dp[1][2])"],
-        ["1","2","b","a","No","1 + min(dp[2][2]=0, dp[1][1]=0) = 1"],
-        ["2","3","a","d","No","1 + min(dp[3][3]=0, dp[2][2]=0) = 1"],
-        ["1","3","-","-","−","1+min(1,1)=2"],
-        ["0","4","-","-","m==m","dp[1][3]=2"]
+        ["0", "4", "m", "m", "Yes", "dp[1][3] = ?"],
+        ["1", "3", "b", "d", "No", "1 + min(dp[2][3], dp[1][2])"],
+        ["1", "2", "b", "a", "No", "1 + min(dp[2][2]=0, dp[1][1]=0) = 1"],
+        ["2", "3", "a", "d", "No", "1 + min(dp[3][3]=0, dp[2][2]=0) = 1"],
+        ["1", "3", "-", "-", "−", "1+min(1,1)=2"],
+        ["0", "4", "-", "-", "m==m", "dp[1][3]=2"]
       ]
     }
   },
@@ -4021,12 +4137,12 @@ const problemLogicDatabase = {
     space: "O(N) — union-find arrays.",
     dryrun: {
       testcase: "n=4, connections=[[0,1],[0,2],[1,2]]",
-      headers: ["Edge","find(u)","find(v)","Union?","Extra Edges","Components"],
+      headers: ["Edge", "find(u)", "find(v)", "Union?", "Extra Edges", "Components"],
       rows: [
-        ["[0,1]","0","1","Yes","0","3 (0-1 connected)"],
-        ["[0,2]","0","2","Yes","0","2 (0-1-2 connected)"],
-        ["[1,2]","0","0","No (same)","1","2"],
-        ["Final","−","−","−","extra=1 >= C-1=1","Yes → return 1"]
+        ["[0,1]", "0", "1", "Yes", "0", "3 (0-1 connected)"],
+        ["[0,2]", "0", "2", "Yes", "0", "2 (0-1-2 connected)"],
+        ["[1,2]", "0", "0", "No (same)", "1", "2"],
+        ["Final", "−", "−", "−", "extra=1 >= C-1=1", "Yes → return 1"]
       ]
     }
   },
@@ -4037,12 +4153,12 @@ const problemLogicDatabase = {
     space: "O(V²) — distance matrix.",
     dryrun: {
       testcase: "n=4, edges=[[0,1,3],[1,2,1],[1,3,4],[2,3,1]], threshold=4",
-      headers: ["City","Reachable within 4","Count","Best City?"],
+      headers: ["City", "Reachable within 4", "Count", "Best City?"],
       rows: [
-        ["0","1(d=3),2(d=4)","2","−"],
-        ["1","0(d=3),2(d=1),3(d=2)","3","No"],
-        ["2","1(d=1),3(d=1)","2","−"],
-        ["3","2(d=1),1(d=2)","2","Yes (highest idx among ties)"]
+        ["0", "1(d=3),2(d=4)", "2", "−"],
+        ["1", "0(d=3),2(d=1),3(d=2)", "3", "No"],
+        ["2", "1(d=1),3(d=1)", "2", "−"],
+        ["3", "2(d=1),1(d=2)", "2", "Yes (highest idx among ties)"]
       ]
     }
   },
@@ -4053,13 +4169,13 @@ const problemLogicDatabase = {
     space: "O(N) — dp array + deque.",
     dryrun: {
       testcase: "nums=[10,2,-10,5,20], k=2",
-      headers: ["i","nums[i]","Deque State","Max in window","dp[i]"],
+      headers: ["i", "nums[i]", "Deque State", "Max in window", "dp[i]"],
       rows: [
-        ["0","10","[0]","−","10"],
-        ["1","2","[0,1]","dp[0]=10","12"],
-        ["2","-10","[0,1,2]","dp[0]=10","0"],
-        ["3","5","[1,3]","dp[1]=12","17"],
-        ["4","20","[3,4]","dp[3]=17","37"]
+        ["0", "10", "[0]", "−", "10"],
+        ["1", "2", "[0,1]", "dp[0]=10", "12"],
+        ["2", "-10", "[0,1,2]", "dp[0]=10", "0"],
+        ["3", "5", "[1,3]", "dp[1]=12", "17"],
+        ["4", "20", "[3,4]", "dp[3]=17", "37"]
       ]
     }
   },
@@ -4070,12 +4186,12 @@ const problemLogicDatabase = {
     space: "O(N) — two deques.",
     dryrun: {
       testcase: "nums=[8,2,4,7], limit=4",
-      headers: ["R","nums[R]","MaxDeq","MinDeq","MaxInW","MinInW","Max-Min","L","Length"],
+      headers: ["R", "nums[R]", "MaxDeq", "MinDeq", "MaxInW", "MinInW", "Max-Min", "L", "Length"],
       rows: [
-        ["0","8","[8]","[8]","8","8","0","0","1"],
-        ["1","2","[8]","[2]","8","2","6 > 4 → L++","1","1"],
-        ["2","4","[4]","[2]","4","2","2 ≤ 4","1","2"],
-        ["3","7","[7]","[2]","7","2","5 > 4 → L++","2","2"]
+        ["0", "8", "[8]", "[8]", "8", "8", "0", "0", "1"],
+        ["1", "2", "[8]", "[2]", "8", "2", "6 > 4 → L++", "1", "1"],
+        ["2", "4", "[4]", "[2]", "4", "2", "2 ≤ 4", "1", "2"],
+        ["3", "7", "[7]", "[2]", "7", "2", "5 > 4 → L++", "2", "2"]
       ]
     }
   },
@@ -4086,10 +4202,10 @@ const problemLogicDatabase = {
     space: "O(V²) — reachability matrix.",
     dryrun: {
       testcase: "numCourses=2, prerequisites=[[1,0]], queries=[[0,1],[1,0]]",
-      headers: ["Query","Reachable(u,v)?","Answer"],
+      headers: ["Query", "Reachable(u,v)?", "Answer"],
       rows: [
-        ["[0,1]","Can reach 1 from 0? No direct edge 0→1","false"],
-        ["[1,0]","Can reach 0 from 1? Edge 1→0 exists","true"]
+        ["[0,1]", "Can reach 1 from 0? No direct edge 0→1", "false"],
+        ["[1,0]", "Can reach 0 from 1? Edge 1→0 exists", "true"]
       ]
     }
   },
@@ -4100,12 +4216,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "bloomDay=[1,10,3,10,2], m=3, k=1",
-      headers: ["Low","High","Mid","Bouquets (k=1)","≥ m=3?","Action"],
+      headers: ["Low", "High", "Mid", "Bouquets (k=1)", "≥ m=3?", "Action"],
       rows: [
-        ["1","10","5","Bloom day ≤ 5: [1,3,2] → 3 flowers → 3 bouquets","Yes","High=5"],
-        ["1","5","3","Bloom day ≤ 3: [1,3,2] → 3 bouquets","Yes","High=3"],
-        ["1","3","2","Bloom day ≤ 2: [1,2] → 2 bouquets","No","Low=3"],
-        ["3","3","−","Low==High","Answer: 3","3"]
+        ["1", "10", "5", "Bloom day ≤ 5: [1,3,2] → 3 flowers → 3 bouquets", "Yes", "High=5"],
+        ["1", "5", "3", "Bloom day ≤ 3: [1,3,2] → 3 bouquets", "Yes", "High=3"],
+        ["1", "3", "2", "Bloom day ≤ 2: [1,2] → 2 bouquets", "No", "Low=3"],
+        ["3", "3", "−", "Low==High", "Answer: 3", "3"]
       ]
     }
   },
@@ -4116,12 +4232,12 @@ const problemLogicDatabase = {
     space: "O(V + E) — union-find + edge storage.",
     dryrun: {
       testcase: "edges=[[0,1,1],[1,2,1],[2,3,2],[0,3,2],[0,2,5],[1,3,5],[0,1,5]]",
-      headers: ["Edge","Without-MST Weight","With-MST Weight","Normal MST Weight","Critical?","Pseudo-Critical?"],
+      headers: ["Edge", "Without-MST Weight", "With-MST Weight", "Normal MST Weight", "Critical?", "Pseudo-Critical?"],
       rows: [
-        ["(0,1,1)","6 (MST breaks)","5","5","Yes","Yes"],
-        ["(1,2,1)","6","5","5","Yes","Yes"],
-        ["(2,3,2)","7 > 5","5","5","Yes","Yes"],
-        ["(0,3,2)","5","5","5","No","Yes (can appear but not always)"]
+        ["(0,1,1)", "6 (MST breaks)", "5", "5", "Yes", "Yes"],
+        ["(1,2,1)", "6", "5", "5", "Yes", "Yes"],
+        ["(2,3,2)", "7 > 5", "5", "5", "Yes", "Yes"],
+        ["(0,3,2)", "5", "5", "5", "No", "Yes (can appear but not always)"]
       ]
     }
   },
@@ -4132,12 +4248,12 @@ const problemLogicDatabase = {
     space: "O(N) — deque storage.",
     dryrun: {
       testcase: "points=[[1,3],[2,0],[5,10],[6,-10]], k=1",
-      headers: ["j","yj+xj","Max(yi-xi in window)","Current Max","Deque"],
+      headers: ["j", "yj+xj", "Max(yi-xi in window)", "Current Max", "Deque"],
       rows: [
-        ["0","4","yi-xi=-2","−","[0]"],
-        ["1","2","yi-xi=-2 (from j=0,within k=1)","−","[0,1]"],
-        ["2","15","j=1: yi-xi=-2, val = 15+(-2)=13","13","[2]"],
-        ["3","-4","j=2: yi-xi=5, val=-4+5=1","13","[2,3]"]
+        ["0", "4", "yi-xi=-2", "−", "[0]"],
+        ["1", "2", "yi-xi=-2 (from j=0,within k=1)", "−", "[0,1]"],
+        ["2", "15", "j=1: yi-xi=-2, val = 15+(-2)=13", "13", "[2]"],
+        ["3", "-4", "j=2: yi-xi=5, val=-4+5=1", "13", "[2,3]"]
       ]
     }
   },
@@ -4148,11 +4264,11 @@ const problemLogicDatabase = {
     space: "O(V + E) — adjacency list and distances.",
     dryrun: {
       testcase: "n=3, edges=[[0,1],[1,2],[0,2]], probs=[0.5,0.5,0.2], start=0, end=2",
-      headers: ["Heap Pop","Node","Prob","Edges Explored","Updates","Max Prob to 2"],
+      headers: ["Heap Pop", "Node", "Prob", "Edges Explored", "Updates", "Max Prob to 2"],
       rows: [
-        ["(-1.0,0)","0","1.0","0→1(0.5),0→2(0.2)","dist[1]=0.5,dist[2]=0.2","0.2"],
-        ["(-0.5,1)","1","0.5","1→2(0.5)","0.5*0.5=0.25>0.2","0.25"],
-        ["(-0.25,2)","2","0.25","Goal reached","−","0.25"]
+        ["(-1.0,0)", "0", "1.0", "0→1(0.5),0→2(0.2)", "dist[1]=0.5,dist[2]=0.2", "0.2"],
+        ["(-0.5,1)", "1", "0.5", "1→2(0.5)", "0.5*0.5=0.25>0.2", "0.25"],
+        ["(-0.25,2)", "2", "0.25", "Goal reached", "−", "0.25"]
       ]
     }
   },
@@ -4163,14 +4279,14 @@ const problemLogicDatabase = {
     space: "O(V) — two DSU arrays.",
     dryrun: {
       testcase: "n=4, edges=[[3,1,2],[3,2,3],[1,1,3],[1,2,4],[2,3,4]]",
-      headers: ["Edge Type","u","v","Alice Union?","Bob Union?","Redundant Count"],
+      headers: ["Edge Type", "u", "v", "Alice Union?", "Bob Union?", "Redundant Count"],
       rows: [
-        ["Type 3","1","2","Yes (new)","Yes (new)","0"],
-        ["Type 3","2","3","Yes (new)","Yes (new)","0"],
-        ["Type 1","1","3","1-2-3 connected → No","−","1"],
-        ["Type 1","2","4","Yes","−","1"],
-        ["Type 2","3","4","−","Yes","1"],
-        ["Final","−","−","Connected","Connected","1"]
+        ["Type 3", "1", "2", "Yes (new)", "Yes (new)", "0"],
+        ["Type 3", "2", "3", "Yes (new)", "Yes (new)", "0"],
+        ["Type 1", "1", "3", "1-2-3 connected → No", "−", "1"],
+        ["Type 1", "2", "4", "Yes", "−", "1"],
+        ["Type 2", "3", "4", "−", "Yes", "1"],
+        ["Final", "−", "−", "Connected", "Connected", "1"]
       ]
     }
   },
@@ -4181,13 +4297,13 @@ const problemLogicDatabase = {
     space: "O(N) — distances array.",
     dryrun: {
       testcase: "points=[[0,0],[2,2],[3,10],[5,2],[7,0]]",
-      headers: ["Added Point","Min Distance to MST","Total Cost","In MST"],
+      headers: ["Added Point", "Min Distance to MST", "Total Cost", "In MST"],
       rows: [
-        ["[0,0]","0 (start)","0","{[0,0]}"],
-        ["[2,2]","4 (from [0,0])","4","{[0,0],[2,2]}"],
-        ["[5,2]","3 (from [2,2])","7","{...,[5,2]}"],
-        ["[7,0]","4 (from [5,2])","11","{...,[7,0]}"],
-        ["[3,10]","10 (from [2,2])","21","{...,[3,10]}"]
+        ["[0,0]", "0 (start)", "0", "{[0,0]}"],
+        ["[2,2]", "4 (from [0,0])", "4", "{[0,0],[2,2]}"],
+        ["[5,2]", "3 (from [2,2])", "7", "{...,[5,2]}"],
+        ["[7,0]", "4 (from [5,2])", "11", "{...,[7,0]}"],
+        ["[3,10]", "10 (from [2,2])", "21", "{...,[3,10]}"]
       ]
     }
   },
@@ -4198,16 +4314,16 @@ const problemLogicDatabase = {
     space: "O(M * N) — effort array and heap.",
     dryrun: {
       testcase: "heights=[[1,2,2],[3,8,2],[5,3,5]]",
-      headers: ["Heap Pop","Cell","Effort","Neighbors","Updates"],
+      headers: ["Heap Pop", "Cell", "Effort", "Neighbors", "Updates"],
       rows: [
-        ["(0,0,0)","(0,0)","0","Right(0,1): eff=1; Down(1,0): eff=2","dist[0][1]=1,dist[1][0]=2"],
-        ["(1,0,1)","(0,1)","1","Right(0,2): eff=max(1,0)=1; Down(1,1): eff=max(1,6)=6","dist[0][2]=1"],
-        ["(1,0,2)","(0,2)","1","Down(1,2): eff=max(1,0)=1","dist[1][2]=1"],
-        ["(1,1,2)","(1,2)","1","Down(2,2): eff=max(1,3)=3","dist[2][2]=3"],
-        ["(2,1,0)","(1,0)","2","Down(2,0): eff=max(2,2)=2","dist[2][0]=2"],
-        ["(2,2,0)","(2,0)","2","Right(2,1): eff=max(2,2)=2","dist[2][1]=2"],
-        ["(2,2,1)","(2,1)","2","Right(2,2): eff=max(2,2)=2","dist[2][2]=min(3,2)=2"],
-        ["(2,2,2)","(2,2)","2 (Goal!)","−","Answer: 2"]
+        ["(0,0,0)", "(0,0)", "0", "Right(0,1): eff=1; Down(1,0): eff=2", "dist[0][1]=1,dist[1][0]=2"],
+        ["(1,0,1)", "(0,1)", "1", "Right(0,2): eff=max(1,0)=1; Down(1,1): eff=max(1,6)=6", "dist[0][2]=1"],
+        ["(1,0,2)", "(0,2)", "1", "Down(1,2): eff=max(1,0)=1", "dist[1][2]=1"],
+        ["(1,1,2)", "(1,2)", "1", "Down(2,2): eff=max(1,3)=3", "dist[2][2]=3"],
+        ["(2,1,0)", "(1,0)", "2", "Down(2,0): eff=max(2,2)=2", "dist[2][0]=2"],
+        ["(2,2,0)", "(2,0)", "2", "Right(2,1): eff=max(2,2)=2", "dist[2][1]=2"],
+        ["(2,2,1)", "(2,1)", "2", "Right(2,2): eff=max(2,2)=2", "dist[2][2]=min(3,2)=2"],
+        ["(2,2,2)", "(2,2)", "2 (Goal!)", "−", "Answer: 2"]
       ]
     }
   },
@@ -4218,14 +4334,14 @@ const problemLogicDatabase = {
     space: "O(N) — dp array + deque.",
     dryrun: {
       testcase: "nums=[1,-1,-2,4,-7,3], k=2",
-      headers: ["i","nums[i]","Deque (indices)","Max dp in window","dp[i]"],
+      headers: ["i", "nums[i]", "Deque (indices)", "Max dp in window", "dp[i]"],
       rows: [
-        ["0","1","[0]","−","1"],
-        ["1","-1","[0,1]","dp[0]=1","0"],
-        ["2","-2","[0,2]","dp[0]=1","−1 (prune: deque becomes [2])"],
-        ["3","4","[3]","dp[2]=-1","3"],
-        ["4","-7","[3,4]","dp[3]=3","-4"],
-        ["5","3","[3,5]","dp[3]=3","6"]
+        ["0", "1", "[0]", "−", "1"],
+        ["1", "-1", "[0,1]", "dp[0]=1", "0"],
+        ["2", "-2", "[0,2]", "dp[0]=1", "−1 (prune: deque becomes [2])"],
+        ["3", "4", "[3]", "dp[2]=-1", "3"],
+        ["4", "-7", "[3,4]", "dp[3]=3", "-4"],
+        ["5", "3", "[3,5]", "dp[3]=3", "6"]
       ]
     }
   },
@@ -4236,12 +4352,12 @@ const problemLogicDatabase = {
     space: "O(max_range) — coverage array.",
     dryrun: {
       testcase: "ranges=[[1,2],[3,4],[5,6]], left=2, right=5",
-      headers: ["Range","Update Diff Array","Coverage After Prefix Sum","Query [2,5] All ≥ 1?"],
+      headers: ["Range", "Update Diff Array", "Coverage After Prefix Sum", "Query [2,5] All ≥ 1?"],
       rows: [
-        ["[1,2]","diff[1]++,diff[3]--","1 covered: 1,2","−"],
-        ["[3,4]","diff[3]++,diff[5]--","2,3,4 covered","−"],
-        ["[5,6]","diff[5]++,diff[7]--","5,6 covered","−"],
-        ["Check [2,5]","−","All of 2,3,4,5 have coverage=1","true"]
+        ["[1,2]", "diff[1]++,diff[3]--", "1 covered: 1,2", "−"],
+        ["[3,4]", "diff[3]++,diff[5]--", "2,3,4 covered", "−"],
+        ["[5,6]", "diff[5]++,diff[7]--", "5,6 covered", "−"],
+        ["Check [2,5]", "−", "All of 2,3,4,5 have coverage=1", "true"]
       ]
     }
   },
@@ -4252,13 +4368,13 @@ const problemLogicDatabase = {
     space: "O(N) — breakpoint arrays.",
     dryrun: {
       testcase: "segments = [[1,4,5],[4,7,7],[1,7,9]]",
-      headers: ["Segment","Start","End","Color","Breakpoints Added"],
+      headers: ["Segment", "Start", "End", "Color", "Breakpoints Added"],
       rows: [
-        ["[1,4,5]","1","4","5","[1: +5], [4: -5]"],
-        ["[4,7,7]","4","7","7","[4: +7], [7: -7]"],
-        ["[1,7,9]","1","7","9","[1: +9], [7: -9]"],
-        ["Sorted events","−","−","−","[1,4,7] boundaries"],
-        ["Result","[1,4): color sum=5+9=14","[4,7): color sum=7+9=16","−","[[1,4,14],[4,7,16]]"]
+        ["[1,4,5]", "1", "4", "5", "[1: +5], [4: -5]"],
+        ["[4,7,7]", "4", "7", "7", "[4: +7], [7: -7]"],
+        ["[1,7,9]", "1", "7", "9", "[1: +9], [7: -9]"],
+        ["Sorted events", "−", "−", "−", "[1,4,7] boundaries"],
+        ["Result", "[1,4): color sum=5+9=14", "[4,7): color sum=7+9=16", "−", "[[1,4,14],[4,7,16]]"]
       ]
     }
   },
@@ -4269,12 +4385,12 @@ const problemLogicDatabase = {
     space: "O(V + E) — adjacency list, distances, ways.",
     dryrun: {
       testcase: "n=7, roads=[[0,6,7],[0,1,2],[1,2,3],[1,3,3],[6,3,3],[3,5,1],[6,5,1],[2,5,1],[0,4,5],[4,6,2]], dst=6",
-      headers: ["Step","Node","Distance","Ways","Key Update"],
+      headers: ["Step", "Node", "Distance", "Ways", "Key Update"],
       rows: [
-        ["Start","0","0","1","−"],
+        ["Start", "0", "0", "1", "−"],
         ["Pop (0,0)", "0", "0", "1", "Relax 1 (dist 2), 4 (dist 5), 6 (dist 7)"],
-        ["Pop (2,1)","1","2","1","dist[2]=5,dist[3]=5"],
-        ["...","converge","dist[6]=7","4 ways","Multiple equal shortest paths"]
+        ["Pop (2,1)", "1", "2", "1", "dist[2]=5,dist[3]=5"],
+        ["...", "converge", "dist[6]=7", "4 ways", "Multiple equal shortest paths"]
       ]
     }
   },
@@ -4285,10 +4401,10 @@ const problemLogicDatabase = {
     space: "O(V + E) — adjacency list.",
     dryrun: {
       testcase: "recipes=['bread'], ingredients=[['yeast','flour']], supplies=['yeast','flour','corn']",
-      headers: ["Step","Available Set","Recipe Checked","All Ingredients Available?","Result"],
+      headers: ["Step", "Available Set", "Recipe Checked", "All Ingredients Available?", "Result"],
       rows: [
-        ["Init","{'yeast','flour','corn'}","−","−","−"],
-        ["Check bread","{'yeast','flour','corn'}","bread needs [yeast, flour]","Yes!","['bread']"]
+        ["Init", "{'yeast','flour','corn'}", "−", "−", "−"],
+        ["Check bread", "{'yeast','flour','corn'}", "bread needs [yeast, flour]", "Yes!", "['bread']"]
       ]
     }
   },
@@ -4299,16 +4415,16 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums = [2,3,1,2,4,3], target = 7",
-      headers: ["L","R","nums[R]","Window Sum","Sum >= 7?","Min Length","Action"],
+      headers: ["L", "R", "nums[R]", "Window Sum", "Sum >= 7?", "Min Length", "Action"],
       rows: [
-        ["0","0","2","2","No","∞","Expand R"],
-        ["0","1","3","5","No","∞","Expand R"],
-        ["0","2","1","6","No","∞","Expand R"],
-        ["0","3","2","8","Yes","4","Shrink: L++, sum=6"],
-        ["1","3","—","6","No","4","Expand R"],
-        ["1","4","4","10","Yes","4","Shrink → 3"],
-        ["2","4","—","7","Yes","3","Shrink → 3 again"],
-        ["2","5","3","8","Yes","3","Final min = 3"]
+        ["0", "0", "2", "2", "No", "∞", "Expand R"],
+        ["0", "1", "3", "5", "No", "∞", "Expand R"],
+        ["0", "2", "1", "6", "No", "∞", "Expand R"],
+        ["0", "3", "2", "8", "Yes", "4", "Shrink: L++, sum=6"],
+        ["1", "3", "—", "6", "No", "4", "Expand R"],
+        ["1", "4", "4", "10", "Yes", "4", "Shrink → 3"],
+        ["2", "4", "—", "7", "Yes", "3", "Shrink → 3 again"],
+        ["2", "5", "3", "8", "Yes", "3", "Final min = 3"]
       ]
     }
   },
@@ -4319,16 +4435,16 @@ const problemLogicDatabase = {
     space: "O(1) — frequency array of size 26.",
     dryrun: {
       testcase: "s = 'ABABBA', k = 1",
-      headers: ["L","R","Char","Window","Max Freq","Valid?","Max Len"],
+      headers: ["L", "R", "Char", "Window", "Max Freq", "Valid?", "Max Len"],
       rows: [
-        ["0","0","A","A:1","1","1-1<=1 ✓","1"],
-        ["0","1","B","A:1,B:1","1","2-1<=1 ✓","2"],
-        ["0","2","A","A:2,B:1","2","3-2<=1 ✓","3"],
-        ["0","3","B","A:2,B:2","2","4-2<=1? No","3"],
-        ["1","3","—","A:1,B:2","2","3-2<=1 ✓","3"],
-        ["1","4","B","A:1,B:3","3","4-3<=1 ✓","4"],
-        ["1","5","A","A:2,B:3","3","5-3<=1? No","4"],
-        ["2","5","—","A:1,B:3","3","4-3<=1 ✓","4"]
+        ["0", "0", "A", "A:1", "1", "1-1<=1 ✓", "1"],
+        ["0", "1", "B", "A:1,B:1", "1", "2-1<=1 ✓", "2"],
+        ["0", "2", "A", "A:2,B:1", "2", "3-2<=1 ✓", "3"],
+        ["0", "3", "B", "A:2,B:2", "2", "4-2<=1? No", "3"],
+        ["1", "3", "—", "A:1,B:2", "2", "3-2<=1 ✓", "3"],
+        ["1", "4", "B", "A:1,B:3", "3", "4-3<=1 ✓", "4"],
+        ["1", "5", "A", "A:2,B:3", "3", "5-3<=1? No", "4"],
+        ["2", "5", "—", "A:1,B:3", "3", "4-3<=1 ✓", "4"]
       ]
     }
   },
@@ -4339,12 +4455,12 @@ const problemLogicDatabase = {
     space: "O(N) — prefix sum array.",
     dryrun: {
       testcase: "nums = [-2,0,3,-5,2,-1], query(0,2)",
-      headers: ["Index i","nums[i]","prefix[i+1]","Query(0,2) = prefix[3]-prefix[0]"],
+      headers: ["Index i", "nums[i]", "prefix[i+1]", "Query(0,2) = prefix[3]-prefix[0]"],
       rows: [
-        ["0","-2","-2","—"],
-        ["1","0","-2","—"],
-        ["2","3","1","1-0=1"],
-        ["3","-5","-4","—"]
+        ["0", "-2", "-2", "—"],
+        ["1", "0", "-2", "—"],
+        ["2", "3", "1", "1-0=1"],
+        ["3", "-5", "-4", "—"]
       ]
     }
   },
@@ -4355,12 +4471,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "1→2→3→4→5, n = 2",
-      headers: ["Step","Fast Pointer","Slow Pointer","Action"],
+      headers: ["Step", "Fast Pointer", "Slow Pointer", "Action"],
       rows: [
-        ["Fast advance n+1","Moves to node 3","dummy (before 1)","Fast 3 ahead"],
-        ["Advance both","Fast=4","Slow=1","Both move"],
-        ["Advance both","Fast=5","Slow=2","Both move"],
-        ["Fast.next=null","null","Slow=3","Remove slow.next (node 4)"]
+        ["Fast advance n+1", "Moves to node 3", "dummy (before 1)", "Fast 3 ahead"],
+        ["Advance both", "Fast=4", "Slow=1", "Both move"],
+        ["Advance both", "Fast=5", "Slow=2", "Both move"],
+        ["Fast.next=null", "null", "Slow=3", "Remove slow.next (node 4)"]
       ]
     }
   },
@@ -4371,12 +4487,12 @@ const problemLogicDatabase = {
     space: "O(1) — constant pointer usage.",
     dryrun: {
       testcase: "List A: 4→1→8→4→5, List B: 5→6→1→8→4→5 (merge at node 8)",
-      headers: ["Step","Pointer A","Pointer B","Action"],
+      headers: ["Step", "Pointer A", "Pointer B", "Action"],
       rows: [
-        ["1-3","4,1,8","5,6,1","Advance normally"],
-        ["4-6","4,5,null→5","8,4,5","A redirected to headB"],
-        ["7-9","6,1,8","null→4","B redirected to headA"],
-        ["Meet","8","8","pA == pB → Intersection at node 8"]
+        ["1-3", "4,1,8", "5,6,1", "Advance normally"],
+        ["4-6", "4,5,null→5", "8,4,5", "A redirected to headB"],
+        ["7-9", "6,1,8", "null→4", "B redirected to headA"],
+        ["Meet", "8", "8", "pA == pB → Intersection at node 8"]
       ]
     }
   },
@@ -4387,14 +4503,14 @@ const problemLogicDatabase = {
     space: "O(1) — constant space.",
     dryrun: {
       testcase: "nums = [2,0,2,1,1,0]",
-      headers: ["low","mid","high","nums","Action"],
+      headers: ["low", "mid", "high", "nums", "Action"],
       rows: [
-        ["0","0","5","[2,0,2,1,1,0]","nums[0]=2 → swap with high → [0,0,2,1,1,2], high--"],
-        ["0","0","4","[0,0,2,1,1,2]","nums[0]=0 → swap low/mid (same), low++, mid++"],
-        ["1","1","4","[0,0,2,1,1,2]","nums[1]=0 → swap low/mid (same), low++, mid++"],
-        ["2","2","4","[0,0,2,1,1,2]","nums[2]=2 → swap mid/high → [0,0,1,1,2,2], high--"],
-        ["2","2","3","[0,0,1,1,2,2]","nums[2]=1 → mid++"],
-        ["2","3","3","[0,0,1,1,2,2]","mid==high → done"]
+        ["0", "0", "5", "[2,0,2,1,1,0]", "nums[0]=2 → swap with high → [0,0,2,1,1,2], high--"],
+        ["0", "0", "4", "[0,0,2,1,1,2]", "nums[0]=0 → swap low/mid (same), low++, mid++"],
+        ["1", "1", "4", "[0,0,2,1,1,2]", "nums[1]=0 → swap low/mid (same), low++, mid++"],
+        ["2", "2", "4", "[0,0,2,1,1,2]", "nums[2]=2 → swap mid/high → [0,0,1,1,2,2], high--"],
+        ["2", "2", "3", "[0,0,1,1,2,2]", "nums[2]=1 → mid++"],
+        ["2", "3", "3", "[0,0,1,1,2,2]", "mid==high → done"]
       ]
     }
   },
@@ -4405,14 +4521,14 @@ const problemLogicDatabase = {
     space: "O(N) — map + array.",
     dryrun: {
       testcase: "insert(1), insert(2), getRandom(), delete(1), insert(3), getRandom()",
-      headers: ["Operation","Map State","Array State","Random"],
+      headers: ["Operation", "Map State", "Array State", "Random"],
       rows: [
-        ["insert(1)","{1:0}","[1]","—"],
-        ["insert(2)","{1:0,2:1}","[1,2]","—"],
-        ["getRandom()","{1:0,2:1}","[1,2]","returns 1 or 2"],
-        ["delete(1)","{2:0}","[2]","—"],
-        ["insert(3)","{2:0,3:1}","[2,3]","—"],
-        ["getRandom()","{2:0,3:1}","[2,3]","returns 2 or 3"]
+        ["insert(1)", "{1:0}", "[1]", "—"],
+        ["insert(2)", "{1:0,2:1}", "[1,2]", "—"],
+        ["getRandom()", "{1:0,2:1}", "[1,2]", "returns 1 or 2"],
+        ["delete(1)", "{2:0}", "[2]", "—"],
+        ["insert(3)", "{2:0,3:1}", "[2,3]", "—"],
+        ["getRandom()", "{2:0,3:1}", "[2,3]", "returns 2 or 3"]
       ]
     }
   },
@@ -4423,12 +4539,12 @@ const problemLogicDatabase = {
     space: "O(N) — array of size N.",
     dryrun: {
       testcase: "insert(1), contains(1), remove(1), contains(1)",
-      headers: ["Operation","Hash Key","Bucket Index","Bucket Value"],
+      headers: ["Operation", "Hash Key", "Bucket Index", "Bucket Value"],
       rows: [
-        ["insert(1)","1","1 % 769 = 1","set[1] = true"],
-        ["contains(1)","1","1","true"],
-        ["remove(1)","1","1","set[1] = false"],
-        ["contains(1)","1","1","false"]
+        ["insert(1)", "1", "1 % 769 = 1", "set[1] = true"],
+        ["contains(1)", "1", "1", "true"],
+        ["remove(1)", "1", "1", "set[1] = false"],
+        ["contains(1)", "1", "1", "false"]
       ]
     }
   },
@@ -4439,13 +4555,13 @@ const problemLogicDatabase = {
     space: "O(N) — bucket array + linked nodes.",
     dryrun: {
       testcase: "put(1,'a'), put(2,'b'), get(1), remove(1), get(1)",
-      headers: ["Operation","Key","Bucket","Action"],
+      headers: ["Operation", "Key", "Bucket", "Action"],
       rows: [
-        ["put(1,'a')","1","1 % 769 = 1","bucket[1] = [(1,'a')]"],
-        ["put(2,'b')","2","2 % 769 = 2","bucket[2] = [(2,'b')]"],
-        ["get(1)","1","1","return 'a'"],
-        ["remove(1)","1","1","bucket[1] = []"],
-        ["get(1)","1","1","return -1 (not found)"]
+        ["put(1,'a')", "1", "1 % 769 = 1", "bucket[1] = [(1,'a')]"],
+        ["put(2,'b')", "2", "2 % 769 = 2", "bucket[2] = [(2,'b')]"],
+        ["get(1)", "1", "1", "return 'a'"],
+        ["remove(1)", "1", "1", "bucket[1] = []"],
+        ["get(1)", "1", "1", "return -1 (not found)"]
       ]
     }
   },
@@ -4456,11 +4572,11 @@ const problemLogicDatabase = {
     space: "O(N) — storing all bookings.",
     dryrun: {
       testcase: "book(10, 20), book(15, 25), book(20, 30)",
-      headers: ["Booking","Sorted Intervals","Overlap?","Result"],
+      headers: ["Booking", "Sorted Intervals", "Overlap?", "Result"],
       rows: [
-        ["[10,20]","[]","No","[[10,20]]"],
-        ["[15,25]","[[10,20]]","Yes (15<20)","false"],
-        ["[20,30]","[[10,20]]","No (20==20 boundary)","[[10,20],[20,30]]"]
+        ["[10,20]", "[]", "No", "[[10,20]]"],
+        ["[15,25]", "[[10,20]]", "Yes (15<20)", "false"],
+        ["[20,30]", "[[10,20]]", "No (20==20 boundary)", "[[10,20],[20,30]]"]
       ]
     }
   },
@@ -4471,10 +4587,10 @@ const problemLogicDatabase = {
     space: "O(1) — constant hash variables.",
     dryrun: {
       testcase: "A='aab', B='aaabab'",
-      headers: ["Window","Hash","Match A?","Action"],
+      headers: ["Window", "Hash", "Match A?", "Action"],
       rows: [
-        ["'aab'","computed","Yes","Return 0"],
-        ["['aab'] substring found at index 0","—","—","Done"]
+        ["'aab'", "computed", "Yes", "Return 0"],
+        ["['aab'] substring found at index 0", "—", "—", "Done"]
       ]
     }
   },
@@ -4782,7 +4898,7 @@ Object.assign(problemLogicDatabase, {
       ]
     }
   }
-,
+  ,
 
 
   20: {
@@ -4865,12 +4981,12 @@ Object.assign(problemLogicDatabase, {
     space: "O(N) — shift difference array.",
     dryrun: {
       testcase: "s='abc', shifts=[[0,1,0,1],[1,2,1,2]]",
-      headers: ["Shift","i","j","dir","amount","Diff Array"],
+      headers: ["Shift", "i", "j", "dir", "amount", "Diff Array"],
       rows: [
-        ["[0,1,0,1]","0","1","0 (left)","1","diff[0]-=1, diff[2]+=1"],
-        ["[1,2,1,2]","1","2","1 (right)","2","diff[1]+=2, diff[3]-=2"],
-        ["Prefix Sum","−","−","−","−","[-1,1,3] after partial prefix"],
-        ["Apply to 'abc'","a→-1→z","b→1→c","c→3→f","−","Result: 'zcf'"]
+        ["[0,1,0,1]", "0", "1", "0 (left)", "1", "diff[0]-=1, diff[2]+=1"],
+        ["[1,2,1,2]", "1", "2", "1 (right)", "2", "diff[1]+=2, diff[3]-=2"],
+        ["Prefix Sum", "−", "−", "−", "−", "[-1,1,3] after partial prefix"],
+        ["Apply to 'abc'", "a→-1→z", "b→1→c", "c→3→f", "−", "Result: 'zcf'"]
       ]
     }
   },
@@ -5037,8 +5153,8 @@ Object.assign(problemLogicDatabase, {
       testcase: "2 people, statements = [[2,1],[0,2]] (2=no statement)",
       headers: ["Role combo [P0,P1]", "P0 assumes good?", "Statement match?", "P1 assumes good?", "Statement match?", "Valid?"],
       rows: [
-        ["[1,1] (both good)","Yes","statements[0][1]=1 == P1(good)","Yes","statements[1][0]=0 == P0(good)? No!","Invalid combo"],
-        ["[1,0] (P0 good)","Yes","statements[0][1]=1 == P1(good)? No!","No (bad person statement ignored)","−","Invalid combo"]
+        ["[1,1] (both good)", "Yes", "statements[0][1]=1 == P1(good)", "Yes", "statements[1][0]=0 == P0(good)? No!", "Invalid combo"],
+        ["[1,0] (P0 good)", "Yes", "statements[0][1]=1 == P1(good)? No!", "No (bad person statement ignored)", "−", "Invalid combo"]
       ]
     }
   },
@@ -5276,7 +5392,7 @@ Object.assign(problemLogicDatabase, {
       headers: ["Index i", "s[i]", "LPS Array State", "Last Value", "Happy Prefix String"],
       rows: [
         ["0", "l", "[0, 0, 0, 0, 0]", "−", "−"],
-        ["...","...","[0, 0, 0, 0, 1]","1","'l'"]
+        ["...", "...", "[0, 0, 0, 0, 1]", "1", "'l'"]
       ]
     }
   }
@@ -9268,6 +9384,1056 @@ Object.assign(problemLogicDatabase, {
         ]
       ]
     }
+  },
+  // --- NEW PROBLEMS FOR TALLY 400 OVERRIDES ---
+  // 1. Arrays & Hashing
+  "448": {
+    "intuition": "Find disappeared numbers by marking elements at index (abs(num) - 1) as negative. Unmarked (positive) indices reveal the missing numbers.",
+    "formula": "Negation indicator: <code>nums[abs(x) - 1] = -abs(nums[abs(x) - 1])</code>",
+    "time": "O(N) - two linear passes.",
+    "space": "O(1) - modification in place.",
+    "dryrun": {
+      "testcase": "nums = [4, 3, 2, 7, 8, 2, 3, 1]",
+      "headers": ["Index", "Num", "Target Index", "Operation", "State of Array"],
+      "rows": [
+        ["0", "4", "3", "Negate index 3", "[4, 3, 2, -7, 8, 2, 3, 1]"],
+        ["1", "3", "2", "Negate index 2", "[4, 3, -2, -7, 8, 2, 3, 1]"],
+        ["2", "2", "1", "Negate index 1", "[4, -3, -2, -7, 8, 2, 3, 1]"],
+        ["3", "7", "6", "Negate index 6", "[4, -3, -2, -7, 8, 2, -3, 1]"],
+        ["4", "8", "7", "Negate index 7", "[4, -3, -2, -7, 8, 2, -3, -1]"],
+        ["5", "2", "1", "Already negated", "[4, -3, -2, -7, 8, 2, -3, -1]"],
+        ["6", "3", "2", "Already negated", "[4, -3, -2, -7, 8, 2, -3, -1]"],
+        ["7", "1", "0", "Negate index 0", "[-4, -3, -2, -7, 8, 2, -3, -1]"],
+        ["Result", "-", "-", "Indices 4 and 5 remain positive", "Missing values: [5, 6]"]
+      ]
+    }
+  },
+  "525": {
+    "intuition": "Replace 0 with -1, calculate running sum. Equal running sum at two indices indicates equal number of 0s and 1s between them.",
+    "formula": "Sum update: <code>sum += (num === 1 ? 1 : -1)</code>. Match condition: <code>map.has(sum)</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(N) - hashmap storage.",
+    "dryrun": {
+      "testcase": "nums = [0, 1, 0]",
+      "headers": ["Index", "Num", "Cumulative Sum", "Map State", "Max Length Updated"],
+      "rows": [
+        ["-", "-", "0", "{0: -1}", "0"],
+        ["0", "0", "-1", "{0: -1, -1: 0}", "0"],
+        ["1", "1", "0", "{0: -1, -1: 0}", "2 (1 - (-1))"],
+        ["2", "0", "-1", "{0: -1, -1: 0}", "2 (no update)"]
+      ]
+    }
+  },
+  "896": {
+    "intuition": "Check if array is entirely non-increasing or non-decreasing by tracking flags for both directions.",
+    "formula": "Direction check: <code>increasing &&= (A[i] <= A[i+1]); decreasing &&= (A[i] >= A[i+1])</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(1) - status flags.",
+    "dryrun": {
+      "testcase": "nums = [1, 2, 2, 3]",
+      "headers": ["Step", "Transition", "Increasing flag", "Decreasing flag"],
+      "rows": [
+        ["Start", "-", "true", "true"],
+        ["1", "1 -> 2", "true", "false"],
+        ["2", "2 -> 2", "true", "false"],
+        ["3", "2 -> 3", "true", "false"],
+        ["End", "-", "true || false = true", "Monotonic!"]
+      ]
+    }
+  },
+  "1929": {
+    "intuition": "Create a result array of double size and copy the original elements twice sequentially.",
+    "formula": "Assignment: <code>ans[i] = nums[i]; ans[i + n] = nums[i]</code>",
+    "time": "O(N) - direct indexing copy.",
+    "space": "O(N) - output array allocation.",
+    "dryrun": {
+      "testcase": "nums = [1, 2, 1]",
+      "headers": ["Index i", "Val nums[i]", "Index (i)", "Index (i+n)", "Ans Array State"],
+      "rows": [
+        ["0", "1", "ans[0]=1", "ans[3]=1", "[1, _, _, 1, _, _]"],
+        ["1", "2", "ans[1]=2", "ans[4]=2", "[1, 2, _, 1, 2, _]"],
+        ["2", "1", "ans[2]=1", "ans[5]=1", "[1, 2, 1, 1, 2, 1]"]
+      ]
+    }
+  },
+  // 2. Binary Search
+  "278": {
+    "intuition": "Use binary search bounds to minimize API calls and pinpoint the first bad version.",
+    "formula": "Pivot check: <code>if (isBadVersion(mid)) hi = mid; else lo = mid + 1;</code>",
+    "time": "O(log N) - binary division.",
+    "space": "O(1) - index pointers.",
+    "dryrun": {
+      "testcase": "n = 5, first bad = 4",
+      "headers": ["Low", "High", "Mid", "isBadVersion(mid)", "Next Range"],
+      "rows": [
+        ["1", "5", "3", "false", "lo = 4, hi = 5"],
+        ["4", "5", "4", "true", "lo = 4, hi = 4"],
+        ["Loop End", "lo == hi", "-", "-", "Result is 4"]
+      ]
+    }
+  },
+  "540": {
+    "intuition": "Use binary search on pairs. In a normal array, a duplicate pair starts at an even index. If broken, the single element lies on the left.",
+    "formula": "Index parity: <code>mid ^= 1</code>; compare <code>nums[mid]</code> to determine side.",
+    "time": "O(log N) - half-interval search.",
+    "space": "O(1) - standard pointers.",
+    "dryrun": {
+      "testcase": "nums = [1, 1, 2, 3, 3]",
+      "headers": ["Low", "High", "Mid", "Mid Partner Index", "Comparison Result", "Next Range"],
+      "rows": [
+        ["0", "4", "2", "3", "nums[2]=2 != nums[3]=3", "hi = 2"],
+        ["0", "2", "1", "0", "nums[1]=1 == nums[0]=1", "lo = 2"],
+        ["Loop End", "lo == hi", "-", "-", "Single element nums[2] = 2", "Result is 2"]
+      ]
+    }
+  },
+  "875": {
+    "intuition": "Binary search the speed k between 1 and max(piles). Calculate sum of ceilings of pile / k.",
+    "formula": "Hours calculation: <code>hours = sum(ceil(p / k))</code>",
+    "time": "O(N log(MaxPile)) - speed range partition.",
+    "space": "O(1) - single integers.",
+    "dryrun": {
+      "testcase": "piles = [3, 6, 7], h = 8",
+      "headers": ["Low Speed", "High Speed", "Mid Speed k", "Calculated Hours", "Feasible?"],
+      "rows": [
+        ["1", "7", "4", "ceil(3/4)+ceil(6/4)+ceil(7/4) = 1+2+2 = 5", "Yes, hi = 4"],
+        ["1", "4", "2", "ceil(3/2)+ceil(6/2)+ceil(7/2) = 2+3+4 = 9", "No, lo = 3"],
+        ["3", "4", "3", "ceil(3/3)+ceil(6/3)+ceil(7/3) = 1+2+3 = 6", "Yes, hi = 3"],
+        ["End", "lo == hi", "k = 3", "-", "Optimal speed = 3"]
+      ]
+    }
+  },
+  "1539": {
+    "intuition": "Count missing numbers relative to index values: <code>missing = arr[mid] - (mid + 1)</code>.",
+    "formula": "Binary decision: <code>if (arr[mid] - mid - 1 < k) lo = mid + 1; else hi = mid;</code>",
+    "time": "O(log N) - search index binary division.",
+    "space": "O(1) - standard.",
+    "dryrun": {
+      "testcase": "arr = [2, 3, 4, 7, 11], k = 5",
+      "headers": ["Low", "High", "Mid", "Missing under Mid", "Next Range"],
+      "rows": [
+        ["0", "5", "2", "arr[2] - 2 - 1 = 4 - 3 = 1 < 5", "lo = 3, hi = 5"],
+        ["3", "5", "4", "arr[4] - 4 - 1 = 11 - 5 = 6 >= 5", "lo = 3, hi = 4"],
+        ["3", "4", "3", "arr[3] - 3 - 1 = 7 - 4 = 3 < 5", "lo = 4, hi = 4"],
+        ["End", "lo == 4", "-", "-", "Result: lo + k = 4 + 5 = 9"]
+      ]
+    }
+  },
+  // 3. Linked Lists
+  "61": {
+    "intuition": "Connect tail to head to form a cycle, track length. Cut the cycle after length - (k % length) elements.",
+    "formula": "Steps to new tail: <code>steps = length - (k % length) - 1</code>",
+    "time": "O(N) - cycle traversal.",
+    "space": "O(1) - node pointer operations.",
+    "dryrun": {
+      "testcase": "head = [1, 2, 3, 4, 5], k = 2",
+      "headers": ["Step", "Action", "Variables", "List state"],
+      "rows": [
+        ["1", "Traverse to end, get length", "len = 5, tail node = 5", "1->2->3->4->5"],
+        ["2", "Make list circular", "tail.next = head", "Circular loop formed"],
+        ["3", "Find new tail node", "steps = 5 - 2 - 1 = 2", "Move 2 steps from head to 3"],
+        ["4", "Set new head and break circular link", "newHead = 4; node 3.next = null", "[4, 5, 1, 2, 3]"]
+      ]
+    }
+  },
+  "86": {
+    "intuition": "Create two dummy lists: one for nodes less than x, another for nodes greater or equal to x. Link them at the end.",
+    "formula": "Partition boundary: <code>node.val < x</code> goes to List1, else List2.",
+    "time": "O(N) - single list pass.",
+    "space": "O(1) - pointer rearrangements.",
+    "dryrun": {
+      "testcase": "head = [1, 4, 3, 2, 5, 2], x = 3",
+      "headers": ["Node Val", "Less-Than List", "Greater-Equal List", "List representation"],
+      "rows": [
+        ["1", "[1]", "[]", "1 < 3 -> less"],
+        ["4", "[1]", "[4]", "4 >= 3 -> greater"],
+        ["3", "[1]", "[4, 3]", "3 >= 3 -> greater"],
+        ["2", "[1, 2]", "[4, 3]", "2 < 3 -> less"],
+        ["5", "[1, 2]", "[4, 3, 5]", "5 >= 3 -> greater"],
+        ["2", "[1, 2, 2]", "[4, 3, 5, 2]", "Combine: [1, 2, 2] -> [4, 3, 5, 2]"]
+      ]
+    }
+  },
+  "328": {
+    "intuition": "Separate list into odd-indexed and even-indexed node sublists. Append even list to end of odd list.",
+    "formula": "List split: <code>odd.next = even.next; even.next = odd.next.next;</code>",
+    "time": "O(N) - single pass through pointers.",
+    "space": "O(1) - in-place reallocation.",
+    "dryrun": {
+      "testcase": "head = [1, 2, 3, 4, 5]",
+      "headers": ["Iter Node", "Odd list state", "Even list state", "Pointers connection"],
+      "rows": [
+        ["Start", "[1]", "[2]", "odd = 1, even = 2"],
+        ["Step 1", "[1 -> 3]", "[2 -> 4]", "odd.next = 3, even.next = 4"],
+        ["Step 2", "[1 -> 3 -> 5]", "[2 -> 4 -> null]", "odd.next = 5, even.next = null"],
+        ["End", "[1 -> 3 -> 5 -> 2 -> 4]", "-", "Attach evenHead to odd.next"]
+      ]
+    }
+  },
+  "707": {
+    "intuition": "Design a singly or doubly linked list with support for indexing, head, tail additions and index deletions.",
+    "formula": "Access: <code>cur = head; for(0..index) cur = cur.next</code>",
+    "time": "O(N) - index queries.",
+    "space": "O(N) - node allocations.",
+    "dryrun": {
+      "testcase": "addAtHead(1), addAtTail(3), addAtIndex(1, 2), get(1)",
+      "headers": ["Action", "Index Target", "Node Value", "List state"],
+      "rows": [
+        ["addAtHead", "0", "1", "[1]"],
+        ["addAtTail", "1", "3", "[1, 3]"],
+        ["addAtIndex", "1", "2", "[1, 2, 3]"],
+        ["get", "1", "-", "Returns value 2"]
+      ]
+    }
+  },
+  // 4. Stacks & Queues
+  "394": {
+    "intuition": "Use two stacks: one for repeat counts (k) and one for string segments. Build characters dynamically inside parentheses.",
+    "formula": "Parse condition: <code>'['</code> pushes context, <code>']'</code> pops and multiplies.",
+    "time": "O(Total Output Characters) - linear reconstruction.",
+    "space": "O(Depth of nesting) - stack frames.",
+    "dryrun": {
+      "testcase": "s = '3[a]2[bc]'",
+      "headers": ["Char", "Count Stack", "String Stack", "Current StringBuilder", "Result Update"],
+      "rows": [
+        ["3", "[3]", "[]", "''", "Accumulate number"],
+        ["[", "[3]", "['']", "''", "Push builder, reset"],
+        ["a", "[3]", "['']", "'a'", "Append to builder"],
+        ["]", "[]", "[]", "''", "Pop and build: '' + 3*'a' = 'aaa'"],
+        ["2", "[2]", "[]", "'aaa'", "Accumulate count"],
+        ["[", "[2]", "['aaa']", "''", "Push context"],
+        ["b", "[2]", "['aaa']", "'b'", "Append b"],
+        ["c", "[2]", "['aaa']", "'bc'", "Append c"],
+        ["]", "[]", "[]", "'aaabcbc'", "Combine popped + 2*'bc'"]
+      ]
+    }
+  },
+  "402": {
+    "intuition": "Use a monotonic increasing stack. Remove previous larger elements when encountering a smaller element to minimize the number.",
+    "formula": "Stack condition: <code>if (num < stack.peek()) { stack.pop(); k--; }</code>",
+    "time": "O(N) - element pushes and pops.",
+    "space": "O(N) - stack buffer.",
+    "dryrun": {
+      "testcase": "num = '1432219', k = 3",
+      "headers": ["Char", "Stack State", "Removals Left (k)", "Action taken"],
+      "rows": [
+        ["1", "['1']", "3", "Push 1"],
+        ["4", "['1', '4']", "3", "Push 4"],
+        ["3", "['1', '3']", "2", "Pop 4 (4 > 3), Push 3"],
+        ["2", "['1', '2']", "1", "Pop 3 (3 > 2), Push 2"],
+        ["2", "['1', '2', '2']", "1", "Push 2"],
+        ["1", "['1', '2', '1']", "0", "Pop 2 (2 > 1), Push 1"],
+        ["9", "['1', '2', '1', '9']", "0", "Push 9 (k=0)"],
+        ["End", "-", "-", "Result: '1219'"]
+      ]
+    }
+  },
+  "946": {
+    "intuition": "Simulate stack pushes. Greedily pop elements when stack top matches the next element in popped sequence.",
+    "formula": "Simulate pop: <code>while (st.top() == popped[j]) { st.pop(); j++; }</code>",
+    "time": "O(N) - each element pushed and popped once.",
+    "space": "O(N) - helper stack size.",
+    "dryrun": {
+      "testcase": "pushed = [1, 2, 3], popped = [2, 3, 1]",
+      "headers": ["Pushed item", "Stack state", "Popped Index j", "Action / Match check"],
+      "rows": [
+        ["1", "[1]", "0", "Push 1"],
+        ["2", "[1, 2]", "0", "Push 2; matches popped[0] = 2"],
+        ["-", "[1]", "1", "Pop 2; matches popped[1] = 3 (false)"],
+        ["3", "[1, 3]", "1", "Push 3; matches popped[1] = 3"],
+        ["-", "[1]", "2", "Pop 3; matches popped[2] = 1"],
+        ["-", "[]", "3", "Pop 1; match complete! Return true"]
+      ]
+    }
+  },
+  "1700": {
+    "intuition": "Count student preferences. Iterate through sandwich stack; if no student wants the top sandwich, stop.",
+    "formula": "Break condition: <code>if (counts[sandwich] === 0) return remaining_students</code>",
+    "time": "O(N) - single pass over sandwiches.",
+    "space": "O(1) - count array of size 2.",
+    "dryrun": {
+      "testcase": "students = [1, 1, 0], sandwiches = [0, 1, 0]",
+      "headers": ["Sandwich Type", "Student Counts [type0, type1]", "Action", "Status"],
+      "rows": [
+        ["Start", "[1, 2]", "Initial preference counts", "-"],
+        ["0", "[0, 2]", "Student type 0 takes sandwich", "Served"],
+        ["1", "[0, 1]", "Student type 1 takes sandwich", "Served"],
+        ["0", "[0, 1]", "No student of type 0 remains", "Break! 1 student left"]
+      ]
+    }
+  },
+  // 5. Trees & BSTs
+  "110": {
+    "intuition": "Recursively check subtree heights. If height difference is > 1 at any node, return -1 indicating imbalance.",
+    "formula": "Depth check: <code>if (abs(leftHeight - rightHeight) > 1) return -1;</code>",
+    "time": "O(N) - single postorder traversal.",
+    "space": "O(H) - call stack recursion depth.",
+    "dryrun": {
+      "testcase": "Tree: [1, 2, null, 3] (left-heavy chain)",
+      "headers": ["Node Val", "Left Depth", "Right Depth", "Height Difference", "Is Balanced?"],
+      "rows": [
+        ["3", "0", "0", "0", "true (returns depth 1)"],
+        ["2", "1", "0", "1", "true (returns depth 2)"],
+        ["1", "2", "0", "2", "Imbalanced! Returns -1"]
+      ]
+    }
+  },
+  "111": {
+    "intuition": "Find the minimum depth. In tree DFS, only compute positive subtree depths when nodes have single children.",
+    "formula": "Minimum check: <code>if (L === 0 || R === 0) return L + R + 1; else return min(L, R) + 1;</code>",
+    "time": "O(N) - node traversal.",
+    "space": "O(H) - recursion recursion frame.",
+    "dryrun": {
+      "testcase": "Tree: [1, 2, 3, null, null, null, 4]",
+      "headers": ["Node", "Left child depth", "Right child depth", "Depth Result"],
+      "rows": [
+        ["4", "0", "0", "1"],
+        ["3", "0", "1", "L=0 -> 0+1+1 = 2"],
+        ["2", "0", "0", "1"],
+        ["1", "1", "2", "min(1, 2)+1 = 2"]
+      ]
+    }
+  },
+  "199": {
+    "intuition": "Perform depth first search (preorder reverse: root -> right -> left) and record node at first visit of each depth level.",
+    "formula": "DFS inclusion: <code>if (depth === result.length) result.push(node.val);</code>",
+    "time": "O(N) - visits all tree nodes.",
+    "space": "O(H) - result list size and stack space.",
+    "dryrun": {
+      "testcase": "Tree: [1, 2, 3, null, 5, null, 4]",
+      "headers": ["Visit Node", "DFS Depth", "Result Array Size", "Result Array State"],
+      "rows": [
+        ["1", "0", "0", "[1]"],
+        ["3", "1", "1", "[1, 3]"],
+        ["4", "2", "2", "[1, 3, 4]"],
+        ["2", "1", "3", "[1, 3, 4] (already filled for lvl 1)"],
+        ["5", "2", "3", "[1, 3, 4] (already filled for lvl 2)"]
+      ]
+    }
+  },
+  "1008": {
+    "intuition": "Build a BST from preorder array. Keep a boundary upper limit to determine tree parent insertion.",
+    "formula": "Range bounds: <code>if (val > bound) return null; node.left = build(min, val); node.right = build(val, max);</code>",
+    "time": "O(N) - linear traversal index.",
+    "space": "O(H) - call recursion memory.",
+    "dryrun": {
+      "testcase": "preorder = [8, 5, 10]",
+      "headers": ["Node Val", "Upper Bound", "L / R Child assignment", "Subtree Root"],
+      "rows": [
+        ["8", "Infinity", "Root node", "8"],
+        ["5", "8", "Left child of 8", "5"],
+        ["10", "Infinity (right child of 8)", "Right child of 8", "10"]
+      ]
+    }
+  },
+  // 6. Heaps & Intervals
+  "252": {
+    "intuition": "Sort intervals by start time. If any interval start is less than previous interval end, meetings overlap.",
+    "formula": "Overlap logic: <code>intervals[i][0] < intervals[i-1][1]</code>",
+    "time": "O(N log N) - interval sorting.",
+    "space": "O(1) - sort in-place.",
+    "dryrun": {
+      "testcase": "intervals = [[0, 30], [5, 10], [15, 20]]",
+      "headers": ["Step", "Prev End", "Cur Start", "Comparison", "Conflict?"],
+      "rows": [
+        ["Sort", "-", "-", "Sort orders correctly", "No"],
+        ["1", "30", "5", "5 < 30", "Conflict! Return false"]
+      ]
+    }
+  },
+  "253": {
+    "intuition": "Sort starts and ends separately. Use two pointers to track concurrent rooms needed without sorting overlaps.",
+    "formula": "Room allocator: <code>if (start[s] < end[e]) { rooms++; s++; } else { e++; s++; }</code>",
+    "time": "O(N log N) - independent coordinate sorting.",
+    "space": "O(N) - arrays space.",
+    "dryrun": {
+      "testcase": "intervals = [[0, 30], [5, 10], [15, 20]]",
+      "headers": ["Pointer s", "Pointer e", "Start Val", "End Val", "Active Rooms", "Max Rooms"],
+      "rows": [
+        ["0", "0", "0", "10", "1 (s++)", "1"],
+        ["1", "0", "5", "10", "2 (s++)", "2"],
+        ["2", "0", "15", "10", "2 (e++ free up, s++)", "2"]
+      ]
+    }
+  },
+  "378": {
+    "intuition": "Use binary search on value range [min, max]. Count numbers less than or equal to mid in matrix to adjust query bounds.",
+    "formula": "Range search: count elements <= mid using two pointers (row, col).",
+    "time": "O(N log(Max-Min)) - search boundaries.",
+    "space": "O(1) - index variables.",
+    "dryrun": {
+      "testcase": "matrix = [[1, 5], [10, 12]], k = 2",
+      "headers": ["Low", "High", "Mid", "Count <= Mid", "Feasible direction"],
+      "rows": [
+        ["1", "12", "6", "2 (elements 1, 5)", "Count 2 >= k=2 -> high = 6"],
+        ["1", "6", "3", "1 (element 1)", "Count 1 < k=2 -> low = 4"],
+        ["4", "6", "5", "2 (elements 1, 5)", "Count 2 >= k=2 -> high = 5"],
+        ["4", "5", "4", "1 (element 1)", "Count 1 < k=2 -> low = 5"],
+        ["End", "lo == hi", "Ans = 5", "-", "-"]
+      ]
+    }
+  },
+  "973": {
+    "intuition": "Compute squared Euclidean distance for each point. Build a min heap or use QuickSelect to partition top k closest.",
+    "formula": "Distance computation: <code>d = x^2 + y^2</code>",
+    "time": "O(N log K) - heap extraction or O(N) avg QuickSelect.",
+    "space": "O(K) - active elements heap.",
+    "dryrun": {
+      "testcase": "points = [[1,3], [-2,2]], k = 1",
+      "headers": ["Point", "Squared Dist", "Heap State (Max Heap size 1)", "Action"],
+      "rows": [
+        ["[1,3]", "1+9 = 10", "[ [1,3] (dist 10) ]", "Add [1,3]"],
+        ["[-2,2]", "4+4 = 8", "[ [-2,2] (dist 8) ]", "8 < 10, evict [1,3] and push [-2,2]"],
+        ["Result", "-", "[ [-2,2] ]", "Top 1 closest point"]
+      ]
+    }
+  },
+  // 7. Graphs
+  "133": {
+    "intuition": "Traverse the graph (BFS or DFS) and use a hashmap to map original nodes to their cloned counterparts.",
+    "formula": "Clone mapping: <code>clones.set(node, new Node(node.val))</code>",
+    "time": "O(V + E) - graph node and edge visits.",
+    "space": "O(V) - storage of nodes in map.",
+    "dryrun": {
+      "testcase": "AdjList: [[2,4],[1,3],[2,4],[1,3]]",
+      "headers": ["Node Queue", "Visited / Map Keys", "Cloning Node val", "Neighbors update"],
+      "rows": [
+        ["[1]", "{1}", "1", "Map contains clone 1"],
+        ["[2, 4]", "{1, 2, 4}", "2", "Clone 2 created, map neighbors"],
+        ["[4, 3]", "{1, 2, 4, 3}", "4", "Clone 4 created, map neighbors"],
+        ["[3]", "{1, 2, 4, 3}", "3", "Clone 3 created, attach all edges"]
+      ]
+    }
+  },
+  "1791": {
+    "intuition": "Since the graph is a star graph with exactly one center connecting all other nodes, the center must appear in the first two edges.",
+    "formula": "Match logic: <code>edges[0][0] == edges[1][0] || edges[0][0] == edges[1][1] ? edges[0][0] : edges[0][1]</code>",
+    "time": "O(1) - single coordinate check.",
+    "space": "O(1) - constant memory.",
+    "dryrun": {
+      "testcase": "edges = [[1, 2], [2, 3]]",
+      "headers": ["Edge 0", "Edge 1", "Common Node check", "Result Center"],
+      "rows": [
+        ["[1, 2]", "[2, 3]", "2 is present in both edges", "2"]
+      ]
+    }
+  },
+  "1971": {
+    "intuition": "Use Union Find to group connected nodes. If source and destination have the same parent group, a path exists.",
+    "formula": "DSU Union: <code>union(u, v)</code>. Check: <code>find(src) === find(dst)</code>",
+    "time": "O(V + E alpha(V)) - standard DSU operations.",
+    "space": "O(V) - parent tracker array.",
+    "dryrun": {
+      "testcase": "edges = [[0, 1], [1, 2]], src = 0, dst = 2",
+      "headers": ["Edge union", "Parents status [0, 1, 2]", "find(src)", "find(dst)", "Path Exists?"],
+      "rows": [
+        ["Initial", "[0, 1, 2]", "0", "2", "No"],
+        ["0-1", "[1, 1, 2]", "1", "2", "No"],
+        ["1-2", "[2, 2, 2]", "2", "2", "Yes (find(0) == find(2))"]
+      ]
+    }
+  },
+  "997": {
+    "intuition": "Compute net trust scores (indegree - outdegree) for each person. The judge will have score N - 1.",
+    "formula": "Score update: <code>trust[a]--; trust[b]++;</code>",
+    "time": "O(V + E) - linear scan of arrays.",
+    "space": "O(N) - counts array.",
+    "dryrun": {
+      "testcase": "n = 3, trust = [[1, 3], [2, 3]]",
+      "headers": ["Pair [a, b]", "Scores [p1, p2, p3]", "Judge Condition?"],
+      "rows": [
+        ["Start", "[0, 0, 0]", "Needs score N-1 = 2"],
+        ["[1, 3]", "[-1, 0, 1]", "Person 1 out-trusts, 3 gets trusted"],
+        ["[2, 3]", "[-1, -1, 2]", "Person 2 out-trusts, 3 has trusted count 2"],
+        ["Result", "-", "Index 3 matches target score 2", "Judge is 3"]
+      ]
+    }
+  },
+  // 8. Tries & Bits
+  "231": {
+    "intuition": "A power of two has exactly one set bit in its binary representation. Check with bitwise AND logic.",
+    "formula": "Power check: <code>(n > 0) && (n & (n - 1)) === 0</code>",
+    "time": "O(1) - single instruction check.",
+    "space": "O(1) - in-place registers.",
+    "dryrun": {
+      "testcase": "n = 8",
+      "headers": ["Number n", "Binary n", "Number (n-1)", "Binary (n-1)", "n & (n-1)", "Is Power?"],
+      "rows": [
+        ["8", "1000", "7", "0111", "1000 & 0111 = 0000", "True"]
+      ]
+    }
+  },
+  "260": {
+    "intuition": "XOR all numbers. The result is (A ^ B). Find a set bit in result, partition numbers into two groups and XOR each group.",
+    "formula": "Lowest set bit: <code>diff = xor & (-xor)</code>",
+    "time": "O(N) - two passes over array.",
+    "space": "O(1) - bit registers.",
+    "dryrun": {
+      "testcase": "nums = [1, 2, 1, 3, 2, 5]",
+      "headers": ["Step", "XOR total", "Set Bit partition", "Group 1 XOR", "Group 2 XOR"],
+      "rows": [
+        ["All XOR", "1^2^1^3^2^5 = 3^5 = 6 (0110)", "-", "-", "-"],
+        ["Diff Bit", "6 & -6 = 2 (0010)", "Check bit index 1", "-", "-"],
+        ["Partition", "-", "Bit 1 set vs not set", "1^1^5 = 5", "2^3^2 = 3"],
+        ["Result", "-", "-", "A = 5", "B = 3"]
+      ]
+    }
+  },
+  "461": {
+    "intuition": "Hamming distance is the count of differing bits, which corresponds to the number of set bits in (x ^ y).",
+    "formula": "Hamming: count set bits of <code>x ^ y</code>.",
+    "time": "O(1) - limited to integer size (32 loops).",
+    "space": "O(1) - register calculations.",
+    "dryrun": {
+      "testcase": "x = 1, y = 4",
+      "headers": ["x (Binary)", "y (Binary)", "x ^ y (Binary)", "Set Bit Count"],
+      "rows": [
+        ["0001", "0100", "0101", "2"]
+      ]
+    }
+  },
+  "1356": {
+    "intuition": "Sort integers based on their set bits counts. If bit counts match, sort them numerically.",
+    "formula": "Comparator: <code>compare(a, b) => bits(a) - bits(b) || a - b</code>",
+    "time": "O(N log N) - standard comparison sorting.",
+    "space": "O(N) - temporary arrays.",
+    "dryrun": {
+      "testcase": "arr = [3, 1, 2]",
+      "headers": ["Number A", "Bits A", "Number B", "Bits B", "Comparison result"],
+      "rows": [
+        ["3", "2", "1", "1", "bits(1) < bits(3) -> 1 before 3"],
+        ["2", "1", "3", "2", "bits(2) < bits(3) -> 2 before 3"],
+        ["1", "1", "2", "1", "bits(1) == bits(2) -> compare value: 1 before 2"],
+        ["Final order", "-", "-", "-", "[1, 2, 3]"]
+      ]
+    }
+  },
+  // 9. Dynamic Programming
+  "91": {
+    "intuition": "Calculate decodings count using 1D DP. A digit can decode alone (if not '0') or combine with the previous digit (if between '10' and '26').",
+    "formula": "DP state: <code>dp[i] = (valid_single ? dp[i-1] : 0) + (valid_double ? dp[i-2] : 0)</code>",
+    "time": "O(N) - single dynamic scan.",
+    "space": "O(N) or O(1) - reduced variables.",
+    "dryrun": {
+      "testcase": "s = '12'",
+      "headers": ["Index i", "Char s[i]", "Single check", "Double check", "dp values [dp_i-2, dp_i-1, dp_i]"],
+      "rows": [
+        ["Start", "-", "-", "-", "[1, 1, _]"],
+        ["1", "'1'", "Valid ('1')", "-", "[1, 1, 1]"],
+        ["2", "'2'", "Valid ('2')", "Valid ('12')", "[1, 1, 2]"]
+      ]
+    }
+  },
+  "139": {
+    "intuition": "Check if string can be split. dp[i] is true if a substring s[j..i] exists in dictionary and dp[j] is true.",
+    "formula": "Boolean DP: <code>dp[i] ||= dp[j] && set.has(s.substring(j, i))</code>",
+    "time": "O(N^2) - double loop substring lookup.",
+    "space": "O(N) - boolean lookup table.",
+    "dryrun": {
+      "testcase": "s = 'leetcode', dict = ['leet', 'code']",
+      "headers": ["Index i", "Word candidate", "Condition check dp[j] && dict.has", "dp Array State"],
+      "rows": [
+        ["0", "-", "dp[0] = true", "[T, F, F, F, F, F, F, F, F]"],
+        ["4", "s[0..4] = 'leet'", "dp[0] && dict.has('leet') = true", "[T, F, F, F, T, F, F, F, F]"],
+        ["8", "s[4..8] = 'code'", "dp[4] && dict.has('code') = true", "[T, F, F, F, T, F, F, F, T]"]
+      ]
+    }
+  },
+  "221": {
+    "intuition": "Find the maximum square of 1s in a grid. dp[r][c] stores the side length of the square ending at grid coordinate.",
+    "formula": "DP transition: <code>dp[r][c] = min(dp[r-1][c], dp[r][c-1], dp[r-1][c-1]) + 1</code>",
+    "time": "O(R * C) - grid traversal.",
+    "space": "O(R * C) - grid DP array.",
+    "dryrun": {
+      "testcase": "matrix = [['1','1'], ['1','1']]",
+      "headers": ["Cell (r,c)", "Val", "Neighbors dp [Up, Left, Diag]", "New dp[r][c]"],
+      "rows": [
+        ["(0,0)", "1", "[0, 0, 0]", "1"],
+        ["(0,1)", "1", "[0, 1, 0]", "1"],
+        ["(1,0)", "1", "[1, 0, 0]", "1"],
+        ["(1,1)", "1", "[1, 1, 1]", "min(1,1,1) + 1 = 2 (Max square area = 4)"]
+      ]
+    }
+  },
+  "1137": {
+    "intuition": "Find the n-th Tribonacci number. Precompute sum of last three numbers sequentially in O(1) space.",
+    "formula": "Tribonacci: <code>T[n] = T[n-1] + T[n-2] + T[n-3]</code>",
+    "time": "O(N) - single iteration loop.",
+    "space": "O(1) - three dynamic variables.",
+    "dryrun": {
+      "testcase": "n = 4",
+      "headers": ["Step", "T0", "T1", "T2", "Next Value T3"],
+      "rows": [
+        ["Start", "0", "1", "1", "-"],
+        ["1", "1", "1", "2", "0+1+1 = 2"],
+        ["2", "1", "2", "4", "1+1+2 = 4"]
+      ]
+    }
+  },
+  // 10. Backtracking & Recursion
+  "47": {
+    "intuition": "Generate all permutations. Sort elements first to skip duplicates at the same tree depth.",
+    "formula": "Skip duplicates: <code>if (i > 0 && nums[i] == nums[i-1] && !used[i-1]) continue;</code>",
+    "time": "O(N * N!) - factorials generation complexity.",
+    "space": "O(N) - recursion array stack.",
+    "dryrun": {
+      "testcase": "nums = [1, 1, 2]",
+      "headers": ["Depth level", "Used Indices status", "Permutation candidate", "Action / Skip decision"],
+      "rows": [
+        ["0", "[]", "[]", "Choose index 0 (1)"],
+        ["1", "[0]", "[1]", "Choose index 1 (1) - skip (duplicate condition match)"],
+        ["1", "[0]", "[1]", "Choose index 2 (2)"],
+        ["2", "[0, 2]", "[1, 2]", "Choose index 1 (1)"],
+        ["3", "[0, 1, 2]", "[1, 2, 1]", "Output perm: [1, 2, 1]"]
+      ]
+    }
+  },
+  "77": {
+    "intuition": "Generate combinations of size k from numbers 1..n. Recurse from current number index.",
+    "formula": "Decision tree: <code>backtrack(start + 1, path)</code>",
+    "time": "O(C(N, K)) - combinatorial permutations.",
+    "space": "O(K) - active recursion path.",
+    "dryrun": {
+      "testcase": "n = 3, k = 2",
+      "headers": ["Decision Branch", "Path State", "Remaining candidates", "Validation?"],
+      "rows": [
+        ["Root", "[]", "1, 2, 3", "Incomplete"],
+        ["Push 1", "[1]", "2, 3", "Incomplete"],
+        ["Push 1->2", "[1, 2]", "3", "Complete combination! Output: [1, 2]"],
+        ["Pop 2, Push 3", "[1, 3]", "None", "Complete combination! Output: [1, 3]"]
+      ]
+    }
+  },
+  "131": {
+    "intuition": "Partition string into palindrome substrings. Use backtracking to split index and check if substring is a palindrome.",
+    "formula": "Validation: <code>if (isPalindrome(s, start, i)) backtrack(i + 1)</code>",
+    "time": "O(N * 2^N) - exponential partitioning checks.",
+    "space": "O(N) - recursion depth.",
+    "dryrun": {
+      "testcase": "s = 'aab'",
+      "headers": ["Index Partition", "String split check", "Is Palindrome?", "Current Path State"],
+      "rows": [
+        ["0", "'a'", "True", "['a']"],
+        ["1", "'a'", "True", "['a', 'a']"],
+        ["2", "'b'", "True", "['a', 'a', 'b'] (Match found)"],
+        ["Backtrack 0", "'aa'", "True", "['aa']"],
+        ["2", "'b'", "True", "['aa', 'b'] (Match found)"]
+      ]
+    }
+  },
+  "216": {
+    "intuition": "Find combinations of k numbers that sum to n. Only use digits 1-9 once.",
+    "formula": "Sum constraint: <code>if (sum === n && path.length === k) result.push([...path])</code>",
+    "time": "O(C(9, K)) - combinations of 9 digits.",
+    "space": "O(K) - recursion memory size.",
+    "dryrun": {
+      "testcase": "k = 2, n = 5",
+      "headers": ["Candidate digit", "Current Path", "Current Sum", "Feasible?"],
+      "rows": [
+        ["1", "[1]", "1", "Yes, continue"],
+        ["2", "[1, 2]", "3", "Length 2, Sum 3 != 5 (Backtrack)"],
+        ["4", "[1, 4]", "5", "Length 2, Sum 5 == 5 (Record result!)"],
+        ["2", "[2]", "2", "Yes, continue"],
+        ["3", "[2, 3]", "5", "Length 2, Sum 5 == 5 (Record result!)"]
+      ]
+    }
+  },
+  // 11. Sorting & Partitioning
+  "75": {
+    "intuition": "Dutch National Flag algorithm. Use three pointers (low, mid, high) to group 0s, 1s, and 2s in a single pass.",
+    "formula": "Pointers update: <code>swap(low, mid) if val == 0; swap(mid, high) if val == 2;</code>",
+    "time": "O(N) - single array sweep.",
+    "space": "O(1) - constant memory pointers.",
+    "dryrun": {
+      "testcase": "nums = [2, 0, 1]",
+      "headers": ["Low pointer", "Mid pointer", "High pointer", "Array state", "Action"],
+      "rows": [
+        ["0", "0", "2", "[2, 0, 1]", "nums[mid]=2 -> Swap with high"],
+        ["0", "0", "1", "[1, 0, 2]", "nums[mid]=1 -> increment mid"],
+        ["0", "1", "1", "[1, 0, 2]", "nums[mid]=0 -> Swap low and mid, increment both"],
+        ["1", "2", "1", "[0, 1, 2]", "Loop termination (mid > high)"]
+      ]
+    }
+  },
+  "905": {
+    "intuition": "Partition array by parity. Maintain two pointers from ends and swap odd values at left with even values at right.",
+    "formula": "Condition: <code>if (nums[lo] % 2 > nums[hi] % 2) swap(lo, hi)</code>",
+    "time": "O(N) - linear convergence pass.",
+    "space": "O(1) - in-place swap values.",
+    "dryrun": {
+      "testcase": "nums = [3, 1, 2, 4]",
+      "headers": ["Low index", "High index", "Parity check (lo, hi)", "Action taken", "Array State"],
+      "rows": [
+        ["0", "3", "3 is odd, 4 is even", "Swap elements", "[4, 1, 2, 3]"],
+        ["0", "2", "4 is even, 2 is even", "Increment low", "[4, 1, 2, 3]"],
+        ["1", "2", "1 is odd, 2 is even", "Swap elements", "[4, 2, 1, 3]"],
+        ["End", "-", "-", "-", "Final: [4, 2, 1, 3]"]
+      ]
+    }
+  },
+  "1051": {
+    "intuition": "Compare heights array with its sorted version. The number of mismatches is the number of out of order indices.",
+    "formula": "Check condition: <code>if (heights[i] !== expected[i]) count++</code>",
+    "time": "O(N log N) - sorting copy array.",
+    "space": "O(N) - expected array storage.",
+    "dryrun": {
+      "testcase": "heights = [1, 1, 4, 2, 1, 3]",
+      "headers": ["Index i", "Actual Height", "Expected Height", "Mismatch?", "Count"],
+      "rows": [
+        ["0", "1", "1", "No", "0"],
+        ["2", "4", "1", "Yes", "1"],
+        ["3", "2", "2", "No", "1"],
+        ["4", "1", "3", "Yes", "2"],
+        ["5", "3", "4", "Yes", "3 (Total out of order = 3)"]
+      ]
+    }
+  },
+  "1122": {
+    "intuition": "Custom sort array 1 using index map of array 2. Place items not in array 2 in sorted order at the end.",
+    "formula": "Comparator: lookup <code>rankMap.get(val)</code>, fallback to sorted index.",
+    "time": "O(N log N) - custom sorting.",
+    "space": "O(N) - lookup ranking map.",
+    "dryrun": {
+      "testcase": "arr1 = [2,3,1], arr2 = [3,2]",
+      "headers": ["Element A", "Element B", "Rank lookup (A vs B)", "Action"],
+      "rows": [
+        ["2", "3", "Rank of 2 is 1, Rank of 3 is 0", "Put 3 before 2"],
+        ["1", "2", "1 is not in arr2, 2 has rank 1", "Put 2 before 1"],
+        ["Final", "-", "-", "Sorted order: [3, 2, 1]"]
+      ]
+    }
+  },
+  // 12. Design & Advanced DS
+  "384": {
+    "intuition": "Implement Fisher-Yates shuffle algorithm. Iterate backward, swapping each element with a random previous element.",
+    "formula": "Swap index: <code>j = rand(0..i); swap(nums[i], nums[j])</code>",
+    "time": "O(N) - single array swap pass.",
+    "space": "O(N) - state backup.",
+    "dryrun": {
+      "testcase": "nums = [1, 2, 3]",
+      "headers": ["Index i", "Random Choice j", "Swap items", "New Array status"],
+      "rows": [
+        ["2", "0", "Swap nums[2] and nums[0]", "[3, 2, 1]"],
+        ["1", "1", "No swap needed", "[3, 2, 1]"],
+        ["0", "-", "End of pass", "[3, 2, 1]"]
+      ]
+    }
+  },
+  "622": {
+    "intuition": "Design a circular queue with array pointers. Pointers wrap around using modulo operator.",
+    "formula": "Pointers wrap: <code>tail = (tail + 1) % size</code>",
+    "time": "O(1) - simple indexing.",
+    "space": "O(K) - array container capacity.",
+    "dryrun": {
+      "testcase": "enQueue(1), enQueue(2), deQueue()",
+      "headers": ["Command", "Queue Array", "Head index", "Tail index", "Success?"],
+      "rows": [
+        ["enQueue(1)", "[1, _]", "0", "0", "True"],
+        ["enQueue(2)", "[1, 2]", "0", "1", "True"],
+        ["deQueue()", "[_, 2]", "1", "1", "True"]
+      ]
+    }
+  },
+  "641": {
+    "intuition": "Design a circular deque with index trackers for both head and tail to support double-ended insertions and deletions.",
+    "formula": "Indices: <code>head = (head - 1 + k) % k; tail = (tail + 1) % k</code>",
+    "time": "O(1) - direct updates.",
+    "space": "O(K) - storage array.",
+    "dryrun": {
+      "testcase": "insertFront(1), insertLast(2), getFront()",
+      "headers": ["Action", "Array representation", "Head", "Tail", "Return value"],
+      "rows": [
+        ["insertFront(1)", "[_, _, 1]", "2", "2", "True"],
+        ["insertLast(2)", "[2, _, 1]", "2", "0", "True"],
+        ["getFront()", "[2, _, 1]", "2", "0", "Returns 1"]
+      ]
+    }
+  },
+  "1603": {
+    "intuition": "Design a parking system tracking remaining parking slot capacities for big, medium, and small car sizes.",
+    "formula": "Capacity verify: <code>if (slots[type] > 0) { slots[type]--; return true; }</code>",
+    "time": "O(1) - single access checks.",
+    "space": "O(1) - constant array.",
+    "dryrun": {
+      "testcase": "slots = [1, 0, 0] (big, med, small)",
+      "headers": ["Car Type", "Slots Available", "Can Park?", "Remaining slots"],
+      "rows": [
+        ["1 (big)", "1", "True", "[0, 0, 0]"],
+        ["1 (big)", "0", "False", "[0, 0, 0]"]
+      ]
+    }
+  },
+  // 13. Strings & Pattern Matching
+  "14": {
+    "intuition": "Compare prefix character by character against other strings. Shorten target prefix until it matches all array items.",
+    "formula": "Prefix check: <code>while(strs[i].indexOf(prefix) !== 0) prefix = prefix.substring(0, prefix.length-1)</code>",
+    "time": "O(S) - total characters count.",
+    "space": "O(1) - in-place matching prefix string.",
+    "dryrun": {
+      "testcase": "strs = ['flower', 'flow', 'flight']",
+      "headers": ["Iteration", "Current Prefix", "Target Word", "Match index", "Next prefix state"],
+      "rows": [
+        ["Start", "'flower'", "-", "-", "'flower'"],
+        ["1", "'flower'", "'flow'", "-1", "'flow' (trimmed)"],
+        ["2", "'flow'", "'flight'", "-1", "'fl' (trimmed)"],
+        ["End", "'fl'", "-", "Matches all!", "'fl'"]
+      ]
+    }
+  },
+  "28": {
+    "intuition": "Use KMP algorithm prefix table to find matching patterns without repeating checks on incorrect indices.",
+    "formula": "LPS table match: <code>j = lps[j-1]</code> when mismatch occurs.",
+    "time": "O(N + M) - linear matching passes.",
+    "space": "O(M) - pattern lookup lookup array.",
+    "dryrun": {
+      "testcase": "haystack = 'sadbutsad', needle = 'sad'",
+      "headers": ["Index i", "Haystack Char", "Needle Index j", "Needle Char", "Comparison status"],
+      "rows": [
+        ["0", "'s'", "0", "'s'", "Match, increment j"],
+        ["1", "'a'", "1", "'a'", "Match, increment j"],
+        ["2", "'d'", "2", "'d'", "Match, j=3 == needle.length -> Match found at index 0"]
+      ]
+    }
+  },
+  "43": {
+    "intuition": "Multiply strings digit by digit and store result in a buffer array. Multiply index position values.",
+    "formula": "Position index: <code>p1 = i + j; p2 = i + j + 1; sum = mul + pos[p2]</code>",
+    "time": "O(N * M) - double digits scan.",
+    "space": "O(N + M) - result representation array.",
+    "dryrun": {
+      "testcase": "num1 = '12', num2 = '3'",
+      "headers": ["Index i", "Digit 1", "Index j", "Digit 2", "Multiply result", "Array index p1, p2", "Array state"],
+      "rows": [
+        ["1", "2", "0", "3", "6", "1, 2", "[0, 0, 6]"],
+        ["0", "1", "0", "3", "3", "0, 1", "[0, 3, 6] (Final output: '36')"]
+      ]
+    }
+  },
+  "680": {
+    "intuition": "Use two pointers from ends. If a mismatch is found, check if remainder is a palindrome by skipping one element.",
+    "formula": "Skipping checks: <code>isPalin(l+1, r) || isPalin(l, r-1)</code>",
+    "time": "O(N) - single verification sweep.",
+    "space": "O(1) - pointer index markers.",
+    "dryrun": {
+      "testcase": "s = 'abca'",
+      "headers": ["Low pointer", "High pointer", "Chars", "Action on mismatch", "Alternative Palindrome check?"],
+      "rows": [
+        ["0", "3", "'a' == 'a'", "Match, progress", "-"],
+        ["1", "2", "'b' != 'c'", "Mismatch!", "Check 'b' (skip 'c') or 'c' (skip 'b') -> 'b' is palindrome! Return true"]
+      ]
+    }
+  },
+  // 14. Greedy Algorithms
+  "45": {
+    "intuition": "Greedy BFS. Track the maximum reach possible inside current jump boundary and increment jumps.",
+    "formula": "Farthest: <code>maxReach = max(maxReach, i + nums[i])</code>. Jump update: <code>if (i === end) { jumps++; end = maxReach; }</code>",
+    "time": "O(N) - single loop sweep.",
+    "space": "O(1) - count integer updates.",
+    "dryrun": {
+      "testcase": "nums = [2, 3, 1, 1, 4]",
+      "headers": ["Index i", "Val nums[i]", "Farthest reach possible", "End Boundary", "Jumps count"],
+      "rows": [
+        ["0", "2", "2", "0", "1 (end becomes 2)"],
+        ["1", "3", "4", "2", "1"],
+        ["2", "1", "4", "2", "2 (end becomes 4)"],
+        ["End", "-", "-", "4", "2 jumps"]
+      ]
+    }
+  },
+  "55": {
+    "intuition": "Track maximum reachable index. If current index becomes larger than maximum reach, return false.",
+    "formula": "Reach update: <code>maxReach = max(maxReach, i + nums[i]); if (maxReach >= target) return true;</code>",
+    "time": "O(N) - single array pass.",
+    "space": "O(1) - single integer.",
+    "dryrun": {
+      "testcase": "nums = [2, 3, 1, 1, 4]",
+      "headers": ["Index i", "Val", "Reach from here (i + nums[i])", "Maximum Reach", "Feasible?"],
+      "rows": [
+        ["0", "2", "2", "2", "Yes"],
+        ["1", "3", "4", "4", "Yes (4 >= target index 4) -> returns true"]
+      ]
+    }
+  },
+  "134": {
+    "intuition": "Iterate through stations. Track current gas surplus. If total net gas is negative, return -1. Otherwise start station is the next one.",
+    "formula": "Start update: <code>if (currentGas < 0) { start = i + 1; currentGas = 0; }</code>",
+    "time": "O(N) - single pass.",
+    "space": "O(1) - integer sums.",
+    "dryrun": {
+      "testcase": "gas = [1, 2], cost = [2, 1]",
+      "headers": ["Station i", "Net gas (gas - cost)", "Current surplus", "Start candidate", "Total net gas"],
+      "rows": [
+        ["0", "-1", "-1", "1 (surplus reset to 0)", "-1"],
+        ["1", "+1", "+1", "1", "0"],
+        ["End", "-", "-", "Total net gas >= 0", "Start is station 1"]
+      ]
+    }
+  },
+  "406": {
+    "intuition": "Sort people by height in descending order, and by queue index in ascending order. Insert people into result queue using index.",
+    "formula": "Comparator: <code>compare(a, b) => b[0] - a[0] || a[1] - b[1]</code>",
+    "time": "O(N^2) - array insertions.",
+    "space": "O(N) - output list.",
+    "dryrun": {
+      "testcase": "people = [[7,0], [4,4], [7,1], [5,0]]",
+      "headers": ["Sorted people", "Inserting person", "Insert Index", "Queue State"],
+      "rows": [
+        ["[[7,0],[7,1],[5,0],[4,4]]", "[7,0]", "0", "[[7,0]]"],
+        ["-", "[7,1]", "1", "[[7,0], [7,1]]"],
+        ["-", "[5,0]", "0", "[[5,0], [7,0], [7,1]]"],
+        ["-", "[4,4]", "4", "[[5,0], [7,0], [7,1], [4,4]]"]
+      ]
+    }
+  },
+  "605": {
+    "intuition": "Check if a flower can be planted by verifying if adjacent slots are empty. Plant greedily.",
+    "formula": "Slot validation: <code>prev === 0 && next === 0 && cur === 0</code>",
+    "time": "O(N) - single pass loop.",
+    "space": "O(1) - in-place updates.",
+    "dryrun": {
+      "testcase": "flowerbed = [1, 0, 0, 0, 1], n = 1",
+      "headers": ["Index i", "Val", "Neighbors check [prev, next]", "Planted?", "Remaining n"],
+      "rows": [
+        ["0", "1", "-, 0", "No", "1"],
+        ["1", "0", "1, 0", "No", "1"],
+        ["2", "0", "0, 0", "Yes (planted!)", "0 (Satisfied!)"]
+      ]
+    }
+  },
+  "860": {
+    "intuition": "Greedily provide change. Prefer using 10 + 5 bills for a 20 change request to preserve 5 bills.",
+    "formula": "Decision tree: pop 10 & 5 on 20, or three 5s if 10 is not available.",
+    "time": "O(N) - single pass of customer list.",
+    "space": "O(1) - variables for 5 and 10 counts.",
+    "dryrun": {
+      "testcase": "bills = [5, 5, 10, 20]",
+      "headers": ["Bill paid", "Change needed", "Active bills state [5s, 10s]", "Action"],
+      "rows": [
+        ["5", "0", "[1, 0]", "Collect 5"],
+        ["5", "0", "[2, 0]", "Collect 5"],
+        ["10", "5", "[1, 1]", "Use 5, Collect 10"],
+        ["20", "15", "[0, 0]", "Use 10 and 5 (Successful!)"]
+      ]
+    }
+  },
+  "1710": {
+    "intuition": "Sort boxes by units per box in descending order. Take as many boxes as possible from the highest units box type first.",
+    "formula": "Greedy grab: <code>take = min(truckSize, boxes)</code>",
+    "time": "O(N log N) - sorting box types.",
+    "space": "O(1) - in-place variables.",
+    "dryrun": {
+      "testcase": "boxTypes = [[1, 3], [2, 2]], size = 2",
+      "headers": ["Box Type", "Units/Box", "Boxes left", "Take amount", "Remaining Size", "Accumulated Units"],
+      "rows": [
+        ["[1, 3]", "3", "1", "1", "1", "3"],
+        ["[2, 2]", "2", "2", "1", "0", "3+2 = 5"]
+      ]
+    }
+  },
+  // 15. Math & Geometry
+  "7": {
+    "intuition": "Reverse digits of integer. Pop digits using modulo operator and verify overflow limits before updating.",
+    "formula": "Overflow condition: <code>if (rev > INT_MAX/10 || rev < INT_MIN/10) return 0</code>",
+    "time": "O(log10 N) - proportional to decimal digit length.",
+    "space": "O(1) - variables.",
+    "dryrun": {
+      "testcase": "x = 123",
+      "headers": ["Step", "Remaining x", "Digit popped", "Reversed state", "Overflow check"],
+      "rows": [
+        ["1", "12", "3", "3", "Safe"],
+        ["2", "1", "2", "32", "Safe"],
+        ["3", "0", "1", "321", "Safe, outputs 321"]
+      ]
+    }
+  },
+  "9": {
+    "intuition": "Reverse the second half of the number and compare it with the first half to check if it's a palindrome.",
+    "formula": "Reverse half: <code>rev = rev * 10 + (x % 10); x = x / 10;</code>",
+    "time": "O(log10 N) - checks half of the digits.",
+    "space": "O(1) - integer state variables.",
+    "dryrun": {
+      "testcase": "x = 121",
+      "headers": ["Remaining x", "Last digit x % 10", "Reversed second half", "Check condition"],
+      "rows": [
+        ["121", "1", "1", "121 > 1"],
+        ["12", "2", "12", "12 <= 12 -> loop termination"],
+        ["Check", "-", "-", "x == rev || x == rev/10 -> 12/10 = 1 == 1 -> True!"]
+      ]
+    }
+  },
+  "50": {
+    "intuition": "Binary exponentiation. Compute pow(x, n) recursively by dividing power by 2.",
+    "formula": "Transition: <code>if (n % 2 === 0) x = x * x, n /= 2; else ans *= x, n--;</code>",
+    "time": "O(log N) - logarithmic scale divisions.",
+    "space": "O(1) - tracking variables.",
+    "dryrun": {
+      "testcase": "x = 2, n = 10",
+      "headers": ["Iter n", "Exponent parity", "Base x value", "Output Accumulator"],
+      "rows": [
+        ["10", "Even", "4 (2^2)", "1"],
+        ["5", "Odd", "4", "4 (1 * 4)"],
+        ["4", "Even", "16 (4^2)", "4"],
+        ["2", "Even", "256 (16^2)", "4"],
+        ["1", "Odd", "256", "4 * 256 = 1024"]
+      ]
+    }
+  },
+  "204": {
+    "intuition": "Sieve of Eratosthenes. Mark multiples of prime numbers as non-prime in a boolean array.",
+    "formula": "Sieve marking: <code>if (prime[i]) for (j = i*i; j < n; j += i) prime[j] = false;</code>",
+    "time": "O(N log log N) - prime multiples sieve.",
+    "space": "O(N) - prime indicators table.",
+    "dryrun": {
+      "testcase": "n = 10",
+      "headers": ["Prime Candidate i", "Sieve Value", "Marked values", "Active Primes list"],
+      "rows": [
+        ["2", "True", "Mark 4, 6, 8", "[2]"],
+        ["3", "True", "Mark 9", "[2, 3]"],
+        ["5", "True", "-", "[2, 3, 5]"],
+        ["7", "True", "-", "[2, 3, 5, 7] (Primes count = 4)"]
+      ]
+    }
+  },
+  "223": {
+    "intuition": "Calculate total area of two rectangles and subtract their overlapping area.",
+    "formula": "Overlap coordinates: <code>left = max(A, E); right = min(C, G); bottom = max(B, F); top = min(D, H);</code>",
+    "time": "O(1) - single step coordinate checks.",
+    "space": "O(1) - coordinates memory.",
+    "dryrun": {
+      "testcase": "Rect1: [-3, 0, 3, 4], Rect2: [0, -1, 9, 2]",
+      "headers": ["Rect1 Area", "Rect2 Area", "Overlap Width", "Overlap Height", "Overlap Area", "Total Combined Area"],
+      "rows": [
+        ["6 * 4 = 24", "9 * 3 = 27", "min(3, 9) - max(-3, 0) = 3", "min(4, 2) - max(0, -1) = 2", "3 * 2 = 6", "24 + 27 - 6 = 45"]
+      ]
+    }
+  },
+  "836": {
+    "intuition": "Two rectangles overlap if their projection intervals along X and Y axes overlap.",
+    "formula": "Overlap condition: <code>(rec1[0] < rec2[2]) && (rec1[2] > rec2[0]) && (rec1[1] < rec2[3]) && (rec1[3] > rec2[1])</code>",
+    "time": "O(1) - constant coordinates check.",
+    "space": "O(1) - variables check.",
+    "dryrun": {
+      "testcase": "rec1 = [0, 0, 2, 2], rec2 = [1, 1, 3, 3]",
+      "headers": ["Axis check", "Left-Right overlap", "Top-Bottom overlap", "Overlaps?"],
+      "rows": [
+        ["-", "0 < 3 && 2 > 1", "0 < 3 && 2 > 1", "True! Rectangles overlap"]
+      ]
+    }
+  },
+  "1281": {
+    "intuition": "Extract digits of the number. Calculate product and sum, and return their difference.",
+    "formula": "Extraction: <code>digit = n % 10; product *= digit; sum += digit;</code>",
+    "time": "O(log10 N) - sweeps digits of number.",
+    "space": "O(1) - integer accumulators.",
+    "dryrun": {
+      "testcase": "n = 234",
+      "headers": ["Step", "Remaining n", "Digit popped", "Product accumulator", "Sum accumulator"],
+      "rows": [
+        ["1", "23", "4", "4", "4"],
+        ["2", "2", "3", "12", "7"],
+        ["3", "0", "4", "48", "11 (Result: 48 - 11 = 37)"]
+      ]
+    }
   }
 });
 
@@ -9299,11 +10465,11 @@ function getProblemLogic(prob) {
 function updateProblemLogicPanel(prob) {
   const panel = document.getElementById('problem-logic-panel');
   if (!panel) return;
-  
+
   const logic = getProblemLogic(prob);
   const content = document.getElementById('logic-content');
   if (!content) return;
-  
+
   let dryrunHtml = '';
   if (logic.dryrun && typeof logic.dryrun === 'object' && logic.dryrun.headers) {
     const headersHtml = logic.dryrun.headers.map(h => `
@@ -9335,7 +10501,7 @@ function updateProblemLogicPanel(prob) {
       <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; background: rgba(255,255,255,0.02); padding: 0.75rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.03); white-space: pre-line;">${logic.dryrun}</p>
     `;
   }
-  
+
   content.innerHTML = `
     <div>
       <h4 style="font-size: 0.95rem; font-weight: 600; color: #ffffff; margin-bottom: 0.35rem;">Core Intuition</h4>
@@ -9370,7 +10536,7 @@ function buildHeatmap() {
     container._heatmapResizeObserver.disconnect();
   }
   container.innerHTML = '';
-  
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const todayKey = formatDateKey(today);
@@ -9378,7 +10544,7 @@ function buildHeatmap() {
   const sixMonthsAgo = new Date(today);
   sixMonthsAgo.setMonth(today.getMonth() - 6);
   sixMonthsAgo.setDate(sixMonthsAgo.getDate() + 1);
-  
+
   for (let d = new Date(sixMonthsAgo); d <= today; d.setDate(d.getDate() + 1)) {
     datesToShow.push(new Date(d));
   }
@@ -9390,7 +10556,7 @@ function buildHeatmap() {
     });
     cell.classList.add('selected');
     cell.setAttribute('aria-pressed', 'true');
-    
+
     const detailDate = document.getElementById('heatmap-detail-date');
     const detailCount = document.getElementById('heatmap-detail-count');
     if (detailDate) detailDate.textContent = dateLabel;
@@ -9486,7 +10652,7 @@ function buildHeatmap() {
     empty.className = 'heatmap-cell empty';
     grid.appendChild(empty);
   }
-  
+
   let todayCell = null;
   let todayCount = 0;
   let todayLabel = '';
@@ -9495,7 +10661,7 @@ function buildHeatmap() {
     const dateStr = formatDateKey(date);
     const cell = document.createElement('button');
     cell.className = 'heatmap-cell';
-    
+
     const count = state.activityLog[dateStr] || 0;
     const dateLabel = date.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
     const solvedLabel = `${count} problem${count !== 1 ? 's' : ''} solved`;
@@ -9504,7 +10670,7 @@ function buildHeatmap() {
     cell.setAttribute('aria-label', `${dateLabel}: ${solvedLabel}`);
     cell.setAttribute('aria-pressed', 'false');
     cell.title = `${dateLabel} - ${solvedLabel}`;
-    
+
     if (count > 0 && count <= 1) cell.classList.add('level-1');
     else if (count > 1 && count <= 2) cell.classList.add('level-2');
     else if (count > 2 && count <= 3) cell.classList.add('level-3');
@@ -9517,13 +10683,13 @@ function buildHeatmap() {
       todayCount = count;
       todayLabel = dateLabel;
     }
-    
+
     grid.appendChild(cell);
   });
-  
+
   scroll.appendChild(heatmapContent);
   container.appendChild(scroll);
-  
+
   const legend = document.createElement('div');
   legend.className = 'heatmap-legend';
   legend.innerHTML = `
@@ -9558,16 +10724,16 @@ function buildHeatmap() {
 function calculatePoints() {
   const solvedCount = state.problems.filter(p => p.status === 'done').length;
   const progressCount = state.problems.filter(p => p.status === 'progress').length;
-  
+
   // Base points from solved problems
   let points = solvedCount * 10 + progressCount * 3;
-  
+
   // Streak bonus
   if (state.streak >= 5) points += state.streak * 5;
   if (state.streak >= 10) points += 25;
-  
+
   state.points = points;
-  
+
   // Update rank based on points
   if (points >= 500) state.rank = 'Algorithm Overlord';
   else if (points >= 250) state.rank = 'Elite';
@@ -9580,18 +10746,18 @@ function buildTopicProgress() {
   const container = document.getElementById('topic-progress-list');
   if (!container) return;
   container.innerHTML = '';
-  
+
   const topics = DSA_TOPICS;
   let totalMastered = 0;
-  
+
   // Count total problems per topic and solved per topic
   topics.forEach(topic => {
     const total = state.problems.filter(p => p.topic === topic).length;
     const solved = state.problems.filter(p => p.topic === topic && p.status === 'done').length;
     const pct = total > 0 ? Math.round((solved / total) * 100) : 0;
-    
+
     if (pct >= 80) totalMastered++;
-    
+
     const row = document.createElement('div');
     row.className = 'topic-bar-row';
     row.innerHTML = `
@@ -9603,7 +10769,7 @@ function buildTopicProgress() {
     `;
     container.appendChild(row);
   });
-  
+
   const badge = document.getElementById('topic-total-badge');
   if (badge) {
     badge.textContent = `${totalMastered} topics mastered`;
@@ -9614,33 +10780,33 @@ function renderSolvedFeed() {
   const list = document.getElementById('solved-feed-list');
   const empty = document.getElementById('solved-feed-empty');
   if (!list || !empty) return;
-  
+
   list.innerHTML = '';
-  
+
   const diffFilter = document.getElementById('solved-filter-diff').value;
   const topicFilter = document.getElementById('solved-filter-topic').value;
-  
+
   let solved = state.problems.filter(p => p.status === 'done');
-  
+
   if (diffFilter !== 'all') {
     solved = solved.filter(p => p.difficulty === diffFilter);
   }
   if (topicFilter !== 'all') {
     solved = solved.filter(p => p.topic === topicFilter);
   }
-  
+
   if (solved.length === 0) {
     list.style.display = 'none';
     empty.style.display = 'block';
     return;
   }
-  
+
   list.style.display = 'block';
   empty.style.display = 'none';
-  
+
   // Sort by most recently solved first (by id as proxy)
   solved.sort((a, b) => b.id - a.id);
-  
+
   solved.forEach(p => {
     const item = document.createElement('div');
     item.className = 'solved-feed-item';
@@ -9655,7 +10821,7 @@ function renderSolvedFeed() {
     `;
     list.appendChild(item);
   });
-  
+
   lucide.createIcons();
 }
 
@@ -9681,10 +10847,10 @@ function showNotification(message, options = {}) {
     container.className = 'toast-container';
     document.body.appendChild(container);
   }
-  
+
   const toast = document.createElement('div');
   toast.className = `toast-notification ${options.type ? `toast-${options.type}` : ''}`;
-  
+
   if (options.type === 'badge') {
     toast.innerHTML = `
       <span class="toast-badge-icon">${options.icon}</span>
@@ -9699,11 +10865,11 @@ function showNotification(message, options = {}) {
   }
 
   container.appendChild(toast);
-  
+
   setTimeout(() => {
     toast.classList.add('show');
   }, 10);
-  
+
   setTimeout(() => {
     toast.classList.remove('show');
     setTimeout(() => toast.remove(), 300);
@@ -9712,28 +10878,28 @@ function showNotification(message, options = {}) {
 
 function renderDashboard() {
   calculatePoints();
-  
+
   // Update stat numbers
   const totalProblems = state.problems.length;
   const solvedCount = state.problems.filter(p => p.status === 'done').length;
-  
+
   document.getElementById('stat-solved-count').textContent = `${solvedCount} / ${totalProblems}`;
   document.getElementById('stat-streak-val').textContent = `${state.streak} Days`;
   document.getElementById('stat-rank-name').textContent = state.rank;
   document.getElementById('stat-points-val').textContent = `${state.points} pts`;
-  
+
   // Progress ring
   const pct = totalProblems > 0 ? Math.round((solvedCount / totalProblems) * 100) : 0;
   const ring = document.getElementById('dashboard-progress-ring');
   document.getElementById('dashboard-pct-text').textContent = `${pct}%`;
-  
+
   if (ring) {
     const circumference = 2 * Math.PI * 60; // r=60
     const offset = circumference - (pct / 100) * circumference;
     ring.style.strokeDasharray = circumference;
     ring.style.strokeDashoffset = offset;
   }
-  
+
   // Breakdown by difficulty
   const easyTotal = state.problems.filter(p => p.difficulty === 'easy').length;
   const easySolved = state.problems.filter(p => p.difficulty === 'easy' && p.status === 'done').length;
@@ -9741,11 +10907,11 @@ function renderDashboard() {
   const medSolved = state.problems.filter(p => p.difficulty === 'medium' && p.status === 'done').length;
   const hardTotal = state.problems.filter(p => p.difficulty === 'hard').length;
   const hardSolved = state.problems.filter(p => p.difficulty === 'hard' && p.status === 'done').length;
-  
+
   document.getElementById('breakdown-easy').textContent = `${easySolved} / ${easyTotal}`;
   document.getElementById('breakdown-medium').textContent = `${medSolved} / ${medTotal}`;
   document.getElementById('breakdown-hard').textContent = `${hardSolved} / ${hardTotal}`;
-  
+
   buildHeatmap();
   buildBadgesList();
   buildTopicProgress();
@@ -9755,12 +10921,12 @@ function renderDashboard() {
 function buildBadgesList() {
   const container = document.getElementById('badges-container');
   container.innerHTML = '';
-  
+
   state.badges.forEach(badge => {
     const isUnlocked = badge.check(state.problems);
     const div = document.createElement('div');
     div.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'}`;
-    
+
     div.innerHTML = `
       <div class="badge-icon">${badge.icon}</div>
       <div class="badge-details">
@@ -9769,7 +10935,7 @@ function buildBadgesList() {
         <span class="badge-status">${isUnlocked ? 'Unlocked' : 'Locked'}</span>
       </div>
     `;
-    
+
     container.appendChild(div);
   });
 }
@@ -9791,6 +10957,94 @@ function getDiscardedRange(length, low, high) {
 // ==========================================================================
 
 const codeTemplates = {
+  twoarraybinary: `
+<span class="code-keyword">function</span> <span class="code-fn">findMedianSortedArrays</span>(nums1, nums2) {
+  <span class="code-comment">// Binary search partitions on smaller array</span>
+  <span class="code-keyword">let</span> low = <span class="code-num">0</span>, high = nums1.length;
+  <span class="code-keyword">while</span> (low &lt;= high) {
+    <span class="code-keyword">let</span> i = Math.<span class="code-fn">floor</span>((low + high) / <span class="code-num">2</span>);
+    <span class="code-keyword">let</span> j = Math.<span class="code-fn">floor</span>((nums1.length + nums2.length + <span class="code-num">1</span>) / <span class="code-num">2</span>) - i;
+    <span class="code-comment">// check left/right values and adjust partitions...</span>
+  }
+}
+`,
+  arraycycle: `
+<span class="code-keyword">function</span> <span class="code-fn">findDuplicate</span>(nums) {
+  <span class="code-comment">// Phase 1: Tortoise &amp; Hare collision</span>
+  <span class="code-keyword">let</span> tortoise = nums[<span class="code-num">0</span>], hare = nums[nums[<span class="code-num">0</span>]];
+  <span class="code-keyword">while</span> (tortoise !== hare) {
+    tortoise = nums[tortoise];
+    hare = nums[nums[hare]];
+  }
+  <span class="code-comment">// Phase 2: Locate cycle start node</span>
+  tortoise = <span class="code-num">0</span>;
+  <span class="code-keyword">while</span> (tortoise !== hare) {
+    tortoise = nums[tortoise];
+    hare = nums[hare];
+  }
+  <span class="code-keyword">return</span> tortoise;
+}
+`,
+  reorderlist: `
+<span class="code-keyword">function</span> <span class="code-fn">reorderList</span>(head) {
+  <span class="code-comment">// 1. Find midpoint (slow/fast pointers)</span>
+  <span class="code-comment">// 2. Reverse second half sublist in-place</span>
+  <span class="code-comment">// 3. Merge first half and reversed second half alternately</span>
+}
+`,
+  treepathsum: `
+<span class="code-keyword">function</span> <span class="code-fn">maxPathSum</span>(root) {
+  <span class="code-keyword">let</span> maxSum = -Infinity;
+  <span class="code-keyword">function</span> <span class="code-fn">dfs</span>(node) {
+    <span class="code-keyword">if</span> (!node) <span class="code-keyword">return</span> <span class="code-num">0</span>;
+    <span class="code-keyword">let</span> left = Math.<span class="code-fn">max</span>(<span class="code-fn">dfs</span>(node.left), <span class="code-num">0</span>);
+    <span class="code-keyword">let</span> right = Math.<span class="code-fn">max</span>(<span class="code-fn">dfs</span>(node.right), <span class="code-num">0</span>);
+    maxSum = Math.<span class="code-fn">max</span>(maxSum, node.val + left + right);
+    <span class="code-keyword">return</span> node.val + Math.<span class="code-fn">max</span>(left, right);
+  }
+  <span class="code-fn">dfs</span>(root);
+  <span class="code-keyword">return</span> maxSum;
+}
+`,
+  equationsolver: `
+<span class="code-keyword">function</span> <span class="code-fn">calcEquation</span>(equations, values, queries) {
+  <span class="code-comment">// 1. Construct ratio directed adjacency graph</span>
+  <span class="code-comment">// 2. Perform DFS to traverse path src → dst multiplying edge weights</span>
+  <span class="code-keyword">return</span> resultRatio;
+}
+`,
+  tarjanbridge: `
+<span class="code-keyword">function</span> <span class="code-fn">criticalConnections</span>(n, connections) {
+  <span class="code-comment">// Tarjan's bridge finder algorithm</span>
+  <span class="code-keyword">let</span> disc = <span class="code-fn">Array</span>(n).<span class="code-fn">fill</span>(-<span class="code-num">1</span>), low = <span class="code-fn">Array</span>(n).<span class="code-fn">fill</span>(-<span class="code-num">1</span>);
+  <span class="code-keyword">let</span> bridges = [];
+  <span class="code-keyword">function</span> <span class="code-fn">dfs</span>(u, p) {
+    disc[u] = low[u] = ++time;
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> v <span class="code-keyword">of</span> adj[u]) {
+      <span class="code-keyword">if</span> (v === p) <span class="code-keyword">continue</span>;
+      <span class="code-keyword">if</span> (disc[v] === -<span class="code-num">1</span>) {
+        <span class="code-fn">dfs</span>(v, u);
+        low[u] = Math.<span class="code-fn">min</span>(low[u], low[v]);
+        <span class="code-keyword">if</span> (low[v] &gt; disc[u]) bridges.<span class="code-fn">push</span>([u, v]);
+      } <span class="code-keyword">else</span> low[u] = Math.<span class="code-fn">min</span>(low[u], disc[v]);
+    }
+  }
+}
+`,
+  combinationtree: `
+<span class="code-keyword">function</span> <span class="code-fn">combinationSum</span>(candidates, target) {
+  <span class="code-keyword">let</span> res = [];
+  <span class="code-keyword">function</span> <span class="code-fn">backtrack</span>(start, remain, path) {
+    <span class="code-keyword">if</span> (remain === <span class="code-num">0</span>) { res.<span class="code-fn">push</span>([...path]); <span class="code-keyword">return</span>; }
+    <span class="code-keyword">if</span> (remain &lt; <span class="code-num">0</span>) <span class="code-keyword">return</span>;
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = start; i &lt; candidates.length; i++) {
+      path.<span class="code-fn">push</span>(candidates[i]);
+      <span class="code-fn">backtrack</span>(i, remain - candidates[i], path);
+      path.<span class="code-fn">pop</span>(); // Backtrack pop
+    }
+  }
+}
+`,
   quicksortfull: `
 <span class="code-keyword">function</span> <span class="code-fn">quickSort</span>(arr, lo, hi) {
   <span class="code-keyword">if</span> (lo &lt; hi) {
@@ -10898,6 +12152,77 @@ codeTemplates['designtwitter'] = `<span class="code-comment">// Design Twitter -
   }
 }`;
 
+codeTemplates['boyermoore'] = `<span class="code-comment">// Boyer-Moore Majority Vote</span>
+<span class="code-keyword">let</span> candidate = <span class="code-keyword">null</span>, count = <span class="code-num">0</span>;
+<span class="code-keyword">for</span> (<span class="code-keyword">let</span> n <span class="code-keyword">of</span> nums) {
+  <span class="code-keyword">if</span> (count === <span class="code-num">0</span>) candidate = n;
+  count += (n === candidate) ? <span class="code-num">1</span> : -<span class="code-num">1</span>;
+}
+<span class="code-keyword">return</span> candidate; <span class="code-comment">// verify if needed</span>`;
+
+codeTemplates['quickselect'] = `<span class="code-comment">// Quick Select - avg O(N)</span>
+<span class="code-keyword">function</span> <span class="code-fn">partition</span>(a, lo, hi) {
+  <span class="code-keyword">let</span> pivot = a[hi], i = lo;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> j = lo; j &lt; hi; j++)
+    <span class="code-keyword">if</span> (a[j] &lt;= pivot) [a[i++], a[j]] = [a[j], a[i]];
+  [a[i], a[hi]] = [a[hi], a[i]];
+  <span class="code-keyword">return</span> i;
+}
+<span class="code-keyword">while</span> (lo &lt; hi) {
+  <span class="code-keyword">let</span> p = <span class="code-fn">partition</span>(a, lo, hi);
+  <span class="code-keyword">if</span> (p === k) <span class="code-keyword">return</span> a[p];
+  p &lt; k ? (lo = p + <span class="code-num">1</span>) : (hi = p - <span class="code-num">1</span>);
+}`;
+
+codeTemplates['bstdeletion'] = `<span class="code-comment">// BST Delete Node (LC 450)</span>
+<span class="code-keyword">function</span> <span class="code-fn">deleteNode</span>(root, key) {
+  <span class="code-keyword">if</span> (!root) <span class="code-keyword">return</span> <span class="code-keyword">null</span>;
+  <span class="code-keyword">if</span> (key &lt; root.val)
+    root.left = <span class="code-fn">deleteNode</span>(root.left, key);
+  <span class="code-keyword">else if</span> (key &gt; root.val)
+    root.right = <span class="code-fn">deleteNode</span>(root.right, key);
+  <span class="code-keyword">else</span> {
+    <span class="code-keyword">if</span> (!root.left) <span class="code-keyword">return</span> root.right;
+    <span class="code-keyword">if</span> (!root.right) <span class="code-keyword">return</span> root.left;
+    <span class="code-keyword">let</span> succ = <span class="code-fn">minNode</span>(root.right);
+    root.val = succ.val;
+    root.right = <span class="code-fn">deleteNode</span>(root.right, succ.val);
+  }
+  <span class="code-keyword">return</span> root;
+}`;
+
+codeTemplates['segmenttreelazy'] = `<span class="code-comment">// Segment Tree Lazy Propagation</span>
+<span class="code-keyword">function</span> <span class="code-fn">update</span>(node, start, end, l, r, val) {
+  <span class="code-keyword">if</span> (r &lt; start || end &lt; l) <span class="code-keyword">return</span>;
+  <span class="code-keyword">if</span> (l &lt;= start &amp;&amp; end &lt;= r) {
+    tree[node] += (end - start + <span class="code-num">1</span>) * val;
+    lazy[node] += val; <span class="code-keyword">return</span>;
+  }
+  <span class="code-fn">pushDown</span>(node, start, end);
+  <span class="code-keyword">let</span> mid = (start + end) &gt;&gt; <span class="code-num">1</span>;
+  <span class="code-fn">update</span>(<span class="code-num">2</span>*node, start, mid, l, r, val);
+  <span class="code-fn">update</span>(<span class="code-num">2</span>*node+<span class="code-num">1</span>, mid+<span class="code-num">1</span>, end, l, r, val);
+  tree[node] = tree[<span class="code-num">2</span>*node] + tree[<span class="code-num">2</span>*node+<span class="code-num">1</span>];
+}`;
+
+codeTemplates['multisourcebfs'] = `<span class="code-comment">// Rotten Oranges Multi-Source BFS</span>
+<span class="code-keyword">let</span> q = [], minutes = <span class="code-num">0</span>, fresh = <span class="code-num">0</span>;
+<span class="code-keyword">for</span> (<span class="code-keyword">let</span> r = <span class="code-num">0</span>; r &lt; R; r++)
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> c = <span class="code-num">0</span>; c &lt; C; c++)
+    grid[r][c] === <span class="code-num">2</span> ? q.<span class="code-fn">push</span>([r,c]) : grid[r][c] === <span class="code-num">1</span> &amp;&amp; fresh++;
+<span class="code-keyword">while</span> (q.length &amp;&amp; fresh) {
+  <span class="code-keyword">let</span> size = q.length; minutes++;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; size; i++) {
+    <span class="code-keyword">let</span> [r, c] = q.<span class="code-fn">shift</span>();
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> [dr,dc] <span class="code-keyword">of</span> dirs) {
+      <span class="code-keyword">if</span> (grid[r+dr]?.[c+dc] === <span class="code-num">1</span>) {
+        grid[r+dr][c+dc] = <span class="code-num">2</span>; fresh--;
+        q.<span class="code-fn">push</span>([r+dr, c+dc]);
+      }
+    }
+  }
+}
+<span class="code-keyword">return</span> fresh ? -<span class="code-num">1</span> : minutes;`;
 codeTemplates['serializedeserialize'] = `<span class="code-comment">// Serialize & Deserialize Binary Tree - LC 297</span>
 <span class="code-fn">serialize</span>(root) {
   <span class="code-keyword">let</span> res = [];
@@ -11133,19 +12458,19 @@ const visualizerState = {
 function loadSelectedAlgorithm() {
   const algo = document.getElementById('algo-select').value;
   visualizerState.algo = algo;
-  
+
   // Only set code template if one exists for this algo key
   if (codeTemplates[algo]) {
     document.getElementById('code-snippet-box').innerHTML = codeTemplates[algo];
   }
   document.getElementById('editor-language').textContent = 'javascript';
-  
+
   // Hide the problem banner when switching manually via dropdown
   const banner = document.getElementById('problem-info-banner');
   if (banner) banner.style.display = 'none';
   const logicPanel = document.getElementById('problem-logic-panel');
   if (logicPanel) logicPanel.style.display = 'none';
-  
+
   resetVisualizer();
 }
 
@@ -11153,7 +12478,7 @@ function updateVisualizerSpeed() {
   const slider = document.getElementById('speed-slider');
   visualizerState.speed = parseInt(slider.value);
   document.getElementById('speed-label').textContent = `${visualizerState.speed}ms`;
-  
+
   if (visualizerState.isPlaying) {
     pauseVisualizer();
     playVisualizer();
@@ -11180,10 +12505,10 @@ function clearLogs() {
 function resetVisualizer() {
   pauseVisualizer();
   clearLogs();
-  
+
   visualizerState.steps = [];
   visualizerState.currentStepIndex = 0;
-  
+
   if (visualizerState.algo === 'bubble') {
     const id = visualizerState.currentProbId || 0;
     const arr = [];
@@ -11193,7 +12518,7 @@ function resetVisualizer() {
     visualizerState.rawArray = [...arr];
     appendLog("[INFO] Generated deterministic array for Bubble Sort.", "info");
     generateBubbleSortSteps(arr);
-  } 
+  }
   else if (visualizerState.algo === 'binary') {
     const id = visualizerState.currentProbId;
     let arr, target;
@@ -11205,21 +12530,123 @@ function resetVisualizer() {
     visualizerState.rawArray = [...arr];
     appendLog("[INFO] Initialized sorted array for Binary Search.", "info");
     generateBinarySearchSteps(arr, target);
-  } 
+  }
+  else if (visualizerState.algo === 'twoarraybinary') {
+    const A = [1, 3, 7, 8, 9, 15, 18, 20, 25];
+    const B = [2, 4, 5, 10, 11, 12, 14, 16, 19, 21, 24];
+    visualizerState.rawArray = { A, B };
+    appendLog("[INFO] Two-Array Binary Search initialized. X: [" + A.join(',') + "], Y: [" + B.join(',') + "]", "info");
+    generateTwoArrayBinarySteps(A, B);
+  }
+  else if (visualizerState.algo === 'arraycycle') {
+    const arr = [2, 5, 8, 7, 3, 6, 8, 1, 4];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Floyd's Array Cycle initialized. Array: [" + arr.join(',') + "]", "info");
+    generateArrayCycleSteps(arr);
+  }
+  else if (visualizerState.algo === 'reorderlist') {
+    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Reorder List initialized. Linked List: " + arr.join(' -> '), "info");
+    generateReorderListSteps(arr);
+  }
+  else if (visualizerState.algo === 'treepathsum') {
+    const treeVals = [10, 5, -10, 3, 7, 12, -5, 1, 4, null, null, 11, 14, -6, 2];
+    visualizerState.rawArray = [...treeVals];
+    appendLog("[INFO] Tree Max Path Sum DFS initialized with 15 nodes.", "info");
+    generateTreePathSumSteps(treeVals);
+  }
+  else if (visualizerState.algo === 'equationsolver') {
+    const equations = [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"], ["a", "f"], ["f", "g"]];
+    const values = [2.0, 3.0, 0.5, 4.0, 1.5, 2.0];
+    const queries = ["f", "d"];
+    visualizerState.rawArray = { equations, values, queries };
+    appendLog("[INFO] Equation Ratio Solver initialized (f / d).", "info");
+    generateEquationSolverSteps(equations, values, queries);
+  }
+  else if (visualizerState.algo === 'tarjanbridge') {
+    const n = 8;
+    const edges = [[0, 1], [1, 2], [2, 0], [1, 3], [3, 4], [4, 5], [5, 3], [4, 6], [6, 7]];
+    visualizerState.rawArray = { n, edges };
+    appendLog("[INFO] Tarjan's Bridge Finder initialized with 8 nodes and 3 bridges.", "info");
+    generateTarjanBridgeSteps(n, edges);
+  }
+  else if (visualizerState.algo === 'combinationtree') {
+    const candidates = [2, 3, 6, 7];
+    const target = 9;
+    visualizerState.rawArray = { candidates, target };
+    appendLog("[INFO] Combination Sum backtracking initialized (target = 9).", "info");
+    generateCombinationTreeSteps(candidates, target);
+  }
+  else if (visualizerState.algo === 'boyermoore') {
+    // Clear majority example: 2 appears 7/11 times
+    const arr = [2, 2, 1, 1, 1, 2, 2, 2, 1, 2, 2];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Boyer-Moore Majority Vote initialized. Array: [" + arr.join(", ") + "]", "info");
+    generateBoyerMooreSteps(arr);
+  }
+  else if (visualizerState.algo === 'quickselect') {
+    // Find the 3rd largest (index 7 in 0-based sorted desc)
+    const arr = [12, 3, 5, 7, 4, 19, 26, 2, 8, 10];
+    const k = 3; // kth largest => index n-k = 7 in sorted asc
+    visualizerState.rawArray = { arr: [...arr], k };
+    appendLog("[INFO] Quick Select initialized. Find " + k + "th largest in [" + arr.join(", ") + "]", "info");
+    generateQuickSelectSteps([...arr], k);
+  }
+  else if (visualizerState.algo === 'bstdeletion') {
+    // BST level-order representation. Delete node 25 (2 children → successor swap)
+    // Tree:        50
+    //           /      \
+    //         25        75
+    //        /  \      /  \
+    //       15   35   60   85
+    //      /  \    \
+    //     10   20   40
+    const tree = [50, 25, 75, 15, 35, 60, 85, 10, 20, null, 40];
+    const deleteKey = 25;
+    visualizerState.rawArray = { tree: [...tree], deleteKey };
+    appendLog("[INFO] BST Deletion initialized. Tree root=50, deleting node " + deleteKey + ".", "info");
+    generateBSTDeletionSteps([...tree], deleteKey);
+  }
+  else if (visualizerState.algo === 'segmenttreelazy') {
+    // Range sum segment tree over [1,2,3,4,5,6,7,8]
+    // Perform range update: add 3 to indices 2..5, then query 1..6
+    const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+    const updateRange = [2, 5]; // 0-indexed
+    const updateVal = 3;
+    const queryRange = [1, 6];
+    visualizerState.rawArray = { arr: [...arr], updateRange, updateVal, queryRange };
+    appendLog("[INFO] Segment Tree Lazy initialized. Array: [" + arr.join(", ") + "]. Update [2..5]+3, Query [1..6]", "info");
+    generateSegmentTreeLazySteps([...arr], updateRange, updateVal, queryRange);
+  }
+  else if (visualizerState.algo === 'multisourcebfs') {
+    // 6x6 grid: 0=empty, 1=fresh, 2=rotten
+    const grid = [
+      [2, 1, 0, 2, 1, 0],
+      [1, 1, 1, 0, 1, 1],
+      [0, 1, 1, 1, 0, 1],
+      [1, 0, 1, 1, 1, 0],
+      [1, 1, 0, 0, 1, 2],
+      [0, 1, 1, 1, 1, 1]
+    ];
+    visualizerState.rawArray = { grid: grid.map(r => [...r]) };
+    appendLog("[INFO] Multi-Source BFS (Rotten Oranges) initialized. 6x6 grid with 2 rotten seeds.", "info");
+    generateMultiSourceBFSSteps(grid.map(r => [...r]));
+  }
   else if (visualizerState.algo === 'window') {
     const id = visualizerState.currentProbId;
     const str = id === 3 ? "abcabcbb" : id === 567 ? "eidbaooo" : "abcabcb";
     visualizerState.rawArray = str.split("");
     appendLog("[INFO] Loading Sliding Window test string: \"" + str + "\"", "info");
     generateSlidingWindowSteps(str);
-  } 
+  }
   else if (visualizerState.algo === 'pointer') {
     const id = visualizerState.currentProbId;
     const heights = id === 11 ? [1, 8, 6, 2, 5, 4, 8, 3, 7] : [1, 8, 6, 2, 5, 4, 8, 3, 7];
     visualizerState.rawArray = [...heights];
     appendLog("[INFO] Loading Two Pointers heights array.", "info");
     generateTwoPointersSteps(heights);
-  } 
+  }
   else if (visualizerState.algo === 'twoSumII') {
     const arr = [2, 7, 11, 15];
     visualizerState.rawArray = [...arr];
@@ -11227,54 +12654,54 @@ function resetVisualizer() {
     generateTwoSumIISteps(arr, 9);
   }
   else if (visualizerState.algo === 'linkedlist' ||
-           visualizerState.algo === 'll-reverse' ||
-           visualizerState.algo === 'll-reverse-range' ||
-           visualizerState.algo === 'll-remove-nth' ||
-           visualizerState.algo === 'll-remove-dups' ||
-           visualizerState.algo === 'll-merge' ||
-           visualizerState.algo === 'll-swap-pairs' ||
-           visualizerState.algo === 'll-rotate') {
+    visualizerState.algo === 'll-reverse' ||
+    visualizerState.algo === 'll-reverse-range' ||
+    visualizerState.algo === 'll-remove-nth' ||
+    visualizerState.algo === 'll-remove-dups' ||
+    visualizerState.algo === 'll-merge' ||
+    visualizerState.algo === 'll-swap-pairs' ||
+    visualizerState.algo === 'll-rotate') {
     const id = visualizerState.currentProbId;
     let config;
 
     // Direct dropdown selection — use algo key to pick operation
     const algoKey = visualizerState.algo;
     if (algoKey === 'll-reverse') {
-      config = { op: 'reverse', list: [1,2,3,4,5] };
+      config = { op: 'reverse', list: [1, 2, 3, 4, 5] };
     } else if (algoKey === 'll-reverse-range') {
-      config = { op: 'reverse_range', list: [1,2,3,4,5], left: 2, right: 4 };
+      config = { op: 'reverse_range', list: [1, 2, 3, 4, 5], left: 2, right: 4 };
     } else if (algoKey === 'll-remove-nth') {
-      config = { op: 'remove_nth', list: [1,2,3,4,5], n: 2 };
+      config = { op: 'remove_nth', list: [1, 2, 3, 4, 5], n: 2 };
     } else if (algoKey === 'll-remove-dups') {
-      config = { op: 'remove_dups', list: [1,1,2,3,3,4] };
+      config = { op: 'remove_dups', list: [1, 1, 2, 3, 3, 4] };
     } else if (algoKey === 'll-merge') {
-      config = { op: 'merge', list: [1,3,5,7], list2: [2,4,6,8] };
+      config = { op: 'merge', list: [1, 3, 5, 7], list2: [2, 4, 6, 8] };
     } else if (algoKey === 'll-swap-pairs') {
-      config = { op: 'swap_pairs', list: [1,2,3,4,5,6] };
+      config = { op: 'swap_pairs', list: [1, 2, 3, 4, 5, 6] };
     } else if (algoKey === 'll-rotate') {
-      config = { op: 'rotate', list: [1,2,3,4,5], k: 2 };
+      config = { op: 'rotate', list: [1, 2, 3, 4, 5], k: 2 };
     } else {
       // linkedlist — pick by problem ID (problem explorer click)
       if (id === 92) {
-        config = { op: 'reverse_range', list: [1,2,3,4,5], left: 2, right: 4 };
+        config = { op: 'reverse_range', list: [1, 2, 3, 4, 5], left: 2, right: 4 };
       } else if (id === 24 || id === 25 || id === 328) {
-        config = { op: 'swap_pairs', list: [1,2,3,4,5,6] };
+        config = { op: 'swap_pairs', list: [1, 2, 3, 4, 5, 6] };
       } else if (id === 21 || id === 23) {
-        config = { op: 'merge', list: [1,3,5], list2: [2,4,6] };
+        config = { op: 'merge', list: [1, 3, 5], list2: [2, 4, 6] };
       } else if (id === 2) {
-        config = { op: 'merge', list: [2,4,3], list2: [5,6,4] };
+        config = { op: 'merge', list: [2, 4, 3], list2: [5, 6, 4] };
       } else if (id === 19) {
-        config = { op: 'remove_nth', list: [1,2,3,4,5], n: 2 };
+        config = { op: 'remove_nth', list: [1, 2, 3, 4, 5], n: 2 };
       } else if (id === 203) {
-        config = { op: 'remove_nth', list: [1,2,6,3,4,5,6], n: 3 };
+        config = { op: 'remove_nth', list: [1, 2, 6, 3, 4, 5, 6], n: 3 };
       } else if (id === 83) {
-        config = { op: 'remove_dups', list: [1,1,2,3,3,4] };
+        config = { op: 'remove_dups', list: [1, 1, 2, 3, 3, 4] };
       } else if (id === 82) {
-        config = { op: 'remove_dups', list: [1,1,2,2,3,4,4] };
+        config = { op: 'remove_dups', list: [1, 1, 2, 2, 3, 4, 4] };
       } else if (id === 61) {
-        config = { op: 'rotate', list: [1,2,3,4,5], k: 2 };
+        config = { op: 'rotate', list: [1, 2, 3, 4, 5], k: 2 };
       } else {
-        config = { op: 'reverse', list: [1,2,3,4,5] };
+        config = { op: 'reverse', list: [1, 2, 3, 4, 5] };
       }
     }
 
@@ -11286,7 +12713,7 @@ function resetVisualizer() {
     visualizerState.rawArray = [10, 20, 30, 40, 50, 60];
     appendLog("[INFO] Initializing Linked List containing a cycle: 5 -> 2", "info");
     generateLinkedListCycleSteps();
-  } 
+  }
   else if (visualizerState.algo === 'cycleII') {
     visualizerState.rawArray = [10, 20, 30, 40, 50, 60];
     appendLog("[INFO] Loading Linked List for Cycle II detection.", "info");
@@ -11405,29 +12832,29 @@ function resetVisualizer() {
     // All inputs are proper [start, end] intervals sorted by context
     if (id === 56) {
       // LC 56 Merge Intervals
-      intervals = [[1,3],[2,6],[5,8],[8,10],[12,15],[14,18]];
+      intervals = [[1, 3], [2, 6], [5, 8], [8, 10], [12, 15], [14, 18]];
       label = 'LC 56 — Merge Intervals';
     } else if (id === 435) {
       // LC 435 Non-overlapping Intervals — classic greedy scheduling
-      intervals = [[1,4],[2,5],[3,6],[0,2],[5,7],[6,9],[8,10]];
+      intervals = [[1, 4], [2, 5], [3, 6], [0, 2], [5, 7], [6, 9], [8, 10]];
       label = 'LC 435 — Non-overlapping Intervals';
     } else if (id === 452) {
       // LC 452 Minimum Arrows to Burst Balloons
-      intervals = [[1,6],[2,8],[7,12],[10,16],[14,20]];
+      intervals = [[1, 6], [2, 8], [7, 12], [10, 16], [14, 20]];
       label = 'LC 452 — Minimum Arrows';
     } else if (id === 253) {
       // LC 253 Meeting Rooms II
-      intervals = [[0,30],[5,10],[15,20],[10,25],[20,35]];
+      intervals = [[0, 30], [5, 10], [15, 20], [10, 25], [20, 35]];
       label = 'LC 253 — Meeting Rooms II';
     } else if (id === 252) {
-      intervals = [[0,30],[5,10],[15,20]];
+      intervals = [[0, 30], [5, 10], [15, 20]];
       label = 'LC 252 — Meeting Rooms';
     } else if (id === 986 || id === 1288) {
-      intervals = [[0,4],[1,5],[3,7],[6,9],[8,12]];
+      intervals = [[0, 4], [1, 5], [3, 7], [6, 9], [8, 12]];
       label = `LC ${id} — Interval Intersection`;
     } else {
       // Default standalone: 8 intervals, good mix of overlaps and gaps
-      intervals = [[0,3],[1,5],[2,4],[5,8],[6,9],[8,11],[10,14],[13,16]];
+      intervals = [[0, 3], [1, 5], [2, 4], [5, 8], [6, 9], [8, 11], [10, 14], [13, 16]];
       label = 'Greedy Interval Scheduling';
     }
     visualizerState.rawArray = intervals.map(([start, end]) => ({ start, end }));
@@ -11554,10 +12981,10 @@ function resetVisualizer() {
       edges: [
         { u: 'S', v: 'A', cap: 15 },
         { u: 'S', v: 'B', cap: 10 },
-        { u: 'A', v: 'B', cap: 5  },
+        { u: 'A', v: 'B', cap: 5 },
         { u: 'A', v: 'C', cap: 10 },
         { u: 'B', v: 'D', cap: 10 },
-        { u: 'C', v: 'D', cap: 4  },
+        { u: 'C', v: 'D', cap: 4 },
         { u: 'C', v: 'T', cap: 10 },
         { u: 'D', v: 'T', cap: 15 }
       ]
@@ -11614,13 +13041,13 @@ function resetVisualizer() {
   else if (visualizerState.algo === 'huffman') {
     visualizerState.rawArray = [
       { char: 'space', freq: 40 },
-      { char: 'e',     freq: 35 },
-      { char: 't',     freq: 28 },
-      { char: 'a',     freq: 22 },
-      { char: 'o',     freq: 18 },
-      { char: 'n',     freq: 15 },
-      { char: 's',     freq: 10 },
-      { char: 'i',     freq: 7  }
+      { char: 'e', freq: 35 },
+      { char: 't', freq: 28 },
+      { char: 'a', freq: 22 },
+      { char: 'o', freq: 18 },
+      { char: 'n', freq: 15 },
+      { char: 's', freq: 10 },
+      { char: 'i', freq: 7 }
     ];
     appendLog("[INFO] Loaded Huffman frequency map (8 chars). Building prefix-free encoding tree...", "info");
     generateHuffmanSteps(visualizerState.rawArray);
@@ -11670,7 +13097,7 @@ function resetVisualizer() {
   else if (visualizerState.algo === 'wordladder') {
     const beginWord = "hit";
     const endWord = "cog";
-    const wordList = ["hot","dot","dog","lot","log","cog"];
+    const wordList = ["hot", "dot", "dog", "lot", "log", "cog"];
     visualizerState.rawArray = { beginWord, endWord, wordList };
     appendLog(`[INFO] Word Ladder: begin="${beginWord}", end="${endWord}", dict=[${wordList.join(', ')}].`, "info");
     generateWordLadderSteps(beginWord, endWord, wordList);
@@ -11688,7 +13115,7 @@ function resetVisualizer() {
     generateWaterFlowSteps(heights);
   }
   else if (visualizerState.algo === 'aliendictionary') {
-    const words = ["wrt","wrf","er","ett","rftt"];
+    const words = ["wrt", "wrf", "er", "ett", "rftt"];
     visualizerState.rawArray = words;
     appendLog(`[INFO] Alien Dictionary: words=[${words.join(', ')}].`, "info");
     generateAlienDictSteps(words);
@@ -11715,7 +13142,7 @@ function resetVisualizer() {
     generateSerializeSteps(treeVals);
   }
 
-  
+
   renderCanvasStep();
 }
 
@@ -11724,19 +13151,936 @@ function resetVisualizer() {
 // ==========================================================================
 
 
+// Two-Array Binary Search Step Generation
+function generateTwoArrayBinarySteps(A, B) {
+  const steps = [];
+  let low = 0;
+  let high = A.length;
+  const totalLen = A.length + B.length;
+  const halfLen = Math.floor((totalLen + 1) / 2);
+
+  while (low <= high) {
+    const i = Math.floor((low + high) / 2);
+    const j = halfLen - i;
+
+    const maxLeftX = (i === 0) ? -Infinity : A[i - 1];
+    const minRightX = (i === A.length) ? Infinity : A[i];
+    const maxLeftY = (j === 0) ? -Infinity : B[j - 1];
+    const minRightY = (j === B.length) ? Infinity : B[j];
+
+    if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
+      // Found partition
+      let median;
+      if (totalLen % 2 === 0) {
+        median = (Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2;
+      } else {
+        median = Math.max(maxLeftX, maxLeftY);
+      }
+      steps.push({
+        i, j, low, high,
+        maxLeftX, minRightX, maxLeftY, minRightY,
+        compare: 'found',
+        median,
+        log: `Partition verified! maxLeftX(${maxLeftX}) <= minRightY(${minRightY}) and maxLeftY(${maxLeftY}) <= minRightX(${minRightX}). Median is ${median}.`
+      });
+      break;
+    } else if (maxLeftX > minRightY) {
+      // Too far right in X, move left
+      steps.push({
+        i, j, low, high,
+        maxLeftX, minRightX, maxLeftY, minRightY,
+        compare: 'left',
+        log: `maxLeftX (${maxLeftX}) > minRightY (${minRightY}). Too far right in array X. Move high to ${i - 1}.`
+      });
+      high = i - 1;
+    } else {
+      // Too far left in X, move right
+      steps.push({
+        i, j, low, high,
+        maxLeftX, minRightX, maxLeftY, minRightY,
+        compare: 'right',
+        log: `maxLeftY (${maxLeftY}) > minRightX (${minRightX}). Too far left in array X. Move low to ${i + 1}.`
+      });
+      low = i + 1;
+    }
+  }
+
+  visualizerState.steps = steps;
+}
+
+// Floyd's Array Cycle Step Generation
+function generateArrayCycleSteps(A) {
+  const steps = [];
+  let tortoise = 0;
+  let hare = 0;
+
+  // Phase 1
+  steps.push({
+    tortoise, hare, phase: 1,
+    log: "Start Phase 1: Tortoise and Hare both start at index 0."
+  });
+
+  do {
+    tortoise = A[tortoise];
+    hare = A[A[hare]];
+    steps.push({
+      tortoise, hare, phase: 1,
+      log: `Tortoise moves 1 step to index ${tortoise} (value ${A[tortoise]}). Hare moves 2 steps to index ${hare} (value ${A[hare]}).`
+    });
+  } while (tortoise !== hare);
+
+  // Phase 2
+  tortoise = 0;
+  steps.push({
+    tortoise, hare, phase: 2,
+    log: `Collision detected at index ${hare}! Reset tortoise pointer to index 0, keeping hare at index ${hare}.`
+  });
+
+  while (tortoise !== hare) {
+    tortoise = A[tortoise];
+    hare = A[hare];
+    steps.push({
+      tortoise, hare, phase: 2,
+      log: `Both pointers move at equal speed (1 step). Tortoise to index ${tortoise}, Hare to index ${hare}.`
+    });
+  }
+
+  steps.push({
+    tortoise, hare, phase: 2,
+    duplicate: tortoise,
+    log: `Pointers met at index ${tortoise}! The duplicate number is confirmed as: ${tortoise}.`
+  });
+
+  visualizerState.steps = steps;
+}
+
+// Reorder List Step Generation
+function generateReorderListSteps(A) {
+  const steps = [];
+  const len = A.length;
+  if (len === 0) return;
+
+  // Phase 1: Split list
+  let slow = 0;
+  let fast = 0;
+  steps.push({
+    phase: 'split', slow, fast,
+    list1: A.slice(0, slow + 1),
+    list2: A.slice(slow + 1),
+    log: `Phase 1: Find middle node. Slow and Fast start at index 0 (value ${A[0]}).`
+  });
+
+  while (fast + 1 < len && fast + 2 < len) {
+    slow = slow + 1;
+    fast = fast + 2;
+    steps.push({
+      phase: 'split', slow, fast,
+      list1: A.slice(0, slow + 1),
+      list2: A.slice(slow + 1),
+      log: `Slow moves 1 node to index ${slow} (${A[slow]}). Fast moves 2 nodes to index ${fast} (${A[fast]}).`
+    });
+  }
+
+  // Phase 2: Reverse second half
+  const firstHalf = A.slice(0, slow + 1);
+  const secondHalf = A.slice(slow + 1);
+  steps.push({
+    phase: 'reverse_start', slow, fast,
+    list1: [...firstHalf],
+    list2: [...secondHalf],
+    log: `Phase 2: Split complete. Middle node is index ${slow} (${A[slow]}). Reversing second half: [${secondHalf.join(', ')}]`
+  });
+
+  const reversed = [];
+  const tempRight = [...secondHalf];
+  while (tempRight.length > 0) {
+    const popped = tempRight.pop();
+    reversed.push(popped);
+    steps.push({
+      phase: 'reversing', slow, fast,
+      list1: [...firstHalf],
+      list2: [...tempRight],
+      reversed: [...reversed],
+      log: `Pop element ${popped} from right and push to reversed sublist.`
+    });
+  }
+
+  // Phase 3: Merge Alternately
+  const list1 = [...firstHalf];
+  const list2 = [...reversed];
+  const merged = [list1[0]];
+  let p1 = 1;
+  let p2 = 0;
+
+  steps.push({
+    phase: 'merge_start',
+    list1: [...list1],
+    list2: [...list2],
+    merged: [...merged],
+    p1, p2,
+    log: `Phase 3: Merge lists alternately. Start with first element of list 1: [${merged.join(', ')}].`
+  });
+
+  while (p1 < list1.length || p2 < list2.length) {
+    if (p2 < list2.length) {
+      merged.push(list2[p2]);
+      steps.push({
+        phase: 'merge',
+        list1: [...list1],
+        list2: [...list2],
+        merged: [...merged],
+        p1, p2: p2 + 1,
+        activeSide: 'list2',
+        activeIdx: p2,
+        log: `Add element ${list2[p2]} from reversed second half to merged list.`
+      });
+      p2++;
+    }
+    if (p1 < list1.length) {
+      merged.push(list1[p1]);
+      steps.push({
+        phase: 'merge',
+        list1: [...list1],
+        list2: [...list2],
+        merged: [...merged],
+        p1: p1 + 1,
+        p2,
+        activeSide: 'list1',
+        activeIdx: p1,
+        log: `Add element ${list1[p1]} from first half to merged list.`
+      });
+      p1++;
+    }
+  }
+
+  steps.push({
+    phase: 'complete',
+    merged: [...merged],
+    log: `Reordering finished successfully! Final list order: [${merged.join(', ')}].`
+  });
+
+  visualizerState.steps = steps;
+}
+
+// Tree Maximum Path Sum DFS Step Generation
+function generateTreePathSumSteps(treeVals) {
+  const steps = [];
+  let globalMax = -Infinity;
+
+  function dfs(nodeIdx) {
+    if (nodeIdx >= treeVals.length || treeVals[nodeIdx] === null) {
+      return 0;
+    }
+
+    const val = treeVals[nodeIdx];
+
+    // DFS traversal left and right
+    const leftRaw = dfs(2 * nodeIdx + 1);
+    const rightRaw = dfs(2 * nodeIdx + 2);
+
+    const left = Math.max(leftRaw, 0);
+    const right = Math.max(rightRaw, 0);
+
+    const localMax = val + left + right;
+    globalMax = Math.max(globalMax, localMax);
+
+    const nodeMaxContribution = val + Math.max(left, right);
+
+    steps.push({
+      active: nodeIdx,
+      leftRaw, rightRaw,
+      leftContrib: left,
+      rightContrib: right,
+      localMax,
+      globalMax,
+      nodeMaxContribution,
+      log: `Evaluate node ${val} (index ${nodeIdx}). Left path return: ${leftRaw} (use: ${left}), Right path return: ${rightRaw} (use: ${right}). Local max sum path candidate: ${localMax}. Current global max: ${globalMax}.`
+    });
+
+    return nodeMaxContribution;
+  }
+
+  dfs(0);
+
+  steps.push({
+    active: null,
+    globalMax,
+    log: `DFS complete. Max path sum found: ${globalMax}.`
+  });
+
+  visualizerState.steps = steps;
+}
+
+// Equation Ratio Solver DFS Step Generation
+function generateEquationSolverSteps(equations, values, queries) {
+  const steps = [];
+
+  // 1. Build adjacency list graph
+  const adj = {};
+  for (let i = 0; i < equations.length; i++) {
+    const u = equations[i][0];
+    const v = equations[i][1];
+    const val = values[i];
+    if (!adj[u]) adj[u] = [];
+    if (!adj[v]) adj[v] = [];
+    adj[u].push({ node: v, weight: val });
+    adj[v].push({ node: u, weight: 1.0 / val });
+  }
+
+  // 2. Solve query step-by-step
+  const src = queries[0];
+  const dst = queries[1];
+
+  steps.push({
+    graph: adj,
+    src, dst,
+    activeNode: null,
+    visited: [],
+    path: [],
+    currentProduct: 1.0,
+    log: `Start DFS traversal to evaluate: ${src} / ${dst}. Build directed ratio graph.`
+  });
+
+  const visitedSet = new Set();
+  let found = false;
+
+  function dfs(curr, target, product, path) {
+    visitedSet.add(curr);
+    path.push(curr);
+
+    steps.push({
+      graph: adj,
+      src, dst,
+      activeNode: curr,
+      visited: [...visitedSet],
+      path: [...path],
+      currentProduct: product,
+      log: `Visit variable "${curr}". Current path ratio product: ${product.toFixed(4)}.`
+    });
+
+    if (curr === target) {
+      found = true;
+      steps.push({
+        graph: adj,
+        src, dst,
+        activeNode: curr,
+        visited: [...visitedSet],
+        path: [...path],
+        currentProduct: product,
+        status: 'found',
+        log: `Destination variable "${target}" reached! Evaluated division ratio value is: ${product.toFixed(4)}.`
+      });
+      return;
+    }
+
+    const neighbors = adj[curr] || [];
+    for (const edge of neighbors) {
+      if (!visitedSet.has(edge.node) && !found) {
+        steps.push({
+          graph: adj,
+          src, dst,
+          activeNode: curr,
+          activeEdge: { from: curr, to: edge.node, weight: edge.weight },
+          visited: [...visitedSet],
+          path: [...path],
+          currentProduct: product,
+          log: `Traverse edge: "${curr}" -> "${edge.node}" with division ratio weight: ${edge.weight}.`
+        });
+        dfs(edge.node, target, product * edge.weight, path);
+      }
+    }
+
+    if (!found) {
+      path.pop();
+      steps.push({
+        graph: adj,
+        src, dst,
+        activeNode: curr,
+        visited: [...visitedSet],
+        path: [...path],
+        currentProduct: product,
+        log: `Backtrack from variable "${curr}". Pop node from path.`
+      });
+    }
+  }
+
+  if (!adj[src] || !adj[dst]) {
+    steps.push({
+      graph: adj,
+      src, dst,
+      status: 'not_found',
+      log: `Variable "${src}" or "${dst}" does not exist in graph! Result is -1.0.`
+    });
+  } else {
+    dfs(src, dst, 1.0, []);
+  }
+
+  visualizerState.steps = steps;
+}
+
+// Tarjan's Bridge Finder DFS Step Generation
+function generateTarjanBridgeSteps(n, edges) {
+  const steps = [];
+  const adj = Array.from({ length: n }, () => []);
+  edges.forEach(([u, v]) => {
+    adj[u].push(v);
+    adj[v].push(u);
+  });
+
+  const disc = Array(n).fill(-1);
+  const low = Array(n).fill(-1);
+  const bridges = [];
+  let time = 0;
+
+  steps.push({
+    n, edges,
+    disc: [...disc],
+    low: [...low],
+    bridges: [],
+    stack: [],
+    activeNode: null,
+    log: "Start Tarjan's DFS bridge finder. Initialize discovery times (disc) and lowest reach values (low) to -1."
+  });
+
+  function dfs(u, p, stack) {
+    disc[u] = low[u] = time++;
+    stack.push(u);
+
+    steps.push({
+      n, edges,
+      disc: [...disc],
+      low: [...low],
+      bridges: [...bridges],
+      stack: [...stack],
+      activeNode: u,
+      log: `DFS visit node ${u}. Set disc[${u}] = low[${u}] = ${disc[u]}.`
+    });
+
+    for (const v of adj[u]) {
+      if (v === p) continue; // skip parent link
+
+      if (disc[v] === -1) {
+        steps.push({
+          n, edges,
+          disc: [...disc],
+          low: [...low],
+          bridges: [...bridges],
+          stack: [...stack],
+          activeNode: u,
+          activeEdge: [u, v],
+          log: `DFS tree edge: Traverse from node ${u} to unvisited neighbor ${v}.`
+        });
+
+        dfs(v, u, stack);
+
+        low[u] = Math.min(low[u], low[v]);
+
+        steps.push({
+          n, edges,
+          disc: [...disc],
+          low: [...low],
+          bridges: [...bridges],
+          stack: [...stack],
+          activeNode: u,
+          log: `Backtrack from node ${v} to node ${u}. Update low[${u}] = min(low[${u}], low[${v}]) = ${low[u]}.`
+        });
+
+        if (low[v] > disc[u]) {
+          bridges.push([u, v]);
+          steps.push({
+            n, edges,
+            disc: [...disc],
+            low: [...low],
+            bridges: [...bridges],
+            stack: [...stack],
+            activeNode: u,
+            foundBridge: [u, v],
+            log: `Bridge Identified! Edge (${u}, ${v}) is critical because low[${v}] (${low[v]}) > disc[${u}] (${disc[u]}).`
+          });
+        }
+      } else {
+        // Back edge
+        low[u] = Math.min(low[u], disc[v]);
+        steps.push({
+          n, edges,
+          disc: [...disc],
+          low: [...low],
+          bridges: [...bridges],
+          stack: [...stack],
+          activeNode: u,
+          activeEdge: [u, v],
+          log: `Back edge to already visited node ${v} found. Update low[${u}] = min(low[${u}], disc[${v}]) = ${low[u]}.`
+        });
+      }
+    }
+
+    stack.pop();
+  }
+
+  for (let i = 0; i < n; i++) {
+    if (disc[i] === -1) {
+      dfs(i, -1, []);
+    }
+  }
+
+  steps.push({
+    n, edges,
+    disc: [...disc],
+    low: [...low],
+    bridges: [...bridges],
+    stack: [],
+    activeNode: null,
+    log: `Tarjan's DFS complete. Bridges found: [${bridges.map(b => `(${b[0]}, ${b[1]})`).join(', ')}].`
+  });
+
+  visualizerState.steps = steps;
+}
+
+// Backtracking Combination Sum Step Generation
+function generateCombinationTreeSteps(candidates, target) {
+  const steps = [];
+  const results = [];
+
+  steps.push({
+    candidates,
+    target,
+    path: [],
+    status: 'search',
+    log: `Start Combination Sum backtracking. Target remains: ${target}.`
+  });
+
+  function backtrack(startIdx, currTarget, path) {
+    if (currTarget === 0) {
+      results.push([...path]);
+      steps.push({
+        candidates,
+        target: currTarget,
+        path: [...path],
+        status: 'valid',
+        log: `Found combination matching target: [${path.join(', ')}]! Added to solutions.`
+      });
+      return;
+    }
+    if (currTarget < 0) {
+      steps.push({
+        candidates,
+        target: currTarget,
+        path: [...path],
+        status: 'pruned',
+        log: `Sum exceeds target. Pruned subset branch: [${path.join(', ')}].`
+      });
+      return;
+    }
+
+    for (let i = startIdx; i < candidates.length; i++) {
+      path.push(candidates[i]);
+      steps.push({
+        candidates,
+        target: currTarget - candidates[i],
+        path: [...path],
+        status: 'search',
+        log: `Push candidate ${candidates[i]} to path. New target: ${currTarget - candidates[i]}.`
+      });
+
+      backtrack(i, currTarget - candidates[i], path);
+
+      path.pop();
+      steps.push({
+        candidates,
+        target: currTarget,
+        path: [...path],
+        status: 'backtrack',
+        log: `Pop last element. Backtrack state.`
+      });
+    }
+  }
+
+  backtrack(0, target, []);
+
+  steps.push({
+    candidates,
+    target: 0,
+    results,
+    status: 'complete',
+    log: `Backtracking complete. Combinations generated: [${results.map(r => `[${r.join(',')}]`).join(', ')}].`
+  });
+
+  visualizerState.steps = steps;
+}
+
+// Boyer-Moore Majority Vote Step Generation
+function generateBoyerMooreSteps(nums) {
+  const steps = [];
+  let candidate = null, count = 0;
+
+  steps.push({
+    arr: [...nums],
+    idx: -1,
+    candidate: null,
+    count: 0,
+    phase: 'init',
+    log: `Start Boyer-Moore. Array: [${nums.join(', ')}]. Candidate=null, Count=0.`
+  });
+
+  for (let i = 0; i < nums.length; i++) {
+    const n = nums[i];
+    if (count === 0) {
+      candidate = n;
+      steps.push({
+        arr: [...nums], idx: i, candidate, count: 0, phase: 'newcandidate',
+        log: `Count hit 0! New candidate = ${candidate}.`
+      });
+    }
+    if (n === candidate) {
+      count++;
+      steps.push({
+        arr: [...nums], idx: i, candidate, count, phase: 'match',
+        log: `nums[${i}]=${n} matches candidate ${candidate}. Count → ${count}.`
+      });
+    } else {
+      count--;
+      steps.push({
+        arr: [...nums], idx: i, candidate, count, phase: 'nomatch',
+        log: `nums[${i}]=${n} ≠ candidate ${candidate}. Count → ${count}.`
+      });
+    }
+  }
+
+  steps.push({
+    arr: [...nums], idx: -1, candidate, count, phase: 'done',
+    log: `Majority candidate = ${candidate}. Appears more than ⌊n/2⌋ times.`
+  });
+
+  visualizerState.steps = steps;
+}
+
+// Quick Select Step Generation (find kth largest)
+function generateQuickSelectSteps(arr, k) {
+  const steps = [];
+  const n = arr.length;
+  const targetIdx = n - k; // kth largest is at targetIdx in sorted ascending order
+
+  steps.push({
+    arr: [...arr], lo: 0, hi: n - 1, pivotIdx: -1, targetIdx, k,
+    phase: 'init', swapPair: null,
+    log: `Quick Select: Find ${k}th largest. Target index in sorted array = ${targetIdx}. Array: [${arr.join(', ')}].`
+  });
+
+  function partition(lo, hi) {
+    const pivot = arr[hi];
+    let i = lo;
+    steps.push({
+      arr: [...arr], lo, hi, pivotIdx: hi, targetIdx, k,
+      phase: 'pivot', swapPair: null,
+      log: `Partitioning [${lo}..${hi}]. Pivot = arr[${hi}] = ${pivot}.`
+    });
+    for (let j = lo; j < hi; j++) {
+      steps.push({
+        arr: [...arr], lo, hi, pivotIdx: hi, compareIdx: j, targetIdx, k,
+        phase: 'compare', swapPair: null,
+        log: `Compare arr[${j}]=${arr[j]} with pivot ${pivot}.`
+      });
+      if (arr[j] <= pivot) {
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+        steps.push({
+          arr: [...arr], lo, hi, pivotIdx: hi, targetIdx, k,
+          phase: 'swap', swapPair: [i, j],
+          log: `arr[${j}]=${arr[j]} ≤ pivot. Swap positions ${i} & ${j}. arr=[${arr.join(',')}].`
+        });
+        i++;
+      }
+    }
+    [arr[i], arr[hi]] = [arr[hi], arr[i]];
+    steps.push({
+      arr: [...arr], lo, hi, pivotIdx: i, targetIdx, k,
+      phase: 'placed', swapPair: [i, hi],
+      log: `Pivot placed at index ${i}. arr=[${arr.join(',')}].`
+    });
+    return i;
+  }
+
+  let lo = 0, hi = n - 1;
+  while (lo <= hi) {
+    const p = partition(lo, hi);
+    if (p === targetIdx) {
+      steps.push({
+        arr: [...arr], lo, hi, pivotIdx: p, targetIdx, k,
+        phase: 'found', swapPair: null,
+        log: `Found! arr[${p}]=${arr[p]} is the ${k}th largest element!`
+      });
+      break;
+    } else if (p < targetIdx) {
+      steps.push({
+        arr: [...arr], lo: p + 1, hi, pivotIdx: p, targetIdx, k,
+        phase: 'searchright', swapPair: null,
+        log: `Pivot pos ${p} < target ${targetIdx}. Search right half [${p+1}..${hi}].`
+      });
+      lo = p + 1;
+    } else {
+      steps.push({
+        arr: [...arr], lo, hi: p - 1, pivotIdx: p, targetIdx, k,
+        phase: 'searchleft', swapPair: null,
+        log: `Pivot pos ${p} > target ${targetIdx}. Search left half [${lo}..${p-1}].`
+      });
+      hi = p - 1;
+    }
+  }
+
+  visualizerState.steps = steps;
+}
+
+// BST Deletion Step Generation
+function generateBSTDeletionSteps(treeArr, deleteKey) {
+  const steps = [];
+
+  // Compute coords dynamically for level-order array
+  function getCoords(idx, totalNodes, canvasW) {
+    const level = Math.floor(Math.log2(idx + 1));
+    const numInLevel = Math.pow(2, level);
+    const levelIdx = idx - numInLevel + 1;
+    const spacing = canvasW / numInLevel;
+    return { x: spacing * levelIdx + spacing / 2, y: 30 + level * 55 };
+  }
+
+  steps.push({
+    tree: [...treeArr], deleteKey, phase: 'init', activeIdx: -1, successorIdx: -1, highlight: [],
+    log: `BST Deletion: Delete key=${deleteKey} from tree. Search starts at root (${treeArr[0]}).`
+  });
+
+  // Simulate BST delete by tracing through the level-order array
+  let idx = 0;
+  const visited = [];
+  while (idx < treeArr.length && treeArr[idx] !== null) {
+    visited.push(idx);
+    steps.push({
+      tree: [...treeArr], deleteKey, phase: 'search', activeIdx: idx, successorIdx: -1, highlight: [...visited],
+      log: `Searching... at node ${treeArr[idx]}. Target=${deleteKey}.`
+    });
+    if (treeArr[idx] === deleteKey) break;
+    if (deleteKey < treeArr[idx]) {
+      idx = 2 * idx + 1;
+    } else {
+      idx = 2 * idx + 2;
+    }
+    if (idx >= treeArr.length || treeArr[idx] === null) break;
+  }
+
+  const targetIdx = idx;
+
+  steps.push({
+    tree: [...treeArr], deleteKey, phase: 'found', activeIdx: targetIdx, successorIdx: -1, highlight: [targetIdx],
+    log: `Found node ${deleteKey} at tree index ${targetIdx}. It has two children → find inorder successor.`
+  });
+
+  // Find inorder successor (min in right subtree)
+  let succIdx = 2 * targetIdx + 2;
+  steps.push({
+    tree: [...treeArr], deleteKey, phase: 'findsuccesor', activeIdx: targetIdx, successorIdx: succIdx, highlight: [targetIdx, succIdx],
+    log: `Inorder successor search: go to right child (index ${succIdx}, value=${treeArr[succIdx]}).`
+  });
+  while (2 * succIdx + 1 < treeArr.length && treeArr[2 * succIdx + 1] !== null) {
+    succIdx = 2 * succIdx + 1;
+    steps.push({
+      tree: [...treeArr], deleteKey, phase: 'findsuccesor', activeIdx: targetIdx, successorIdx: succIdx, highlight: [targetIdx, succIdx],
+      log: `Go left to find minimum: index ${succIdx}, value=${treeArr[succIdx]}.`
+    });
+  }
+
+  steps.push({
+    tree: [...treeArr], deleteKey, phase: 'successorfound', activeIdx: targetIdx, successorIdx: succIdx, highlight: [targetIdx, succIdx],
+    log: `Inorder successor = ${treeArr[succIdx]} (index ${succIdx}). Swap value into target node.`
+  });
+
+  // Swap
+  const newTree = [...treeArr];
+  const succVal = newTree[succIdx];
+  newTree[targetIdx] = succVal;
+  newTree[succIdx] = null;
+
+  steps.push({
+    tree: [...newTree], deleteKey, phase: 'swapped', activeIdx: targetIdx, successorIdx: succIdx, highlight: [targetIdx],
+    log: `Swapped! Node ${deleteKey} replaced by ${succVal}. Successor leaf at index ${succIdx} removed.`
+  });
+
+  steps.push({
+    tree: [...newTree], deleteKey, phase: 'done', activeIdx: -1, successorIdx: -1, highlight: [],
+    log: `BST Deletion complete. Tree is still a valid BST.`
+  });
+
+  visualizerState.steps = steps;
+}
+
+// Segment Tree Lazy Propagation Step Generation
+function generateSegmentTreeLazySteps(arr, updateRange, updateVal, queryRange) {
+  const n = arr.length;
+  const tree = new Array(4 * n).fill(0);
+  const lazy = new Array(4 * n).fill(0);
+  const steps = [];
+
+  function build(node, start, end) {
+    if (start === end) { tree[node] = arr[start]; return; }
+    const mid = (start + end) >> 1;
+    build(2 * node, start, mid);
+    build(2 * node + 1, mid + 1, end);
+    tree[node] = tree[2 * node] + tree[2 * node + 1];
+  }
+  build(1, 0, n - 1);
+
+  steps.push({
+    arr: [...arr], tree: tree.slice(1, 2 * n), lazy: lazy.slice(1, 2 * n),
+    phase: 'build', activeNode: -1, updateRange, updateVal, queryRange, queryResult: null,
+    log: `Segment tree built. Original array: [${arr.join(', ')}]. Leaf sums propagated up.`
+  });
+
+  function pushDown(node, start, end) {
+    if (lazy[node] !== 0) {
+      const mid = (start + end) >> 1;
+      tree[2 * node] += (mid - start + 1) * lazy[node];
+      lazy[2 * node] += lazy[node];
+      tree[2 * node + 1] += (end - mid) * lazy[node];
+      lazy[2 * node + 1] += lazy[node];
+      lazy[node] = 0;
+    }
+  }
+
+  function update(node, start, end, l, r, val) {
+    if (r < start || end < l) return;
+    if (l <= start && end <= r) {
+      tree[node] += (end - start + 1) * val;
+      lazy[node] += val;
+      steps.push({
+        arr: [...arr], tree: tree.slice(1, 2 * n), lazy: lazy.slice(1, 2 * n),
+        phase: 'update_lazy', activeNode: node - 1, updateRange, updateVal, queryRange, queryResult: null,
+        log: `Range [${start}..${end}] fully inside update [${l}..${r}]. Apply lazy +${val} to node ${node}. tree[${node}]=${tree[node]}.`
+      });
+      return;
+    }
+    pushDown(node, start, end);
+    const mid = (start + end) >> 1;
+    steps.push({
+      arr: [...arr], tree: tree.slice(1, 2 * n), lazy: lazy.slice(1, 2 * n),
+      phase: 'update_descend', activeNode: node - 1, updateRange, updateVal, queryRange, queryResult: null,
+      log: `Partial overlap at node ${node} [${start}..${end}]. Push down lazy and recurse children.`
+    });
+    update(2 * node, start, mid, l, r, val);
+    update(2 * node + 1, mid + 1, end, l, r, val);
+    tree[node] = tree[2 * node] + tree[2 * node + 1];
+  }
+
+  function query(node, start, end, l, r) {
+    if (r < start || end < l) return 0;
+    if (l <= start && end <= r) {
+      steps.push({
+        arr: [...arr], tree: tree.slice(1, 2 * n), lazy: lazy.slice(1, 2 * n),
+        phase: 'query_use', activeNode: node - 1, updateRange, updateVal, queryRange, queryResult: null,
+        log: `Range [${start}..${end}] fully inside query [${l}..${r}]. Use node ${node} value=${tree[node]}.`
+      });
+      return tree[node];
+    }
+    pushDown(node, start, end);
+    const mid = (start + end) >> 1;
+    steps.push({
+      arr: [...arr], tree: tree.slice(1, 2 * n), lazy: lazy.slice(1, 2 * n),
+      phase: 'query_descend', activeNode: node - 1, updateRange, updateVal, queryRange, queryResult: null,
+      log: `Query partial overlap at node ${node} [${start}..${end}]. Recurse both children.`
+    });
+    return query(2 * node, start, mid, l, r) + query(2 * node + 1, mid + 1, end, l, r);
+  }
+
+  update(1, 0, n - 1, updateRange[0], updateRange[1], updateVal);
+  steps.push({
+    arr: [...arr], tree: tree.slice(1, 2 * n), lazy: lazy.slice(1, 2 * n),
+    phase: 'update_done', activeNode: -1, updateRange, updateVal, queryRange, queryResult: null,
+    log: `Range update complete: added ${updateVal} to indices [${updateRange[0]}..${updateRange[1]}]. Now querying [${queryRange[0]}..${queryRange[1]}].`
+  });
+
+  const result = query(1, 0, n - 1, queryRange[0], queryRange[1]);
+  steps.push({
+    arr: [...arr], tree: tree.slice(1, 2 * n), lazy: lazy.slice(1, 2 * n),
+    phase: 'query_done', activeNode: -1, updateRange, updateVal, queryRange, queryResult: result,
+    log: `Range sum query [${queryRange[0]}..${queryRange[1]}] = ${result}.`
+  });
+
+  visualizerState.steps = steps;
+}
+
+// Multi-Source BFS (Rotten Oranges) Step Generation
+function generateMultiSourceBFSSteps(grid) {
+  const R = grid.length, C = grid[0].length;
+  const steps = [];
+  const dirs = [[0,1],[0,-1],[1,0],[-1,0]];
+  let fresh = 0;
+  const queue = [];
+
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      if (grid[r][c] === 2) queue.push([r, c, 0]);
+      if (grid[r][c] === 1) fresh++;
+    }
+  }
+
+  steps.push({
+    grid: grid.map(r => [...r]), minute: 0, freshLeft: fresh,
+    activeQueue: [...queue.map(x => [x[0], x[1]])], justRotten: [],
+    phase: 'init',
+    log: `Multi-Source BFS initialized. Rotten seeds: ${queue.length} cells. Fresh oranges: ${fresh}.`
+  });
+
+  let minute = 0;
+  while (queue.length > 0 && fresh > 0) {
+    const size = queue.length;
+    const justRotten = [];
+    minute++;
+    for (let i = 0; i < size; i++) {
+      const [r, c] = queue.shift();
+      for (const [dr, dc] of dirs) {
+        const nr = r + dr, nc = c + dc;
+        if (nr >= 0 && nr < R && nc >= 0 && nc < C && grid[nr][nc] === 1) {
+          grid[nr][nc] = 2;
+          fresh--;
+          justRotten.push([nr, nc]);
+          queue.push([nr, nc, minute]);
+        }
+      }
+    }
+    steps.push({
+      grid: grid.map(r => [...r]), minute, freshLeft: fresh,
+      activeQueue: [...queue.map(x => [x[0], x[1]])], justRotten: [...justRotten],
+      phase: fresh === 0 ? 'done' : 'bfs',
+      log: `Minute ${minute}: ${justRotten.length} fresh orange(s) rotted. Fresh remaining: ${fresh}.`
+    });
+  }
+
+  if (fresh > 0) {
+    steps.push({
+      grid: grid.map(r => [...r]), minute: -1, freshLeft: fresh,
+      activeQueue: [], justRotten: [], phase: 'impossible',
+      log: `Impossible! ${fresh} fresh orange(s) remain unreachable.`
+    });
+  } else {
+    steps.push({
+      grid: grid.map(r => [...r]), minute, freshLeft: 0,
+      activeQueue: [], justRotten: [], phase: 'done',
+      log: `All oranges rotten! Minimum time = ${minute} minutes.`
+    });
+  }
+
+  visualizerState.steps = steps;
+}
+
 // Minimum Window Substring Step Generation
 function generateMinWindowSteps(S, T) {
   const steps = [];
   const need = {};
   for (const c of T) need[c] = (need[c] || 0) + 1;
-  
+
   const map = {};
   let have = 0;
   const needCount = Object.keys(need).length;
   let l = 0;
   let minLen = Infinity;
   let ans = [-1, -1];
-  
+
   steps.push({
     l: 0,
     r: -1,
@@ -11747,15 +14091,15 @@ function generateMinWindowSteps(S, T) {
     minLen,
     log: `Minimum Window Substring: need map initialized: ${JSON.stringify(need)}`
   });
-  
+
   for (let r = 0; r < S.length; r++) {
     const c = S[r];
     map[c] = (map[c] || 0) + 1;
-    
+
     if (need[c] && map[c] === need[c]) {
       have++;
     }
-    
+
     steps.push({
       l,
       r,
@@ -11766,7 +14110,7 @@ function generateMinWindowSteps(S, T) {
       minLen,
       log: `Expanded right pointer to S[r=${r}]='${c}'. Window count: ${map[c]}. satisfied: ${have}/${needCount}.`
     });
-    
+
     while (have === needCount) {
       const windowLen = r - l + 1;
       if (windowLen < minLen) {
@@ -11783,13 +14127,13 @@ function generateMinWindowSteps(S, T) {
           log: `Found a smaller valid window: "${S.substring(l, r + 1)}" (length ${windowLen}).`
         });
       }
-      
+
       const leftChar = S[l];
       map[leftChar]--;
       if (need[leftChar] && map[leftChar] < need[leftChar]) {
         have--;
       }
-      
+
       l++;
       steps.push({
         l,
@@ -11799,11 +14143,11 @@ function generateMinWindowSteps(S, T) {
         have,
         ans: [...ans],
         minLen,
-        log: `Shrunk left pointer from S[l=${l-1}]='${leftChar}'. satisfied: ${have}/${needCount}.`
+        log: `Shrunk left pointer from S[l=${l - 1}]='${leftChar}'. satisfied: ${have}/${needCount}.`
       });
     }
   }
-  
+
   steps.push({
     l,
     r: S.length - 1,
@@ -11814,7 +14158,7 @@ function generateMinWindowSteps(S, T) {
     minLen,
     log: `Sliding Window search complete. Minimum Window Substring is "${ans[0] === -1 ? 'None' : S.substring(ans[0], ans[1] + 1)}"`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -11823,7 +14167,7 @@ function generateWordLadderSteps(beginWord, endWord, wordList) {
   const steps = [];
   const wordSet = new Set(wordList);
   wordSet.add(beginWord);
-  
+
   const nodes = Array.from(wordSet).map((w, idx) => {
     let x = 100, y = 175;
     if (w === "hit") { x = 60; y = 175; }
@@ -11835,7 +14179,7 @@ function generateWordLadderSteps(beginWord, endWord, wordList) {
     else if (w === "cog") { x = 460; y = 175; }
     return { id: w, x, y };
   });
-  
+
   const edges = [];
   const nodeIds = nodes.map(n => n.id);
   for (let i = 0; i < nodeIds.length; i++) {
@@ -11851,10 +14195,10 @@ function generateWordLadderSteps(beginWord, endWord, wordList) {
       }
     }
   }
-  
+
   const queue = [[beginWord, [beginWord]]];
   const visited = new Set([beginWord]);
-  
+
   steps.push({
     nodes,
     edges,
@@ -11864,11 +14208,11 @@ function generateWordLadderSteps(beginWord, endWord, wordList) {
     shortestPath: [],
     log: `Word Ladder BFS starting. beginWord="${beginWord}" pushed to queue.`
   });
-  
+
   let targetPath = [];
   while (queue.length > 0) {
     const [currWord, path] = queue.shift();
-    
+
     steps.push({
       nodes,
       edges,
@@ -11878,12 +14222,12 @@ function generateWordLadderSteps(beginWord, endWord, wordList) {
       shortestPath: [],
       log: `Dequeued "${currWord}". Path so far: ${path.join(' → ')}`
     });
-    
+
     if (currWord === endWord) {
       targetPath = path;
       break;
     }
-    
+
     for (let i = 0; i < currWord.length; i++) {
       for (let c = 97; c <= 122; c++) {
         const char = String.fromCharCode(c);
@@ -11892,7 +14236,7 @@ function generateWordLadderSteps(beginWord, endWord, wordList) {
           visited.add(nextWord);
           const nextPath = [...path, nextWord];
           queue.push([nextWord, nextPath]);
-          
+
           steps.push({
             nodes,
             edges,
@@ -11906,7 +14250,7 @@ function generateWordLadderSteps(beginWord, endWord, wordList) {
       }
     }
   }
-  
+
   steps.push({
     nodes,
     edges,
@@ -11914,11 +14258,11 @@ function generateWordLadderSteps(beginWord, endWord, wordList) {
     activeNode: null,
     visited: Array.from(visited),
     shortestPath: targetPath,
-    log: targetPath.length > 0 
+    log: targetPath.length > 0
       ? `Word Ladder found shortest path of length ${targetPath.length}: ${targetPath.join(' → ')}`
       : `Word Ladder complete. No path exists between ${beginWord} and ${endWord}.`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -11927,10 +14271,10 @@ function generateWaterFlowSteps(heights) {
   const steps = [];
   const R = heights.length;
   const C = heights[0].length;
-  
+
   const pacReach = Array.from({ length: R }, () => Array(C).fill(false));
   const atlReach = Array.from({ length: R }, () => Array(C).fill(false));
-  
+
   steps.push({
     heights,
     pacReach: pacReach.map(row => [...row]),
@@ -11938,7 +14282,7 @@ function generateWaterFlowSteps(heights) {
     activeCell: null,
     log: "Pacific Atlantic Water Flow: Grid loaded. Starting BFS expansion from Pacific ocean boundaries (top/left)..."
   });
-  
+
   const pacQueue = [];
   for (let r = 0; r < R; r++) {
     pacReach[r][0] = true;
@@ -11948,9 +14292,9 @@ function generateWaterFlowSteps(heights) {
     pacReach[0][c] = true;
     pacQueue.push([0, c]);
   }
-  
+
   const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]];
-  
+
   while (pacQueue.length > 0) {
     const [r, c] = pacQueue.shift();
     steps.push({
@@ -11960,7 +14304,7 @@ function generateWaterFlowSteps(heights) {
       activeCell: [r, c],
       log: `Pacific BFS: Dequeued cell (${r}, ${c}) [height=${heights[r][c]}]. Checking neighbors...`
     });
-    
+
     for (const [dr, dc] of dirs) {
       const nr = r + dr;
       const nc = c + dc;
@@ -11979,7 +14323,7 @@ function generateWaterFlowSteps(heights) {
       }
     }
   }
-  
+
   steps.push({
     heights,
     pacReach: pacReach.map(row => [...row]),
@@ -11987,7 +14331,7 @@ function generateWaterFlowSteps(heights) {
     activeCell: null,
     log: "Pacific boundary BFS complete. Starting BFS expansion from Atlantic ocean boundaries (bottom/right)..."
   });
-  
+
   const atlQueue = [];
   for (let r = 0; r < R; r++) {
     atlReach[r][C - 1] = true;
@@ -11997,7 +14341,7 @@ function generateWaterFlowSteps(heights) {
     atlReach[R - 1][c] = true;
     atlQueue.push([R - 1, c]);
   }
-  
+
   while (atlQueue.length > 0) {
     const [r, c] = atlQueue.shift();
     steps.push({
@@ -12007,7 +14351,7 @@ function generateWaterFlowSteps(heights) {
       activeCell: [r, c],
       log: `Atlantic BFS: Dequeued cell (${r}, ${c}) [height=${heights[r][c]}]. Checking neighbors...`
     });
-    
+
     for (const [dr, dc] of dirs) {
       const nr = r + dr;
       const nc = c + dc;
@@ -12026,7 +14370,7 @@ function generateWaterFlowSteps(heights) {
       }
     }
   }
-  
+
   const results = [];
   for (let r = 0; r < R; r++) {
     for (let c = 0; c < C; c++) {
@@ -12035,15 +14379,15 @@ function generateWaterFlowSteps(heights) {
       }
     }
   }
-  
+
   steps.push({
     heights,
     pacReach: pacReach.map(row => [...row]),
     atlReach: atlReach.map(row => [...row]),
     activeCell: null,
-    log: `Water Flow complete. Found ${results.length} cells that flow to both oceans: [${results.map(([r,c]) => `(${r},${c})`).join(', ')}]`
+    log: `Water Flow complete. Found ${results.length} cells that flow to both oceans: [${results.map(([r, c]) => `(${r},${c})`).join(', ')}]`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -12052,16 +14396,16 @@ function generateAlienDictSteps(words) {
   const steps = [];
   const adj = {};
   const indegree = {};
-  
+
   for (const w of words) {
     for (const char of w) {
       if (!adj[char]) adj[char] = [];
       if (indegree[char] === undefined) indegree[char] = 0;
     }
   }
-  
+
   const comparisons = [];
-  
+
   steps.push({
     adj: JSON.parse(JSON.stringify(adj)),
     indegree: { ...indegree },
@@ -12071,26 +14415,26 @@ function generateAlienDictSteps(words) {
     activeCompare: null,
     log: "Alien Dictionary: Building relation graph from adjacent words..."
   });
-  
+
   for (let i = 0; i < words.length - 1; i++) {
     const w1 = words[i];
     const w2 = words[i + 1];
     let len = Math.min(w1.length, w2.length);
     let diffFound = false;
-    
+
     for (let j = 0; j < len; j++) {
       if (w1[j] !== w2[j]) {
         const u = w1[j];
         const v = w2[j];
-        
+
         diffFound = true;
         comparisons.push({ u, v, w1, w2 });
-        
+
         if (!adj[u].includes(v)) {
           adj[u].push(v);
           indegree[v]++;
         }
-        
+
         steps.push({
           adj: JSON.parse(JSON.stringify(adj)),
           indegree: { ...indegree },
@@ -12103,7 +14447,7 @@ function generateAlienDictSteps(words) {
         break;
       }
     }
-    
+
     if (!diffFound && w1.length > w2.length) {
       steps.push({
         adj: JSON.parse(JSON.stringify(adj)),
@@ -12118,10 +14462,10 @@ function generateAlienDictSteps(words) {
       return;
     }
   }
-  
+
   const queue = Object.keys(indegree).filter(char => indegree[char] === 0).sort();
   const res = [];
-  
+
   steps.push({
     adj: JSON.parse(JSON.stringify(adj)),
     indegree: { ...indegree },
@@ -12131,11 +14475,11 @@ function generateAlienDictSteps(words) {
     activeCompare: null,
     log: `Graph construction complete. In-degree 0 nodes: [${queue.join(', ')}]. Adding them to queue.`
   });
-  
+
   while (queue.length > 0) {
     const char = queue.shift();
     res.push(char);
-    
+
     steps.push({
       adj: JSON.parse(JSON.stringify(adj)),
       indegree: { ...indegree },
@@ -12145,11 +14489,11 @@ function generateAlienDictSteps(words) {
       activeNode: char,
       log: `Dequeued character '${char}' and appended it to result alphabet. decrementing neighbor in-degrees...`
     });
-    
+
     const neighbors = adj[char] || [];
     for (const neighbor of neighbors) {
       indegree[neighbor]--;
-      
+
       steps.push({
         adj: JSON.parse(JSON.stringify(adj)),
         indegree: { ...indegree },
@@ -12159,7 +14503,7 @@ function generateAlienDictSteps(words) {
         activeNode: char,
         log: `Edge '${char}' ➔ '${neighbor}' relaxed. in-degree[${neighbor}] = ${indegree[neighbor]}.`
       });
-      
+
       if (indegree[neighbor] === 0) {
         queue.push(neighbor);
         steps.push({
@@ -12174,10 +14518,10 @@ function generateAlienDictSteps(words) {
       }
     }
   }
-  
+
   const allCharsCount = Object.keys(indegree).length;
   const complete = res.length === allCharsCount;
-  
+
   steps.push({
     adj: JSON.parse(JSON.stringify(adj)),
     indegree: { ...indegree },
@@ -12185,11 +14529,11 @@ function generateAlienDictSteps(words) {
     res: [...res],
     comparisons: [...comparisons],
     activeNode: null,
-    log: complete 
+    log: complete
       ? `Topological Sort complete! Valid alphabet character ordering: "${res.join('')}"`
       : `Topological Sort complete, but cycle detected! Result string "${res.join('')}" is incomplete. Invalid dictionary.`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -12202,7 +14546,7 @@ function generateTwitterSteps(actions) {
     2: new Set([2])
   };
   let time = 0;
-  
+
   steps.push({
     tweets: [],
     follows: { 1: [1], 2: [2] },
@@ -12210,11 +14554,11 @@ function generateTwitterSteps(actions) {
     activeAction: null,
     log: "Design Twitter database initialized. Users 1 and 2 follow themselves by default."
   });
-  
+
   actions.forEach((act, idx) => {
     let logMsg = "";
     let feed = [];
-    
+
     if (act.type === 'postTweet') {
       tweets.push({ userId: act.userId, tweetId: act.tweetId, time: time++ });
       logMsg = `User ${act.userId} posted Tweet ${act.tweetId}.`;
@@ -12238,12 +14582,12 @@ function generateTwitterSteps(actions) {
         .slice(0, 10);
       logMsg = `Retrieved news feed for User ${act.userId}. Returned: [${feed.map(t => t.tweetId).join(', ')}].`;
     }
-    
+
     const followsMap = {};
     Object.keys(follows).forEach(u => {
       followsMap[u] = Array.from(follows[u]);
     });
-    
+
     steps.push({
       tweets: [...tweets],
       follows: followsMap,
@@ -12252,7 +14596,7 @@ function generateTwitterSteps(actions) {
       log: logMsg
     });
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -12266,14 +14610,14 @@ function generateSerializeSteps(treeVals) {
     { id: 4, val: 4, x: 290, y: 220, parent: 3, left: true },
     { id: 5, val: 5, x: 390, y: 220, parent: 3, right: true }
   ];
-  
+
   const edges = [
     { u: 1, v: 2 },
     { u: 1, v: 3 },
     { u: 3, v: 4 },
     { u: 3, v: 5 }
   ];
-  
+
   steps.push({
     nodes,
     edges,
@@ -12283,7 +14627,7 @@ function generateSerializeSteps(treeVals) {
     serializedString: "",
     log: "Starting Serialization Phase (Preorder DFS traversal)..."
   });
-  
+
   const preorderLog = [
     { node: 1, tokens: ["1"], log: "Visit Root (1)." },
     { node: 2, tokens: ["1", "2"], log: "Go left from 1 to 2. Visit 2." },
@@ -12297,7 +14641,7 @@ function generateSerializeSteps(treeVals) {
     { node: null, tokens: ["1", "2", "N", "N", "3", "4", "N", "N", "5", "N"], log: "Go left from 5. Node is Null (N)." },
     { node: null, tokens: ["1", "2", "N", "N", "3", "4", "N", "N", "5", "N", "N"], log: "Go right from 5. Node is Null (N). Preorder DFS traversal complete." }
   ];
-  
+
   preorderLog.forEach(item => {
     steps.push({
       nodes,
@@ -12309,9 +14653,9 @@ function generateSerializeSteps(treeVals) {
       log: item.log
     });
   });
-  
+
   const finalSerialized = "1,2,N,N,3,4,N,N,5,N,N";
-  
+
   steps.push({
     nodes,
     edges,
@@ -12322,7 +14666,7 @@ function generateSerializeSteps(treeVals) {
     deserializedNodes: [],
     log: `Starting Deserialization Phase using string: "${finalSerialized}"`
   });
-  
+
   const deserializationSteps = [
     { idx: 0, val: "1", nodes: [1], log: "Parse token '1': Recreate root Node (1)." },
     { idx: 1, val: "2", nodes: [1, 2], log: "Parse token '2': Recreate Node (2) and attach as left child of 1." },
@@ -12336,7 +14680,7 @@ function generateSerializeSteps(treeVals) {
     { idx: 9, val: "N", nodes: [1, 2, 3, 4, 5], log: "Parse token 'N': Left child of 5 is Null." },
     { idx: 10, val: "N", nodes: [1, 2, 3, 4, 5], log: "Parse token 'N': Right child of 5 is Null. Completed subtree of 5." }
   ];
-  
+
   deserializationSteps.forEach(item => {
     steps.push({
       nodes,
@@ -12349,7 +14693,7 @@ function generateSerializeSteps(treeVals) {
       log: item.log
     });
   });
-  
+
   steps.push({
     nodes,
     edges,
@@ -12360,14 +14704,14 @@ function generateSerializeSteps(treeVals) {
     deserializedNodes: [1, 2, 3, 4, 5],
     log: "Deserialization complete! Binary Tree reconstructed successfully."
   });
-  
+
   visualizerState.steps = steps;
 }
 
 // Word Search II Step Generation
 function generateWordSearchIISteps(board, words) {
   const steps = [];
-  
+
   // Build Trie
   const trie = {};
   for (const word of words) {
@@ -12378,12 +14722,12 @@ function generateWordSearchIISteps(board, words) {
     }
     curr.isWord = word;
   }
-  
+
   const m = board.length;
   const n = board[0].length;
   const visited = Array.from({ length: m }, () => Array(n).fill(false));
   const foundWords = new Set();
-  
+
   steps.push({
     board: board.map(r => [...r]),
     activePath: [],
@@ -12391,16 +14735,16 @@ function generateWordSearchIISteps(board, words) {
     found: [],
     log: "Word Search II: Trie populated. Starting search from grid cell (0, 0)..."
   });
-  
+
   function dfs(r, c, node, prefix, path) {
     const char = board[r][c];
     if (!node[char]) return;
-    
+
     const nextNode = node[char];
     const newPrefix = prefix + char;
     const newPath = [...path, [r, c]];
     visited[r][c] = true;
-    
+
     steps.push({
       board: board.map(row => [...row]),
       activePath: [...newPath],
@@ -12408,7 +14752,7 @@ function generateWordSearchIISteps(board, words) {
       found: Array.from(foundWords),
       log: `Visited cell (${r}, ${c}) containing '${char}'. Prefix string: "${newPrefix}".`
     });
-    
+
     if (nextNode.isWord) {
       foundWords.add(nextNode.isWord);
       steps.push({
@@ -12419,7 +14763,7 @@ function generateWordSearchIISteps(board, words) {
         log: `Success! Word "${nextNode.isWord}" found!`
       });
     }
-    
+
     const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]];
     for (const [dr, dc] of dirs) {
       const nr = r + dr;
@@ -12428,7 +14772,7 @@ function generateWordSearchIISteps(board, words) {
         dfs(nr, nc, nextNode, newPrefix, newPath);
       }
     }
-    
+
     visited[r][c] = false;
     steps.push({
       board: board.map(row => [...row]),
@@ -12438,13 +14782,13 @@ function generateWordSearchIISteps(board, words) {
       log: `Backtracking: leaving cell (${r}, ${c}) containing '${char}'.`
     });
   }
-  
+
   for (let r = 0; r < m; r++) {
     for (let c = 0; c < n; c++) {
       dfs(r, c, trie, "", []);
     }
   }
-  
+
   steps.push({
     board: board.map(row => [...row]),
     activePath: [],
@@ -12452,7 +14796,7 @@ function generateWordSearchIISteps(board, words) {
     found: Array.from(foundWords),
     log: `Word Search II completed! Words found: ${Array.from(foundWords).join(', ') || 'none'}`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -12460,24 +14804,24 @@ function generateWordSearchIISteps(board, words) {
 function generateGenerateParenthesesSteps(n) {
   const steps = [];
   const results = [];
-  
+
   steps.push({
     tree: [],
     stack: [],
     found: [],
     log: `Generate Parentheses: Starting recursion for n = ${n} pairs.`
   });
-  
+
   const treeNodes = [];
   let nodeIdCounter = 0;
-  
+
   function backtrack(str, open, close, parentId, path) {
     const nodeId = nodeIdCounter++;
     const nodeObj = { id: nodeId, label: str || "root", parentId, status: 'active', open, close };
     treeNodes.push(nodeObj);
-    
+
     const activePathIds = [...path, nodeId];
-    
+
     steps.push({
       tree: treeNodes.map(node => {
         const copy = { ...node };
@@ -12490,7 +14834,7 @@ function generateGenerateParenthesesSteps(n) {
       found: [...results],
       log: `Inspecting state "${str || 'empty'}": open count = ${open}, close count = ${close}`
     });
-    
+
     if (str.length === n * 2) {
       results.push(str);
       nodeObj.status = 'valid';
@@ -12502,11 +14846,11 @@ function generateGenerateParenthesesSteps(n) {
       });
       return;
     }
-    
+
     if (open < n) {
       backtrack(str + "(", open + 1, close, nodeId, activePathIds);
     }
-    
+
     if (close < open) {
       backtrack(str + ")", open, close + 1, nodeId, activePathIds);
     } else if (close > open || (open === n && close < n)) {
@@ -12520,9 +14864,9 @@ function generateGenerateParenthesesSteps(n) {
       });
     }
   }
-  
+
   backtrack("", 0, 0, null, []);
-  
+
   steps.push({
     tree: treeNodes.map(node => {
       const copy = { ...node };
@@ -12533,7 +14877,7 @@ function generateGenerateParenthesesSteps(n) {
     found: [...results],
     log: `Generate Parentheses completed! Produced all ${results.length} valid combinations.`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -12541,7 +14885,7 @@ function generateGenerateParenthesesSteps(n) {
 function generateLISSteps(nums) {
   const steps = [];
   const piles = [];
-  
+
   steps.push({
     piles: [],
     activeIndex: -1,
@@ -12549,10 +14893,10 @@ function generateLISSteps(nums) {
     searchBounds: null,
     log: `LIS Patience Sorting start. Source sequence: [${nums.join(', ')}]`
   });
-  
+
   for (let i = 0; i < nums.length; i++) {
     const x = nums[i];
-    
+
     steps.push({
       piles: piles.map(p => [...p]),
       activeIndex: i,
@@ -12560,15 +14904,15 @@ function generateLISSteps(nums) {
       searchBounds: null,
       log: `Processing element at index ${i}: value = ${x}. Finding target pile...`
     });
-    
+
     let low = 0;
     let high = piles.length - 1;
     let foundIdx = piles.length;
-    
+
     while (low <= high) {
       const mid = Math.floor((low + high) / 2);
       const topOfPile = piles[mid][piles[mid].length - 1];
-      
+
       steps.push({
         piles: piles.map(p => [...p]),
         activeIndex: i,
@@ -12576,7 +14920,7 @@ function generateLISSteps(nums) {
         searchBounds: { low, high, mid },
         log: `Binary Searching piles: Checking top of Pile ${mid + 1} (${topOfPile}) with candidate ${x}`
       });
-      
+
       if (topOfPile >= x) {
         foundIdx = mid;
         high = mid - 1;
@@ -12584,7 +14928,7 @@ function generateLISSteps(nums) {
         low = mid + 1;
       }
     }
-    
+
     if (foundIdx === piles.length) {
       piles.push([x]);
       steps.push({
@@ -12605,7 +14949,7 @@ function generateLISSteps(nums) {
       });
     }
   }
-  
+
   steps.push({
     piles: piles.map(p => [...p]),
     activeIndex: -1,
@@ -12613,7 +14957,7 @@ function generateLISSteps(nums) {
     searchBounds: null,
     log: `LIS Patience Sorting complete. Longest Increasing Subsequence length = ${piles.length}`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -12626,9 +14970,9 @@ function generateTrappingWaterSteps(height) {
   let leftMax = 0;
   let rightMax = 0;
   let volume = 0;
-  
+
   const water = Array(n).fill(0);
-  
+
   steps.push({
     left,
     right,
@@ -12638,7 +14982,7 @@ function generateTrappingWaterSteps(height) {
     volume,
     log: `Trapping Rain Water: Initialize double pointers. L=0, R=${n - 1}.`
   });
-  
+
   while (left < right) {
     steps.push({
       left,
@@ -12649,7 +14993,7 @@ function generateTrappingWaterSteps(height) {
       volume,
       log: `Comparing heights: height[L=${left}] = ${height[left]} vs height[R=${right}] = ${height[right]}`
     });
-    
+
     if (height[left] < height[right]) {
       if (height[left] >= leftMax) {
         leftMax = height[left];
@@ -12706,7 +15050,7 @@ function generateTrappingWaterSteps(height) {
       right--;
     }
   }
-  
+
   steps.push({
     left,
     right,
@@ -12716,7 +15060,7 @@ function generateTrappingWaterSteps(height) {
     volume,
     log: `Trapping Rain Water completed! Pointers met at index ${left}. Total water trapped = ${volume} units.`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -12726,46 +15070,46 @@ function generateBurstBalloonsSteps(nums) {
   const n = nums.length;
   const val = [1, ...nums, 1];
   const dp = Array.from({ length: n + 2 }, () => Array(n + 2).fill(0));
-  
+
   steps.push({
     dp: dp.map(row => [...row]),
     balloons: [...nums],
     activeInterval: null,
     k: -1,
-    log: `Burst Balloons: Initialize DP grid table of size ${n+2}x${n+2}. Boundary pads [1, ..., 1] added.`
+    log: `Burst Balloons: Initialize DP grid table of size ${n + 2}x${n + 2}. Boundary pads [1, ..., 1] added.`
   });
-  
+
   for (let len = 1; len <= n; len++) {
     for (let i = 1; i <= n - len + 1; i++) {
       const j = i + len - 1;
-      
+
       steps.push({
         dp: dp.map(row => [...row]),
         balloons: [...nums],
         activeInterval: [i, j],
         k: -1,
-        log: `Solving interval of length ${len}: range [${i}, ${j}] (balloons: ${nums.slice(i-1, j).join(', ')})`
+        log: `Solving interval of length ${len}: range [${i}, ${j}] (balloons: ${nums.slice(i - 1, j).join(', ')})`
       });
-      
+
       for (let k = i; k <= j; k++) {
         const cost = val[i - 1] * val[k] * val[j + 1];
         const leftDP = dp[i][k - 1];
         const rightDP = dp[k + 1][j];
         const total = cost + leftDP + rightDP;
-        
+
         if (total > dp[i][j]) {
           dp[i][j] = total;
         }
-        
+
         steps.push({
           dp: dp.map(row => [...row]),
           balloons: [...nums],
           activeInterval: [i, j],
           k,
-          log: `Testing balloon index k=${k} (val=${val[k]}) to pop last in range [${i}, ${j}]. Coins: ${val[i-1]} * ${val[k]} * ${val[j+1]} (${cost}) + left DP (${leftDP}) + right DP (${rightDP}) = ${total}.`
+          log: `Testing balloon index k=${k} (val=${val[k]}) to pop last in range [${i}, ${j}]. Coins: ${val[i - 1]} * ${val[k]} * ${val[j + 1]} (${cost}) + left DP (${leftDP}) + right DP (${rightDP}) = ${total}.`
         });
       }
-      
+
       steps.push({
         dp: dp.map(row => [...row]),
         balloons: [...nums],
@@ -12775,7 +15119,7 @@ function generateBurstBalloonsSteps(nums) {
       });
     }
   }
-  
+
   steps.push({
     dp: dp.map(row => [...row]),
     balloons: [...nums],
@@ -12783,7 +15127,7 @@ function generateBurstBalloonsSteps(nums) {
     k: -1,
     log: `Burst Balloons completed! Maximum coins: ${dp[1][n]}.`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -12943,7 +15287,7 @@ function generateHuffmanSteps(nodes) {
     function traverse(node, bits) {
       if (!node) return;
       if (!node.left && !node.right) { table[node.val] = bits || '0'; return; }
-      traverse(node.left,  bits + '0');
+      traverse(node.left, bits + '0');
       traverse(node.right, bits + '1');
     }
     traverse(root, '');
@@ -12967,27 +15311,27 @@ function generateHuffmanSteps(nodes) {
     encodingTable: null,
     phase: 'init',
     log: `Huffman initialized. ${queue.length} leaf nodes sorted by frequency (ascending): ` +
-         queue.map(n => `'${n.val}'=${n.freq}`).join(' | ')
+      queue.map(n => `'${n.val}'=${n.freq}`).join(' | ')
   });
 
   let mergeCount = 0;
 
   while (queue.length > 1) {
-    const left  = queue.shift();
+    const left = queue.shift();
     const right = queue.shift();
     mergeCount++;
 
     // Pre-merge highlight step: show which two nodes are about to be merged
     steps.push({
       queue: [serializeNode(left), serializeNode(right), ...queue.map(n => serializeNode(n))],
-      mergeLeft:  left.val,
+      mergeLeft: left.val,
       mergeRight: right.val,
-      mergedVal:  null,
+      mergedVal: null,
       encodingTable: null,
       phase: 'selecting',
       log: `Step ${mergeCount}: Select two lowest-frequency nodes — ` +
-           `'${left.val}' (freq=${left.freq}) and '${right.val}' (freq=${right.freq}). ` +
-           `New internal node cost = ${left.freq} + ${right.freq} = ${left.freq + right.freq}.`
+        `'${left.val}' (freq=${left.freq}) and '${right.val}' (freq=${right.freq}). ` +
+        `New internal node cost = ${left.freq} + ${right.freq} = ${left.freq + right.freq}.`
     });
 
     const parent = {
@@ -13003,14 +15347,14 @@ function generateHuffmanSteps(nodes) {
 
     steps.push({
       queue: queue.map(n => serializeNode(n)),
-      mergeLeft:  left.val,
+      mergeLeft: left.val,
       mergeRight: right.val,
-      mergedVal:  parent.val,
+      mergedVal: parent.val,
       encodingTable: null,
       phase: 'merged',
       log: `Merged '${left.val}' (${left.freq}) + '${right.val}' (${right.freq}) → internal node '${parent.val}' (freq=${parent.freq}). ` +
-           `Priority queue now has ${queue.length} node${queue.length !== 1 ? 's' : ''}: ` +
-           queue.map(n => `'${n.val}'=${n.freq}`).join(' | ')
+        `Priority queue now has ${queue.length} node${queue.length !== 1 ? 's' : ''}: ` +
+        queue.map(n => `'${n.val}'=${n.freq}`).join(' | ')
     });
   }
 
@@ -13023,18 +15367,18 @@ function generateHuffmanSteps(nodes) {
 
   steps.push({
     queue: [serializeNode(root)],
-    mergeLeft:  null,
+    mergeLeft: null,
     mergeRight: null,
-    mergedVal:  null,
+    mergedVal: null,
     encodingTable,
     encodingNodes: nodes,
     totalBits,
     naiveBits,
     phase: 'complete',
     log: `Huffman tree complete! Root frequency = ${root.freq}. ` +
-         `Encoding uses ${totalBits} bits vs ${naiveBits} bits (fixed 8-bit). ` +
-         `Space saved: ${((1 - totalBits / naiveBits) * 100).toFixed(1)}%. ` +
-         `Codes: ` + nodes.map(n => `'${n.char}'→${encodingTable[n.char]}`).join(', ')
+      `Encoding uses ${totalBits} bits vs ${naiveBits} bits (fixed 8-bit). ` +
+      `Space saved: ${((1 - totalBits / naiveBits) * 100).toFixed(1)}%. ` +
+      `Codes: ` + nodes.map(n => `'${n.char}'→${encodingTable[n.char]}`).join(', ')
   });
 
   visualizerState.steps = steps;
@@ -13210,8 +15554,10 @@ function generateRBTreeSteps(arr) {
       `Tree stable after inserting ${val}. Root ${root.val} is Black. RB properties satisfied.`);
   }
 
-  steps.push({ tree: null, positions: {}, activeVal: null, uncleVal: null, fixCase: 'start',
-    log: `Red-Black Tree insertion: [${arr.join(', ')}]. Rules: root=Black, new nodes=Red, no two consecutive Red nodes, equal Black-height on all paths.` });
+  steps.push({
+    tree: null, positions: {}, activeVal: null, uncleVal: null, fixCase: 'start',
+    log: `Red-Black Tree insertion: [${arr.join(', ')}]. Rules: root=Black, new nodes=Red, no two consecutive Red nodes, equal Black-height on all paths.`
+  });
 
   for (const val of arr) insert(val);
 
@@ -13226,14 +15572,14 @@ function generateNetFlowSteps() {
 
   // Build adjacency and capacity/flow maps
   // cap[u][v] = capacity, flow[u][v] = current flow
-  const cap  = {};
+  const cap = {};
   const flow = {};
   nodes.forEach(u => { cap[u] = {}; flow[u] = {}; });
   nodes.forEach(u => nodes.forEach(v => { cap[u][v] = 0; flow[u][v] = 0; }));
   edges.forEach(e => { cap[e.u][e.v] += e.cap; });
 
   const source = nodes[0];
-  const sink   = nodes[nodes.length - 1];
+  const sink = nodes[nodes.length - 1];
 
   function snapshotFlows() {
     return edges.map(e => ({
@@ -13310,7 +15656,7 @@ function generateNetFlowSteps() {
       path, pathEdges, bottleneck,
       maxFlow, phase: 'found',
       log: `Iteration ${iteration}: BFS found augmenting path ${path.join(' → ')}. ` +
-           `Bottleneck = min(${pathEdges.map(e => { const [u,v] = e.split('-'); return cap[u][v] - flow[u][v]; }).join(', ')}) = ${bottleneck}.`
+        `Bottleneck = min(${pathEdges.map(e => { const [u, v] = e.split('-'); return cap[u][v] - flow[u][v]; }).join(', ')}) = ${bottleneck}.`
     });
 
     // Augment flow along path
@@ -13326,8 +15672,8 @@ function generateNetFlowSteps() {
       path, pathEdges, bottleneck,
       maxFlow, phase: 'augmented',
       log: `Pushed ${bottleneck} units along ${path.join(' → ')}. ` +
-           `Updated flows: ${pathEdges.map(e => { const [u,v] = e.split('-'); return `${e} → ${flow[u][v]}/${cap[u][v]}`; }).join(', ')}. ` +
-           `Total max flow so far = ${maxFlow}.`
+        `Updated flows: ${pathEdges.map(e => { const [u, v] = e.split('-'); return `${e} → ${flow[u][v]}/${cap[u][v]}`; }).join(', ')}. ` +
+        `Total max flow so far = ${maxFlow}.`
     });
   }
 
@@ -13337,7 +15683,7 @@ function generateNetFlowSteps() {
     path: [], pathEdges: [], bottleneck: 0,
     maxFlow, phase: 'done',
     log: `BFS found no augmenting path. Residual graph has no S→T path. ` +
-         `Algorithm complete. Maximum flow = ${maxFlow}.`
+      `Algorithm complete. Maximum flow = ${maxFlow}.`
   });
 
   visualizerState.steps = steps;
@@ -13353,15 +15699,15 @@ function generateAStarSteps() {
   const START = [2, 0], GOAL = [2, 5];
   const WALLS = new Set(['1,2', '2,2', '3,2']);
 
-  const key  = ([r, c]) => `${r},${c}`;
+  const key = ([r, c]) => `${r},${c}`;
   const heur = ([r, c]) => Math.abs(r - GOAL[0]) + Math.abs(c - GOAL[1]); // Manhattan
 
   // open set as array of {r, c, f, g, h}; parent map for path reconstruction
-  const gMap     = {};   // g[key] = cost from start
-  const fMap     = {};   // f[key]
-  const hMap     = {};   // h[key]
+  const gMap = {};   // g[key] = cost from start
+  const fMap = {};   // f[key]
+  const hMap = {};   // h[key]
   const parentMap = {};  // parent[key] = [pr, pc]
-  const openSet  = [];   // cells in open list
+  const openSet = [];   // cells in open list
   const closedSet = new Set();
 
   const startKey = key(START);
@@ -13375,10 +15721,10 @@ function generateAStarSteps() {
     const gOut = {}, fOut = {}, hOut = {};
     Object.keys(gMap).forEach(k => { gOut[k] = gMap[k]; fOut[k] = fMap[k]; hOut[k] = hMap[k]; });
     steps.push({
-      open:   openSet.map(x => [...x]),
+      open: openSet.map(x => [...x]),
       closed: [...closedSet].map(k => k.split(',').map(Number)),
       active: active ? [...active] : null,
-      path:   path || [],
+      path: path || [],
       f: fOut, g: gOut, h: hOut,
       log
     });
@@ -13386,13 +15732,13 @@ function generateAStarSteps() {
 
   snap(null, [], `A* initialized. Start = (${START}), Goal = (${GOAL}). Heuristic = Manhattan distance.`);
 
-  const dirs = [[-1,0],[1,0],[0,-1],[0,1]]; // 4-directional
+  const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]]; // 4-directional
 
   while (openSet.length > 0) {
     // Pick node with lowest f
     openSet.sort((a, b) => fMap[key(a)] - fMap[key(b)]);
     const current = openSet.shift();
-    const curKey  = key(current);
+    const curKey = key(current);
 
     snap(current, [], `Expand lowest-f cell (${current[0]},${current[1]}) [f=${fMap[curKey]}, g=${gMap[curKey]}, h=${hMap[curKey]}].`);
 
@@ -13420,9 +15766,9 @@ function generateAStarSteps() {
 
       const tentativeG = gMap[curKey] + 1;
       if (gMap[nKey] === undefined || tentativeG < gMap[nKey]) {
-        gMap[nKey]   = tentativeG;
-        hMap[nKey]   = heur([nr, nc]);
-        fMap[nKey]   = tentativeG + hMap[nKey];
+        gMap[nKey] = tentativeG;
+        hMap[nKey] = heur([nr, nc]);
+        fMap[nKey] = tentativeG + hMap[nKey];
         parentMap[nKey] = curKey;
         if (!openSet.some(x => key(x) === nKey)) openSet.push([nr, nc]);
         snap(current, [],
@@ -13452,9 +15798,9 @@ function generatePrimsSteps() {
   };
 
   const INF = Infinity;
-  const inMST   = new Set();
+  const inMST = new Set();
   const minDist = { A: 0, B: INF, C: INF, D: INF }; // dist to MST
-  const parent  = { A: null, B: null, C: null, D: null };
+  const parent = { A: null, B: null, C: null, D: null };
   const mstEdges = [];
 
   const snap = (activeNode, log) => {
@@ -13466,9 +15812,9 @@ function generatePrimsSteps() {
       }
     }
     steps.push({
-      mstEdges:  [...mstEdges],
-      inMST:     [...inMST],
-      minDist:   { ...minDist },
+      mstEdges: [...mstEdges],
+      inMST: [...inMST],
+      minDist: { ...minDist },
       candidates,
       activeNode: activeNode || null,
       log
@@ -13504,7 +15850,7 @@ function generatePrimsSteps() {
     for (const { to: v, w } of adjList[u]) {
       if (!inMST.has(v) && w < minDist[v]) {
         minDist[v] = w;
-        parent[v]  = u;
+        parent[v] = u;
         snap(u, `Relax: node ${v} distance updated to ${w} via edge ${u}-${v}.`);
       }
     }
@@ -13525,7 +15871,7 @@ function generateSingleNumberSteps() {
   const steps = [];
   const arr = [4, 1, 2, 1, 2];
   let acc = 0;
-  
+
   steps.push({
     array: arr,
     index: -1,
@@ -13534,9 +15880,9 @@ function generateSingleNumberSteps() {
     binaryVal: "000",
     log: "XOR Accumulator initialized with 0. Starting scan of elements..."
   });
-  
+
   const toBin = (v) => v.toString(2).padStart(3, '0');
-  
+
   arr.forEach((val, idx) => {
     const prevAcc = acc;
     acc = acc ^ val;
@@ -13549,7 +15895,7 @@ function generateSingleNumberSteps() {
       log: `XOR element index ${idx} (${val}). Acc = ${prevAcc} (${toBin(prevAcc)}) ^ ${val} (${toBin(val)}) = ${acc} (${toBin(acc)})`
     });
   });
-  
+
   steps.push({
     array: arr,
     index: -1,
@@ -13558,7 +15904,7 @@ function generateSingleNumberSteps() {
     binaryVal: "000",
     log: `Scan complete. The unique element left after pairs cancel out is ${acc}.`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -13568,9 +15914,9 @@ function generateBitmaskSubsetsSteps() {
   const arr = ['A', 'B', 'C'];
   const n = arr.length;
   const list = [];
-  
+
   const toBin = (v) => v.toString(2).padStart(3, '0');
-  
+
   for (let mask = 0; mask < (1 << n); mask++) {
     const subset = [];
     for (let i = 0; i < n; i++) {
@@ -13579,7 +15925,7 @@ function generateBitmaskSubsetsSteps() {
       }
     }
     list.push([...subset]);
-    
+
     steps.push({
       mask: mask,
       binaryMask: toBin(mask),
@@ -13588,7 +15934,7 @@ function generateBitmaskSubsetsSteps() {
       log: `Mask ${mask} (${toBin(mask)}). Set bits match indices: ${subset.join(', ') || 'None'}. Subtree generated: [${subset.join(', ')}]`
     });
   }
-  
+
   visualizerState.steps = steps;
 }
 
@@ -13597,19 +15943,19 @@ function generateBitmaskDPSteps() {
   const steps = [];
   const n = 4;
   const numStates = 1 << n;
-  
+
   let dp = Array.from({ length: numStates }, () => Array(n).fill(Infinity));
   const cloneDP = (tbl) => tbl.map(r => [...r]);
   const toBin = (v) => v.toString(2).padStart(4, '0');
   const nodeName = (idx) => ['A', 'B', 'C', 'D'][idx];
-  
+
   const dist = [
     [0, 10, 15, 20],
     [10, 0, 35, 25],
     [15, 35, 0, 30],
     [20, 25, 30, 0]
   ];
-  
+
   dp[1][0] = 0;
   steps.push({
     dp: cloneDP(dp),
@@ -13621,13 +15967,13 @@ function generateBitmaskDPSteps() {
     action: 'init',
     log: "Initialize DP table. dp[0001][A] = 0 (Start path at node A visiting only A)."
   });
-  
+
   const size1Transitions = [
     { u: 0, v: 1, nextMask: 3 },
     { u: 0, v: 2, nextMask: 5 },
     { u: 0, v: 3, nextMask: 9 }
   ];
-  
+
   const size2Transitions = [
     { mask: 3, u: 1, v: 2, nextMask: 7 },
     { mask: 3, u: 1, v: 3, nextMask: 11 },
@@ -13636,7 +15982,7 @@ function generateBitmaskDPSteps() {
     { mask: 9, u: 3, v: 1, nextMask: 11 },
     { mask: 9, u: 3, v: 2, nextMask: 13 }
   ];
-  
+
   const size3Transitions = [
     { mask: 7, u: 1, v: 3, nextMask: 15 },
     { mask: 7, u: 2, v: 3, nextMask: 15 },
@@ -13651,7 +15997,7 @@ function generateBitmaskDPSteps() {
     const currentCost = dp[1][u];
     const newCost = currentCost + dist[u][v];
     const prevNextCost = dp[nextMask][v];
-    
+
     steps.push({
       dp: cloneDP(dp),
       activeMask: 1,
@@ -13662,9 +16008,9 @@ function generateBitmaskDPSteps() {
       action: 'evaluate',
       log: `Evaluating path size 1: Ending at ${nodeName(u)} (visited: {A}). Trying transition to unvisited ${nodeName(v)}. Cost: dp[0001][A] (${currentCost}) + dist(${nodeName(u)},${nodeName(v)}) (${dist[u][v]}) = ${newCost}.`
     });
-    
+
     dp[nextMask][v] = Math.min(dp[nextMask][v], newCost);
-    
+
     steps.push({
       dp: cloneDP(dp),
       activeMask: nextMask,
@@ -13676,13 +16022,13 @@ function generateBitmaskDPSteps() {
       log: `Updated DP table: dp[${toBin(nextMask)}][${nodeName(v)}] = min(${prevNextCost === Infinity ? '∞' : prevNextCost}, ${newCost}) = ${dp[nextMask][v]}.`
     });
   });
-  
+
   size2Transitions.forEach(trans => {
     const { mask, u, v, nextMask } = trans;
     const currentCost = dp[mask][u];
     const newCost = currentCost + dist[u][v];
     const prevNextCost = dp[nextMask][v];
-    
+
     steps.push({
       dp: cloneDP(dp),
       activeMask: mask,
@@ -13693,9 +16039,9 @@ function generateBitmaskDPSteps() {
       action: 'evaluate',
       log: `Evaluating path size 2: Ending at ${nodeName(u)} (visited: {A,${nodeName(mask === 3 ? 1 : mask === 5 ? 2 : 3)}}). Transition to unvisited ${nodeName(v)}. Cost: dp[${toBin(mask)}][${nodeName(u)}] (${currentCost}) + dist(${nodeName(u)},${nodeName(v)}) (${dist[u][v]}) = ${newCost}.`
     });
-    
+
     dp[nextMask][v] = Math.min(dp[nextMask][v], newCost);
-    
+
     steps.push({
       dp: cloneDP(dp),
       activeMask: nextMask,
@@ -13707,13 +16053,13 @@ function generateBitmaskDPSteps() {
       log: `Updated DP table: dp[${toBin(nextMask)}][${nodeName(v)}] = min(${prevNextCost === Infinity ? '∞' : prevNextCost}, ${newCost}) = ${dp[nextMask][v]}.`
     });
   });
-  
+
   size3Transitions.forEach(trans => {
     const { mask, u, v, nextMask } = trans;
     const currentCost = dp[mask][u];
     const newCost = currentCost + dist[u][v];
     const prevNextCost = dp[nextMask][v];
-    
+
     const getVisitedDesc = (m) => {
       let res = ['A'];
       if (m & 2) res.push('B');
@@ -13732,9 +16078,9 @@ function generateBitmaskDPSteps() {
       action: 'evaluate',
       log: `Evaluating path size 3: Ending at ${nodeName(u)} (visited: ${getVisitedDesc(mask)}). Transition to unvisited ${nodeName(v)}. Cost: dp[${toBin(mask)}][${nodeName(u)}] (${currentCost}) + dist(${nodeName(u)},${nodeName(v)}) (${dist[u][v]}) = ${newCost}.`
     });
-    
+
     dp[nextMask][v] = Math.min(dp[nextMask][v], newCost);
-    
+
     steps.push({
       dp: cloneDP(dp),
       activeMask: nextMask,
@@ -13746,10 +16092,10 @@ function generateBitmaskDPSteps() {
       log: `Updated DP table: dp[${toBin(nextMask)}][${nodeName(v)}] = min(${prevNextCost === Infinity ? '∞' : prevNextCost}, ${newCost}) = ${dp[nextMask][v]}.`
     });
   });
-  
+
   const closingNodes = [1, 2, 3];
   let bestTourCost = Infinity;
-  
+
   closingNodes.forEach(u => {
     const cost = dp[15][u] + dist[u][0];
     steps.push({
@@ -13766,14 +16112,14 @@ function generateBitmaskDPSteps() {
       bestTourCost = cost;
     }
   });
-  
+
   const tourEdges = [
     { from: 0, to: 2 },
     { from: 2, to: 3 },
     { from: 3, to: 1 },
     { from: 1, to: 0 }
   ];
-  
+
   steps.push({
     dp: cloneDP(dp),
     activeMask: 15,
@@ -13784,7 +16130,7 @@ function generateBitmaskDPSteps() {
     action: 'done',
     log: `TSP Complete! Optimal Hamiltonian Cycle found: A → C → D → B → A. Minimum total distance = ${bestTourCost}.`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -13793,10 +16139,10 @@ function generateKosarajuSteps() {
   const steps = [];
   const n = 5;
   const nodeNames = ['A', 'B', 'C', 'D', 'E'];
-  
+
   let stack = [];
   let visited = new Set();
-  
+
   const pushStep = (phase, activeNode, scanningEdge, log, customObj = {}) => {
     steps.push({
       phase,
@@ -13809,122 +16155,122 @@ function generateKosarajuSteps() {
       ...customObj
     });
   };
-  
+
   pushStep(1, null, null, "Kosaraju's Algorithm Initialized. Phase 1: DFS on original graph to determine topological finish times.");
-  
+
   pushStep(1, 0, null, "DFS Pass 1: Start DFS from node A (unvisited).");
   visited.add(0);
-  
+
   pushStep(1, 0, { from: 0, to: 1 }, "DFS Pass 1: Traversing edge A → B.");
   pushStep(1, 1, null, "DFS Pass 1: Node B visited.");
   visited.add(1);
-  
+
   pushStep(1, 1, { from: 1, to: 2 }, "DFS Pass 1: Traversing edge B → C.");
   pushStep(1, 2, null, "DFS Pass 1: Node C visited.");
   visited.add(2);
-  
+
   pushStep(1, 2, { from: 2, to: 0 }, "DFS Pass 1: Edge C → A points to visited node A. Backtracking.");
-  
+
   stack.push(2);
   pushStep(1, 2, null, "DFS Pass 1: Node C has no unvisited neighbors. Backtracking and pushing C to stack.");
-  
+
   pushStep(1, 1, { from: 1, to: 3 }, "DFS Pass 1: Back to B. Traversing edge B → D.");
   pushStep(1, 3, null, "DFS Pass 1: Node D visited.");
   visited.add(3);
-  
+
   pushStep(1, 3, { from: 3, to: 4 }, "DFS Pass 1: Traversing edge D → E.");
   pushStep(1, 4, null, "DFS Pass 1: Node E visited.");
   visited.add(4);
-  
+
   pushStep(1, 4, { from: 4, to: 3 }, "DFS Pass 1: Edge E → D points to visited node D. Backtracking.");
-  
+
   stack.push(4);
   pushStep(1, 4, null, "DFS Pass 1: Node E has no unvisited neighbors. Backtracking and pushing E to stack.");
-  
+
   stack.push(3);
   pushStep(1, 3, null, "DFS Pass 1: Back to D. Node D has no unvisited neighbors. Backtracking and pushing D to stack.");
-  
+
   stack.push(1);
   pushStep(1, 1, null, "DFS Pass 1: Back to B. Node B has no unvisited neighbors. Backtracking and pushing B to stack.");
-  
+
   stack.push(0);
   pushStep(1, 0, null, "DFS Pass 1: Back to A. Node A has no unvisited neighbors. DFS complete. Pushing A to stack.");
-  
+
   pushStep(1, null, null, `Phase 1 Complete. Finish order stack (LIFO): [${stack.map(x => nodeNames[x]).join(', ')}].`);
-  
+
   pushStep(2, null, null, "Phase 2: Reversing all graph edges to construct the transposed graph (G^T).");
-  
+
   visited.clear();
   let sccs = [];
   let nodeComponents = {};
-  
+
   const getCompObj = () => ({
     sccs: sccs.map(comp => comp.map(x => nodeNames[x])),
     nodeComponents: { ...nodeComponents }
   });
-  
+
   pushStep(3, null, null, "Phase 3: Starting DFS on transposed graph by popping nodes from finish stack.", getCompObj());
-  
+
   let poppedVal = stack.pop();
   pushStep(3, null, null, `Phase 3: Popping ${nodeNames[poppedVal]} from stack.`, { poppingVal: poppedVal, ...getCompObj() });
   pushStep(3, 0, null, "Node A is unvisited. Start new DFS search on transposed graph to collect SCC.", getCompObj());
-  
+
   visited.add(0);
   nodeComponents[0] = 0;
   let comp1 = [0];
   pushStep(3, 0, null, "DFS Pass 2: Visited node A. Added to component 1.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
-  
+
   pushStep(3, 0, { from: 0, to: 2 }, "DFS Pass 2: Traversing edge A → C in transposed graph.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
   visited.add(2);
   nodeComponents[2] = 0;
   comp1.push(2);
   pushStep(3, 2, null, "DFS Pass 2: Visited node C. Added to component 1.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
-  
+
   pushStep(3, 2, { from: 2, to: 1 }, "DFS Pass 2: Traversing edge C → B in transposed graph.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
   visited.add(1);
   nodeComponents[1] = 0;
   comp1.push(1);
   pushStep(3, 1, null, "DFS Pass 2: Visited node B. Added to component 1.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
-  
+
   pushStep(3, 1, { from: 1, to: 0 }, "DFS Pass 2: Edge B → A points to visited node A. Backtracking.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp1.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
-  
+
   sccs.push(comp1);
   pushStep(3, null, null, `DFS Pass 2 complete. Resolved Component 1: {${comp1.map(x => nodeNames[x]).join(', ')}}.`, getCompObj());
-  
+
   poppedVal = stack.pop();
   pushStep(3, null, null, `Phase 3: Popping ${nodeNames[poppedVal]} from stack.`, { poppingVal: poppedVal, ...getCompObj() });
   pushStep(3, null, null, "Node B is already visited. Skipping.", getCompObj());
-  
+
   poppedVal = stack.pop();
   pushStep(3, null, null, `Phase 3: Popping ${nodeNames[poppedVal]} from stack.`, { poppingVal: poppedVal, ...getCompObj() });
   pushStep(3, 3, null, "Node D is unvisited. Start new DFS search on transposed graph to collect SCC.", getCompObj());
-  
+
   visited.add(3);
   nodeComponents[3] = 1;
   let comp2 = [3];
   pushStep(3, 3, null, "DFS Pass 2: Visited node D. Added to component 2.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp2.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
-  
+
   pushStep(3, 3, { from: 3, to: 4 }, "DFS Pass 2: Traversing edge D → E in transposed graph.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp2.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
   visited.add(4);
   nodeComponents[4] = 1;
   comp2.push(4);
   pushStep(3, 4, null, "DFS Pass 2: Visited node E. Added to component 2.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp2.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
-  
+
   pushStep(3, 4, { from: 4, to: 3 }, "DFS Pass 2: Edge E → D points to visited node D. Backtracking.", { sccs: [...sccs.map(comp => comp.map(x => nodeNames[x])), comp2.map(x => nodeNames[x])], nodeComponents: { ...nodeComponents } });
-  
+
   sccs.push(comp2);
   pushStep(3, null, null, `DFS Pass 2 complete. Resolved Component 2: {${comp2.map(x => nodeNames[x]).join(', ')}}.`, getCompObj());
-  
+
   poppedVal = stack.pop();
   pushStep(3, null, null, `Phase 3: Popping ${nodeNames[poppedVal]} from stack.`, { poppingVal: poppedVal, ...getCompObj() });
   pushStep(3, null, null, "Node E is already visited. Skipping.", getCompObj());
-  
+
   poppedVal = stack.pop();
   pushStep(3, null, null, `Phase 3: Popping ${nodeNames[poppedVal]} from stack.`, { poppingVal: poppedVal, ...getCompObj() });
   pushStep(3, null, null, "Node C is already visited. Skipping.", getCompObj());
-  
+
   pushStep(3, null, null, `Kosaraju SCC Complete! Found 2 Strongly Connected Components: Component 1 {A, C, B}, Component 2 {D, E}.`, getCompObj());
-  
+
   visualizerState.steps = steps;
 }
 
@@ -13933,7 +16279,7 @@ function generateBinaryAdditionSteps() {
   const steps = [];
   let a = 3;
   let b = 2;
-  
+
   steps.push({
     a: a,
     b: b,
@@ -13945,17 +16291,17 @@ function generateBinaryAdditionSteps() {
     binaryCarry: "0000",
     log: "Adder initialized. A = 3 (0011), B = 2 (0010)."
   });
-  
+
   let tempA = a;
   let tempB = b;
   let stepIdx = 0;
-  
+
   while (tempB !== 0) {
     const prevA = tempA;
     const prevB = tempB;
     const sumVal = tempA ^ tempB;
     const carryVal = (tempA & tempB) << 1;
-    
+
     steps.push({
       a: prevA,
       b: prevB,
@@ -13967,11 +16313,11 @@ function generateBinaryAdditionSteps() {
       binaryCarry: carryVal.toString(2).padStart(4, '0'),
       log: `Step ${++stepIdx}: Sum (XOR) = ${prevA} ^ ${prevB} = ${sumVal}. Carry (AND<<1) = (${prevA} & ${prevB})<<1 = ${carryVal}.`
     });
-    
+
     tempA = sumVal;
     tempB = carryVal;
   }
-  
+
   steps.push({
     a: tempA,
     b: tempB,
@@ -13983,7 +16329,7 @@ function generateBinaryAdditionSteps() {
     binaryCarry: "0000",
     log: `Carry is 0. Sum loop complete. Final Sum = ${tempA}.`
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -13996,7 +16342,7 @@ function generateBubbleSortSteps(arr) {
   const temp = [...arr];
   const n = temp.length;
   steps.push({ array: [...temp], compare: [], swap: [], sorted: [], log: "Ready. Bubble Sort started." });
-  
+
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n - i - 1; j++) {
       steps.push({
@@ -14004,7 +16350,7 @@ function generateBubbleSortSteps(arr) {
         compare: [j, j + 1],
         swap: [],
         sorted: getSortedIndicesList(n, i),
-        log: `Comparing index ${j} (${temp[j]}) and index ${j+1} (${temp[j+1]})`
+        log: `Comparing index ${j} (${temp[j]}) and index ${j + 1} (${temp[j + 1]})`
       });
       if (temp[j] > temp[j + 1]) {
         const swapVal = temp[j];
@@ -14015,7 +16361,7 @@ function generateBubbleSortSteps(arr) {
           compare: [],
           swap: [j, j + 1],
           sorted: getSortedIndicesList(n, i),
-          log: `Swapped indices ${j} & ${j+1} (${temp[j]} <-> ${temp[j+1]})`
+          log: `Swapped indices ${j} & ${j + 1} (${temp[j]} <-> ${temp[j + 1]})`
         });
       }
     }
@@ -14031,7 +16377,7 @@ function generateBubbleSortSteps(arr) {
     array: [...temp],
     compare: [],
     swap: [],
-    sorted: Array.from({length: n}, (_, i) => i),
+    sorted: Array.from({ length: n }, (_, i) => i),
     log: "Bubble Sort completed! Array is fully sorted."
   });
   visualizerState.steps = steps;
@@ -14052,7 +16398,7 @@ function generateBinarySearchSteps(arr, target) {
   let high = arr.length - 1;
   const n = arr.length;
   steps.push({ low, high, mid: -1, discarded: [], found: -1, log: `Binary Search start. Target = ${target}` });
-  
+
   while (low <= high) {
     const mid = Math.floor((low + high) / 2);
     steps.push({
@@ -14061,7 +16407,7 @@ function generateBinarySearchSteps(arr, target) {
       found: -1,
       log: `Inspecting Mid point index ${mid} (value = ${arr[mid]}). Range [${low}...${high}]`
     });
-    
+
     if (arr[mid] === target) {
       steps.push({
         low, high, mid,
@@ -14071,7 +16417,7 @@ function generateBinarySearchSteps(arr, target) {
       });
       break;
     }
-    
+
     if (arr[mid] < target) {
       const oldLow = low;
       low = mid + 1;
@@ -14092,11 +16438,11 @@ function generateBinarySearchSteps(arr, target) {
       });
     }
   }
-  
+
   if (low > high) {
-    steps.push({ low, high, mid: -1, discarded: Array.from({length: n}, (_, i) => i), found: -1, log: `Target not found.` });
+    steps.push({ low, high, mid: -1, discarded: Array.from({ length: n }, (_, i) => i), found: -1, log: `Target not found.` });
   }
-  
+
   visualizerState.steps = steps;
 }
 
@@ -14107,9 +16453,9 @@ function generateSlidingWindowSteps(str) {
   const n = chars.length;
   let left = 0;
   let set = new Set();
-  
+
   steps.push({ left: 0, right: -1, set: new Set(), duplicateIndex: -1, maxLen: 0, log: "Start. Window is empty." });
-  
+
   for (let right = 0; right < n; right++) {
     const char = chars[right];
     if (set.has(char)) {
@@ -14126,7 +16472,7 @@ function generateSlidingWindowSteps(str) {
         });
       }
     }
-    
+
     set.add(char);
     const currLen = right - left + 1;
     steps.push({
@@ -14134,7 +16480,7 @@ function generateSlidingWindowSteps(str) {
       log: `Expanded window. Added "${char}". Current window size = ${currLen}`
     });
   }
-  
+
   steps.push({ left, right: n - 1, set: new Set(set), duplicateIndex: -1, maxLen: set.size, log: `Finished. Max unique length = ${set.size}` });
   visualizerState.steps = steps;
 }
@@ -14145,29 +16491,29 @@ function generateTwoPointersSteps(heights) {
   let left = 0;
   let right = heights.length - 1;
   let maxA = 0;
-  
+
   steps.push({ left, right, currentArea: 0, maxArea: 0, log: "Two Pointers loaded. L=0, R=" + right });
-  
+
   while (left < right) {
     const w = right - left;
     const h = Math.min(heights[left], heights[right]);
     const area = h * w;
     maxA = Math.max(maxA, area);
-    
+
     steps.push({
       left, right, currentArea: area, maxArea: maxA,
       log: `Pointers L=${left} (val=${heights[left]}), R=${right} (val=${heights[right]}). Width=${w}, height=${h}. Area=${area}. MaxArea=${maxA}`
     });
-    
+
     if (heights[left] < heights[right]) {
       left++;
-      steps.push({ left, right, currentArea: area, maxArea: maxA, log: `Height L (${heights[left-1]}) < R (${heights[right]}). Advance L index to ${left}` });
+      steps.push({ left, right, currentArea: area, maxArea: maxA, log: `Height L (${heights[left - 1]}) < R (${heights[right]}). Advance L index to ${left}` });
     } else {
       right--;
-      steps.push({ left, right, currentArea: area, maxArea: maxA, log: `Height L (${heights[left]}) >= R (${heights[right+1]}). Retreat R index to ${right}` });
+      steps.push({ left, right, currentArea: area, maxArea: maxA, log: `Height L (${heights[left]}) >= R (${heights[right + 1]}). Retreat R index to ${right}` });
     }
   }
-  
+
   steps.push({ left, right, currentArea: 0, maxArea: maxA, log: `Pointers met. Completed! Max Area found = ${maxA}` });
   visualizerState.steps = steps;
 }
@@ -14177,24 +16523,24 @@ function generateTwoSumIISteps(numbers, target) {
   const steps = [];
   let left = 0;
   let right = numbers.length - 1;
-  
+
   steps.push({ left, right, sum: 0, found: false, log: `Two Sum II start. Numbers=[${numbers.join(", ")}], Target=${target}` });
-  
+
   while (left < right) {
     const sum = numbers[left] + numbers[right];
     steps.push({
       left, right, sum, found: sum === target,
       log: `Inspecting L=${left} (val=${numbers[left]}), R=${right} (val=${numbers[right]}). Sum = ${sum}`
     });
-    
+
     if (sum === target) {
       steps.push({
         left, right, sum, found: true,
-        log: `Target sum reached! sum(${numbers[left]} + ${numbers[right]}) = ${target}. Return indices [${left+1}, ${right+1}]`
+        log: `Target sum reached! sum(${numbers[left]} + ${numbers[right]}) = ${target}. Return indices [${left + 1}, ${right + 1}]`
       });
       break;
     }
-    
+
     if (sum < target) {
       left++;
       steps.push({ left, right, sum, found: false, log: `Sum ${sum} < ${target}. Left pointer advances to index ${left}` });
@@ -14203,7 +16549,7 @@ function generateTwoSumIISteps(numbers, target) {
       steps.push({ left, right, sum, found: false, log: `Sum ${sum} > ${target}. Right pointer retreats to index ${right}` });
     }
   }
-  
+
   visualizerState.steps = steps;
 }
 
@@ -14307,7 +16653,7 @@ function generateLinkedListCycleIISteps() {
   while (entry !== slow) {
     iteration++;
     entry = next[entry];
-    slow  = next[slow];
+    slow = next[slow];
     const found = entry === slow;
     steps.push({
       phase: 2, slow, fast: -1, entry, met: found,
@@ -14333,46 +16679,46 @@ function generateLinkedListSteps(config) {
   // Step shape: { nodes[], next[]{from,to}, pointers{}, removed[], done[], phase, op, log }
   // nodes[] = current array of {val,id}; next[] = directed arrow pairs; pointers = {name:id}; removed/done = id sets
 
-  let nodes    = list.map((v,i) => ({ val: v, id: i }));
-  const idOf   = v => nodes.find(n => n.val === v)?.id ?? -1;
+  let nodes = list.map((v, i) => ({ val: v, id: i }));
+  const idOf = v => nodes.find(n => n.val === v)?.id ?? -1;
 
   const snap = (phase, ptrs, removed, done, arrows, log) =>
     steps.push({
-      nodes:    nodes.map(n => ({...n})),
-      arrows:   arrows ? arrows.map(a=>({...a})) : buildSeqArrows(nodes),
-      pointers: ptrs   || {},
-      removed:  new Set(removed || []),
-      done:     new Set(done    || []),
+      nodes: nodes.map(n => ({ ...n })),
+      arrows: arrows ? arrows.map(a => ({ ...a })) : buildSeqArrows(nodes),
+      pointers: ptrs || {},
+      removed: new Set(removed || []),
+      done: new Set(done || []),
       phase, op, log
     });
 
   // Build sequential arrows for a node array
   function buildSeqArrows(ns, cycleBack) {
-    const arr = ns.map((n,i) => i < ns.length-1 ? { from: n.id, to: ns[i+1].id } : null).filter(Boolean);
+    const arr = ns.map((n, i) => i < ns.length - 1 ? { from: n.id, to: ns[i + 1].id } : null).filter(Boolean);
     if (cycleBack != null) arr.push(cycleBack);
     return arr;
   }
 
-  snap('init', {head: nodes[0].id}, [], [],
-    null, `${op.replace(/_/g,' ').toUpperCase()}: Initial list [${list.join(' → ')}].`);
+  snap('init', { head: nodes[0].id }, [], [],
+    null, `${op.replace(/_/g, ' ').toUpperCase()}: Initial list [${list.join(' → ')}].`);
 
   // ── REVERSE ──
   if (op === 'reverse') {
-    snap('explain', {head: nodes[0].id}, [], [],
+    snap('explain', { head: nodes[0].id }, [], [],
       null, `Reverse linked list. Use three pointers: prev=null, curr=head, next=null.`);
     let prev = null; // id or null
     let curr = 0;    // index in nodes
     const result = [];
 
     for (let i = 0; i < nodes.length; i++) {
-      const currId  = nodes[curr].id;
+      const currId = nodes[curr].id;
       const nextIdx = curr + 1 < nodes.length ? curr + 1 : null;
-      const nextId  = nextIdx !== null ? nodes[nextIdx].id : null;
+      const nextId = nextIdx !== null ? nodes[nextIdx].id : null;
 
       snap('work',
         { prev: prev !== null ? prev : null, curr: currId, next: nextId !== null ? nextId : null },
         [], result.map(id => id),
-        null, `curr=${nodes[curr].val}. Save next. Point curr.next → prev(${prev !== null ? nodes.find(n=>n.id===prev)?.val : 'null'}).`
+        null, `curr=${nodes[curr].val}. Save next. Point curr.next → prev(${prev !== null ? nodes.find(n => n.id === prev)?.val : 'null'}).`
       );
 
       result.push(currId);
@@ -14380,110 +16726,110 @@ function generateLinkedListSteps(config) {
       curr = nextIdx !== null ? nextIdx : curr;
 
       // Draw reversed arrows so far
-      const revArrows = result.slice(0).reverse().map((id,i,arr) =>
-        i < arr.length-1 ? { from: id, to: arr[i+1] } : null
+      const revArrows = result.slice(0).reverse().map((id, i, arr) =>
+        i < arr.length - 1 ? { from: id, to: arr[i + 1] } : null
       ).filter(Boolean);
       const fwdArrows = nextIdx !== null
-        ? nodes.slice(nextIdx).map((n,i,arr) => i<arr.length-1 ? {from:n.id,to:arr[i+1].id} : null).filter(Boolean)
+        ? nodes.slice(nextIdx).map((n, i, arr) => i < arr.length - 1 ? { from: n.id, to: arr[i + 1].id } : null).filter(Boolean)
         : [];
 
       snap('work',
         { prev: currId, curr: nextId !== null ? nextId : null },
         [], result.map(id => id),
         [...revArrows, ...fwdArrows],
-        `Reversed so far: [${result.map(id=>nodes.find(n=>n.id===id)?.val).join(' ← ')}].`
+        `Reversed so far: [${result.map(id => nodes.find(n => n.id === id)?.val).join(' ← ')}].`
       );
     }
 
     nodes = [...nodes].reverse();
-    snap('done', {head: nodes[0].id}, [], nodes.map(n=>n.id),
+    snap('done', { head: nodes[0].id }, [], nodes.map(n => n.id),
       buildSeqArrows(nodes),
-      `Reversal complete! List: [${nodes.map(n=>n.val).join(' → ')}].`);
+      `Reversal complete! List: [${nodes.map(n => n.val).join(' → ')}].`);
   }
 
   // ── REVERSE RANGE [left, right] ──
   else if (op === 'reverse_range') {
-    const l = (left||1) - 1, r = (right||nodes.length) - 1;
-    snap('explain', {head: nodes[0].id}, [], [],
-      null, `Reverse sublist from position ${l+1} to ${r+1}. Traverse to node before left, then reverse the sublist in-place.`);
+    const l = (left || 1) - 1, r = (right || nodes.length) - 1;
+    snap('explain', { head: nodes[0].id }, [], [],
+      null, `Reverse sublist from position ${l + 1} to ${r + 1}. Traverse to node before left, then reverse the sublist in-place.`);
 
     // Highlight range
-    const rangeIds = nodes.slice(l, r+1).map(n=>n.id);
+    const rangeIds = nodes.slice(l, r + 1).map(n => n.id);
     snap('work',
       { left: nodes[l].id, right: nodes[r].id },
       [], [], null,
-      `Identified range: [${nodes.slice(l,r+1).map(n=>n.val).join(' → ')}]. Will reverse this segment.`
+      `Identified range: [${nodes.slice(l, r + 1).map(n => n.val).join(' → ')}]. Will reverse this segment.`
     );
 
     // Reverse the slice
     const before = nodes.slice(0, l);
-    const segment = nodes.slice(l, r+1).reverse();
-    const after   = nodes.slice(r+1);
+    const segment = nodes.slice(l, r + 1).reverse();
+    const after = nodes.slice(r + 1);
     nodes = [...before, ...segment, ...after];
 
-    snap('done', {head: nodes[0].id}, [], nodes.slice(l,r+1).map(n=>n.id),
+    snap('done', { head: nodes[0].id }, [], nodes.slice(l, r + 1).map(n => n.id),
       buildSeqArrows(nodes),
-      `Reversed! Sublist [${segment.map(n=>n.val).join(' → ')}]. Full: [${nodes.map(n=>n.val).join(' → ')}].`
+      `Reversed! Sublist [${segment.map(n => n.val).join(' → ')}]. Full: [${nodes.map(n => n.val).join(' → ')}].`
     );
   }
 
   // ── REMOVE NTH FROM END ──
   else if (op === 'remove_nth') {
     const nth = n || 2;
-    snap('explain', {head: nodes[0].id}, [], [],
-      null, `Remove ${nth}-th node from end. Use two-pointer gap technique: advance fast ${nth+1} steps, then advance both until fast=null.`);
+    snap('explain', { head: nodes[0].id }, [], [],
+      null, `Remove ${nth}-th node from end. Use two-pointer gap technique: advance fast ${nth + 1} steps, then advance both until fast=null.`);
 
     const targetIdx = nodes.length - nth;
-    const targetId  = nodes[targetIdx].id;
+    const targetId = nodes[targetIdx].id;
 
     // Show fast pointer advancing
     let fast = nth;
-    snap('work', {fast: nodes[Math.min(fast, nodes.length-1)].id, slow: nodes[0].id}, [], [], null,
+    snap('work', { fast: nodes[Math.min(fast, nodes.length - 1)].id, slow: nodes[0].id }, [], [], null,
       `Fast pointer advanced ${nth} steps ahead of slow. Now advance both until fast.next = null.`);
 
     // Advance both
     for (let step2 = 0; fast < nodes.length - 1; step2++) {
       fast++;
       const slowId = nodes[targetIdx - (nodes.length - 1 - fast) - 1]?.id ?? nodes[0].id;
-      snap('work', {fast: nodes[fast].id, slow: slowId}, [], [], null,
-        `Fast at ${nodes[fast].val}. Slow at ${nodes.find(n=>n.id===slowId)?.val ?? '?'}.`);
+      snap('work', { fast: nodes[fast].id, slow: slowId }, [], [], null,
+        `Fast at ${nodes[fast].val}. Slow at ${nodes.find(n => n.id === slowId)?.val ?? '?'}.`);
     }
 
-    snap('work', {target: targetId}, [targetId], [], null,
+    snap('work', { target: targetId }, [targetId], [], null,
       `Remove node ${nodes[targetIdx].val} (${nth}-th from end).`);
 
     nodes = nodes.filter(n => n.id !== targetId);
-    snap('done', {head: nodes[0]?.id}, [], nodes.map(n=>n.id),
+    snap('done', { head: nodes[0]?.id }, [], nodes.map(n => n.id),
       buildSeqArrows(nodes),
-      `Removed. Result: [${nodes.map(n=>n.val).join(' → ')}${nodes.length===0?'(empty)':''}].`);
+      `Removed. Result: [${nodes.map(n => n.val).join(' → ')}${nodes.length === 0 ? '(empty)' : ''}].`);
   }
 
   // ── REMOVE DUPLICATES ──
   else if (op === 'remove_dups') {
-    snap('explain', {head: nodes[0].id}, [], [],
+    snap('explain', { head: nodes[0].id }, [], [],
       null, `Remove duplicates from sorted list. Walk with curr pointer; skip nodes while curr.val === curr.next.val.`);
 
     const removedIds = [];
     let i = 0;
     while (i < nodes.length - 1) {
-      snap('work', {curr: nodes[i].id, next: nodes[i+1].id}, removedIds, [], null,
-        `curr=${nodes[i].val}. next=${nodes[i+1].val}. ${nodes[i].val===nodes[i+1].val?'Duplicate! Skip next.':'No duplicate. Advance.'}`);
-      if (nodes[i].val === nodes[i+1].val) {
-        removedIds.push(nodes[i+1].id);
-        nodes.splice(i+1, 1);
+      snap('work', { curr: nodes[i].id, next: nodes[i + 1].id }, removedIds, [], null,
+        `curr=${nodes[i].val}. next=${nodes[i + 1].val}. ${nodes[i].val === nodes[i + 1].val ? 'Duplicate! Skip next.' : 'No duplicate. Advance.'}`);
+      if (nodes[i].val === nodes[i + 1].val) {
+        removedIds.push(nodes[i + 1].id);
+        nodes.splice(i + 1, 1);
       } else {
         i++;
       }
     }
-    snap('done', {head: nodes[0].id}, removedIds, nodes.map(n=>n.id),
+    snap('done', { head: nodes[0].id }, removedIds, nodes.map(n => n.id),
       buildSeqArrows(nodes),
-      `Deduplication done. Result: [${nodes.map(n=>n.val).join(' → ')}].`);
+      `Deduplication done. Result: [${nodes.map(n => n.val).join(' → ')}].`);
   }
 
   // ── MERGE TWO SORTED LISTS ──
   else if (op === 'merge') {
-    const b = (list2||[]).map((v,i) => ({ val: v, id: nodes.length + i }));
-    snap('explain', {h1: nodes[0].id, h2: b[0].id}, [], [],
+    const b = (list2 || []).map((v, i) => ({ val: v, id: nodes.length + i }));
+    snap('explain', { h1: nodes[0].id, h2: b[0].id }, [], [],
       [...buildSeqArrows(nodes), ...buildSeqArrows(b)],
       `Merge two sorted lists. Compare heads, pick smaller, advance that pointer.`);
 
@@ -14493,59 +16839,59 @@ function generateLinkedListSteps(config) {
     while (ia < nodes.length && ib < b.length) {
       const aNode = nodes[ia], bNode = b[ib];
       snap('work',
-        {p1: aNode.id, p2: bNode.id},
-        [], merged.map(n=>n.id),
+        { p1: aNode.id, p2: bNode.id },
+        [], merged.map(n => n.id),
         [...buildSeqArrows(nodes.slice(ia)), ...buildSeqArrows(b.slice(ib)),
-         ...buildSeqArrows(merged)],
-        `Compare p1=${aNode.val} vs p2=${bNode.val}. Pick ${aNode.val <= bNode.val ? aNode.val+' (L)' : bNode.val+' (R)'}.`
+        ...buildSeqArrows(merged)],
+        `Compare p1=${aNode.val} vs p2=${bNode.val}. Pick ${aNode.val <= bNode.val ? aNode.val + ' (L)' : bNode.val + ' (R)'}.`
       );
       if (aNode.val <= bNode.val) { merged.push(aNode); ia++; }
-      else                        { merged.push(bNode); ib++; }
+      else { merged.push(bNode); ib++; }
     }
     while (ia < nodes.length) { merged.push(nodes[ia++]); }
-    while (ib < b.length)     { merged.push(b[ib++]); }
+    while (ib < b.length) { merged.push(b[ib++]); }
 
     nodes = merged;
-    snap('done', {head: nodes[0].id}, [], nodes.map(n=>n.id),
+    snap('done', { head: nodes[0].id }, [], nodes.map(n => n.id),
       buildSeqArrows(nodes),
-      `Merged: [${nodes.map(n=>n.val).join(' → ')}].`);
+      `Merged: [${nodes.map(n => n.val).join(' → ')}].`);
   }
 
   // ── SWAP NODES IN PAIRS ──
   else if (op === 'swap_pairs') {
-    snap('explain', {head: nodes[0].id}, [], [],
+    snap('explain', { head: nodes[0].id }, [], [],
       null, `Swap every adjacent pair. Use dummy head. For each pair: dummy.next=second, second.next=first, first.next=nextPair.`);
 
     for (let i = 0; i + 1 < nodes.length; i += 2) {
-      snap('work', {first: nodes[i].id, second: nodes[i+1].id}, [], [], null,
-        `Pair: (${nodes[i].val}, ${nodes[i+1].val}). Swap them.`);
-      [nodes[i], nodes[i+1]] = [nodes[i+1], nodes[i]];
-      snap('work', {}, [], nodes.slice(0, i+2).map(n=>n.id),
-        buildSeqArrows(nodes), `Swapped. So far: [${nodes.map(n=>n.val).join(' → ')}].`);
+      snap('work', { first: nodes[i].id, second: nodes[i + 1].id }, [], [], null,
+        `Pair: (${nodes[i].val}, ${nodes[i + 1].val}). Swap them.`);
+      [nodes[i], nodes[i + 1]] = [nodes[i + 1], nodes[i]];
+      snap('work', {}, [], nodes.slice(0, i + 2).map(n => n.id),
+        buildSeqArrows(nodes), `Swapped. So far: [${nodes.map(n => n.val).join(' → ')}].`);
     }
-    snap('done', {head: nodes[0].id}, [], nodes.map(n=>n.id),
-      buildSeqArrows(nodes), `All pairs swapped: [${nodes.map(n=>n.val).join(' → ')}].`);
+    snap('done', { head: nodes[0].id }, [], nodes.map(n => n.id),
+      buildSeqArrows(nodes), `All pairs swapped: [${nodes.map(n => n.val).join(' → ')}].`);
   }
 
   // ── ROTATE LIST ──
   else if (op === 'rotate') {
     const kk = ((k || 2) % nodes.length) || 0;
-    snap('explain', {head: nodes[0].id}, [], [],
-      null, `Rotate list right by k=${k||2} positions. Effective rotation = ${kk} (k mod length). Find new tail at position ${nodes.length - kk - 1}.`);
+    snap('explain', { head: nodes[0].id }, [], [],
+      null, `Rotate list right by k=${k || 2} positions. Effective rotation = ${kk} (k mod length). Find new tail at position ${nodes.length - kk - 1}.`);
 
     if (kk === 0) {
-      snap('done', {head: nodes[0].id}, [], nodes.map(n=>n.id), null, `k is multiple of length — no change.`);
+      snap('done', { head: nodes[0].id }, [], nodes.map(n => n.id), null, `k is multiple of length — no change.`);
     } else {
       const splitIdx = nodes.length - kk;
       const newTailId = nodes[splitIdx - 1].id;
       const newHeadId = nodes[splitIdx].id;
-      snap('work', {newTail: newTailId, newHead: newHeadId}, [], [], null,
-        `New tail at index ${splitIdx-1} (val=${nodes[splitIdx-1].val}). New head at index ${splitIdx} (val=${nodes[splitIdx].val}). Connect tail→original-head to form ring, then break.`
+      snap('work', { newTail: newTailId, newHead: newHeadId }, [], [], null,
+        `New tail at index ${splitIdx - 1} (val=${nodes[splitIdx - 1].val}). New head at index ${splitIdx} (val=${nodes[splitIdx].val}). Connect tail→original-head to form ring, then break.`
       );
       const rotated = [...nodes.slice(splitIdx), ...nodes.slice(0, splitIdx)];
       nodes = rotated;
-      snap('done', {head: nodes[0].id}, [], nodes.map(n=>n.id),
-        buildSeqArrows(nodes), `Rotated ${kk} right: [${nodes.map(n=>n.val).join(' → ')}].`);
+      snap('done', { head: nodes[0].id }, [], nodes.map(n => n.id),
+        buildSeqArrows(nodes), `Rotated ${kk} right: [${nodes.map(n => n.val).join(' → ')}].`);
     }
   }
 
@@ -14558,9 +16904,9 @@ function generateMonotonicStackSteps(temps) {
   const n = temps.length;
   const ans = new Array(n).fill(0);
   const stack = [];
-  
+
   steps.push({ scanning: -1, stack: [], resolved: {}, result: [...ans], log: "Stack initialised." });
-  
+
   for (let i = 0; i < n; i++) {
     steps.push({ scanning: i, stack: [...stack], resolved: {}, result: [...ans], log: `Inspecting temperature index ${i} (${temps[i]}°)` });
     while (stack.length > 0 && temps[i] > temps[stack[stack.length - 1]]) {
@@ -14590,24 +16936,24 @@ function generateMonoStackSteps() {
   if (id === 503) {
     nums = [1, 2, 1]; mode = 'nge_circular';
     title = 'Next Greater Element II — Circular (LC 503)';
-    note  = 'Double the array conceptually (2N loop, index mod N). Dequeue when nums[i] > nums[stack.top].';
+    note = 'Double the array conceptually (2N loop, index mod N). Dequeue when nums[i] > nums[stack.top].';
   } else if (id === 907) {
     nums = [3, 1, 2, 4]; mode = 'contribution';
     title = 'Sum of Subarray Minimums (LC 907)';
-    note  = 'For each element, find left/right boundaries where it is the minimum. Contribution = val × left_span × right_span.';
+    note = 'For each element, find left/right boundaries where it is the minimum. Contribution = val × left_span × right_span.';
   } else if (id === 496) {
-    nums = [1, 3, 4, 2];  mode = 'nge';
+    nums = [1, 3, 4, 2]; mode = 'nge';
     title = 'Next Greater Element I (LC 496)';
-    note  = 'Monotonic decreasing stack. Pop when larger element found; that is the NGE.';
+    note = 'Monotonic decreasing stack. Pop when larger element found; that is the NGE.';
   } else {
     nums = [2, 1, 2, 4, 3]; mode = 'nge';
     title = 'Next Greater Element (NGE) — Monotonic Stack';
-    note  = 'Pop from stack whenever a larger element is encountered. Remaining stack elements have no NGE.';
+    note = 'Pop from stack whenever a larger element is encountered. Remaining stack elements have no NGE.';
   }
 
   const n = nums.length;
   const result = new Array(n).fill(-1);
-  const stack  = [];    // indices
+  const stack = [];    // indices
 
   const snap = (phase, i, activeIdx, poppedIdx, contribution, log) =>
     steps.push({
@@ -14617,8 +16963,8 @@ function generateMonoStackSteps() {
       activeIdx,      // index in 0..n-1 currently being processed
       poppedIdx,      // index just popped (-1 if none)
       contribution,   // {idx, left, right, val} for contribution mode
-      stack:    [...stack],
-      result:   [...result],
+      stack: [...stack],
+      result: [...result],
       log
     });
 
@@ -14643,7 +16989,7 @@ function generateMonoStackSteps() {
       if (i < n) {
         stack.push(idx);
         snap('push', i, idx, -1, null,
-          `Push idx ${idx} onto stack. Stack: [${stack.map(s=>`${s}(${nums[s]})`).join(', ')}].`);
+          `Push idx ${idx} onto stack. Stack: [${stack.map(s => `${s}(${nums[s]})`).join(', ')}].`);
       } else {
         snap('scan', i, idx, -1, null,
           `Second pass idx ${idx} — only popping, not pushing new indices.`);
@@ -14664,16 +17010,16 @@ function generateMonoStackSteps() {
     // prevLess pass
     for (let i = 0; i < n; i++) {
       snap('scan', i, i, -1, null,
-        `Find prevLess[${i}] for val=${nums[i]}. Stack: [${stack.map(s=>nums[s]).join(',')||'empty'}].`);
-      while (stack.length > 0 && nums[stack[stack.length-1]] >= nums[i]) {
+        `Find prevLess[${i}] for val=${nums[i]}. Stack: [${stack.map(s => nums[s]).join(',') || 'empty'}].`);
+      while (stack.length > 0 && nums[stack[stack.length - 1]] >= nums[i]) {
         const p = stack.pop();
         snap('pop', i, i, p, null,
           `Pop ${p} (val=${nums[p]}) ≥ ${nums[i]}. Not the prev-less.`);
       }
-      prevLess[i] = stack.length > 0 ? stack[stack.length-1] : -1;
+      prevLess[i] = stack.length > 0 ? stack[stack.length - 1] : -1;
       stack.push(i);
       snap('push', i, i, -1, null,
-        `prevLess[${i}] = ${prevLess[i]}. Push ${i}. Stack: [${stack.map(s=>nums[s]).join(',')}].`);
+        `prevLess[${i}] = ${prevLess[i]}. Push ${i}. Stack: [${stack.map(s => nums[s]).join(',')}].`);
     }
 
     stack.length = 0;
@@ -14682,12 +17028,12 @@ function generateMonoStackSteps() {
 
     // nextLess pass
     for (let i = n - 1; i >= 0; i--) {
-      while (stack.length > 0 && nums[stack[stack.length-1]] > nums[i]) {
+      while (stack.length > 0 && nums[stack[stack.length - 1]] > nums[i]) {
         const p = stack.pop();
         snap('pop', i, i, p, null,
           `Pop ${p} (val=${nums[p]}) > ${nums[i]}. Not the next-less.`);
       }
-      nextLess[i] = stack.length > 0 ? stack[stack.length-1] : n;
+      nextLess[i] = stack.length > 0 ? stack[stack.length - 1] : n;
       stack.push(i);
       snap('push', i, i, -1, null,
         `nextLess[${i}] = ${nextLess[i]}. Push ${i}.`);
@@ -14699,7 +17045,7 @@ function generateMonoStackSteps() {
       `Step 3: Compute contribution of each element as minimum of its subarray range.`);
 
     for (let i = 0; i < n; i++) {
-      const left  = i - prevLess[i];          // subarrays where nums[i] is min, from left
+      const left = i - prevLess[i];          // subarrays where nums[i] is min, from left
       const right = nextLess[i] - i;          // subarrays where nums[i] is min, to right
       const contrib = nums[i] * left * right;
       total += contrib;
@@ -14708,7 +17054,7 @@ function generateMonoStackSteps() {
     }
 
     snap('done', -1, -1, -1, null,
-      `Sum of Subarray Minimums = ${total} (mod 10^9+7 = ${total % (1e9+7)}).`);
+      `Sum of Subarray Minimums = ${total} (mod 10^9+7 = ${total % (1e9 + 7)}).`);
   }
 
   visualizerState.steps = steps;
@@ -14721,20 +17067,20 @@ function generateDFSCycleSteps() {
   // Directed graph: edges adapted per problem
   let edges, n, nodeLabels, title, note;
   if (id === 207 || id === 210) {
-    n = 4; nodeLabels = ['0','1','2','3'];
-    edges = [[0,1],[1,2],[2,0],[3,1]];  // cycle: 0→1→2→0
+    n = 4; nodeLabels = ['0', '1', '2', '3'];
+    edges = [[0, 1], [1, 2], [2, 0], [3, 1]];  // cycle: 0→1→2→0
     title = id === 207 ? 'Course Schedule (LC 207)' : 'Course Schedule II (LC 210)';
-    note  = 'DFS on prerequisites graph. GRAY node = in current DFS path. Back edge to GRAY = cycle = impossible schedule.';
+    note = 'DFS on prerequisites graph. GRAY node = in current DFS path. Back edge to GRAY = cycle = impossible schedule.';
   } else if (id === 802) {
-    n = 5; nodeLabels = ['0','1','2','3','4'];
-    edges = [[1,2],[2,3],[3,1],[0,4]];  // cycle 1→2→3→1; safe: 0,4
+    n = 5; nodeLabels = ['0', '1', '2', '3', '4'];
+    edges = [[1, 2], [2, 3], [3, 1], [0, 4]];  // cycle 1→2→3→1; safe: 0,4
     title = 'Find Eventual Safe States (LC 802)';
-    note  = 'Nodes that only lead to terminals are "safe". Cycle detection via DFS coloring identifies unsafe nodes.';
+    note = 'Nodes that only lead to terminals are "safe". Cycle detection via DFS coloring identifies unsafe nodes.';
   } else {
-    n = 5; nodeLabels = ['A','B','C','D','E'];
-    edges = [[0,1],[1,2],[2,3],[3,1],[0,4]];  // cycle B→C→D→B
+    n = 5; nodeLabels = ['A', 'B', 'C', 'D', 'E'];
+    edges = [[0, 1], [1, 2], [2, 3], [3, 1], [0, 4]];  // cycle B→C→D→B
     title = 'Directed Graph — DFS Cycle Detection';
-    note  = 'WHITE=unvisited, GRAY=in DFS stack (current path), BLACK=fully processed. Back edge to GRAY node = cycle.';
+    note = 'WHITE=unvisited, GRAY=in DFS stack (current path), BLACK=fully processed. Back edge to GRAY node = cycle.';
   }
 
   // WHITE=0, GRAY=1, BLACK=2
@@ -14745,18 +17091,18 @@ function generateDFSCycleSteps() {
   let cycleFound = false;
 
   // adjacency
-  const adj = Array.from({length:n}, ()=>[]);
-  edges.forEach(([u,v]) => adj[u].push(v));
+  const adj = Array.from({ length: n }, () => []);
+  edges.forEach(([u, v]) => adj[u].push(v));
 
   const snap = (activeNode, activeEdge, log) =>
     steps.push({
       n, nodeLabels, edges, title, note,
-      color:      [...color],
-      callStack:  [...callStack],
+      color: [...color],
+      callStack: [...callStack],
       activeNode,
       activeEdge,   // [u,v] being examined or null
-      cycleEdge:    cycleEdge ? [...cycleEdge] : null,
-      hasCycle:     cycleFound,
+      cycleEdge: cycleEdge ? [...cycleEdge] : null,
+      hasCycle: cycleFound,
       log
     });
 
@@ -14766,29 +17112,29 @@ function generateDFSCycleSteps() {
     if (cycleFound) return true;
     color[u] = 1; // GRAY
     callStack.push(u);
-    snap(u, null, `Enter DFS(${nodeLabels[u]}). Color ${nodeLabels[u]} GRAY (in current path). Stack: [${callStack.map(x=>nodeLabels[x]).join('→')}].`);
+    snap(u, null, `Enter DFS(${nodeLabels[u]}). Color ${nodeLabels[u]} GRAY (in current path). Stack: [${callStack.map(x => nodeLabels[x]).join('→')}].`);
 
     for (const v of adj[u]) {
-      snap(u, [u,v], `Examine edge ${nodeLabels[u]}→${nodeLabels[v]}. Neighbor color = ${['WHITE','GRAY','BLACK'][color[v]]}.`);
+      snap(u, [u, v], `Examine edge ${nodeLabels[u]}→${nodeLabels[v]}. Neighbor color = ${['WHITE', 'GRAY', 'BLACK'][color[v]]}.`);
 
       if (color[v] === 1) {
         // Back edge — cycle detected
         cycleEdge = [u, v];
         cycleFound = true;
-        snap(u, [u,v], `⚠ BACK EDGE! ${nodeLabels[u]}→${nodeLabels[v]} (${nodeLabels[v]} is GRAY = in current path). CYCLE DETECTED!`);
+        snap(u, [u, v], `⚠ BACK EDGE! ${nodeLabels[u]}→${nodeLabels[v]} (${nodeLabels[v]} is GRAY = in current path). CYCLE DETECTED!`);
         return true;
       }
       if (color[v] === 0) {
-        snap(v, [u,v], `${nodeLabels[v]} is WHITE. Recurse DFS(${nodeLabels[v]}).`);
+        snap(v, [u, v], `${nodeLabels[v]} is WHITE. Recurse DFS(${nodeLabels[v]}).`);
         if (dfs(v)) return true;
       } else {
-        snap(u, [u,v], `${nodeLabels[v]} is BLACK (fully processed). Safe edge — no cycle via this path.`);
+        snap(u, [u, v], `${nodeLabels[v]} is BLACK (fully processed). Safe edge — no cycle via this path.`);
       }
     }
 
     color[u] = 2; // BLACK
     callStack.pop();
-    snap(u, null, `DFS(${nodeLabels[u]}) complete. Color ${nodeLabels[u]} BLACK. Stack: [${callStack.map(x=>nodeLabels[x]).join('→')||'empty'}].`);
+    snap(u, null, `DFS(${nodeLabels[u]}) complete. Color ${nodeLabels[u]} BLACK. Stack: [${callStack.map(x => nodeLabels[x]).join('→') || 'empty'}].`);
     return false;
   }
 
@@ -14815,15 +17161,15 @@ function generatePalindromeSteps() {
   if (id === 516 || id === 1312) {
     s = 'babad'; mode = 'dp_table';
     title = id === 516 ? 'Longest Palindromic Subsequence (LC 516)' : 'Min Insertions to Make Palindrome (LC 1312)';
-    note  = 'dp[i][j] = LPS length of s[i..j]. If s[i]==s[j]: dp[i][j]=dp[i+1][j-1]+2, else max(dp[i+1][j],dp[i][j-1]).';
+    note = 'dp[i][j] = LPS length of s[i..j]. If s[i]==s[j]: dp[i][j]=dp[i+1][j-1]+2, else max(dp[i+1][j],dp[i][j-1]).';
   } else if (id === 647) {
     s = 'aaa'; mode = 'expand';
     title = 'Palindromic Substrings — Count (LC 647)';
-    note  = 'Expand around each center (n odd centers + n-1 even centers). Every successful expansion = one palindrome.';
+    note = 'Expand around each center (n odd centers + n-1 even centers). Every successful expansion = one palindrome.';
   } else {
     s = 'babad'; mode = 'expand';
     title = 'Longest Palindromic Substring (LC 5)';
-    note  = 'Expand around each center outward. Track the longest palindrome found.';
+    note = 'Expand around each center outward. Track the longest palindrome found.';
   }
 
   const n = s.length;
@@ -14835,7 +17181,7 @@ function generatePalindromeSteps() {
       L, R,         // current expansion bounds
       bestStart,    // start of best palindrome so far
       bestLen,      // length of best palindrome so far
-      dp: dpTable ? dpTable.map(r=>[...r]) : null,
+      dp: dpTable ? dpTable.map(r => [...r]) : null,
       phase,        // 'init'|'center'|'expand'|'found'|'dp_fill'|'done'
       log
     });
@@ -14857,62 +17203,62 @@ function generatePalindromeSteps() {
         if (isNew) { bestStart = L; bestLen = R - L + 1; }
         totalCount++;
         snap(c, L, R, bestStart, bestLen, null, 'expand',
-          `Expand: s[${L}]='${s[L]}' == s[${R}]='${s[R]}'. Palindrome "${s.slice(L,R+1)}" (len=${R-L+1}).${isNew?' ← New best!':''}`);
+          `Expand: s[${L}]='${s[L]}' == s[${R}]='${s[R]}'. Palindrome "${s.slice(L, R + 1)}" (len=${R - L + 1}).${isNew ? ' ← New best!' : ''}`);
         L--; R++;
       }
-      if (L+1 <= R-1 || (L+1 === R))
-        snap(c, L+1, R-1, bestStart, bestLen, null, 'center',
-          `Expansion stopped: s[${Math.max(0,L)}]='${s[Math.max(0,L)]}' ≠ s[${Math.min(n-1,R)}]='${s[Math.min(n-1,R)]}' or boundary reached.`);
+      if (L + 1 <= R - 1 || (L + 1 === R))
+        snap(c, L + 1, R - 1, bestStart, bestLen, null, 'center',
+          `Expansion stopped: s[${Math.max(0, L)}]='${s[Math.max(0, L)]}' ≠ s[${Math.min(n - 1, R)}]='${s[Math.min(n - 1, R)]}' or boundary reached.`);
 
       // Even-length palindromes (center between c and c+1)
       if (c + 1 < n) {
-        snap(c, c, c+1, bestStart, bestLen, null, 'center',
-          `Even center between ${c} and ${c+1}. Check s[${c}]='${s[c]}' == s[${c+1}]='${s[c+1]}'.`);
+        snap(c, c, c + 1, bestStart, bestLen, null, 'center',
+          `Even center between ${c} and ${c + 1}. Check s[${c}]='${s[c]}' == s[${c + 1}]='${s[c + 1]}'.`);
         L = c; R = c + 1;
         while (L >= 0 && R < n && s[L] === s[R]) {
           const isNew = (R - L + 1) > bestLen;
           if (isNew) { bestStart = L; bestLen = R - L + 1; }
           totalCount++;
           snap(c, L, R, bestStart, bestLen, null, 'expand',
-            `Expand: s[${L}]='${s[L]}' == s[${R}]='${s[R]}'. Palindrome "${s.slice(L,R+1)}" (len=${R-L+1}).${isNew?' ← New best!':''}`);
+            `Expand: s[${L}]='${s[L]}' == s[${R}]='${s[R]}'. Palindrome "${s.slice(L, R + 1)}" (len=${R - L + 1}).${isNew ? ' ← New best!' : ''}`);
           L--; R++;
         }
       }
     }
 
-    snap(-1, bestStart, bestStart+bestLen-1, bestStart, bestLen, null, 'done',
+    snap(-1, bestStart, bestStart + bestLen - 1, bestStart, bestLen, null, 'done',
       mode === 'expand' && id === 647
         ? `Total palindromic substrings = ${totalCount}.`
-        : `Longest palindrome = "${s.slice(bestStart, bestStart+bestLen)}" (len=${bestLen}).`);
+        : `Longest palindrome = "${s.slice(bestStart, bestStart + bestLen)}" (len=${bestLen}).`);
 
   } else if (mode === 'dp_table') {
     // dp[i][j] = LPS length of s[i..j]
-    const dp = Array.from({length:n}, ()=>new Array(n).fill(0));
+    const dp = Array.from({ length: n }, () => new Array(n).fill(0));
     // base: single chars
-    for (let i=0;i<n;i++) dp[i][i]=1;
+    for (let i = 0; i < n; i++) dp[i][i] = 1;
 
     snap(-1, -1, -1, 0, 1, dp, 'init',
       `dp[i][i]=1 (single chars are palindromes). Fill diagonally by increasing length.`);
 
-    for (let len=2; len<=n; len++) {
-      for (let i=0; i<=n-len; i++) {
-        const j=i+len-1;
+    for (let len = 2; len <= n; len++) {
+      for (let i = 0; i <= n - len; i++) {
+        const j = i + len - 1;
         snap(-1, i, j, 0, 0, dp, 'dp_fill',
-          `dp[${i}][${j}]: s[${i}]='${s[i]}' vs s[${j}]='${s[j]}'. ${s[i]===s[j]?'Match!':'No match.'}`);
-        if (s[i]===s[j]) {
-          dp[i][j] = (len===2)?2:dp[i+1][j-1]+2;
+          `dp[${i}][${j}]: s[${i}]='${s[i]}' vs s[${j}]='${s[j]}'. ${s[i] === s[j] ? 'Match!' : 'No match.'}`);
+        if (s[i] === s[j]) {
+          dp[i][j] = (len === 2) ? 2 : dp[i + 1][j - 1] + 2;
           snap(-1, i, j, 0, dp[i][j], dp, 'found',
-            `s[${i}]==s[${j}]. dp[${i}][${j}] = ${len===2?2:`dp[${i+1}][${j-1}]+2`} = ${dp[i][j]}.`);
+            `s[${i}]==s[${j}]. dp[${i}][${j}] = ${len === 2 ? 2 : `dp[${i + 1}][${j - 1}]+2`} = ${dp[i][j]}.`);
         } else {
-          dp[i][j] = Math.max(dp[i+1][j], dp[i][j-1]);
+          dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
           snap(-1, i, j, 0, dp[i][j], dp, 'dp_fill',
-            `dp[${i}][${j}] = max(dp[${i+1}][${j}]=${dp[i+1][j]}, dp[${i}][${j-1}]=${dp[i][j-1]}) = ${dp[i][j]}.`);
+            `dp[${i}][${j}] = max(dp[${i + 1}][${j}]=${dp[i + 1][j]}, dp[${i}][${j - 1}]=${dp[i][j - 1]}) = ${dp[i][j]}.`);
         }
       }
     }
 
-    snap(-1, 0, n-1, 0, dp[0][n-1], dp, 'done',
-      `LPS of "${s}" = dp[0][${n-1}] = ${dp[0][n-1]}.`);
+    snap(-1, 0, n - 1, 0, dp[0][n - 1], dp, 'done',
+      `LPS of "${s}" = dp[0][${n - 1}] = ${dp[0][n - 1]}.`);
   }
 
   visualizerState.steps = steps;
@@ -14924,24 +17270,24 @@ function generateLargestRectangleSteps(heights) {
   const n = heights.length;
   const stack = [];
   let maxArea = 0;
-  
+
   steps.push({ scanning: -1, stack: [], activeRectangle: null, maxArea: 0, log: "Histogram loaded. Stack initialized to empty." });
-  
+
   for (let i = 0; i <= n; i++) {
     const h = (i === n) ? 0 : heights[i];
     steps.push({ scanning: i, stack: [...stack], activeRectangle: null, maxArea, log: `Scanning bar index ${i} (height = ${h}). Stack = [${stack.join(", ")}]` });
-    
+
     while (stack.length > 0 && h < heights[stack[stack.length - 1]]) {
       const poppedIdx = stack.pop();
       const height = heights[poppedIdx];
       const width = stack.length === 0 ? i : i - 1 - stack[stack.length - 1];
       const area = height * width;
       maxArea = Math.max(maxArea, area);
-      
+
       const rectStart = stack.length === 0 ? 0 : stack[stack.length - 1] + 1;
       const rectWidth = width;
       const rectHeight = height;
-      
+
       steps.push({
         scanning: i,
         stack: [...stack],
@@ -14950,13 +17296,13 @@ function generateLargestRectangleSteps(heights) {
         log: `Popped index ${poppedIdx} (height ${height}). Computed Width = ${width}. Area = ${height} * ${width} = ${area}. Max Area = ${maxArea}`
       });
     }
-    
+
     if (i < n) {
       stack.push(i);
       steps.push({ scanning: i, stack: [...stack], activeRectangle: null, maxArea, log: `Pushed index ${i} onto stack.` });
     }
   }
-  
+
   steps.push({ scanning: -1, stack: [], activeRectangle: null, maxArea, log: `Histogram scanned. Maximum rectangle area = ${maxArea}` });
   visualizerState.steps = steps;
 }
@@ -14969,8 +17315,8 @@ function generateTreeSteps(treeArray) {
   const n = treeArray.length;
 
   // Build adjacency: parent -> [leftChild, rightChild] (skip null slots)
-  function leftChild(i)  { const c = 2*i+1; return c < n && treeArray[c] !== null ? c : -1; }
-  function rightChild(i) { const c = 2*i+2; return c < n && treeArray[c] !== null ? c : -1; }
+  function leftChild(i) { const c = 2 * i + 1; return c < n && treeArray[c] !== null ? c : -1; }
+  function rightChild(i) { const c = 2 * i + 2; return c < n && treeArray[c] !== null ? c : -1; }
 
   const visited = [];
   const callStack = []; // tracks DFS call frames (node indices)
@@ -15034,16 +17380,16 @@ function generateGraphSteps() {
     5: [0, 2]
   };
 
-  const visited  = new Set();
+  const visited = new Set();
   const treeEdges = []; // edges discovered by BFS
-  const queue    = [0];
+  const queue = [0];
   visited.add(0);
 
   const snap = (scanning, bfsQueue, log) =>
     steps.push({
       scanning,
-      visited:   [...visited],
-      queue:     [...bfsQueue],
+      visited: [...visited],
+      queue: [...bfsQueue],
       treeEdges: treeEdges.map(e => [...e]),
       log
     });
@@ -15119,31 +17465,31 @@ function generateMatrixSteps() {
   if (isMinPath) {
     // ── Min Path Sum: dp[i][j] = srcGrid[i][j] + min(dp[i-1][j], dp[i][j-1]) ──
     snap(null,
-      `Grid DP: Minimum Path Sum on a ${m}×${n} grid. dp[i][j] = grid[i][j] + min(from above, from left). Goal: reach (${m-1},${n-1}) with minimum cost.`);
+      `Grid DP: Minimum Path Sum on a ${m}×${n} grid. dp[i][j] = grid[i][j] + min(from above, from left). Goal: reach (${m - 1},${n - 1}) with minimum cost.`);
 
     // Fill first row
     dp[0][0] = srcGrid[0][0];
     snap({ r: 0, c: 0 }, `Base: dp[0][0] = ${dp[0][0]}.`);
     for (let c = 1; c < n; c++) {
       dp[0][c] = dp[0][c - 1] + srcGrid[0][c];
-      snap({ r: 0, c }, `First row: dp[0][${c}] = dp[0][${c-1}](${dp[0][c-1]}) + grid[0][${c}](${srcGrid[0][c]}) = ${dp[0][c]}.`);
+      snap({ r: 0, c }, `First row: dp[0][${c}] = dp[0][${c - 1}](${dp[0][c - 1]}) + grid[0][${c}](${srcGrid[0][c]}) = ${dp[0][c]}.`);
     }
     // Fill first col
     for (let r = 1; r < m; r++) {
       dp[r][0] = dp[r - 1][0] + srcGrid[r][0];
-      snap({ r, c: 0 }, `First col: dp[${r}][0] = dp[${r-1}][0](${dp[r-1][0]}) + grid[${r}][0](${srcGrid[r][0]}) = ${dp[r][0]}.`);
+      snap({ r, c: 0 }, `First col: dp[${r}][0] = dp[${r - 1}][0](${dp[r - 1][0]}) + grid[${r}][0](${srcGrid[r][0]}) = ${dp[r][0]}.`);
     }
     // Fill rest
     for (let r = 1; r < m; r++) {
       for (let c = 1; c < n; c++) {
-        const fromTop  = dp[r - 1][c];
+        const fromTop = dp[r - 1][c];
         const fromLeft = dp[r][c - 1];
         dp[r][c] = srcGrid[r][c] + Math.min(fromTop, fromLeft);
         snap({ r, c },
           `dp[${r}][${c}] = grid(${srcGrid[r][c]}) + min(top=${fromTop}, left=${fromLeft}) = ${dp[r][c]}.`);
       }
     }
-    snap(null, `Min Path Sum complete! dp[${m-1}][${n-1}] = ${dp[m-1][n-1]} — optimal cost from (0,0) to (${m-1},${n-1}).`);
+    snap(null, `Min Path Sum complete! dp[${m - 1}][${n - 1}] = ${dp[m - 1][n - 1]} — optimal cost from (0,0) to (${m - 1},${n - 1}).`);
 
   } else {
     // ── Unique Paths: dp[i][j] = dp[i-1][j] + dp[i][j-1] ──
@@ -15157,14 +17503,14 @@ function generateMatrixSteps() {
 
     for (let r = 1; r < m; r++) {
       for (let c = 1; c < n; c++) {
-        const fromTop  = dp[r - 1][c];
+        const fromTop = dp[r - 1][c];
         const fromLeft = dp[r][c - 1];
         dp[r][c] = fromTop + fromLeft;
         snap({ r, c },
-          `dp[${r}][${c}] = dp[${r-1}][${c}](${fromTop}) + dp[${r}][${c-1}](${fromLeft}) = ${dp[r][c]} unique paths.`);
+          `dp[${r}][${c}] = dp[${r - 1}][${c}](${fromTop}) + dp[${r}][${c - 1}](${fromLeft}) = ${dp[r][c]} unique paths.`);
       }
     }
-    snap(null, `Unique Paths complete! dp[${m-1}][${n-1}] = ${dp[m-1][n-1]} distinct paths from (0,0) to (${m-1},${n-1}).`);
+    snap(null, `Unique Paths complete! dp[${m - 1}][${n - 1}] = ${dp[m - 1][n - 1]} distinct paths from (0,0) to (${m - 1},${n - 1}).`);
   }
 
   visualizerState.steps = steps;
@@ -15174,14 +17520,14 @@ function generateMatrixSteps() {
 function generateIntervalsSteps(intervals) {
   const steps = [];
   const n = intervals.length;
-  
+
   steps.push({
     scanning: -1,
     activeInterval: null,
     merged: [],
     log: "Interval elements loaded. Sorting ranges by start times."
   });
-  
+
   const merged = [];
   for (let i = 0; i < n; i++) {
     const current = intervals[i];
@@ -15191,7 +17537,7 @@ function generateIntervalsSteps(intervals) {
       merged: JSON.parse(JSON.stringify(merged)),
       log: `Inspecting interval [${current[0]}, ${current[1]}].`
     });
-    
+
     if (merged.length === 0 || merged[merged.length - 1][1] < current[0]) {
       merged.push(current);
       steps.push({
@@ -15212,7 +17558,7 @@ function generateIntervalsSteps(intervals) {
       });
     }
   }
-  
+
   steps.push({ scanning: -1, activeInterval: null, merged: JSON.parse(JSON.stringify(merged)), log: "Interval scanning complete." });
   visualizerState.steps = steps;
 }
@@ -15339,7 +17685,7 @@ function generateTrieSteps(words) {
 
   const snap = (phase, operation, activePath, activeWord, insertingChar, log) =>
     steps.push({
-      trie:          JSON.parse(JSON.stringify(trie)),
+      trie: JSON.parse(JSON.stringify(trie)),
       phase,         // 'insert' | 'search' | 'done'
       operation,     // 'start' | 'traverse' | 'create' | 'mark_end' | 'found' | 'not_found' | 'prefix_ok'
       activePath,    // array of node IDs currently highlighted
@@ -15367,12 +17713,12 @@ function generateTrieSteps(words) {
         node = node.children[ch];
         pathIds.push(node.id);
         snap('insert', 'create', [...pathIds], word, ch,
-          `"${ch}" not found — create new node (id=${node.id}) for prefix "${word.slice(0, i+1)}".`);
+          `"${ch}" not found — create new node (id=${node.id}) for prefix "${word.slice(0, i + 1)}".`);
       } else {
         node = node.children[ch];
         pathIds.push(node.id);
         snap('insert', 'traverse', [...pathIds], word, ch,
-          `"${ch}" already exists (id=${node.id}) — traverse to it. Prefix "${word.slice(0, i+1)}" shared.`);
+          `"${ch}" already exists (id=${node.id}) — traverse to it. Prefix "${word.slice(0, i + 1)}" shared.`);
       }
     }
 
@@ -15405,7 +17751,7 @@ function generateTrieSteps(words) {
       node = node.children[ch];
       pathIds.push(node.id);
       snap('search', 'traverse', [...pathIds], word, ch,
-        `Follow "${ch}" → node id=${node.id}. Prefix "${word.slice(0, i+1)}" exists.`);
+        `Follow "${ch}" → node id=${node.id}. Prefix "${word.slice(0, i + 1)}" exists.`);
     }
 
     if (found) {
@@ -15452,47 +17798,47 @@ function generateStringDPSteps(s1, s2) {
   const steps = [];
   const m = s1.length, n = s2.length;
   const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
-  
+
   steps.push({
     dp: dp.map(r => [...r]),
     activeCell: null,
     s1, s2,
-    log: `LCS DP table initialized (${m+1}×${n+1}). All cells set to 0.`
+    log: `LCS DP table initialized (${m + 1}×${n + 1}). All cells set to 0.`
   });
-  
+
   for (let i = 1; i <= m; i++) {
     for (let j = 1; j <= n; j++) {
       steps.push({
         dp: dp.map(r => [...r]),
         activeCell: { r: i, c: j },
-        matchChars: { a: s1[i-1], b: s2[j-1] },
+        matchChars: { a: s1[i - 1], b: s2[j - 1] },
         s1, s2,
-        log: `Comparing s1[${i-1}]="${s1[i-1]}" with s2[${j-1}]="${s2[j-1]}"`
+        log: `Comparing s1[${i - 1}]="${s1[i - 1]}" with s2[${j - 1}]="${s2[j - 1]}"`
       });
-      
-      const match = s1[i-1] === s2[j-1];
+
+      const match = s1[i - 1] === s2[j - 1];
       if (match) {
-        dp[i][j] = dp[i-1][j-1] + 1;
+        dp[i][j] = dp[i - 1][j - 1] + 1;
         steps.push({
           dp: dp.map(r => [...r]),
           activeCell: { r: i, c: j },
-          matchChars: { a: s1[i-1], b: s2[j-1] },
+          matchChars: { a: s1[i - 1], b: s2[j - 1] },
           s1, s2,
-          log: `Match! "${s1[i-1]}" == "${s2[j-1]}". dp[${i}][${j}] = dp[${i-1}][${j-1}] + 1 = ${dp[i][j]}`
+          log: `Match! "${s1[i - 1]}" == "${s2[j - 1]}". dp[${i}][${j}] = dp[${i - 1}][${j - 1}] + 1 = ${dp[i][j]}`
         });
       } else {
-        dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
         steps.push({
           dp: dp.map(r => [...r]),
           activeCell: { r: i, c: j },
-          matchChars: { a: s1[i-1], b: s2[j-1] },
+          matchChars: { a: s1[i - 1], b: s2[j - 1] },
           s1, s2,
-          log: `No match. dp[${i}][${j}] = max(dp[${i-1}][${j}], dp[${i}][${j-1}]) = max(${dp[i-1][j]}, ${dp[i][j-1]}) = ${dp[i][j]}`
+          log: `No match. dp[${i}][${j}] = max(dp[${i - 1}][${j}], dp[${i}][${j - 1}]) = max(${dp[i - 1][j]}, ${dp[i][j - 1]}) = ${dp[i][j]}`
         });
       }
     }
   }
-  
+
   steps.push({
     dp: dp.map(r => [...r]),
     activeCell: null,
@@ -15506,12 +17852,12 @@ function generateStringDPSteps(s1, s2) {
 function generateDP1DSteps(n) {
   const steps = [];
   const dp = new Array(n + 1).fill(0);
-  
-  steps.push({ dp: [...dp], activeIndex: -1, n, log: `Climbing Stairs initialized. dp array of size ${n+1} created.` });
-  
+
+  steps.push({ dp: [...dp], activeIndex: -1, n, log: `Climbing Stairs initialized. dp array of size ${n + 1} created.` });
+
   dp[0] = 1;
   steps.push({ dp: [...dp], activeIndex: 0, n, log: `Base case: dp[0] = 1 (1 way to stay at ground)` });
-  
+
   if (n >= 1) {
     dp[1] = 1;
     steps.push({ dp: [...dp], activeIndex: 1, n, log: `Base case: dp[1] = 1 (only one way to climb 1 stair)` });
@@ -15520,13 +17866,13 @@ function generateDP1DSteps(n) {
     dp[2] = 2;
     steps.push({ dp: [...dp], activeIndex: 2, n, log: `Base case: dp[2] = 2 (1+1 or 2 in one jump)` });
   }
-  
+
   for (let i = 3; i <= n; i++) {
-    steps.push({ dp: [...dp], activeIndex: i, n, log: `Computing dp[${i}]: dp[${i-1}] (${dp[i-1]}) + dp[${i-2}] (${dp[i-2]})` });
-    dp[i] = dp[i-1] + dp[i-2];
+    steps.push({ dp: [...dp], activeIndex: i, n, log: `Computing dp[${i}]: dp[${i - 1}] (${dp[i - 1]}) + dp[${i - 2}] (${dp[i - 2]})` });
+    dp[i] = dp[i - 1] + dp[i - 2];
     steps.push({ dp: [...dp], activeIndex: i, n, log: `dp[${i}] = ${dp[i]}. This is the Fibonacci recurrence!` });
   }
-  
+
   steps.push({ dp: [...dp], activeIndex: -1, n, log: `Completed! dp[${n}] = ${dp[n]} unique ways to climb ${n} stairs.` });
   visualizerState.steps = steps;
 }
@@ -15538,43 +17884,43 @@ function generatePrefixSumSteps(nums, k) {
   let prefix = 0;
   let count = 0;
   const prefixArr = [0];
-  
-  steps.push({ 
-    nums, prefix: 0, prefixArr: [0], prefixMap: { ...prefixMap }, 
+
+  steps.push({
+    nums, prefix: 0, prefixArr: [0], prefixMap: { ...prefixMap },
     activeIndex: -1, count, k,
     log: `Prefix Sum init. Map: {0:1} means empty subarray has sum 0.`
   });
-  
+
   for (let i = 0; i < nums.length; i++) {
     prefix += nums[i];
     prefixArr.push(prefix);
-    
-    steps.push({ 
-      nums, prefix, prefixArr: [...prefixArr], prefixMap: { ...prefixMap }, 
+
+    steps.push({
+      nums, prefix, prefixArr: [...prefixArr], prefixMap: { ...prefixMap },
       activeIndex: i, count, k,
       log: `Index ${i}: nums[${i}]=${nums[i]}. Running prefix = ${prefix}`
     });
-    
+
     const needed = prefix - k;
     if (prefixMap[needed] !== undefined) {
       count += prefixMap[needed];
-      steps.push({ 
-        nums, prefix, prefixArr: [...prefixArr], prefixMap: { ...prefixMap }, 
+      steps.push({
+        nums, prefix, prefixArr: [...prefixArr], prefixMap: { ...prefixMap },
         activeIndex: i, count, k,
         log: `Found! prefix - k = ${prefix} - ${k} = ${needed} exists in map (×${prefixMap[needed]}). count → ${count}`
       });
     }
-    
+
     prefixMap[prefix] = (prefixMap[prefix] || 0) + 1;
-    steps.push({ 
-      nums, prefix, prefixArr: [...prefixArr], prefixMap: { ...prefixMap }, 
+    steps.push({
+      nums, prefix, prefixArr: [...prefixArr], prefixMap: { ...prefixMap },
       activeIndex: i, count, k,
       log: `Added prefix ${prefix} to map. Map[${prefix}] = ${prefixMap[prefix]}`
     });
   }
-  
-  steps.push({ 
-    nums, prefix, prefixArr: [...prefixArr], prefixMap: { ...prefixMap }, 
+
+  steps.push({
+    nums, prefix, prefixArr: [...prefixArr], prefixMap: { ...prefixMap },
     activeIndex: -1, count, k,
     log: `Complete! Found ${count} subarrays with sum = ${k}`
   });
@@ -15649,7 +17995,7 @@ function generateUnionFindSteps(n, edges) {
       path.push(curr);
       curr = parent[curr];
     }
-    
+
     path.forEach(node => {
       if (parent[node] !== curr) {
         parent[node] = curr;
@@ -15698,7 +18044,7 @@ function generateUnionFindSteps(n, edges) {
 function generateSegmentTreeSteps(nums, ql, qr) {
   const steps = [];
   const n = nums.length;
-  const tree   = new Array(n * 4).fill(0);
+  const tree = new Array(n * 4).fill(0);
   const ranges = {}; // node → [l, r]
 
   // ── helpers ──
@@ -15711,7 +18057,7 @@ function generateSegmentTreeSteps(nums, ql, qr) {
       operation,  // 'descend' | 'leaf' | 'combine' | 'out_of_range' | 'fully_covered' | 'partial' | 'update_leaf' | 'update_combine'
       activeNode,
       queryRange: queryRange ? [...queryRange] : null,
-      covered:    [...covered],
+      covered: [...covered],
       result,
       log
     });
@@ -15733,7 +18079,7 @@ function generateSegmentTreeSteps(nums, ql, qr) {
     }
 
     const mid = Math.floor((l + r) / 2);
-    const leftVal  = build(node * 2,     l,     mid);
+    const leftVal = build(node * 2, l, mid);
     const rightVal = build(node * 2 + 1, mid + 1, r);
     tree[node] = leftVal + rightVal;
     snap('build', 'combine', node, null, covered, 0,
@@ -15770,21 +18116,21 @@ function generateSegmentTreeSteps(nums, ql, qr) {
     }
 
     snap('query', 'partial', node, [ql, qr], queryCovered, result,
-      `[${l}, ${r}] partially overlaps [${ql}, ${qr}]. Split at mid=${Math.floor((l+r)/2)}.`);
+      `[${l}, ${r}] partially overlaps [${ql}, ${qr}]. Split at mid=${Math.floor((l + r) / 2)}.`);
     const mid = Math.floor((l + r) / 2);
     return query(node * 2, l, mid) + query(node * 2 + 1, mid + 1, r);
   }
 
   snap('query', 'descend', null, [ql, qr], [], 0,
-    `Query phase: sum of nums[${ql}..${qr}]. Expected = ${nums.slice(ql, qr+1).reduce((a,b)=>a+b,0)}.`);
+    `Query phase: sum of nums[${ql}..${qr}]. Expected = ${nums.slice(ql, qr + 1).reduce((a, b) => a + b, 0)}.`);
   query(1, 0, n - 1);
   snap('query', 'fully_covered', null, [ql, qr], [...queryCovered], result,
     `Query complete. sum(nums[${ql}..${qr}]) = ${result}. Covered nodes: [${queryCovered.join(', ')}].`);
 
   // ── Phase 3: Point update ──
   const updateIdx = Math.floor(n / 2); // update middle element
-  const newVal    = nums[updateIdx] + 5;
-  const oldVal    = nums[updateIdx];
+  const newVal = nums[updateIdx] + 5;
+  const oldVal = nums[updateIdx];
   const updateCovered = [];
 
   function update(node, l, r, idx, val) {
@@ -15800,8 +18146,8 @@ function generateSegmentTreeSteps(nums, ql, qr) {
     }
 
     const mid = Math.floor((l + r) / 2);
-    if (idx <= mid) update(node * 2,     l,     mid, idx, val);
-    else            update(node * 2 + 1, mid + 1, r, idx, val);
+    if (idx <= mid) update(node * 2, l, mid, idx, val);
+    else update(node * 2 + 1, mid + 1, r, idx, val);
 
     tree[node] = tree[node * 2] + tree[node * 2 + 1];
     snap('update', 'update_combine', node, null, [...updateCovered], 0,
@@ -15952,23 +18298,23 @@ function generateHeapSteps(nums) {
 
 // 26. Dijkstra Shortest Path
 function generateDijkstraSteps() {
-  const nodeLabels = ['A','B','C','D','E'];
-  const edges = [[0,1,4],[0,2,1],[2,1,2],[1,3,1],[2,3,5],[3,4,3]];
+  const nodeLabels = ['A', 'B', 'C', 'D', 'E'];
+  const edges = [[0, 1, 4], [0, 2, 1], [2, 1, 2], [1, 3, 1], [2, 3, 5], [3, 4, 3]];
   const graph = Array.from({ length: 5 }, () => []);
-  edges.forEach(([u,v,w]) => graph[u].push([v,w]));
+  edges.forEach(([u, v, w]) => graph[u].push([v, w]));
 
-  const dist    = [0, Infinity, Infinity, Infinity, Infinity];
+  const dist = [0, Infinity, Infinity, Infinity, Infinity];
   const visited = new Set();
-  const pq      = [[0,0]];
+  const pq = [[0, 0]];
   // settledEdges: edges whose destination is fully settled
   // relaxedEdges: edges relaxed in THIS step (reset each step)
   const settledEdges = new Set(); // "u-v"
 
   const snap = (activeNode, activeEdge, relaxedEdge, log) => steps.push({
     edges, nodeLabels,
-    dist:         [...dist],
-    visited:      [...visited],
-    pq:           pq.map(x=>[...x]),
+    dist: [...dist],
+    visited: [...visited],
+    pq: pq.map(x => [...x]),
     activeNode,   // node index being settled, or -1
     activeEdge,   // [u,v] currently being inspected, or null
     relaxedEdge,  // [u,v] just improved, or null
@@ -15980,36 +18326,36 @@ function generateDijkstraSteps() {
   snap(-1, null, null, `Dijkstra from A. dist = [0,∞,∞,∞,∞]. Push (A,0) into min-heap.`);
 
   while (pq.length) {
-    pq.sort((a,b) => a[0]-b[0]);
+    pq.sort((a, b) => a[0] - b[0]);
     const [d, u] = pq.shift();
     if (visited.has(u)) continue;
     visited.add(u);
     snap(u, null, null, `Settle ${nodeLabels[u]} (dist=${d}). Mark as finalized.`);
 
-    graph[u].forEach(([v,w]) => {
-      snap(-1, [u,v], null, `Inspect edge ${nodeLabels[u]}→${nodeLabels[v]} (w=${w}). Current dist[${nodeLabels[v]}]=${dist[v]===Infinity?'∞':dist[v]}.`);
+    graph[u].forEach(([v, w]) => {
+      snap(-1, [u, v], null, `Inspect edge ${nodeLabels[u]}→${nodeLabels[v]} (w=${w}). Current dist[${nodeLabels[v]}]=${dist[v] === Infinity ? '∞' : dist[v]}.`);
       if (dist[u] + w < dist[v]) {
         dist[v] = dist[u] + w;
         pq.push([dist[v], v]);
         settledEdges.add(`${u}-${v}`);
-        snap(-1, [u,v], [u,v], `Relaxed! dist[${nodeLabels[v]}] = ${dist[u]}+${w} = ${dist[v]}. Updated.`);
+        snap(-1, [u, v], [u, v], `Relaxed! dist[${nodeLabels[v]}] = ${dist[u]}+${w} = ${dist[v]}. Updated.`);
       }
     });
   }
 
-  snap(-1, null, null, `Dijkstra complete. Final distances: ${nodeLabels.map((l,i)=>`${l}:${dist[i]}`).join(', ')}.`);
+  snap(-1, null, null, `Dijkstra complete. Final distances: ${nodeLabels.map((l, i) => `${l}:${dist[i]}`).join(', ')}.`);
   visualizerState.steps = steps;
 }
 
 // 27. Topological Sort
 // 27. Topological Sort — with removedEdges, nodeLabels, in-degree per step
 function generateTopoSortSteps() {
-  const nodeLabels = ['A','B','C','D','E','F'];
-  const edges = [[0,2],[1,2],[1,3],[2,4],[3,4],[4,5]];
+  const nodeLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
+  const edges = [[0, 2], [1, 2], [1, 3], [2, 4], [3, 4], [4, 5]];
   const n = 6;
   const graph = Array.from({ length: n }, () => []);
   const indegree = new Array(n).fill(0);
-  edges.forEach(([u,v]) => { graph[u].push(v); indegree[v]++; });
+  edges.forEach(([u, v]) => { graph[u].push(v); indegree[v]++; });
 
   const removedEdges = new Set(); // "u-v" strings
   const order = [];
@@ -16019,15 +18365,15 @@ function generateTopoSortSteps() {
   const snap = (active, log) => steps.push({
     edges, nodeLabels,
     indegree: [...indegree],
-    queue:    [...queue],
-    order:    [...order],
+    queue: [...queue],
+    order: [...order],
     active,
     removedEdges: new Set(removedEdges),
     n, log
   });
 
   const steps = [];
-  snap(null, `Kahn's Algorithm. Nodes with in-degree 0: [${queue.map(i=>nodeLabels[i]).join(', ')}]. Add to queue.`);
+  snap(null, `Kahn's Algorithm. Nodes with in-degree 0: [${queue.map(i => nodeLabels[i]).join(', ')}]. Add to queue.`);
 
   while (queue.length) {
     const u = queue.shift();
@@ -16043,7 +18389,7 @@ function generateTopoSortSteps() {
     });
   }
 
-  snap(null, `Topological order: ${order.map(i=>nodeLabels[i]).join(' → ')}. All ${n} nodes processed.`);
+  snap(null, `Topological order: ${order.map(i => nodeLabels[i]).join(' → ')}. All ${n} nodes processed.`);
   visualizerState.steps = steps;
 }
 
@@ -16054,7 +18400,7 @@ function generateKnapsackSteps(weights, values, capacity) {
 
   const snap = (activeCell, action, takeVal, skipVal, log) =>
     steps.push({
-      dp:         dp.map(r => [...r]),
+      dp: dp.map(r => [...r]),
       weights, values, capacity,
       activeCell,
       action,     // 'init'|'take'|'skip'|'backtrack'|'done'
@@ -16077,16 +18423,16 @@ function generateKnapsackSteps(weights, values, capacity) {
       if (dp[i][cap] === -Infinity) dp[i][cap] = 0; // guard
       const action = (take !== -Infinity && take > skip) ? 'take' : 'skip';
       steps.push({
-        dp:         dp.map(r => [...r]),
+        dp: dp.map(r => [...r]),
         weights, values, capacity,
         activeCell: { r: i, c: cap },
         action,
-        takeVal:    take === -Infinity ? null : take,
-        skipVal:    skip,
+        takeVal: take === -Infinity ? null : take,
+        skipVal: skip,
         selectedItems: [],
         log: action === 'take'
-          ? `Item ${i} (w=${weights[i-1]}, v=${values[i-1]}), cap=${cap}: TAKE → v[${i-1}](${values[i-1]}) + dp[${i-1}][${cap-weights[i-1]}](${dp[i-1][cap-weights[i-1]]}) = ${take} > skip(${skip}).`
-          : `Item ${i} (w=${weights[i-1]}, v=${values[i-1]}), cap=${cap}: SKIP → dp[${i-1}][${cap}](${skip})${take === null ? ' (item too heavy)' : ` >= take(${take})`}.`
+          ? `Item ${i} (w=${weights[i - 1]}, v=${values[i - 1]}), cap=${cap}: TAKE → v[${i - 1}](${values[i - 1]}) + dp[${i - 1}][${cap - weights[i - 1]}](${dp[i - 1][cap - weights[i - 1]]}) = ${take} > skip(${skip}).`
+          : `Item ${i} (w=${weights[i - 1]}, v=${values[i - 1]}), cap=${cap}: SKIP → dp[${i - 1}][${cap}](${skip})${take === null ? ' (item too heavy)' : ` >= take(${take})`}.`
       });
     }
   }
@@ -16099,36 +18445,36 @@ function generateKnapsackSteps(weights, values, capacity) {
       selectedItems.push(i - 1); // 0-indexed item
       w -= weights[i - 1];
       steps.push({
-        dp:         dp.map(r => [...r]),
+        dp: dp.map(r => [...r]),
         weights, values, capacity,
         activeCell: { r: i, c: w + weights[i - 1] },
-        action:     'backtrack',
-        takeVal:    values[i - 1],
-        skipVal:    0,
+        action: 'backtrack',
+        takeVal: values[i - 1],
+        skipVal: 0,
         selectedItems: [...selectedItems],
-        log: `Backtrack: dp[${i}][${w + weights[i-1]}] ≠ dp[${i-1}][${w + weights[i-1]}] → Item ${i} (w=${weights[i-1]}, v=${values[i-1]}) was TAKEN. Remaining capacity = ${w}.`
+        log: `Backtrack: dp[${i}][${w + weights[i - 1]}] ≠ dp[${i - 1}][${w + weights[i - 1]}] → Item ${i} (w=${weights[i - 1]}, v=${values[i - 1]}) was TAKEN. Remaining capacity = ${w}.`
       });
     } else {
       steps.push({
-        dp:         dp.map(r => [...r]),
+        dp: dp.map(r => [...r]),
         weights, values, capacity,
         activeCell: { r: i, c: w },
-        action:     'backtrack',
-        takeVal:    null,
-        skipVal:    dp[i][w],
+        action: 'backtrack',
+        takeVal: null,
+        skipVal: dp[i][w],
         selectedItems: [...selectedItems],
-        log: `Backtrack: dp[${i}][${w}] = dp[${i-1}][${w}] → Item ${i} was SKIPPED.`
+        log: `Backtrack: dp[${i}][${w}] = dp[${i - 1}][${w}] → Item ${i} was SKIPPED.`
       });
     }
   }
 
   steps.push({
-    dp:            dp.map(r => [...r]),
+    dp: dp.map(r => [...r]),
     weights, values, capacity,
-    activeCell:    null,
-    action:        'done',
-    takeVal:       null,
-    skipVal:       null,
+    activeCell: null,
+    action: 'done',
+    takeVal: null,
+    skipVal: null,
     selectedItems: [...selectedItems],
     log: `Done! Max value = ${dp[n][capacity]}. Selected items (0-indexed): [${selectedItems.join(', ')}].`
   });
@@ -16155,12 +18501,12 @@ function generateKMPSteps(text, pattern) {
   for (let i = 1; i < pattern.length;) {
     if (pattern[i] === pattern[len]) {
       lps[i] = ++len;
-      snapLPS(i, len - 1, `pattern[${i}]='${pattern[i]}' == pattern[${len-1}]='${pattern[len-1]}'. lps[${i}] = ${lps[i]}.`);
+      snapLPS(i, len - 1, `pattern[${i}]='${pattern[i]}' == pattern[${len - 1}]='${pattern[len - 1]}'. lps[${i}] = ${lps[i]}.`);
       i++;
     } else if (len > 0) {
       const prev = len;
       len = lps[len - 1];
-      snapLPS(i, len, `Mismatch at i=${i}. Fallback: len ${prev} → ${len} via lps[${prev-1}]=${lps[prev-1]}.`);
+      snapLPS(i, len, `Mismatch at i=${i}. Fallback: len ${prev} → ${len} via lps[${prev - 1}]=${lps[prev - 1]}.`);
     } else {
       lps[i] = 0;
       snapLPS(i, 0, `No prefix match for pattern[${i}]='${pattern[i]}'. lps[${i}] = 0.`);
@@ -16168,8 +18514,10 @@ function generateKMPSteps(text, pattern) {
     }
   }
 
-  steps.push({ phase: 'lps', text, pattern, lps: [...lps], i: -1, j: -1, matchedAt: -1, patternOffset: 0, jumpFrom: -1,
-    log: `LPS table complete: [${lps.join(', ')}]. Phase 2 — Scan text for pattern.` });
+  steps.push({
+    phase: 'lps', text, pattern, lps: [...lps], i: -1, j: -1, matchedAt: -1, patternOffset: 0, jumpFrom: -1,
+    log: `LPS table complete: [${lps.join(', ')}]. Phase 2 — Scan text for pattern.`
+  });
 
   // Scan
   let i = 0, j = 0;
@@ -16193,8 +18541,10 @@ function generateKMPSteps(text, pattern) {
     }
   }
 
-  steps.push({ phase: 'scan', text, pattern, lps: [...lps], i: text.length, j, matchedAt: -1, patternOffset: 0, jumpFrom: -1,
-    log: `Scan complete. Text fully traversed.` });
+  steps.push({
+    phase: 'scan', text, pattern, lps: [...lps], i: text.length, j, matchedAt: -1, patternOffset: 0, jumpFrom: -1,
+    log: `Scan complete. Text fully traversed.`
+  });
 
   visualizerState.steps = steps;
 }
@@ -16210,7 +18560,7 @@ function generateFenwickSteps(nums) {
   const snap = (mode, activeChain, total, srcIdx, log) =>
     steps.push({
       nums: [...nums],
-      bit:  [...bit],
+      bit: [...bit],
       mode,           // 'init'|'update'|'query'|'done'
       activeChain,    // array of 1-based BIT indices involved in this step
       total,
@@ -16230,7 +18580,7 @@ function generateFenwickSteps(nums) {
     for (let i = idx + 1; i <= n; i += lowbit(i)) chain.push(i);
 
     snap('update', [], 0, idx,
-      `Insert a[${idx+1}]=${value}. Update chain: ${chain.join(' → ')} (each += ${value}).`);
+      `Insert a[${idx + 1}]=${value}. Update chain: ${chain.join(' → ')} (each += ${value}).`);
 
     for (const i of chain) {
       bit[i] += value;
@@ -16255,7 +18605,7 @@ function generateFenwickSteps(nums) {
   }
 
   snap('done', [], total, -1,
-    `Query sum(1..${queryIdx}) = ${total}. Verified: ${nums.slice(0, queryIdx).join('+')} = ${nums.slice(0, queryIdx).reduce((a,b)=>a+b,0)}.`);
+    `Query sum(1..${queryIdx}) = ${total}. Verified: ${nums.slice(0, queryIdx).join('+')} = ${nums.slice(0, queryIdx).reduce((a, b) => a + b, 0)}.`);
 
   visualizerState.steps = steps;
 }
@@ -16263,14 +18613,14 @@ function generateFenwickSteps(nums) {
 // 31. Bellman-Ford
 // 31. Bellman-Ford — with pass tracking, relaxed flag, dist table, negative-cycle check
 function generateBellmanFordSteps() {
-  const nodeLabels = ['A','B','C','D','E'];
+  const nodeLabels = ['A', 'B', 'C', 'D', 'E'];
   const n = 5;
-  const edges = [[0,1,6],[0,2,7],[1,3,5],[1,2,8],[2,3,-3],[3,4,2],[4,1,-2]];
+  const edges = [[0, 1, 6], [0, 2, 7], [1, 3, 5], [1, 2, 8], [2, 3, -3], [3, 4, 2], [4, 1, -2]];
   const dist = [0, Infinity, Infinity, Infinity, Infinity];
 
   const snap = (activeEdge, relaxed, pass, negCycle, log) => steps.push({
     edges, nodeLabels,
-    dist:       [...dist],
+    dist: [...dist],
     activeEdge, // [u,v] or null
     relaxed,    // bool — was this edge relaxed?
     pass,
@@ -16279,18 +18629,18 @@ function generateBellmanFordSteps() {
   });
 
   const steps = [];
-  snap(null, false, 0, false, `Bellman-Ford from A. Run V-1=${n-1} passes over all edges. Handles negative weights.`);
+  snap(null, false, 0, false, `Bellman-Ford from A. Run V-1=${n - 1} passes over all edges. Handles negative weights.`);
 
   for (let pass = 1; pass < n; pass++) {
     let anyRelaxed = false;
-    snap(null, false, pass, false, `Pass ${pass}/${n-1}: scan all ${edges.length} edges for relaxations.`);
-    edges.forEach(([u,v,w]) => {
-      snap([u,v], false, pass, false,
-        `Pass ${pass}: test ${nodeLabels[u]}→${nodeLabels[v]} (w=${w}). dist[${nodeLabels[u]}]=${dist[u]===Infinity?'∞':dist[u]}.`);
+    snap(null, false, pass, false, `Pass ${pass}/${n - 1}: scan all ${edges.length} edges for relaxations.`);
+    edges.forEach(([u, v, w]) => {
+      snap([u, v], false, pass, false,
+        `Pass ${pass}: test ${nodeLabels[u]}→${nodeLabels[v]} (w=${w}). dist[${nodeLabels[u]}]=${dist[u] === Infinity ? '∞' : dist[u]}.`);
       if (dist[u] !== Infinity && dist[u] + w < dist[v]) {
         dist[v] = dist[u] + w;
         anyRelaxed = true;
-        snap([u,v], true, pass, false,
+        snap([u, v], true, pass, false,
           `Relaxed! dist[${nodeLabels[v]}] = ${dist[u]}+${w} = ${dist[v]}.`);
       }
     });
@@ -16302,13 +18652,13 @@ function generateBellmanFordSteps() {
 
   // Negative cycle check (extra pass)
   let negCycle = false;
-  edges.forEach(([u,v,w]) => {
+  edges.forEach(([u, v, w]) => {
     if (dist[u] !== Infinity && dist[u] + w < dist[v]) negCycle = true;
   });
   snap(null, false, n, negCycle,
     negCycle
       ? `⚠ Negative cycle detected! A V-th relaxation is still possible.`
-      : `No negative cycle. Final distances: ${nodeLabels.map((l,i)=>`${l}:${dist[i]===Infinity?'∞':dist[i]}`).join(', ')}.`);
+      : `No negative cycle. Final distances: ${nodeLabels.map((l, i) => `${l}:${dist[i] === Infinity ? '∞' : dist[i]}`).join(', ')}.`);
 
   visualizerState.steps = steps;
 }
@@ -16317,20 +18667,20 @@ function generateBellmanFordSteps() {
 // 32. Floyd-Warshall — with k highlight, improved flag, via-path annotation
 function generateFloydWarshallSteps() {
   const inf = Infinity;
-  const nodeLabels = ['A','B','C','D'];
+  const nodeLabels = ['A', 'B', 'C', 'D'];
   const N = 4;
   const dist = [
-    [0,   3,   inf, 7  ],
-    [8,   0,   2,   inf],
-    [5,   inf, 0,   1  ],
-    [2,   inf, inf, 0  ]
+    [0, 3, inf, 7],
+    [8, 0, 2, inf],
+    [5, inf, 0, 1],
+    [2, inf, inf, 0]
   ];
   // via[i][j] = intermediate node used for shortest i→j path
-  const via = Array.from({length:N},()=>new Array(N).fill(null));
+  const via = Array.from({ length: N }, () => new Array(N).fill(null));
 
   const snap = (activeCell, k, improved, log) => steps.push({
-    dist:       dist.map(r=>[...r]),
-    via:        via.map(r=>[...r]),
+    dist: dist.map(r => [...r]),
+    via: via.map(r => [...r]),
     activeCell, // {r,c} or null
     k,          // current intermediate node index, -1 = init
     improved,
@@ -16353,11 +18703,11 @@ function generateFloydWarshallSteps() {
         if (through < dist[i][j]) {
           dist[i][j] = through;
           via[i][j] = k;
-          snap({r:i,c:j}, k, true,
+          snap({ r: i, c: j }, k, true,
             `Improved! dist[${nodeLabels[i]}][${nodeLabels[j]}] = dist[${nodeLabels[i]}][${nodeLabels[k]}](${dist[i][k]}≠via) + dist[${nodeLabels[k]}][${nodeLabels[j]}](${dist[k][j]}) = ${through}. Via ${nodeLabels[k]}.`);
         } else {
-          snap({r:i,c:j}, k, false,
-            `dist[${nodeLabels[i]}][${nodeLabels[j]}]=${dist[i][j]=== inf?'∞':dist[i][j]} ≤ via ${nodeLabels[k]}(${through===inf?'∞':through}). No improvement.`);
+          snap({ r: i, c: j }, k, false,
+            `dist[${nodeLabels[i]}][${nodeLabels[j]}]=${dist[i][j] === inf ? '∞' : dist[i][j]} ≤ via ${nodeLabels[k]}(${through === inf ? '∞' : through}). No improvement.`);
         }
       }
     }
@@ -16394,7 +18744,7 @@ function generateQuickSortSteps(nums) {
 function generateQuickSortFullSteps() {
   const steps = [];
   const initialArr = [4, 2, 1, 3];
-  
+
   steps.push({
     array: [...initialArr],
     pivotIdx: -1,
@@ -16403,7 +18753,7 @@ function generateQuickSortFullSteps() {
     sorted: [],
     log: "Initial array loaded. Starting recursive Quick Sort."
   });
-  
+
   // Hardcoded steps for simplicity of [4, 2, 1, 3] Lomuto trace
   // 1. Partition [0, 3], pivot value = 3, pivotIdx = 3
   steps.push({
@@ -16442,7 +18792,7 @@ function generateQuickSortFullSteps() {
     sorted: [2],
     log: "Place pivot 3 at final sorted index 2. Pivot is now locked."
   });
-  
+
   // 2. Recursively partition left half [0, 1], pivot value = 1, pivotIdx = 1
   steps.push({
     array: [2, 1, 3, 4],
@@ -16461,7 +18811,7 @@ function generateQuickSortFullSteps() {
     sorted: [0, 2],
     log: "Place pivot 1 at final index 0. Locked."
   });
-  
+
   // 3. Right half [3, 3] is single element, sorted
   steps.push({
     array: [1, 2, 3, 4],
@@ -16471,7 +18821,7 @@ function generateQuickSortFullSteps() {
     sorted: [0, 1, 2, 3],
     log: "All partition recursions complete. Array is fully sorted."
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -16485,12 +18835,12 @@ function generateMergeSortSteps() {
   // Each step emits: array[], phase, left, mid, right, compareL, compareR, sortedRegions[], divideDepth, log
   const snap = (phase, left, mid, right, compareL, compareR, depth, log) =>
     steps.push({
-      array:     [...work],
+      array: [...work],
       phase,           // 'start'|'split'|'compare'|'place'|'merge_done'|'done'
       left, mid, right,
       compareL,        // index being compared from left half (-1 if not comparing)
       compareR,        // index being compared from right half (-1 if not comparing)
-      sortedRegions:   Array.from(sorted),
+      sortedRegions: Array.from(sorted),
       divideDepth: depth,
       log
     });
@@ -16508,16 +18858,16 @@ function generateMergeSortSteps() {
 
     const m = Math.floor((l + r) / 2);
     snap('split', l, m, r, -1, -1, depth,
-      `Split [${l}..${r}] → left [${l}..${m}] and right [${m+1}..${r}].`);
+      `Split [${l}..${r}] → left [${l}..${m}] and right [${m + 1}..${r}].`);
 
     mergeSort(l, m, depth + 1);
     mergeSort(m + 1, r, depth + 1);
 
     // Merge
     snap('split', l, m, r, -1, -1, depth,
-      `Merge [${l}..${m}] + [${m+1}..${r}] — left: [${work.slice(l,m+1).join(',')}], right: [${work.slice(m+1,r+1).join(',')}].`);
+      `Merge [${l}..${m}] + [${m + 1}..${r}] — left: [${work.slice(l, m + 1).join(',')}], right: [${work.slice(m + 1, r + 1).join(',')}].`);
 
-    const left  = work.slice(l, m + 1);
+    const left = work.slice(l, m + 1);
     const right = work.slice(m + 1, r + 1);
     let i = 0, j = 0, k = l;
 
@@ -16527,19 +18877,19 @@ function generateMergeSortSteps() {
       if (left[i] <= right[j]) {
         work[k++] = left[i++];
         snap('place', l, m, r, l + i - 1, m + 1 + j, depth,
-          `left[${i-1}]=${left[i-1]} ≤ right[${j}]=${right[j]}. Place ${left[i-1]} at index ${k-1}.`);
+          `left[${i - 1}]=${left[i - 1]} ≤ right[${j}]=${right[j]}. Place ${left[i - 1]} at index ${k - 1}.`);
       } else {
         work[k++] = right[j++];
         snap('place', l, m, r, l + i, m + 1 + j - 1, depth,
-          `right[${j-1}]=${right[j-1]} < left[${i}]=${left[i]}. Place ${right[j-1]} at index ${k-1}.`);
+          `right[${j - 1}]=${right[j - 1]} < left[${i}]=${left[i]}. Place ${right[j - 1]} at index ${k - 1}.`);
       }
     }
-    while (i < left.length)  { work[k++] = left[i++]; }
+    while (i < left.length) { work[k++] = left[i++]; }
     while (j < right.length) { work[k++] = right[j++]; }
 
     for (let x = l; x <= r; x++) sorted.add(x);
     snap('merge_done', l, m, r, -1, -1, depth,
-      `Merged [${l}..${r}] → [${work.slice(l, r+1).join(', ')}].`);
+      `Merged [${l}..${r}] → [${work.slice(l, r + 1).join(', ')}].`);
   }
 
   mergeSort(0, arr.length - 1, 0);
@@ -16548,12 +18898,12 @@ function generateMergeSortSteps() {
 
   visualizerState.steps = steps;
 }
-  
+
 // Insertion Sort step generator
 function generateInsertionSortSteps() {
   const steps = [];
   const arr = [5, 2, 4, 6, 1, 3];
-  
+
   steps.push({
     array: [...arr],
     activeIdx: -1,
@@ -16561,7 +18911,7 @@ function generateInsertionSortSteps() {
     sortedCount: 1,
     log: "Insertion Sort started. Initial subarray index 0 is trivially sorted."
   });
-  
+
   // Step-by-step trace
   // 1. Insert 2
   steps.push({
@@ -16578,7 +18928,7 @@ function generateInsertionSortSteps() {
     sortedCount: 2,
     log: "Shift 5 right and insert 2. Sorted portion is now [2, 5]."
   });
-  
+
   // 2. Insert 4
   steps.push({
     array: [2, 5, 4, 6, 1, 3],
@@ -16594,7 +18944,7 @@ function generateInsertionSortSteps() {
     sortedCount: 3,
     log: "Shift 5 right and insert 4. Sorted portion is now [2, 4, 5]."
   });
-  
+
   // 3. Insert 6
   steps.push({
     array: [2, 4, 5, 6, 1, 3],
@@ -16610,7 +18960,7 @@ function generateInsertionSortSteps() {
     sortedCount: 4,
     log: "Commit 6 at index 3. Sorted portion is now [2, 4, 5, 6]."
   });
-  
+
   // 4. Insert 1
   steps.push({
     array: [2, 4, 5, 6, 1, 3],
@@ -16626,7 +18976,7 @@ function generateInsertionSortSteps() {
     sortedCount: 5,
     log: "Shift sorted elements right and insert 1 at index 0."
   });
-  
+
   // 5. Insert 3
   steps.push({
     array: [1, 2, 4, 5, 6, 3],
@@ -16642,7 +18992,7 @@ function generateInsertionSortSteps() {
     sortedCount: 6,
     log: "Shift sorted elements and insert 3 at index 2. Sorting complete!"
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -16661,7 +19011,7 @@ function generateBFSGridSteps() {
   const q = [[0, 0]];
   dist[0][0] = 0;
   const steps = [{ grid, dist: dist.map(r => [...r]), active: [0, 0], queue: [...q], target: [4, 4], log: "BFS starts from top-left cell." }];
-  const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+  const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
   while (q.length) {
     const [r, c] = q.shift();
     steps.push({ grid, dist: dist.map(row => [...row]), active: [r, c], queue: [...q], target: [4, 4], log: `Visit cell (${r}, ${c}) at distance ${dist[r][c]}.` });
@@ -16682,17 +19032,17 @@ function generateBFSGridSteps() {
 function generateLFUCacheSteps() {
   const capacity = 3;
   const ops = [
-    ['put',1,'A'], ['put',2,'B'], ['put',3,'C'],
-    ['get',1],
-    ['put',4,'D'],   // evicts min-freq, least-recent in that freq bucket
-    ['get',2],
-    ['get',1],
-    ['put',5,'E'],   // evicts again
-    ['get',3]
+    ['put', 1, 'A'], ['put', 2, 'B'], ['put', 3, 'C'],
+    ['get', 1],
+    ['put', 4, 'D'],   // evicts min-freq, least-recent in that freq bucket
+    ['get', 2],
+    ['get', 1],
+    ['put', 5, 'E'],   // evicts again
+    ['get', 3]
   ];
 
   // Internal state: key -> {val, freq}
-  const cache  = new Map();             // key -> {val, freq}
+  const cache = new Map();             // key -> {val, freq}
   const freqMap = new Map();            // freq -> [key, ...] (ordered LRU within same freq)
   let minFreq = 0;
 
@@ -16705,10 +19055,10 @@ function generateLFUCacheSteps() {
   const snap = (op, key, val, hit, evictedKey, log) =>
     steps.push({
       op, key, val: val ?? null, hit,
-      cache:    [...cache.entries()].map(([k,v]) => ({ key:k, val:v.val, freq:v.freq })),
-      buckets:  snapBuckets(),
+      cache: [...cache.entries()].map(([k, v]) => ({ key: k, val: v.val, freq: v.freq })),
+      buckets: snapBuckets(),
       minFreq,
-      activeKey:  key,
+      activeKey: key,
       evictedKey: evictedKey ?? null,
       capacity,
       log
@@ -16776,24 +19126,24 @@ function generateMonotonicDequeSteps() {
   // Pick problem-specific config
   let nums, k, mode, title, problemNote;
   if (id === 862) {
-    nums  = [2, -1, 2];  k = 3;
-    mode  = 'prefix_deque';
+    nums = [2, -1, 2]; k = 3;
+    mode = 'prefix_deque';
     title = 'Shortest Subarray with Sum ≥ K (LC 862)';
     problemNote = 'Use prefix sums + monotonic deque. For each j, find smallest i where prefix[j]-prefix[i] >= K.';
   } else if (id === 1425 || id === 1696) {
-    nums  = [10, -2, -10, -5, 20];  k = 2;
-    mode  = 'dp_deque';
+    nums = [10, -2, -10, -5, 20]; k = 2;
+    mode = 'dp_deque';
     title = id === 1425 ? 'Constrained Subsequence Sum (LC 1425)' : 'Jump Game VI (LC 1696)';
     problemNote = 'dp[i] = nums[i] + max(dp[i-k..i-1]). Use decreasing deque to track max dp in window.';
   } else if (id === 1438) {
-    nums  = [8, 2, 4, 7];  k = 4;
-    mode  = 'minmax_deque';
+    nums = [8, 2, 4, 7]; k = 4;
+    mode = 'minmax_deque';
     title = 'Longest Subarray With Abs Diff ≤ Limit (LC 1438)';
     problemNote = 'Two deques: one max-deque, one min-deque. Valid window: maxDeque.front - minDeque.front ≤ limit.';
   } else {
     // Default: LC 239 sliding window max
-    nums  = [1, 3, -1, -3, 5, 3, 6, 7];  k = 3;
-    mode  = 'sliding_max';
+    nums = [1, 3, -1, -3, 5, 3, 6, 7]; k = 3;
+    mode = 'sliding_max';
     title = 'Sliding Window Maximum (LC 239)';
     problemNote = 'Monotonic decreasing deque. Front = window max. Pop back when smaller, pop front when expired.';
   }
@@ -16803,13 +19153,13 @@ function generateMonotonicDequeSteps() {
     steps.push({
       nums, k, mode, title, problemNote,
       r,
-      deque:    [...deque],           // primary deque (indices, decreasing values)
+      deque: [...deque],           // primary deque (indices, decreasing values)
       dequeVals: deque.map(i => nums[i] ?? i),
       minDeque: minDeque ? [...minDeque] : null,
       minDequeVals: minDeque ? minDeque.map(i => nums[i] ?? i) : null,
-      out:      [...out],
+      out: [...out],
       windowStart: Math.max(0, r - k + 1),
-      windowEnd:   r,
+      windowEnd: r,
       action,   // 'pop_back' | 'pop_front' | 'push' | 'output' | 'init'
       log
     });
@@ -16820,7 +19170,7 @@ function generateMonotonicDequeSteps() {
   if (mode === 'sliding_max') {
     const dq = [], out = [];
     for (let r = 0; r < nums.length; r++) {
-      while (dq.length && nums[dq[dq.length-1]] <= nums[r]) {
+      while (dq.length && nums[dq[dq.length - 1]] <= nums[r]) {
         const popped = dq.pop();
         snap(r, [...dq], null, [...out], 'pop_back',
           `Pop back: deque top nums[${popped}]=${nums[popped]} ≤ nums[${r}]=${nums[r]} — stale max.`);
@@ -16831,12 +19181,12 @@ function generateMonotonicDequeSteps() {
       if (dq[0] <= r - k) {
         const exp = dq.shift();
         snap(r, [...dq], null, [...out], 'pop_front',
-          `Front idx ${exp} is outside window [${r-k+1},${r}]. Evict from front.`);
+          `Front idx ${exp} is outside window [${r - k + 1},${r}]. Evict from front.`);
       }
       if (r >= k - 1) {
         out.push(nums[dq[0]]);
         snap(r, [...dq], null, [...out], 'output',
-          `Window [${r-k+1}..${r}]: max = nums[${dq[0]}] = ${nums[dq[0]]}. Output: [${out.join(',')}].`);
+          `Window [${r - k + 1}..${r}]: max = nums[${dq[0]}] = ${nums[dq[0]]}. Output: [${out.join(',')}].`);
       }
     }
 
@@ -16854,7 +19204,7 @@ function generateMonotonicDequeSteps() {
       out.push(dp[i]);
       snap(i, [...dq], null, [...out], 'output',
         `dp[${i}] = nums[${i}](${nums[i]}) + max(dp[deque_front]=${dp[dq[0]] ?? 0}) = ${dp[i]}.`);
-      while (dq.length && dp[dq[dq.length-1]] <= dp[i]) {
+      while (dq.length && dp[dq[dq.length - 1]] <= dp[i]) {
         const popped = dq.pop();
         snap(i, [...dq], null, [...out], 'pop_back',
           `Pop back: dp[${popped}]=${dp[popped]} ≤ dp[${i}]=${dp[i]}. Maintain decreasing order.`);
@@ -16869,25 +19219,25 @@ function generateMonotonicDequeSteps() {
     const maxDq = [], minDq = [], out = [];
     let left = 0;
     for (let r = 0; r < nums.length; r++) {
-      while (maxDq.length && nums[maxDq[maxDq.length-1]] <= nums[r]) maxDq.pop();
-      while (minDq.length && nums[minDq[minDq.length-1]] >= nums[r]) minDq.pop();
+      while (maxDq.length && nums[maxDq[maxDq.length - 1]] <= nums[r]) maxDq.pop();
+      while (minDq.length && nums[minDq[minDq.length - 1]] >= nums[r]) minDq.pop();
       maxDq.push(r); minDq.push(r);
       snap(r, [...maxDq], [...minDq], [...out], 'push',
         `Push idx ${r} (${nums[r]}). max-deque front=${nums[maxDq[0]]}, min-deque front=${nums[minDq[0]]}.`);
       while (maxDq.length && minDq.length && nums[maxDq[0]] - nums[minDq[0]] > limit) {
         snap(r, [...maxDq], [...minDq], [...out], 'pop_front',
-          `Diff ${nums[maxDq[0]]}-${nums[minDq[0]]}=${nums[maxDq[0]]-nums[minDq[0]]} > limit ${limit}. Shrink left.`);
+          `Diff ${nums[maxDq[0]]}-${nums[minDq[0]]}=${nums[maxDq[0]] - nums[minDq[0]]} > limit ${limit}. Shrink left.`);
         left++;
         if (maxDq[0] < left) maxDq.shift();
         if (minDq[0] < left) minDq.shift();
       }
       out.push(r - left + 1);
       snap(r, [...maxDq], [...minDq], [...out], 'output',
-        `Valid window [${left}..${r}], length = ${r-left+1}.`);
+        `Valid window [${left}..${r}], length = ${r - left + 1}.`);
     }
   }
 
-  snap(nums.length-1, [], null, [], 'init',
+  snap(nums.length - 1, [], null, [], 'init',
     `Done! Monotonic deque processed all elements.`);
 
   visualizerState.steps = steps;
@@ -16927,7 +19277,7 @@ function generateLRUCacheSteps() {
 // 36. Sliding Window Maximum
 // 36. Sliding Window Maximum — richer deque value/window tracking
 function generateSlidingMaxSteps(nums, k) {
-  const dq  = [];   // stores indices, monotonically decreasing by value
+  const dq = [];   // stores indices, monotonically decreasing by value
   const out = [];
   const steps = [];
 
@@ -16935,11 +19285,11 @@ function generateSlidingMaxSteps(nums, k) {
     nums,
     k,
     r,
-    dq:          [...dq],
-    dqVals:      dq.map(i => nums[i]),          // values in deque (not just indices)
+    dq: [...dq],
+    dqVals: dq.map(i => nums[i]),          // values in deque (not just indices)
     windowStart: Math.max(0, r - k + 1),
-    windowEnd:   r,
-    out:         [...out],
+    windowEnd: r,
+    out: [...out],
     evictReason: evictReason || null,           // 'smaller' | 'expired' | null
     log
   });
@@ -17042,15 +19392,15 @@ function generateMedianFinderSteps(nums) {
   }));
 
   const snap = (activeVal, action, log) => steps.push({
-    small:       [...small],
-    large:       [...large],
-    smallTree:   heapTree(small, true),
-    largeTree:   heapTree(large, false),
-    active:      activeVal,
+    small: [...small],
+    large: [...large],
+    smallTree: heapTree(small, true),
+    largeTree: heapTree(large, false),
+    active: activeVal,
     action,      // 'insert'|'rebalance'|'query'
-    median:      small.length === 0 ? null
-                 : small.length > large.length ? small[0]
-                 : (small[0] + large[0]) / 2,
+    median: small.length === 0 ? null
+      : small.length > large.length ? small[0]
+        : (small[0] + large[0]) / 2,
     log
   });
 
@@ -17072,18 +19422,18 @@ function generateMedianFinderSteps(nums) {
     // Step 2: rebalance
     if (small.length > large.length + 1) {
       const moved = small.shift();
-      small.sort((a,b) => b-a);
+      small.sort((a, b) => b - a);
       large.push(moved);
-      large.sort((a,b) => a-b);
+      large.sort((a, b) => a - b);
       snap(moved, 'rebalance',
-        `small has ${small.length+1} > large ${large.length-1} + 1. Move small.top(${moved}) → large.`);
+        `small has ${small.length + 1} > large ${large.length - 1} + 1. Move small.top(${moved}) → large.`);
     } else if (large.length > small.length) {
       const moved = large.shift();
-      large.sort((a,b) => a-b);
+      large.sort((a, b) => a - b);
       small.push(moved);
-      small.sort((a,b) => b-a);
+      small.sort((a, b) => b - a);
       snap(moved, 'rebalance',
-        `large has ${large.length+1} > small ${small.length-1}. Move large.top(${moved}) → small.`);
+        `large has ${large.length + 1} > small ${small.length - 1}. Move large.top(${moved}) → small.`);
     }
 
     const median = small.length > large.length ? small[0] : (small[0] + large[0]) / 2;
@@ -17097,17 +19447,17 @@ function generateMedianFinderSteps(nums) {
 // 40. Sudoku Solver
 function generateSudokuSteps() {
   const board = [
-    ['5','3','.','.','7','.','.','.','.'],
-    ['6','.','.','1','9','5','.','.','.'],
-    ['.','9','8','.','.','.','.','6','.'],
-    ['8','.','.','.','6','.','.','.','3'],
-    ['4','.','.','8','.','3','.','.','1'],
-    ['7','.','.','.','2','.','.','.','6'],
-    ['.','6','.','.','.','.','2','8','.'],
-    ['.','.','.','4','1','9','.','.','5'],
-    ['.','.','.','.','8','.','.','7','9']
+    ['5', '3', '.', '.', '7', '.', '.', '.', '.'],
+    ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+    ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+    ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+    ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+    ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+    ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+    ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+    ['.', '.', '.', '.', '8', '.', '.', '7', '9']
   ];
-  
+
   const steps = [];
   steps.push({
     board: board.map(r => [...r]),
@@ -17115,7 +19465,7 @@ function generateSudokuSteps() {
     conflict: null,
     log: "Sudoku puzzle loaded. Starting recursive backtracking search..."
   });
-  
+
   function isValid(r, c, val) {
     for (let i = 0; i < 9; i++) {
       if (board[r][i] === val) return false;
@@ -17130,10 +19480,10 @@ function generateSudokuSteps() {
     }
     return true;
   }
-  
+
   let stepCount = 0;
   const maxSteps = 400; // Safe cap for visual steps density
-  
+
   function solve() {
     for (let r = 0; r < 9; r++) {
       for (let c = 0; c < 9; c++) {
@@ -17150,11 +19500,11 @@ function generateSudokuSteps() {
                 candidate: val,
                 log: ok ? `Trying ${val} at (${r}, ${c}) - Valid.` : `Trying ${val} at (${r}, ${c}) - Conflict found.`
               });
-              
+
               if (ok) {
                 board[r][c] = val;
                 if (solve()) return true;
-                
+
                 // Backtrack
                 board[r][c] = '.';
                 if (stepCount < maxSteps) {
@@ -17183,9 +19533,9 @@ function generateSudokuSteps() {
     }
     return true;
   }
-  
+
   solve();
-  
+
   // Add final step showing completely solved grid
   steps.push({
     board: board.map(r => [...r]),
@@ -17193,7 +19543,7 @@ function generateSudokuSteps() {
     conflict: null,
     log: "Sudoku puzzle completely solved successfully!"
   });
-  
+
   visualizerState.steps = steps;
 }
 
@@ -17204,53 +19554,53 @@ function generateSudokuSteps() {
 function renderCanvasStep() {
   const canvas = document.getElementById('canvas-area');
   canvas.innerHTML = '';
-  
+
   const step = visualizerState.steps[visualizerState.currentStepIndex];
   if (!step) return;
-  
+
   // --- A. BUBBLE SORT ---
   if (visualizerState.algo === 'bubble') {
     const barContainer = document.createElement('div');
     barContainer.className = 'bar-container';
     const maxVal = Math.max(...visualizerState.rawArray);
-    
+
     step.array.forEach((val, idx) => {
       const bar = document.createElement('div');
       bar.className = 'algo-bar';
-      const pctHeight = Math.max(15, (val / maxVal) * 80); 
+      const pctHeight = Math.max(15, (val / maxVal) * 80);
       bar.style.height = `${pctHeight}%`;
-      
+
       if (step.compare.includes(idx)) bar.classList.add('compare');
       else if (step.swap.includes(idx)) bar.classList.add('swap');
       else if (step.sorted.includes(idx)) bar.classList.add('sorted');
-      
+
       const span = document.createElement('span');
       span.className = 'algo-bar-val';
       span.textContent = val;
-      
+
       bar.appendChild(span);
       barContainer.appendChild(bar);
     });
     canvas.appendChild(barContainer);
-  } 
-  
+  }
+
   // --- B. BINARY SEARCH ---
   else if (visualizerState.algo === 'binary') {
     const bsContainer = document.createElement('div');
     bsContainer.className = 'binary-search-container';
     const arrayContainer = document.createElement('div');
     arrayContainer.className = 'bs-array';
-    
+
     visualizerState.rawArray.forEach((val, idx) => {
       const cell = document.createElement('div');
       cell.className = 'bs-element';
       cell.textContent = val;
-      
+
       const idxSpan = document.createElement('div');
       idxSpan.className = 'bs-element-idx';
       idxSpan.textContent = idx;
       cell.appendChild(idxSpan);
-      
+
       if (idx === step.found) cell.classList.add('found');
       else if (idx === step.mid) cell.classList.add('mid');
       else if (step.discarded.includes(idx)) cell.classList.add('discarded');
@@ -17258,7 +19608,7 @@ function renderCanvasStep() {
         cell.classList.add('active');
         if (idx === step.low || idx === step.high) cell.classList.add('low-high');
       }
-      
+
       if (idx === step.low && idx === step.high) {
         const pointer = document.createElement('div');
         pointer.className = 'bs-pointer-label low';
@@ -17286,88 +19636,88 @@ function renderCanvasStep() {
         pointer.textContent = 'Mid';
         cell.appendChild(pointer);
       }
-      
+
       arrayContainer.appendChild(cell);
     });
-    
+
     bsContainer.appendChild(arrayContainer);
     canvas.appendChild(bsContainer);
   }
-  
+
   // --- C. SLIDING WINDOW ---
   else if (visualizerState.algo === 'window') {
     const container = document.createElement('div');
     container.className = 'sliding-window-container';
-    
+
     const wrapper = document.createElement('div');
     wrapper.className = 'sw-string-wrapper';
-    
+
     visualizerState.rawArray.forEach((char, idx) => {
       const box = document.createElement('div');
       box.className = 'sw-char-box';
       box.textContent = char;
-      
+
       const idxSpan = document.createElement('div');
       idxSpan.className = 'sw-char-idx';
       idxSpan.textContent = idx;
       box.appendChild(idxSpan);
-      
+
       if (idx >= step.left && idx <= step.right) {
         box.classList.add('in-window');
         if (idx === step.duplicateIndex) {
           box.classList.add('duplicate');
         }
       }
-      
+
       wrapper.appendChild(box);
     });
-    
+
     if (step.right >= step.left) {
       const overlay = document.createElement('div');
       overlay.className = 'sw-window-overlay';
-      const boxWidth = 48 + 8; 
-      const offsetLeft = 24 + step.left * boxWidth; 
+      const boxWidth = 48 + 8;
+      const offsetLeft = 24 + step.left * boxWidth;
       const width = (step.right - step.left + 1) * boxWidth - 8;
-      
+
       overlay.style.left = `${offsetLeft}px`;
       overlay.style.width = `${width}px`;
       wrapper.appendChild(overlay);
     }
-    
+
     container.appendChild(wrapper);
-    
+
     const stats = document.createElement('div');
     stats.style.fontFamily = 'Space Grotesk, sans-serif';
     stats.style.fontSize = '0.95rem';
     stats.style.color = 'var(--text-muted)';
     stats.innerHTML = `Current Unique Set: <strong>[ ${Array.from(step.set).join(", ")} ]</strong> | Size = <strong>${step.set.size}</strong>`;
     container.appendChild(stats);
-    
+
     canvas.appendChild(container);
   }
-  
+
   // --- D. TWO POINTERS ---
   else if (visualizerState.algo === 'pointer') {
     const container = document.createElement('div');
     container.className = 'tp-container';
     const maxVal = Math.max(...visualizerState.rawArray);
-    
+
     visualizerState.rawArray.forEach((val, idx) => {
       const bar = document.createElement('div');
       bar.className = 'tp-bar';
       const pctHeight = (val / maxVal) * 75;
       bar.style.height = `${pctHeight}%`;
-      
+
       if (idx === step.left || idx === step.right) bar.classList.add('active');
-      
+
       const valSpan = document.createElement('div');
       valSpan.className = 'tp-bar-val';
       valSpan.textContent = val;
-      
+
       const idxSpan = document.createElement('div');
       idxSpan.className = 'tp-bar-idx';
       idxSpan.textContent = idx;
-      
+
       if (idx === step.left) {
         const label = document.createElement('div');
         label.className = 'bs-pointer-label low';
@@ -17382,16 +19732,16 @@ function renderCanvasStep() {
         label.textContent = 'Right';
         bar.appendChild(label);
       }
-      
+
       bar.appendChild(valSpan);
       bar.appendChild(idxSpan);
       container.appendChild(bar);
     });
-    
+
     if (step.left < step.right) {
       const water = document.createElement('div');
       water.className = 'tp-water-overlay';
-      const barWidth = 40; 
+      const barWidth = 40;
       const barGap = 16;
       const totalBarSpace = barWidth + barGap;
       const leftVal = visualizerState.rawArray[step.left];
@@ -17400,38 +19750,38 @@ function renderCanvasStep() {
       const startX = step.left * totalBarSpace + (barWidth / 2);
       const width = (step.right - step.left) * totalBarSpace;
       const waterH = (minH / maxVal) * 75;
-      
+
       water.style.left = `${startX}px`;
       water.style.width = `${width}px`;
       water.style.height = `${waterH}%`;
       water.style.bottom = '0';
-      
+
       container.appendChild(water);
     }
     canvas.appendChild(container);
   }
-  
+
   // --- E. TWO SUM II CANVAS (Sorted Cells) ---
   else if (visualizerState.algo === 'twoSumII') {
     const bsContainer = document.createElement('div');
     bsContainer.className = 'binary-search-container';
     const arrayContainer = document.createElement('div');
     arrayContainer.className = 'bs-array';
-    
+
     visualizerState.rawArray.forEach((val, idx) => {
       const cell = document.createElement('div');
       cell.className = 'bs-element';
       cell.textContent = val;
-      
+
       const idxSpan = document.createElement('div');
       idxSpan.className = 'bs-element-idx';
       idxSpan.textContent = idx;
       cell.appendChild(idxSpan);
-      
+
       if (idx === step.left || idx === step.right) {
         cell.classList.add('active');
         cell.classList.add('low-high');
-        
+
         if (idx === step.left) {
           const pointer = document.createElement('div');
           pointer.className = 'bs-pointer-label low';
@@ -17445,36 +19795,36 @@ function renderCanvasStep() {
           cell.appendChild(pointer);
         }
       }
-      
+
       if (step.found && (idx === step.left || idx === step.right)) {
         cell.classList.remove('active');
         cell.classList.add('found');
       }
-      
+
       arrayContainer.appendChild(cell);
     });
-    
+
     bsContainer.appendChild(arrayContainer);
     canvas.appendChild(bsContainer);
   }
-  
+
   // --- F-NEW. LINKED LIST MANIPULATION ---
   else if (visualizerState.algo === 'linkedlist' ||
-           visualizerState.algo === 'll-reverse' ||
-           visualizerState.algo === 'll-reverse-range' ||
-           visualizerState.algo === 'll-remove-nth' ||
-           visualizerState.algo === 'll-remove-dups' ||
-           visualizerState.algo === 'll-merge' ||
-           visualizerState.algo === 'll-swap-pairs' ||
-           visualizerState.algo === 'll-rotate') {
+    visualizerState.algo === 'll-reverse' ||
+    visualizerState.algo === 'll-reverse-range' ||
+    visualizerState.algo === 'll-remove-nth' ||
+    visualizerState.algo === 'll-remove-dups' ||
+    visualizerState.algo === 'll-merge' ||
+    visualizerState.algo === 'll-swap-pairs' ||
+    visualizerState.algo === 'll-rotate') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
     container.style.minHeight = '220px';
 
     const { nodes, arrows, pointers, removed, done, phase, op } = step;
     const removedSet = removed instanceof Set ? removed : new Set(removed || []);
-    const doneSet    = done    instanceof Set ? done    : new Set(done    || []);
-    const ptrs       = pointers || {};
+    const doneSet = done instanceof Set ? done : new Set(done || []);
+    const ptrs = pointers || {};
 
     // ── Operation + phase pill ──
     const opLabels = {
@@ -17482,14 +19832,14 @@ function renderCanvasStep() {
       remove_nth: 'Remove Nth from End', remove_dups: 'Remove Duplicates',
       merge: 'Merge Two Lists', swap_pairs: 'Swap Pairs', rotate: 'Rotate List'
     };
-    const phaseColors = { init:'var(--text-muted)', explain:'var(--accent-cyan)', work:'var(--primary-glow)', done:'var(--easy)' };
+    const phaseColors = { init: 'var(--text-muted)', explain: 'var(--accent-cyan)', work: 'var(--primary-glow)', done: 'var(--easy)' };
     const hdr = document.createElement('div');
     hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px;';
     const opPill = document.createElement('span');
     opPill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
       letter-spacing:0.07em;padding:2px 10px;border-radius:20px;
-      border:1px solid ${phaseColors[phase]||'var(--text-muted)'};
-      color:${phaseColors[phase]||'var(--text-muted)'};`;
+      border:1px solid ${phaseColors[phase] || 'var(--text-muted)'};
+      color:${phaseColors[phase] || 'var(--text-muted)'};`;
     opPill.textContent = opLabels[op] || op;
     hdr.appendChild(opPill);
     // Pointer legend pills
@@ -17508,11 +19858,11 @@ function renderCanvasStep() {
     // Layout: each node = 52px wide circle (r=22), 14px gap between, 40px top margin for pointer labels
     const R = 22, GAP = 18, TOP = 45, BOTTOM = 20;
     const nodeCount = nodes.length;
-    const svgW = nodeCount * (R*2 + GAP) + GAP;
-    const svgH = TOP + R*2 + BOTTOM;
+    const svgW = nodeCount * (R * 2 + GAP) + GAP;
+    const svgH = TOP + R * 2 + BOTTOM;
 
     // x-centre of node at index i
-    const cx = i => GAP + i * (R*2 + GAP) + R;
+    const cx = i => GAP + i * (R * 2 + GAP) + R;
     const cy = TOP + R;
 
     const svgNS = 'http://www.w3.org/2000/svg';
@@ -17544,16 +19894,16 @@ function renderCanvasStep() {
       if (fi === undefined || ti === undefined) return;
       const x1 = cx(fi) + R - 2, y1 = cy;
       const x2 = cx(ti) - R + 2, y2 = cy;
-      const isDone  = doneSet.has(from) && doneSet.has(to);
-      const isBack  = ti < fi; // reversed arrow — draw curved below
+      const isDone = doneSet.has(from) && doneSet.has(to);
+      const isBack = ti < fi; // reversed arrow — draw curved below
 
       const line = document.createElementNS(svgNS, isBack ? 'path' : 'line');
-      const col   = isDone ? 'var(--easy)' : 'rgba(255,255,255,0.3)';
-      const mId   = isDone ? 'llArrGreen' : 'llArr';
+      const col = isDone ? 'var(--easy)' : 'rgba(255,255,255,0.3)';
+      const mId = isDone ? 'llArrGreen' : 'llArr';
 
       if (isBack) {
         const mx = (x1 + x2) / 2;
-        line.setAttribute('d', `M ${x1} ${y1} C ${x1+10} ${y1+30}, ${x2-10} ${y2+30}, ${x2} ${y2}`);
+        line.setAttribute('d', `M ${x1} ${y1} C ${x1 + 10} ${y1 + 30}, ${x2 - 10} ${y2 + 30}, ${x2} ${y2}`);
         line.setAttribute('fill', 'none');
       } else {
         line.setAttribute('x1', x1); line.setAttribute('y1', y1);
@@ -17578,17 +19928,17 @@ function renderCanvasStep() {
       const x = cx(i), y = cy;
       const isRemoved = removedSet.has(node.id);
       const isDoneNode = doneSet.has(node.id);
-      const hasPtr     = ptrNames[node.id] !== undefined;
+      const hasPtr = ptrNames[node.id] !== undefined;
 
       // Determine colours
-      let fill   = 'rgba(30,41,59,0.9)';
+      let fill = 'rgba(30,41,59,0.9)';
       let stroke = 'rgba(255,255,255,0.15)';
-      let sw     = '1.5';
+      let sw = '1.5';
       let textCol = 'white';
 
-      if (isRemoved)       { fill='rgba(244,63,94,0.15)';     stroke='var(--hard)';         sw='2';   textCol='var(--hard)'; }
-      else if (hasPtr)     { fill='rgba(6,182,212,0.2)';      stroke='var(--accent-cyan)';  sw='2.5'; textCol='var(--accent-cyan)'; }
-      else if (isDoneNode) { fill='rgba(16,185,129,0.15)';    stroke='var(--easy)';         sw='2';   textCol='var(--easy)'; }
+      if (isRemoved) { fill = 'rgba(244,63,94,0.15)'; stroke = 'var(--hard)'; sw = '2'; textCol = 'var(--hard)'; }
+      else if (hasPtr) { fill = 'rgba(6,182,212,0.2)'; stroke = 'var(--accent-cyan)'; sw = '2.5'; textCol = 'var(--accent-cyan)'; }
+      else if (isDoneNode) { fill = 'rgba(16,185,129,0.15)'; stroke = 'var(--easy)'; sw = '2'; textCol = 'var(--easy)'; }
 
       // Circle
       const circle = document.createElementNS(svgNS, 'circle');
@@ -17600,8 +19950,8 @@ function renderCanvasStep() {
       // Strikethrough for removed nodes
       if (isRemoved) {
         const line = document.createElementNS(svgNS, 'line');
-        line.setAttribute('x1', x-R+4); line.setAttribute('y1', y-R+4);
-        line.setAttribute('x2', x+R-4); line.setAttribute('y2', y+R-4);
+        line.setAttribute('x1', x - R + 4); line.setAttribute('y1', y - R + 4);
+        line.setAttribute('x2', x + R - 4); line.setAttribute('y2', y + R - 4);
         line.setAttribute('stroke', 'var(--hard)'); line.setAttribute('stroke-width', '1.5');
         svg.appendChild(line);
       }
@@ -17663,27 +20013,27 @@ function renderCanvasStep() {
     container.className = 'cycle-container';
     const wrapper = document.createElement('div');
     wrapper.className = 'cycle-nodes-wrapper';
-    
+
     const coords = [
-      { x: 30, y: 70 },   
-      { x: 120, y: 70 },  
-      { x: 210, y: 70 },  
-      { x: 300, y: 40 },  
-      { x: 380, y: 80 },  
-      { x: 310, y: 130 }   
+      { x: 30, y: 70 },
+      { x: 120, y: 70 },
+      { x: 210, y: 70 },
+      { x: 300, y: 40 },
+      { x: 380, y: 80 },
+      { x: 310, y: 130 }
     ];
-    
+
     coords.forEach((c, idx) => {
       const node = document.createElement('div');
       node.className = 'cycle-node';
       node.style.left = `${c.x}px`;
       node.style.top = `${c.y}px`;
       node.innerHTML = `<span class="cycle-node-val">${visualizerState.rawArray[idx]}</span>`;
-      
+
       const isSlow = idx === step.slow;
       const isFast = idx === step.fast;
       const isEntry = idx === step.entry;
-      
+
       if (isSlow && isEntry) {
         node.classList.add('active-both');
       } else if (isSlow && isFast) {
@@ -17696,7 +20046,7 @@ function renderCanvasStep() {
         node.classList.add('active-slow');
         node.style.borderColor = 'var(--accent-cyan)';
       }
-      
+
       if (isSlow || isFast || isEntry) {
         const textLabel = document.createElement('div');
         textLabel.style.position = 'absolute';
@@ -17705,7 +20055,7 @@ function renderCanvasStep() {
         textLabel.style.fontWeight = '700';
         textLabel.style.textTransform = 'uppercase';
         textLabel.style.whiteSpace = 'nowrap';
-        
+
         if (isSlow && isEntry) {
           textLabel.style.color = 'var(--easy)';
           textLabel.textContent = 'Intersection Met';
@@ -17726,15 +20076,15 @@ function renderCanvasStep() {
       }
       wrapper.appendChild(node);
     });
-    
+
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("class", "cycle-arrow-svg");
-    
+
     const links = [
       { from: 0, to: 1 }, { from: 1, to: 2 }, { from: 2, to: 3 },
-      { from: 3, to: 4 }, { from: 4, to: 5 }, { from: 5, to: 2 } 
+      { from: 3, to: 4 }, { from: 4, to: 5 }, { from: 5, to: 2 }
     ];
-    
+
     const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
     defs.innerHTML = `
       <marker id="arrow" viewBox="0 0 10 10" refX="24" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -17745,15 +20095,15 @@ function renderCanvasStep() {
       </marker>
     `;
     svg.appendChild(defs);
-    
+
     links.forEach(l => {
       const fromNode = coords[l.from];
       const toNode = coords[l.to];
       const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      const r = 27; 
-      
+      const r = 27;
+
       if (l.from === 5 && l.to === 2) {
-        const dStr = `M ${fromNode.x + r} ${fromNode.y + r} Q ${(fromNode.x + toNode.x)/2 - 30} ${(fromNode.y + toNode.y)/2 + 20} ${toNode.x + r} ${toNode.y + r}`;
+        const dStr = `M ${fromNode.x + r} ${fromNode.y + r} Q ${(fromNode.x + toNode.x) / 2 - 30} ${(fromNode.y + toNode.y) / 2 + 20} ${toNode.x + r} ${toNode.y + r}`;
         line.setAttribute("d", dStr);
         line.setAttribute("stroke", "rgba(99,102,241,0.45)");
         line.setAttribute("stroke-dasharray", "4");
@@ -17768,12 +20118,12 @@ function renderCanvasStep() {
       line.setAttribute("fill", "none");
       svg.appendChild(line);
     });
-    
+
     wrapper.appendChild(svg);
     container.appendChild(wrapper);
     canvas.appendChild(container);
   }
-  
+
   // --- G-NEW. MONOTONIC STACK (NGE / circular / contribution) ---
   else if (visualizerState.algo === 'monostack') {
     const container = document.createElement('div');
@@ -17794,13 +20144,13 @@ function renderCanvasStep() {
     }
 
     // ── Phase badge ──
-    const phaseColors = { init:'var(--text-muted)', scan:'var(--accent-cyan)', pop:'var(--hard)', push:'var(--primary-glow)', contribution:'var(--medium)', done:'var(--easy)' };
-    const phaseLabels = { init:'Init', scan:'Scan', pop:'Pop (NGE found)', push:'Push', contribution:'Contribution', done:'Done' };
+    const phaseColors = { init: 'var(--text-muted)', scan: 'var(--accent-cyan)', pop: 'var(--hard)', push: 'var(--primary-glow)', contribution: 'var(--medium)', done: 'var(--easy)' };
+    const phaseLabels = { init: 'Init', scan: 'Scan', pop: 'Pop (NGE found)', push: 'Push', contribution: 'Contribution', done: 'Done' };
     const hdr = document.createElement('div');
     hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
     const badge = document.createElement('span');
     badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
-      border:1px solid ${phaseColors[phase]||'var(--text-muted)'};color:${phaseColors[phase]||'var(--text-muted)'};`;
+      border:1px solid ${phaseColors[phase] || 'var(--text-muted)'};color:${phaseColors[phase] || 'var(--text-muted)'};`;
     badge.textContent = phaseLabels[phase] || phase;
     hdr.appendChild(badge);
     if (phase === 'scan' && i >= n && mode === 'nge_circular') {
@@ -17818,16 +20168,16 @@ function renderCanvasStep() {
 
     nums.forEach((val, idx) => {
       const cell = document.createElement('div');
-      const isActive  = idx === activeIdx;
-      const isPopped  = idx === poppedIdx;
-      const inStack   = (stk||[]).includes(idx);
+      const isActive = idx === activeIdx;
+      const isPopped = idx === poppedIdx;
+      const inStack = (stk || []).includes(idx);
       const hasResult = result && result[idx] !== -1;
 
       cell.style.cssText = `width:${CELL}px;height:${CELL}px;flex-shrink:0;display:flex;flex-direction:column;
         align-items:center;justify-content:center;border-radius:6px;font-family:monospace;font-size:0.85rem;font-weight:700;
-        border:${isPopped?'2px solid var(--hard)':isActive?'2px solid var(--accent-cyan)':inStack?'1.5px solid var(--primary-glow)':'1px solid rgba(255,255,255,0.1)'};
-        background:${isPopped?'rgba(244,63,94,0.15)':isActive?'rgba(6,182,212,0.15)':inStack?'rgba(99,102,241,0.12)':'rgba(255,255,255,0.02)'};
-        color:${isPopped?'var(--hard)':isActive?'var(--accent-cyan)':inStack?'var(--primary-glow)':'rgba(255,255,255,0.7)'};`;
+        border:${isPopped ? '2px solid var(--hard)' : isActive ? '2px solid var(--accent-cyan)' : inStack ? '1.5px solid var(--primary-glow)' : '1px solid rgba(255,255,255,0.1)'};
+        background:${isPopped ? 'rgba(244,63,94,0.15)' : isActive ? 'rgba(6,182,212,0.15)' : inStack ? 'rgba(99,102,241,0.12)' : 'rgba(255,255,255,0.02)'};
+        color:${isPopped ? 'var(--hard)' : isActive ? 'var(--accent-cyan)' : inStack ? 'var(--primary-glow)' : 'rgba(255,255,255,0.7)'};`;
       cell.innerHTML = `<span>${val}</span><span style="font-size:0.45rem;color:rgba(255,255,255,0.25)">[${idx}]</span>`;
       arrRow.appendChild(cell);
     });
@@ -17840,7 +20190,7 @@ function renderCanvasStep() {
       contribRow.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;';
       contribRow.innerHTML = `
         <span style="font-size:0.72rem;font-family:monospace;color:var(--medium);">
-          nums[${ci}]=${cv} is min in <strong>${left}×${right}=${left*right}</strong> subarrays →
+          nums[${ci}]=${cv} is min in <strong>${left}×${right}=${left * right}</strong> subarrays →
           contribution = ${cv}×${left}×${right} = <strong style="color:var(--easy)">${contrib}</strong>
         </span>
         <span style="font-size:0.68rem;font-family:monospace;color:var(--text-muted);">total = ${total}</span>`;
@@ -17855,9 +20205,9 @@ function renderCanvasStep() {
         const cell = document.createElement('div');
         cell.style.cssText = `width:${CELL}px;height:${CELL}px;flex-shrink:0;display:flex;flex-direction:column;
           align-items:center;justify-content:center;border-radius:6px;font-family:monospace;font-size:0.85rem;font-weight:700;
-          border:1px solid ${r!==-1?'rgba(16,185,129,0.4)':'rgba(255,255,255,0.06)'};
-          background:${r!==-1?'rgba(16,185,129,0.08)':'transparent'};
-          color:${r!==-1?'var(--easy)':'rgba(255,255,255,0.2)'};`;
+          border:1px solid ${r !== -1 ? 'rgba(16,185,129,0.4)' : 'rgba(255,255,255,0.06)'};
+          background:${r !== -1 ? 'rgba(16,185,129,0.08)' : 'transparent'};
+          color:${r !== -1 ? 'var(--easy)' : 'rgba(255,255,255,0.2)'};`;
         cell.innerHTML = `<span>${r === -1 ? '?' : r}</span><span style="font-size:0.45rem;color:rgba(255,255,255,0.2)">NGE</span>`;
         resRow.appendChild(cell);
       });
@@ -17897,19 +20247,19 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'stack') {
     const container = document.createElement('div');
     container.className = 'stack-container';
-    
+
     const leftSide = document.createElement('div');
     leftSide.className = 'stack-array-side';
-    
+
     const labelRow = document.createElement('div');
     labelRow.style.fontSize = '0.85rem';
     labelRow.style.color = 'var(--text-muted)';
     labelRow.textContent = 'Scanning Temperatures:';
     leftSide.appendChild(labelRow);
-    
+
     const arrayRow = document.createElement('div');
     arrayRow.className = 'stack-array-row';
-    
+
     visualizerState.rawArray.forEach((temp, idx) => {
       const el = document.createElement('div');
       el.className = 'stack-array-el';
@@ -17918,22 +20268,22 @@ function renderCanvasStep() {
       idxSpan.className = 'bs-element-idx';
       idxSpan.textContent = idx;
       el.appendChild(idxSpan);
-      
+
       if (idx === step.scanning) el.classList.add('scanning');
       else if (step.resolved[idx] !== undefined || step.result[idx] > 0) el.classList.add('resolved');
       else if (step.stack.includes(idx)) el.classList.add('popped');
-      
+
       arrayRow.appendChild(el);
     });
     leftSide.appendChild(arrayRow);
-    
+
     const ansRowLabel = document.createElement('div');
     ansRowLabel.style.fontSize = '0.85rem';
     ansRowLabel.style.color = 'var(--text-muted)';
     ansRowLabel.style.marginTop = '1rem';
     ansRowLabel.textContent = 'Output Days Array:';
     leftSide.appendChild(ansRowLabel);
-    
+
     const ansRow = document.createElement('div');
     ansRow.className = 'stack-array-row';
     step.result.forEach((val, idx) => {
@@ -17950,27 +20300,27 @@ function renderCanvasStep() {
     });
     leftSide.appendChild(ansRow);
     container.appendChild(leftSide);
-    
+
     const rightSide = document.createElement('div');
     rightSide.className = 'stack-frame-side';
-    
+
     const stackLabel = document.createElement('div');
     stackLabel.style.fontSize = '0.8rem';
     stackLabel.style.color = 'var(--text-muted)';
     stackLabel.style.marginBottom = '6px';
     stackLabel.textContent = 'Monotonic Stack';
     rightSide.appendChild(stackLabel);
-    
+
     const beaker = document.createElement('div');
     beaker.className = 'stack-visual-box';
-    
+
     step.stack.forEach(idx => {
       const item = document.createElement('div');
       item.className = 'stack-visual-item';
       item.textContent = `${visualizerState.rawArray[idx]}° (idx ${idx})`;
       beaker.appendChild(item);
     });
-    
+
     rightSide.appendChild(beaker);
     container.appendChild(rightSide);
     canvas.appendChild(container);
@@ -17982,13 +20332,13 @@ function renderCanvasStep() {
     container.className = 'tp-container';
     container.style.position = 'relative';
     const maxVal = Math.max(...visualizerState.rawArray);
-    
+
     visualizerState.rawArray.forEach((val, idx) => {
       const bar = document.createElement('div');
       bar.className = 'tp-bar';
       const pctHeight = (val / maxVal) * 75;
       bar.style.height = `${pctHeight}%`;
-      
+
       if (idx === step.scanning) {
         bar.classList.add('active');
         bar.style.background = 'var(--secondary)';
@@ -17996,20 +20346,20 @@ function renderCanvasStep() {
         bar.style.background = 'rgba(99, 102, 241, 0.4)';
         bar.style.borderColor = 'var(--primary)';
       }
-      
+
       const valSpan = document.createElement('div');
       valSpan.className = 'tp-bar-val';
       valSpan.textContent = val;
-      
+
       const idxSpan = document.createElement('div');
       idxSpan.className = 'tp-bar-idx';
       idxSpan.textContent = idx;
-      
+
       bar.appendChild(valSpan);
       bar.appendChild(idxSpan);
       container.appendChild(bar);
     });
-    
+
     if (step.activeRectangle) {
       const overlay = document.createElement('div');
       overlay.style.position = 'absolute';
@@ -18020,19 +20370,19 @@ function renderCanvasStep() {
       overlay.style.zIndex = '5';
       overlay.style.pointerEvents = 'none';
       overlay.style.bottom = '0';
-      
-      const barWidth = 40; 
+
+      const barWidth = 40;
       const barGap = 16;
       const totalBarSpace = barWidth + barGap;
-      
+
       const startX = step.activeRectangle.start * totalBarSpace;
       const width = step.activeRectangle.width * totalBarSpace - barGap;
       const heightPct = (step.activeRectangle.height / maxVal) * 75;
-      
+
       overlay.style.left = `${startX}px`;
       overlay.style.width = `${width}px`;
       overlay.style.height = `${heightPct}%`;
-      
+
       const overlayLabel = document.createElement('div');
       overlayLabel.style.position = 'absolute';
       overlayLabel.style.top = '50%';
@@ -18046,7 +20396,7 @@ function renderCanvasStep() {
       overlayLabel.style.textShadow = '0 1px 3px rgba(0,0,0,0.8)';
       overlayLabel.textContent = `A = ${step.activeRectangle.height * step.activeRectangle.width}`;
       overlay.appendChild(overlayLabel);
-      
+
       container.appendChild(overlay);
     }
     canvas.appendChild(container);
@@ -18062,10 +20412,10 @@ function renderCanvasStep() {
     const treeArray = visualizerState.rawArray;
 
     const treeCoords = [
-      { x: 228, y: 20  },  // 0 root
-      { x: 120, y: 90  },  // 1 left
-      { x: 336, y: 90  },  // 2 right
-      { x: 50,  y: 160 },  // 3 left-left
+      { x: 228, y: 20 },  // 0 root
+      { x: 120, y: 90 },  // 1 left
+      { x: 336, y: 90 },  // 2 right
+      { x: 50, y: 160 },  // 3 left-left
       { x: 180, y: 160 },  // 4 left-right
       { x: 270, y: 160 },  // 5 right-left
       { x: 400, y: 160 }   // 6 right-right
@@ -18086,7 +20436,7 @@ function renderCanvasStep() {
 
     treeLinks.forEach(l => {
       const from = treeCoords[l.from];
-      const to   = treeCoords[l.to];
+      const to = treeCoords[l.to];
       const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
 
       line.setAttribute("x1", from.x + r);
@@ -18094,8 +20444,8 @@ function renderCanvasStep() {
       line.setAttribute("x2", to.x + r);
       line.setAttribute("y2", to.y + r);
 
-      const isActive   = activeEdge && activeEdge[0] === l.from && activeEdge[1] === l.to;
-      const isVisited  = step.visited.includes(l.from) && step.visited.includes(l.to);
+      const isActive = activeEdge && activeEdge[0] === l.from && activeEdge[1] === l.to;
+      const isVisited = step.visited.includes(l.from) && step.visited.includes(l.to);
 
       if (isActive) {
         line.setAttribute("stroke", "var(--primary-glow)");
@@ -18119,15 +20469,15 @@ function renderCanvasStep() {
       const node = document.createElement('div');
       node.className = 'tree-node';
       node.style.left = `${c.x}px`;
-      node.style.top  = `${c.y}px`;
+      node.style.top = `${c.y}px`;
 
-      const onStack   = (step.callStack || []).includes(idx);
+      const onStack = (step.callStack || []).includes(idx);
       const isVisited = step.visited.includes(idx);
       const isScanning = idx === step.scanning;
 
-      if (isScanning)      node.classList.add('scanning');
-      else if (isVisited)  node.classList.add('visited');
-      else if (onStack)    node.classList.add('active'); // on call stack but not yet visited
+      if (isScanning) node.classList.add('scanning');
+      else if (isVisited) node.classList.add('visited');
+      else if (onStack) node.classList.add('active'); // on call stack but not yet visited
 
       const valSpan = document.createElement('span');
       valSpan.className = 'tree-node-val';
@@ -18190,17 +20540,17 @@ function renderCanvasStep() {
     // Layout: n nodes in a circle
     const CX = 230, CY = 130, RADIUS = 100, R = 24;
     const svgNS = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(svgNS,'svg');
-    svg.setAttribute('viewBox','0 0 460 270');
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', '0 0 460 270');
     svg.style.cssText = 'width:100%;display:block;overflow:visible;';
 
-    const nodePos = Array.from({length: n}, (_, i) => {
+    const nodePos = Array.from({ length: n }, (_, i) => {
       const angle = (2 * Math.PI * i / n) - Math.PI / 2;
       return { x: CX + RADIUS * Math.cos(angle), y: CY + RADIUS * Math.sin(angle) };
     });
 
     // Arrow markers
-    const defs = document.createElementNS(svgNS,'defs');
+    const defs = document.createElementNS(svgNS, 'defs');
     defs.innerHTML = `
       <marker id="dcArr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
         <path d="M0,0 L10,5 L0,10 z" fill="rgba(255,255,255,0.3)"/>
@@ -18216,66 +20566,66 @@ function renderCanvasStep() {
     // Edges
     edges.forEach(([u, v]) => {
       const from = nodePos[u], to = nodePos[v];
-      const isActive = activeEdge && activeEdge[0]===u && activeEdge[1]===v;
-      const isBack   = cycleEdge && cycleEdge[0]===u && cycleEdge[1]===v;
+      const isActive = activeEdge && activeEdge[0] === u && activeEdge[1] === v;
+      const isBack = cycleEdge && cycleEdge[0] === u && cycleEdge[1] === v;
 
       // Offset line slightly so bidirectional edges don't overlap
       const dx = to.x - from.x, dy = to.y - from.y;
-      const len = Math.sqrt(dx*dx+dy*dy);
-      const nx = -dy/len*4, ny = dx/len*4;
+      const len = Math.sqrt(dx * dx + dy * dy);
+      const nx = -dy / len * 4, ny = dx / len * 4;
 
-      const line = document.createElementNS(svgNS,'line');
+      const line = document.createElementNS(svgNS, 'line');
       line.setAttribute('x1', from.x + nx); line.setAttribute('y1', from.y + ny);
-      line.setAttribute('x2', to.x + nx);   line.setAttribute('y2', to.y + ny);
-      line.setAttribute('stroke', isBack?'var(--hard)':isActive?'var(--accent-cyan)':'rgba(255,255,255,0.2)');
-      line.setAttribute('stroke-width', isBack||isActive ? '2.5' : '1.5');
-      line.setAttribute('marker-end', isBack?'url(#dcArrBack)':isActive?'url(#dcArrActive)':'url(#dcArr)');
-      if (isBack) line.setAttribute('stroke-dasharray','5 3');
+      line.setAttribute('x2', to.x + nx); line.setAttribute('y2', to.y + ny);
+      line.setAttribute('stroke', isBack ? 'var(--hard)' : isActive ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.2)');
+      line.setAttribute('stroke-width', isBack || isActive ? '2.5' : '1.5');
+      line.setAttribute('marker-end', isBack ? 'url(#dcArrBack)' : isActive ? 'url(#dcArrActive)' : 'url(#dcArr)');
+      if (isBack) line.setAttribute('stroke-dasharray', '5 3');
       svg.appendChild(line);
 
       // Edge label
-      const mx = (from.x+to.x)/2+nx+4, my = (from.y+to.y)/2+ny-4;
-      const etxt = document.createElementNS(svgNS,'text');
-      etxt.setAttribute('x',mx); etxt.setAttribute('y',my);
-      etxt.setAttribute('font-family','monospace'); etxt.setAttribute('font-size','9');
-      etxt.setAttribute('fill', isBack?'var(--hard)':isActive?'var(--accent-cyan)':'rgba(255,255,255,0.3)');
-      etxt.setAttribute('text-anchor','middle');
+      const mx = (from.x + to.x) / 2 + nx + 4, my = (from.y + to.y) / 2 + ny - 4;
+      const etxt = document.createElementNS(svgNS, 'text');
+      etxt.setAttribute('x', mx); etxt.setAttribute('y', my);
+      etxt.setAttribute('font-family', 'monospace'); etxt.setAttribute('font-size', '9');
+      etxt.setAttribute('fill', isBack ? 'var(--hard)' : isActive ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.3)');
+      etxt.setAttribute('text-anchor', 'middle');
       etxt.textContent = isBack ? '⚠ back edge' : '';
       svg.appendChild(etxt);
     });
 
     // Nodes — WHITE=0(default), GRAY=1(primary-glow), BLACK=2(easy)
     const nodeColors = ['rgba(30,41,59,0.9)', 'rgba(245,158,11,0.2)', 'rgba(16,185,129,0.15)'];
-    const nodeStrokes= ['rgba(255,255,255,0.2)', 'var(--medium)', 'var(--easy)'];
+    const nodeStrokes = ['rgba(255,255,255,0.2)', 'var(--medium)', 'var(--easy)'];
     const colorLabels = ['WHITE', 'GRAY', 'BLACK'];
 
     nodePos.forEach((pos, idx) => {
-      const c      = (color && color[idx]) ?? 0;
-      const isAct  = idx === activeNode;
-      const inStack = (callStack||[]).includes(idx);
+      const c = (color && color[idx]) ?? 0;
+      const isAct = idx === activeNode;
+      const inStack = (callStack || []).includes(idx);
 
-      const circle = document.createElementNS(svgNS,'circle');
-      circle.setAttribute('cx',pos.x); circle.setAttribute('cy',pos.y); circle.setAttribute('r',R);
-      circle.setAttribute('fill', isAct?'rgba(6,182,212,0.3)' : nodeColors[c]);
-      circle.setAttribute('stroke', isAct?'var(--accent-cyan)' : nodeStrokes[c]);
-      circle.setAttribute('stroke-width', isAct||inStack?'2.5':'1.5');
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('cx', pos.x); circle.setAttribute('cy', pos.y); circle.setAttribute('r', R);
+      circle.setAttribute('fill', isAct ? 'rgba(6,182,212,0.3)' : nodeColors[c]);
+      circle.setAttribute('stroke', isAct ? 'var(--accent-cyan)' : nodeStrokes[c]);
+      circle.setAttribute('stroke-width', isAct || inStack ? '2.5' : '1.5');
       svg.appendChild(circle);
 
-      const txt = document.createElementNS(svgNS,'text');
-      txt.setAttribute('x',pos.x); txt.setAttribute('y',pos.y+5);
-      txt.setAttribute('text-anchor','middle');
-      txt.setAttribute('font-family','monospace'); txt.setAttribute('font-size','14');
-      txt.setAttribute('font-weight','700');
-      txt.setAttribute('fill', isAct?'var(--accent-cyan)':c===2?'var(--easy)':c===1?'var(--medium)':'white');
+      const txt = document.createElementNS(svgNS, 'text');
+      txt.setAttribute('x', pos.x); txt.setAttribute('y', pos.y + 5);
+      txt.setAttribute('text-anchor', 'middle');
+      txt.setAttribute('font-family', 'monospace'); txt.setAttribute('font-size', '14');
+      txt.setAttribute('font-weight', '700');
+      txt.setAttribute('fill', isAct ? 'var(--accent-cyan)' : c === 2 ? 'var(--easy)' : c === 1 ? 'var(--medium)' : 'white');
       txt.textContent = nodeLabels[idx];
       svg.appendChild(txt);
 
       // Color badge
-      const badgeTxt = document.createElementNS(svgNS,'text');
-      badgeTxt.setAttribute('x',pos.x); badgeTxt.setAttribute('y',pos.y+R+13);
-      badgeTxt.setAttribute('text-anchor','middle');
-      badgeTxt.setAttribute('font-family','monospace'); badgeTxt.setAttribute('font-size','8');
-      badgeTxt.setAttribute('fill', c===1?'var(--medium)':c===2?'var(--easy)':'rgba(255,255,255,0.25)');
+      const badgeTxt = document.createElementNS(svgNS, 'text');
+      badgeTxt.setAttribute('x', pos.x); badgeTxt.setAttribute('y', pos.y + R + 13);
+      badgeTxt.setAttribute('text-anchor', 'middle');
+      badgeTxt.setAttribute('font-family', 'monospace'); badgeTxt.setAttribute('font-size', '8');
+      badgeTxt.setAttribute('fill', c === 1 ? 'var(--medium)' : c === 2 ? 'var(--easy)' : 'rgba(255,255,255,0.25)');
       badgeTxt.textContent = colorLabels[c];
       svg.appendChild(badgeTxt);
     });
@@ -18300,7 +20650,7 @@ function renderCanvasStep() {
           border:1px solid var(--medium);color:var(--medium);background:rgba(245,158,11,0.08);font-weight:700;`;
         pill.textContent = nodeLabels[ci];
         stackDiv.appendChild(pill);
-        if (pi < callStack.length-1) {
+        if (pi < callStack.length - 1) {
           const ar = document.createElement('span');
           ar.style.cssText = 'font-size:0.6rem;color:var(--text-muted);';
           ar.textContent = '→';
@@ -18345,25 +20695,25 @@ function renderCanvasStep() {
     const nodeLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
     // 6-node layout: 0=top-left, 1=top-right, 2=right, 3=bottom-right, 4=bottom-left, 5=center
     const graphCoords = [
-      { x: 80,  y: 20  },  // 0 A
-      { x: 310, y: 20  },  // 1 B
+      { x: 80, y: 20 },  // 0 A
+      { x: 310, y: 20 },  // 1 B
       { x: 390, y: 130 },  // 2 C
       { x: 310, y: 210 },  // 3 D
-      { x: 80,  y: 210 },  // 4 E
+      { x: 80, y: 210 },  // 4 E
       { x: 195, y: 110 }   // 5 F (center)
     ];
 
     // All undirected edges of the graph (must match adjList in generateGraphSteps)
     const allEdges = [
-      [0,1],[0,4],[0,5],
-      [1,2],
-      [2,3],[2,5],
-      [3,4]
+      [0, 1], [0, 4], [0, 5],
+      [1, 2],
+      [2, 3], [2, 5],
+      [3, 4]
     ];
 
     const treeEdges = step.treeEdges || [];   // BFS tree edges discovered so far
-    const bfsQueue  = step.queue  || [];
-    const visited   = step.visited || [];
+    const bfsQueue = step.queue || [];
+    const visited = step.visited || [];
 
     const r = 22; // node radius offset
 
@@ -18382,7 +20732,7 @@ function renderCanvasStep() {
 
     allEdges.forEach(([a, b]) => {
       const from = graphCoords[a];
-      const to   = graphCoords[b];
+      const to = graphCoords[b];
       const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
 
       line.setAttribute("x1", from.x + r);
@@ -18410,15 +20760,15 @@ function renderCanvasStep() {
       const node = document.createElement('div');
       node.className = 'tree-node';
       node.style.left = `${c.x}px`;
-      node.style.top  = `${c.y}px`;
+      node.style.top = `${c.y}px`;
 
       const isScanning = idx === step.scanning;
-      const isVisited  = visited.includes(idx);
-      const inQueue    = bfsQueue.includes(idx);
+      const isVisited = visited.includes(idx);
+      const inQueue = bfsQueue.includes(idx);
 
-      if (isScanning)     node.classList.add('scanning');
+      if (isScanning) node.classList.add('scanning');
       else if (isVisited) node.classList.add('visited');
-      else if (inQueue)   node.classList.add('active'); // queued but not yet processed
+      else if (inQueue) node.classList.add('active'); // queued but not yet processed
 
       node.innerHTML = `<span class="tree-node-val">${nodeLabels[idx]}</span>`;
       container.appendChild(node);
@@ -18496,11 +20846,11 @@ function renderCanvasStep() {
           cell.className = 'matrix-cell';
 
           const isScanning = step.scanning && step.scanning.r === rIdx && step.scanning.c === cIdx;
-          const isBase     = rIdx === 0 || cIdx === 0;
-          const isSolved   = !isSource && val !== 0 && val !== Infinity && !isScanning;
+          const isBase = rIdx === 0 || cIdx === 0;
+          const isSolved = !isSource && val !== 0 && val !== Infinity && !isScanning;
 
-          if (isScanning)    cell.classList.add('scanning');
-          else if (isBase)   cell.classList.add('active-path');
+          if (isScanning) cell.classList.add('scanning');
+          else if (isBase) cell.classList.add('active-path');
           else if (isSolved) cell.classList.add('solved');
 
           cell.textContent = (val === Infinity) ? '∞' : val;
@@ -18514,7 +20864,7 @@ function renderCanvasStep() {
 
     if (isMinPath && step.srcGrid) {
       panelWrap.appendChild(makeGrid(step.srcGrid, 'Input Grid', true));
-      panelWrap.appendChild(makeGrid(step.grid,    'dp[ ][ ]',   false));
+      panelWrap.appendChild(makeGrid(step.grid, 'dp[ ][ ]', false));
     } else {
       panelWrap.appendChild(makeGrid(step.grid, null, false));
     }
@@ -18527,35 +20877,35 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'intervals') {
     const container = document.createElement('div');
     container.className = 'interval-container';
-    
+
     visualizerState.rawArray.forEach((interval, idx) => {
       const row = document.createElement('div');
       row.className = 'interval-row-block';
-      
+
       const bar = document.createElement('div');
       bar.className = 'interval-bar-block';
-      
+
       const timelineMaxVal = 10;
       const leftPct = (interval[0] / timelineMaxVal) * 100;
       const widthPct = ((interval[1] - interval[0]) / timelineMaxVal) * 100;
-      
+
       bar.style.left = `${leftPct}%`;
       bar.style.width = `${widthPct}%`;
       bar.textContent = `[${interval[0]}, ${interval[1]}]`;
-      
+
       if (idx === step.scanning) bar.classList.add('scanning');
       else if (step.merged.some(m => m[0] <= interval[0] && m[1] >= interval[1])) bar.classList.add('merged');
       else bar.classList.add('active');
-      
+
       row.appendChild(bar);
       container.appendChild(row);
     });
-    
+
     const axis = document.createElement('div');
     axis.className = 'interval-axis';
     axis.innerHTML = '<span>t=0</span><span>t=2</span><span>t=4</span><span>t=6</span><span>t=8</span><span>t=10</span>';
     container.appendChild(axis);
-    
+
     canvas.appendChild(container);
   }
 
@@ -18565,10 +20915,10 @@ function renderCanvasStep() {
     container.className = 'hash-container';
 
     // New generator emits: step.table (array of bucket chains), step.activeKey, step.activeBucket, step.phase
-    const table        = step.table;        // array[SIZE] of string[]
-    const activeKey    = step.activeKey;
+    const table = step.table;        // array[SIZE] of string[]
+    const activeKey = step.activeKey;
     const activeBucket = step.activeBucket;
-    const phase        = step.phase;        // 'init'|'hash'|'insert'|'collision'|'lookup'|'done'
+    const phase = step.phase;        // 'init'|'hash'|'insert'|'collision'|'lookup'|'done'
 
     // Phase pill header
     const phaseColors = {
@@ -18620,7 +20970,7 @@ function renderCanvasStep() {
       cell.className = 'hash-bucket-cell';
       if (b === activeBucket) {
         cell.style.borderColor = phaseColors[phase] || 'var(--primary-glow)';
-        cell.style.background  = `rgba(99,102,241,0.06)`;
+        cell.style.background = `rgba(99,102,241,0.06)`;
       }
 
       if (chain.length === 0) {
@@ -18669,26 +21019,26 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'bits') {
     const container = document.createElement('div');
     container.className = 'bit-container';
-    
+
     step.bits.forEach((val, idx) => {
       const cell = document.createElement('div');
       cell.className = 'bit-cell';
-      
+
       if (idx === step.activeIndex) cell.classList.add('active-bit');
-      
+
       const valDiv = document.createElement('div');
       valDiv.className = 'bit-cell-val';
       valDiv.textContent = val;
-      
+
       const idxDiv = document.createElement('div');
       idxDiv.className = 'bit-cell-idx';
-      idxDiv.textContent = 7 - idx; 
-      
+      idxDiv.textContent = 7 - idx;
+
       cell.appendChild(valDiv);
       cell.appendChild(idxDiv);
       container.appendChild(cell);
     });
-    
+
     canvas.appendChild(container);
   }
 
@@ -18792,7 +21142,7 @@ function renderCanvasStep() {
     function drawEdges(node) {
       Object.values(node.children).forEach(child => {
         const from = nodePositions[node.id];
-        const to   = nodePositions[child.id];
+        const to = nodePositions[child.id];
         if (!from || !to) return;
 
         const isOnPath = activePath.has(node.id) && activePath.has(child.id);
@@ -18825,14 +21175,14 @@ function renderCanvasStep() {
 
       const cx = pos.x + SVG_PAD;
       const cy = pos.y + SVG_PAD;
-      const r  = 18;
+      const r = 18;
 
-      const isOnPath    = activePath.has(node.id);
-      const isActive    = isOnPath && (step.activePath || []).indexOf(node.id) === (step.activePath || []).length - 1;
-      const isRoot      = node.id === 0;
-      const isEnd       = node.isEnd;
-      const isFound     = isActive && (step.operation === 'found' || step.operation === 'mark_end');
-      const isNotFound  = isActive && step.operation === 'not_found';
+      const isOnPath = activePath.has(node.id);
+      const isActive = isOnPath && (step.activePath || []).indexOf(node.id) === (step.activePath || []).length - 1;
+      const isRoot = node.id === 0;
+      const isEnd = node.isEnd;
+      const isFound = isActive && (step.operation === 'found' || step.operation === 'mark_end');
+      const isNotFound = isActive && step.operation === 'not_found';
       const isSearchPath = step.phase === 'search' && isOnPath;
 
       // Circle
@@ -18845,14 +21195,13 @@ function renderCanvasStep() {
       let stroke = 'rgba(255,255,255,0.15)';
       let strokeW = '1.5';
 
-      if (isFound)         { fill = 'rgba(16,185,129,0.25)';  stroke = 'var(--easy)';         strokeW = '2.5'; }
-      else if (isNotFound) { fill = 'rgba(244,63,94,0.2)';    stroke = 'var(--hard)';         strokeW = '2.5'; }
-      else if (isActive && step.phase === 'insert' && step.operation === 'create')
-                           { fill = 'rgba(99,102,241,0.25)';  stroke = 'var(--primary-glow)'; strokeW = '2.5'; }
-      else if (isActive)   { fill = 'rgba(6,182,212,0.2)';    stroke = 'var(--accent-cyan)';  strokeW = '2.5'; }
-      else if (isSearchPath){ fill = 'rgba(6,182,212,0.08)';  stroke = 'var(--accent-cyan)';  strokeW = '1.5'; }
-      else if (isOnPath)   { fill = 'rgba(99,102,241,0.12)';  stroke = 'var(--primary-glow)'; strokeW = '1.5'; }
-      else if (isRoot)     { fill = 'rgba(255,255,255,0.05)'; stroke = 'rgba(255,255,255,0.3)'; }
+      if (isFound) { fill = 'rgba(16,185,129,0.25)'; stroke = 'var(--easy)'; strokeW = '2.5'; }
+      else if (isNotFound) { fill = 'rgba(244,63,94,0.2)'; stroke = 'var(--hard)'; strokeW = '2.5'; }
+      else if (isActive && step.phase === 'insert' && step.operation === 'create') { fill = 'rgba(99,102,241,0.25)'; stroke = 'var(--primary-glow)'; strokeW = '2.5'; }
+      else if (isActive) { fill = 'rgba(6,182,212,0.2)'; stroke = 'var(--accent-cyan)'; strokeW = '2.5'; }
+      else if (isSearchPath) { fill = 'rgba(6,182,212,0.08)'; stroke = 'var(--accent-cyan)'; strokeW = '1.5'; }
+      else if (isOnPath) { fill = 'rgba(99,102,241,0.12)'; stroke = 'var(--primary-glow)'; strokeW = '1.5'; }
+      else if (isRoot) { fill = 'rgba(255,255,255,0.05)'; stroke = 'rgba(255,255,255,0.3)'; }
 
       circle.setAttribute('fill', fill);
       circle.setAttribute('stroke', stroke);
@@ -18931,18 +21280,18 @@ function renderCanvasStep() {
     }
 
     // ── Phase badge ──
-    const phaseColors = { init:'var(--text-muted)', center:'var(--medium)', expand:'var(--accent-cyan)', found:'var(--easy)', dp_fill:'var(--primary-glow)', done:'var(--easy)' };
+    const phaseColors = { init: 'var(--text-muted)', center: 'var(--medium)', expand: 'var(--accent-cyan)', found: 'var(--easy)', dp_fill: 'var(--primary-glow)', done: 'var(--easy)' };
     const hdr = document.createElement('div');
     hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
     const badge = document.createElement('span');
     badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
-      border:1px solid ${phaseColors[phase]||'var(--text-muted)'};color:${phaseColors[phase]||'var(--text-muted)'};`;
+      border:1px solid ${phaseColors[phase] || 'var(--text-muted)'};color:${phaseColors[phase] || 'var(--text-muted)'};`;
     badge.textContent = phase;
     hdr.appendChild(badge);
     if (bestLen > 1 && s) {
       const bestPill = document.createElement('span');
       bestPill.style.cssText = 'font-size:0.72rem;font-family:monospace;color:var(--easy);font-weight:700;margin-left:auto;';
-      bestPill.textContent = `Best: "${s.slice(bestStart, bestStart+bestLen)}" (len=${bestLen})`;
+      bestPill.textContent = `Best: "${s.slice(bestStart, bestStart + bestLen)}" (len=${bestLen})`;
       hdr.appendChild(bestPill);
     }
     container.appendChild(hdr);
@@ -18955,17 +21304,17 @@ function renderCanvasStep() {
 
       [...s].forEach((ch, idx) => {
         const cell = document.createElement('div');
-        const isL   = idx === L;
-        const isR   = idx === R;
+        const isL = idx === L;
+        const isR = idx === R;
         const inPalin = L >= 0 && R >= 0 && idx >= L && idx <= R;
-        const isBest  = bestLen > 1 && idx >= bestStart && idx < bestStart + bestLen;
+        const isBest = bestLen > 1 && idx >= bestStart && idx < bestStart + bestLen;
         const isCenter = idx === center;
 
         cell.style.cssText = `width:${CELL}px;height:${CELL}px;flex-shrink:0;display:flex;flex-direction:column;
           align-items:center;justify-content:center;border-radius:6px;font-family:monospace;font-size:1rem;font-weight:700;
-          border:${isL||isR?'2.5px solid var(--accent-cyan)':inPalin?'1.5px solid var(--primary-glow)':isBest?'1px solid rgba(16,185,129,0.5)':'1px solid rgba(255,255,255,0.1)'};
-          background:${isL||isR?'rgba(6,182,212,0.2)':inPalin?'rgba(99,102,241,0.12)':isBest?'rgba(16,185,129,0.08)':'rgba(255,255,255,0.02)'};
-          color:${isL||isR?'var(--accent-cyan)':inPalin?'var(--primary-glow)':isBest?'var(--easy)':'rgba(255,255,255,0.7)'};`;
+          border:${isL || isR ? '2.5px solid var(--accent-cyan)' : inPalin ? '1.5px solid var(--primary-glow)' : isBest ? '1px solid rgba(16,185,129,0.5)' : '1px solid rgba(255,255,255,0.1)'};
+          background:${isL || isR ? 'rgba(6,182,212,0.2)' : inPalin ? 'rgba(99,102,241,0.12)' : isBest ? 'rgba(16,185,129,0.08)' : 'rgba(255,255,255,0.02)'};
+          color:${isL || isR ? 'var(--accent-cyan)' : inPalin ? 'var(--primary-glow)' : isBest ? 'var(--easy)' : 'rgba(255,255,255,0.7)'};`;
         cell.innerHTML = `<span>${ch}</span><span style="font-size:0.45rem;color:rgba(255,255,255,0.25)">[${idx}]</span>`;
         arrRow.appendChild(cell);
       });
@@ -18978,8 +21327,8 @@ function renderCanvasStep() {
         [...s].forEach((_, idx) => {
           const lbl = document.createElement('div');
           lbl.style.cssText = `width:${CELL}px;flex-shrink:0;text-align:center;font-size:0.55rem;font-family:monospace;font-weight:700;`;
-          lbl.style.color = idx===L && idx===R ? 'var(--accent-cyan)' : idx===L ? 'var(--primary-glow)' : idx===R ? 'var(--medium)' : 'transparent';
-          lbl.textContent = idx===L && idx===R ? '⬆ L=R' : idx===L ? '⬆ L' : idx===R ? '⬆ R' : '.';
+          lbl.style.color = idx === L && idx === R ? 'var(--accent-cyan)' : idx === L ? 'var(--primary-glow)' : idx === R ? 'var(--medium)' : 'transparent';
+          lbl.textContent = idx === L && idx === R ? '⬆ L=R' : idx === L ? '⬆ L' : idx === R ? '⬆ R' : '.';
           ptrRow.appendChild(lbl);
         });
         container.appendChild(ptrRow);
@@ -18989,7 +21338,7 @@ function renderCanvasStep() {
       if (L >= 0 && R >= 0 && R < s.length && L <= R) {
         const palDiv = document.createElement('div');
         palDiv.style.cssText = 'font-size:0.78rem;font-family:monospace;text-align:center;margin-top:4px;';
-        palDiv.innerHTML = `Current: <strong style="color:var(--accent-cyan)">"${s.slice(L,R+1)}"</strong> ${phase==='found'?'← New best!':''}`;
+        palDiv.innerHTML = `Current: <strong style="color:var(--accent-cyan)">"${s.slice(L, R + 1)}"</strong> ${phase === 'found' ? '← New best!' : ''}`;
         container.appendChild(palDiv);
       }
 
@@ -19003,7 +21352,7 @@ function renderCanvasStep() {
       grid.style.cssText = `display:inline-grid;grid-template-columns:${DCELL}px repeat(${n},${DCELL}px);gap:2px;`;
 
       // corner
-      grid.appendChild(Object.assign(document.createElement('div'),{style:`width:${DCELL}px;height:${DCELL}px;`}));
+      grid.appendChild(Object.assign(document.createElement('div'), { style: `width:${DCELL}px;height:${DCELL}px;` }));
       // col headers
       [...s].forEach(ch => {
         const h = document.createElement('div');
@@ -19022,13 +21371,13 @@ function renderCanvasStep() {
 
         row.forEach((val, j) => {
           const cell = document.createElement('div');
-          const isActive = L===i && R===j;
-          const isDiag   = i === j;
+          const isActive = L === i && R === j;
+          const isDiag = i === j;
           cell.style.cssText = `width:${DCELL}px;height:${DCELL}px;display:flex;align-items:center;justify-content:center;
             border-radius:4px;font-family:monospace;font-size:0.75rem;font-weight:700;
-            border:1px solid ${isActive?'var(--easy)':isDiag?'rgba(255,255,255,0.1)':'rgba(255,255,255,0.05)'};
-            background:${isActive?'rgba(16,185,129,0.2)':isDiag?'rgba(255,255,255,0.03)':'transparent'};
-            color:${isActive?'var(--easy)':val>1?'rgba(255,255,255,0.8)':val===1?'rgba(255,255,255,0.4)':'rgba(255,255,255,0.12)'};`;
+            border:1px solid ${isActive ? 'var(--easy)' : isDiag ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.05)'};
+            background:${isActive ? 'rgba(16,185,129,0.2)' : isDiag ? 'rgba(255,255,255,0.03)' : 'transparent'};
+            color:${isActive ? 'var(--easy)' : val > 1 ? 'rgba(255,255,255,0.8)' : val === 1 ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.12)'};`;
           cell.textContent = j < i ? '' : val || '';
           grid.appendChild(cell);
         });
@@ -19039,7 +21388,7 @@ function renderCanvasStep() {
 
       const status = document.createElement('div');
       status.style.cssText = 'font-size:0.7rem;font-family:monospace;color:var(--text-muted);margin-top:6px;';
-      status.textContent = phase === 'done' ? `LPS = dp[0][${n-1}] = ${dp[0]?.[n-1] ?? ''}` : `Filling dp[${L}][${R}] = ${dp[L]?.[R] ?? ''}`;
+      status.textContent = phase === 'done' ? `LPS = dp[0][${n - 1}] = ${dp[0]?.[n - 1] ?? ''}` : `Filling dp[${L}][${R}] = ${dp[L]?.[R] ?? ''}`;
       container.appendChild(status);
     }
 
@@ -19151,7 +21500,7 @@ function renderCanvasStep() {
     if (step.activeIndex > 1) {
       const formula = document.createElement('div');
       formula.className = 'dp1d-formula';
-      formula.innerHTML = `dp[${step.activeIndex}] = dp[${step.activeIndex-1}] + dp[${step.activeIndex-2}] = <strong>${step.dp[step.activeIndex-1] || 0}</strong> + <strong>${step.dp[step.activeIndex-2] || 0}</strong> = <span style="color:var(--primary-glow)">${step.dp[step.activeIndex] || '?'}</span>`;
+      formula.innerHTML = `dp[${step.activeIndex}] = dp[${step.activeIndex - 1}] + dp[${step.activeIndex - 2}] = <strong>${step.dp[step.activeIndex - 1] || 0}</strong> + <strong>${step.dp[step.activeIndex - 2] || 0}</strong> = <span style="color:var(--primary-glow)">${step.dp[step.activeIndex] || '?'}</span>`;
       container.appendChild(formula);
     }
 
@@ -19381,7 +21730,7 @@ function renderCanvasStep() {
 
     // Compute tree layout by level
     // node i: level = floor(log2(i)), position within level = i - 2^level
-    const NODE_R  = 22;
+    const NODE_R = 22;
     const H_SPACE = 56;
     const V_SPACE = 68;
 
@@ -19405,21 +21754,21 @@ function renderCanvasStep() {
     const svg = document.createElementNS(svgNS, 'svg');
     svg.style.cssText = `width:100%;max-width:${svgW}px;height:${svgH}px;display:block;margin:0 auto;overflow:visible;`;
 
-    const activeNode  = step.activeNode;
-    const covered     = new Set(step.covered || []);
-    const phase       = step.phase;
+    const activeNode = step.activeNode;
+    const covered = new Set(step.covered || []);
+    const phase = step.phase;
 
     // Draw edges
     visibleNodes.forEach(nd => {
-      const left  = nd * 2;
+      const left = nd * 2;
       const right = nd * 2 + 1;
       [left, right].forEach(child => {
         if (!step.ranges[child]) return;
         const from = getPos(nd);
-        const to   = getPos(child);
+        const to = getPos(child);
         const line = document.createElementNS(svgNS, 'line');
         line.setAttribute('x1', from.x); line.setAttribute('y1', from.y + NODE_R - 2);
-        line.setAttribute('x2', to.x);   line.setAttribute('y2', to.y - NODE_R + 2);
+        line.setAttribute('x2', to.x); line.setAttribute('y2', to.y - NODE_R + 2);
 
         const bothCovered = covered.has(nd) && covered.has(child);
         const onActivePath = (nd === activeNode || child === activeNode);
@@ -19437,35 +21786,25 @@ function renderCanvasStep() {
 
     // Draw nodes
     visibleNodes.forEach(nd => {
-      const pos      = getPos(nd);
-      const range    = step.ranges[nd];
-      const val      = step.tree[nd];
+      const pos = getPos(nd);
+      const range = step.ranges[nd];
+      const val = step.tree[nd];
       const isActive = nd === activeNode;
       const isCovered = covered.has(nd);
-      const isLeaf   = range && range[0] === range[1];
+      const isLeaf = range && range[0] === range[1];
 
       let fill = 'rgba(30,41,59,0.9)', stroke = 'rgba(255,255,255,0.1)', strokeW = '1.5', textCol = 'rgba(255,255,255,0.6)';
 
-      if (isActive && phase === 'build' && step.operation === 'leaf')
-        { fill = 'rgba(99,102,241,0.3)'; stroke = 'var(--primary-glow)'; strokeW = '2.5'; textCol = 'white'; }
-      else if (isActive && phase === 'build')
-        { fill = 'rgba(99,102,241,0.15)'; stroke = 'var(--primary-glow)'; strokeW = '2'; textCol = 'white'; }
-      else if (isActive && phase === 'query' && step.operation === 'fully_covered')
-        { fill = 'rgba(16,185,129,0.25)'; stroke = 'var(--easy)'; strokeW = '2.5'; textCol = 'var(--easy)'; }
-      else if (isActive && phase === 'query' && step.operation === 'out_of_range')
-        { fill = 'rgba(255,255,255,0.03)'; stroke = 'rgba(255,255,255,0.15)'; strokeW = '1'; textCol = 'rgba(255,255,255,0.2)'; }
-      else if (isActive && phase === 'query' && step.operation === 'partial')
-        { fill = 'rgba(245,158,11,0.15)'; stroke = 'var(--medium)'; strokeW = '2'; textCol = 'var(--medium)'; }
-      else if (isActive && phase === 'query')
-        { fill = 'rgba(6,182,212,0.15)'; stroke = 'var(--accent-cyan)'; strokeW = '2'; textCol = 'white'; }
-      else if (isActive && phase === 'update' && step.operation === 'update_leaf')
-        { fill = 'rgba(245,158,11,0.25)'; stroke = 'var(--medium)'; strokeW = '2.5'; textCol = 'var(--medium)'; }
-      else if (isActive && phase === 'update')
-        { fill = 'rgba(245,158,11,0.12)'; stroke = 'var(--medium)'; strokeW = '2'; textCol = 'white'; }
-      else if (isCovered && phase === 'query')
-        { fill = 'rgba(16,185,129,0.12)'; stroke = 'var(--easy)'; strokeW = '1.5'; textCol = 'var(--easy)'; }
-      else if (isLeaf)
-        { fill = 'rgba(255,255,255,0.04)'; stroke = 'rgba(255,255,255,0.2)'; }
+      if (isActive && phase === 'build' && step.operation === 'leaf') { fill = 'rgba(99,102,241,0.3)'; stroke = 'var(--primary-glow)'; strokeW = '2.5'; textCol = 'white'; }
+      else if (isActive && phase === 'build') { fill = 'rgba(99,102,241,0.15)'; stroke = 'var(--primary-glow)'; strokeW = '2'; textCol = 'white'; }
+      else if (isActive && phase === 'query' && step.operation === 'fully_covered') { fill = 'rgba(16,185,129,0.25)'; stroke = 'var(--easy)'; strokeW = '2.5'; textCol = 'var(--easy)'; }
+      else if (isActive && phase === 'query' && step.operation === 'out_of_range') { fill = 'rgba(255,255,255,0.03)'; stroke = 'rgba(255,255,255,0.15)'; strokeW = '1'; textCol = 'rgba(255,255,255,0.2)'; }
+      else if (isActive && phase === 'query' && step.operation === 'partial') { fill = 'rgba(245,158,11,0.15)'; stroke = 'var(--medium)'; strokeW = '2'; textCol = 'var(--medium)'; }
+      else if (isActive && phase === 'query') { fill = 'rgba(6,182,212,0.15)'; stroke = 'var(--accent-cyan)'; strokeW = '2'; textCol = 'white'; }
+      else if (isActive && phase === 'update' && step.operation === 'update_leaf') { fill = 'rgba(245,158,11,0.25)'; stroke = 'var(--medium)'; strokeW = '2.5'; textCol = 'var(--medium)'; }
+      else if (isActive && phase === 'update') { fill = 'rgba(245,158,11,0.12)'; stroke = 'var(--medium)'; strokeW = '2'; textCol = 'white'; }
+      else if (isCovered && phase === 'query') { fill = 'rgba(16,185,129,0.12)'; stroke = 'var(--easy)'; strokeW = '1.5'; textCol = 'var(--easy)'; }
+      else if (isLeaf) { fill = 'rgba(255,255,255,0.04)'; stroke = 'rgba(255,255,255,0.2)'; }
 
       const circle = document.createElementNS(svgNS, 'circle');
       circle.setAttribute('cx', pos.x); circle.setAttribute('cy', pos.y);
@@ -19634,7 +21973,7 @@ function renderCanvasStep() {
       track.style.cssText = `position:relative;flex:1;height:100%;`;
 
       const bar = document.createElement('div');
-      const leftPct  = (interval.start / maxEnd) * 100;
+      const leftPct = (interval.start / maxEnd) * 100;
       const widthPct = ((interval.end - interval.start) / maxEnd) * 100;
       bar.style.cssText = `
         position:absolute;
@@ -19772,11 +22111,11 @@ function renderCanvasStep() {
 
     const isDijk = visualizerState.algo === 'dijkstra';
     const { edges, nodeLabels, dist, visited, activeNode, activeEdge, relaxedEdge,
-            settledEdges, pass, relaxed, negCycle } = step;
-    const labels = nodeLabels || ['A','B','C','D','E'];
+      settledEdges, pass, relaxed, negCycle } = step;
+    const labels = nodeLabels || ['A', 'B', 'C', 'D', 'E'];
     const N = labels.length;
-    const settled  = settledEdges instanceof Set ? settledEdges : new Set(settledEdges||[]);
-    const visitedSet = new Set(visited||[]);
+    const settled = settledEdges instanceof Set ? settledEdges : new Set(settledEdges || []);
+    const visitedSet = new Set(visited || []);
 
     // ── Header badge ──
     const hdr = document.createElement('div');
@@ -19786,13 +22125,13 @@ function renderCanvasStep() {
       const pq = step.pq || [];
       const pqPill = document.createElement('span');
       pqPill.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--accent-cyan);';
-      pqPill.textContent = `Heap: ${pq.map(([d,n])=>`${labels[n]}:${d}`).join(', ')||'empty'}`;
+      pqPill.textContent = `Heap: ${pq.map(([d, n]) => `${labels[n]}:${d}`).join(', ') || 'empty'}`;
       hdr.appendChild(pqPill);
     } else {
       const passPill = document.createElement('span');
       passPill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
-        border:1px solid ${negCycle?'var(--hard)':'var(--primary-glow)'};
-        color:${negCycle?'var(--hard)':'var(--primary-glow)'};`;
+        border:1px solid ${negCycle ? 'var(--hard)' : 'var(--primary-glow)'};
+        color:${negCycle ? 'var(--hard)' : 'var(--primary-glow)'};`;
       passPill.textContent = negCycle ? '⚠ Negative Cycle!' : `Pass ${pass}`;
       hdr.appendChild(passPill);
       if (relaxed) {
@@ -19814,84 +22153,84 @@ function renderCanvasStep() {
 
     const R = 26; // node radius
     const coords = [
-      {x:50,  y:130},   // A — left centre
-      {x:210, y:30 },   // B — top middle
-      {x:210, y:235},   // C — bottom middle
-      {x:380, y:130},   // D — right centre
-      {x:540, y:130}    // E — far right
+      { x: 50, y: 130 },   // A — left centre
+      { x: 210, y: 30 },   // B — top middle
+      { x: 210, y: 235 },   // C — bottom middle
+      { x: 380, y: 130 },   // D — right centre
+      { x: 540, y: 130 }    // E — far right
     ];
     const svgNS = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(svgNS,'svg');
-    svg.setAttribute('viewBox','0 0 630 310');
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.setAttribute('viewBox', '0 0 630 310');
     svg.style.cssText = 'width:100%;display:block;overflow:visible;';
 
     // Arrow marker
-    const defs = document.createElementNS(svgNS,'defs');
+    const defs = document.createElementNS(svgNS, 'defs');
     defs.innerHTML = `<marker id="gArr" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="rgba(255,255,255,0.25)"/>
     </marker>`;
     svg.appendChild(defs);
 
-    edges.forEach(([u,v,w]) => {
+    edges.forEach(([u, v, w]) => {
       const from = coords[u], to = coords[v];
       if (!from || !to) return;
 
-      const isActive  = activeEdge && activeEdge[0]===u && activeEdge[1]===v;
-      const isRelaxed = (isDijk ? (relaxedEdge && relaxedEdge[0]===u && relaxedEdge[1]===v)
-                                : (relaxed && activeEdge && activeEdge[0]===u && activeEdge[1]===v));
+      const isActive = activeEdge && activeEdge[0] === u && activeEdge[1] === v;
+      const isRelaxed = (isDijk ? (relaxedEdge && relaxedEdge[0] === u && relaxedEdge[1] === v)
+        : (relaxed && activeEdge && activeEdge[0] === u && activeEdge[1] === v));
       const isSettled = settled.has(`${u}-${v}`);
 
       let stroke = 'rgba(255,255,255,0.12)', sw = '1.5';
-      if (isRelaxed)     { stroke = 'var(--easy)';        sw = '2.5'; }
+      if (isRelaxed) { stroke = 'var(--easy)'; sw = '2.5'; }
       else if (isActive) { stroke = 'var(--accent-cyan)'; sw = '2'; }
-      else if (isSettled){ stroke = 'rgba(16,185,129,0.5)'; sw = '2'; }
+      else if (isSettled) { stroke = 'rgba(16,185,129,0.5)'; sw = '2'; }
 
       // Edge line
-      const line = document.createElementNS(svgNS,'line');
-      line.setAttribute('x1',from.x+R); line.setAttribute('y1',from.y+R);
-      line.setAttribute('x2',to.x+R);   line.setAttribute('y2',to.y+R);
-      line.setAttribute('stroke',stroke); line.setAttribute('stroke-width',sw);
-      line.setAttribute('marker-end','url(#gArr)');
+      const line = document.createElementNS(svgNS, 'line');
+      line.setAttribute('x1', from.x + R); line.setAttribute('y1', from.y + R);
+      line.setAttribute('x2', to.x + R); line.setAttribute('y2', to.y + R);
+      line.setAttribute('stroke', stroke); line.setAttribute('stroke-width', sw);
+      line.setAttribute('marker-end', 'url(#gArr)');
       svg.appendChild(line);
 
       // Weight label
-      const wLabel = document.createElementNS(svgNS,'text');
-      wLabel.setAttribute('x',(from.x+to.x)/2+R); wLabel.setAttribute('y',(from.y+to.y)/2+R-6);
-      wLabel.setAttribute('text-anchor','middle');
-      wLabel.setAttribute('font-family','monospace'); wLabel.setAttribute('font-size','13');
-      wLabel.setAttribute('fill', isRelaxed?'var(--easy)': isActive?'var(--accent-cyan)':'rgba(255,255,255,0.4)');
-      wLabel.setAttribute('font-weight', isActive||isRelaxed?'700':'400');
+      const wLabel = document.createElementNS(svgNS, 'text');
+      wLabel.setAttribute('x', (from.x + to.x) / 2 + R); wLabel.setAttribute('y', (from.y + to.y) / 2 + R - 6);
+      wLabel.setAttribute('text-anchor', 'middle');
+      wLabel.setAttribute('font-family', 'monospace'); wLabel.setAttribute('font-size', '13');
+      wLabel.setAttribute('fill', isRelaxed ? 'var(--easy)' : isActive ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.4)');
+      wLabel.setAttribute('font-weight', isActive || isRelaxed ? '700' : '400');
       wLabel.textContent = w;
       svg.appendChild(wLabel);
     });
 
     // Nodes
-    coords.slice(0,N).forEach((c,idx) => {
+    coords.slice(0, N).forEach((c, idx) => {
       const isSettledNode = visitedSet.has(idx);
-      const isActive      = idx === activeNode;
-      const isRelaxedNode = !isDijk && relaxed && activeEdge && activeEdge[1]===idx;
+      const isActive = idx === activeNode;
+      const isRelaxedNode = !isDijk && relaxed && activeEdge && activeEdge[1] === idx;
 
-      const circle = document.createElementNS(svgNS,'circle');
-      circle.setAttribute('cx',c.x+R); circle.setAttribute('cy',c.y+R); circle.setAttribute('r',R);
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('cx', c.x + R); circle.setAttribute('cy', c.y + R); circle.setAttribute('r', R);
       circle.setAttribute('fill',
-        isActive      ? 'rgba(6,182,212,0.25)'
-        : isRelaxedNode ? 'rgba(16,185,129,0.2)'
-        : isSettledNode ? 'rgba(16,185,129,0.12)'
-        : 'rgba(30,41,59,0.9)');
+        isActive ? 'rgba(6,182,212,0.25)'
+          : isRelaxedNode ? 'rgba(16,185,129,0.2)'
+            : isSettledNode ? 'rgba(16,185,129,0.12)'
+              : 'rgba(30,41,59,0.9)');
       circle.setAttribute('stroke',
-        isActive      ? 'var(--accent-cyan)'
-        : isRelaxedNode ? 'var(--easy)'
-        : isSettledNode ? 'rgba(16,185,129,0.5)'
-        : 'rgba(255,255,255,0.15)');
-      circle.setAttribute('stroke-width', isActive||isRelaxedNode ? '2.5' : '1.5');
+        isActive ? 'var(--accent-cyan)'
+          : isRelaxedNode ? 'var(--easy)'
+            : isSettledNode ? 'rgba(16,185,129,0.5)'
+              : 'rgba(255,255,255,0.15)');
+      circle.setAttribute('stroke-width', isActive || isRelaxedNode ? '2.5' : '1.5');
       svg.appendChild(circle);
 
-      const txt = document.createElementNS(svgNS,'text');
-      txt.setAttribute('x',c.x+R); txt.setAttribute('y',c.y+R+6);
-      txt.setAttribute('text-anchor','middle');
-      txt.setAttribute('font-family','monospace'); txt.setAttribute('font-size','16');
-      txt.setAttribute('font-weight','700');
-      txt.setAttribute('fill', isActive?'var(--accent-cyan)':isSettledNode?'var(--easy)':'white');
+      const txt = document.createElementNS(svgNS, 'text');
+      txt.setAttribute('x', c.x + R); txt.setAttribute('y', c.y + R + 6);
+      txt.setAttribute('text-anchor', 'middle');
+      txt.setAttribute('font-family', 'monospace'); txt.setAttribute('font-size', '16');
+      txt.setAttribute('font-weight', '700');
+      txt.setAttribute('fill', isActive ? 'var(--accent-cyan)' : isSettledNode ? 'var(--easy)' : 'white');
       txt.textContent = labels[idx];
       svg.appendChild(txt);
     });
@@ -19911,22 +22250,22 @@ function renderCanvasStep() {
     const distRow = document.createElement('div');
     distRow.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;';
 
-    labels.slice(0,N).forEach((lbl,idx) => {
-      const d      = dist[idx];
+    labels.slice(0, N).forEach((lbl, idx) => {
+      const d = dist[idx];
       const isSett = visitedSet.has(idx);
-      const isAct  = idx === activeNode;
-      const card   = document.createElement('div');
+      const isAct = idx === activeNode;
+      const card = document.createElement('div');
       card.style.cssText = `display:flex;flex-direction:column;align-items:center;padding:6px 14px;
         border-radius:8px;font-family:monospace;min-width:52px;
-        border:1px solid ${isAct?'var(--accent-cyan)':isSett?'rgba(16,185,129,0.4)':'rgba(255,255,255,0.08)'};
-        background:${isAct?'rgba(6,182,212,0.1)':isSett?'rgba(16,185,129,0.07)':'rgba(255,255,255,0.02)'};`;
+        border:1px solid ${isAct ? 'var(--accent-cyan)' : isSett ? 'rgba(16,185,129,0.4)' : 'rgba(255,255,255,0.08)'};
+        background:${isAct ? 'rgba(6,182,212,0.1)' : isSett ? 'rgba(16,185,129,0.07)' : 'rgba(255,255,255,0.02)'};`;
       card.innerHTML = `
-        <span style="font-size:0.65rem;font-weight:700;color:${isAct?'var(--accent-cyan)':isSett?'var(--easy)':'rgba(255,255,255,0.45)'};">${lbl}</span>
+        <span style="font-size:0.65rem;font-weight:700;color:${isAct ? 'var(--accent-cyan)' : isSett ? 'var(--easy)' : 'rgba(255,255,255,0.45)'};">${lbl}</span>
         <span style="font-size:0.9rem;font-weight:700;margin-top:2px;
-          color:${d===Infinity?'rgba(255,255,255,0.18)':isAct?'var(--accent-cyan)':isSett?'var(--easy)':'white'};">
-          ${d===Infinity?'∞':d}
+          color:${d === Infinity ? 'rgba(255,255,255,0.18)' : isAct ? 'var(--accent-cyan)' : isSett ? 'var(--easy)' : 'white'};">
+          ${d === Infinity ? '∞' : d}
         </span>
-        ${isSett?'<span style="font-size:0.55rem;color:var(--easy);margin-top:1px;">settled</span>':''}`;
+        ${isSett ? '<span style="font-size:0.55rem;color:var(--easy);margin-top:1px;">settled</span>' : ''}`;
       distRow.appendChild(card);
     });
     tableWrap.appendChild(distRow);
@@ -19941,20 +22280,20 @@ function renderCanvasStep() {
     container.className = 'advanced-vis-container';
 
     const { edges, nodeLabels, indegree, queue, order, active, removedEdges, n } = step;
-    const labels = nodeLabels || Array.from({length: n||6}, (_,i) => String.fromCharCode(65+i));
-    const removed = removedEdges instanceof Set ? removedEdges : new Set(removedEdges||[]);
+    const labels = nodeLabels || Array.from({ length: n || 6 }, (_, i) => String.fromCharCode(65 + i));
+    const removed = removedEdges instanceof Set ? removedEdges : new Set(removedEdges || []);
 
     // ── SVG DAG ──
     const nodeCoords = [
-      {x:60, y:90}, {x:60, y:210}, {x:200,y:150}, {x:200,y:270},
-      {x:340,y:210}, {x:480,y:210}
+      { x: 60, y: 90 }, { x: 60, y: 210 }, { x: 200, y: 150 }, { x: 200, y: 270 },
+      { x: 340, y: 210 }, { x: 480, y: 210 }
     ];
     const svgNS = 'http://www.w3.org/2000/svg';
-    const svg = document.createElementNS(svgNS,'svg');
+    const svg = document.createElementNS(svgNS, 'svg');
     svg.style.cssText = 'width:100%;max-width:560px;height:300px;display:block;margin:0 auto;overflow:visible;';
 
     // Arrow marker
-    const defs = document.createElementNS(svgNS,'defs');
+    const defs = document.createElementNS(svgNS, 'defs');
     defs.innerHTML = `
       <marker id="tArrow" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
         <path d="M0,0 L10,5 L0,10 z" fill="rgba(255,255,255,0.3)"/>
@@ -19965,13 +22304,13 @@ function renderCanvasStep() {
     svg.appendChild(defs);
 
     // Edges
-    edges.forEach(([u,v]) => {
+    edges.forEach(([u, v]) => {
       const from = nodeCoords[u], to = nodeCoords[v];
       if (!from || !to) return;
       const isRemoved = removed.has(`${u}-${v}`);
-      const line = document.createElementNS(svgNS,'line');
-      line.setAttribute('x1', from.x+22); line.setAttribute('y1', from.y+22);
-      line.setAttribute('x2', to.x+22);   line.setAttribute('y2', to.y+22);
+      const line = document.createElementNS(svgNS, 'line');
+      line.setAttribute('x1', from.x + 22); line.setAttribute('y1', from.y + 22);
+      line.setAttribute('x2', to.x + 22); line.setAttribute('y2', to.y + 22);
       line.setAttribute('stroke', isRemoved ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.25)');
       line.setAttribute('stroke-width', isRemoved ? '1' : '2');
       line.setAttribute('stroke-dasharray', isRemoved ? '3 4' : '0');
@@ -19981,54 +22320,54 @@ function renderCanvasStep() {
 
     // Nodes
     nodeCoords.slice(0, labels.length).forEach((c, idx) => {
-      const isActive  = idx === active;
-      const inOrder   = order.includes(idx);
-      const inQueue   = queue.includes(idx) && !inOrder;
-      const deg       = indegree[idx];
+      const isActive = idx === active;
+      const inOrder = order.includes(idx);
+      const inQueue = queue.includes(idx) && !inOrder;
+      const deg = indegree[idx];
 
       // Circle
-      const circle = document.createElementNS(svgNS,'circle');
-      circle.setAttribute('cx', c.x+22); circle.setAttribute('cy', c.y+22);
+      const circle = document.createElementNS(svgNS, 'circle');
+      circle.setAttribute('cx', c.x + 22); circle.setAttribute('cy', c.y + 22);
       circle.setAttribute('r', 22);
       circle.setAttribute('fill',
         isActive ? 'rgba(6,182,212,0.25)'
-        : inOrder ? 'rgba(16,185,129,0.2)'
-        : inQueue ? 'rgba(245,158,11,0.15)'
-        : 'rgba(30,41,59,0.9)');
+          : inOrder ? 'rgba(16,185,129,0.2)'
+            : inQueue ? 'rgba(245,158,11,0.15)'
+              : 'rgba(30,41,59,0.9)');
       circle.setAttribute('stroke',
         isActive ? 'var(--accent-cyan)'
-        : inOrder ? 'var(--easy)'
-        : inQueue ? 'var(--medium)'
-        : 'rgba(255,255,255,0.15)');
+          : inOrder ? 'var(--easy)'
+            : inQueue ? 'var(--medium)'
+              : 'rgba(255,255,255,0.15)');
       circle.setAttribute('stroke-width', isActive || inOrder ? '2.5' : '1.5');
       svg.appendChild(circle);
 
       // Label
-      const txt = document.createElementNS(svgNS,'text');
-      txt.setAttribute('x', c.x+22); txt.setAttribute('y', c.y+22+5);
-      txt.setAttribute('text-anchor','middle');
-      txt.setAttribute('font-family','monospace'); txt.setAttribute('font-size','14');
-      txt.setAttribute('font-weight','700');
+      const txt = document.createElementNS(svgNS, 'text');
+      txt.setAttribute('x', c.x + 22); txt.setAttribute('y', c.y + 22 + 5);
+      txt.setAttribute('text-anchor', 'middle');
+      txt.setAttribute('font-family', 'monospace'); txt.setAttribute('font-size', '14');
+      txt.setAttribute('font-weight', '700');
       txt.setAttribute('fill', isActive ? 'var(--accent-cyan)' : inOrder ? 'var(--easy)' : 'white');
       txt.textContent = labels[idx];
       svg.appendChild(txt);
 
       // In-degree badge (top-right of node)
-      const bx = c.x+36, by = c.y+4;
-      const badgeCirc = document.createElementNS(svgNS,'circle');
-      badgeCirc.setAttribute('cx',bx); badgeCirc.setAttribute('cy',by);
-      badgeCirc.setAttribute('r',11);
-      badgeCirc.setAttribute('fill', deg===0 ? 'rgba(16,185,129,0.3)' : 'rgba(30,41,59,0.95)');
-      badgeCirc.setAttribute('stroke', deg===0 ? 'var(--easy)' : 'rgba(255,255,255,0.2)');
-      badgeCirc.setAttribute('stroke-width','1.5');
+      const bx = c.x + 36, by = c.y + 4;
+      const badgeCirc = document.createElementNS(svgNS, 'circle');
+      badgeCirc.setAttribute('cx', bx); badgeCirc.setAttribute('cy', by);
+      badgeCirc.setAttribute('r', 11);
+      badgeCirc.setAttribute('fill', deg === 0 ? 'rgba(16,185,129,0.3)' : 'rgba(30,41,59,0.95)');
+      badgeCirc.setAttribute('stroke', deg === 0 ? 'var(--easy)' : 'rgba(255,255,255,0.2)');
+      badgeCirc.setAttribute('stroke-width', '1.5');
       svg.appendChild(badgeCirc);
 
-      const badgeTxt = document.createElementNS(svgNS,'text');
-      badgeTxt.setAttribute('x',bx); badgeTxt.setAttribute('y',by+4);
-      badgeTxt.setAttribute('text-anchor','middle');
-      badgeTxt.setAttribute('font-family','monospace'); badgeTxt.setAttribute('font-size','10');
-      badgeTxt.setAttribute('font-weight','700');
-      badgeTxt.setAttribute('fill', deg===0 ? 'var(--easy)' : 'rgba(255,255,255,0.6)');
+      const badgeTxt = document.createElementNS(svgNS, 'text');
+      badgeTxt.setAttribute('x', bx); badgeTxt.setAttribute('y', by + 4);
+      badgeTxt.setAttribute('text-anchor', 'middle');
+      badgeTxt.setAttribute('font-family', 'monospace'); badgeTxt.setAttribute('font-size', '10');
+      badgeTxt.setAttribute('font-weight', '700');
+      badgeTxt.setAttribute('fill', deg === 0 ? 'var(--easy)' : 'rgba(255,255,255,0.6)');
       badgeTxt.textContent = deg;
       svg.appendChild(badgeTxt);
     });
@@ -20071,7 +22410,7 @@ function renderCanvasStep() {
           border:1px solid var(--easy);color:var(--easy);background:rgba(16,185,129,0.08);font-weight:700;`;
         pill.textContent = labels[idx];
         oRow.appendChild(pill);
-        if (i < order.length-1) {
+        if (i < order.length - 1) {
           const arr = document.createElement('span');
           arr.style.cssText = 'color:var(--text-muted);font-size:0.7rem;';
           arr.textContent = '→';
@@ -20093,15 +22432,15 @@ function renderCanvasStep() {
     const n = weights.length;
 
     // ── Action badge ──
-    const actionColors = { take:'var(--easy)', skip:'var(--text-muted)', backtrack:'var(--accent-cyan)', init:'var(--text-muted)', done:'var(--easy)' };
+    const actionColors = { take: 'var(--easy)', skip: 'var(--text-muted)', backtrack: 'var(--accent-cyan)', init: 'var(--text-muted)', done: 'var(--easy)' };
     const hdr = document.createElement('div');
     hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
 
     const badge = document.createElement('span');
     badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
       letter-spacing:0.08em;padding:2px 10px;border-radius:20px;
-      border:1px solid ${actionColors[action]||'var(--text-muted)'};
-      color:${actionColors[action]||'var(--text-muted)'};`;
+      border:1px solid ${actionColors[action] || 'var(--text-muted)'};
+      color:${actionColors[action] || 'var(--text-muted)'};`;
     badge.textContent = action;
     hdr.appendChild(badge);
 
@@ -20110,7 +22449,7 @@ function renderCanvasStep() {
       detail.style.cssText = 'font-size:0.75rem;font-family:monospace;color:var(--text-muted);';
       const canTake = takeVal !== null;
       detail.innerHTML = canTake
-        ? `take(${takeVal}) vs skip(${skipVal}) → <strong style="color:${actionColors[action]}">${action==='take'?takeVal:skipVal}</strong>`
+        ? `take(${takeVal}) vs skip(${skipVal}) → <strong style="color:${actionColors[action]}">${action === 'take' ? takeVal : skipVal}</strong>`
         : `item too heavy → skip(${skipVal})`;
       hdr.appendChild(detail);
     }
@@ -20130,14 +22469,14 @@ function renderCanvasStep() {
 
     for (let i = 0; i < n; i++) {
       const isActiveItem = activeCell && activeCell.r === i + 1;
-      const isSelected   = selectedItems.includes(i);
+      const isSelected = selectedItems.includes(i);
       const row = document.createElement('div');
       row.style.cssText = `display:grid;grid-template-columns:28px 40px 40px 40px;gap:2px;
         padding:3px 0;border-radius:4px;font-size:0.75rem;font-family:monospace;
         background:${isActiveItem ? 'rgba(99,102,241,0.1)' : 'transparent'};
         color:${isSelected ? 'var(--easy)' : isActiveItem ? 'var(--primary-glow)' : 'var(--text-main)'};
         font-weight:${isActiveItem || isSelected ? '700' : '400'};`;
-      row.innerHTML = `<span>${i+1}</span><span>${weights[i]}</span><span>${values[i]}</span><span>${isSelected ? '✓' : '·'}</span>`;
+      row.innerHTML = `<span>${i + 1}</span><span>${weights[i]}</span><span>${values[i]}</span><span>${isSelected ? '✓' : '·'}</span>`;
       itemTable.appendChild(row);
     }
 
@@ -20145,7 +22484,7 @@ function renderCanvasStep() {
       const selSummary = document.createElement('div');
       selSummary.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--easy);margin-top:4px;';
       const totalVal = selectedItems.reduce((s, i) => s + values[i], 0);
-      const totalW   = selectedItems.reduce((s, i) => s + weights[i], 0);
+      const totalW = selectedItems.reduce((s, i) => s + weights[i], 0);
       selSummary.textContent = `val=${totalVal}, w=${totalW}`;
       itemTable.appendChild(selSummary);
     }
@@ -20157,7 +22496,7 @@ function renderCanvasStep() {
 
     const CELL = 36;
     const grid = document.createElement('div');
-    grid.style.cssText = `display:grid;grid-template-columns:28px repeat(${capacity+1},${CELL}px);gap:2px;`;
+    grid.style.cssText = `display:grid;grid-template-columns:28px repeat(${capacity + 1},${CELL}px);gap:2px;`;
 
     // Column headers (capacities)
     grid.appendChild(Object.assign(document.createElement('div'), { style: 'font-size:0;' }));
@@ -20181,17 +22520,17 @@ function renderCanvasStep() {
           align-items:center;justify-content:center;border-radius:4px;font-family:monospace;
           font-size:0.72rem;border:1px solid rgba(255,255,255,0.06);`;
 
-        const isActive    = activeCell && activeCell.r === r && activeCell.c === c;
+        const isActive = activeCell && activeCell.r === r && activeCell.c === c;
         const isBacktrack = action === 'backtrack' && activeCell && activeCell.r === r && activeCell.c === c;
-        const isSelected  = action === 'done' && selectedItems.length > 0 && r > 0 &&
-                            selectedItems.includes(r - 1) && c <= capacity;
+        const isSelected = action === 'done' && selectedItems.length > 0 && r > 0 &&
+          selectedItems.includes(r - 1) && c <= capacity;
 
-        if (isBacktrack)       { cell.style.background = 'rgba(6,182,212,0.2)';   cell.style.borderColor = 'var(--accent-cyan)'; cell.style.fontWeight = '700'; cell.style.color = 'var(--accent-cyan)'; }
-        else if (isActive && action === 'take')  { cell.style.background = 'rgba(16,185,129,0.2)'; cell.style.borderColor = 'var(--easy)'; cell.style.fontWeight = '700'; cell.style.color = 'var(--easy)'; }
-        else if (isActive && action === 'skip')  { cell.style.background = 'rgba(255,255,255,0.05)'; cell.style.borderColor = 'rgba(255,255,255,0.25)'; cell.style.color = 'var(--text-muted)'; }
-        else if (isActive)     { cell.style.background = 'rgba(99,102,241,0.2)';  cell.style.borderColor = 'var(--primary-glow)'; }
-        else if (val > 0)      { cell.style.background = 'rgba(255,255,255,0.03)'; cell.style.color = 'rgba(255,255,255,0.7)'; }
-        else                   { cell.style.color = 'rgba(255,255,255,0.15)'; }
+        if (isBacktrack) { cell.style.background = 'rgba(6,182,212,0.2)'; cell.style.borderColor = 'var(--accent-cyan)'; cell.style.fontWeight = '700'; cell.style.color = 'var(--accent-cyan)'; }
+        else if (isActive && action === 'take') { cell.style.background = 'rgba(16,185,129,0.2)'; cell.style.borderColor = 'var(--easy)'; cell.style.fontWeight = '700'; cell.style.color = 'var(--easy)'; }
+        else if (isActive && action === 'skip') { cell.style.background = 'rgba(255,255,255,0.05)'; cell.style.borderColor = 'rgba(255,255,255,0.25)'; cell.style.color = 'var(--text-muted)'; }
+        else if (isActive) { cell.style.background = 'rgba(99,102,241,0.2)'; cell.style.borderColor = 'var(--primary-glow)'; }
+        else if (val > 0) { cell.style.background = 'rgba(255,255,255,0.03)'; cell.style.color = 'rgba(255,255,255,0.7)'; }
+        else { cell.style.color = 'rgba(255,255,255,0.15)'; }
 
         cell.innerHTML = `<strong>${val}</strong><span style="font-size:0.5rem;color:rgba(255,255,255,0.25)">${r},${c}</span>`;
         grid.appendChild(cell);
@@ -20218,8 +22557,8 @@ function renderCanvasStep() {
     const phasePill = document.createElement('span');
     phasePill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
       letter-spacing:0.08em;padding:2px 10px;border-radius:20px;
-      border:1px solid ${phase==='lps'?'var(--primary-glow)':'var(--accent-cyan)'};
-      color:${phase==='lps'?'var(--primary-glow)':'var(--accent-cyan)'};`;
+      border:1px solid ${phase === 'lps' ? 'var(--primary-glow)' : 'var(--accent-cyan)'};
+      color:${phase === 'lps' ? 'var(--primary-glow)' : 'var(--accent-cyan)'};`;
     phasePill.textContent = phase === 'lps' ? 'Phase 1 — Build LPS' : 'Phase 2 — Scan Text';
     hdr.appendChild(phasePill);
     if (matchedAt >= 0) {
@@ -20236,16 +22575,16 @@ function renderCanvasStep() {
     }
     container.appendChild(hdr);
 
-    const makeCell = (ch, label, state, extraStyle='') => {
+    const makeCell = (ch, label, state, extraStyle = '') => {
       const cell = document.createElement('div');
       const colors = {
-        active:   { bg:'rgba(6,182,212,0.2)',   border:'var(--accent-cyan)',   text:'white' },
-        match:    { bg:'rgba(16,185,129,0.25)', border:'var(--easy)',          text:'var(--easy)' },
-        lps_i:    { bg:'rgba(99,102,241,0.2)',  border:'var(--primary-glow)',  text:'white' },
-        lps_j:    { bg:'rgba(245,158,11,0.15)', border:'var(--medium)',        text:'var(--medium)' },
-        found:    { bg:'rgba(16,185,129,0.15)', border:'var(--easy)',          text:'var(--easy)' },
-        normal:   { bg:'rgba(255,255,255,0.03)',border:'rgba(255,255,255,0.08)',text:'rgba(255,255,255,0.7)' },
-        blank:    { bg:'transparent',           border:'transparent',          text:'transparent' }
+        active: { bg: 'rgba(6,182,212,0.2)', border: 'var(--accent-cyan)', text: 'white' },
+        match: { bg: 'rgba(16,185,129,0.25)', border: 'var(--easy)', text: 'var(--easy)' },
+        lps_i: { bg: 'rgba(99,102,241,0.2)', border: 'var(--primary-glow)', text: 'white' },
+        lps_j: { bg: 'rgba(245,158,11,0.15)', border: 'var(--medium)', text: 'var(--medium)' },
+        found: { bg: 'rgba(16,185,129,0.15)', border: 'var(--easy)', text: 'var(--easy)' },
+        normal: { bg: 'rgba(255,255,255,0.03)', border: 'rgba(255,255,255,0.08)', text: 'rgba(255,255,255,0.7)' },
+        blank: { bg: 'transparent', border: 'transparent', text: 'transparent' }
       };
       const c = colors[state] || colors.normal;
       cell.style.cssText = `
@@ -20265,7 +22604,7 @@ function renderCanvasStep() {
       patRow.style.cssText = 'display:flex;gap:3px;margin-bottom:6px;flex-wrap:nowrap;overflow-x:auto;';
       [...pattern].forEach((ch, idx) => {
         let state = 'normal';
-        if (idx === i)   state = 'lps_i';
+        if (idx === i) state = 'lps_i';
         if (idx === j && idx !== i) state = 'lps_j';
         if (idx === i && idx === j) state = 'active';
         patRow.appendChild(makeCell(ch, idx, state));
@@ -20333,7 +22672,7 @@ function renderCanvasStep() {
         let state = 'normal';
         if (matchedAt >= 0) state = 'found';
         else if (idx === j) state = 'active';
-        else if (idx < j)   state = 'match';
+        else if (idx < j) state = 'match';
         patRow.appendChild(makeCell(ch, idx, state));
       });
       container.appendChild(patRow);
@@ -20373,7 +22712,7 @@ function renderCanvasStep() {
     container.className = 'advanced-vis-container';
 
     const { nums, bit, mode, activeChain, total, srcIdx, n } = step;
-    const modeColors = { init:'var(--text-muted)', update:'var(--primary-glow)', query:'var(--accent-cyan)', done:'var(--easy)' };
+    const modeColors = { init: 'var(--text-muted)', update: 'var(--primary-glow)', query: 'var(--accent-cyan)', done: 'var(--easy)' };
     const CELL = 42;
     const lowbit = x => x & -x;
     const chainSet = new Set(activeChain || []);
@@ -20384,11 +22723,11 @@ function renderCanvasStep() {
     const mBadge = document.createElement('span');
     mBadge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
       letter-spacing:0.08em;padding:2px 10px;border-radius:20px;
-      border:1px solid ${modeColors[mode]||'var(--text-muted)'};
-      color:${modeColors[mode]||'var(--text-muted)'};`;
-    mBadge.textContent = mode === 'update' ? `Update a[${srcIdx+1}]=${nums[srcIdx]}` :
-                         mode === 'query'  ? `Prefix Query sum(1..${Math.min(5,n)})` :
-                         mode === 'done'   ? `Done — sum = ${total}` : 'Fenwick Tree';
+      border:1px solid ${modeColors[mode] || 'var(--text-muted)'};
+      color:${modeColors[mode] || 'var(--text-muted)'};`;
+    mBadge.textContent = mode === 'update' ? `Update a[${srcIdx + 1}]=${nums[srcIdx]}` :
+      mode === 'query' ? `Prefix Query sum(1..${Math.min(5, n)})` :
+        mode === 'done' ? `Done — sum = ${total}` : 'Fenwick Tree';
     hdr.appendChild(mBadge);
     if (activeChain && activeChain.length > 0) {
       const chainEl = document.createElement('span');
@@ -20412,10 +22751,10 @@ function renderCanvasStep() {
       const cell = document.createElement('div');
       cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;flex-direction:column;
         align-items:center;justify-content:center;border-radius:4px;font-family:monospace;
-        border:1px solid ${isSource?modeColors.update:'rgba(255,255,255,0.08)'};
-        background:${isSource?'rgba(99,102,241,0.15)':'rgba(255,255,255,0.03)'};
-        font-weight:${isSource?'700':'400'};`;
-      cell.innerHTML = `<span style="font-size:0.82rem;color:${isSource?'var(--primary-glow)':'rgba(255,255,255,0.7)'}">${val}</span>
+        border:1px solid ${isSource ? modeColors.update : 'rgba(255,255,255,0.08)'};
+        background:${isSource ? 'rgba(99,102,241,0.15)' : 'rgba(255,255,255,0.03)'};
+        font-weight:${isSource ? '700' : '400'};`;
+      cell.innerHTML = `<span style="font-size:0.82rem;color:${isSource ? 'var(--primary-glow)' : 'rgba(255,255,255,0.7)'}">${val}</span>
                         <span style="font-size:0.55rem;color:rgba(255,255,255,0.3)">a[${oneBased}]</span>`;
       numsRow.appendChild(cell);
     });
@@ -20439,26 +22778,26 @@ function renderCanvasStep() {
     bit.slice(1).forEach((val, idx) => {
       const oneBased = idx + 1;
       const lb = lowbit(oneBased);
-      const isActive  = chainSet.has(oneBased);
-      const isUpdate  = isActive && mode === 'update';
-      const isQuery   = isActive && mode === 'query';
-      const isDone    = mode === 'done' && val > 0;
+      const isActive = chainSet.has(oneBased);
+      const isUpdate = isActive && mode === 'update';
+      const isQuery = isActive && mode === 'query';
+      const isDone = mode === 'done' && val > 0;
 
-      let bg     = 'rgba(255,255,255,0.03)';
+      let bg = 'rgba(255,255,255,0.03)';
       let border = 'rgba(255,255,255,0.08)';
-      let textC  = 'rgba(255,255,255,0.6)';
+      let textC = 'rgba(255,255,255,0.6)';
 
-      if (isUpdate) { bg = 'rgba(99,102,241,0.2)';  border = 'var(--primary-glow)'; textC = 'var(--primary-glow)'; }
-      if (isQuery)  { bg = 'rgba(6,182,212,0.18)';  border = 'var(--accent-cyan)';  textC = 'var(--accent-cyan)'; }
+      if (isUpdate) { bg = 'rgba(99,102,241,0.2)'; border = 'var(--primary-glow)'; textC = 'var(--primary-glow)'; }
+      if (isQuery) { bg = 'rgba(6,182,212,0.18)'; border = 'var(--accent-cyan)'; textC = 'var(--accent-cyan)'; }
       if (isDone && !isActive) { bg = 'rgba(16,185,129,0.08)'; border = 'rgba(16,185,129,0.3)'; textC = 'var(--easy)'; }
 
       const cell = document.createElement('div');
       cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;flex-direction:column;
         align-items:center;justify-content:center;border-radius:4px;font-family:monospace;
         border:1px solid ${border};background:${bg};flex-shrink:0;`;
-      cell.innerHTML = `<span style="font-size:0.82rem;font-weight:700;color:${textC}">${val||0}</span>
+      cell.innerHTML = `<span style="font-size:0.82rem;font-weight:700;color:${textC}">${val || 0}</span>
                         <span style="font-size:0.48rem;color:rgba(255,255,255,0.25)">BIT[${oneBased}]</span>
-                        <span style="font-size:0.45rem;color:${isActive?textC:'rgba(255,255,255,0.2)'}">lb=${lb}</span>`;
+                        <span style="font-size:0.45rem;color:${isActive ? textC : 'rgba(255,255,255,0.2)'}">lb=${lb}</span>`;
       bitRow.appendChild(cell);
 
       // Store left-center X for arrow drawing (cell width + gap per slot)
@@ -20470,9 +22809,9 @@ function renderCanvasStep() {
     // SVG arrows: draw propagation chain
     if (activeChain && activeChain.length >= 2) {
       const svgNS = 'http://www.w3.org/2000/svg';
-      const svgW  = nums.length * (CELL + 4);
-      const svgH  = 30;
-      const svg   = document.createElementNS(svgNS, 'svg');
+      const svgW = nums.length * (CELL + 4);
+      const svgH = 30;
+      const svg = document.createElementNS(svgNS, 'svg');
       svg.style.cssText = `position:absolute;bottom:0;left:0;width:${svgW}px;height:${svgH}px;overflow:visible;pointer-events:none;`;
 
       const arrowColor = mode === 'query' ? 'var(--accent-cyan)' : 'var(--primary-glow)';
@@ -20486,7 +22825,7 @@ function renderCanvasStep() {
 
       for (let k = 0; k < activeChain.length - 1; k++) {
         const fromIdx = activeChain[k];
-        const toIdx   = activeChain[k + 1];
+        const toIdx = activeChain[k + 1];
         const x1 = cellPositions[fromIdx];
         const x2 = cellPositions[toIdx];
         if (x1 === undefined || x2 === undefined) continue;
@@ -20511,7 +22850,7 @@ function renderCanvasStep() {
     if (mode === 'query' || mode === 'done') {
       status.innerHTML = `Running sum = <strong style="color:var(--accent-cyan)">${total}</strong>`;
     } else if (mode === 'update' && srcIdx >= 0) {
-      status.innerHTML = `Inserting a[${srcIdx+1}]=${nums[srcIdx]} → updates ${(activeChain||[]).join(', ')||'—'}`;
+      status.innerHTML = `Inserting a[${srcIdx + 1}]=${nums[srcIdx]} → updates ${(activeChain || []).join(', ') || '—'}`;
     }
     container.appendChild(status);
     canvas.appendChild(container);
@@ -20523,7 +22862,7 @@ function renderCanvasStep() {
     container.className = 'advanced-vis-container';
 
     const { dist, via, activeCell, k, improved, nodeLabels, N } = step;
-    const labels = nodeLabels || ['A','B','C','D'];
+    const labels = nodeLabels || ['A', 'B', 'C', 'D'];
     const n = N || dist.length;
     const CELL = 52;
 
@@ -20545,7 +22884,7 @@ function renderCanvasStep() {
       hdr.appendChild(impPill);
     }
     if (activeCell && k >= 0 && k < n) {
-      const {r, c} = activeCell;
+      const { r, c } = activeCell;
       const viaNode = via && via[r] && via[r][c] !== null ? labels[via[r][c]] : null;
       const pathPill = document.createElement('span');
       pathPill.style.cssText = 'font-size:0.7rem;font-family:monospace;color:var(--text-muted);';
@@ -20567,48 +22906,48 @@ function renderCanvasStep() {
     grid.appendChild(corner);
 
     // Column headers
-    labels.slice(0,n).forEach((lbl,j) => {
+    labels.slice(0, n).forEach((lbl, j) => {
       const h = document.createElement('div');
       h.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;align-items:center;justify-content:center;
         font-size:0.72rem;font-family:monospace;font-weight:700;border-radius:4px;
-        background:${k===j?'rgba(245,158,11,0.1)':'transparent'};
-        color:${k===j?'var(--medium)':'var(--text-muted)'};`;
+        background:${k === j ? 'rgba(245,158,11,0.1)' : 'transparent'};
+        color:${k === j ? 'var(--medium)' : 'var(--text-muted)'};`;
       h.textContent = lbl;
       grid.appendChild(h);
     });
 
     // Data rows
-    dist.slice(0,n).forEach((row, i) => {
+    dist.slice(0, n).forEach((row, i) => {
       // Row header
       const rh = document.createElement('div');
       rh.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;align-items:center;justify-content:center;
         font-size:0.72rem;font-family:monospace;font-weight:700;border-radius:4px;
-        background:${k===i?'rgba(245,158,11,0.1)':'transparent'};
-        color:${k===i?'var(--medium)':'var(--text-muted)'};`;
+        background:${k === i ? 'rgba(245,158,11,0.1)' : 'transparent'};
+        color:${k === i ? 'var(--medium)' : 'var(--text-muted)'};`;
       rh.textContent = labels[i];
       grid.appendChild(rh);
 
-      row.slice(0,n).forEach((val, j) => {
+      row.slice(0, n).forEach((val, j) => {
         const cell = document.createElement('div');
-        const isActive   = activeCell && activeCell.r===i && activeCell.c===j;
-        const isKRow     = k >= 0 && k < n && i === k;
-        const isKCol     = k >= 0 && k < n && j === k;
-        const isDiag     = i === j;
-        const viaNode    = via && via[i] && via[i][j] !== null ? labels[via[i][j]] : null;
+        const isActive = activeCell && activeCell.r === i && activeCell.c === j;
+        const isKRow = k >= 0 && k < n && i === k;
+        const isKCol = k >= 0 && k < n && j === k;
+        const isDiag = i === j;
+        const viaNode = via && via[i] && via[i][j] !== null ? labels[via[i][j]] : null;
 
         let bg = 'rgba(255,255,255,0.02)', border = 'rgba(255,255,255,0.06)', color = 'rgba(255,255,255,0.6)', fw = '400';
 
-        if (isActive && improved)   { bg='rgba(16,185,129,0.2)'; border='var(--easy)'; color='var(--easy)'; fw='700'; }
-        else if (isActive)          { bg='rgba(6,182,212,0.1)';  border='var(--accent-cyan)'; color='var(--accent-cyan)'; fw='700'; }
-        else if (isDiag)            { bg='rgba(255,255,255,0.03)'; color='rgba(255,255,255,0.25)'; }
-        else if (isKRow||isKCol)    { bg='rgba(245,158,11,0.06)'; border='rgba(245,158,11,0.2)'; }
-        else if (val!==Infinity && val>0) { color='rgba(255,255,255,0.8)'; }
+        if (isActive && improved) { bg = 'rgba(16,185,129,0.2)'; border = 'var(--easy)'; color = 'var(--easy)'; fw = '700'; }
+        else if (isActive) { bg = 'rgba(6,182,212,0.1)'; border = 'var(--accent-cyan)'; color = 'var(--accent-cyan)'; fw = '700'; }
+        else if (isDiag) { bg = 'rgba(255,255,255,0.03)'; color = 'rgba(255,255,255,0.25)'; }
+        else if (isKRow || isKCol) { bg = 'rgba(245,158,11,0.06)'; border = 'rgba(245,158,11,0.2)'; }
+        else if (val !== Infinity && val > 0) { color = 'rgba(255,255,255,0.8)'; }
 
         cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;flex-direction:column;
           align-items:center;justify-content:center;border-radius:4px;
           border:1px solid ${border};background:${bg};font-family:monospace;`;
 
-        const valStr = val===Infinity ? '∞' : val;
+        const valStr = val === Infinity ? '∞' : val;
         cell.innerHTML = `<span style="font-size:0.82rem;font-weight:${fw};color:${color}">${valStr}</span>
           ${viaNode && isActive ? `<span style="font-size:0.45rem;color:var(--easy)">via ${viaNode}</span>` : ''}
           <span style="font-size:0.45rem;color:rgba(255,255,255,0.2)">${labels[i]}→${labels[j]}</span>`;
@@ -20627,7 +22966,7 @@ function renderCanvasStep() {
     container.className = 'advanced-vis-container';
     container.style.paddingTop = '30px';
     container.style.paddingBottom = '30px';
-    
+
     // Draw partition segment blocks
     const blocksWrap = document.createElement('div');
     blocksWrap.style.display = 'flex';
@@ -20635,7 +22974,7 @@ function renderCanvasStep() {
     blocksWrap.style.justifyContent = 'center';
     blocksWrap.style.marginTop = '20px';
     blocksWrap.style.flexWrap = 'wrap';
-    
+
     step.array.forEach((val, idx) => {
       const block = document.createElement('div');
       block.style.padding = '8px 12px';
@@ -20646,16 +22985,16 @@ function renderCanvasStep() {
       block.style.fontFamily = 'monospace';
       block.style.textAlign = 'center';
       block.style.minWidth = '50px';
-      
+
       const inPartition = idx >= step.left && idx <= step.right;
       const isPivot = idx === step.pivotIdx;
       const isSorted = step.sorted.includes(idx);
-      
+
       let label = "Inactive";
       let bg = "rgba(255,255,255,0.02)";
       let borderC = "var(--border-color)";
       let textC = "var(--text-main)";
-      
+
       if (isPivot) {
         label = "Pivot";
         bg = "rgba(6, 182, 212, 0.15)";
@@ -20672,21 +23011,21 @@ function renderCanvasStep() {
         borderC = "var(--warning)";
         textC = "var(--warning)";
       }
-      
+
       block.style.background = bg;
       block.style.borderColor = borderC;
       block.style.color = textC;
-      
+
       const valDiv = document.createElement('div');
       valDiv.style.fontSize = '1.05rem';
       valDiv.textContent = val;
-      
+
       const lblDiv = document.createElement('div');
       lblDiv.style.fontSize = '0.6rem';
       lblDiv.style.color = textC;
       lblDiv.style.marginTop = '4px';
       lblDiv.textContent = label;
-      
+
       block.appendChild(valDiv);
       block.appendChild(lblDiv);
       blocksWrap.appendChild(block);
@@ -20701,25 +23040,25 @@ function renderCanvasStep() {
     const { array, phase, left, mid, right, compareL, compareR, sortedRegions } = step;
     const n = array.length;
     const CELL = 44;
-    const GAP  = 6;
+    const GAP = 6;
 
     // ── Phase badge ──
-    const phaseColors = { start:'var(--text-muted)', split:'var(--medium)', compare:'var(--accent-cyan)', place:'var(--primary-glow)', merge_done:'var(--easy)', done:'var(--easy)' };
+    const phaseColors = { start: 'var(--text-muted)', split: 'var(--medium)', compare: 'var(--accent-cyan)', place: 'var(--primary-glow)', merge_done: 'var(--easy)', done: 'var(--easy)' };
     const hdr = document.createElement('div');
     hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
     const badge = document.createElement('span');
     badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;text-transform:uppercase;
       letter-spacing:0.08em;padding:2px 10px;border-radius:20px;
-      border:1px solid ${phaseColors[phase]||'var(--text-muted)'};
-      color:${phaseColors[phase]||'var(--text-muted)'};`;
-    badge.textContent = phase.replace('_',' ');
+      border:1px solid ${phaseColors[phase] || 'var(--text-muted)'};
+      color:${phaseColors[phase] || 'var(--text-muted)'};`;
+    badge.textContent = phase.replace('_', ' ');
     hdr.appendChild(badge);
     if (left >= 0 && right >= 0) {
       const rangeEl = document.createElement('span');
       rangeEl.style.cssText = 'font-size:0.72rem;font-family:monospace;color:var(--text-muted);';
       rangeEl.textContent = phase === 'split'
-        ? `[${left}..${mid}] | [${mid+1}..${right}]`
-        : `merging [${left}..${mid}] + [${mid+1}..${right}]`;
+        ? `[${left}..${mid}] | [${mid + 1}..${right}]`
+        : `merging [${left}..${mid}] + [${mid + 1}..${right}]`;
       hdr.appendChild(rangeEl);
     }
     container.appendChild(hdr);
@@ -20736,42 +23075,42 @@ function renderCanvasStep() {
         align-items:center;justify-content:center;border-radius:6px;
         font-family:monospace;font-size:0.88rem;font-weight:700;flex-shrink:0;`;
 
-      const inActive  = left >= 0 && idx >= left && idx <= right;
-      const inLeft    = left >= 0 && mid >= 0 && idx >= left && idx <= mid;
-      const inRight   = mid >= 0 && right >= 0 && idx > mid && idx <= right;
-      const isCompL   = idx === compareL;
-      const isCompR   = idx === compareR;
-      const isSorted  = sortedSet.has(idx);
+      const inActive = left >= 0 && idx >= left && idx <= right;
+      const inLeft = left >= 0 && mid >= 0 && idx >= left && idx <= mid;
+      const inRight = mid >= 0 && right >= 0 && idx > mid && idx <= right;
+      const isCompL = idx === compareL;
+      const isCompR = idx === compareR;
+      const isSorted = sortedSet.has(idx);
 
       if (isCompL || isCompR) {
-        cell.style.background   = 'rgba(6,182,212,0.25)';
-        cell.style.border       = '2px solid var(--accent-cyan)';
-        cell.style.color        = 'var(--accent-cyan)';
+        cell.style.background = 'rgba(6,182,212,0.25)';
+        cell.style.border = '2px solid var(--accent-cyan)';
+        cell.style.color = 'var(--accent-cyan)';
       } else if (phase === 'merge_done' && inActive) {
-        cell.style.background   = 'rgba(16,185,129,0.2)';
-        cell.style.border       = '1.5px solid var(--easy)';
-        cell.style.color        = 'var(--easy)';
+        cell.style.background = 'rgba(16,185,129,0.2)';
+        cell.style.border = '1.5px solid var(--easy)';
+        cell.style.color = 'var(--easy)';
       } else if (phase === 'split' && inLeft) {
-        cell.style.background   = 'rgba(99,102,241,0.15)';
-        cell.style.border       = '1.5px solid var(--primary-glow)';
-        cell.style.color        = 'var(--primary-glow)';
+        cell.style.background = 'rgba(99,102,241,0.15)';
+        cell.style.border = '1.5px solid var(--primary-glow)';
+        cell.style.color = 'var(--primary-glow)';
       } else if (phase === 'split' && inRight) {
-        cell.style.background   = 'rgba(245,158,11,0.15)';
-        cell.style.border       = '1.5px solid var(--medium)';
-        cell.style.color        = 'var(--medium)';
+        cell.style.background = 'rgba(245,158,11,0.15)';
+        cell.style.border = '1.5px solid var(--medium)';
+        cell.style.color = 'var(--medium)';
       } else if (inActive && (phase === 'compare' || phase === 'place')) {
         const col = inLeft ? 'rgba(99,102,241,0.12)' : 'rgba(245,158,11,0.08)';
-        cell.style.background   = col;
-        cell.style.border       = `1.5px solid ${inLeft?'var(--primary-glow)':'var(--medium)'}`;
-        cell.style.color        = inLeft ? 'var(--primary-glow)' : 'var(--medium)';
+        cell.style.background = col;
+        cell.style.border = `1.5px solid ${inLeft ? 'var(--primary-glow)' : 'var(--medium)'}`;
+        cell.style.color = inLeft ? 'var(--primary-glow)' : 'var(--medium)';
       } else if (isSorted && phase === 'done') {
-        cell.style.background   = 'rgba(16,185,129,0.12)';
-        cell.style.border       = '1px solid rgba(16,185,129,0.4)';
-        cell.style.color        = 'var(--easy)';
+        cell.style.background = 'rgba(16,185,129,0.12)';
+        cell.style.border = '1px solid rgba(16,185,129,0.4)';
+        cell.style.color = 'var(--easy)';
       } else {
-        cell.style.background   = 'rgba(255,255,255,0.03)';
-        cell.style.border       = '1px solid rgba(255,255,255,0.08)';
-        cell.style.color        = 'rgba(255,255,255,0.6)';
+        cell.style.background = 'rgba(255,255,255,0.03)';
+        cell.style.border = '1px solid rgba(255,255,255,0.08)';
+        cell.style.color = 'rgba(255,255,255,0.6)';
       }
 
       cell.innerHTML = `<span>${val}</span><span style="font-size:0.45rem;color:rgba(255,255,255,0.25);margin-top:2px">[${idx}]</span>`;
@@ -20782,29 +23121,29 @@ function renderCanvasStep() {
     // ── Active subarray bracket labels (SVG, no overlap) ──
     if (left >= 0 && right >= 0 && phase !== 'done') {
       const svgNS2 = 'http://www.w3.org/2000/svg';
-      const bracketSvg = document.createElementNS(svgNS2,'svg');
+      const bracketSvg = document.createElementNS(svgNS2, 'svg');
       const totalW = n * (CELL + GAP);
       bracketSvg.style.cssText = `width:100%;max-width:${totalW}px;height:36px;display:block;overflow:visible;margin:0 auto 4px;`;
 
-      const startX = left * (CELL + GAP) + CELL/2;
-      const endX   = right * (CELL + GAP) + CELL/2;
-      const midX   = mid * (CELL + GAP) + CELL/2;
+      const startX = left * (CELL + GAP) + CELL / 2;
+      const endX = right * (CELL + GAP) + CELL / 2;
+      const midX = mid * (CELL + GAP) + CELL / 2;
 
       // Left half bracket
       [[startX, midX, 'var(--primary-glow)', `L[${left}..${mid}]`],
-       [midX + GAP, endX, 'var(--medium)', `R[${mid+1}..${right}]`]].forEach(([x1, x2, col, lbl]) => {
+      [midX + GAP, endX, 'var(--medium)', `R[${mid + 1}..${right}]`]].forEach(([x1, x2, col, lbl]) => {
         if (x1 >= x2) return;
-        const path = document.createElementNS(svgNS2,'path');
-        path.setAttribute('d',`M${x1},4 L${x1},14 L${x2},14 L${x2},4`);
-        path.setAttribute('stroke',col); path.setAttribute('stroke-width','1.5');
-        path.setAttribute('fill','none');
+        const path = document.createElementNS(svgNS2, 'path');
+        path.setAttribute('d', `M${x1},4 L${x1},14 L${x2},14 L${x2},4`);
+        path.setAttribute('stroke', col); path.setAttribute('stroke-width', '1.5');
+        path.setAttribute('fill', 'none');
         bracketSvg.appendChild(path);
 
-        const t = document.createElementNS(svgNS2,'text');
-        t.setAttribute('x',(x1+x2)/2); t.setAttribute('y',30);
-        t.setAttribute('text-anchor','middle');
-        t.setAttribute('font-family','monospace'); t.setAttribute('font-size','10');
-        t.setAttribute('fill',col); t.setAttribute('font-weight','700');
+        const t = document.createElementNS(svgNS2, 'text');
+        t.setAttribute('x', (x1 + x2) / 2); t.setAttribute('y', 30);
+        t.setAttribute('text-anchor', 'middle');
+        t.setAttribute('font-family', 'monospace'); t.setAttribute('font-size', '10');
+        t.setAttribute('fill', col); t.setAttribute('font-weight', '700');
         t.textContent = lbl;
         bracketSvg.appendChild(t);
       });
@@ -20824,7 +23163,7 @@ function renderCanvasStep() {
     const status = document.createElement('div');
     status.className = 'concept-status';
     status.style.marginTop = '8px';
-    status.innerHTML = `Sorted positions: <strong>${sortedSet.size > 0 ? [...sortedSet].sort((a,b)=>a-b).join(', ') : '—'}</strong>`;
+    status.innerHTML = `Sorted positions: <strong>${sortedSet.size > 0 ? [...sortedSet].sort((a, b) => a - b).join(', ') : '—'}</strong>`;
     container.appendChild(status);
 
     canvas.appendChild(container);
@@ -20834,7 +23173,7 @@ function renderCanvasStep() {
     container.className = 'advanced-vis-container';
     container.style.paddingTop = '50px';
     container.style.paddingBottom = '30px';
-    
+
     // Draw partition segment blocks (boxes below the bars)
     const blocksWrap = document.createElement('div');
     blocksWrap.style.display = 'flex';
@@ -20842,7 +23181,7 @@ function renderCanvasStep() {
     blocksWrap.style.margin = '20px auto 0 auto';
     blocksWrap.style.width = 'max-content';
     blocksWrap.style.position = 'relative';
-    
+
     step.array.forEach((val, idx) => {
       const block = document.createElement('div');
       block.style.padding = '8px 0';
@@ -20854,16 +23193,16 @@ function renderCanvasStep() {
       block.style.fontWeight = 'bold';
       block.style.fontFamily = 'monospace';
       block.style.textAlign = 'center';
-      
+
       const isSorted = idx < step.sortedCount;
       const isActive = idx === step.activeIdx;
       const isCompare = idx === step.compareIdx;
-      
+
       let label = "Unsorted";
       let bg = "rgba(255,255,255,0.02)";
       let borderC = "var(--border-color)";
       let textC = "var(--text-main)";
-      
+
       if (isActive) {
         label = "Key";
         bg = "rgba(236, 72, 153, 0.15)";
@@ -20880,37 +23219,37 @@ function renderCanvasStep() {
         borderC = "var(--easy)";
         textC = "var(--easy)";
       }
-      
+
       block.style.background = bg;
       block.style.borderColor = borderC;
       block.style.color = textC;
-      
+
       const valDiv = document.createElement('div');
       valDiv.style.fontSize = '1.05rem';
       valDiv.textContent = val;
-      
+
       const lblDiv = document.createElement('div');
       lblDiv.style.fontSize = '0.6rem';
       lblDiv.style.color = textC;
       lblDiv.style.marginTop = '4px';
       lblDiv.textContent = label;
-      
+
       block.appendChild(valDiv);
       block.appendChild(lblDiv);
       blocksWrap.appendChild(block);
     });
-    
+
     // 3. Draw insertion arrow if active & comparing
     if (step.activeIdx >= 0 && step.compareIdx >= 0) {
       const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       svg.style.position = 'absolute';
-      svg.style.top = '-45px'; 
+      svg.style.top = '-45px';
       svg.style.left = '0';
       svg.style.width = '100%';
       svg.style.height = '45px';
       svg.style.pointerEvents = 'none';
       svg.style.zIndex = '10';
-      
+
       const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
       const marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
       marker.setAttribute("id", "arr-head");
@@ -20920,20 +23259,20 @@ function renderCanvasStep() {
       marker.setAttribute("markerWidth", "6");
       marker.setAttribute("markerHeight", "6");
       marker.setAttribute("orient", "auto-start-reverse");
-      
+
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", "M 0 0 L 10 5 L 0 10 z");
       path.setAttribute("fill", "var(--secondary)");
       marker.appendChild(path);
       defs.appendChild(marker);
       svg.appendChild(defs);
-      
-      const startX = step.activeIdx * 74 + 32; 
+
+      const startX = step.activeIdx * 74 + 32;
       const endX = step.compareIdx * 74 + 32;
-      
+
       const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
       const dy = -25;
-      const dPath = `M ${startX} 43 Q ${(startX + endX)/2} 10 ${endX} 43`;
+      const dPath = `M ${startX} 43 Q ${(startX + endX) / 2} 10 ${endX} 43`;
       line.setAttribute("d", dPath);
       line.setAttribute("stroke", "var(--secondary)");
       line.setAttribute("stroke-width", "2.5");
@@ -20942,7 +23281,7 @@ function renderCanvasStep() {
       svg.appendChild(line);
       blocksWrap.appendChild(svg);
     }
-    
+
     container.appendChild(blocksWrap);
     canvas.appendChild(container);
   }
@@ -20951,7 +23290,7 @@ function renderCanvasStep() {
     container.className = 'advanced-vis-container';
     container.style.paddingTop = '30px';
     container.style.paddingBottom = '30px';
-    
+
     // Draw partition segment blocks
     const blocksWrap = document.createElement('div');
     blocksWrap.style.display = 'flex';
@@ -20959,7 +23298,7 @@ function renderCanvasStep() {
     blocksWrap.style.justifyContent = 'center';
     blocksWrap.style.marginTop = '20px';
     blocksWrap.style.flexWrap = 'wrap';
-    
+
     step.array.forEach((val, idx) => {
       const block = document.createElement('div');
       block.style.padding = '8px 12px';
@@ -20970,12 +23309,12 @@ function renderCanvasStep() {
       block.style.fontFamily = 'monospace';
       block.style.textAlign = 'center';
       block.style.minWidth = '50px';
-      
+
       let label = "";
       let bg = "rgba(255,255,255,0.02)";
       let borderC = "var(--border-color)";
       let textC = "var(--text-main)";
-      
+
       if (idx === step.pivot) {
         label = "Pivot";
         bg = "rgba(6, 182, 212, 0.15)";
@@ -21002,33 +23341,33 @@ function renderCanvasStep() {
         borderC = "var(--easy)";
         textC = "var(--easy)";
       }
-      
+
       block.style.background = bg;
       block.style.borderColor = borderC;
       block.style.color = textC;
-      
+
       const valDiv = document.createElement('div');
       valDiv.style.fontSize = '1.05rem';
       valDiv.textContent = val;
-      
+
       const lblDiv = document.createElement('div');
       lblDiv.style.fontSize = '0.6rem';
       lblDiv.style.color = textC;
       lblDiv.style.marginTop = '4px';
       lblDiv.textContent = label;
-      
+
       block.appendChild(valDiv);
       block.appendChild(lblDiv);
       blocksWrap.appendChild(block);
     });
     container.appendChild(blocksWrap);
-    
+
     // 3. Draw status variables
     const status = document.createElement('div');
     status.className = 'concept-status';
     status.innerHTML = `i = <span style="color:var(--easy);font-weight:bold">${step.i}</span> &nbsp;|&nbsp; j = <span style="color:var(--hard);font-weight:bold">${step.j}</span> &nbsp;|&nbsp; pivot = <span style="color:var(--accent-cyan);font-weight:bold">${step.pivot}</span>`;
     container.appendChild(status);
-    
+
     canvas.appendChild(container);
   }
 
@@ -21039,7 +23378,7 @@ function renderCanvasStep() {
 
     const { grid, dist, active, queue, target } = step;
     const rows = grid.length, cols = grid[0].length;
-    const queueSet = new Set((queue||[]).map(([r,c])=>`${r},${c}`));
+    const queueSet = new Set((queue || []).map(([r, c]) => `${r},${c}`));
     const CELL = 48;
 
     // ── Grid ──
@@ -21047,24 +23386,24 @@ function renderCanvasStep() {
     gridEl.style.cssText = `display:inline-grid;grid-template-columns:repeat(${cols},${CELL}px);gap:4px;margin-bottom:12px;`;
 
     grid.forEach((row, r) => row.forEach((val, c) => {
-      const cell  = document.createElement('div');
-      const key   = `${r},${c}`;
-      const d     = dist[r][c];
-      const isWall    = val === 1;
-      const isStart   = r === 0 && c === 0;
-      const isTarget  = target && target[0]===r && target[1]===c;
-      const isActive  = active && active[0]===r && active[1]===c;
-      const isQueue   = queueSet.has(key);
+      const cell = document.createElement('div');
+      const key = `${r},${c}`;
+      const d = dist[r][c];
+      const isWall = val === 1;
+      const isStart = r === 0 && c === 0;
+      const isTarget = target && target[0] === r && target[1] === c;
+      const isActive = active && active[0] === r && active[1] === c;
+      const isQueue = queueSet.has(key);
       const isVisited = d >= 0 && !isActive && !isQueue;
 
       let bg = 'rgba(255,255,255,0.03)', border = 'rgba(255,255,255,0.08)', color = 'rgba(255,255,255,0.3)', content = '';
 
-      if (isWall)        { bg='rgba(30,41,59,0.9)';        border='rgba(255,255,255,0.06)'; content=''; color='transparent'; }
-      else if (isTarget) { bg='rgba(244,63,94,0.2)';       border='var(--hard)';            color='var(--hard)'; content='▶'; }
-      else if (isStart)  { bg='rgba(16,185,129,0.2)';      border='var(--easy)';            color='var(--easy)'; content='S'; }
-      else if (isActive) { bg='rgba(6,182,212,0.3)';       border='var(--accent-cyan)';     color='var(--accent-cyan)'; content=d>=0?String(d):''; }
-      else if (isQueue)  { bg='rgba(245,158,11,0.15)';     border='var(--medium)';          color='var(--medium)'; content=d>=0?String(d):''; }
-      else if (isVisited){ bg='rgba(99,102,241,0.12)';     border='rgba(99,102,241,0.3)';   color='rgba(255,255,255,0.7)'; content=String(d); }
+      if (isWall) { bg = 'rgba(30,41,59,0.9)'; border = 'rgba(255,255,255,0.06)'; content = ''; color = 'transparent'; }
+      else if (isTarget) { bg = 'rgba(244,63,94,0.2)'; border = 'var(--hard)'; color = 'var(--hard)'; content = '▶'; }
+      else if (isStart) { bg = 'rgba(16,185,129,0.2)'; border = 'var(--easy)'; color = 'var(--easy)'; content = 'S'; }
+      else if (isActive) { bg = 'rgba(6,182,212,0.3)'; border = 'var(--accent-cyan)'; color = 'var(--accent-cyan)'; content = d >= 0 ? String(d) : ''; }
+      else if (isQueue) { bg = 'rgba(245,158,11,0.15)'; border = 'var(--medium)'; color = 'var(--medium)'; content = d >= 0 ? String(d) : ''; }
+      else if (isVisited) { bg = 'rgba(99,102,241,0.12)'; border = 'rgba(99,102,241,0.3)'; color = 'rgba(255,255,255,0.7)'; content = String(d); }
 
       cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;align-items:center;justify-content:center;
         border-radius:6px;border:1.5px solid ${border};background:${bg};
@@ -21079,12 +23418,12 @@ function renderCanvasStep() {
     const legend = document.createElement('div');
     legend.style.cssText = 'display:flex;gap:12px;flex-wrap:wrap;font-size:0.65rem;font-family:monospace;margin-bottom:8px;';
     [
-      ['S', 'var(--easy)',        'Start'],
-      ['▶', 'var(--hard)',        'Goal'],
+      ['S', 'var(--easy)', 'Start'],
+      ['▶', 'var(--hard)', 'Goal'],
       ['n', 'var(--accent-cyan)', 'Active'],
-      ['n', 'var(--medium)',      'In Queue'],
-      ['n', 'rgba(99,102,241,0.8)','Visited'],
-      ['■', 'rgba(255,255,255,0.2)','Wall'],
+      ['n', 'var(--medium)', 'In Queue'],
+      ['n', 'rgba(99,102,241,0.8)', 'Visited'],
+      ['■', 'rgba(255,255,255,0.2)', 'Wall'],
     ].forEach(([sym, col, lbl]) => {
       const item = document.createElement('span');
       item.style.cssText = `display:flex;align-items:center;gap:4px;color:var(--text-muted);`;
@@ -21106,7 +23445,7 @@ function renderCanvasStep() {
       e.textContent = 'empty';
       qRow.appendChild(e);
     } else {
-      (queue||[]).slice(0,10).forEach(([r,c]) => {
+      (queue || []).slice(0, 10).forEach(([r, c]) => {
         const pill = document.createElement('span');
         pill.style.cssText = 'font-size:0.7rem;font-family:monospace;padding:2px 7px;border-radius:6px;border:1px solid var(--medium);color:var(--medium);background:rgba(245,158,11,0.08);';
         pill.textContent = `(${r},${c})`;
@@ -21115,7 +23454,7 @@ function renderCanvasStep() {
       if (queue.length > 10) {
         const more = document.createElement('span');
         more.style.cssText = 'font-size:0.68rem;color:var(--text-muted);font-family:monospace;';
-        more.textContent = `+${queue.length-10} more`;
+        more.textContent = `+${queue.length - 10} more`;
         qRow.appendChild(more);
       }
     }
@@ -21129,7 +23468,7 @@ function renderCanvasStep() {
     container.className = 'advanced-vis-container';
 
     const { op, key, val, hit, cache, buckets, minFreq, activeKey, evictedKey, capacity } = step;
-    const opColors = { put:'var(--primary-glow)', get:'var(--accent-cyan)' };
+    const opColors = { put: 'var(--primary-glow)', get: 'var(--accent-cyan)' };
 
     // ── Header ──
     const hdr = document.createElement('div');
@@ -21137,12 +23476,12 @@ function renderCanvasStep() {
     if (op) {
       const opPill = document.createElement('span');
       opPill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
-        border:1px solid ${opColors[op]||'var(--text-muted)'};color:${opColors[op]||'var(--text-muted)'};`;
+        border:1px solid ${opColors[op] || 'var(--text-muted)'};color:${opColors[op] || 'var(--text-muted)'};`;
       opPill.textContent = `${op}(${key}${val !== null && val !== undefined ? `,'${val}'` : ''})`;
       hdr.appendChild(opPill);
       if (op === 'get') {
         const hitPill = document.createElement('span');
-        hitPill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;color:${hit?'var(--easy)':'var(--hard)'};`;
+        hitPill.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;color:${hit ? 'var(--easy)' : 'var(--hard)'};`;
         hitPill.textContent = hit ? '✓ HIT' : '✗ MISS';
         hdr.appendChild(hitPill);
       }
@@ -21155,17 +23494,17 @@ function renderCanvasStep() {
     }
     const mfPill = document.createElement('span');
     mfPill.style.cssText = 'font-size:0.68rem;font-family:monospace;color:var(--text-muted);margin-left:auto;';
-    mfPill.textContent = `minFreq = ${minFreq} | size = ${(cache||[]).length}/${capacity}`;
+    mfPill.textContent = `minFreq = ${minFreq} | size = ${(cache || []).length}/${capacity}`;
     hdr.appendChild(mfPill);
     container.appendChild(hdr);
 
     // ── Frequency bucket columns ──
-    const maxFreq = Math.max(...Object.keys(buckets||{}).map(Number), 1);
+    const maxFreq = Math.max(...Object.keys(buckets || {}).map(Number), 1);
     const bucketsWrap = document.createElement('div');
     bucketsWrap.style.cssText = 'display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:12px;';
 
     for (let f = 1; f <= maxFreq + 1; f++) {
-      const bkeys = (buckets||{})[f] || [];
+      const bkeys = (buckets || {})[f] || [];
       if (f > maxFreq && bkeys.length === 0) continue;
 
       const col = document.createElement('div');
@@ -21186,20 +23525,20 @@ function renderCanvasStep() {
         col.appendChild(empty);
       } else {
         bkeys.forEach((k, pos) => {
-          const cacheEntry = (cache||[]).find(e => e.key === k);
-          const isActive   = k === activeKey;
-          const isEvicted  = k === evictedKey;
+          const cacheEntry = (cache || []).find(e => e.key === k);
+          const isActive = k === activeKey;
+          const isEvicted = k === evictedKey;
           const card = document.createElement('div');
           card.style.cssText = `padding:5px 10px;border-radius:7px;font-family:monospace;font-size:0.78rem;
             font-weight:700;text-align:center;
-            border:1.5px solid ${isEvicted?'var(--hard)':isActive?opColors[op]||'var(--accent-cyan)':'rgba(255,255,255,0.12)'};
-            background:${isEvicted?'rgba(244,63,94,0.15)':isActive?'rgba(99,102,241,0.15)':'rgba(255,255,255,0.04)'};
-            color:${isEvicted?'var(--hard)':isActive?opColors[op]||'var(--accent-cyan)':'rgba(255,255,255,0.7)'};
+            border:1.5px solid ${isEvicted ? 'var(--hard)' : isActive ? opColors[op] || 'var(--accent-cyan)' : 'rgba(255,255,255,0.12)'};
+            background:${isEvicted ? 'rgba(244,63,94,0.15)' : isActive ? 'rgba(99,102,241,0.15)' : 'rgba(255,255,255,0.04)'};
+            color:${isEvicted ? 'var(--hard)' : isActive ? opColors[op] || 'var(--accent-cyan)' : 'rgba(255,255,255,0.7)'};
             position:relative;`;
           card.innerHTML = `<div>${k}</div>
             <div style="font-size:0.55rem;font-weight:400;color:rgba(255,255,255,0.35)">'${cacheEntry?.val ?? '?'}'</div>
-            ${pos===0?'<div style="font-size:0.48rem;color:rgba(255,255,255,0.25)">MRU</div>':''}
-            ${pos===bkeys.length-1&&bkeys.length>1?'<div style="font-size:0.48rem;color:rgba(255,255,255,0.25)">LRU</div>':''}`;
+            ${pos === 0 ? '<div style="font-size:0.48rem;color:rgba(255,255,255,0.25)">MRU</div>' : ''}
+            ${pos === bkeys.length - 1 && bkeys.length > 1 ? '<div style="font-size:0.48rem;color:rgba(255,255,255,0.25)">LRU</div>' : ''}`;
           col.appendChild(card);
         });
       }
@@ -21208,19 +23547,19 @@ function renderCanvasStep() {
     container.appendChild(bucketsWrap);
 
     // ── Cache state table ──
-    if ((cache||[]).length > 0) {
+    if ((cache || []).length > 0) {
       const tableRow = document.createElement('div');
       tableRow.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;';
       const tLabel = document.createElement('span');
       tLabel.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);align-self:center;';
       tLabel.textContent = 'Cache:';
       tableRow.appendChild(tLabel);
-      (cache||[]).forEach(e => {
+      (cache || []).forEach(e => {
         const pill = document.createElement('span');
         pill.style.cssText = `font-size:0.72rem;font-family:monospace;padding:2px 9px;border-radius:6px;
-          border:1px solid ${e.key===activeKey?opColors[op]:'rgba(255,255,255,0.1)'};
-          color:${e.key===activeKey?opColors[op]:'var(--text-main)'};
-          background:${e.key===activeKey?'rgba(99,102,241,0.08)':'transparent'};`;
+          border:1px solid ${e.key === activeKey ? opColors[op] : 'rgba(255,255,255,0.1)'};
+          color:${e.key === activeKey ? opColors[op] : 'var(--text-main)'};
+          background:${e.key === activeKey ? 'rgba(99,102,241,0.08)' : 'transparent'};`;
         pill.textContent = `${e.key}:'${e.val}' (f${e.freq})`;
         tableRow.appendChild(pill);
       });
@@ -21264,13 +23603,13 @@ function renderCanvasStep() {
       cell.className = 'dp1d-cell';
 
       const inWindow = step.r >= 0 && idx >= step.windowStart && idx <= step.windowEnd;
-      const inDeque  = step.dq.includes(idx);
-      const isMax    = inDeque && idx === step.dq[0] && step.r >= step.k - 1;
-      const evicted  = step.evictReason === 'smaller' && idx === step.r - 1 && !inDeque; // rough hint
+      const inDeque = step.dq.includes(idx);
+      const isMax = inDeque && idx === step.dq[0] && step.r >= step.k - 1;
+      const evicted = step.evictReason === 'smaller' && idx === step.r - 1 && !inDeque; // rough hint
 
-      if (isMax)       { cell.classList.add('dp1d-active'); cell.style.borderColor = 'var(--easy)'; cell.style.boxShadow = '0 0 8px rgba(16,185,129,0.5)'; }
-      else if (inDeque){ cell.classList.add('dp1d-active'); }
-      else if (inWindow){ cell.classList.add('dp1d-filled'); }
+      if (isMax) { cell.classList.add('dp1d-active'); cell.style.borderColor = 'var(--easy)'; cell.style.boxShadow = '0 0 8px rgba(16,185,129,0.5)'; }
+      else if (inDeque) { cell.classList.add('dp1d-active'); }
+      else if (inWindow) { cell.classList.add('dp1d-filled'); }
 
       cell.innerHTML = `<div class="dp1d-cell-val">${val}</div><div class="dp1d-cell-idx">[${idx}]</div>`;
       row.appendChild(cell);
@@ -21406,13 +23745,13 @@ function renderCanvasStep() {
     }
 
     // ── Action badge ──
-    const actionColors = { pop_back:'var(--hard)', pop_front:'var(--medium)', push:'var(--primary-glow)', output:'var(--easy)', init:'var(--text-muted)' };
-    const actionLabels = { pop_back:'Pop Back', pop_front:'Pop Front', push:'Push Back', output:'Window Output', init:'Init' };
+    const actionColors = { pop_back: 'var(--hard)', pop_front: 'var(--medium)', push: 'var(--primary-glow)', output: 'var(--easy)', init: 'var(--text-muted)' };
+    const actionLabels = { pop_back: 'Pop Back', pop_front: 'Pop Front', push: 'Push Back', output: 'Window Output', init: 'Init' };
     const hdr = document.createElement('div');
     hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;';
     const badge = document.createElement('span');
     badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
-      border:1px solid ${actionColors[action]||'var(--text-muted)'};color:${actionColors[action]||'var(--text-muted)'};`;
+      border:1px solid ${actionColors[action] || 'var(--text-muted)'};color:${actionColors[action] || 'var(--text-muted)'};`;
     badge.textContent = actionLabels[action] || action;
     hdr.appendChild(badge);
     if (r >= 0) {
@@ -21430,13 +23769,13 @@ function renderCanvasStep() {
       nums.forEach((val, idx) => {
         const cell = document.createElement('div');
         const inWindow = r >= 0 && idx >= windowStart && idx <= windowEnd;
-        const inDeque  = deque && deque.includes(idx);
-        const isCurr   = idx === r;
+        const inDeque = deque && deque.includes(idx);
+        const isCurr = idx === r;
         cell.style.cssText = `width:42px;height:42px;flex-shrink:0;display:flex;flex-direction:column;
           align-items:center;justify-content:center;border-radius:6px;font-family:monospace;font-size:0.82rem;font-weight:700;
-          border:${isCurr?'2px solid var(--primary-glow)':inDeque?'1.5px solid var(--accent-cyan)':inWindow?'1px solid rgba(99,102,241,0.4)':'1px solid rgba(255,255,255,0.08)'};
-          background:${isCurr?'rgba(99,102,241,0.2)':inDeque?'rgba(6,182,212,0.12)':inWindow?'rgba(99,102,241,0.06)':'rgba(255,255,255,0.02)'};
-          color:${isCurr?'var(--primary-glow)':inDeque?'var(--accent-cyan)':'rgba(255,255,255,0.7)'};`;
+          border:${isCurr ? '2px solid var(--primary-glow)' : inDeque ? '1.5px solid var(--accent-cyan)' : inWindow ? '1px solid rgba(99,102,241,0.4)' : '1px solid rgba(255,255,255,0.08)'};
+          background:${isCurr ? 'rgba(99,102,241,0.2)' : inDeque ? 'rgba(6,182,212,0.12)' : inWindow ? 'rgba(99,102,241,0.06)' : 'rgba(255,255,255,0.02)'};
+          color:${isCurr ? 'var(--primary-glow)' : inDeque ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.7)'};`;
         cell.innerHTML = `<span>${val}</span><span style="font-size:0.45rem;color:rgba(255,255,255,0.25)">[${idx}]</span>`;
         arrRow.appendChild(cell);
       });
@@ -21468,15 +23807,15 @@ function renderCanvasStep() {
         dq.forEach((idx, pos) => {
           const val = dqVals ? dqVals[pos] : idx;
           const isFront = pos === 0;
-          const isBack  = pos === dq.length - 1;
+          const isBack = pos === dq.length - 1;
           const pill = document.createElement('div');
           pill.style.cssText = `padding:4px 12px;font-family:monospace;font-size:0.8rem;font-weight:700;
             border-top:2px solid ${color};border-bottom:2px solid ${color};
-            border-left:${isFront?'2px solid '+color:'1px solid rgba(255,255,255,0.1)'};
-            border-right:${isBack?'2px solid '+color:'1px solid rgba(255,255,255,0.1)'};
-            border-radius:${isFront?'6px 0 0 6px':isBack?'0 6px 6px 0':'0'};
-            background:${isFront?'rgba(6,182,212,0.15)':'rgba(255,255,255,0.03)'};
-            color:${isFront?color:'rgba(255,255,255,0.8)'};`;
+            border-left:${isFront ? '2px solid ' + color : '1px solid rgba(255,255,255,0.1)'};
+            border-right:${isBack ? '2px solid ' + color : '1px solid rgba(255,255,255,0.1)'};
+            border-radius:${isFront ? '6px 0 0 6px' : isBack ? '0 6px 6px 0' : '0'};
+            background:${isFront ? 'rgba(6,182,212,0.15)' : 'rgba(255,255,255,0.03)'};
+            color:${isFront ? color : 'rgba(255,255,255,0.8)'};`;
           pill.innerHTML = `${val}<sub style="font-size:0.45rem;color:rgba(255,255,255,0.3)">[${idx}]</sub>`;
           wrap.appendChild(pill);
         });
@@ -21521,16 +23860,16 @@ function renderCanvasStep() {
     container.className = 'advanced-vis-container';
 
     const { small, large, smallTree, largeTree, active, action, median } = step;
-    const actionColors = { insert:'var(--primary-glow)', rebalance:'var(--medium)', query:'var(--easy)', init:'var(--text-muted)' };
-    const actionLabels = { insert:'Insert', rebalance:'Rebalance', query:'Query Median', init:'Init' };
+    const actionColors = { insert: 'var(--primary-glow)', rebalance: 'var(--medium)', query: 'var(--easy)', init: 'var(--text-muted)' };
+    const actionLabels = { insert: 'Insert', rebalance: 'Rebalance', query: 'Query Median', init: 'Init' };
 
     // ── Header ──
     const hdr = document.createElement('div');
     hdr.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;';
     const badge = document.createElement('span');
     badge.style.cssText = `font-size:0.68rem;font-family:monospace;font-weight:700;padding:2px 10px;border-radius:20px;
-      border:1px solid ${actionColors[action]||'var(--text-muted)'};color:${actionColors[action]||'var(--text-muted)'};`;
-    badge.textContent = `${actionLabels[action]||action}${active!==null?' → '+active:''}`;
+      border:1px solid ${actionColors[action] || 'var(--text-muted)'};color:${actionColors[action] || 'var(--text-muted)'};`;
+    badge.textContent = `${actionLabels[action] || action}${active !== null ? ' → ' + active : ''}`;
     hdr.appendChild(badge);
     if (median !== null && median !== undefined) {
       const medPill = document.createElement('span');
@@ -21552,7 +23891,7 @@ function renderCanvasStep() {
       titleEl.textContent = label;
       wrap.appendChild(titleEl);
 
-      const R   = 20, H_GAP = 52, V_GAP = 52;
+      const R = 20, H_GAP = 52, V_GAP = 52;
       const svgNS = 'http://www.w3.org/2000/svg';
 
       // Compute positions: 1-based heap index → x,y
@@ -21578,7 +23917,7 @@ function renderCanvasStep() {
         const from = getPos(n.parentIdx), to = getPos(n.idx);
         const line = document.createElementNS(svgNS, 'line');
         line.setAttribute('x1', from.x); line.setAttribute('y1', from.y);
-        line.setAttribute('x2', to.x);   line.setAttribute('y2', to.y);
+        line.setAttribute('x2', to.x); line.setAttribute('y2', to.y);
         line.setAttribute('stroke', 'rgba(255,255,255,0.12)');
         line.setAttribute('stroke-width', '1.5');
         svg.appendChild(line);
@@ -21586,10 +23925,10 @@ function renderCanvasStep() {
 
       // Nodes
       nodes.forEach(n => {
-        const pos   = getPos(n.idx);
+        const pos = getPos(n.idx);
         const isTop = n.idx === 1;
         const isActive = n.val === active;
-        const fill  = isActive ? `rgba(${isMax?'99,102,241':'6,182,212'},0.25)` : isTop ? `rgba(${isMax?'99,102,241':'6,182,212'},0.15)` : 'rgba(30,41,59,0.9)';
+        const fill = isActive ? `rgba(${isMax ? '99,102,241' : '6,182,212'},0.25)` : isTop ? `rgba(${isMax ? '99,102,241' : '6,182,212'},0.15)` : 'rgba(30,41,59,0.9)';
         const stroke = isActive ? color : isTop ? color : 'rgba(255,255,255,0.2)';
 
         const circle = document.createElementNS(svgNS, 'circle');
@@ -21644,9 +23983,9 @@ function renderCanvasStep() {
       arr.forEach(v => {
         const chip = document.createElement('span');
         chip.style.cssText = `font-size:0.72rem;font-family:monospace;padding:2px 7px;border-radius:6px;
-          border:1px solid ${v===active?col:'rgba(255,255,255,0.1)'};
-          color:${v===active?col:'rgba(255,255,255,0.7)'};
-          background:${v===active?'rgba(99,102,241,0.08)':'transparent'};font-weight:${v===active?'700':'400'};`;
+          border:1px solid ${v === active ? col : 'rgba(255,255,255,0.1)'};
+          color:${v === active ? col : 'rgba(255,255,255,0.7)'};
+          background:${v === active ? 'rgba(99,102,241,0.08)' : 'transparent'};font-weight:${v === active ? '700' : '400'};`;
         chip.textContent = v;
         w.appendChild(chip);
       });
@@ -21688,7 +24027,7 @@ function renderCanvasStep() {
     // Rotation type badge
     if (step.rotationType) {
       const rotColors = { LL: '#10b981', RR: '#10b981', LR: '#f59e0b', RL: '#f59e0b' };
-      const rotDesc  = { LL: 'Left-Left → Right Rotation', RR: 'Right-Right → Left Rotation', LR: 'Left-Right → Double Rotation', RL: 'Right-Left → Double Rotation' };
+      const rotDesc = { LL: 'Left-Left → Right Rotation', RR: 'Right-Right → Left Rotation', LR: 'Left-Right → Double Rotation', RL: 'Right-Left → Double Rotation' };
       const badge = document.createElement('div');
       badge.style.cssText = `font-size:0.72rem;font-weight:700;font-family:monospace;letter-spacing:0.07em;color:${rotColors[step.rotationType]};text-transform:uppercase;`;
       badge.textContent = `⟳ ${step.rotationType}: ${rotDesc[step.rotationType]}`;
@@ -21709,8 +24048,8 @@ function renderCanvasStep() {
 
     // Compute layout positions by traversing the serialized tree
     const NODE_R = 22;
-    const H_GAP  = 52;
-    const V_GAP  = 64;
+    const H_GAP = 52;
+    const V_GAP = 64;
     const positions = new Map(); // val → {x, y}
 
     function computeLayout(node, depth, counter) {
@@ -21774,10 +24113,10 @@ function renderCanvasStep() {
       if (!node) return;
       const p = positions.get(node.val);
       if (!p) return;
-      const isActive  = node.val === step.activeNode;
-      const isOnPath  = step.path && step.path.includes(node.val);
-      const isUnbal   = step.status === 'unbalanced' && isActive;
-      const bfAbs     = Math.abs(node.bf);
+      const isActive = node.val === step.activeNode;
+      const isOnPath = step.path && step.path.includes(node.val);
+      const isUnbal = step.status === 'unbalanced' && isActive;
+      const bfAbs = Math.abs(node.bf);
 
       const nodeEl = document.createElement('div');
       nodeEl.style.cssText = `
@@ -21828,8 +24167,8 @@ function renderCanvasStep() {
     const container = document.createElement('div');
     container.className = 'concept-vis-container';
 
-    const phaseColors = { init:'var(--text-muted)', selecting:'var(--medium)', merged:'var(--accent-cyan)', complete:'var(--easy)' };
-    const phaseLabels = { init:'Initialized', selecting:'Selecting Pair', merged:'Merged', complete:'Complete' };
+    const phaseColors = { init: 'var(--text-muted)', selecting: 'var(--medium)', merged: 'var(--accent-cyan)', complete: 'var(--easy)' };
+    const phaseLabels = { init: 'Initialized', selecting: 'Selecting Pair', merged: 'Merged', complete: 'Complete' };
 
     // ── Phase badge ──
     const phaseBadge = document.createElement('div');
@@ -21841,22 +24180,22 @@ function renderCanvasStep() {
     // ── Priority Queue ──
     const qTitle = document.createElement('div');
     qTitle.style.cssText = 'font-size:0.65rem;font-family:monospace;color:var(--text-muted);text-transform:uppercase;font-weight:700;letter-spacing:0.05em;margin-bottom:8px;';
-    qTitle.textContent = `Priority Queue (${step.queue.length} node${step.queue.length!==1?'s':''} — sorted by freq ↑)`;
+    qTitle.textContent = `Priority Queue (${step.queue.length} node${step.queue.length !== 1 ? 's' : ''} — sorted by freq ↑)`;
     container.appendChild(qTitle);
 
-    const maxFreq = Math.max(...step.queue.map(n=>n.freq), 1);
+    const maxFreq = Math.max(...step.queue.map(n => n.freq), 1);
     const queueRow = document.createElement('div');
     queueRow.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;';
 
     step.queue.forEach(node => {
-      const isLeft   = node.val === step.mergeLeft;
-      const isRight  = node.val === step.mergeRight;
+      const isLeft = node.val === step.mergeLeft;
+      const isRight = node.val === step.mergeRight;
       const isMerged = node.val === step.mergedVal;
-      const isLeaf   = !node.left && !node.right;
-      const pct      = Math.round((node.freq / maxFreq) * 100);
+      const isLeaf = !node.left && !node.right;
+      const pct = Math.round((node.freq / maxFreq) * 100);
 
-      let borderCol = isLeft||isRight ? 'var(--medium)' : isMerged ? 'var(--accent-cyan)' : isLeaf ? 'var(--primary-glow)' : 'rgba(255,255,255,0.15)';
-      let bgCol     = isLeft||isRight ? 'rgba(245,158,11,0.1)' : isMerged ? 'rgba(6,182,212,0.1)' : 'rgba(255,255,255,0.03)';
+      let borderCol = isLeft || isRight ? 'var(--medium)' : isMerged ? 'var(--accent-cyan)' : isLeaf ? 'var(--primary-glow)' : 'rgba(255,255,255,0.15)';
+      let bgCol = isLeft || isRight ? 'rgba(245,158,11,0.1)' : isMerged ? 'rgba(6,182,212,0.1)' : 'rgba(255,255,255,0.03)';
 
       const card = document.createElement('div');
       card.style.cssText = `display:flex;flex-direction:column;align-items:center;gap:4px;
@@ -21866,7 +24205,7 @@ function renderCanvasStep() {
       // Char label
       const charEl = document.createElement('div');
       charEl.style.cssText = `font-size:0.9rem;font-weight:700;
-        color:${isLeaf?'var(--primary-glow)':isMerged?'var(--accent-cyan)':'rgba(255,255,255,0.7)'};`;
+        color:${isLeaf ? 'var(--primary-glow)' : isMerged ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.7)'};`;
       charEl.textContent = isLeaf ? `'${node.val}'` : node.val;
       card.appendChild(charEl);
 
@@ -21881,14 +24220,14 @@ function renderCanvasStep() {
       barWrap.style.cssText = 'width:100%;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;';
       const bar = document.createElement('div');
       bar.style.cssText = `height:100%;width:${pct}%;border-radius:2px;
-        background:${isLeft||isRight?'var(--medium)':isMerged?'var(--accent-cyan)':'var(--primary-glow)'};`;
+        background:${isLeft || isRight ? 'var(--medium)' : isMerged ? 'var(--accent-cyan)' : 'var(--primary-glow)'};`;
       barWrap.appendChild(bar);
       card.appendChild(barWrap);
 
       // Merge arrow tag
-      if (isLeft)   { const t=document.createElement('div'); t.style.cssText='font-size:0.55rem;color:var(--medium);font-weight:700;'; t.textContent='← L'; card.appendChild(t); }
-      if (isRight)  { const t=document.createElement('div'); t.style.cssText='font-size:0.55rem;color:var(--medium);font-weight:700;'; t.textContent='R →'; card.appendChild(t); }
-      if (isMerged) { const t=document.createElement('div'); t.style.cssText='font-size:0.55rem;color:var(--accent-cyan);font-weight:700;'; t.textContent='✓ new'; card.appendChild(t); }
+      if (isLeft) { const t = document.createElement('div'); t.style.cssText = 'font-size:0.55rem;color:var(--medium);font-weight:700;'; t.textContent = '← L'; card.appendChild(t); }
+      if (isRight) { const t = document.createElement('div'); t.style.cssText = 'font-size:0.55rem;color:var(--medium);font-weight:700;'; t.textContent = 'R →'; card.appendChild(t); }
+      if (isMerged) { const t = document.createElement('div'); t.style.cssText = 'font-size:0.55rem;color:var(--accent-cyan);font-weight:700;'; t.textContent = '✓ new'; card.appendChild(t); }
 
       queueRow.appendChild(card);
     });
@@ -21904,7 +24243,7 @@ function renderCanvasStep() {
       const tableWrap = document.createElement('div');
       tableWrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;';
 
-      const sorted = [...step.encodingNodes].sort((a,b) =>
+      const sorted = [...step.encodingNodes].sort((a, b) =>
         step.encodingTable[a.char].length - step.encodingTable[b.char].length || b.freq - a.freq);
 
       sorted.forEach(n => {
@@ -21998,15 +24337,15 @@ function renderCanvasStep() {
 
     // Fix-case badge
     const caseLabels = {
-      start:    { label: 'Ready',               color: 'var(--text-muted)' },
-      insert:   { label: 'Inserted (Red)',       color: 'var(--primary-glow)' },
-      recolor:  { label: 'Case 1 — Recolor',     color: 'var(--medium)' },
+      start: { label: 'Ready', color: 'var(--text-muted)' },
+      insert: { label: 'Inserted (Red)', color: 'var(--primary-glow)' },
+      recolor: { label: 'Case 1 — Recolor', color: 'var(--medium)' },
       'LR-step1': { label: 'Case 2 — LR Triangle → Rotate', color: 'var(--secondary)' },
       'RL-step1': { label: 'Case 2 — RL Triangle → Rotate', color: 'var(--secondary)' },
       'LL-step2': { label: 'Case 3 — LL Line → Right Rotate', color: 'var(--accent-cyan)' },
-      'RR-step2': { label: 'Case 3 — RR Line → Left Rotate',  color: 'var(--accent-cyan)' },
-      rotated:  { label: '✓ Rotation Done',      color: 'var(--easy)' },
-      stable:   { label: '✓ Tree Balanced',       color: 'var(--easy)' },
+      'RR-step2': { label: 'Case 3 — RR Line → Left Rotate', color: 'var(--accent-cyan)' },
+      rotated: { label: '✓ Rotation Done', color: 'var(--easy)' },
+      stable: { label: '✓ Tree Balanced', color: 'var(--easy)' },
     };
     const caseInfo = caseLabels[step.fixCase] || { label: step.fixCase, color: 'var(--text-muted)' };
     const badge = document.createElement('div');
@@ -22070,8 +24409,8 @@ function renderCanvasStep() {
       const p = pos[node.val];
       if (!p) return;
       const isActive = node.val === step.activeVal;
-      const isUncle  = node.val === step.uncleVal;
-      const isRed    = node.color === 'red';
+      const isUncle = node.val === step.uncleVal;
+      const isRed = node.color === 'red';
 
       const el = document.createElement('div');
       el.style.cssText = `
@@ -22126,16 +24465,16 @@ function renderCanvasStep() {
 
     // Node layout for 6 nodes: S left, A/B middle-top/bottom, C/D right-middle, T far right
     const nodePos = {
-      'S': { x: 60,  y: 130 },
-      'A': { x: 210, y: 55  },
+      'S': { x: 60, y: 130 },
+      'A': { x: 210, y: 55 },
       'B': { x: 210, y: 205 },
-      'C': { x: 360, y: 55  },
+      'C': { x: 360, y: 55 },
       'D': { x: 360, y: 205 },
       'T': { x: 510, y: 130 }
     };
     const NODE_R = 24;
-    const SVG_W  = 590;
-    const SVG_H  = 280;
+    const SVG_W = 590;
+    const SVG_H = 280;
 
     const graphWrap = document.createElement('div');
     graphWrap.style.cssText = `position:relative;width:${SVG_W}px;height:${SVG_H}px;flex-shrink:0;`;
@@ -22162,8 +24501,8 @@ function renderCanvasStep() {
       return marker;
     };
     defs.appendChild(mkMarker('arr-default', 'rgba(255,255,255,0.25)'));
-    defs.appendChild(mkMarker('arr-active',  '#f59e0b'));
-    defs.appendChild(mkMarker('arr-full',    '#ef4444'));
+    defs.appendChild(mkMarker('arr-active', '#f59e0b'));
+    defs.appendChild(mkMarker('arr-full', '#ef4444'));
     defs.appendChild(mkMarker('arr-partial', '#10b981'));
     svg.appendChild(defs);
 
@@ -22172,8 +24511,8 @@ function renderCanvasStep() {
       const from = nodePos[e.u], to = nodePos[e.v];
       if (!from || !to) return;
       const isOnPath = step.pathEdges && step.pathEdges.includes(`${e.u}-${e.v}`);
-      const isFull   = e.residual === 0;
-      const hasFlow  = e.flow > 0;
+      const isFull = e.residual === 0;
+      const hasFlow = e.flow > 0;
 
       // Vector from center to center, shorten to node radius
       const dx = to.x - from.x, dy = to.y - from.y;
@@ -22181,8 +24520,8 @@ function renderCanvasStep() {
       const ux = dx / dist, uy = dy / dist;
       const x1 = from.x + ux * NODE_R;
       const y1 = from.y + uy * NODE_R;
-      const x2 = to.x   - ux * (NODE_R + 8); // 8px before node for arrowhead
-      const y2 = to.y   - uy * (NODE_R + 8);
+      const x2 = to.x - ux * (NODE_R + 8); // 8px before node for arrowhead
+      const y2 = to.y - uy * (NODE_R + 8);
 
       const markerId = isOnPath ? 'arr-active' : isFull ? 'arr-full' : hasFlow ? 'arr-partial' : 'arr-default';
       const strokeColor = isOnPath ? '#f59e0b' : isFull ? '#ef4444' : hasFlow ? '#10b981' : 'rgba(255,255,255,0.2)';
@@ -22223,9 +24562,9 @@ function renderCanvasStep() {
     nodeList.forEach(id => {
       const p = nodePos[id];
       if (!p) return;
-      const isOnPath  = step.path && step.path.includes(id);
-      const isSource  = id === nodeList[0];
-      const isSink    = id === nodeList[nodeList.length - 1];
+      const isOnPath = step.path && step.path.includes(id);
+      const isSource = id === nodeList[0];
+      const isSink = id === nodeList[nodeList.length - 1];
 
       const el = document.createElement('div');
       el.style.cssText = `
@@ -22300,12 +24639,12 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'singlenumber') {
     const container = document.createElement('div');
     container.className = 'advanced-vis-container';
-    
+
     const arrayWrap = document.createElement('div');
     arrayWrap.style.display = 'flex';
     arrayWrap.style.gap = '10px';
     arrayWrap.style.marginBottom = '25px';
-    
+
     step.array.forEach((val, idx) => {
       const cell = document.createElement('div');
       cell.className = 'bs-element';
@@ -22317,7 +24656,7 @@ function renderCanvasStep() {
       arrayWrap.appendChild(cell);
     });
     container.appendChild(arrayWrap);
-    
+
     // Register display
     const registers = document.createElement('div');
     registers.style.display = 'flex';
@@ -22326,7 +24665,7 @@ function renderCanvasStep() {
     registers.style.width = '240px';
     registers.style.fontFamily = 'monospace';
     registers.style.fontSize = '0.95rem';
-    
+
     registers.innerHTML = `
       <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:6px;">
         <span>Active Val:</span><strong>${step.index >= 0 ? step.array[step.index] : '0'} (${step.binaryVal})</strong>
@@ -22443,31 +24782,31 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'bitmaskdp') {
     const container = document.createElement('div');
     container.className = 'tsp-container';
-    
+
     const graphPanel = document.createElement('div');
     graphPanel.className = 'tsp-graph-panel';
-    
+
     const graphTitle = document.createElement('div');
     graphTitle.className = 'tsp-table-header';
     graphTitle.textContent = 'Complete Weighted Graph (TSP)';
     graphPanel.appendChild(graphTitle);
-    
+
     const graphWrapper = document.createElement('div');
     graphWrapper.className = 'tsp-graph-wrapper';
-    
+
     const coords = [
       { x: 80, y: 30, name: 'A' },
       { x: 320, y: 30, name: 'B' },
       { x: 320, y: 220, name: 'C' },
       { x: 80, y: 220, name: 'D' }
     ];
-    
+
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("class", "cycle-arrow-svg");
     svg.style.position = 'absolute';
     svg.style.width = '100%';
     svg.style.height = '100%';
-    
+
     const edgesList = [
       { u: 0, v: 1, w: 10, mid: { x: 222, y: 52 } },
       { u: 0, v: 2, w: 15, mid: { x: 222, y: 165 } },
@@ -22476,26 +24815,26 @@ function renderCanvasStep() {
       { u: 1, v: 3, w: 25, mid: { x: 222, y: 125 } },
       { u: 2, v: 3, w: 30, mid: { x: 222, y: 242 } }
     ];
-    
+
     edgesList.forEach(e => {
       const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
       const from = coords[e.u];
       const to = coords[e.v];
-      
+
       line.setAttribute("x1", from.x + 22);
       line.setAttribute("y1", from.y + 22);
       line.setAttribute("x2", to.x + 22);
       line.setAttribute("y2", to.y + 22);
-      
-      const isInTour = step.inTour.some(te => 
+
+      const isInTour = step.inTour.some(te =>
         (te.from === e.u && te.to === e.v) || (te.from === e.v && te.to === e.u)
       );
-      
+
       const isActive = step.activeEdge && (
         (step.activeEdge.from === e.u && step.activeEdge.to === e.v) ||
         (step.activeEdge.from === e.v && step.activeEdge.to === e.u)
       );
-      
+
       if (isInTour) {
         line.setAttribute("stroke", "var(--easy)");
         line.setAttribute("stroke-width", "4");
@@ -22509,7 +24848,7 @@ function renderCanvasStep() {
         line.setAttribute("stroke-width", "1.5");
       }
       svg.appendChild(line);
-      
+
       const label = document.createElement('div');
       label.className = 'tsp-edge-label';
       if (isInTour) label.classList.add('in-tour');
@@ -22519,34 +24858,34 @@ function renderCanvasStep() {
       label.textContent = e.w;
       graphWrapper.appendChild(label);
     });
-    
+
     graphWrapper.appendChild(svg);
-    
+
     coords.forEach((coord, idx) => {
       const el = document.createElement('div');
       el.className = 'tsp-node';
       el.style.left = `${coord.x}px`;
       el.style.top = `${coord.y}px`;
       el.textContent = coord.name;
-      
+
       const isVisited = (step.activeMask & (1 << idx)) > 0;
       if (isVisited) el.classList.add('visited');
-      
+
       if (step.activeNode === idx) {
         el.classList.remove('visited');
         el.classList.add('active');
       }
-      
+
       if (step.candidateNode === idx) {
         el.classList.remove('visited');
         el.classList.add('neighbor');
       }
-      
+
       graphWrapper.appendChild(el);
     });
-    
+
     graphPanel.appendChild(graphWrapper);
-    
+
     const graphInfo = document.createElement('div');
     graphInfo.className = 'tsp-info-box';
     graphInfo.innerHTML = `
@@ -22555,21 +24894,21 @@ function renderCanvasStep() {
     `;
     graphPanel.appendChild(graphInfo);
     container.appendChild(graphPanel);
-    
+
     const tablePanel = document.createElement('div');
     tablePanel.className = 'tsp-table-panel';
-    
+
     const tableTitle = document.createElement('div');
     tableTitle.className = 'tsp-table-header';
     tableTitle.textContent = 'DP Table dp[mask][u]';
     tablePanel.appendChild(tableTitle);
-    
+
     const tableScroll = document.createElement('div');
     tableScroll.className = 'tsp-table-scroll';
-    
+
     const table = document.createElement('table');
     table.className = 'tsp-table';
-    
+
     const thead = document.createElement('thead');
     thead.innerHTML = `
       <tr>
@@ -22581,30 +24920,30 @@ function renderCanvasStep() {
       </tr>
     `;
     table.appendChild(thead);
-    
+
     const tbody = document.createElement('tbody');
     for (let mask = 0; mask < 16; mask++) {
       const tr = document.createElement('tr');
       if (step.activeMask === mask) {
         tr.className = 'active-row';
       }
-      
+
       const toBin = (v) => v.toString(2).padStart(4, '0');
-      
+
       const desc = [];
       if (mask & 1) desc.push('A');
       if (mask & 2) desc.push('B');
       if (mask & 4) desc.push('C');
       if (mask & 8) desc.push('D');
-      
+
       let tdMask = document.createElement('td');
       tdMask.innerHTML = `<span style="font-family:monospace; font-weight:bold; color:var(--text-muted);">${toBin(mask)}</span> <span style="font-size:0.7rem; color:var(--text-muted); font-weight:normal;">{${desc.join(',')}}</span>`;
       tr.appendChild(tdMask);
-      
+
       for (let u = 0; u < 4; u++) {
         const td = document.createElement('td');
         const val = step.dp[mask][u];
-        
+
         if (val === Infinity) {
           td.textContent = '∞';
           td.className = 'cell-infinity';
@@ -22614,16 +24953,16 @@ function renderCanvasStep() {
             td.className = 'cell-base';
           }
         }
-        
+
         if (step.activeMask === mask && step.activeNode === u) {
           td.className = 'cell-active';
         }
-        
+
         const nextMask = step.activeMask | (1 << step.candidateNode);
         if (step.candidateNode !== null && nextMask === mask && step.candidateNode === u) {
           td.className = 'cell-candidate';
         }
-        
+
         tr.appendChild(td);
       }
       tbody.appendChild(tr);
@@ -22632,24 +24971,24 @@ function renderCanvasStep() {
     tableScroll.appendChild(table);
     tablePanel.appendChild(tableScroll);
     container.appendChild(tablePanel);
-    
+
     canvas.appendChild(container);
   }
   else if (visualizerState.algo === 'kosaraju') {
     const container = document.createElement('div');
     container.className = 'scc-container';
-    
+
     const graphPanel = document.createElement('div');
     graphPanel.className = 'scc-graph-panel';
-    
+
     const graphTitle = document.createElement('div');
     graphTitle.className = 'tsp-table-header';
     graphTitle.textContent = step.reversed ? 'Transposed Directed Graph (G^T)' : 'Original Directed Graph (G)';
     graphPanel.appendChild(graphTitle);
-    
+
     const graphWrapper = document.createElement('div');
     graphWrapper.className = 'scc-graph-wrapper';
-    
+
     const coords = [
       { x: 30, y: 130, name: 'A' },
       { x: 150, y: 40, name: 'B' },
@@ -22657,13 +24996,13 @@ function renderCanvasStep() {
       { x: 270, y: 130, name: 'D' },
       { x: 390, y: 130, name: 'E' }
     ];
-    
+
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("class", "cycle-arrow-svg");
     svg.style.position = 'absolute';
     svg.style.width = '100%';
     svg.style.height = '100%';
-    
+
     svg.innerHTML = `
       <defs>
         <marker id="scc-arrow" viewBox="0 0 10 10" refX="24" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -22674,7 +25013,7 @@ function renderCanvasStep() {
         </marker>
       </defs>
     `;
-    
+
     let edges = [];
     if (step.reversed) {
       edges = [
@@ -22695,21 +25034,21 @@ function renderCanvasStep() {
         { u: 4, v: 3, offset: 6 }
       ];
     }
-    
+
     edges.forEach(e => {
       const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
       const from = coords[e.u];
       const to = coords[e.v];
-      
+
       const offset = e.offset || 0;
-      
+
       line.setAttribute("x1", from.x + 22);
       line.setAttribute("y1", from.y + 22 + offset);
       line.setAttribute("x2", to.x + 22);
       line.setAttribute("y2", to.y + 22 + offset);
-      
+
       const isActive = step.scanningEdge && (step.scanningEdge.from === e.u && step.scanningEdge.to === e.v);
-      
+
       if (isActive) {
         line.setAttribute("stroke", "var(--secondary)");
         line.setAttribute("stroke-width", "3");
@@ -22725,7 +25064,7 @@ function renderCanvasStep() {
     // ── SCC group outlines (drawn before nodes so they appear behind) ──
     if (step.nodeComponents && step.sccs && step.sccs.length > 0) {
       const sccColors = ['rgba(99,102,241,0.7)', 'rgba(16,185,129,0.7)', 'rgba(245,158,11,0.7)', 'rgba(244,63,94,0.7)'];
-      const sccFills  = ['rgba(99,102,241,0.08)', 'rgba(16,185,129,0.08)', 'rgba(245,158,11,0.08)', 'rgba(244,63,94,0.08)'];
+      const sccFills = ['rgba(99,102,241,0.08)', 'rgba(16,185,129,0.08)', 'rgba(245,158,11,0.08)', 'rgba(244,63,94,0.08)'];
 
       step.sccs.forEach((compNodes, compIdx) => {
         // Map component node names back to coord indices
@@ -22735,12 +25074,12 @@ function renderCanvasStep() {
         // Compute bounding box of the group
         const xs = nodeIndices.map(i => coords[i].x + 22);
         const ys = nodeIndices.map(i => coords[i].y + 22);
-        const cx = xs.reduce((s,v)=>s+v,0)/xs.length;
-        const cy = ys.reduce((s,v)=>s+v,0)/ys.length;
-        const rx = Math.max(...xs.map(x=>Math.abs(x-cx))) + 32;
-        const ry = Math.max(...ys.map(y=>Math.abs(y-cy))) + 32;
+        const cx = xs.reduce((s, v) => s + v, 0) / xs.length;
+        const cy = ys.reduce((s, v) => s + v, 0) / ys.length;
+        const rx = Math.max(...xs.map(x => Math.abs(x - cx))) + 32;
+        const ry = Math.max(...ys.map(y => Math.abs(y - cy))) + 32;
 
-        const ellipse = document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+        const ellipse = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
         ellipse.setAttribute('cx', cx); ellipse.setAttribute('cy', cy);
         ellipse.setAttribute('rx', rx); ellipse.setAttribute('ry', ry);
         ellipse.setAttribute('fill', sccFills[compIdx % sccFills.length]);
@@ -22750,11 +25089,11 @@ function renderCanvasStep() {
         svg.insertBefore(ellipse, svg.firstChild.nextSibling); // after defs, before edges
 
         // Label
-        const label = document.createElementNS('http://www.w3.org/2000/svg','text');
+        const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         label.setAttribute('x', cx); label.setAttribute('y', cy - ry + 14);
-        label.setAttribute('text-anchor','middle');
-        label.setAttribute('font-family','monospace'); label.setAttribute('font-size','11');
-        label.setAttribute('font-weight','700');
+        label.setAttribute('text-anchor', 'middle');
+        label.setAttribute('font-family', 'monospace'); label.setAttribute('font-size', '11');
+        label.setAttribute('font-weight', '700');
         label.setAttribute('fill', sccColors[compIdx % sccColors.length]);
         label.textContent = `SCC ${compIdx + 1}`;
         svg.appendChild(label);
@@ -22762,14 +25101,14 @@ function renderCanvasStep() {
     }
 
     graphWrapper.appendChild(svg);
-    
+
     coords.forEach((coord, idx) => {
       const el = document.createElement('div');
       el.className = 'scc-node';
       el.style.left = `${coord.x}px`;
       el.style.top = `${coord.y}px`;
       el.textContent = coord.name;
-      
+
       if (step.activeNode === idx) {
         el.classList.add('active');
       } else if (step.nodeComponents && step.nodeComponents[idx] !== undefined) {
@@ -22777,12 +25116,12 @@ function renderCanvasStep() {
       } else if (step.phase === 1 && step.visited.includes(idx)) {
         el.classList.add('visited-pass1');
       }
-      
+
       graphWrapper.appendChild(el);
     });
-    
+
     graphPanel.appendChild(graphWrapper);
-    
+
     const legend = document.createElement('div');
     legend.className = 'tsp-info-box';
     legend.innerHTML = `
@@ -22795,24 +25134,24 @@ function renderCanvasStep() {
     `;
     graphPanel.appendChild(legend);
     container.appendChild(graphPanel);
-    
+
     const sidebar = document.createElement('div');
     sidebar.className = 'scc-sidebar';
-    
+
     const stackBox = document.createElement('div');
     stackBox.className = 'scc-panel-box';
-    
+
     const stackTitle = document.createElement('div');
     stackTitle.className = 'tsp-table-header';
     stackTitle.textContent = 'Finish Stack (DFS 1)';
     stackBox.appendChild(stackTitle);
-    
+
     const stackScroll = document.createElement('div');
     stackScroll.className = 'scc-stack-scroll';
-    
+
     const stackContainer = document.createElement('div');
     stackContainer.className = 'scc-stack-container';
-    
+
     step.stack.forEach((val, idx) => {
       const el = document.createElement('div');
       el.className = 'scc-stack-el';
@@ -22825,18 +25164,18 @@ function renderCanvasStep() {
     stackScroll.appendChild(stackContainer);
     stackBox.appendChild(stackScroll);
     sidebar.appendChild(stackBox);
-    
+
     const sccBox = document.createElement('div');
     sccBox.className = 'scc-panel-box';
-    
+
     const sccTitle = document.createElement('div');
     sccTitle.className = 'tsp-table-header';
     sccTitle.textContent = 'Strongly Connected Components';
     sccBox.appendChild(sccTitle);
-    
+
     const sccContainer = document.createElement('div');
     sccContainer.className = 'scc-groups-container';
-    
+
     if (step.sccs && step.sccs.length > 0) {
       step.sccs.forEach((comp, idx) => {
         const el = document.createElement('div');
@@ -22856,7 +25195,7 @@ function renderCanvasStep() {
     sccBox.appendChild(sccContainer);
     sidebar.appendChild(sccBox);
     container.appendChild(sidebar);
-    
+
     canvas.appendChild(container);
   }
   else if (visualizerState.algo === 'binaryaddition') {
@@ -22866,7 +25205,7 @@ function renderCanvasStep() {
     const { binaryA, binaryB, binarySum, binaryCarry, a, b, sum, carry } = step;
     const BITS = 4;
     const CELL = 52;
-    const GAP  = 6;
+    const GAP = 6;
 
     const makeRow = (label, binStr, color, highlightBits) => {
       const wrap = document.createElement('div');
@@ -22887,8 +25226,8 @@ function renderCanvasStep() {
         const cell = document.createElement('div');
         cell.style.cssText = `width:${CELL}px;height:${CELL}px;display:flex;align-items:center;justify-content:center;
           border-radius:8px;font-family:monospace;font-size:1.3rem;font-weight:900;flex-shrink:0;
-          border:2px solid ${isHighlight ? color : isSet ? color.replace(')', ',0.6)').replace('var(--','rgba(') : 'rgba(255,255,255,0.08)'};
-          background:${isHighlight ? color.replace('var(--accent-cyan)','rgba(6,182,212,0.2)').replace('var(--primary-glow)','rgba(99,102,241,0.2)').replace('var(--easy)','rgba(16,185,129,0.2)').replace('var(--medium)','rgba(245,158,11,0.2)') : isSet ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.02)'};
+          border:2px solid ${isHighlight ? color : isSet ? color.replace(')', ',0.6)').replace('var(--', 'rgba(') : 'rgba(255,255,255,0.08)'};
+          background:${isHighlight ? color.replace('var(--accent-cyan)', 'rgba(6,182,212,0.2)').replace('var(--primary-glow)', 'rgba(99,102,241,0.2)').replace('var(--easy)', 'rgba(16,185,129,0.2)').replace('var(--medium)', 'rgba(245,158,11,0.2)') : isSet ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.02)'};
           color:${isSet ? color : 'rgba(255,255,255,0.2)'};`;
         cell.textContent = bit;
         cells.appendChild(cell);
@@ -22907,7 +25246,7 @@ function renderCanvasStep() {
 
     // Determine which bits changed between A XOR B = sum (highlight bits where both were 1 → carry)
     const carryBits = [];
-    const sumBits   = [];
+    const sumBits = [];
     for (let i = 0; i < BITS; i++) {
       if (binaryA[i] === '1' && binaryB[i] === '1') carryBits.push(i);
       if (binaryA[i] !== binaryB[i]) sumBits.push(i);
@@ -22927,7 +25266,7 @@ function renderCanvasStep() {
     const sep = document.createElement('div');
     sep.style.cssText = 'display:flex;align-items:center;gap:10px;margin-bottom:6px;';
     sep.innerHTML = `<div style="width:130px;text-align:right;font-size:0.7rem;font-family:monospace;color:rgba(255,255,255,0.2);flex-shrink:0;">─────────</div>
-      <div style="width:${BITS*(CELL+GAP)-GAP}px;height:1px;background:rgba(255,255,255,0.12);"></div>`;
+      <div style="width:${BITS * (CELL + GAP) - GAP}px;height:1px;background:rgba(255,255,255,0.12);"></div>`;
     container.appendChild(sep);
 
     container.appendChild(makeRow('Sum  = A XOR B', binarySum, 'var(--accent-cyan)', sumBits));
@@ -22948,17 +25287,17 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'prims') {
     const container = document.createElement('div');
     container.className = 'tree-container';
-    
+
     const nodeCoords = {
       'A': { x: 80, y: 80 },
       'B': { x: 320, y: 60 },
       'C': { x: 180, y: 200 },
       'D': { x: 360, y: 220 }
     };
-    
+
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("class", "cycle-arrow-svg");
-    
+
     // Draw all potential edges
     const allEdges = [
       { u: 'A', v: 'B', d: 241 },
@@ -22967,22 +25306,22 @@ function renderCanvasStep() {
       { u: 'B', v: 'D', d: 165 },
       { u: 'C', v: 'D', d: 181 }
     ];
-    
+
     allEdges.forEach(e => {
       const fromC = nodeCoords[e.u];
       const toC = nodeCoords[e.v];
       const edgeKey = `${e.u}-${e.v}`;
       const edgeKeyRev = `${e.v}-${e.u}`;
-      
+
       const isMst = step.mstEdges.includes(edgeKey) || step.mstEdges.includes(edgeKeyRev);
       const isCandidate = step.candidates.includes(edgeKey) || step.candidates.includes(edgeKeyRev);
-      
+
       const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
       line.setAttribute("x1", fromC.x + 22);
       line.setAttribute("y1", fromC.y + 22);
       line.setAttribute("x2", toC.x + 22);
       line.setAttribute("y2", toC.y + 22);
-      
+
       if (isMst) {
         line.setAttribute("stroke", "var(--easy)");
         line.setAttribute("stroke-width", "3.5");
@@ -22995,14 +25334,14 @@ function renderCanvasStep() {
         line.setAttribute("stroke-width", "1");
       }
       svg.appendChild(line);
-      
+
       // Draw label
       const dx = toC.x - fromC.x;
       const dy = toC.y - fromC.y;
       const label = document.createElement('div');
       label.style.position = 'absolute';
-      label.style.left = `${fromC.x + dx/2 - 10}px`;
-      label.style.top = `${fromC.y + dy/2 - 10}px`;
+      label.style.left = `${fromC.x + dx / 2 - 10}px`;
+      label.style.top = `${fromC.y + dy / 2 - 10}px`;
       label.style.fontSize = '0.7rem';
       label.style.fontFamily = 'monospace';
       label.style.color = isMst ? 'var(--easy)' : isCandidate ? 'rgba(245, 158, 11, 0.9)' : 'var(--text-muted)';
@@ -23010,7 +25349,7 @@ function renderCanvasStep() {
       container.appendChild(label);
     });
     container.appendChild(svg);
-    
+
     // Draw Nodes
     Object.keys(nodeCoords).forEach(id => {
       const coord = nodeCoords[id];
@@ -23019,7 +25358,7 @@ function renderCanvasStep() {
       node.style.position = 'absolute';
       node.style.left = `${coord.x}px`;
       node.style.top = `${coord.y}px`;
-      
+
       const inMst = step.inMST.includes(id);
       if (inMst) {
         node.style.borderColor = 'var(--easy)';
@@ -23029,27 +25368,27 @@ function renderCanvasStep() {
         node.style.borderColor = 'var(--accent-cyan)';
         node.style.background = 'rgba(6, 182, 212, 0.2)';
       }
-      
+
       const valSpan = document.createElement('span');
       valSpan.className = 'tree-node-val';
       valSpan.textContent = id;
       node.appendChild(valSpan);
-      
+
       const distSpan = document.createElement('span');
       distSpan.style.fontSize = '0.55rem';
       distSpan.style.color = inMst ? 'var(--easy)' : 'var(--text-muted)';
       distSpan.textContent = step.minDist[id] === Infinity ? 'd:' : `d:${step.minDist[id]}`;
       node.appendChild(distSpan);
-      
+
       container.appendChild(node);
     });
-    
+
     canvas.appendChild(container);
   }
   else if (visualizerState.algo === 'astar') {
     const container = document.createElement('div');
     container.className = 'matrix-container';
-    
+
     const rows = 5;
     const cols = 6;
     const grid = document.createElement('div');
@@ -23057,7 +25396,7 @@ function renderCanvasStep() {
     grid.style.gridTemplateColumns = `repeat(${cols}, 54px)`;
     grid.style.gap = '8px';
     grid.style.margin = '0 auto';
-    
+
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         const cell = document.createElement('div');
@@ -23070,16 +25409,16 @@ function renderCanvasStep() {
         cell.style.padding = '4px';
         cell.style.fontSize = '0.65rem';
         cell.style.position = 'relative';
-        
+
         const isStart = r === 2 && c === 0;
         const isEnd = r === 2 && c === 5;
         const isWall = (r === 1 && c === 2) || (r === 2 && c === 2) || (r === 3 && c === 2);
-        
+
         const isOpen = step.open.some(x => x[0] === r && x[1] === c);
         const isClosed = step.closed.some(x => x[0] === r && x[1] === c);
         const isPath = step.path.some(x => x[0] === r && x[1] === c);
         const isActive = step.active && step.active[0] === r && step.active[1] === c;
-        
+
         if (isStart) {
           cell.style.background = 'rgba(16, 185, 129, 0.2)';
           cell.style.borderColor = 'var(--easy)';
@@ -23102,7 +25441,7 @@ function renderCanvasStep() {
           cell.style.borderColor = 'rgba(245, 158, 11, 0.4)';
           cell.style.background = 'rgba(245, 158, 11, 0.05)';
         }
-        
+
         const key = `${r},${c}`;
         if (step.f[key] !== undefined && !isWall) {
           const corner = document.createElement('div');
@@ -23111,7 +25450,7 @@ function renderCanvasStep() {
           corner.style.width = '100%';
           corner.innerHTML = `<span>g:${step.g[key]}</span><span>h:${step.h[key]}</span>`;
           cell.appendChild(corner);
-          
+
           const center = document.createElement('div');
           center.style.fontWeight = 'bold';
           center.style.textAlign = 'center';
@@ -23127,7 +25466,7 @@ function renderCanvasStep() {
           label.textContent = isStart ? 'START' : isEnd ? 'GOAL' : isWall ? 'WALL' : `(${r},${c})`;
           cell.appendChild(label);
         }
-        
+
         grid.appendChild(cell);
       }
     }
@@ -23137,22 +25476,22 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'wordsearch2') {
     const container = document.createElement('div');
     container.className = 'wordsearch-container';
-    
+
     const boardPanel = document.createElement('div');
     boardPanel.className = 'ws-board-panel';
     boardPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem; text-align:center;">Grid Board</h3>';
-    
+
     const grid = document.createElement('div');
     grid.className = 'ws-grid';
-    
+
     const activePathSet = new Set(step.activePath.map(([r, c]) => `${r},${c}`));
-    
+
     for (let r = 0; r < step.board.length; r++) {
       for (let c = 0; c < step.board[0].length; c++) {
         const cell = document.createElement('div');
         cell.className = 'ws-cell';
         cell.textContent = step.board[r][c];
-        
+
         const key = `${r},${c}`;
         if (activePathSet.has(key)) {
           cell.classList.add('active-path');
@@ -23168,36 +25507,36 @@ function renderCanvasStep() {
         } else if (step.visited[r][c]) {
           cell.classList.add('visited-path');
         }
-        
+
         grid.appendChild(cell);
       }
     }
     boardPanel.appendChild(grid);
     container.appendChild(boardPanel);
-    
+
     const triePanel = document.createElement('div');
     triePanel.className = 'ws-trie-panel';
     triePanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem;">Found Words & Trie State</h3>';
-    
+
     const activeWordStr = step.activePath.map(([r, c]) => step.board[r][c]).join('');
     const pathText = document.createElement('p');
     pathText.innerHTML = `<strong>Current Prefix:</strong> <span style="font-family:monospace; color:var(--primary-glow); font-size:1.1rem; letter-spacing:1px;">"${activeWordStr || 'empty'}"</span>`;
     triePanel.appendChild(pathText);
-    
+
     const wordsList = document.createElement('div');
     wordsList.style.marginTop = '1rem';
     wordsList.innerHTML = '<strong>Dictionary Check:</strong>';
-    
+
     const listContainer = document.createElement('ul');
     listContainer.style.paddingLeft = '20px';
     listContainer.style.marginTop = '0.5rem';
-    
+
     const rawWords = visualizerState.rawArray.words || [];
     rawWords.forEach(w => {
       const li = document.createElement('li');
       li.style.fontSize = '0.9rem';
       li.style.marginBottom = '4px';
-      
+
       const isFound = step.found.includes(w);
       if (isFound) {
         li.innerHTML = `<span style="color:var(--easy); text-decoration:line-through;">${w}</span> <span style="color:var(--easy);">✓</span>`;
@@ -23206,7 +25545,7 @@ function renderCanvasStep() {
       }
       listContainer.appendChild(li);
     });
-    
+
     wordsList.appendChild(listContainer);
     triePanel.appendChild(wordsList);
     container.appendChild(triePanel);
@@ -23215,24 +25554,24 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'generateparentheses') {
     const container = document.createElement('div');
     container.className = 'parentheses-container';
-    
+
     const panelsRow = document.createElement('div');
     panelsRow.style.display = 'flex';
     panelsRow.style.gap = '20px';
     panelsRow.style.width = '100%';
     panelsRow.style.flexWrap = 'wrap';
-    
+
     const stackPanel = document.createElement('div');
     stackPanel.className = 'ws-board-panel';
     stackPanel.style.flex = '1';
     stackPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem; text-align:center;">Recursion Stack</h3>';
-    
+
     const stackList = document.createElement('div');
     stackList.style.display = 'flex';
     stackList.style.flexDirection = 'column-reverse';
     stackList.style.gap = '8px';
     stackList.style.alignItems = 'center';
-    
+
     if (step.stack && step.stack.length > 0) {
       step.stack.forEach((frame, idx) => {
         const item = document.createElement('div');
@@ -23250,17 +25589,17 @@ function renderCanvasStep() {
     }
     stackPanel.appendChild(stackList);
     panelsRow.appendChild(stackPanel);
-    
+
     const foundPanel = document.createElement('div');
     foundPanel.className = 'ws-trie-panel';
     foundPanel.style.flex = '1';
     foundPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem;">Valid Combinations</h3>';
-    
+
     const foundList = document.createElement('div');
     foundList.style.display = 'flex';
     foundList.style.gap = '8px';
     foundList.style.flexWrap = 'wrap';
-    
+
     if (step.found && step.found.length > 0) {
       step.found.forEach(combo => {
         const pill = document.createElement('div');
@@ -23276,34 +25615,34 @@ function renderCanvasStep() {
     }
     foundPanel.appendChild(foundList);
     panelsRow.appendChild(foundPanel);
-    
+
     container.appendChild(panelsRow);
-    
+
     const trailPanel = document.createElement('div');
     trailPanel.className = 'glass-card';
     trailPanel.style.width = '100%';
     trailPanel.style.padding = '1rem';
     trailPanel.style.border = '1px solid var(--border-color)';
-    
+
     const activePathLabels = step.stack ? step.stack.map(n => `"${n.label}"`) : [];
     trailPanel.innerHTML = `<strong>Decision Trail:</strong> <span style="font-family:monospace; color:var(--accent-cyan);">${activePathLabels.join(' ➔ ') || 'root'}</span>`;
     container.appendChild(trailPanel);
-    
+
     canvas.appendChild(container);
   }
   else if (visualizerState.algo === 'lis') {
     const container = document.createElement('div');
     container.className = 'lis-container';
-    
+
     const pilesRow = document.createElement('div');
     pilesRow.className = 'lis-piles-row';
-    
+
     const maxPilesLength = Math.max(1, step.piles.length);
     for (let pIdx = 0; pIdx < maxPilesLength + 1; pIdx++) {
       if (pIdx < step.piles.length || pIdx === step.piles.length) {
         const pile = document.createElement('div');
         pile.className = 'lis-pile';
-        
+
         if (step.searchBounds && pIdx >= step.searchBounds.low && pIdx <= step.searchBounds.high) {
           pile.classList.add('active-search');
           if (pIdx === step.searchBounds.mid) {
@@ -23311,14 +25650,14 @@ function renderCanvasStep() {
             pile.style.background = 'rgba(236,72,153,0.05)';
           }
         }
-        
+
         const pileData = step.piles[pIdx] || [];
         if (pileData.length > 0) {
           pileData.forEach((val, idx) => {
             const card = document.createElement('div');
             card.className = 'lis-card';
             card.textContent = val;
-            
+
             if (idx === pileData.length - 1) {
               card.style.borderColor = 'var(--accent-cyan)';
               card.style.boxShadow = '0 0 8px rgba(6,182,212,0.3)';
@@ -23329,13 +25668,13 @@ function renderCanvasStep() {
           pile.style.borderStyle = 'dashed';
           pile.style.borderColor = 'rgba(255,255,255,0.1)';
         }
-        
+
         const label = document.createElement('div');
         label.style.fontSize = '0.7rem';
         label.style.color = 'var(--text-muted)';
         label.style.marginTop = '4px';
         label.style.textAlign = 'center';
-        
+
         let labelText = `Pile ${pIdx + 1}`;
         if (step.searchBounds) {
           if (pIdx === step.searchBounds.low) labelText += ' (L)';
@@ -23344,17 +25683,17 @@ function renderCanvasStep() {
         }
         label.textContent = labelText;
         pile.appendChild(label);
-        
+
         pilesRow.appendChild(pile);
       }
     }
     container.appendChild(pilesRow);
-    
+
     const sourcePanel = document.createElement('div');
     sourcePanel.style.display = 'flex';
     sourcePanel.style.gap = '8px';
     sourcePanel.style.marginTop = '1rem';
-    
+
     visualizerState.rawArray.forEach((val, idx) => {
       const cell = document.createElement('div');
       cell.className = 'lis-card';
@@ -23362,13 +25701,13 @@ function renderCanvasStep() {
       cell.style.width = '48px';
       cell.style.height = '48px';
       cell.style.fontSize = '1.1rem';
-      
+
       if (idx === step.activeIndex) {
         cell.classList.add('active-card');
       } else if (idx < step.activeIndex) {
         cell.style.opacity = '0.35';
       }
-      
+
       const idxSpan = document.createElement('div');
       idxSpan.style.position = 'absolute';
       idxSpan.style.bottom = '2px';
@@ -23376,45 +25715,45 @@ function renderCanvasStep() {
       idxSpan.style.color = 'var(--text-muted)';
       idxSpan.textContent = idx;
       cell.appendChild(idxSpan);
-      
+
       sourcePanel.appendChild(cell);
     });
-    
+
     container.appendChild(sourcePanel);
     canvas.appendChild(container);
   }
   else if (visualizerState.algo === 'trappingwater') {
     const container = document.createElement('div');
     container.className = 'water-container';
-    
+
     const chart = document.createElement('div');
     chart.className = 'water-chart';
-    
+
     const maxVal = Math.max(...visualizerState.rawArray, 1);
-    
+
     visualizerState.rawArray.forEach((val, idx) => {
       const col = document.createElement('div');
       col.className = 'water-bar-column';
-      
+
       const wall = document.createElement('div');
       wall.className = 'elevation-wall';
       const wallPct = (val / maxVal) * 60;
       wall.style.height = `${wallPct}%`;
       wall.textContent = val > 0 ? val : '';
-      
+
       if (idx === step.left || idx === step.right) {
         wall.classList.add('highlight-wall');
       }
-      
+
       const wVal = step.water[idx] || 0;
       const water = document.createElement('div');
       water.className = 'water-block';
       const waterPct = (wVal / maxVal) * 60;
       water.style.height = `${waterPct}%`;
-      
+
       col.appendChild(water);
       col.appendChild(wall);
-      
+
       if (idx === step.left) {
         const pLabel = document.createElement('div');
         pLabel.className = 'water-pointer-label left';
@@ -23427,18 +25766,18 @@ function renderCanvasStep() {
         pLabel.textContent = 'R';
         col.appendChild(pLabel);
       }
-      
+
       chart.appendChild(col);
     });
-    
+
     container.appendChild(chart);
-    
+
     const statsRow = document.createElement('div');
     statsRow.style.display = 'flex';
     statsRow.style.gap = '20px';
     statsRow.style.width = '100%';
     statsRow.style.justifyContent = 'center';
-    
+
     statsRow.innerHTML = `
       <div class="glass-card" style="padding: 10px 20px; border: 1px solid var(--border-color); text-align: center;">
         <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">leftMax</span>
@@ -23459,23 +25798,23 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'burstballoons') {
     const container = document.createElement('div');
     container.className = 'bb-container';
-    
+
     const balloonsRow = document.createElement('div');
     balloonsRow.className = 'balloons-row';
-    
+
     const padL = document.createElement('div');
     padL.className = 'lis-card';
     padL.style.opacity = '0.3';
     padL.textContent = '1';
     balloonsRow.appendChild(padL);
-    
+
     step.balloons.forEach((val, idx) => {
       const balloon = document.createElement('div');
       balloon.className = 'balloon-element';
       balloon.textContent = val;
-      
+
       const realIdx = idx + 1;
-      
+
       if (step.activeInterval) {
         const [i, j] = step.activeInterval;
         if (realIdx >= i && realIdx <= j) {
@@ -23488,28 +25827,28 @@ function renderCanvasStep() {
       }
       balloonsRow.appendChild(balloon);
     });
-    
+
     const padR = document.createElement('div');
     padR.className = 'lis-card';
     padR.style.opacity = '0.3';
     padR.textContent = '1';
     balloonsRow.appendChild(padR);
-    
+
     container.appendChild(balloonsRow);
-    
+
     const tablePanel = document.createElement('div');
     tablePanel.className = 'dp-table-wrapper';
-    
+
     const table = document.createElement('table');
     table.className = 'dp-matrix-table';
-    
+
     const headerRow = document.createElement('tr');
     headerRow.innerHTML = '<th>i \\ j</th>';
     for (let j = 0; j < step.dp[0].length; j++) {
       headerRow.innerHTML += `<th>${j}</th>`;
     }
     table.appendChild(headerRow);
-    
+
     for (let i = 0; i < step.dp.length; i++) {
       const row = document.createElement('tr');
       row.innerHTML += `<td><strong>${i}</strong></td>`;
@@ -23517,7 +25856,7 @@ function renderCanvasStep() {
         const cell = document.createElement('td');
         const cellVal = step.dp[i][j];
         cell.textContent = cellVal === 0 ? '' : cellVal;
-        
+
         if (step.activeInterval) {
           const [ai, aj] = step.activeInterval;
           if (i === ai && j === aj) {
@@ -23539,16 +25878,16 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'minwindow') {
     const container = document.createElement('div');
     container.className = 'water-container';
-    
+
     const charRow = document.createElement('div');
     charRow.className = 'window-char-container';
-    
+
     const S = visualizerState.rawArray.S;
     for (let i = 0; i < S.length; i++) {
       const cell = document.createElement('div');
       cell.className = 'window-char-cell';
       cell.textContent = S[i];
-      
+
       const inWin = i >= step.l && i <= step.r;
       if (inWin) {
         cell.classList.add('in-window');
@@ -23556,7 +25895,7 @@ function renderCanvasStep() {
           cell.classList.add('window-edge');
         }
       }
-      
+
       if (i === step.l) {
         const p = document.createElement('div');
         p.className = 'window-char-pointer-label l-ptr';
@@ -23569,7 +25908,7 @@ function renderCanvasStep() {
         p.textContent = 'R';
         cell.appendChild(p);
       }
-      
+
       const idxSpan = document.createElement('div');
       idxSpan.style.position = 'absolute';
       idxSpan.style.top = '2px';
@@ -23578,11 +25917,11 @@ function renderCanvasStep() {
       idxSpan.style.color = 'var(--text-muted)';
       idxSpan.textContent = i;
       cell.appendChild(idxSpan);
-      
+
       charRow.appendChild(cell);
     }
     container.appendChild(charRow);
-    
+
     const table = document.createElement('table');
     table.className = 'map-compare-table';
     table.innerHTML = `
@@ -23593,12 +25932,12 @@ function renderCanvasStep() {
         <th>Status</th>
       </tr>
     `;
-    
+
     Object.keys(step.need).forEach(char => {
       const needVal = step.need[char];
       const winVal = step.map[char] || 0;
       const matched = winVal >= needVal;
-      
+
       const tr = document.createElement('tr');
       if (matched) tr.className = 'matched-cell';
       tr.innerHTML = `
@@ -23609,17 +25948,17 @@ function renderCanvasStep() {
       `;
       table.appendChild(tr);
     });
-    
+
     const tablePanel = document.createElement('div');
     tablePanel.style.marginTop = '1rem';
     tablePanel.appendChild(table);
     container.appendChild(tablePanel);
-    
+
     const stats = document.createElement('div');
     stats.style.display = 'flex';
     stats.style.gap = '20px';
     stats.style.marginTop = '1.5rem';
-    
+
     const winStr = step.ans[0] === -1 ? 'None' : S.substring(step.ans[0], step.ans[1] + 1);
     stats.innerHTML = `
       <div class="glass-card" style="padding: 10px 20px; border: 1px solid var(--border-color); text-align: center;">
@@ -23637,22 +25976,22 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'wordladder') {
     const container = document.createElement('div');
     container.className = 'wl-container';
-    
+
     const graphPanel = document.createElement('div');
     graphPanel.style.flex = '2';
     graphPanel.style.minWidth = '300px';
-    
+
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("class", "wl-graph-svg");
-    
+
     const shortestPathEdges = [];
     if (step.shortestPath && step.shortestPath.length > 1) {
       for (let i = 0; i < step.shortestPath.length - 1; i++) {
-        shortestPathEdges.push(`${step.shortestPath[i]}-${step.shortestPath[i+1]}`);
-        shortestPathEdges.push(`${step.shortestPath[i+1]}-${step.shortestPath[i]}`);
+        shortestPathEdges.push(`${step.shortestPath[i]}-${step.shortestPath[i + 1]}`);
+        shortestPathEdges.push(`${step.shortestPath[i + 1]}-${step.shortestPath[i]}`);
       }
     }
-    
+
     step.edges.forEach(e => {
       const uNode = step.nodes.find(n => n.id === e.u);
       const vNode = step.nodes.find(n => n.id === e.v);
@@ -23663,24 +26002,24 @@ function renderCanvasStep() {
         line.setAttribute("x2", vNode.x);
         line.setAttribute("y2", vNode.y);
         line.setAttribute("class", "wl-link-line");
-        
+
         const edgeKey = `${e.u}-${e.v}`;
         const isShortest = shortestPathEdges.includes(edgeKey);
         const isActive = step.activeNode === e.u || step.activeNode === e.v;
-        
+
         if (isShortest) {
           line.classList.add('shortest-path');
         } else if (isActive && step.visited.includes(e.u) && step.visited.includes(e.v)) {
           line.classList.add('active');
         }
-        
+
         svg.appendChild(line);
       }
     });
-    
+
     step.nodes.forEach(n => {
       const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-      
+
       const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
       circle.setAttribute("cx", n.x);
       circle.setAttribute("cy", n.y);
@@ -23689,11 +26028,11 @@ function renderCanvasStep() {
       circle.setAttribute("fill", "rgba(30, 41, 59, 0.95)");
       circle.setAttribute("stroke", "var(--border-color)");
       circle.setAttribute("stroke-width", "1.5");
-      
+
       const isShortest = step.shortestPath.includes(n.id);
       const isActive = step.activeNode === n.id;
       const isVisited = step.visited.includes(n.id);
-      
+
       if (isShortest) {
         circle.classList.add('shortest-path');
         circle.setAttribute("stroke", "var(--easy)");
@@ -23704,33 +26043,33 @@ function renderCanvasStep() {
         circle.classList.add('visited');
         circle.setAttribute("stroke", "var(--primary)");
       }
-      
+
       g.appendChild(circle);
-      
+
       const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
       text.setAttribute("x", n.x);
       text.setAttribute("y", n.y);
       text.setAttribute("class", "wl-node-text");
       text.textContent = n.id;
       g.appendChild(text);
-      
+
       svg.appendChild(g);
     });
-    
+
     graphPanel.appendChild(svg);
     container.appendChild(graphPanel);
-    
+
     const queuePanel = document.createElement('div');
     queuePanel.className = 'ws-trie-panel';
     queuePanel.style.flex = '1';
     queuePanel.style.minWidth = '220px';
     queuePanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem;">BFS Path Queue</h3>';
-    
+
     const qList = document.createElement('div');
     qList.style.display = 'flex';
     qList.style.flexDirection = 'column';
     qList.style.gap = '8px';
-    
+
     if (step.queue && step.queue.length > 0) {
       step.queue.forEach((path, idx) => {
         const item = document.createElement('div');
@@ -23748,37 +26087,37 @@ function renderCanvasStep() {
     }
     queuePanel.appendChild(qList);
     container.appendChild(queuePanel);
-    
+
     canvas.appendChild(container);
   }
   else if (visualizerState.algo === 'waterflow') {
     const container = document.createElement('div');
     container.className = 'wordsearch-container';
-    
+
     const gridPanel = document.createElement('div');
     gridPanel.className = 'ws-board-panel';
     gridPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem; text-align:center;">Height Grid Map</h3>';
-    
+
     const grid = document.createElement('div');
     grid.className = 'wf-grid-layout';
-    
+
     const R = step.heights.length;
     const C = step.heights[0].length;
-    
+
     for (let r = 0; r < R; r++) {
       for (let c = 0; c < C; c++) {
         const cell = document.createElement('div');
         cell.className = 'wf-grid-cell';
         cell.textContent = step.heights[r][c];
-        
+
         const isPac = r === 0 || c === 0;
         const isAtl = r === R - 1 || c === C - 1;
         if (isPac) cell.classList.add('pacific-border');
         if (isAtl) cell.classList.add('atlantic-border');
-        
+
         const reachPac = step.pacReach[r][c];
         const reachAtl = step.atlReach[r][c];
-        
+
         if (reachPac && reachAtl) {
           cell.classList.add('both-reach');
         } else if (reachPac) {
@@ -23786,19 +26125,19 @@ function renderCanvasStep() {
         } else if (reachAtl) {
           cell.classList.add('atlantic-reach');
         }
-        
+
         if (step.activeCell && step.activeCell[0] === r && step.activeCell[1] === c) {
           cell.style.borderColor = 'white';
           cell.style.boxShadow = '0 0 12px white';
           cell.style.transform = 'scale(1.05)';
         }
-        
+
         grid.appendChild(cell);
       }
     }
     gridPanel.appendChild(grid);
     container.appendChild(gridPanel);
-    
+
     const legendPanel = document.createElement('div');
     legendPanel.className = 'ws-trie-panel';
     legendPanel.innerHTML = `
@@ -23827,18 +26166,18 @@ function renderCanvasStep() {
   else if (visualizerState.algo === 'aliendictionary') {
     const container = document.createElement('div');
     container.className = 'parentheses-container';
-    
+
     const topRow = document.createElement('div');
     topRow.style.display = 'flex';
     topRow.style.gap = '20px';
     topRow.style.width = '100%';
     topRow.style.flexWrap = 'wrap';
-    
+
     const rulesPanel = document.createElement('div');
     rulesPanel.className = 'ws-board-panel';
     rulesPanel.style.flex = '1';
     rulesPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem;">Alphabet Ordering Rules</h3>';
-    
+
     if (step.comparisons && step.comparisons.length > 0) {
       step.comparisons.forEach(c => {
         const card = document.createElement('div');
@@ -23853,17 +26192,17 @@ function renderCanvasStep() {
       rulesPanel.innerHTML += '<p style="color:var(--text-muted);">Analyzing word pairs...</p>';
     }
     topRow.appendChild(rulesPanel);
-    
+
     const resultPanel = document.createElement('div');
     resultPanel.className = 'ws-trie-panel';
     resultPanel.style.flex = '1';
     resultPanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem;">Result Alphabet</h3>';
-    
+
     const charRow = document.createElement('div');
     charRow.style.display = 'flex';
     charRow.style.gap = '6px';
     charRow.style.marginTop = '1rem';
-    
+
     if (step.res && step.res.length > 0) {
       step.res.forEach(char => {
         const item = document.createElement('div');
@@ -23879,25 +26218,25 @@ function renderCanvasStep() {
     resultPanel.appendChild(charRow);
     topRow.appendChild(resultPanel);
     container.appendChild(topRow);
-    
+
     const indegreePanel = document.createElement('div');
     indegreePanel.className = 'glass-card';
     indegreePanel.style.width = '100%';
     indegreePanel.style.padding = '1.5rem';
     indegreePanel.style.border = '1px solid var(--border-color)';
     indegreePanel.innerHTML = '<h3 style="margin-top:0; margin-bottom:1rem; text-align:center;">Graph Nodes & In-Degrees</h3>';
-    
+
     const degBox = document.createElement('div');
     degBox.className = 'ad-indegree-box';
-    
+
     Object.keys(step.indegree).sort().forEach(char => {
       const node = document.createElement('div');
       node.className = 'ad-indegree-node';
-      
+
       const count = step.indegree[char];
       if (count === 0) node.classList.add('zero');
       if (step.queue.includes(char)) node.classList.add('active-queue');
-      
+
       node.innerHTML = `
         <strong style="font-size:1.1rem; display:block;">${char}</strong>
         <span style="font-size:0.6rem; color:var(--text-muted);">in-deg: ${count}</span>
@@ -23906,20 +26245,20 @@ function renderCanvasStep() {
     });
     indegreePanel.appendChild(degBox);
     container.appendChild(indegreePanel);
-    
+
     canvas.appendChild(container);
   }
   else if (visualizerState.algo === 'designtwitter') {
     const container = document.createElement('div');
     container.className = 'tw-grid-layout';
-    
+
     const colTimeline = document.createElement('div');
     colTimeline.className = 'tw-panel-card';
     colTimeline.innerHTML = '<h3 class="tw-header">Action Timeline</h3>';
-    
+
     const actionTimeline = document.createElement('div');
     actionTimeline.className = 'tw-action-timeline';
-    
+
     visualizerState.rawArray.forEach((act, idx) => {
       const item = document.createElement('div');
       item.className = 'tw-action-item';
@@ -23931,11 +26270,11 @@ function renderCanvasStep() {
     });
     colTimeline.appendChild(actionTimeline);
     container.appendChild(colTimeline);
-    
+
     const colFollows = document.createElement('div');
     colFollows.className = 'tw-panel-card';
     colFollows.innerHTML = '<h3 class="tw-header">Follow DB Maps</h3>';
-    
+
     Object.keys(step.follows).forEach(userId => {
       const followees = step.follows[userId];
       const row = document.createElement('div');
@@ -23947,16 +26286,16 @@ function renderCanvasStep() {
       colFollows.appendChild(row);
     });
     container.appendChild(colFollows);
-    
+
     const colTweets = document.createElement('div');
     colTweets.className = 'tw-panel-card';
     colTweets.innerHTML = '<h3 class="tw-header">Global Tweets DB</h3>';
-    
+
     const tweetsList = document.createElement('div');
     tweetsList.style.display = 'flex';
     tweetsList.style.flexDirection = 'column';
     tweetsList.style.gap = '8px';
-    
+
     if (step.tweets.length > 0) {
       step.tweets.forEach(t => {
         const item = document.createElement('div');
@@ -23965,13 +26304,13 @@ function renderCanvasStep() {
         item.style.border = '1px solid var(--border-color)';
         item.style.borderRadius = '6px';
         item.style.fontSize = '0.75rem';
-        
+
         const highlight = step.activeAction && step.activeAction.type === 'postTweet' && step.activeAction.tweetId === t.tweetId;
         if (highlight) {
           item.style.borderColor = 'var(--easy)';
           item.style.background = 'rgba(16, 185, 129, 0.08)';
         }
-        
+
         item.innerHTML = `<strong>User ${t.userId}</strong>: Tweet #${t.tweetId} <span style="float:right; opacity:0.6;">t=${t.time}</span>`;
         tweetsList.appendChild(item);
       });
@@ -23980,24 +26319,24 @@ function renderCanvasStep() {
     }
     colTweets.appendChild(tweetsList);
     container.appendChild(colTweets);
-    
+
     const colFeed = document.createElement('div');
     colFeed.className = 'tw-panel-card';
     colFeed.innerHTML = '<h3 class="tw-header">News Feed</h3>';
-    
+
     const feedContainer = document.createElement('div');
     feedContainer.className = 'tw-feed-container';
-    
+
     if (step.feed.length > 0) {
       step.feed.forEach(t => {
         const card = document.createElement('div');
         card.className = 'tw-tweet-card';
-        
+
         const highlight = step.activeAction && step.activeAction.type === 'getNewsFeed';
         if (highlight) {
           card.classList.add('highlight');
         }
-        
+
         card.innerHTML = `
           <div class="tw-avatar">U${t.userId}</div>
           <div class="tw-tweet-content">
@@ -24017,21 +26356,21 @@ function renderCanvasStep() {
     }
     colFeed.appendChild(feedContainer);
     container.appendChild(colFeed);
-    
+
     canvas.appendChild(container);
   }
   else if (visualizerState.algo === 'serializedeserialize') {
     const container = document.createElement('div');
     container.style.width = '100%';
-    
+
     const treePanel = document.createElement('div');
     treePanel.style.position = 'relative';
     treePanel.style.height = '280px';
     treePanel.style.width = '100%';
-    
+
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("style", "width:100%; height:280px; background:rgba(255,255,255,0.01); border:1px solid var(--border-color); border-radius:12px;");
-    
+
     step.edges.forEach(e => {
       const uNode = step.nodes.find(n => n.id === e.u);
       const vNode = step.nodes.find(n => n.id === e.v);
@@ -24050,12 +26389,12 @@ function renderCanvasStep() {
         }
       }
     });
-    
+
     step.nodes.forEach(n => {
       const drawNode = step.phase === 'serialize' || step.deserializedNodes.includes(n.id);
       if (drawNode) {
         const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        
+
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         circle.setAttribute("cx", n.x);
         circle.setAttribute("cy", n.y);
@@ -24063,7 +26402,7 @@ function renderCanvasStep() {
         circle.setAttribute("fill", "rgba(30, 41, 59, 0.95)");
         circle.setAttribute("stroke", "var(--border-color)");
         circle.setAttribute("stroke-width", "2");
-        
+
         if (step.activeNode === n.val) {
           circle.setAttribute("stroke", "var(--secondary)");
           circle.setAttribute("fill", "rgba(236, 72, 153, 0.15)");
@@ -24071,9 +26410,9 @@ function renderCanvasStep() {
           circle.setAttribute("stroke", "var(--easy)");
           circle.setAttribute("fill", "rgba(16, 185, 129, 0.15)");
         }
-        
+
         g.appendChild(circle);
-        
+
         const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         text.setAttribute("x", n.x);
         text.setAttribute("y", n.y);
@@ -24085,22 +26424,22 @@ function renderCanvasStep() {
         text.setAttribute("dominant-baseline", "middle");
         text.textContent = n.val;
         g.appendChild(text);
-        
+
         svg.appendChild(g);
       }
     });
-    
+
     treePanel.appendChild(svg);
     container.appendChild(treePanel);
-    
+
     const listContainer = document.createElement('div');
     listContainer.className = 'ser-string-container';
-    
+
     step.serializedTokens.forEach((token, idx) => {
       const box = document.createElement('div');
       box.className = 'ser-token-box';
       box.textContent = token;
-      
+
       if (token === 'N') box.classList.add('null-token');
       if (step.phase === 'deserialize' && idx <= step.activeTokenIndex) {
         box.classList.add('built-token');
@@ -24111,11 +26450,1327 @@ function renderCanvasStep() {
       if (step.phase === 'serialize' && idx === step.serializedTokens.length - 1) {
         box.classList.add('active');
       }
-      
+
       listContainer.appendChild(box);
     });
     container.appendChild(listContainer);
-    
+
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'twoarraybinary') {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '20px';
+    container.style.width = '100%';
+    container.style.padding = '10px';
+
+    // X Array
+    const xWrapper = document.createElement('div');
+    xWrapper.innerHTML = `<h4 style="font-size:0.85rem; margin-bottom:5px; color:white;">Array X (low=${step.low}, high=${step.high})</h4>`;
+    const xRow = document.createElement('div');
+    xRow.style.display = 'flex';
+    xRow.style.gap = '6px';
+    xRow.style.position = 'relative';
+    xRow.style.overflowX = 'auto';
+    xRow.style.whiteSpace = 'nowrap';
+    xRow.style.padding = '5px 0';
+
+    const X = visualizerState.rawArray.A;
+    X.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'bs-element';
+      cell.textContent = val;
+      cell.style.width = '42px';
+      cell.style.height = '42px';
+      cell.style.flexShrink = '0';
+
+      const idxSpan = document.createElement('div');
+      idxSpan.className = 'bs-element-idx';
+      idxSpan.textContent = idx;
+      cell.appendChild(idxSpan);
+
+      if (idx === step.i) {
+        cell.style.borderLeft = '3px dashed var(--accent-cyan)';
+      }
+      if (idx < step.i) {
+        cell.style.background = 'rgba(0, 242, 254, 0.08)';
+      }
+      if (idx === step.i - 1 && step.maxLeftX === val) {
+        cell.style.boxShadow = '0 0 10px var(--accent-cyan)';
+      }
+      if (idx === step.i && step.minRightX === val) {
+        cell.style.boxShadow = '0 0 10px var(--accent-cyan)';
+      }
+      xRow.appendChild(cell);
+    });
+    xWrapper.appendChild(xRow);
+    container.appendChild(xWrapper);
+
+    // Y Array
+    const yWrapper = document.createElement('div');
+    yWrapper.innerHTML = `<h4 style="font-size:0.85rem; margin-bottom:5px; color:white;">Array Y</h4>`;
+    const yRow = document.createElement('div');
+    yRow.style.display = 'flex';
+    yRow.style.gap = '6px';
+    yRow.style.position = 'relative';
+    yRow.style.overflowX = 'auto';
+    yRow.style.whiteSpace = 'nowrap';
+    yRow.style.padding = '5px 0';
+
+    const Y = visualizerState.rawArray.B;
+    Y.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'bs-element';
+      cell.textContent = val;
+      cell.style.width = '42px';
+      cell.style.height = '42px';
+      cell.style.flexShrink = '0';
+
+      const idxSpan = document.createElement('div');
+      idxSpan.className = 'bs-element-idx';
+      idxSpan.textContent = idx;
+      cell.appendChild(idxSpan);
+
+      if (idx === step.j) {
+        cell.style.borderLeft = '3px dashed var(--secondary)';
+      }
+      if (idx < step.j) {
+        cell.style.background = 'rgba(236, 72, 153, 0.08)';
+      }
+      if (idx === step.j - 1 && step.maxLeftY === val) {
+        cell.style.boxShadow = '0 0 10px var(--secondary)';
+      }
+      if (idx === step.j && step.minRightY === val) {
+        cell.style.boxShadow = '0 0 10px var(--secondary)';
+      }
+      yRow.appendChild(cell);
+    });
+    yWrapper.appendChild(yRow);
+    container.appendChild(yWrapper);
+
+    // Stats board
+    const board = document.createElement('div');
+    board.className = 'tw-panel-card';
+    board.style.padding = '12px';
+    board.style.fontSize = '0.8rem';
+    board.innerHTML = `
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <div><strong>Left X Max (A[i-1]):</strong> <span style="color:var(--accent-cyan); font-family:monospace;">${step.maxLeftX}</span></div>
+        <div><strong>Right X Min (A[i]):</strong> <span style="color:var(--accent-cyan); font-family:monospace;">${step.minRightX}</span></div>
+        <div><strong>Left Y Max (B[j-1]):</strong> <span style="color:var(--secondary); font-family:monospace;">${step.maxLeftY}</span></div>
+        <div><strong>Right Y Min (B[j]):</strong> <span style="color:var(--secondary); font-family:monospace;">${step.minRightY}</span></div>
+      </div>
+      <div style="margin-top:10px; text-align:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:8px;">
+        <strong>Partition Check:</strong> maxLeftX &lt;= minRightY (${step.maxLeftX} &lt;= ${step.minRightY}) &amp; maxLeftY &lt;= minRightX (${step.maxLeftY} &lt;= ${step.minRightX})
+        <br><span style="font-weight:bold; font-size:0.9rem; color:var(--easy);">${step.compare === 'found' ? `SUCCESS! Median = ${step.median}` : 'Searching...'}</span>
+      </div>
+    `;
+    container.appendChild(board);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'arraycycle') {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '20px';
+    container.style.width = '100%';
+
+    // Array Representation
+    const arrWrapper = document.createElement('div');
+    arrWrapper.innerHTML = '<h4 style="font-size:0.85rem; margin-bottom:5px; color:white;">Indices Array [0..N-1]</h4>';
+    const arrRow = document.createElement('div');
+    arrRow.style.display = 'flex';
+    arrRow.style.gap = '8px';
+    arrRow.style.overflowX = 'auto';
+    arrRow.style.whiteSpace = 'nowrap';
+    arrRow.style.padding = '25px 0 20px 0';
+
+    const A = visualizerState.rawArray;
+    A.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'bs-element';
+      cell.textContent = val;
+      cell.style.width = '42px';
+      cell.style.height = '42px';
+      cell.style.flexShrink = '0';
+
+      const idxSpan = document.createElement('div');
+      idxSpan.className = 'bs-element-idx';
+      idxSpan.textContent = idx;
+      cell.appendChild(idxSpan);
+
+      // Pointers markers
+      if (idx === step.tortoise) {
+        const tort = document.createElement('div');
+        tort.style.position = 'absolute';
+        tort.style.top = '-20px';
+        tort.style.fontSize = '0.9rem';
+        tort.textContent = '🐢';
+        cell.appendChild(tort);
+        cell.style.borderColor = 'var(--easy)';
+        cell.style.background = 'rgba(16, 185, 129, 0.1)';
+      }
+      if (idx === step.hare) {
+        const hare = document.createElement('div');
+        hare.style.position = 'absolute';
+        hare.style.bottom = '-20px';
+        hare.style.fontSize = '0.9rem';
+        hare.textContent = '🐇';
+        cell.appendChild(hare);
+        cell.style.borderColor = 'var(--secondary)';
+        cell.style.background = 'rgba(236, 72, 153, 0.1)';
+      }
+      arrRow.appendChild(cell);
+    });
+    arrWrapper.appendChild(arrRow);
+    container.appendChild(arrWrapper);
+
+    // SVG Directed Loop Graph
+    const svgWrapper = document.createElement('div');
+    svgWrapper.style.width = '100%';
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("style", "width:100%; height:260px; background:rgba(0,0,0,0.15); border:1px solid var(--border-color); border-radius:12px;");
+    svg.setAttribute("viewBox", "0 0 480 260");
+
+    const centerX = 240, centerY = 130, radius = 90;
+    const nodeCoords = A.map((val, idx) => {
+      const angle = (idx * 2 * Math.PI) / A.length - Math.PI / 2;
+      return {
+        x: centerX + radius * Math.cos(angle),
+        y: centerY + radius * Math.sin(angle)
+      };
+    });
+
+    // Draw lines first so nodes sit on top
+    A.forEach((val, idx) => {
+      const from = nodeCoords[idx];
+      const to = nodeCoords[val];
+      if (from && to) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", from.x);
+        line.setAttribute("y1", from.y);
+        line.setAttribute("x2", to.x);
+        line.setAttribute("y2", to.y);
+        line.setAttribute("stroke", "var(--border-color)");
+        line.setAttribute("stroke-opacity", "0.5");
+        line.setAttribute("stroke-width", "2");
+        svg.appendChild(line);
+      }
+    });
+
+    A.forEach((val, idx) => {
+      const coords = nodeCoords[idx];
+      const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", coords.x);
+      circle.setAttribute("cy", coords.y);
+      circle.setAttribute("r", "16");
+      circle.setAttribute("fill", "rgba(30, 41, 59, 0.95)");
+      circle.setAttribute("stroke", "var(--border-color)");
+      circle.setAttribute("stroke-width", "1.5");
+
+      if (idx === step.tortoise && idx === step.hare) {
+        circle.setAttribute("stroke", "var(--accent-cyan)");
+        circle.setAttribute("fill", "rgba(0, 242, 254, 0.2)");
+        circle.setAttribute("r", "18");
+      } else if (idx === step.tortoise) {
+        circle.setAttribute("stroke", "var(--easy)");
+        circle.setAttribute("fill", "rgba(16, 185, 129, 0.15)");
+      } else if (idx === step.hare) {
+        circle.setAttribute("stroke", "var(--secondary)");
+        circle.setAttribute("fill", "rgba(236, 72, 153, 0.15)");
+      }
+
+      g.appendChild(circle);
+
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", coords.x);
+      text.setAttribute("y", coords.y);
+      text.setAttribute("fill", "white");
+      text.setAttribute("font-size", "11px");
+      text.setAttribute("font-weight", "bold");
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("dominant-baseline", "middle");
+      text.textContent = idx;
+      g.appendChild(text);
+
+      // SVG label markers to avoid overlaps
+      if (idx === step.tortoise && idx === step.hare) {
+        const lbl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        lbl.setAttribute("x", coords.x);
+        lbl.setAttribute("y", coords.y - 23);
+        lbl.setAttribute("fill", "var(--accent-cyan)");
+        lbl.setAttribute("font-size", "10px");
+        lbl.setAttribute("font-weight", "bold");
+        lbl.setAttribute("text-anchor", "middle");
+        lbl.textContent = "T & H";
+        g.appendChild(lbl);
+      } else if (idx === step.tortoise) {
+        const lbl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        lbl.setAttribute("x", coords.x);
+        lbl.setAttribute("y", coords.y - 23);
+        lbl.setAttribute("fill", "var(--easy)");
+        lbl.setAttribute("font-size", "10px");
+        lbl.setAttribute("font-weight", "bold");
+        lbl.setAttribute("text-anchor", "middle");
+        lbl.textContent = "T";
+        g.appendChild(lbl);
+      } else if (idx === step.hare) {
+        const lbl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        lbl.setAttribute("x", coords.x);
+        lbl.setAttribute("y", coords.y + 27);
+        lbl.setAttribute("fill", "var(--secondary)");
+        lbl.setAttribute("font-size", "10px");
+        lbl.setAttribute("font-weight", "bold");
+        lbl.setAttribute("text-anchor", "middle");
+        lbl.textContent = "H";
+        g.appendChild(lbl);
+      }
+
+      svg.appendChild(g);
+    });
+
+    svgWrapper.appendChild(svg);
+    container.appendChild(svgWrapper);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'reorderlist') {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '15px';
+    container.style.width = '100%';
+
+    if (step.phase === 'split') {
+      const title = document.createElement('h4');
+      title.textContent = "Phase 1: Find Middle of LinkedList";
+      title.style.color = "white";
+      container.appendChild(title);
+
+      const row = document.createElement('div');
+      row.style.display = 'flex';
+      row.style.gap = '8px';
+      row.style.alignItems = 'center';
+      row.style.overflowX = 'auto';
+      row.style.whiteSpace = 'nowrap';
+      row.style.padding = '25px 0 25px 0';
+
+      visualizerState.rawArray.forEach((val, idx) => {
+        const box = document.createElement('div');
+        box.className = 'bs-element';
+        box.textContent = val;
+        box.style.width = '42px';
+        box.style.height = '42px';
+        box.style.flexShrink = '0';
+
+        if (idx === step.slow) {
+          const slowMarker = document.createElement('div');
+          slowMarker.style.position = 'absolute';
+          slowMarker.style.top = '-20px';
+          slowMarker.style.fontSize = '0.7rem';
+          slowMarker.textContent = 'Slow';
+          box.appendChild(slowMarker);
+          box.style.borderColor = 'var(--easy)';
+        }
+        if (idx === step.fast) {
+          const fastMarker = document.createElement('div');
+          fastMarker.style.position = 'absolute';
+          fastMarker.style.bottom = '-20px';
+          fastMarker.style.fontSize = '0.7rem';
+          fastMarker.textContent = 'Fast';
+          box.appendChild(fastMarker);
+          box.style.borderColor = 'var(--secondary)';
+        }
+        row.appendChild(box);
+        if (idx < visualizerState.rawArray.length - 1) {
+          const arrow = document.createElement('div');
+          arrow.innerHTML = '→';
+          arrow.style.color = 'var(--text-muted)';
+          arrow.style.flexShrink = '0';
+          row.appendChild(arrow);
+        }
+      });
+      container.appendChild(row);
+    }
+    else if (step.phase === 'reverse_start' || step.phase === 'reversing') {
+      const title = document.createElement('h4');
+      title.textContent = "Phase 2: Reverse Second Half Sublist";
+      title.style.color = "white";
+      container.appendChild(title);
+
+      const main = document.createElement('div');
+      main.style.display = 'flex';
+      main.style.flexDirection = 'column';
+      main.style.gap = '20px';
+
+      const leftRow = document.createElement('div');
+      leftRow.style.display = 'flex';
+      leftRow.style.gap = '8px';
+      leftRow.style.alignItems = 'center';
+      leftRow.style.overflowX = 'auto';
+      leftRow.style.whiteSpace = 'nowrap';
+      leftRow.style.padding = '5px 0';
+      leftRow.innerHTML = '<span style="width:100px; color:var(--text-muted); font-size:0.8rem; flex-shrink:0;">First Half:</span>';
+      step.list1.forEach((val, idx) => {
+        const box = document.createElement('div');
+        box.className = 'bs-element';
+        box.textContent = val;
+        box.style.width = '38px';
+        box.style.height = '38px';
+        box.style.flexShrink = '0';
+        leftRow.appendChild(box);
+        if (idx < step.list1.length - 1) leftRow.innerHTML += '<span style="color:var(--text-muted); flex-shrink:0;">→</span>';
+      });
+      main.appendChild(leftRow);
+
+      const rightRow = document.createElement('div');
+      rightRow.style.display = 'flex';
+      rightRow.style.gap = '8px';
+      rightRow.style.alignItems = 'center';
+      rightRow.style.overflowX = 'auto';
+      rightRow.style.whiteSpace = 'nowrap';
+      rightRow.style.padding = '5px 0';
+      rightRow.innerHTML = '<span style="width:100px; color:var(--text-muted); font-size:0.8rem; flex-shrink:0;">Unreversed:</span>';
+      if (step.list2 && step.list2.length > 0) {
+        step.list2.forEach((val, idx) => {
+          const box = document.createElement('div');
+          box.className = 'bs-element';
+          box.textContent = val;
+          box.style.width = '38px';
+          box.style.height = '38px';
+          box.style.flexShrink = '0';
+          rightRow.appendChild(box);
+          if (idx < step.list2.length - 1) rightRow.innerHTML += '<span style="color:var(--text-muted); flex-shrink:0;">→</span>';
+        });
+      } else {
+        rightRow.innerHTML += '<span style="color:var(--text-muted); font-style:italic; flex-shrink:0;">Empty</span>';
+      }
+      main.appendChild(rightRow);
+
+      const revRow = document.createElement('div');
+      revRow.style.display = 'flex';
+      revRow.style.gap = '8px';
+      revRow.style.alignItems = 'center';
+      revRow.style.overflowX = 'auto';
+      revRow.style.whiteSpace = 'nowrap';
+      revRow.style.padding = '5px 0';
+      revRow.innerHTML = '<span style="width:100px; color:var(--easy); font-size:0.8rem; flex-shrink:0;">Reversed list:</span>';
+      if (step.reversed && step.reversed.length > 0) {
+        step.reversed.forEach((val, idx) => {
+          const box = document.createElement('div');
+          box.className = 'bs-element';
+          box.textContent = val;
+          box.style.width = '38px';
+          box.style.height = '38px';
+          box.style.borderColor = 'var(--easy)';
+          box.style.flexShrink = '0';
+          revRow.appendChild(box);
+          if (idx < step.reversed.length - 1) revRow.innerHTML += '<span style="color:var(--text-muted); flex-shrink:0;">→</span>';
+        });
+      } else {
+        revRow.innerHTML += '<span style="color:var(--text-muted); font-style:italic; flex-shrink:0;">Empty</span>';
+      }
+      main.appendChild(revRow);
+
+      container.appendChild(main);
+    }
+    else if (step.phase === 'merge_start' || step.phase === 'merge' || step.phase === 'complete') {
+      const title = document.createElement('h4');
+      title.textContent = "Phase 3: Alternate Merge Nodes";
+      title.style.color = "white";
+      container.appendChild(title);
+
+      const main = document.createElement('div');
+      main.style.display = 'flex';
+      main.style.flexDirection = 'column';
+      main.style.gap = '15px';
+
+      if (step.phase !== 'complete') {
+        const r1 = document.createElement('div');
+        r1.style.display = 'flex';
+        r1.style.gap = '8px';
+        r1.style.alignItems = 'center';
+        r1.style.overflowX = 'auto';
+        r1.style.whiteSpace = 'nowrap';
+        r1.style.padding = '5px 0';
+        r1.innerHTML = '<span style="width:100px; color:var(--text-muted); font-size:0.8rem; flex-shrink:0;">List 1:</span>';
+        step.list1.forEach((val, idx) => {
+          const box = document.createElement('div');
+          box.className = 'bs-element';
+          box.textContent = val;
+          box.style.width = '38px';
+          box.style.height = '38px';
+          box.style.flexShrink = '0';
+          if (step.activeSide === 'list1' && step.activeIdx === idx) {
+            box.style.borderColor = 'var(--accent-cyan)';
+            box.style.background = 'rgba(0, 242, 254, 0.15)';
+          } else if (idx < step.p1) {
+            box.style.opacity = '0.3';
+          }
+          r1.appendChild(box);
+          if (idx < step.list1.length - 1) r1.innerHTML += '<span style="color:var(--text-muted); flex-shrink:0;">→</span>';
+        });
+        main.appendChild(r1);
+
+        const r2 = document.createElement('div');
+        r2.style.display = 'flex';
+        r2.style.gap = '8px';
+        r2.style.alignItems = 'center';
+        r2.style.overflowX = 'auto';
+        r2.style.whiteSpace = 'nowrap';
+        r2.style.padding = '5px 0';
+        r2.innerHTML = '<span style="width:100px; color:var(--easy); font-size:0.8rem; flex-shrink:0;">Reversed List 2:</span>';
+        step.list2.forEach((val, idx) => {
+          const box = document.createElement('div');
+          box.className = 'bs-element';
+          box.textContent = val;
+          box.style.width = '38px';
+          box.style.height = '38px';
+          box.style.borderColor = 'var(--easy)';
+          box.style.flexShrink = '0';
+          if (step.activeSide === 'list2' && step.activeIdx === idx) {
+            box.style.borderColor = 'var(--secondary)';
+            box.style.background = 'rgba(236, 72, 153, 0.15)';
+          } else if (idx < step.p2) {
+            box.style.opacity = '0.3';
+          }
+          r2.appendChild(box);
+          if (idx < step.list2.length - 1) r2.innerHTML += '<span style="color:var(--text-muted); flex-shrink:0;">→</span>';
+        });
+        main.appendChild(r2);
+      }
+
+      const mRow = document.createElement('div');
+      mRow.style.display = 'flex';
+      mRow.style.gap = '8px';
+      mRow.style.alignItems = 'center';
+      mRow.style.overflowX = 'auto';
+      mRow.style.whiteSpace = 'nowrap';
+      mRow.style.padding = '5px 0';
+      mRow.style.marginTop = '10px';
+      mRow.innerHTML = '<span style="width:100px; color:white; font-size:0.85rem; font-weight:bold; flex-shrink:0;">Merged List:</span>';
+      step.merged.forEach((val, idx) => {
+        const box = document.createElement('div');
+        box.className = 'bs-element';
+        box.textContent = val;
+        box.style.width = '42px';
+        box.style.height = '42px';
+        box.style.borderColor = 'var(--accent-cyan)';
+        box.style.flexShrink = '0';
+        mRow.appendChild(box);
+        if (idx < step.merged.length - 1) mRow.innerHTML += '<span style="color:var(--text-muted); flex-shrink:0;">→</span>';
+      });
+      main.appendChild(mRow);
+      container.appendChild(main);
+    }
+
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'treepathsum') {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '15px';
+    container.style.width = '100%';
+
+    const canvasWidth = 480;
+    const canvasHeight = 240;
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("style", `width:100%; height:${canvasHeight}px; background:rgba(0,0,0,0.15); border:1px solid var(--border-color); border-radius:12px;`);
+    svg.setAttribute("viewBox", `0 0 ${canvasWidth} ${canvasHeight}`);
+
+    const tree = visualizerState.rawArray;
+
+    // Dynamically calculate tree node coordinates for 15 nodes (4 levels) to avoid overlap
+    const coords = [];
+    for (let idx = 0; idx < tree.length; idx++) {
+      const level = Math.floor(Math.log2(idx + 1));
+      const numNodesInLevel = Math.pow(2, level);
+      const levelIndex = idx - numNodesInLevel + 1;
+      const spacing = canvasWidth / numNodesInLevel;
+      const x = spacing * levelIndex + spacing / 2;
+      const y = 30 + level * 52;
+      coords.push({ x, y });
+    }
+
+    coords.forEach((coord, idx) => {
+      if (idx >= tree.length || tree[idx] === null) return;
+      const leftIdx = 2 * idx + 1;
+      const rightIdx = 2 * idx + 2;
+
+      if (leftIdx < tree.length && tree[leftIdx] !== null) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", coord.x);
+        line.setAttribute("y1", coord.y);
+        line.setAttribute("x2", coords[leftIdx].x);
+        line.setAttribute("y2", coords[leftIdx].y);
+        line.setAttribute("stroke", "var(--border-color)");
+        line.setAttribute("stroke-opacity", "0.4");
+        line.setAttribute("stroke-width", "2");
+        svg.appendChild(line);
+      }
+      if (rightIdx < tree.length && tree[rightIdx] !== null) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", coord.x);
+        line.setAttribute("y1", coord.y);
+        line.setAttribute("x2", coords[rightIdx].x);
+        line.setAttribute("y2", coords[rightIdx].y);
+        line.setAttribute("stroke", "var(--border-color)");
+        line.setAttribute("stroke-opacity", "0.4");
+        line.setAttribute("stroke-width", "2");
+        svg.appendChild(line);
+      }
+    });
+
+    coords.forEach((coord, idx) => {
+      if (idx >= tree.length || tree[idx] === null) return;
+      const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", coord.x);
+      circle.setAttribute("cy", coord.y);
+      circle.setAttribute("r", "15");
+      circle.setAttribute("fill", "rgba(30, 41, 59, 0.95)");
+      circle.setAttribute("stroke", "var(--border-color)");
+      circle.setAttribute("stroke-width", "2");
+
+      if (step.active === idx) {
+        circle.setAttribute("stroke", "var(--secondary)");
+        circle.setAttribute("fill", "rgba(236, 72, 153, 0.2)");
+        circle.setAttribute("r", "18");
+      }
+
+      g.appendChild(circle);
+
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", coord.x);
+      text.setAttribute("y", coord.y);
+      text.setAttribute("fill", "white");
+      text.setAttribute("font-size", "10px");
+      text.setAttribute("font-weight", "bold");
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("dominant-baseline", "middle");
+      text.textContent = tree[idx];
+      g.appendChild(text);
+
+      svg.appendChild(g);
+    });
+
+    container.appendChild(svg);
+
+    const board = document.createElement('div');
+    board.className = 'tw-panel-card';
+    board.style.padding = '12px';
+    board.style.fontSize = '0.8rem';
+    board.innerHTML = `
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <div><strong>Active Node:</strong> <span style="color:var(--secondary); font-weight:bold;">${step.active !== null ? tree[step.active] : 'None'}</span></div>
+        <div><strong>Subtree Max Sum Candidate:</strong> <span style="color:var(--accent-cyan); font-family:monospace; font-weight:bold;">${step.localMax !== undefined ? step.localMax : 'N/A'}</span></div>
+        <div><strong>Left Path Contribution:</strong> <span style="color:var(--text-muted); font-family:monospace;">${step.leftContrib !== undefined ? step.leftContrib : 'N/A'} (raw: ${step.leftRaw})</span></div>
+        <div><strong>Right Path Contribution:</strong> <span style="color:var(--text-muted); font-family:monospace;">${step.rightContrib !== undefined ? step.rightContrib : 'N/A'} (raw: ${step.rightRaw})</span></div>
+      </div>
+      <div style="margin-top:10px; border-top:1px solid rgba(255,255,255,0.05); padding-top:8px; text-align:center;">
+        <span style="font-size:0.9rem; font-weight:bold;">GLOBAL MAX PATH SUM: <span style="color:var(--easy); text-shadow:0 0 10px var(--easy); font-size:1.1rem;">${step.globalMax}</span></span>
+      </div>
+    `;
+    container.appendChild(board);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'equationsolver') {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '15px';
+    container.style.width = '100%';
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("style", "width:100%; height:200px; background:rgba(0,0,0,0.15); border:1px solid var(--border-color); border-radius:12px;");
+    svg.setAttribute("viewBox", "0 0 450 200");
+
+    // Coordinates for 7 nodes representing the division ratio graph (overlap-free placement)
+    const coords = {
+      'a': { x: 220, y: 100 },
+      'b': { x: 170, y: 40 },
+      'c': { x: 270, y: 40 },
+      'd': { x: 340, y: 100 },
+      'e': { x: 270, y: 160 },
+      'f': { x: 100, y: 100 },
+      'g': { x: 40, y: 100 }
+    };
+
+    if (step.graph) {
+      Object.keys(coords).forEach(u => {
+        const neighbors = step.graph[u] || [];
+        neighbors.forEach(edge => {
+          const from = coords[u];
+          const to = coords[edge.node];
+          if (from && to) {
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", from.x);
+            line.setAttribute("y1", from.y);
+            line.setAttribute("x2", to.x);
+            line.setAttribute("y2", to.y);
+
+            if (step.activeEdge && step.activeEdge.from === u && step.activeEdge.to === edge.node) {
+              line.setAttribute("stroke", "var(--secondary)");
+              line.setAttribute("stroke-width", "3");
+            } else {
+              line.setAttribute("stroke", "var(--border-color)");
+              line.setAttribute("stroke-opacity", "0.4");
+              line.setAttribute("stroke-width", "1.5");
+            }
+            svg.appendChild(line);
+
+            // Render weight ratio cleanly at edge midpoint to prevent overlap
+            const midX = (from.x + to.x) / 2;
+            const midY = (from.y + to.y) / 2;
+            const weightLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            weightLabel.setAttribute("x", midX);
+            weightLabel.setAttribute("y", midY - 5);
+            weightLabel.setAttribute("fill", "rgba(255,255,255,0.45)");
+            weightLabel.setAttribute("font-size", "8.5px");
+            weightLabel.setAttribute("font-family", "monospace");
+            weightLabel.setAttribute("text-anchor", "middle");
+            weightLabel.textContent = edge.weight.toFixed(1);
+            svg.appendChild(weightLabel);
+          }
+        });
+      });
+    }
+
+    Object.keys(coords).forEach(u => {
+      const coord = coords[u];
+      const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", coord.x);
+      circle.setAttribute("cy", coord.y);
+      circle.setAttribute("r", "15");
+      circle.setAttribute("fill", "rgba(30, 41, 59, 0.95)");
+      circle.setAttribute("stroke", "var(--border-color)");
+      circle.setAttribute("stroke-width", "2");
+
+      if (step.activeNode === u) {
+        circle.setAttribute("stroke", "var(--secondary)");
+        circle.setAttribute("fill", "rgba(236, 72, 153, 0.2)");
+        circle.setAttribute("r", "17");
+      } else if (step.path && step.path.includes(u)) {
+        circle.setAttribute("stroke", "var(--easy)");
+        circle.setAttribute("fill", "rgba(16, 185, 129, 0.15)");
+      } else if (step.visited && step.visited.includes(u)) {
+        circle.setAttribute("stroke", "var(--text-muted)");
+        circle.setAttribute("opacity", "0.6");
+      }
+
+      g.appendChild(circle);
+
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", coord.x);
+      text.setAttribute("y", coord.y);
+      text.setAttribute("fill", "white");
+      text.setAttribute("font-size", "11px");
+      text.setAttribute("font-weight", "bold");
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("dominant-baseline", "middle");
+      text.textContent = u;
+      g.appendChild(text);
+
+      svg.appendChild(g);
+    });
+
+    container.appendChild(svg);
+
+    const board = document.createElement('div');
+    board.className = 'tw-panel-card';
+    board.style.padding = '12px';
+    board.style.fontSize = '0.8rem';
+    board.innerHTML = `
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <div><strong>DFS Query path:</strong> <span style="color:var(--easy); font-weight:bold;">${step.path ? step.path.join(' → ') : 'None'}</span></div>
+        <div><strong>Target Node:</strong> <span style="color:var(--accent-cyan); font-weight:bold;">${step.dst || 'None'}</span></div>
+        <div><strong>Visited variables:</strong> <span style="color:var(--text-muted);">${step.visited ? step.visited.join(', ') : 'None'}</span></div>
+        <div><strong>Current path product:</strong> <span style="color:var(--secondary); font-family:monospace; font-weight:bold;">${step.currentProduct !== undefined ? step.currentProduct.toFixed(4) : 'N/A'}</span></div>
+      </div>
+      <div style="margin-top:10px; border-top:1px solid rgba(255,255,255,0.05); padding-top:8px; text-align:center;">
+        <strong>Query Ratio evaluation:</strong> <span style="font-weight:bold; font-size:1rem; color:var(--easy);">${step.status === 'found' ? `SUCCESS: ${step.currentProduct.toFixed(4)}` : step.status === 'not_found' ? 'ERROR: -1.0' : 'Searching...'}</span>
+      </div>
+    `;
+    container.appendChild(board);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'tarjanbridge') {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '15px';
+    container.style.width = '100%';
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("style", "width:100%; height:220px; background:rgba(0,0,0,0.15); border:1px solid var(--border-color); border-radius:12px;");
+    svg.setAttribute("viewBox", "0 0 540 220");
+
+    // Coordinates for n=8 graph layout preventing overlaps
+    const coords = [
+      { x: 50, y: 60 },
+      { x: 150, y: 100 },
+      { x: 50, y: 140 },
+      { x: 250, y: 100 },
+      { x: 350, y: 100 },
+      { x: 300, y: 40 },
+      { x: 440, y: 100 },
+      { x: 490, y: 160 }
+    ];
+
+    step.edges.forEach(([u, v]) => {
+      const from = coords[u];
+      const to = coords[v];
+      if (from && to) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", from.x);
+        line.setAttribute("y1", from.y);
+        line.setAttribute("x2", to.x);
+        line.setAttribute("y2", to.y);
+
+        const isBridge = step.bridges.some(b => (b[0] === u && b[1] === v) || (b[0] === v && b[1] === u));
+        const isActiveEdge = step.activeEdge && ((step.activeEdge[0] === u && step.activeEdge[1] === v) || (step.activeEdge[0] === v && step.activeEdge[1] === u));
+
+        if (isBridge) {
+          line.setAttribute("stroke", "var(--secondary)");
+          line.setAttribute("stroke-width", "4");
+          line.setAttribute("stroke-dasharray", "4");
+        } else if (isActiveEdge) {
+          line.setAttribute("stroke", "var(--accent-cyan)");
+          line.setAttribute("stroke-width", "3");
+        } else {
+          line.setAttribute("stroke", "var(--border-color)");
+          line.setAttribute("stroke-opacity", "0.4");
+          line.setAttribute("stroke-width", "1.5");
+        }
+        svg.appendChild(line);
+      }
+    });
+
+    coords.forEach((coord, idx) => {
+      const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", coord.x);
+      circle.setAttribute("cy", coord.y);
+      circle.setAttribute("r", "15");
+      circle.setAttribute("fill", "rgba(30, 41, 59, 0.95)");
+      circle.setAttribute("stroke", "var(--border-color)");
+      circle.setAttribute("stroke-width", "2");
+
+      if (step.activeNode === idx) {
+        circle.setAttribute("stroke", "var(--accent-cyan)");
+        circle.setAttribute("fill", "rgba(0, 242, 254, 0.2)");
+        circle.setAttribute("r", "17");
+      }
+
+      g.appendChild(circle);
+
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", coord.x);
+      text.setAttribute("y", coord.y);
+      text.setAttribute("fill", "white");
+      text.setAttribute("font-size", "11px");
+      text.setAttribute("font-weight", "bold");
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("dominant-baseline", "middle");
+      text.textContent = idx;
+      g.appendChild(text);
+
+      svg.appendChild(g);
+
+      // Label positioning offsets
+      const discVal = step.disc[idx] === -1 ? '-' : step.disc[idx];
+      const lowVal = step.low[idx] === -1 ? '-' : step.low[idx];
+      const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      label.setAttribute("x", coord.x);
+      label.setAttribute("y", coord.y - 21);
+      label.setAttribute("fill", "var(--text-muted)");
+      label.setAttribute("font-size", "9px");
+      label.setAttribute("font-family", "monospace");
+      label.setAttribute("text-anchor", "middle");
+      label.textContent = `d:${discVal}/l:${lowVal}`;
+      svg.appendChild(label);
+    });
+
+    container.appendChild(svg);
+
+    const board = document.createElement('div');
+    board.className = 'tw-panel-card';
+    board.style.padding = '12px';
+    board.style.fontSize = '0.8rem';
+    board.innerHTML = `
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <div><strong>DFS Active Stack:</strong> <span style="color:var(--accent-cyan); font-family:monospace; font-weight:bold;">[${step.stack ? step.stack.join(', ') : ''}]</span></div>
+        <div><strong>Active Node u:</strong> <span style="color:var(--secondary); font-weight:bold;">${step.activeNode !== null ? step.activeNode : 'None'}</span></div>
+      </div>
+      <div style="margin-top:10px; border-top:1px solid rgba(255,255,255,0.05); padding-top:8px; text-align:center;">
+        <strong>Bridges Identified:</strong> <span style="font-weight:bold; font-size:1.15rem; color:var(--secondary);">${step.bridges && step.bridges.length > 0 ? step.bridges.map(b => `(${b[0]}, ${b[1]})`).join(' ') : 'None yet'}</span>
+      </div>
+    `;
+    container.appendChild(board);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'combinationtree') {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '15px';
+    container.style.width = '100%';
+    container.style.padding = '10px';
+
+    // Original candidates array
+    const candidatesWrapper = document.createElement('div');
+    candidatesWrapper.innerHTML = '<h4 style="font-size:0.85rem; margin-bottom:5px; color:white;">Original Candidates Array</h4>';
+    const candidatesRow = document.createElement('div');
+    candidatesRow.style.display = 'flex';
+    candidatesRow.style.gap = '8px';
+    candidatesRow.style.padding = '5px 0';
+    const candidates = visualizerState.rawArray.candidates || [];
+    candidates.forEach(val => {
+      const item = document.createElement('div');
+      item.className = 'bs-element';
+      item.textContent = val;
+      item.style.width = '42px';
+      item.style.height = '42px';
+      item.style.borderColor = 'var(--border-color)';
+      candidatesRow.appendChild(item);
+    });
+    candidatesWrapper.appendChild(candidatesRow);
+    container.appendChild(candidatesWrapper);
+
+    const gaugeWrapper = document.createElement('div');
+    gaugeWrapper.className = 'tw-panel-card';
+    gaugeWrapper.style.padding = '12px';
+
+    let pct = Math.max(0, (step.target / visualizerState.rawArray.target) * 100);
+    if (step.target < 0) pct = 0;
+    const barColor = step.status === 'valid' ? 'var(--easy)' : step.status === 'pruned' ? 'var(--secondary)' : 'var(--accent-cyan)';
+
+    gaugeWrapper.innerHTML = `
+      <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:5px; color:white;">
+        <span><strong>Remaining Target Sum:</strong> ${step.target} / ${visualizerState.rawArray.target}</span>
+        <span style="font-weight:bold; text-transform:uppercase; color:${barColor};">${step.status}</span>
+      </div>
+      <div style="width:100%; height:12px; background:rgba(255,255,255,0.05); border-radius:6px; overflow:hidden;">
+        <div style="width:${pct}%; height:100%; background:${barColor}; transition: width 0.3s, background 0.3s;"></div>
+      </div>
+    `;
+    container.appendChild(gaugeWrapper);
+
+    const pathWrapper = document.createElement('div');
+    pathWrapper.innerHTML = '<h4 style="font-size:0.85rem; margin-bottom:5px; color:white;">Active Combination Stack (Subset)</h4>';
+    const pathRow = document.createElement('div');
+    pathRow.style.display = 'flex';
+    pathRow.style.gap = '8px';
+    pathRow.style.overflowX = 'auto';
+    pathRow.style.whiteSpace = 'nowrap';
+    pathRow.style.padding = '5px 0';
+
+    if (step.path && step.path.length > 0) {
+      step.path.forEach(val => {
+        const item = document.createElement('div');
+        item.className = 'bs-element';
+        item.textContent = val;
+        item.style.width = '42px';
+        item.style.height = '42px';
+        item.style.borderColor = barColor;
+        item.style.flexShrink = '0';
+        pathRow.appendChild(item);
+      });
+    } else {
+      pathRow.innerHTML = '<span style="color:var(--text-muted); font-style:italic; font-size:0.8rem;">Empty Path</span>';
+    }
+    pathWrapper.appendChild(pathRow);
+    container.appendChild(pathWrapper);
+
+    if (step.results || (step.status === 'complete' && step.results)) {
+      const resultsWrapper = document.createElement('div');
+      resultsWrapper.className = 'tw-panel-card';
+      resultsWrapper.style.padding = '12px';
+      resultsWrapper.style.fontSize = '0.8rem';
+
+      const solutions = step.results || [];
+      resultsWrapper.innerHTML = `
+        <h4 style="font-size:0.8rem; margin-bottom:5px; color:white;">Valid Combinations Solutions Found:</h4>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:5px;">
+          ${solutions.length > 0 ? solutions.map(sol => `<span style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25); color:var(--easy); padding:3px 8px; border-radius:15px; font-family:monospace; font-weight:bold;">[${sol.join(', ')}]</span>`).join('') : '<span style="color:var(--text-muted); font-style:italic;">None yet</span>'}
+        </div>
+      `;
+      container.appendChild(resultsWrapper);
+    }
+
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'boyermoore') {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex; flex-direction:column; gap:16px; width:100%; padding:10px;';
+
+    // Array display
+    const arrWrapper = document.createElement('div');
+    arrWrapper.innerHTML = '<h4 style="font-size:0.85rem; margin-bottom:6px; color:white;">Input Array — Scanning for Majority</h4>';
+    const arrRow = document.createElement('div');
+    arrRow.style.cssText = 'display:flex; gap:8px; overflow-x:auto; padding:24px 0 8px; white-space:nowrap;';
+    step.arr.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'bs-element';
+      cell.textContent = val;
+      cell.style.cssText = 'width:42px; height:42px; flex-shrink:0; position:relative;';
+      if (idx === step.idx) {
+        if (step.phase === 'match') {
+          cell.style.borderColor = 'var(--easy)';
+          cell.style.background = 'rgba(16,185,129,0.2)';
+          cell.style.boxShadow = '0 0 14px var(--easy)';
+        } else if (step.phase === 'nomatch') {
+          cell.style.borderColor = 'var(--secondary)';
+          cell.style.background = 'rgba(236,72,153,0.2)';
+          cell.style.boxShadow = '0 0 14px var(--secondary)';
+        } else if (step.phase === 'newcandidate') {
+          cell.style.borderColor = 'var(--accent-cyan)';
+          cell.style.background = 'rgba(0,242,254,0.2)';
+          cell.style.boxShadow = '0 0 14px var(--accent-cyan)';
+        }
+        const arrow = document.createElement('div');
+        arrow.style.cssText = 'position:absolute; top:-22px; left:50%; transform:translateX(-50%); font-size:0.75rem; color:var(--accent-cyan); white-space:nowrap;';
+        arrow.textContent = '▼ scan';
+        cell.appendChild(arrow);
+      }
+      if (val === step.candidate && idx !== step.idx) {
+        cell.style.borderColor = 'rgba(16,185,129,0.4)';
+        cell.style.background = 'rgba(16,185,129,0.05)';
+      }
+      arrRow.appendChild(cell);
+    });
+    arrWrapper.appendChild(arrRow);
+    container.appendChild(arrWrapper);
+
+    // Candidate & Count
+    const infoCard = document.createElement('div');
+    infoCard.className = 'tw-panel-card';
+    infoCard.style.padding = '14px';
+    const countColor = step.phase === 'match' ? 'var(--easy)' : step.phase === 'nomatch' ? 'var(--secondary)' : 'var(--accent-cyan)';
+    const candidateDisplay = step.candidate !== null ? step.candidate : '—';
+    infoCard.innerHTML = `
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:12px;">
+        <div style="text-align:center; background:rgba(0,242,254,0.06); border:1px solid rgba(0,242,254,0.2); border-radius:10px; padding:12px;">
+          <div style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Current Candidate</div>
+          <div style="font-size:2rem; font-weight:bold; color:var(--accent-cyan);">${candidateDisplay}</div>
+        </div>
+        <div style="text-align:center; background:rgba(16,185,129,0.06); border:1px solid ${countColor}40; border-radius:10px; padding:12px;">
+          <div style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Vote Count</div>
+          <div style="font-size:2rem; font-weight:bold; color:${countColor};">${step.count}</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:0.8rem;">
+        <span style="color:var(--text-muted);">Vote Bar:</span>
+        <div style="flex:1; height:10px; background:rgba(255,255,255,0.06); border-radius:5px; overflow:hidden;">
+          <div style="width:${Math.max(0, Math.min(100, (step.count / step.arr.length) * 100))}%; height:100%; background:${countColor}; transition:width 0.3s;"></div>
+        </div>
+      </div>
+      ${step.phase === 'done' ? `<div style="margin-top:12px; text-align:center; font-size:1rem; font-weight:bold; color:var(--easy); text-shadow:0 0 12px var(--easy);">🏆 Majority Element = ${step.candidate}</div>` : ''}
+    `;
+    container.appendChild(infoCard);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'quickselect') {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex; flex-direction:column; gap:16px; width:100%; padding:10px;';
+
+    const header = document.createElement('div');
+    header.innerHTML = `<h4 style="font-size:0.85rem; color:white; margin-bottom:4px;">Quick Select — Find <span style="color:var(--accent-cyan);">${step.k}th Largest</span> (target index: ${step.targetIdx})</h4>`;
+    container.appendChild(header);
+
+    // Array
+    const arrRow = document.createElement('div');
+    arrRow.style.cssText = 'display:flex; gap:8px; overflow-x:auto; padding:28px 0 12px; white-space:nowrap;';
+    step.arr.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'bs-element';
+      cell.textContent = val;
+      cell.style.cssText = 'width:42px; height:42px; flex-shrink:0; position:relative;';
+      // Active search window
+      if (idx >= step.lo && idx <= step.hi) {
+        cell.style.background = 'rgba(0,242,254,0.07)';
+        cell.style.borderColor = 'rgba(0,242,254,0.35)';
+      } else {
+        cell.style.opacity = '0.3';
+      }
+      // Pivot
+      if (idx === step.pivotIdx) {
+        cell.style.borderColor = 'var(--secondary)';
+        cell.style.background = 'rgba(236,72,153,0.2)';
+        cell.style.boxShadow = '0 0 12px var(--secondary)';
+        const lbl = document.createElement('div');
+        lbl.style.cssText = 'position:absolute; top:-22px; left:50%; transform:translateX(-50%); font-size:0.7rem; color:var(--secondary); white-space:nowrap;';
+        lbl.textContent = 'pivot';
+        cell.appendChild(lbl);
+      }
+      // Compare index
+      if (idx === step.compareIdx) {
+        cell.style.borderColor = 'var(--accent-cyan)';
+        const lbl = document.createElement('div');
+        lbl.style.cssText = 'position:absolute; bottom:-22px; left:50%; transform:translateX(-50%); font-size:0.7rem; color:var(--accent-cyan); white-space:nowrap;';
+        lbl.textContent = 'j';
+        cell.appendChild(lbl);
+      }
+      // Swap highlight
+      if (step.swapPair && (idx === step.swapPair[0] || idx === step.swapPair[1])) {
+        cell.style.background = 'rgba(245,158,11,0.2)';
+        cell.style.borderColor = 'rgb(245,158,11)';
+      }
+      // Target position
+      if (idx === step.targetIdx) {
+        const tgt = document.createElement('div');
+        tgt.style.cssText = 'position:absolute; top:-22px; right:-2px; font-size:0.65rem; color:var(--easy); white-space:nowrap;';
+        tgt.textContent = `k=${step.k}`;
+        cell.appendChild(tgt);
+      }
+      if (step.phase === 'found' && idx === step.pivotIdx) {
+        cell.style.boxShadow = '0 0 20px var(--easy)';
+        cell.style.borderColor = 'var(--easy)';
+        cell.style.background = 'rgba(16,185,129,0.25)';
+      }
+      arrRow.appendChild(cell);
+    });
+    container.appendChild(arrRow);
+
+    const infoCard = document.createElement('div');
+    infoCard.className = 'tw-panel-card';
+    infoCard.style.padding = '12px';
+    infoCard.innerHTML = `
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; font-size:0.8rem;">
+        <div><strong>Search Window:</strong> <span style="color:var(--accent-cyan); font-family:monospace;">[${step.lo} .. ${step.hi}]</span></div>
+        <div><strong>Pivot Index:</strong> <span style="color:var(--secondary); font-family:monospace;">${step.pivotIdx >= 0 ? step.pivotIdx : '—'}</span></div>
+        <div><strong>Phase:</strong> <span style="color:var(--text-muted); text-transform:uppercase;">${step.phase}</span></div>
+      </div>
+      ${step.phase === 'found' ? `<div style="margin-top:10px; text-align:center; font-size:1rem; font-weight:bold; color:var(--easy); text-shadow:0 0 12px var(--easy);">🎯 ${step.k}th Largest = ${step.arr[step.pivotIdx]}</div>` : ''}
+    `;
+    container.appendChild(infoCard);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'bstdeletion') {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex; flex-direction:column; gap:16px; width:100%; padding:10px;';
+
+    const canvasW = 480, canvasH = 250;
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("style", `width:100%; height:${canvasH}px; background:rgba(0,0,0,0.15); border:1px solid var(--border-color); border-radius:12px;`);
+    svg.setAttribute("viewBox", `0 0 ${canvasW} ${canvasH}`);
+
+    const tree = step.tree;
+    const coords = [];
+    for (let i = 0; i < tree.length; i++) {
+      const level = Math.floor(Math.log2(i + 1));
+      const numInLevel = Math.pow(2, level);
+      const levelIdx = i - numInLevel + 1;
+      const spacing = canvasW / numInLevel;
+      coords.push({ x: spacing * levelIdx + spacing / 2, y: 30 + level * 55 });
+    }
+
+    // Draw edges
+    coords.forEach((coord, idx) => {
+      if (idx >= tree.length || tree[idx] === null) return;
+      [2 * idx + 1, 2 * idx + 2].forEach(childIdx => {
+        if (childIdx < tree.length && tree[childIdx] !== null) {
+          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          line.setAttribute("x1", coord.x); line.setAttribute("y1", coord.y);
+          line.setAttribute("x2", coords[childIdx].x); line.setAttribute("y2", coords[childIdx].y);
+          line.setAttribute("stroke", "var(--border-color)"); line.setAttribute("stroke-opacity", "0.4"); line.setAttribute("stroke-width", "2");
+          svg.appendChild(line);
+        }
+      });
+    });
+
+    // Draw nodes
+    coords.forEach((coord, idx) => {
+      if (idx >= tree.length || tree[idx] === null) return;
+      const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", coord.x); circle.setAttribute("cy", coord.y);
+      circle.setAttribute("r", "18"); circle.setAttribute("fill", "rgba(30,41,59,0.95)");
+      circle.setAttribute("stroke", "var(--border-color)"); circle.setAttribute("stroke-width", "2");
+
+      if (idx === step.activeIdx) {
+        circle.setAttribute("stroke", step.phase === 'found' || step.phase === 'swapped' ? "var(--secondary)" : "var(--accent-cyan)");
+        circle.setAttribute("fill", step.phase === 'found' || step.phase === 'swapped' ? "rgba(236,72,153,0.2)" : "rgba(0,242,254,0.15)");
+        circle.setAttribute("r", "20");
+      } else if (idx === step.successorIdx) {
+        circle.setAttribute("stroke", "var(--easy)"); circle.setAttribute("fill", "rgba(16,185,129,0.2)"); circle.setAttribute("r", "20");
+      } else if (step.highlight && step.highlight.includes(idx)) {
+        circle.setAttribute("stroke", "rgba(0,242,254,0.5)"); circle.setAttribute("fill", "rgba(0,242,254,0.06)");
+      }
+
+      g.appendChild(circle);
+      const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      text.setAttribute("x", coord.x); text.setAttribute("y", coord.y);
+      text.setAttribute("fill", "white"); text.setAttribute("font-size", "11px");
+      text.setAttribute("font-weight", "bold"); text.setAttribute("text-anchor", "middle"); text.setAttribute("dominant-baseline", "middle");
+      text.textContent = tree[idx];
+      g.appendChild(text);
+      svg.appendChild(g);
+    });
+
+    container.appendChild(svg);
+
+    const infoCard = document.createElement('div');
+    infoCard.className = 'tw-panel-card';
+    infoCard.style.padding = '12px';
+    infoCard.innerHTML = `
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; font-size:0.8rem;">
+        <div><strong>Deleting Key:</strong> <span style="color:var(--secondary); font-size:1.1rem; font-weight:bold;">${step.deleteKey}</span></div>
+        <div><strong>Active Node:</strong> <span style="color:var(--accent-cyan); font-weight:bold;">${step.activeIdx >= 0 && step.tree[step.activeIdx] !== null ? step.tree[step.activeIdx] : '—'}</span></div>
+        <div><strong>Inorder Successor:</strong> <span style="color:var(--easy); font-weight:bold;">${step.successorIdx >= 0 && step.tree[step.successorIdx] !== null ? step.tree[step.successorIdx] : '—'}</span></div>
+      </div>
+      <div style="margin-top:10px; text-align:center; font-size:0.85rem; text-transform:uppercase; font-weight:bold; color:var(--accent-cyan);">${step.phase.replace(/_/g, ' ')}</div>
+    `;
+    container.appendChild(infoCard);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'segmenttreelazy') {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex; flex-direction:column; gap:16px; width:100%; padding:10px;';
+
+    // Source array
+    const arrWrapper = document.createElement('div');
+    arrWrapper.innerHTML = '<h4 style="font-size:0.85rem; margin-bottom:6px; color:white;">Source Array</h4>';
+    const arrRow = document.createElement('div');
+    arrRow.style.cssText = 'display:flex; gap:8px; overflow-x:auto; padding:5px 0;';
+    const rawArr = visualizerState.rawArray.arr;
+    rawArr.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'bs-element';
+      cell.textContent = val;
+      cell.style.cssText = 'width:42px; height:42px; flex-shrink:0;';
+      if (idx >= step.updateRange[0] && idx <= step.updateRange[1]) {
+        cell.style.borderColor = 'var(--secondary)';
+        cell.style.background = 'rgba(236,72,153,0.1)';
+      }
+      if (idx >= step.queryRange[0] && idx <= step.queryRange[1]) {
+        if (step.phase.startsWith('query')) {
+          cell.style.borderColor = 'var(--accent-cyan)';
+          cell.style.boxShadow = '0 0 8px var(--accent-cyan)';
+        }
+      }
+      arrRow.appendChild(cell);
+    });
+    arrWrapper.appendChild(arrRow);
+    container.appendChild(arrWrapper);
+
+    // Segment tree nodes
+    const treeWrapper = document.createElement('div');
+    treeWrapper.innerHTML = `<h4 style="font-size:0.85rem; margin-bottom:6px; color:white;">Segment Tree Nodes <span style="color:var(--text-muted); font-size:0.75rem; font-weight:normal;">(val | lazy)</span></h4>`;
+    const treeRow = document.createElement('div');
+    treeRow.style.cssText = 'display:flex; gap:8px; overflow-x:auto; padding:5px 0; flex-wrap:wrap;';
+    const treeData = step.tree || [];
+    const lazyData = step.lazy || [];
+    treeData.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.style.cssText = 'flex-shrink:0; display:flex; flex-direction:column; align-items:center; background:rgba(30,41,59,0.8); border:1px solid var(--border-color); border-radius:8px; padding:6px 8px; min-width:46px;';
+      if (idx === step.activeNode) {
+        cell.style.borderColor = step.phase.startsWith('query') ? 'var(--accent-cyan)' : 'var(--secondary)';
+        cell.style.boxShadow = `0 0 10px ${step.phase.startsWith('query') ? 'var(--accent-cyan)' : 'var(--secondary)'}`;
+        cell.style.background = step.phase.startsWith('query') ? 'rgba(0,242,254,0.1)' : 'rgba(236,72,153,0.1)';
+      }
+      if (lazyData[idx] > 0) {
+        cell.style.borderColor = 'rgba(245,158,11,0.7)';
+      }
+      cell.innerHTML = `<span style="font-size:0.9rem; font-weight:bold; color:white;">${val}</span><span style="font-size:0.65rem; color:${lazyData[idx] > 0 ? 'rgb(245,158,11)' : 'var(--text-muted)'}; margin-top:2px;">lazy:${lazyData[idx] || 0}</span><span style="font-size:0.6rem; color:rgba(255,255,255,0.25);">${idx}</span>`;
+      treeRow.appendChild(cell);
+    });
+    treeWrapper.appendChild(treeRow);
+    container.appendChild(treeWrapper);
+
+    const infoCard = document.createElement('div');
+    infoCard.className = 'tw-panel-card';
+    infoCard.style.padding = '12px';
+    infoCard.innerHTML = `
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; font-size:0.8rem;">
+        <div><strong>Update Range:</strong> <span style="color:var(--secondary); font-family:monospace;">[${step.updateRange[0]}..${step.updateRange[1]}] +${step.updateVal}</span></div>
+        <div><strong>Query Range:</strong> <span style="color:var(--accent-cyan); font-family:monospace;">[${step.queryRange[0]}..${step.queryRange[1]}]</span></div>
+        <div><strong>Phase:</strong> <span style="color:var(--text-muted); text-transform:uppercase;">${step.phase.replace(/_/g, ' ')}</span></div>
+      </div>
+      ${step.queryResult !== null ? `<div style="margin-top:10px; text-align:center; font-size:1rem; font-weight:bold; color:var(--easy); text-shadow:0 0 12px var(--easy);">Range Sum Query Result = ${step.queryResult}</div>` : ''}
+    `;
+    container.appendChild(infoCard);
+    canvas.appendChild(container);
+  }
+  else if (visualizerState.algo === 'multisourcebfs') {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex; flex-direction:column; gap:16px; width:100%; padding:10px;';
+
+    const header = document.createElement('div');
+    header.style.cssText = 'display:flex; justify-content:space-between; align-items:center;';
+    header.innerHTML = `
+      <h4 style="font-size:0.85rem; color:white; margin:0;">Rotten Oranges Grid — Multi-Source BFS</h4>
+      <div style="display:flex; gap:12px; font-size:0.75rem; color:var(--text-muted);">
+        <span><span style="display:inline-block; width:12px; height:12px; background:var(--secondary); border-radius:2px; margin-right:4px;"></span>Rotten (2)</span>
+        <span><span style="display:inline-block; width:12px; height:12px; background:rgb(245,158,11); border-radius:2px; margin-right:4px;"></span>Fresh (1)</span>
+        <span><span style="display:inline-block; width:12px; height:12px; background:rgba(255,255,255,0.08); border:1px solid var(--border-color); border-radius:2px; margin-right:4px;"></span>Empty (0)</span>
+      </div>
+    `;
+    container.appendChild(header);
+
+    // Grid
+    const gridWrapper = document.createElement('div');
+    gridWrapper.style.cssText = 'display:flex; flex-direction:column; gap:5px; align-self:center;';
+
+    const grid = step.grid;
+    const justRotten = step.justRotten || [];
+    const justRottenSet = new Set(justRotten.map(([r, c]) => `${r},${c}`));
+
+    grid.forEach((row, r) => {
+      const rowDiv = document.createElement('div');
+      rowDiv.style.cssText = 'display:flex; gap:5px;';
+      row.forEach((cell, c) => {
+        const cellDiv = document.createElement('div');
+        cellDiv.style.cssText = 'width:48px; height:48px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; transition: all 0.3s; border:1px solid transparent;';
+        const key = `${r},${c}`;
+        if (cell === 2) {
+          if (justRottenSet.has(key)) {
+            // Just became rotten this minute - animated
+            cellDiv.style.background = 'rgba(236,72,153,0.35)';
+            cellDiv.style.borderColor = 'var(--secondary)';
+            cellDiv.style.boxShadow = '0 0 16px var(--secondary)';
+            cellDiv.textContent = '🤢';
+          } else {
+            cellDiv.style.background = 'rgba(236,72,153,0.15)';
+            cellDiv.style.borderColor = 'rgba(236,72,153,0.4)';
+            cellDiv.textContent = '🍊';
+          }
+        } else if (cell === 1) {
+          cellDiv.style.background = 'rgba(245,158,11,0.15)';
+          cellDiv.style.borderColor = 'rgba(245,158,11,0.4)';
+          cellDiv.textContent = '🍋';
+        } else {
+          cellDiv.style.background = 'rgba(255,255,255,0.04)';
+          cellDiv.style.borderColor = 'rgba(255,255,255,0.06)';
+          cellDiv.textContent = '';
+        }
+        rowDiv.appendChild(cellDiv);
+      });
+      gridWrapper.appendChild(rowDiv);
+    });
+    container.appendChild(gridWrapper);
+
+    const infoCard = document.createElement('div');
+    infoCard.className = 'tw-panel-card';
+    infoCard.style.padding = '12px';
+    const phaseColor = step.phase === 'done' ? 'var(--easy)' : step.phase === 'impossible' ? 'var(--secondary)' : 'var(--accent-cyan)';
+    infoCard.innerHTML = `
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; font-size:0.8rem;">
+        <div style="text-align:center;"><div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:4px;">Minute</div><div style="font-size:1.8rem; font-weight:bold; color:var(--accent-cyan);">${step.minute >= 0 ? step.minute : '∞'}</div></div>
+        <div style="text-align:center;"><div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:4px;">Fresh Remaining</div><div style="font-size:1.8rem; font-weight:bold; color:${step.freshLeft === 0 ? 'var(--easy)' : 'rgb(245,158,11)'};">${step.freshLeft}</div></div>
+        <div style="text-align:center;"><div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:4px;">Phase</div><div style="font-size:0.85rem; font-weight:bold; color:${phaseColor}; text-transform:uppercase; margin-top:8px;">${step.phase}</div></div>
+      </div>
+      ${step.phase === 'done' ? `<div style="margin-top:12px; text-align:center; font-size:1rem; font-weight:bold; color:var(--easy); text-shadow:0 0 12px var(--easy);">✅ All oranges rotten in ${step.minute} minutes!</div>` : ''}
+      ${step.phase === 'impossible' ? `<div style="margin-top:12px; text-align:center; font-size:1rem; font-weight:bold; color:var(--secondary); text-shadow:0 0 12px var(--secondary);">❌ Impossible — ${step.freshLeft} unreachable fresh orange(s).</div>` : ''}
+    `;
+    container.appendChild(infoCard);
     canvas.appendChild(container);
   }
 }
@@ -24123,21 +27778,21 @@ function renderCanvasStep() {
 
 function stepVisualizer() {
   if (visualizerState.steps.length === 0) return;
-  
+
   if (visualizerState.currentStepIndex >= visualizerState.steps.length - 1) {
     appendLog("[INFO] End of simulation steps reached. Click Reset.", 'alert');
     pauseVisualizer();
     return;
   }
-  
+
   visualizerState.currentStepIndex++;
   const activeStepSnapshot = visualizerState.steps[visualizerState.currentStepIndex];
-  
+
   let traceType = 'info';
   if (activeStepSnapshot.log.includes("Comparing") || activeStepSnapshot.log.includes("Inspecting")) traceType = 'compare';
   if (activeStepSnapshot.log.includes("Swapped") || activeStepSnapshot.log.includes("Pop") || activeStepSnapshot.log.includes("Conflict") || activeStepSnapshot.log.includes("Overlap")) traceType = 'alert';
   if (activeStepSnapshot.log.includes("Success") || activeStepSnapshot.log.includes("Finished") || activeStepSnapshot.log.includes("Meeting") || activeStepSnapshot.log.includes("complete")) traceType = 'success';
-  
+
   appendLog(activeStepSnapshot.log, traceType);
   renderCanvasStep();
 }
@@ -24147,16 +27802,16 @@ function playVisualizer() {
     pauseVisualizer();
     return;
   }
-  
+
   if (visualizerState.currentStepIndex >= visualizerState.steps.length - 1) {
     resetVisualizer();
   }
-  
+
   visualizerState.isPlaying = true;
   document.getElementById('play-icon').setAttribute('data-lucide', 'pause');
   document.getElementById('play-text').textContent = 'Pause';
   lucide.createIcons();
-  
+
   visualizerState.timer = setInterval(() => {
     if (visualizerState.currentStepIndex >= visualizerState.steps.length - 1) {
       pauseVisualizer();
@@ -24173,10 +27828,10 @@ function pauseVisualizer() {
     clearInterval(visualizerState.timer);
     visualizerState.timer = null;
   }
-  
+
   const playIcon = document.getElementById('play-icon');
   const playText = document.getElementById('play-text');
-  
+
   if (playIcon && playText) {
     playIcon.setAttribute('data-lucide', 'play');
     playText.textContent = 'Play';
@@ -24192,7 +27847,7 @@ function initTheme() {
   const savedTheme = localStorage.getItem('theme') || 'dark';
   const sunIcon = document.getElementById('theme-icon-sun');
   const moonIcon = document.getElementById('theme-icon-moon');
-  
+
   if (savedTheme === 'light') {
     document.body.classList.add('light-theme');
     if (sunIcon && moonIcon) {
@@ -24211,10 +27866,10 @@ function initTheme() {
 function toggleTheme() {
   const isLight = document.body.classList.toggle('light-theme');
   localStorage.setItem('theme', isLight ? 'light' : 'dark');
-  
+
   const sunIcon = document.getElementById('theme-icon-sun');
   const moonIcon = document.getElementById('theme-icon-moon');
-  
+
   if (sunIcon && moonIcon) {
     if (isLight) {
       sunIcon.style.display = 'inline-block';

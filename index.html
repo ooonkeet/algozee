@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>I'll Go if you say Algo | Creative DSA Tracker & Visualizer</title>
-  <meta name="description" content="A highly interactive, gamified platform to track DSA progress, visualize algorithm executions, and build daily coding habits.">
+  <meta name="description"
+    content="A highly interactive, gamified platform to track DSA progress, visualize algorithm executions, and build daily coding habits.">
   <link rel="stylesheet" href="style.css">
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
 
   <!-- ==========================================================================
@@ -20,7 +23,14 @@
         <div class="logo-container">
           <div class="logo-icon">
             <!-- Cute SVG robot head / terminal logo -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2" ry="2"></rect><path d="M12 2v9"></path><path d="M8 5h8"></path><circle cx="8" cy="16" r="1" fill="#fff"></circle><circle cx="16" cy="16" r="1" fill="#fff"></circle></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="10" rx="2" ry="2"></rect>
+              <path d="M12 2v9"></path>
+              <path d="M8 5h8"></path>
+              <circle cx="8" cy="16" r="1" fill="#fff"></circle>
+              <circle cx="16" cy="16" r="1" fill="#fff"></circle>
+            </svg>
           </div>
           <div class="logo-text">
             <span>Algozee</span>
@@ -29,7 +39,8 @@
         </div>
       </a>
 
-      <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu" aria-expanded="false">
+      <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu"
+        aria-expanded="false">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
@@ -60,7 +71,7 @@
             </li>
           </ul>
         </nav>
-        
+
         <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
           <i data-lucide="sun" id="theme-icon-sun" style="display: none;"></i>
           <i data-lucide="moon" id="theme-icon-moon"></i>
@@ -70,7 +81,7 @@
   </header>
 
   <main class="container">
-    
+
     <!-- ==========================================================================
          LOBBY / HOME PAGE VIEW
          ========================================================================== -->
@@ -82,7 +93,8 @@
           </div>
           <h1 class="hero-title">I'll Go if you say<br>Algo!</h1>
           <p class="hero-subtitle">
-            Stuck in analysis paralysis? Track a broader DSA problem deck, visualize algorithms step-by-step, and maintain streaks that keep your practice sharp.
+            Stuck in analysis paralysis? Track a broader DSA problem deck, visualize algorithms step-by-step, and
+            maintain streaks that keep your practice sharp.
           </p>
           <div class="hero-cta">
             <button class="btn btn-primary" onclick="switchTab('explorer')">
@@ -99,17 +111,18 @@
           <div class="hero-widget-box">
             <!-- "Algo Decider" Widget -->
             <div class="glass-card decider-widget accent-indigo">
-              <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+              <h3
+                style="font-size: 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
                 <i data-lucide="dices" style="color: var(--primary-glow)"></i>
                 Should you study today?
               </h3>
               <p style="font-size: 0.8rem; color: var(--text-muted);">Let the algorithm decide your daily challenge!</p>
-              
+
               <div class="decider-display" id="decider-screen">
                 <div class="decider-topic" id="decider-topic">Click Roll!</div>
                 <div class="decider-prompt" id="decider-prompt">Let's find out...</div>
               </div>
-              
+
               <button class="btn btn-accent btn-sm" style="width: 100%" id="decider-roll-btn" onclick="rollAlgoDice()">
                 Roll the Dice 🎲
               </button>
@@ -123,7 +136,7 @@
       <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem auto;">
         We combine progress tracking, visualization sandboxes, and motivational game design to keep you coding daily.
       </p>
-      
+
       <div class="features-grid">
         <!-- Feature 1 -->
         <div class="glass-card accent-indigo">
@@ -134,7 +147,8 @@
             <h3>Dynamic Dashboards</h3>
           </div>
           <p style="color: var(--text-muted); font-size: 0.9rem;">
-            Watch your metrics grow with real-time circular statistics gauges, solve ratios, and a full contribution calendar grid that tracks daily coding consistency.
+            Watch your metrics grow with real-time circular statistics gauges, solve ratios, and a full contribution
+            calendar grid that tracks daily coding consistency.
           </p>
         </div>
 
@@ -147,7 +161,8 @@
             <h3>Gamified Streaks</h3>
           </div>
           <p style="color: var(--text-muted); font-size: 0.9rem;">
-            Earn custom achievements like "Binary Boss" or "Recursion Rookie". Maintain your continuous solve streak to double your points and claim higher ranks.
+            Earn custom achievements like "Binary Boss" or "Recursion Rookie". Maintain your continuous solve streak to
+            double your points and claim higher ranks.
           </p>
         </div>
 
@@ -160,7 +175,8 @@
             <h3>Algorithm Sandbox</h3>
           </div>
           <p style="color: var(--text-muted); font-size: 0.9rem;">
-            Step through sorting, graphs, DP, caches, heaps, strings, and backtracking. Control speed, inspect states, and read conversational execution logs.
+            Step through sorting, graphs, DP, caches, heaps, strings, and backtracking. Control speed, inspect states,
+            and read conversational execution logs.
           </p>
         </div>
       </div>
@@ -171,7 +187,8 @@
          ========================================================================== -->
     <section id="page-dashboard" class="page-view">
       <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Your Training Dashboard</h2>
-      <p style="color: var(--text-muted); margin-bottom: 2rem;">Real-time analysis of your DSA metrics, streak activity, and unlocked awards.</p>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">Real-time analysis of your DSA metrics, streak activity,
+        and unlocked awards.</p>
 
       <div class="dashboard-layout">
         <!-- Stats Row -->
@@ -223,15 +240,16 @@
           <div class="progress-chart-container">
             <div class="progress-svg-wrapper">
               <svg class="progress-svg-ring" width="140" height="140">
-                <circle class="ring-bg" cx="70" cy="70" r="60" stroke-width="12" fill="transparent"/>
-                <circle class="ring-fg" id="dashboard-progress-ring" cx="70" cy="70" r="60" stroke-width="12" fill="transparent"/>
+                <circle class="ring-bg" cx="70" cy="70" r="60" stroke-width="12" fill="transparent" />
+                <circle class="ring-fg" id="dashboard-progress-ring" cx="70" cy="70" r="60" stroke-width="12"
+                  fill="transparent" />
               </svg>
               <div class="progress-text">
                 <span class="progress-pct" id="dashboard-pct-text">0%</span>
                 <span class="progress-label">Solved</span>
               </div>
             </div>
-            
+
             <div class="chart-breakdown">
               <div class="breakdown-row">
                 <span class="breakdown-cat">
@@ -259,7 +277,8 @@
         <div class="glass-card heatmap-card accent-pink">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
             <h3 style="font-size: 1.25rem;">Activity Calendar</h3>
-            <span style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.25rem;">
+            <span
+              style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.25rem;">
               <i data-lucide="info" style="width: 14px; height: 14px;"></i> Interactive daily solve log
             </span>
           </div>
@@ -273,7 +292,8 @@
         <!-- Badges container -->
         <div class="glass-card badges-card accent-indigo">
           <h3 style="font-size: 1.25rem;">Unlocked Badges</h3>
-          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Achieve target milestones to unlock shiny medals.</p>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Achieve target milestones to
+            unlock shiny medals.</p>
           <div class="badges-grid" id="badges-container">
             <!-- Badges dynamically updated by JS -->
           </div>
@@ -286,7 +306,9 @@
               <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Topic Mastery</h3>
               <p style="font-size: 0.8rem; color: var(--text-muted);">Progress across all expanded DSA tracks</p>
             </div>
-            <span id="topic-total-badge" style="background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.25); color: var(--accent-cyan); font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 20px; font-family: 'Fira Code', monospace;">0 topics mastered</span>
+            <span id="topic-total-badge"
+              style="background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.25); color: var(--accent-cyan); font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 20px; font-family: 'Fira Code', monospace;">0
+              topics mastered</span>
           </div>
           <div id="topic-progress-list">
             <!-- Dynamically rendered topic bars -->
@@ -298,16 +320,19 @@
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
             <div>
               <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Solved Problems</h3>
-              <p style="font-size: 0.8rem; color: var(--text-muted);">All problems you've completed — click to revisit</p>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">All problems you've completed — click to revisit
+              </p>
             </div>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <select id="solved-filter-diff" class="filter-select" onchange="renderSolvedFeed()" style="font-size: 0.75rem; padding: 0.35rem 1.5rem 0.35rem 0.6rem; border-radius: 6px; height: auto;">
+              <select id="solved-filter-diff" class="filter-select" onchange="renderSolvedFeed()"
+                style="font-size: 0.75rem; padding: 0.35rem 1.5rem 0.35rem 0.6rem; border-radius: 6px; height: auto;">
                 <option value="all">All Difficulties</option>
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
               </select>
-              <select id="solved-filter-topic" class="filter-select" onchange="renderSolvedFeed()" style="font-size: 0.75rem; padding: 0.35rem 1.5rem 0.35rem 0.6rem; border-radius: 6px; height: auto;">
+              <select id="solved-filter-topic" class="filter-select" onchange="renderSolvedFeed()"
+                style="font-size: 0.75rem; padding: 0.35rem 1.5rem 0.35rem 0.6rem; border-radius: 6px; height: auto;">
                 <option value="all">All Topics</option>
                 <option value="Arrays &amp; Hashing">Arrays &amp; Hashing</option>
                 <option value="Binary Search">Binary Search</option>
@@ -322,16 +347,20 @@
                 <option value="Sorting &amp; Partitioning">Sorting &amp; Partitioning</option>
                 <option value="Design &amp; Advanced DS">Design &amp; Advanced DS</option>
                 <option value="Strings &amp; Pattern Matching">Strings &amp; Pattern Matching</option>
+                <option value="Greedy Algorithms">Greedy Algorithms</option>
+                <option value="Math &amp; Geometry">Math &amp; Geometry</option>
               </select>
             </div>
           </div>
           <div id="solved-feed-list">
             <!-- Dynamically rendered solved problems -->
           </div>
-          <div id="solved-feed-empty" style="display: none; text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
+          <div id="solved-feed-empty"
+            style="display: none; text-align: center; padding: 3rem 1rem; color: var(--text-muted);">
             <div style="font-size: 3rem; margin-bottom: 1rem;">📭</div>
             <p style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">No solved problems yet</p>
-            <p style="font-size: 0.85rem;">Go to <strong>DSA Explorer</strong> and mark problems as Solved to see them here.</p>
+            <p style="font-size: 0.85rem;">Go to <strong>DSA Explorer</strong> and mark problems as Solved to see them
+              here.</p>
           </div>
         </div>
 
@@ -343,16 +372,18 @@
          ========================================================================== -->
     <section id="page-explorer" class="page-view">
       <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">DSA Challenge Deck</h2>
-      <p style="color: var(--text-muted); margin-bottom: 2rem;">Toggle status indicators directly on cards to watch your statistics and calendar adapt.</p>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">Toggle status indicators directly on cards to watch your
+        statistics and calendar adapt.</p>
 
       <div class="explorer-header">
         <!-- Search and filters -->
         <div class="search-filter-box">
           <div class="search-input-wrapper">
             <i data-lucide="search"></i>
-            <input type="text" class="search-input" id="search-bar" placeholder="Search DSA problem name..." oninput="filterProblems()">
+            <input type="text" class="search-input" id="search-bar" placeholder="Search DSA problem name..."
+              oninput="filterProblems()">
           </div>
-          
+
           <select class="filter-select" id="difficulty-select" onchange="filterProblems()">
             <option value="all">All Difficulties</option>
             <option value="easy">Easy</option>
@@ -377,6 +408,8 @@
           <button class="pill-btn" onclick="selectCategory('Sorting & Partitioning', this)">Sorting</button>
           <button class="pill-btn" onclick="selectCategory('Design & Advanced DS', this)">Advanced DS</button>
           <button class="pill-btn" onclick="selectCategory('Strings & Pattern Matching', this)">Strings</button>
+          <button class="pill-btn" onclick="selectCategory('Greedy Algorithms', this)">Greedy</button>
+          <button class="pill-btn" onclick="selectCategory('Math & Geometry', this)">Math &amp; Geometry</button>
         </div>
       </div>
 
@@ -403,7 +436,8 @@
          ========================================================================== -->
     <section id="page-visualizer" class="page-view">
       <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Interactive Algorithm Sandbox</h2>
-      <p style="color: var(--text-muted); margin-bottom: 2rem;">Run step-by-step visuals to see exactly how indices pivot, compare, and modify states.</p>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">Run step-by-step visuals to see exactly how indices
+        pivot, compare, and modify states.</p>
 
       <div class="visualizer-layout">
         <!-- Left: main visualization -->
@@ -411,8 +445,10 @@
           <!-- Selection & Controls -->
           <div class="visualizer-controls">
             <div class="control-group">
-              <label for="algo-select" style="font-size: 0.85rem; font-weight:600; color: var(--text-muted)">Algorithm:</label>
-              <select class="filter-select" id="algo-select" style="padding: 0.5rem 1.5rem 0.5rem 0.5rem;" onchange="loadSelectedAlgorithm()">
+              <label for="algo-select"
+                style="font-size: 0.85rem; font-weight:600; color: var(--text-muted)">Algorithm:</label>
+              <select class="filter-select" id="algo-select" style="padding: 0.5rem 1.5rem 0.5rem 0.5rem;"
+                onchange="loadSelectedAlgorithm()">
                 <option value="bubble">Bubble Sort</option>
                 <option value="binary">Binary Search</option>
                 <option value="window">Sliding Window (LC 3)</option>
@@ -421,13 +457,13 @@
                 <option value="cycle">Fast & Slow (LC 141)</option>
                 <option value="cycleII">Linked List Cycle II (LC 142)</option>
                 <optgroup label="─── Linked List Operations ───">
-                <option value="ll-reverse">LL: Reverse (LC 206)</option>
-                <option value="ll-reverse-range">LL: Reverse Sublist (LC 92)</option>
-                <option value="ll-remove-nth">LL: Remove Nth From End (LC 19)</option>
-                <option value="ll-remove-dups">LL: Remove Duplicates (LC 83)</option>
-                <option value="ll-merge">LL: Merge Two Sorted (LC 21)</option>
-                <option value="ll-swap-pairs">LL: Swap Pairs (LC 24)</option>
-                <option value="ll-rotate">LL: Rotate List (LC 61)</option>
+                  <option value="ll-reverse">LL: Reverse (LC 206)</option>
+                  <option value="ll-reverse-range">LL: Reverse Sublist (LC 92)</option>
+                  <option value="ll-remove-nth">LL: Remove Nth From End (LC 19)</option>
+                  <option value="ll-remove-dups">LL: Remove Duplicates (LC 83)</option>
+                  <option value="ll-merge">LL: Merge Two Sorted (LC 21)</option>
+                  <option value="ll-swap-pairs">LL: Swap Pairs (LC 24)</option>
+                  <option value="ll-rotate">LL: Rotate List (LC 61)</option>
                 </optgroup>
                 <option value="stack">Monotonic Stack (LC 739)</option>
                 <option value="monostack">Monotonic Stack NGE-II / Circular (LC 503)</option>
@@ -482,17 +518,33 @@
                 <option value="medianfinder">Median Finder (heap tree)</option>
                 <option value="sudoku">Sudoku Solver</option>
                 <optgroup label="─── Approved Additions ───">
-                <option value="wordsearch2">Word Search II (LC 212)</option>
-                <option value="generateparentheses">Generate Parentheses (LC 22)</option>
-                <option value="lis">Longest Increasing Subsequence (LC 300)</option>
-                <option value="trappingwater">Trapping Rain Water (LC 42)</option>
-                <option value="burstballoons">Burst Balloons (LC 312)</option>
-                <option value="minwindow">Minimum Window Substring (LC 76)</option>
-                <option value="wordladder">Word Ladder (LC 127)</option>
-                <option value="waterflow">Pacific Atlantic Water Flow (LC 417)</option>
-                <option value="aliendictionary">Alien Dictionary (LC 269)</option>
-                <option value="designtwitter">Design Twitter (LC 355)</option>
-                <option value="serializedeserialize">Serialize & Deserialize Binary Tree (LC 297)</option>
+                  <option value="wordsearch2">Word Search II (LC 212)</option>
+                  <option value="generateparentheses">Generate Parentheses (LC 22)</option>
+                  <option value="lis">Longest Increasing Subsequence (LC 300)</option>
+                  <option value="trappingwater">Trapping Rain Water (LC 42)</option>
+                  <option value="burstballoons">Burst Balloons (LC 312)</option>
+                  <option value="minwindow">Minimum Window Substring (LC 76)</option>
+                  <option value="wordladder">Word Ladder (LC 127)</option>
+                  <option value="waterflow">Pacific Atlantic Water Flow (LC 417)</option>
+                  <option value="aliendictionary">Alien Dictionary (LC 269)</option>
+                  <option value="designtwitter">Design Twitter (LC 355)</option>
+                  <option value="serializedeserialize">Serialize & Deserialize Binary Tree (LC 297)</option>
+                </optgroup>
+                <optgroup label="─── Custom Visualizations ───">
+                  <option value="twoarraybinary">Two-Array Binary Search (LC 4)</option>
+                  <option value="arraycycle">Floyd's Array Cycle (LC 287)</option>
+                  <option value="reorderlist">Reorder List (LC 143)</option>
+                  <option value="treepathsum">Max Path Sum DFS (LC 124)</option>
+                  <option value="equationsolver">Equation Ratio Solver (LC 399)</option>
+                  <option value="tarjanbridge">Tarjan's Bridge Finder (LC 1192)</option>
+                  <option value="combinationtree">Combination Sum backtrack (LC 39)</option>
+                </optgroup>
+                <optgroup label="─── Advanced Sandbox Additions ───">
+                  <option value="boyermoore">Boyer-Moore Majority Vote (LC 169)</option>
+                  <option value="quickselect">Quick Select K-th Largest (LC 215)</option>
+                  <option value="bstdeletion">BST Deletion (LC 450)</option>
+                  <option value="segmenttreelazy">Segment Tree Lazy Propagation</option>
+                  <option value="multisourcebfs">Multi-Source BFS Grid (LC 994)</option>
                 </optgroup>
               </select>
             </div>
@@ -502,10 +554,12 @@
               <button class="btn btn-secondary btn-sm" onclick="resetVisualizer()" title="Reset array and logs">
                 <i data-lucide="rotate-ccw"></i> Reset
               </button>
-              <button class="btn btn-secondary btn-sm" id="step-btn" onclick="stepVisualizer()" title="Execute one step">
+              <button class="btn btn-secondary btn-sm" id="step-btn" onclick="stepVisualizer()"
+                title="Execute one step">
                 <i data-lucide="skip-forward"></i> Step
               </button>
-              <button class="btn btn-primary btn-sm" id="play-btn" onclick="playVisualizer()" title="Auto play execution">
+              <button class="btn btn-primary btn-sm" id="play-btn" onclick="playVisualizer()"
+                title="Auto play execution">
                 <i data-lucide="play" id="play-icon"></i> <span id="play-text">Play</span>
               </button>
             </div>
@@ -513,7 +567,8 @@
             <!-- Speed controls -->
             <div class="speed-control">
               <span>Speed:</span>
-              <input type="range" class="speed-slider" id="speed-slider" min="100" max="1500" value="800" step="50" onchange="updateVisualizerSpeed()">
+              <input type="range" class="speed-slider" id="speed-slider" min="100" max="1500" value="800" step="50"
+                onchange="updateVisualizerSpeed()">
               <span id="speed-label" style="font-size: 0.75rem; width: 40px; font-family: monospace;">800ms</span>
             </div>
           </div>
@@ -541,8 +596,10 @@
           </div>
 
           <!-- Problem Logic Panel (shown when loading from explorer) -->
-          <div class="glass-card problem-logic-panel" id="problem-logic-panel" style="display:none; margin-top: 1.5rem; padding: 1.5rem; border: 1px solid var(--border-color);">
-            <h3 style="font-size: 1.15rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem;">
+          <div class="glass-card problem-logic-panel" id="problem-logic-panel"
+            style="display:none; margin-top: 1.5rem; padding: 1.5rem; border: 1px solid var(--border-color);">
+            <h3
+              style="font-size: 1.15rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.5rem;">
               <i data-lucide="book-open" style="color: var(--primary-glow); width: 20px; height: 20px;"></i>
               Problem Logic & Formulation
             </h3>
@@ -554,7 +611,7 @@
 
         <!-- Right: Code view & Logs -->
         <div class="visualizer-sidebar">
-          
+
           <!-- Mock code sandbox -->
           <div class="code-playground">
             <div class="editor-header">
@@ -608,4 +665,5 @@
 
   <script src="app.js?v=3"></script>
 </body>
+
 </html>
