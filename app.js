@@ -151,6 +151,7 @@ const state = {
     { id: 106, name: "Construct Binary Tree from Inorder and Postorder Traversal", difficulty: "medium", topic: "Trees & BSTs", subcategory: "Tree DFS", acceptance: "61.0%", status: "todo" },
     { id: 437, name: "Path Sum III", difficulty: "medium", topic: "Trees & BSTs", subcategory: "Tree DFS", acceptance: "48.0%", status: "todo" },
     { id: 297, name: "Serialize and Deserialize Binary Tree", difficulty: "hard", topic: "Trees & BSTs", subcategory: "Tree DFS", acceptance: "55.8%", status: "todo" },
+    { id: 449, name: "Serialize and Deserialize BST", difficulty: "medium", topic: "Trees & BSTs", subcategory: "Tree DFS", acceptance: "54.1%", status: "todo" },
     // Tree BFS
     { id: 102, name: "Binary Tree Level Order Traversal", difficulty: "medium", topic: "Trees & BSTs", subcategory: "Tree BFS / Level Order", acceptance: "64.9%", status: "todo" },
     { id: 103, name: "Binary Tree Zigzag Level Order Traversal", difficulty: "medium", topic: "Trees & BSTs", subcategory: "Tree BFS / Level Order", acceptance: "57.1%", status: "todo" },
@@ -275,6 +276,7 @@ const state = {
     { id: 322, name: "Coin Change", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "42.1%", status: "todo" },
     { id: 139, name: "Word Break", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "46.3%", status: "todo" },
     { id: 300, name: "Longest Increasing Subsequence", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "54.6%", status: "todo" },
+    { id: 354, name: "Russian Doll Envelopes", difficulty: "hard", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "37.5%", status: "todo" },
     { id: 746, name: "Min Cost Climbing Stairs", difficulty: "easy", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "64.0%", status: "todo" },
     { id: 152, name: "Maximum Product Subarray", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "35.7%", status: "todo" },
     { id: 91, name: "Decode Ways", difficulty: "medium", topic: "Dynamic Programming", subcategory: "1D DP Basics", acceptance: "35.1%", status: "todo" },
@@ -306,6 +308,9 @@ const state = {
     { id: 516, name: "Longest Palindromic Subsequence", difficulty: "medium", topic: "Dynamic Programming", subcategory: "String DP / Sequence DP", acceptance: "61.8%", status: "todo" },
     { id: 712, name: "Minimum ASCII Delete Sum for Two Strings", difficulty: "medium", topic: "Dynamic Programming", subcategory: "String DP / Sequence DP", acceptance: "63.4%", status: "todo" },
     { id: 10, name: "Regular Expression Matching", difficulty: "hard", topic: "Dynamic Programming", subcategory: "String DP / Sequence DP", acceptance: "28.1%", status: "todo" },
+    // Interval DP
+    { id: 312, name: "Burst Balloons", difficulty: "hard", topic: "Dynamic Programming", subcategory: "Interval DP", acceptance: "57.8%", status: "todo" },
+    { id: 1547, name: "Minimum Cost to Cut a Stick", difficulty: "hard", topic: "Dynamic Programming", subcategory: "Interval DP", acceptance: "59.2%", status: "todo" },
     // Bitmask DP
     { id: 847, name: "Shortest Path Visiting All Nodes", difficulty: "hard", topic: "Dynamic Programming", subcategory: "Bitmask DP", acceptance: "60.1%", status: "todo" },
     { id: 1125, name: "Smallest Sufficient Team", difficulty: "hard", topic: "Dynamic Programming", subcategory: "Bitmask DP", acceptance: "54.8%", status: "todo" },
@@ -323,6 +328,7 @@ const state = {
     { id: 51, name: "N-Queens", difficulty: "hard", topic: "Backtracking & Recursion", subcategory: "N-Queens Backtracking", acceptance: "71.7%", status: "todo" },
     { id: 78, name: "Subsets", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "76.6%", status: "todo" },
     { id: 90, name: "Subsets II", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "57.2%", status: "todo" },
+    { id: 79, name: "Word Search", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "41.9%", status: "todo" },
     { id: 47, name: "Permutations II", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "58.3%", status: "todo" },
     { id: 131, name: "Palindrome Partitioning", difficulty: "medium", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "72.4%", status: "todo" },
     { id: 2151, name: "Maximum Good People Based on Statements", difficulty: "hard", topic: "Backtracking & Recursion", subcategory: "Backtracking Search", acceptance: "51.8%", status: "todo" },
@@ -349,6 +355,7 @@ const state = {
     { id: 705, name: "Design HashSet", difficulty: "easy", topic: "Design & Advanced DS", subcategory: "Design Data Structure", acceptance: "66.5%", status: "todo" },
     { id: 706, name: "Design HashMap", difficulty: "easy", topic: "Design & Advanced DS", subcategory: "Design Data Structure", acceptance: "65.8%", status: "todo" },
     { id: 729, name: "My Calendar I", difficulty: "medium", topic: "Design & Advanced DS", subcategory: "Interval Design", acceptance: "59.0%", status: "todo" },
+    { id: 355, name: "Design Twitter", difficulty: "medium", topic: "Design & Advanced DS", subcategory: "Design Data Structure", acceptance: "37.5%", status: "todo" },
 
     // --- 13. STRINGS & PATTERN MATCHING ---
     { id: 28, name: "Find the Index of the First Occurrence in a String", difficulty: "easy", topic: "Strings & Pattern Matching", subcategory: "KMP String Matching", acceptance: "44.5%", status: "todo" },
@@ -390,6 +397,7 @@ const state = {
     { id: 1263, name: "Minimum Moves to Move a Box to Their Target Location", difficulty: "hard", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "49.6%", status: "todo" },
     { id: 752, name: "Open the Lock", difficulty: "medium", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "56.7%", status: "todo" },
     { id: 127, name: "Word Ladder", difficulty: "hard", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "38.9%", status: "todo" },
+    { id: 126, name: "Word Ladder II", difficulty: "hard", topic: "Graphs", subcategory: "Graph BFS / DFS", acceptance: "27.5%", status: "todo" },
     // --- 17. SUDOKU & BACKTRACKING ---
     { id: 52, name: "N-Queens II", difficulty: "hard", topic: "Backtracking & Recursion", subcategory: "Sudoku Backtracking", acceptance: "65.5%", status: "todo" },
     { id: 980, name: "Unique Paths III", difficulty: "hard", topic: "Backtracking & Recursion", subcategory: "Sudoku Backtracking", acceptance: "43.2%", status: "todo" },
@@ -740,7 +748,29 @@ function loadProblemIntoVisualizer(prob) {
   const selector = document.getElementById('algo-select');
   
   // 1. Fine-grained visualizer routing for the canvas engines
-  if (prob.id === 220 || prob.id === 109 || prob.id === 218) {
+  if (prob.id === 212 || prob.id === 79) {
+    selector.value = 'wordsearch2';
+  } else if (prob.id === 22 || prob.id === 17) {
+    selector.value = 'generateparentheses';
+  } else if (prob.id === 300 || prob.id === 354) {
+    selector.value = 'lis';
+  } else if (prob.id === 42 || prob.id === 11) {
+    selector.value = 'trappingwater';
+  } else if (prob.id === 312 || prob.id === 1547) {
+    selector.value = 'burstballoons';
+  } else if (prob.id === 76 || prob.id === 567 || prob.id === 438) {
+    selector.value = 'minwindow';
+  } else if (prob.id === 127 || prob.id === 126) {
+    selector.value = 'wordladder';
+  } else if (prob.id === 417 || prob.id === 130) {
+    selector.value = 'waterflow';
+  } else if (prob.id === 269 || prob.id === 207 || prob.id === 210) {
+    selector.value = 'aliendictionary';
+  } else if (prob.id === 355) {
+    selector.value = 'designtwitter';
+  } else if (prob.id === 297 || prob.id === 449) {
+    selector.value = 'serializedeserialize';
+  } else if (prob.id === 220 || prob.id === 109 || prob.id === 218) {
     selector.value = 'rbtree';
   } else if (prob.id === 1349 || prob.id === 2123 || prob.id === 1947) {
     selector.value = 'netflow';
@@ -1234,7 +1264,6 @@ function generateSnippetForProblem(prob) {
 ${body}`;
   editorCode.innerHTML = generatedCode;
 }
-
 const problemLogicDatabase = {
   1: {
     intuition: "Use a Hash Map to store numbers and their indices. For each number, check if its complement (target - num) exists in the map. This avoids the O(N2) nested loop search.",
@@ -1247,6 +1276,188 @@ const problemLogicDatabase = {
       rows: [
         ["1", "0", "2", "7", "{}", "Store index -> Map = {2: 0}"],
         ["2", "1", "7", "2", "{2: 0}", "Complement 2 found at index 0! Return [0, 1]"]
+      ]
+    }
+  },
+  79: {
+    intuition: "Search for word path in grid by running DFS from each starting letter. Recursively explore all four adjacent cardinal neighbors. Backtrack by marking cell visited ('#') and restoring it.",
+    formula: "DFS match check:<br><code>if (board[r][c] != word[k]) return false;</code><br>Restore grid cell:<br><code>board[r][c] = original_char;</code>",
+    time: "O(M * N * 4^L) — grid search of length L.",
+    space: "O(L) — DFS call stack depth.",
+    dryrun: {
+      testcase: "board = [['A','B'],['C','D']], word = 'ABD'",
+      headers: ["DFS Level","(r, c)","Grid Char","Word Char","Match?"],
+      rows: [
+        ["0","(0,0)","A","A","Match"],
+        ["1","(0,1)","B","B","Match"],
+        ["2","(1,1)","D","D","Match -> Word Found!"]
+      ]
+    }
+  },
+  17: {
+    intuition: "Generate string combinations by traversing digit-letter map. Backtrack by exploring each available branch at digit step.",
+    formula: "Backtrack recursion:<br><code>backtrack(idx + 1, path + letter);</code>",
+    time: "O(4^N) — N digits mapping to 3-4 letters.",
+    space: "O(N) — recursion depth.",
+    dryrun: {
+      testcase: "digits = '23'",
+      headers: ["Depth","Digit","Options","Path Build","Status"],
+      rows: [
+        ["0","2","[a,b,c]","'a'","Recurse"],
+        ["1","3","[d,e,f]","'ad'","Leaf -> Added to Result"]
+      ]
+    }
+  },
+  354: {
+    intuition: "Sort envelopes by width ascending, then height descending. This reduces problem to 1D LIS on heights, which can be solved in O(N log N) using binary search patience sorting.",
+    formula: "LIS patience search:<br><code>if (dp[mid] < h) l = mid + 1; else r = mid;</code>",
+    time: "O(N log N) — sorting and binary search passes.",
+    space: "O(N) — dp array storage.",
+    dryrun: {
+      testcase: "envelopes = [[5,4],[6,4],[6,7]]",
+      headers: ["Sorted Envelopes","Height LIS array","Decisions","Max Nested"],
+      rows: [
+        ["[5,4], [6,7], [6,4] (w tie h desc)","[]","Process [5,4] -> LIS=[4]","1"],
+        ["-","[4]","Process [6,7] -> LIS=[4,7]","2"]
+      ]
+    }
+  },
+  11: {
+    intuition: "Two pointers at left and right boundaries of container. Calculate area, then move pointer pointing to the shorter wall inward to maximize potential wall height.",
+    formula: "Area calculations:<br><code>area = min(h[L], h[R]) * (R - L)</code><br>Pointer step:<br><code>if (h[L] < h[R]) L++; else R--;</code>",
+    time: "O(N) — linear scan of heights.",
+    space: "O(1) — constant variables.",
+    dryrun: {
+      testcase: "height = [1,8,6,2,5,4,8,3,7]",
+      headers: ["L","R","h[L]","h[R]","Width","Area","Next Shift"],
+      rows: [
+        ["0","8","1","7","8","8","L++"],
+        ["1","8","8","7","7","49","R--"]
+      ]
+    }
+  },
+  1547: {
+    intuition: "Interval DP. For each segment between cuts i and j, try cut k. The cost of cut k is cuts[j] - cuts[i] plus optimal costs of segments cuts[i..k] and cuts[k..j].",
+    formula: "DP segment transition:<br><code>dp[i][j] = min(dp[i][k] + dp[k][j] + cuts[j] - cuts[i])</code>",
+    time: "O(C³) — where C is the number of cuts.",
+    space: "O(C²) — DP transition table.",
+    dryrun: {
+      testcase: "cuts = [1,3,4,5], n=7",
+      headers: ["Segment [i, j]","Cuts in range","Optimal partition cut k","Transition Sum","Cost"],
+      rows: [
+        ["[0, 5]","1, 3, 4","k=3 (cut val 3)","dp[0][3] + dp[3][5]","12"]
+      ]
+    }
+  },
+  567: {
+    intuition: "Sliding window of length s1. Maintain character frequency count maps. If match count equals 26 letters, s2 contains permutation of s1.",
+    formula: "Window match condition:<br><code>if (map1 === map2) return true;</code>",
+    time: "O(N) — linear scan of s2.",
+    space: "O(1) — 26 lowercase letter hashes.",
+    dryrun: {
+      testcase: "s1 = 'ab', s2 = 'eidbaooo'",
+      headers: ["L","R","s2[R]","Window Map","s1 Map","Match?"],
+      rows: [
+        ["0","1","i","{e:1,i:1}","{a:1,b:1}","No"],
+        ["3","4","a","{d:1,b:1,a:1}","{a:1,b:1}","Yes (at slide 'ba')"]
+      ]
+    }
+  },
+  438: {
+    intuition: "Sliding window of length p. Build frequency maps, and slide window across s. When maps match, append left index to result array.",
+    formula: "Window check:<br><code>if (mapS === mapP) res.push(L);</code>",
+    time: "O(N) — single pass of s.",
+    space: "O(1) — alphabet map size.",
+    dryrun: {
+      testcase: "s = 'cbaebabacd', p = 'abc'",
+      headers: ["L","R","Added Char","Deleted Char","Window Match?","Indexes Added"],
+      rows: [
+        ["0","2","a","None","Yes ('cba')","[0]"],
+        ["3","5","b","c","No ('bae')","[]"]
+      ]
+    }
+  },
+  126: {
+    intuition: "Use BFS to find shortest path distance and construct parent map. Use DFS backtrack recursion to rebuild all paths from beginWord to endWord.",
+    formula: "BFS level map check:<br><code>if (levels[v] === levels[u] + 1) adj[u].push(v);</code>",
+    time: "O(V + E) — word vertex traversals.",
+    space: "O(N * P) — where P is total paths stored.",
+    dryrun: {
+      testcase: "begin='hit', end='cog', list=['hot','dot','dog','cog']",
+      headers: ["Queue BFS","Neighbors","Distance Levels","Valid Paths"],
+      rows: [
+        ["['hit']","'hot'","{'hit':0, 'hot':1}","[['hit','hot']]"],
+        ["['hot']","'dot'","{'dot':2}","[['hit','hot','dot'...]]"]
+      ]
+    }
+  },
+  130: {
+    intuition: "Traverse border cells and mark connected 'O' regions to 'E' (escaped). Scan entire grid: replace 'O' regions with 'X', and restore 'E' regions back to 'O'.",
+    formula: "Border scan logic:<br><code>if (board[r][c] == 'O') dfs(r, c);</code>",
+    time: "O(M * N) — touches every grid cell.",
+    space: "O(M * N) — recursion stack size.",
+    dryrun: {
+      testcase: "board = [['X','O'],['X','O']]",
+      headers: ["Border Cell","DFS Mark","Final Pass Grid","Status"],
+      rows: [
+        ["(0,1)","Marked Escaped 'E'","[[X, E], [X, E]]","Unsurrounded"],
+        ["All Cells","Scan","[[X, O], [X, O]]","Complete"]
+      ]
+    }
+  },
+  207: {
+    intuition: "Build directed dependency graph and in-degree counts. Run Kahn's BFS algorithm. If processed course count matches total course count, no cycle exists.",
+    formula: "Kahn's BFS cycle check:<br><code>if (inDegree[v] == 0) queue.push(v);</code>",
+    time: "O(V + E) — visit each node and edge.",
+    space: "O(V + E) — adjacency graph lists.",
+    dryrun: {
+      testcase: "numCourses=2, prereqs=[[1,0]]",
+      headers: ["Nodes Queue","Popped Course","Decremented inDegree","Course Count","Cycle status"],
+      rows: [
+        ["[0]","0","inDeg[1] = 0 -> push","1","Ok"],
+        ["[1]","1","None","2","Ok (2 == 2)"]
+      ]
+    }
+  },
+  210: {
+    intuition: "Build dependency graph. Repeatedly queue courses with 0 prerequisites (in-degree=0), append to output list, and decrement neighbor course requirements.",
+    formula: "Order collection:<br><code>result.push(course);</code>",
+    time: "O(V + E) — graph path visits.",
+    space: "O(V + E) — queue and result storage.",
+    dryrun: {
+      testcase: "4 courses, prereqs=[[1,0],[2,0],[3,1]]",
+      headers: ["Queue","Popped","Next InDegree Reduction","Result List"],
+      rows: [
+        ["[0]","0","inDeg[1]--, inDeg[2]--","[0]"],
+        ["[1,2]","1","inDeg[3]--","[0,1]"]
+      ]
+    }
+  },
+  355: {
+    intuition: "Design Twitter database class. Map followers in a set table. Keep posts in global/local list with timestamps. News Feed pulls sorted tweets from followed users.",
+    formula: "Feed query:<br><code>tweets.filter(t => follows[userId].has(t.userId))</code>",
+    time: "O(U + T log K) — to fetch and merge T tweets.",
+    space: "O(U + T) — user relationships and posts.",
+    dryrun: {
+      testcase: "postTweet(1, 5), getNewsFeed(1)",
+      headers: ["Operation","Followers","Tweets Database","News Feed Output"],
+      rows: [
+        ["postTweet(1,5)","{1}","[{userId:1, id:5, time:0}]","−"],
+        ["getNewsFeed(1)","{1}","[{userId:1, id:5, time:0}]","[5]"]
+      ]
+    }
+  },
+  449: {
+    intuition: "Postorder serialization writes values to a string. Deserialization uses BST properties (lower/upper bounds) to parse nodes from the end of values array.",
+    formula: "BST property bounds check:<br><code>if (val < lower || val > upper) return null;</code>",
+    time: "O(N) — visits each node value.",
+    space: "O(N) — tree recursion depth stack.",
+    dryrun: {
+      testcase: "root = [2,1,3]",
+      headers: ["DFS Postorder","Serialized String","Parse Range","Rebuilt Nodes"],
+      rows: [
+        ["1 -> 3 -> 2","'1,3,2'","[-Inf, Inf]","Root 2"],
+        ["-","'1,3'","[2, Inf]","Right child 3"]
       ]
     }
   },
@@ -10707,6 +10918,206 @@ codeTemplates['serializedeserialize'] = `<span class="code-comment">// Serialize
     <span class="code-keyword">return</span> node;
   }
   <span class="code-keyword">return</span> <span class="code-fn">dfs</span>();
+}`;
+
+codeTemplates[79] = `<span class="code-comment">// Word Search - LC 79</span>
+<span class="code-keyword">function</span> <span class="code-fn">exist</span>(board, word) {
+  <span class="code-keyword">let</span> R = board.length, C = board[0].length;
+  <span class="code-keyword">function</span> <span class="code-fn">dfs</span>(r, c, idx) {
+    <span class="code-keyword">if</span> (idx === word.length) <span class="code-keyword">return</span> <span class="code-keyword">true</span>;
+    <span class="code-keyword">if</span> (r < 0 || c < 0 || r >= R || c >= C || board[r][c] !== word[idx]) <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+    <span class="code-keyword">let</span> temp = board[r][c]; board[r][c] = '#';
+    <span class="code-keyword">let</span> found = dfs(r+1, c, idx+1) || dfs(r-1, c, idx+1) || dfs(r, c+1, idx+1) || dfs(r, c-1, idx+1);
+    board[r][c] = temp;
+    <span class="code-keyword">return</span> found;
+  }
+}`;
+
+codeTemplates[17] = `<span class="code-comment">// Letter Combinations of a Phone Number - LC 17</span>
+<span class="code-keyword">function</span> <span class="code-fn">letterCombinations</span>(digits) {
+  <span class="code-keyword">if</span> (!digits) <span class="code-keyword">return</span> [];
+  <span class="code-keyword">let</span> map = { 2: "abc", 3: "def", 4: "ghi", 5: "jkl", 6: "mno", 7: "pqrs", 8: "tuv", 9: "wxyz" };
+  <span class="code-keyword">let</span> res = [];
+  <span class="code-keyword">function</span> <span class="code-fn">backtrack</span>(idx, path) {
+    <span class="code-keyword">if</span> (path.length === digits.length) { res.push(path); <span class="code-keyword">return</span>; }
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> char of map[digits[idx]]) {
+      backtrack(idx + 1, path + char);
+    }
+  }
+  backtrack(0, "");
+  <span class="code-keyword">return</span> res;
+}`;
+
+codeTemplates[354] = `<span class="code-comment">// Russian Doll Envelopes - LC 354</span>
+<span class="code-keyword">function</span> <span class="code-fn">maxEnvelopes</span>(envelopes) {
+  envelopes.sort((a, b) => a[0] === b[0] ? b[1] - a[1] : a[0] - b[0]);
+  <span class="code-keyword">let</span> dp = [];
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> [w, h] of envelopes) {
+    <span class="code-keyword">let</span> l = 0, r = dp.length;
+    <span class="code-keyword">while</span> (l < r) {
+      <span class="code-keyword">let</span> mid = (l + r) >> 1;
+      <span class="code-keyword">if</span> (dp[mid] < h) l = mid + 1;
+      <span class="code-keyword">else</span> r = mid;
+    }
+    dp[l] = h;
+  }
+  <span class="code-keyword">return</span> dp.length;
+}`;
+
+codeTemplates[11] = `<span class="code-comment">// Container With Most Water - LC 11</span>
+<span class="code-keyword">function</span> <span class="code-fn">maxArea</span>(height) {
+  <span class="code-keyword">let</span> maxA = 0, l = 0, r = height.length - 1;
+  <span class="code-keyword">while</span> (l < r) {
+    <span class="code-keyword">let</span> h = Math.min(height[l], height[r]);
+    maxA = Math.max(maxA, h * (r - l));
+    <span class="code-keyword">if</span> (height[l] < height[r]) l++;
+    <span class="code-keyword">else</span> r--;
+  }
+  <span class="code-keyword">return</span> maxA;
+}`;
+
+codeTemplates[1547] = `<span class="code-comment">// Minimum Cost to Cut a Stick - LC 1547</span>
+<span class="code-keyword">function</span> <span class="code-fn">minCost</span>(n, cuts) {
+  cuts.push(0, n);
+  cuts.sort((a, b) => a - b);
+  <span class="code-keyword">let</span> m = cuts.length;
+  <span class="code-keyword">let</span> dp = Array.from({length: m}, () => Array(m).fill(0));
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> len = 2; len < m; len++) {
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = 0; i < m - len; i++) {
+      <span class="code-keyword">let</span> j = i + len;
+      dp[i][j] = Infinity;
+      <span class="code-keyword">for</span> (<span class="code-keyword">let</span> k = i + 1; k < j; k++) {
+        dp[i][j] = Math.min(dp[i][j], dp[i][k] + dp[k][j] + cuts[j] - cuts[i]);
+      }
+    }
+  }
+  <span class="code-keyword">return</span> dp[0][m - 1];
+}`;
+
+codeTemplates[567] = `<span class="code-comment">// Permutation in String - LC 567</span>
+<span class="code-keyword">function</span> <span class="code-fn">checkInclusion</span>(s1, s2) {
+  <span class="code-keyword">let</span> map1 = {}, map2 = {};
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> char of s1) map1[char] = (map1[char] || 0) + 1;
+  <span class="code-keyword">let</span> l = 0;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> r = 0; r < s2.length; r++) {
+    map2[s2[r]] = (map2[s2[r]] || 0) + 1;
+    <span class="code-keyword">if</span> (r - l + 1 > s1.length) {
+      map2[s2[l]]--;
+      <span class="code-keyword">if</span> (map2[s2[l]] === 0) delete map2[s2[l]];
+      l++;
+    }
+    <span class="code-keyword">if</span> (matches(map1, map2)) <span class="code-keyword">return</span> <span class="code-keyword">true</span>;
+  }
+  <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+}`;
+
+codeTemplates[438] = `<span class="code-comment">// Find All Anagrams in a String - LC 438</span>
+<span class="code-keyword">function</span> <span class="code-fn">findAnagrams</span>(s, p) {
+  <span class="code-keyword">let</span> mapP = {}, mapS = {}, res = [];
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> char of p) mapP[char] = (mapP[char] || 0) + 1;
+  <span class="code-keyword">let</span> l = 0;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> r = 0; r < s.length; r++) {
+    mapS[s[r]] = (mapS[s[r]] || 0) + 1;
+    <span class="code-keyword">if</span> (r - l + 1 > p.length) {
+      mapS[s[l]]--;
+      <span class="code-keyword">if</span> (mapS[s[l]] === 0) delete mapS[s[l]];
+      l++;
+    }
+    <span class="code-keyword">if</span> (matches(mapP, mapS)) res.push(l);
+  }
+  <span class="code-keyword">return</span> res;
+}`;
+
+codeTemplates[126] = `<span class="code-comment">// Word Ladder II - LC 126</span>
+<span class="code-keyword">function</span> <span class="code-fn">findLadders</span>(beginWord, endWord, wordList) {
+  <span class="code-keyword">let</span> wordSet = <span class="code-keyword">new</span> Set(wordList);
+  <span class="code-keyword">if</span> (!wordSet.has(endWord)) <span class="code-keyword">return</span> [];
+  <span class="code-keyword">let</span> adj = {}, levels = { [beginWord]: 0 };
+  <span class="code-keyword">let</span> queue = [beginWord], found = <span class="code-keyword">false</span>;
+  <span class="code-keyword">while</span> (queue.length && !found) {
+    <span class="code-keyword">let</span> nextQueue = [];
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> u of queue) {
+      <span class="code-keyword">for</span> (<span class="code-keyword">let</span> v of getNeighbors(u, wordSet)) {
+        <span class="code-keyword">if</span> (levels[v] === undefined) {
+          levels[v] = levels[u] + 1;
+          nextQueue.push(v);
+        }
+        <span class="code-keyword">if</span> (levels[v] === levels[u] + 1) {
+          (adj[u] = adj[u] || []).push(v);
+        }
+        <span class="code-keyword">if</span> (v === endWord) found = <span class="code-keyword">true</span>;
+      }
+    }
+    queue = nextQueue;
+  }
+}`;
+
+codeTemplates[130] = `<span class="code-comment">// Surrounded Regions - LC 130</span>
+<span class="code-keyword">function</span> <span class="code-fn">solve</span>(board) {
+  <span class="code-keyword">let</span> R = board.length, C = board[0].length;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> r = 0; r < R; r++) {
+    dfs(r, 0); dfs(r, C - 1);
+  }
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> c = 0; c < C; c++) {
+    dfs(0, c); dfs(R - 1, c);
+  }
+  <span class="code-keyword">function</span> <span class="code-fn">dfs</span>(r, c) {
+    <span class="code-keyword">if</span> (r < 0 || c < 0 || r >= R || c >= C || board[r][c] !== 'O') <span class="code-keyword">return</span>;
+    board[r][c] = 'E';
+    dfs(r+1, c); dfs(r-1, c); dfs(r, c+1); dfs(r, c-1);
+  }
+}`;
+
+codeTemplates[207] = `<span class="code-comment">// Course Schedule I - LC 207</span>
+<span class="code-keyword">function</span> <span class="code-fn">canFinish</span>(numCourses, prerequisites) {
+  <span class="code-keyword">let</span> adj = Array.from({length: numCourses}, () => []);
+  <span class="code-keyword">let</span> inDegree = Array(numCourses).fill(0);
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> [u, v] of prerequisites) {
+    adj[v].push(u); inDegree[u]++;
+  }
+  <span class="code-keyword">let</span> queue = [], count = 0;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = 0; i < numCourses; i++) {
+    <span class="code-keyword">if</span> (inDegree[i] === 0) queue.push(i);
+  }
+}`;
+
+codeTemplates[210] = `<span class="code-comment">// Course Schedule II - LC 210</span>
+<span class="code-keyword">function</span> <span class="code-fn">findOrder</span>(numCourses, prerequisites) {
+  <span class="code-keyword">let</span> adj = Array.from({length: numCourses}, () => []);
+  <span class="code-keyword">let</span> inDegree = Array(numCourses).fill(0), res = [];
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> [u, v] of prerequisites) {
+    adj[v].push(u); inDegree[u]++;
+  }
+  <span class="code-keyword">let</span> queue = [];
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = 0; i < numCourses; i++) {
+    <span class="code-keyword">if</span> (inDegree[i] === 0) queue.push(i);
+  }
+}`;
+
+codeTemplates[449] = `<span class="code-comment">// Serialize & Deserialize BST - LC 449</span>
+<span class="code-fn">serialize</span>(root) {
+  <span class="code-keyword">let</span> res = [];
+  <span class="code-keyword">function</span> <span class="code-fn">postorder</span>(node) {
+    <span class="code-keyword">if</span> (!node) <span class="code-keyword">return</span>;
+    postorder(node.left); postorder(node.right); res.push(node.val);
+  }
+  postorder(root);
+  <span class="code-keyword">return</span> res.join(",");
+}
+<span class="code-fn">deserialize</span>(data) {
+  <span class="code-keyword">if</span> (!data) <span class="code-keyword">return</span> <span class="code-keyword">null</span>;
+  <span class="code-keyword">let</span> vals = data.split(",").map(Number);
+  <span class="code-keyword">function</span> <span class="code-fn">helper</span>(lower, upper) {
+    <span class="code-keyword">if</span> (vals.length === 0) <span class="code-keyword">return</span> <span class="code-keyword">null</span>;
+    <span class="code-keyword">let</span> val = vals[vals.length - 1];
+    <span class="code-keyword">if</span> (val < lower || val > upper) <span class="code-keyword">return</span> <span class="code-keyword">null</span>;
+    vals.pop();
+    <span class="code-keyword">let</span> node = <span class="code-keyword">new</span> TreeNode(val);
+    node.right = helper(val, upper);
+    node.left = helper(lower, val);
+    <span class="code-keyword">return</span> node;
+  }
+  <span class="code-keyword">return</span> helper(-Infinity, Infinity);
 }`;
 
 const visualizerState = {
