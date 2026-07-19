@@ -10957,6 +10957,81 @@ function getDiscardedRange(length, low, high) {
 // ==========================================================================
 
 const codeTemplates = {
+  singlenumber: `
+<span class="code-keyword">function</span> <span class="code-fn">singleNumber</span>(nums) {
+  <span class="code-keyword">let</span> result = <span class="code-num">0</span>;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> num <span class="code-keyword">of</span> nums) {
+    result ^= num; <span class="code-comment">// x ^ x = 0, x ^ 0 = x</span>
+  }
+  <span class="code-keyword">return</span> result;
+}
+`,
+  kernighan: `
+<span class="code-keyword">function</span> <span class="code-fn">countSetBitsKernighan</span>(n) {
+  <span class="code-keyword">let</span> count = <span class="code-num">0</span>;
+  <span class="code-keyword">while</span> (n &gt; <span class="code-num">0</span>) {
+    n = n &amp; (n - <span class="code-num">1</span>); <span class="code-comment">// Clears lowest set bit</span>
+    count++;
+  }
+  <span class="code-keyword">return</span> count;
+}
+`,
+  countbits: `
+<span class="code-keyword">function</span> <span class="code-fn">countBitsDP</span>(n) {
+  <span class="code-keyword">let</span> ans = <span class="code-keyword">new</span> Array(n + <span class="code-num">1</span>).<span class="code-fn">fill</span>(<span class="code-num">0</span>);
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">1</span>; i &lt;= n; i++) {
+    ans[i] = ans[i &gt;&gt; <span class="code-num">1</span>] + (i &amp; <span class="code-num">1</span>); <span class="code-comment">// DP transition</span>
+  }
+  <span class="code-keyword">return</span> ans;
+}
+`,
+  poweroftwo: `
+<span class="code-keyword">function</span> <span class="code-fn">isPowerOfTwo</span>(n) {
+  <span class="code-keyword">return</span> n &gt; <span class="code-num">0</span> &amp;&amp; (n &amp; (n - <span class="code-num">1</span>)) === <span class="code-num">0</span>;
+}
+`,
+  reversebits: `
+<span class="code-keyword">function</span> <span class="code-fn">reverseBits</span>(n) {
+  <span class="code-keyword">let</span> result = <span class="code-num">0</span>;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; <span class="code-num">32</span>; i++) {
+    result = (result &lt;&lt; <span class="code-num">1</span>) | (n &amp; <span class="code-num">1</span>);
+    n &gt;&gt;&gt;= <span class="code-num">1</span>;
+  }
+  <span class="code-keyword">return</span> result &gt;&gt;&gt; <span class="code-num">0</span>;
+}
+`,
+  singlenumberII: `
+<span class="code-keyword">function</span> <span class="code-fn">singleNumberII</span>(nums) {
+  <span class="code-keyword">let</span> ones = <span class="code-num">0</span>, twos = <span class="code-num">0</span>;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> x <span class="code-keyword">of</span> nums) {
+    ones = (ones ^ x) &amp; ~twos;
+    twos = (twos ^ x) &amp; ~ones;
+  }
+  <span class="code-keyword">return</span> ones;
+}
+`,
+  bitmasksubsets: `
+<span class="code-keyword">function</span> <span class="code-fn">subsetsBitmask</span>(nums) {
+  <span class="code-keyword">let</span> n = nums.length, total = <span class="code-num">1</span> &lt;&lt; n, result = [];
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> mask = <span class="code-num">0</span>; mask &lt; total; mask++) {
+    <span class="code-keyword">let</span> subset = [];
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; n; i++) {
+      <span class="code-keyword">if</span> (mask &amp; (<span class="code-num">1</span> &lt;&lt; i)) subset.<span class="code-fn">push</span>(nums[i]);
+    }
+    result.<span class="code-fn">push</span>(subset);
+  }
+  <span class="code-keyword">return</span> result;
+}
+`,
+  missingnumber: `
+<span class="code-keyword">function</span> <span class="code-fn">missingNumberXOR</span>(nums) {
+  <span class="code-keyword">let</span> n = nums.length, xorSum = n;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; n; i++) {
+    xorSum ^= i ^ nums[i];
+  }
+  <span class="code-keyword">return</span> xorSum;
+}
+`,
   timsort: `
 <span class="code-keyword">function</span> <span class="code-fn">timSort</span>(arr) {
   <span class="code-keyword">let</span> RUN = <span class="code-num">4</span>, n = arr.length;
@@ -12753,6 +12828,54 @@ function resetVisualizer() {
     visualizerState.rawArray = [...arr];
     appendLog("[INFO] Generated deterministic array for Bubble Sort.", "info");
     generateBubbleSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'singlenumber') {
+    const arr = [12, 5, 8, 19, 5, 12, 44, 27, 8, 19, 33, 27, 91, 33, 91];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Single Number I initialized with 15 elements. Resolving XOR cancellation...", "info");
+    generateSingleNumberSteps(arr);
+  }
+  else if (visualizerState.algo === 'kernighan') {
+    const n = 214;
+    visualizerState.rawArray = n;
+    appendLog("[INFO] Brian Kernighan's bit clearing initialized for n = 214 (11010110_2).", "info");
+    generateKernighanSteps(n);
+  }
+  else if (visualizerState.algo === 'countbits') {
+    const n = 20;
+    visualizerState.rawArray = n;
+    appendLog("[INFO] Counting Bits DP table initialized for range 0 to 20.", "info");
+    generateCountBitsSteps(n);
+  }
+  else if (visualizerState.algo === 'poweroftwo') {
+    const arr = [1, 2, 3, 4, 8, 12, 16, 24, 32, 64, 100, 256];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Power of Two & Four test array initialized with 12 numbers.", "info");
+    generatePowerOfTwoSteps(arr);
+  }
+  else if (visualizerState.algo === 'reversebits') {
+    const n = 43261596;
+    visualizerState.rawArray = n;
+    appendLog("[INFO] 32-bit Reversal initialized for n = 43261596 (00000010100101000001111010011100_2).", "info");
+    generateReverseBitsSteps(n);
+  }
+  else if (visualizerState.algo === 'singlenumberII') {
+    const arr = [17, 17, 17, 45, 23, 45, 45, 89, 89, 89, 23, 61, 23];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Single Number II initialized with 13 elements (triplets + 1 unique).", "info");
+    generateSingleNumberIISteps(arr);
+  }
+  else if (visualizerState.algo === 'bitmasksubsets') {
+    const elements = ['A', 'B', 'C', 'D'];
+    visualizerState.rawArray = [...elements];
+    appendLog("[INFO] Bitmask Power Set generator initialized for 4 elements (2^4 = 16 subsets).", "info");
+    generateBitmaskSubsetsSteps(elements);
+  }
+  else if (visualizerState.algo === 'missingnumber') {
+    const arr = [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Missing Number via XOR initialized with 15 elements (missing = 8).", "info");
+    generateMissingNumberSteps(arr);
   }
   else if (visualizerState.algo === 'timsort') {
     const arr = [28, 14, 5, 42, 99, 17, 33, 61, 8, 72, 53, 91, 22, 47, 85, 19, 64, 38, 77, 90, 12, 55, 30, 81];
@@ -16749,6 +16872,244 @@ function generateBubbleSortSteps(arr) {
 // --------------------------------------------------------------------------
 // ADDITIONAL ADVANCED SORTING & SEARCHING GENERATORS
 // --------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------
+// BIT MANIPULATION GENERATORS
+// --------------------------------------------------------------------------
+
+function generateSingleNumberSteps(arr) {
+  const steps = [];
+  let currentXOR = 0;
+
+  steps.push({
+    array: [...arr], activeIdx: -1, currentXOR: 0,
+    log: "Single Number I started. Initial running XOR = 0."
+  });
+
+  for (let i = 0; i < arr.length; i++) {
+    const val = arr[i];
+    const prevXOR = currentXOR;
+    currentXOR ^= val;
+
+    steps.push({
+      array: [...arr], activeIdx: i, activeVal: val, prevXOR, currentXOR,
+      log: `Step ${i + 1}: Running XOR (${prevXOR}) ^ Element ${val} = ${currentXOR}`
+    });
+  }
+
+  steps.push({
+    array: [...arr], activeIdx: -1, currentXOR, found: currentXOR,
+    log: `Single Number complete! Unique single number found = ${currentXOR}.`
+  });
+
+  visualizerState.steps = steps;
+}
+
+function generateKernighanSteps(n) {
+  const steps = [];
+  let temp = n;
+  let count = 0;
+
+  steps.push({
+    n: temp, nMinus1: 0, cleared: temp, count: 0,
+    log: `Brian Kernighan's Algorithm initialized for n = ${temp} (${temp.toString(2).padStart(8, '0')}).`
+  });
+
+  while (temp > 0) {
+    const prev = temp;
+    const minus1 = temp - 1;
+    const nextVal = temp & minus1;
+    count++;
+
+    steps.push({
+      n: prev, nMinus1: minus1, cleared: nextVal, count,
+      log: `Step ${count}: n (${prev} = ${prev.toString(2).padStart(8, '0')}) & (n-1) (${minus1} = ${minus1.toString(2).padStart(8, '0')}) -> ${nextVal} (${nextVal.toString(2).padStart(8, '0')})`
+    });
+
+    temp = nextVal;
+  }
+
+  steps.push({
+    n: 0, nMinus1: 0, cleared: 0, count,
+    log: `Complete! Total set bits count = ${count}.`
+  });
+
+  visualizerState.steps = steps;
+}
+
+function generateCountBitsSteps(n) {
+  const steps = [];
+  const dp = new Array(n + 1).fill(0);
+
+  steps.push({
+    dp: [...dp], currentI: 0, log: `Counting Bits DP initialized for n = ${n}.`
+  });
+
+  for (let i = 1; i <= n; i++) {
+    const parent = i >> 1;
+    const lsb = i & 1;
+    dp[i] = dp[parent] + lsb;
+
+    steps.push({
+      dp: [...dp], currentI: i, parent, lsb,
+      log: `i = ${i} (${i.toString(2).padStart(5, '0')}): dp[${i >> 1}] (${dp[parent]}) + lsb(${lsb}) = ${dp[i]}`
+    });
+  }
+
+  steps.push({
+    dp: [...dp], currentI: -1, log: "Counting Bits DP table generation complete!"
+  });
+
+  visualizerState.steps = steps;
+}
+
+function generatePowerOfTwoSteps(arr) {
+  const steps = [];
+
+  steps.push({
+    array: [...arr], activeIdx: -1, log: "Power of Two / Four test suite initialized."
+  });
+
+  for (let i = 0; i < arr.length; i++) {
+    const num = arr[i];
+    const isPow2 = num > 0 && (num & (num - 1)) === 0;
+    const isPow4 = isPow2 && (num & 0x55555555) !== 0;
+
+    steps.push({
+      array: [...arr], activeIdx: i, num, nMinus1: num - 1,
+      andVal: num & (num - 1), isPow2, isPow4,
+      log: `Testing num = ${num} (${num.toString(2).padStart(8, '0')}): (n & (n-1)) = ${num & (num - 1)}. Power of 2: ${isPow2 ? 'YES' : 'NO'}, Power of 4: ${isPow4 ? 'YES' : 'NO'}`
+    });
+  }
+
+  steps.push({
+    array: [...arr], activeIdx: -1, log: "Power of Two / Four tests complete."
+  });
+
+  visualizerState.steps = steps;
+}
+
+function generateReverseBitsSteps(n) {
+  const steps = [];
+  let orig = n >>> 0;
+  let rev = 0;
+
+  steps.push({
+    orig, rev: 0, bitIdx: -1,
+    log: `32-Bit Reversal initialized for ${orig} (${orig.toString(2).padStart(32, '0')}).`
+  });
+
+  for (let i = 0; i < 32; i++) {
+    const bit = orig & 1;
+    rev = ((rev << 1) | bit) >>> 0;
+    orig = orig >>> 1;
+
+    steps.push({
+      orig, rev, bitIdx: i, bitExtracted: bit,
+      log: `Bit ${i}: Extracted bit ${bit}. Shifted reversed accumulator -> ${rev.toString(2).padStart(32, '0')}`
+    });
+  }
+
+  steps.push({
+    orig: 0, rev, bitIdx: 32,
+    log: `32-Bit Reversal complete! Unsigned integer result = ${rev}.`
+  });
+
+  visualizerState.steps = steps;
+}
+
+function generateSingleNumberIISteps(arr) {
+  const steps = [];
+  let ones = 0, twos = 0;
+
+  steps.push({
+    array: [...arr], activeIdx: -1, ones: 0, twos: 0,
+    log: "Single Number II initialized. Tracking bitmask frequencies (ones & twos)."
+  });
+
+  for (let i = 0; i < arr.length; i++) {
+    const x = arr[i];
+    const prevOnes = ones;
+    const prevTwos = twos;
+    ones = (ones ^ x) & ~twos;
+    twos = (twos ^ x) & ~ones;
+
+    steps.push({
+      array: [...arr], activeIdx: i, activeVal: x, ones, twos, prevOnes, prevTwos,
+      log: `Element ${x}: Updated ones mask = ${ones} (${ones.toString(2).padStart(8, '0')}), twos mask = ${twos} (${twos.toString(2).padStart(8, '0')})`
+    });
+  }
+
+  steps.push({
+    array: [...arr], activeIdx: -1, ones, twos, found: ones,
+    log: `Single Number II complete! Unique single element = ${ones}.`
+  });
+
+  visualizerState.steps = steps;
+}
+
+function generateBitmaskSubsetsSteps(elements) {
+  const steps = [];
+  const n = elements.length;
+  const total = 1 << n;
+  const allSubsets = [];
+
+  steps.push({
+    elements: [...elements], mask: -1, currentSubset: [], subsets: [],
+    log: `Bitmask Power Set started for ${n} elements. Total subsets = 2^${n} = ${total}.`
+  });
+
+  for (let mask = 0; mask < total; mask++) {
+    const subset = [];
+    for (let i = 0; i < n; i++) {
+      if (mask & (1 << i)) subset.push(elements[i]);
+    }
+    allSubsets.push([...subset]);
+
+    steps.push({
+      elements: [...elements], mask,
+      maskBinary: mask.toString(2).padStart(n, '0'),
+      currentSubset: [...subset], subsets: [...allSubsets],
+      log: `Mask ${mask} (${mask.toString(2).padStart(n, '0')}): Subset = [${subset.join(', ')}]`
+    });
+  }
+
+  steps.push({
+    elements: [...elements], mask: total, maskBinary: "",
+    currentSubset: [], subsets: [...allSubsets],
+    log: `Bitmask Power Set complete! Generated all ${total} subsets.`
+  });
+
+  visualizerState.steps = steps;
+}
+
+function generateMissingNumberSteps(arr) {
+  const steps = [];
+  const n = arr.length;
+  let xorSum = n;
+
+  steps.push({
+    array: [...arr], activeIdx: -1, xorSum,
+    log: `Missing Number via XOR initialized for N = ${n}. Initial xorSum = N (${n}).`
+  });
+
+  for (let i = 0; i < arr.length; i++) {
+    const prevXOR = xorSum;
+    xorSum ^= i ^ arr[i];
+
+    steps.push({
+      array: [...arr], activeIdx: i, activeVal: arr[i], prevXOR, xorSum,
+      log: `Step ${i}: xorSum (${prevXOR}) ^ index ${i} ^ value ${arr[i]} = ${xorSum}`
+    });
+  }
+
+  steps.push({
+    array: [...arr], activeIdx: -1, xorSum, missing: xorSum,
+    log: `Missing Number complete! Missing integer = ${xorSum}.`
+  });
+
+  visualizerState.steps = steps;
+}
 
 function generateTimSortSteps(arr) {
   const steps = [];
@@ -22497,6 +22858,307 @@ function renderCanvasStep() {
       cell.appendChild(idxDiv);
       container.appendChild(cell);
     });
+
+    canvas.appendChild(container);
+  }
+
+  // --- SINGLE NUMBER I & MISSING NUMBER (BIT GRID) ---
+  else if (visualizerState.algo === 'singlenumber' || visualizerState.algo === 'missingnumber') {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex;flex-direction:column;gap:1.2rem;align-items:center;justify-content:center;width:100%;padding:1rem;';
+
+    // Top: Input Array
+    const topBox = document.createElement('div');
+    topBox.style.textAlign = 'center';
+    topBox.innerHTML = `<div style="font-size:0.85rem;font-weight:600;color:var(--text-muted);margin-bottom:0.5rem;">Input Array (Active Index: ${step.activeIdx})</div>`;
+    const arrRow = document.createElement('div');
+    arrRow.className = 'bs-array';
+    step.array.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'bs-element';
+      if (idx === step.activeIdx) cell.classList.add('mid');
+      else if (step.found === val || step.missing === val) cell.classList.add('found');
+      else cell.classList.add('active');
+      cell.textContent = val;
+      arrRow.appendChild(cell);
+    });
+    topBox.appendChild(arrRow);
+    container.appendChild(topBox);
+
+    // Bit Grid helper
+    const makeBitRow = (label, num, color) => {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:10px;margin-bottom:6px;';
+      const lbl = document.createElement('div');
+      lbl.style.cssText = 'width:150px;text-align:right;font-size:0.75rem;font-family:monospace;font-weight:bold;color:' + color + ';';
+      lbl.textContent = label;
+      row.appendChild(lbl);
+
+      const bits = (num >>> 0).toString(2).padStart(8, '0').split('');
+      bits.forEach(b => {
+        const cell = document.createElement('div');
+        cell.style.cssText = `width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+          background:${b === '1' ? 'rgba(99,102,241,0.25)' : 'rgba(255,255,255,0.03)'};
+          border:${b === '1' ? '1px solid var(--primary)' : '1px solid var(--border-color)'};
+          border-radius:6px;font-family:monospace;font-weight:bold;font-size:0.9rem;
+          color:${b === '1' ? '#fff' : 'var(--text-muted)'};`;
+        cell.textContent = b;
+        row.appendChild(cell);
+      });
+
+      const dec = document.createElement('div');
+      dec.style.cssText = 'font-family:monospace;font-size:0.8rem;font-weight:bold;color:#fff;margin-left:8px;';
+      dec.textContent = `= ${num}`;
+      row.appendChild(dec);
+      return row;
+    };
+
+    const gridBox = document.createElement('div');
+    gridBox.style.cssText = 'background:rgba(0,0,0,0.2);padding:1rem;border-radius:8px;border:1px solid var(--border-color);';
+
+    if (visualizerState.algo === 'singlenumber') {
+      if (step.prevXOR !== undefined) gridBox.appendChild(makeBitRow('Prev Accumulator', step.prevXOR, 'var(--accent-cyan)'));
+      if (step.activeVal !== undefined) gridBox.appendChild(makeBitRow('Current Element', step.activeVal, 'var(--secondary)'));
+      gridBox.appendChild(makeBitRow('Resulting XOR', step.currentXOR, 'var(--easy)'));
+    } else {
+      if (step.prevXOR !== undefined) gridBox.appendChild(makeBitRow('Prev xorSum', step.prevXOR, 'var(--accent-cyan)'));
+      if (step.activeVal !== undefined) gridBox.appendChild(makeBitRow('Val ^ Index', step.activeVal ^ step.activeIdx, 'var(--secondary)'));
+      gridBox.appendChild(makeBitRow('Running xorSum', step.xorSum, 'var(--easy)'));
+    }
+    container.appendChild(gridBox);
+    canvas.appendChild(container);
+  }
+
+  // --- BRIAN KERNIGHAN & POWER OF TWO (BIT GRID) ---
+  else if (visualizerState.algo === 'kernighan' || visualizerState.algo === 'poweroftwo') {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex;flex-direction:column;gap:1.2rem;align-items:center;justify-content:center;width:100%;padding:1rem;';
+
+    const makeBitRow = (label, num, color) => {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:10px;margin-bottom:6px;';
+      const lbl = document.createElement('div');
+      lbl.style.cssText = 'width:150px;text-align:right;font-size:0.75rem;font-family:monospace;font-weight:bold;color:' + color + ';';
+      lbl.textContent = label;
+      row.appendChild(lbl);
+
+      const bits = (num >>> 0).toString(2).padStart(8, '0').split('');
+      bits.forEach(b => {
+        const cell = document.createElement('div');
+        cell.style.cssText = `width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+          background:${b === '1' ? 'rgba(99,102,241,0.25)' : 'rgba(255,255,255,0.03)'};
+          border:${b === '1' ? '1px solid var(--primary)' : '1px solid var(--border-color)'};
+          border-radius:6px;font-family:monospace;font-weight:bold;font-size:0.9rem;
+          color:${b === '1' ? '#fff' : 'var(--text-muted)'};`;
+        cell.textContent = b;
+        row.appendChild(cell);
+      });
+
+      const dec = document.createElement('div');
+      dec.style.cssText = 'font-family:monospace;font-size:0.8rem;font-weight:bold;color:#fff;margin-left:8px;';
+      dec.textContent = `= ${num}`;
+      row.appendChild(dec);
+      return row;
+    };
+
+    const gridBox = document.createElement('div');
+    gridBox.style.cssText = 'background:rgba(0,0,0,0.2);padding:1rem;border-radius:8px;border:1px solid var(--border-color);';
+
+    if (visualizerState.algo === 'kernighan') {
+      gridBox.appendChild(makeBitRow('n (binary)', step.n, 'var(--accent-cyan)'));
+      gridBox.appendChild(makeBitRow('n - 1 (binary)', step.nMinus1, 'var(--secondary)'));
+      gridBox.appendChild(makeBitRow('n & (n - 1)', step.cleared, 'var(--easy)'));
+
+      const cntBadge = document.createElement('div');
+      cntBadge.style.cssText = 'margin-top:10px;text-align:center;font-family:monospace;font-weight:bold;color:var(--easy);';
+      cntBadge.textContent = `Set Bits Counter = ${step.count}`;
+      gridBox.appendChild(cntBadge);
+    } else if (visualizerState.algo === 'poweroftwo') {
+      if (step.num !== undefined) {
+        gridBox.appendChild(makeBitRow('num (binary)', step.num, 'var(--accent-cyan)'));
+        gridBox.appendChild(makeBitRow('num - 1', step.nMinus1, 'var(--secondary)'));
+        gridBox.appendChild(makeBitRow('num & (num - 1)', step.andVal, 'var(--easy)'));
+
+        const badge = document.createElement('div');
+        badge.style.cssText = 'margin-top:10px;text-align:center;font-family:monospace;font-weight:bold;color:' + (step.isPow2 ? 'var(--easy)' : '#ef4444') + ';';
+        badge.textContent = `Num = ${step.num} | Power of 2: ${step.isPow2 ? 'YES ✔' : 'NO ✖'} | Power of 4: ${step.isPow4 ? 'YES ✔' : 'NO ✖'}`;
+        gridBox.appendChild(badge);
+      }
+    }
+
+    container.appendChild(gridBox);
+    canvas.appendChild(container);
+  }
+
+  // --- COUNTING BITS DP TABLE (BIT GRID) ---
+  else if (visualizerState.algo === 'countbits') {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex;flex-direction:column;gap:1rem;align-items:center;width:100%;max-width:700px;height:100%;max-height:460px;padding:0.5rem;overflow-y:auto;overscroll-behavior:contain;border-radius:8px;border:1px solid var(--border-color);background:rgba(0,0,0,0.25);';
+
+    const table = document.createElement('table');
+    table.style.cssText = 'width:100%;border-collapse:collapse;font-family:monospace;font-size:0.85rem;text-align:center;';
+    table.innerHTML = `
+      <thead style="position:sticky;top:0;background:#0f172a;z-index:10;box-shadow:0 2px 4px rgba(0,0,0,0.4);">
+        <tr style="color:var(--accent-cyan);border-bottom:1px solid var(--border-color);">
+          <th style="padding:8px;">i (dec)</th>
+          <th style="padding:8px;">Binary (5-bit)</th>
+          <th style="padding:8px;">dp[i >> 1]</th>
+          <th style="padding:8px;">lsb (i & 1)</th>
+          <th style="padding:8px;">Set Bits dp[i]</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    `;
+
+    let activeTr = null;
+    const tbody = table.querySelector('tbody');
+    step.dp.forEach((count, i) => {
+      const tr = document.createElement('tr');
+      tr.style.cssText = 'border-bottom:1px solid rgba(255,255,255,0.05);transition:background 0.2s;';
+      if (i === step.currentI) {
+        tr.style.background = 'rgba(236,72,153,0.3)';
+        tr.style.fontWeight = 'bold';
+        activeTr = tr;
+      }
+
+      tr.innerHTML = `
+        <td style="padding:8px;color:#fff;">${i}</td>
+        <td style="padding:8px;color:var(--accent-cyan);">${i.toString(2).padStart(5, '0')}</td>
+        <td style="padding:8px;">dp[${i >> 1}] = ${step.dp[i >> 1] || 0}</td>
+        <td style="padding:8px;color:var(--secondary);">${i & 1}</td>
+        <td style="padding:8px;color:var(--easy);font-weight:bold;">${count}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    container.appendChild(table);
+    canvas.appendChild(container);
+
+    if (activeTr) {
+      setTimeout(() => {
+        if (typeof activeTr.scrollIntoView === 'function') {
+          activeTr.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      }, 50);
+    }
+  }
+
+  // --- 32-BIT REVERSAL (BIT GRID) ---
+  else if (visualizerState.algo === 'reversebits') {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex;flex-direction:column;gap:1.5rem;align-items:center;justify-content:center;width:100%;padding:1rem;';
+
+    const make32BitRow = (label, num, highlightBit, color) => {
+      const box = document.createElement('div');
+      box.style.cssText = 'text-align:center;width:100%;max-width:750px;';
+      box.innerHTML = `<div style="font-size:0.8rem;font-weight:bold;color:${color};margin-bottom:6px;">${label}</div>`;
+
+      const grid = document.createElement('div');
+      grid.style.cssText = 'display:grid;grid-template-columns:repeat(16, 1fr);gap:4px;justify-content:center;';
+
+      const bits = (num >>> 0).toString(2).padStart(32, '0').split('');
+      bits.forEach((b, idx) => {
+        const cell = document.createElement('div');
+        const isHl = highlightBit !== undefined && idx === highlightBit;
+        cell.style.cssText = `padding:4px 0;text-align:center;font-family:monospace;font-size:0.75rem;font-weight:bold;
+          background:${isHl ? 'rgba(236,72,153,0.3)' : b === '1' ? 'rgba(99,102,241,0.2)' : 'rgba(255,255,255,0.02)'};
+          border:${isHl ? '1px solid var(--secondary)' : b === '1' ? '1px solid var(--primary)' : '1px solid var(--border-color)'};
+          border-radius:4px;color:${isHl ? '#fff' : b === '1' ? '#fff' : 'var(--text-muted)'};`;
+        cell.textContent = b;
+        grid.appendChild(cell);
+      });
+
+      box.appendChild(grid);
+      return box;
+    };
+
+    container.appendChild(make32BitRow('Original Unsigned Integer (Shift Right >> 1)', step.orig, step.bitIdx < 32 ? 31 - step.bitIdx : undefined, 'var(--accent-cyan)'));
+    container.appendChild(make32BitRow('Reversed Result Accumulator (Shift Left << 1 | bit)', step.rev, step.bitIdx < 32 ? 31 - step.bitIdx : undefined, 'var(--easy)'));
+
+    const status = document.createElement('div');
+    status.style.cssText = 'font-family:monospace;font-size:0.85rem;font-weight:bold;color:var(--accent-cyan);';
+    status.textContent = `Pass ${Math.min(step.bitIdx + 1, 32)} / 32 | Reversed Integer = ${step.rev}`;
+    container.appendChild(status);
+
+    canvas.appendChild(container);
+  }
+
+  // --- SINGLE NUMBER II (BIT GRID) ---
+  else if (visualizerState.algo === 'singlenumberII') {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex;flex-direction:column;gap:1.2rem;align-items:center;justify-content:center;width:100%;padding:1rem;';
+
+    const makeBitRow = (label, num, color) => {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:10px;margin-bottom:6px;';
+      const lbl = document.createElement('div');
+      lbl.style.cssText = 'width:150px;text-align:right;font-size:0.75rem;font-family:monospace;font-weight:bold;color:' + color + ';';
+      lbl.textContent = label;
+      row.appendChild(lbl);
+
+      const bits = (num >>> 0).toString(2).padStart(8, '0').split('');
+      bits.forEach(b => {
+        const cell = document.createElement('div');
+        cell.style.cssText = `width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+          background:${b === '1' ? 'rgba(99,102,241,0.25)' : 'rgba(255,255,255,0.03)'};
+          border:${b === '1' ? '1px solid var(--primary)' : '1px solid var(--border-color)'};
+          border-radius:6px;font-family:monospace;font-weight:bold;font-size:0.9rem;
+          color:${b === '1' ? '#fff' : 'var(--text-muted)'};`;
+        cell.textContent = b;
+        row.appendChild(cell);
+      });
+
+      const dec = document.createElement('div');
+      dec.style.cssText = 'font-family:monospace;font-size:0.8rem;font-weight:bold;color:#fff;margin-left:8px;';
+      dec.textContent = `= ${num}`;
+      row.appendChild(dec);
+      return row;
+    };
+
+    const gridBox = document.createElement('div');
+    gridBox.style.cssText = 'background:rgba(0,0,0,0.2);padding:1rem;border-radius:8px;border:1px solid var(--border-color);';
+
+    if (step.activeVal !== undefined) gridBox.appendChild(makeBitRow('Current Element x', step.activeVal, 'var(--secondary)'));
+    gridBox.appendChild(makeBitRow('ones Mask (1st Count)', step.ones, 'var(--accent-cyan)'));
+    gridBox.appendChild(makeBitRow('twos Mask (2nd Count)', step.twos, 'var(--easy)'));
+
+    container.appendChild(gridBox);
+    canvas.appendChild(container);
+  }
+
+  // --- BITMASK SUBSETS (BIT GRID) ---
+  else if (visualizerState.algo === 'bitmasksubsets') {
+    const container = document.createElement('div');
+    container.style.cssText = 'display:flex;flex-direction:column;gap:1.2rem;align-items:center;justify-content:center;width:100%;padding:1rem;';
+
+    const header = document.createElement('div');
+    header.style.cssText = 'font-family:monospace;font-size:0.85rem;font-weight:bold;color:var(--accent-cyan);text-align:center;';
+    header.textContent = `Bitmask ${step.mask} (${step.maskBinary || '0000'}) -> Subset: [${(step.currentSubset || []).join(', ')}]`;
+    container.appendChild(header);
+
+    if (step.elements) {
+      const bitRow = document.createElement('div');
+      bitRow.style.cssText = 'display:flex;gap:12px;justify-content:center;';
+
+      step.elements.forEach((elem, idx) => {
+        const active = step.mask !== -1 && (step.mask & (1 << idx));
+        const cell = document.createElement('div');
+        cell.style.cssText = `padding:8px 16px;border-radius:8px;font-family:monospace;font-weight:bold;text-align:center;
+          background:${active ? 'rgba(236,72,153,0.2)' : 'rgba(255,255,255,0.03)'};
+          border:${active ? '1px solid var(--secondary)' : '1px solid var(--border-color)'};
+          color:${active ? '#fff' : 'var(--text-muted)'};`;
+        cell.innerHTML = `<div>${elem}</div><div style="font-size:0.7rem;margin-top:2px;">bit:${active ? 1 : 0}</div>`;
+        bitRow.appendChild(cell);
+      });
+      container.appendChild(bitRow);
+    }
+
+    if (step.subsets && step.subsets.length > 0) {
+      const subBox = document.createElement('div');
+      subBox.style.cssText = 'max-height:120px;overflow-y:auto;background:rgba(0,0,0,0.2);padding:8px 12px;border-radius:8px;border:1px solid var(--border-color);width:100%;max-width:550px;font-family:monospace;font-size:0.78rem;color:var(--easy);';
+      subBox.textContent = `Generated Subsets (${step.subsets.length}): ` + step.subsets.map(s => `[${s.join(',')}]`).join(', ');
+      container.appendChild(subBox);
+    }
 
     canvas.appendChild(container);
   }
