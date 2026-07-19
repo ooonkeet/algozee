@@ -10957,6 +10957,241 @@ function getDiscardedRange(length, low, high) {
 // ==========================================================================
 
 const codeTemplates = {
+  timsort: `
+<span class="code-keyword">function</span> <span class="code-fn">timSort</span>(arr) {
+  <span class="code-keyword">let</span> RUN = <span class="code-num">4</span>, n = arr.length;
+  <span class="code-comment">// 1. Sort individual runs with Insertion Sort</span>
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; n; i += RUN)
+    insertionSortRun(arr, i, Math.<span class="code-fn">min</span>(i + RUN - <span class="code-num">1</span>, n - <span class="code-num">1</span>));
+  <span class="code-comment">// 2. Merge runs doubling size</span>
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> size = RUN; size &lt; n; size = <span class="code-num">2</span> * size) {
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> left = <span class="code-num">0</span>; left &lt; n; left += <span class="code-num">2</span> * size) {
+      <span class="code-keyword">let</span> mid = left + size - <span class="code-num">1</span>, right = Math.<span class="code-fn">min</span>(left + <span class="code-num">2</span> * size - <span class="code-num">1</span>, n - <span class="code-num">1</span>);
+      <span class="code-keyword">if</span> (mid &lt; right) mergeRuns(arr, left, mid, right);
+    }
+  }
+}
+`,
+  bucketsort: `
+<span class="code-keyword">function</span> <span class="code-fn">bucketSort</span>(arr, bucketCount = <span class="code-num">5</span>) {
+  <span class="code-keyword">let</span> min = Math.<span class="code-fn">min</span>(...arr), max = Math.<span class="code-fn">max</span>(...arr);
+  <span class="code-keyword">let</span> range = (max - min) / bucketCount || <span class="code-num">1</span>;
+  <span class="code-keyword">let</span> buckets = Array.<span class="code-fn">from</span>({ length: bucketCount }, () =&gt; []);
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> x <span class="code-keyword">of</span> arr) {
+    <span class="code-keyword">let</span> idx = Math.<span class="code-fn">min</span>(Math.<span class="code-fn">floor</span>((x - min) / range), bucketCount - <span class="code-num">1</span>);
+    buckets[idx].<span class="code-fn">push</span>(x);
+  }
+  <span class="code-keyword">return</span> buckets.<span class="code-fn">flatMap</span>(b =&gt; b.<span class="code-fn">sort</span>((a, b) =&gt; a - b));
+}
+`,
+  combsort: `
+<span class="code-keyword">function</span> <span class="code-fn">combSort</span>(arr) {
+  <span class="code-keyword">let</span> gap = arr.length, shrink = <span class="code-num">1.3</span>, sorted = <span class="code-keyword">false</span>;
+  <span class="code-keyword">while</span> (!sorted) {
+    gap = Math.<span class="code-fn">floor</span>(gap / shrink);
+    <span class="code-keyword">if</span> (gap &lt;= <span class="code-num">1</span>) { gap = <span class="code-num">1</span>; sorted = <span class="code-keyword">true</span>; }
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i + gap &lt; arr.length; i++) {
+      <span class="code-keyword">if</span> (arr[i] &gt; arr[i + gap]) {
+        [arr[i], arr[i + gap]] = [arr[i + gap], arr[i]];
+        sorted = <span class="code-keyword">false</span>;
+      }
+    }
+  }
+}
+`,
+  gnomesort: `
+<span class="code-keyword">function</span> <span class="code-fn">gnomeSort</span>(arr) {
+  <span class="code-keyword">let</span> pos = <span class="code-num">0</span>, n = arr.length;
+  <span class="code-keyword">while</span> (pos &lt; n) {
+    <span class="code-keyword">if</span> (pos === <span class="code-num">0</span> || arr[pos] &gt;= arr[pos - <span class="code-num">1</span>]) pos++;
+    <span class="code-keyword">else</span> {
+      [arr[pos], arr[pos - <span class="code-num">1</span>]] = [arr[pos - <span class="code-num">1</span>], arr[pos]];
+      pos--;
+    }
+  }
+}
+`,
+  pancakesort: `
+<span class="code-keyword">function</span> <span class="code-fn">pancakeSort</span>(arr) {
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> currSize = arr.length; currSize &gt; <span class="code-num">1</span>; currSize--) {
+    <span class="code-keyword">let</span> mi = findMaxIndex(arr, currSize);
+    <span class="code-keyword">if</span> (mi !== currSize - <span class="code-num">1</span>) {
+      flip(arr, mi);
+      flip(arr, currSize - <span class="code-num">1</span>);
+    }
+  }
+}
+`,
+  bitonicsort: `
+<span class="code-keyword">function</span> <span class="code-fn">bitonicSort</span>(arr, low, cnt, dir) {
+  <span class="code-keyword">if</span> (cnt &gt; <span class="code-num">1</span>) {
+    <span class="code-keyword">let</span> k = Math.<span class="code-fn">floor</span>(cnt / <span class="code-num">2</span>);
+    bitonicSort(arr, low, k, <span class="code-num">1</span>);
+    bitonicSort(arr, low + k, k, <span class="code-num">0</span>);
+    bitonicMerge(arr, low, cnt, dir);
+  }
+}
+`,
+  fibonaccisearch: `
+<span class="code-keyword">function</span> <span class="code-fn">fibonacciSearch</span>(arr, target) {
+  <span class="code-keyword">let</span> n = arr.length, fibM2 = <span class="code-num">0</span>, fibM1 = <span class="code-num">1</span>, fibM = fibM2 + fibM1;
+  <span class="code-keyword">while</span> (fibM &lt; n) { fibM2 = fibM1; fibM1 = fibM; fibM = fibM2 + fibM1; }
+  <span class="code-keyword">let</span> offset = -<span class="code-num">1</span>;
+  <span class="code-keyword">while</span> (fibM &gt; <span class="code-num">1</span>) {
+    <span class="code-keyword">let</span> i = Math.<span class="code-fn">min</span>(offset + fibM2, n - <span class="code-num">1</span>);
+    <span class="code-keyword">if</span> (arr[i] &lt; target) { fibM = fibM1; fibM1 = fibM2; fibM2 = fibM - fibM1; offset = i; }
+    <span class="code-keyword">else if</span> (arr[i] &gt; target) { fibM = fibM2; fibM1 = fibM1 - fibM2; fibM2 = fibM - fibM1; }
+    <span class="code-keyword">else return</span> i;
+  }
+  <span class="code-keyword">return</span> -<span class="code-num">1</span>;
+}
+`,
+  rabinkarp: `
+<span class="code-keyword">function</span> <span class="code-fn">rabinKarpSearch</span>(text, pattern) {
+  <span class="code-keyword">let</span> d = <span class="code-num">256</span>, q = <span class="code-num">101</span>, M = pattern.length, N = text.length;
+  <span class="code-keyword">let</span> p = <span class="code-num">0</span>, t = <span class="code-num">0</span>, h = Math.<span class="code-fn">pow</span>(d, M - <span class="code-num">1</span>) % q;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; M; i++) {
+    p = (d * p + pattern.<span class="code-fn">charCodeAt</span>(i)) % q;
+    t = (d * t + text.<span class="code-fn">charCodeAt</span>(i)) % q;
+  }
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt;= N - M; i++) {
+    <span class="code-keyword">if</span> (p === t &amp;&amp; text.<span class="code-fn">substring</span>(i, i + M) === pattern) <span class="code-keyword">return</span> i;
+    <span class="code-keyword">if</span> (i &lt; N - M) t = (d * (t - text.<span class="code-fn">charCodeAt</span>(i) * h) + text.<span class="code-fn">charCodeAt</span>(i + M)) % q;
+  }
+}
+`,
+  selectionsort: `
+<span class="code-keyword">function</span> <span class="code-fn">selectionSort</span>(arr) {
+  <span class="code-keyword">let</span> n = arr.length;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; n - <span class="code-num">1</span>; i++) {
+    <span class="code-keyword">let</span> minIdx = i;
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> j = i + <span class="code-num">1</span>; j &lt; n; j++) {
+      <span class="code-keyword">if</span> (arr[j] &lt; arr[minIdx]) minIdx = j;
+    }
+    <span class="code-keyword">if</span> (minIdx !== i) [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
+  }
+}
+`,
+  heapsort: `
+<span class="code-keyword">function</span> <span class="code-fn">heapSort</span>(arr) {
+  <span class="code-keyword">let</span> n = arr.length;
+  <span class="code-comment">// 1. Build max heap</span>
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = Math.<span class="code-fn">floor</span>(n / <span class="code-num">2</span>) - <span class="code-num">1</span>; i &gt;= <span class="code-num">0</span>; i--) heapify(arr, n, i);
+  <span class="code-comment">// 2. Extract elements from heap</span>
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = n - <span class="code-num">1</span>; i &gt; <span class="code-num">0</span>; i--) {
+    [arr[<span class="code-num">0</span>], arr[i]] = [arr[i], arr[<span class="code-num">0</span>]];
+    heapify(arr, i, <span class="code-num">0</span>);
+  }
+}
+`,
+  countingsort: `
+<span class="code-keyword">function</span> <span class="code-fn">countingSort</span>(arr) {
+  <span class="code-keyword">let</span> max = Math.<span class="code-fn">max</span>(...arr), count = <span class="code-fn">Array</span>(max + <span class="code-num">1</span>).<span class="code-fn">fill</span>(<span class="code-num">0</span>);
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> x <span class="code-keyword">of</span> arr) count[x]++;
+  <span class="code-keyword">let</span> idx = <span class="code-num">0</span>;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt;= max; i++) {
+    <span class="code-keyword">while</span> (count[i] &gt; <span class="code-num">0</span>) { arr[idx++] = i; count[i]--; }
+  }
+}
+`,
+  radixsort: `
+<span class="code-keyword">function</span> <span class="code-fn">radixSort</span>(arr) {
+  <span class="code-keyword">let</span> max = Math.<span class="code-fn">max</span>(...arr);
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> exp = <span class="code-num">1</span>; Math.<span class="code-fn">floor</span>(max / exp) &gt; <span class="code-num">0</span>; exp *= <span class="code-num">10</span>) {
+    countSortByDigit(arr, exp);
+  }
+}
+`,
+  shellsort: `
+<span class="code-keyword">function</span> <span class="code-fn">shellSort</span>(arr) {
+  <span class="code-keyword">let</span> n = arr.length;
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> gap = Math.<span class="code-fn">floor</span>(n / <span class="code-num">2</span>); gap &gt; <span class="code-num">0</span>; gap = Math.<span class="code-fn">floor</span>(gap / <span class="code-num">2</span>)) {
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = gap; i &lt; n; i++) {
+      <span class="code-keyword">let</span> temp = arr[i], j = i;
+      <span class="code-keyword">while</span> (j &gt;= gap &amp;&amp; arr[j - gap] &gt; temp) {
+        arr[j] = arr[j - gap];
+        j -= gap;
+      }
+      arr[j] = temp;
+    }
+  }
+}
+`,
+  cocktailsort: `
+<span class="code-keyword">function</span> <span class="code-fn">cocktailSort</span>(arr) {
+  <span class="code-keyword">let</span> swapped = <span class="code-keyword">true</span>, start = <span class="code-num">0</span>, end = arr.length - <span class="code-num">1</span>;
+  <span class="code-keyword">while</span> (swapped) {
+    swapped = <span class="code-keyword">false</span>;
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = start; i &lt; end; i++) {
+      <span class="code-keyword">if</span> (arr[i] &gt; arr[i + <span class="code-num">1</span>]) { [arr[i], arr[i+<span class="code-num">1</span>]] = [arr[i+<span class="code-num">1</span>], arr[i]]; swapped = <span class="code-keyword">true</span>; }
+    }
+    <span class="code-keyword">if</span> (!swapped) <span class="code-keyword">break</span>;
+    swapped = <span class="code-keyword">false</span>; end--;
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = end - <span class="code-num">1</span>; i &gt;= start; i--) {
+      <span class="code-keyword">if</span> (arr[i] &gt; arr[i + <span class="code-num">1</span>]) { [arr[i], arr[i+<span class="code-num">1</span>]] = [arr[i+<span class="code-num">1</span>], arr[i]]; swapped = <span class="code-keyword">true</span>; }
+    }
+    start++;
+  }
+}
+`,
+  linearsearch: `
+<span class="code-keyword">function</span> <span class="code-fn">linearSearch</span>(arr, target) {
+  <span class="code-keyword">for</span> (<span class="code-keyword">let</span> i = <span class="code-num">0</span>; i &lt; arr.length; i++) {
+    <span class="code-keyword">if</span> (arr[i] === target) <span class="code-keyword">return</span> i;
+  }
+  <span class="code-keyword">return</span> -<span class="code-num">1</span>;
+}
+`,
+  ternarysearch: `
+<span class="code-keyword">function</span> <span class="code-fn">ternarySearch</span>(arr, target, l, r) {
+  <span class="code-keyword">while</span> (l &lt;= r) {
+    <span class="code-keyword">let</span> m1 = l + Math.<span class="code-fn">floor</span>((r - l) / <span class="code-num">3</span>);
+    <span class="code-keyword">let</span> m2 = r - Math.<span class="code-fn">floor</span>((r - l) / <span class="code-num">3</span>);
+    <span class="code-keyword">if</span> (arr[m1] === target) <span class="code-keyword">return</span> m1;
+    <span class="code-keyword">if</span> (arr[m2] === target) <span class="code-keyword">return</span> m2;
+    <span class="code-keyword">if</span> (target &lt; arr[m1]) r = m1 - <span class="code-num">1</span>;
+    <span class="code-keyword">else if</span> (target &gt; arr[m2]) l = m2 + <span class="code-num">1</span>;
+    <span class="code-keyword">else</span> { l = m1 + <span class="code-num">1</span>; r = m2 - <span class="code-num">1</span>; }
+  }
+  <span class="code-keyword">return</span> -<span class="code-num">1</span>;
+}
+`,
+  jumpsearch: `
+<span class="code-keyword">function</span> <span class="code-fn">jumpSearch</span>(arr, target) {
+  <span class="code-keyword">let</span> n = arr.length, step = Math.<span class="code-fn">floor</span>(Math.<span class="code-fn">sqrt</span>(n)), prev = <span class="code-num">0</span>;
+  <span class="code-keyword">while</span> (arr[Math.<span class="code-fn">min</span>(step, n) - <span class="code-num">1</span>] &lt; target) {
+    prev = step; step += Math.<span class="code-fn">floor</span>(Math.<span class="code-fn">sqrt</span>(n));
+    <span class="code-keyword">if</span> (prev &gt;= n) <span class="code-keyword">return</span> -<span class="code-num">1</span>;
+  }
+  <span class="code-keyword">while</span> (arr[prev] &lt; target) {
+    prev++;
+    <span class="code-keyword">if</span> (prev === Math.<span class="code-fn">min</span>(step, n)) <span class="code-keyword">return</span> -<span class="code-num">1</span>;
+  }
+  <span class="code-keyword">return</span> arr[prev] === target ? prev : -<span class="code-num">1</span>;
+}
+`,
+  interpolationsearch: `
+<span class="code-keyword">function</span> <span class="code-fn">interpolationSearch</span>(arr, target) {
+  <span class="code-keyword">let</span> low = <span class="code-num">0</span>, high = arr.length - <span class="code-num">1</span>;
+  <span class="code-keyword">while</span> (low &lt;= high &amp;&amp; target &gt;= arr[low] &amp;&amp; target &lt;= arr[high]) {
+    <span class="code-keyword">if</span> (low === high) <span class="code-keyword">return</span> arr[low] === target ? low : -<span class="code-num">1</span>;
+    <span class="code-keyword">let</span> pos = low + Math.<span class="code-fn">floor</span>(((target - arr[low]) * (high - low)) / (arr[high] - arr[low]));
+    <span class="code-keyword">if</span> (arr[pos] === target) <span class="code-keyword">return</span> pos;
+    <span class="code-keyword">if</span> (arr[pos] &lt; target) low = pos + <span class="code-num">1</span>;
+    <span class="code-keyword">else</span> high = pos - <span class="code-num">1</span>;
+  }
+  <span class="code-keyword">return</span> -<span class="code-num">1</span>;
+}
+`,
+  exponentialsearch: `
+<span class="code-keyword">function</span> <span class="code-fn">exponentialSearch</span>(arr, target) {
+  <span class="code-keyword">let</span> n = arr.length;
+  <span class="code-keyword">if</span> (arr[<span class="code-num">0</span>] === target) <span class="code-keyword">return</span> <span class="code-num">0</span>;
+  <span class="code-keyword">let</span> i = <span class="code-num">1</span>;
+  <span class="code-keyword">while</span> (i &lt; n &amp;&amp; arr[i] &lt;= target) i *= <span class="code-num">2</span>;
+  <span class="code-keyword">return</span> binarySearch(arr, target, Math.<span class="code-fn">floor</span>(i / <span class="code-num">2</span>), Math.<span class="code-fn">min</span>(i, n - <span class="code-num">1</span>));
+}
+`,
   twoarraybinary: `
 <span class="code-keyword">function</span> <span class="code-fn">findMedianSortedArrays</span>(nums1, nums2) {
   <span class="code-comment">// Binary search partitions on smaller array</span>
@@ -12519,6 +12754,127 @@ function resetVisualizer() {
     appendLog("[INFO] Generated deterministic array for Bubble Sort.", "info");
     generateBubbleSortSteps(arr);
   }
+  else if (visualizerState.algo === 'timsort') {
+    const arr = [28, 14, 5, 42, 99, 17, 33, 61, 8, 72, 53, 91, 22, 47, 85, 19, 64, 38, 77, 90, 12, 55, 30, 81];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Tim Sort initialized with 24 elements (RUN size = 4).", "info");
+    generateTimSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'bucketsort') {
+    const arr = [42, 32, 23, 52, 25, 47, 51, 12, 89, 75, 63, 91, 18, 38, 72, 81, 15, 66, 95, 29];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Bucket Sort initialized with 20 elements into 5 buckets.", "info");
+    generateBucketSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'combsort') {
+    const arr = [84, 28, 15, 42, 99, 17, 33, 61, 8, 72, 53, 91, 22, 47, 85, 19, 64, 38, 77, 90];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Comb Sort initialized with 20 elements (shrink factor = 1.3).", "info");
+    generateCombSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'gnomesort') {
+    const arr = [34, 2, 23, 67, 12, 89, 45, 18, 76, 29, 51, 8, 93, 15, 62];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Gnome Sort initialized with 15 elements.", "info");
+    generateGnomeSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'pancakesort') {
+    const arr = [23, 10, 40, 15, 50, 8, 32, 19, 45, 12, 60, 27];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Pancake Sort initialized with 12 elements.", "info");
+    generatePancakeSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'bitonicsort') {
+    const arr = [3, 7, 4, 8, 6, 2, 1, 5, 11, 9, 15, 10, 14, 12, 13, 16];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Bitonic Sort initialized with 16 elements (2^4 power of two).", "info");
+    generateBitonicSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'fibonaccisearch') {
+    const arr = [4, 9, 15, 22, 29, 36, 43, 50, 58, 65, 73, 81, 89, 97, 106, 115, 124, 134, 144, 155, 167, 180, 193];
+    const target = 134;
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Fibonacci Search initialized with 23 sorted elements. Target = 134.", "info");
+    generateFibonacciSearchSteps(arr, target);
+  }
+  else if (visualizerState.algo === 'rabinkarp') {
+    const text = "ABABDABACDABABCABAB";
+    const pattern = "ABABC";
+    visualizerState.rawArray = { text, pattern };
+    appendLog("[INFO] Rabin-Karp Rolling Hash search initialized. Pattern: '" + pattern + "', Text length = " + text.length + ".", "info");
+    generateRabinKarpSteps(text, pattern);
+  }
+  else if (visualizerState.algo === 'selectionsort') {
+    const arr = [29, 10, 14, 37, 13, 8, 25, 42];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Generated array for Selection Sort.", "info");
+    generateSelectionSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'heapsort') {
+    const arr = [12, 11, 13, 5, 6, 7, 3, 9];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Generated array for Heap Sort.", "info");
+    generateHeapSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'countingsort') {
+    const arr = [4, 2, 2, 8, 3, 3, 1, 4];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Generated integer array for Counting Sort.", "info");
+    generateCountingSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'radixsort') {
+    const arr = [170, 45, 75, 90, 802, 24, 2, 66];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Generated numbers array for Radix Sort.", "info");
+    generateRadixSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'shellsort') {
+    const arr = [35, 33, 42, 10, 14, 19, 27, 44, 26, 12];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Generated array for Shell Sort.", "info");
+    generateShellSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'cocktailsort') {
+    const arr = [5, 1, 4, 2, 8, 0, 2, 7];
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Generated array for Cocktail Shaker Sort.", "info");
+    generateCocktailSortSteps(arr);
+  }
+  else if (visualizerState.algo === 'linearsearch') {
+    const arr = [14, 28, 5, 42, 99, 17, 33, 61, 8, 72, 53, 91, 22, 47, 85, 19, 64, 38, 77, 90];
+    const target = 77;
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Linear Search initialized with 20 elements. Target = 77.", "info");
+    generateLinearSearchSteps(arr, target);
+  }
+  else if (visualizerState.algo === 'ternarysearch') {
+    const arr = [2, 5, 8, 12, 17, 21, 26, 30, 35, 41, 46, 52, 58, 63, 69, 74, 80, 85, 91, 97, 104, 110, 116, 123, 130, 138, 147];
+    const target = 123;
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Ternary Search initialized with 27 sorted elements. Target = 123.", "info");
+    generateTernarySearchSteps(arr, target);
+  }
+  else if (visualizerState.algo === 'jumpsearch') {
+    const arr = [3, 7, 11, 15, 20, 24, 29, 34, 40, 45, 51, 57, 63, 70, 76, 83, 90, 96, 103, 111, 118, 126, 135, 143, 152];
+    const target = 135;
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Jump Search initialized with 25 sorted elements (step size = 5). Target = 135.", "info");
+    generateJumpSearchSteps(arr, target);
+  }
+  else if (visualizerState.algo === 'interpolationsearch') {
+    const arr = [5, 12, 22, 35, 48, 60, 75, 92, 110, 128, 145, 165, 185, 205, 230, 260, 295, 330, 370, 425];
+    const target = 295;
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Interpolation Search initialized with 20 uniform sorted elements. Target = 295.", "info");
+    generateInterpolationSearchSteps(arr, target);
+  }
+  else if (visualizerState.algo === 'exponentialsearch') {
+    const arr = [2, 6, 10, 15, 21, 27, 34, 40, 48, 55, 63, 71, 80, 88, 97, 106, 116, 125, 136, 147, 159, 170, 182, 195, 210];
+    const target = 182;
+    visualizerState.rawArray = [...arr];
+    appendLog("[INFO] Exponential Search initialized with 25 sorted elements. Target = 182.", "info");
+    generateExponentialSearchSteps(arr, target);
+  }
   else if (visualizerState.algo === 'binary') {
     const id = visualizerState.currentProbId;
     let arr, target;
@@ -12526,9 +12882,12 @@ function resetVisualizer() {
     else if (id === 35) { arr = [1, 3, 5, 6]; target = 5; }
     else if (id === 33 || id === 153) { arr = [4, 5, 6, 7, 0, 1, 2]; target = 0; }
     else if (id === 162) { arr = [1, 2, 3, 1]; target = 2; }
-    else { arr = [3, 8, 12, 17, 24, 38, 45, 52, 60, 77]; target = 45; }
+    else {
+      arr = [3, 7, 11, 15, 19, 24, 28, 33, 39, 44, 50, 56, 62, 69, 75, 82, 88, 95, 103, 110, 118, 125, 134, 145];
+      target = 125;
+    }
     visualizerState.rawArray = [...arr];
-    appendLog("[INFO] Initialized sorted array for Binary Search.", "info");
+    appendLog("[INFO] Binary Search initialized with " + arr.length + " sorted elements. Target = " + target + ".", "info");
     generateBinarySearchSteps(arr, target);
   }
   else if (visualizerState.algo === 'twoarraybinary') {
@@ -16383,6 +16742,798 @@ function generateBubbleSortSteps(arr) {
   visualizerState.steps = steps;
 }
 
+// --------------------------------------------------------------------------
+// EXPANDED SORTING ALGORITHM GENERATORS
+// --------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------
+// ADDITIONAL ADVANCED SORTING & SEARCHING GENERATORS
+// --------------------------------------------------------------------------
+
+function generateTimSortSteps(arr) {
+  const steps = [];
+  const temp = [...arr];
+  const n = temp.length;
+  const RUN = 4;
+  const sorted = [];
+
+  steps.push({ array: [...temp], compare: [], swap: [], sorted: [], log: "Tim Sort started. Phase 1: Sorting sub-runs of size RUN = 4 with Insertion Sort." });
+
+  for (let i = 0; i < n; i += RUN) {
+    const end = Math.min(i + RUN - 1, n - 1);
+    for (let j = i + 1; j <= end; j++) {
+      const key = temp[j];
+      let k = j - 1;
+      while (k >= i && temp[k] > key) {
+        steps.push({ array: [...temp], compare: [k, k + 1], swap: [], sorted: [...sorted], log: `Run Insertion: Compare index ${k} (${temp[k]}) > key ${key}. Shifting.` });
+        temp[k + 1] = temp[k];
+        k--;
+      }
+      temp[k + 1] = key;
+      steps.push({ array: [...temp], compare: [], swap: [k + 1], sorted: [...sorted], log: `Run Insertion: Placed key ${key} in run [${i}...${end}].` });
+    }
+  }
+
+  steps.push({ array: [...temp], compare: [], swap: [], sorted: [], log: "Phase 1 complete! Sub-runs are insertion sorted. Phase 2: Merging runs." });
+
+  for (let size = RUN; size < n; size = 2 * size) {
+    for (let left = 0; left < n; left += 2 * size) {
+      const mid = left + size - 1;
+      const right = Math.min(left + 2 * size - 1, n - 1);
+      if (mid < right) {
+        steps.push({ array: [...temp], compare: [left, right], swap: [], sorted: [], log: `Merging run [${left}...${mid}] with run [${mid + 1}...${right}]` });
+        const merged = [];
+        let p1 = left, p2 = mid + 1;
+        while (p1 <= mid && p2 <= right) {
+          if (temp[p1] <= temp[p2]) merged.push(temp[p1++]);
+          else merged.push(temp[p2++]);
+        }
+        while (p1 <= mid) merged.push(temp[p1++]);
+        while (p2 <= right) merged.push(temp[p2++]);
+
+        for (let k = 0; k < merged.length; k++) {
+          temp[left + k] = merged[k];
+        }
+        steps.push({ array: [...temp], compare: [], swap: Array.from({ length: right - left + 1 }, (_, idx) => left + idx), sorted: [], log: `Merged run [${left}...${right}] successfully.` });
+      }
+    }
+  }
+
+  steps.push({ array: [...temp], compare: [], swap: [], sorted: Array.from({ length: n }, (_, i) => i), log: "Tim Sort complete! Array fully sorted." });
+  visualizerState.steps = steps;
+}
+
+function generateBucketSortSteps(arr) {
+  const steps = [];
+  const temp = [...arr];
+  const bucketCount = 5;
+  const minVal = Math.min(...temp);
+  const maxVal = Math.max(...temp);
+  const range = (maxVal - minVal) / bucketCount || 1;
+  const buckets = Array.from({ length: bucketCount }, () => []);
+
+  steps.push({ array: [...temp], buckets: buckets.map(b => [...b]), output: [], activeIdx: -1, log: `Bucket Sort started. Distributing 20 elements into 5 buckets (range per bucket = ${range.toFixed(1)}).` });
+
+  for (let i = 0; i < temp.length; i++) {
+    const val = temp[i];
+    const bIdx = Math.min(Math.floor((val - minVal) / range), bucketCount - 1);
+    buckets[bIdx].push(val);
+    steps.push({ array: [...temp], buckets: buckets.map(b => [...b]), output: [], activeIdx: i, activeVal: val, log: `Element ${val} placed into Bucket ${bIdx}` });
+  }
+
+  steps.push({ array: [...temp], buckets: buckets.map(b => [...b]), output: [], activeIdx: -1, log: "Distribution complete. Sorting individual buckets..." });
+
+  for (let b = 0; b < bucketCount; b++) {
+    buckets[b].sort((x, y) => x - y);
+    steps.push({ array: [...temp], buckets: buckets.map(b => [...b]), output: [], activeBucket: b, log: `Sorted Bucket ${b}: [${buckets[b].join(', ')}]` });
+  }
+
+  const output = buckets.flatMap(b => b);
+  steps.push({ array: [...output], buckets: buckets.map(b => [...b]), output: [...output], activeIdx: -1, log: "Bucket Sort complete! Concatenated sorted buckets into output array." });
+  visualizerState.steps = steps;
+}
+
+function generateCombSortSteps(arr) {
+  const steps = [];
+  const temp = [...arr];
+  const n = temp.length;
+  let gap = n;
+  const shrink = 1.3;
+  let sorted = false;
+
+  steps.push({ array: [...temp], gap, compare: [], swap: [], sorted: [], log: `Comb Sort started. Initial gap size = ${gap}` });
+
+  while (!sorted) {
+    gap = Math.floor(gap / shrink);
+    if (gap <= 1) {
+      gap = 1;
+      sorted = true;
+    }
+
+    steps.push({ array: [...temp], gap, compare: [], swap: [], sorted: [], log: `Pass with shrink gap size = ${gap}` });
+
+    for (let i = 0; i + gap < n; i++) {
+      steps.push({ array: [...temp], gap, compare: [i, i + gap], swap: [], sorted: [], log: `Comparing index ${i} (${temp[i]}) with index ${i + gap} (${temp[i + gap]}) [gap=${gap}]` });
+
+      if (temp[i] > temp[i + gap]) {
+        const swapVal = temp[i];
+        temp[i] = temp[i + gap];
+        temp[i + gap] = swapVal;
+        sorted = false;
+        steps.push({ array: [...temp], gap, compare: [], swap: [i, i + gap], sorted: [], log: `Swapped index ${i} (${temp[i]}) and index ${i + gap} (${temp[i + gap]})` });
+      }
+    }
+  }
+
+  steps.push({ array: [...temp], gap: 0, compare: [], swap: [], sorted: Array.from({ length: n }, (_, i) => i), log: "Comb Sort complete! Array is sorted." });
+  visualizerState.steps = steps;
+}
+
+function generateGnomeSortSteps(arr) {
+  const steps = [];
+  const temp = [...arr];
+  const n = temp.length;
+  let pos = 0;
+
+  steps.push({ array: [...temp], gnomePos: 0, compare: [], swap: [], log: "Gnome Sort started. Garden gnome at index 0." });
+
+  while (pos < n) {
+    if (pos === 0 || temp[pos] >= temp[pos - 1]) {
+      steps.push({ array: [...temp], gnomePos: pos, compare: pos > 0 ? [pos, pos - 1] : [pos], swap: [], log: `Gnome at index ${pos}: elements in order (or start). Stepping forward to ${pos + 1}.` });
+      pos++;
+    } else {
+      steps.push({ array: [...temp], gnomePos: pos, compare: [pos, pos - 1], swap: [], log: `Gnome at index ${pos}: ${temp[pos]} < ${temp[pos - 1]}. Out of order!` });
+      const swapVal = temp[pos];
+      temp[pos] = temp[pos - 1];
+      temp[pos - 1] = swapVal;
+      steps.push({ array: [...temp], gnomePos: pos - 1, compare: [], swap: [pos, pos - 1], log: `Swapped ${temp[pos - 1]} and ${temp[pos]}. Gnome stepping back to index ${pos - 1}.` });
+      pos--;
+    }
+  }
+
+  steps.push({ array: [...temp], gnomePos: -1, compare: [], swap: [], sorted: Array.from({ length: n }, (_, i) => i), log: "Gnome Sort complete! Garden gnome reached the end." });
+  visualizerState.steps = steps;
+}
+
+function generatePancakeSortSteps(arr) {
+  const steps = [];
+  const temp = [...arr];
+  const n = temp.length;
+
+  steps.push({ array: [...temp], flipEnd: -1, compare: [], swap: [], log: "Pancake Sort started." });
+
+  function flip(k) {
+    let left = 0, right = k;
+    while (left < right) {
+      const t = temp[left];
+      temp[left] = temp[right];
+      temp[right] = t;
+      left++;
+      right--;
+    }
+  }
+
+  for (let currSize = n; currSize > 1; currSize--) {
+    let maxIdx = 0;
+    for (let i = 1; i < currSize; i++) {
+      if (temp[i] > temp[maxIdx]) maxIdx = i;
+    }
+
+    if (maxIdx !== currSize - 1) {
+      if (maxIdx !== 0) {
+        steps.push({ array: [...temp], flipEnd: maxIdx, compare: [maxIdx], swap: [], log: `Flipping prefix 0...${maxIdx} to bring maximum ${temp[maxIdx]} to top (index 0).` });
+        flip(maxIdx);
+        steps.push({ array: [...temp], flipEnd: maxIdx, compare: [], swap: Array.from({ length: maxIdx + 1 }, (_, i) => i), log: `Flipped prefix 0...${maxIdx}. Max is now at top (index 0).` });
+      }
+
+      steps.push({ array: [...temp], flipEnd: currSize - 1, compare: [0, currSize - 1], swap: [], log: `Flipping prefix 0...${currSize - 1} to move top element ${temp[0]} to position ${currSize - 1}.` });
+      flip(currSize - 1);
+      steps.push({ array: [...temp], flipEnd: currSize - 1, compare: [], swap: Array.from({ length: currSize }, (_, i) => i), log: `Flipped prefix 0...${currSize - 1}. Placed element ${temp[currSize - 1]} at sorted index ${currSize - 1}.` });
+    }
+  }
+
+  steps.push({ array: [...temp], flipEnd: -1, compare: [], swap: [], sorted: Array.from({ length: n }, (_, i) => i), log: "Pancake Sort complete!" });
+  visualizerState.steps = steps;
+}
+
+function generateBitonicSortSteps(arr) {
+  const steps = [];
+  const temp = [...arr];
+  const n = temp.length;
+
+  steps.push({ array: [...temp], compare: [], swap: [], log: "Bitonic Sort started on 16-element power-of-two array." });
+
+  function bitonicCompare(i, j, dir) {
+    steps.push({ array: [...temp], compare: [i, j], swap: [], log: `Comparing index ${i} (${temp[i]}) and ${j} (${temp[j]}) [Direction: ${dir === 1 ? 'Ascending ↑' : 'Descending ↓'}]` });
+    if ((dir === 1 && temp[i] > temp[j]) || (dir === 0 && temp[i] < temp[j])) {
+      const t = temp[i];
+      temp[i] = temp[j];
+      temp[j] = t;
+      steps.push({ array: [...temp], compare: [], swap: [i, j], log: `Swapped index ${i} (${temp[i]}) and ${j} (${temp[j]})` });
+    }
+  }
+
+  function bitonicMerge(low, cnt, dir) {
+    if (cnt > 1) {
+      const k = Math.floor(cnt / 2);
+      for (let i = low; i < low + k; i++) {
+        bitonicCompare(i, i + k, dir);
+      }
+      bitonicMerge(low, k, dir);
+      bitonicMerge(low + k, k, dir);
+    }
+  }
+
+  function bitonicSortRecursive(low, cnt, dir) {
+    if (cnt > 1) {
+      const k = Math.floor(cnt / 2);
+      bitonicSortRecursive(low, k, 1);
+      bitonicSortRecursive(low + k, k, 0);
+      bitonicMerge(low, cnt, dir);
+    }
+  }
+
+  bitonicSortRecursive(0, n, 1);
+
+  steps.push({ array: [...temp], compare: [], swap: [], sorted: Array.from({ length: n }, (_, i) => i), log: "Bitonic Sort complete! Array fully sorted." });
+  visualizerState.steps = steps;
+}
+
+function generateFibonacciSearchSteps(arr, target) {
+  const steps = [];
+  const n = arr.length;
+  let fibM2 = 0;
+  let fibM1 = 1;
+  let fibM = fibM2 + fibM1;
+
+  while (fibM < n) {
+    fibM2 = fibM1;
+    fibM1 = fibM;
+    fibM = fibM2 + fibM1;
+  }
+
+  let offset = -1;
+  steps.push({ offset, fibM, fibM1, fibM2, activeIdx: -1, discarded: [], found: -1, log: `Fibonacci Search started. Initial Fibonacci fibM = ${fibM}, Target = ${target}` });
+
+  while (fibM > 1) {
+    const i = Math.min(offset + fibM2, n - 1);
+    const discarded = [];
+    for (let k = 0; k <= offset; k++) discarded.push(k);
+
+    steps.push({ offset, fibM, fibM1, fibM2, activeIdx: i, discarded, found: -1, log: `Checking index i = offset(${offset}) + fibM2(${fibM2}) = ${i} (val=${arr[i]})` });
+
+    if (arr[i] < target) {
+      steps.push({ offset, fibM, fibM1, fibM2, activeIdx: i, discarded, found: -1, log: `arr[${i}] (${arr[i]}) < target (${target}). Shift Fibonacci range down by 1 step, offset = ${i}.` });
+      fibM = fibM1;
+      fibM1 = fibM2;
+      fibM2 = fibM - fibM1;
+      offset = i;
+    } else if (arr[i] > target) {
+      steps.push({ offset, fibM, fibM1, fibM2, activeIdx: i, discarded, found: -1, log: `arr[${i}] (${arr[i]}) > target (${target}). Shift Fibonacci range down by 2 steps.` });
+      fibM = fibM2;
+      fibM1 = fibM1 - fibM2;
+      fibM2 = fibM - fibM1;
+    } else {
+      steps.push({ offset, fibM, fibM1, fibM2, activeIdx: i, discarded, found: i, log: `Success! Target ${target} found at index ${i}.` });
+      visualizerState.steps = steps;
+      return;
+    }
+  }
+
+  if (fibM1 && offset + 1 < n && arr[offset + 1] === target) {
+    steps.push({ offset, fibM, fibM1, fibM2, activeIdx: offset + 1, discarded: [], found: offset + 1, log: `Success! Target ${target} found at index ${offset + 1}.` });
+  } else {
+    steps.push({ offset, fibM, fibM1, fibM2, activeIdx: -1, discarded: Array.from({ length: n }, (_, k) => k), found: -1, log: `Target ${target} not found.` });
+  }
+  visualizerState.steps = steps;
+}
+
+function generateRabinKarpSteps(text, pattern) {
+  const steps = [];
+  const d = 256;
+  const q = 101;
+  const M = pattern.length;
+  const N = text.length;
+
+  let p = 0;
+  let t = 0;
+  let h = 1;
+
+  for (let i = 0; i < M - 1; i++) {
+    h = (h * d) % q;
+  }
+
+  for (let i = 0; i < M; i++) {
+    p = (d * p + pattern.charCodeAt(i)) % q;
+    t = (d * t + text.charCodeAt(i)) % q;
+  }
+
+  steps.push({ windowIdx: 0, text, pattern, hashP: p, hashT: t, match: false, found: -1, log: `Rabin-Karp initialized. Pattern Hash = ${p}, Initial Window Hash = ${t}` });
+
+  for (let i = 0; i <= N - M; i++) {
+    const windowStr = text.substring(i, i + M);
+    const hashMatch = (p === t);
+    const stringMatch = hashMatch && (windowStr === pattern);
+
+    steps.push({
+      windowIdx: i, text, pattern, hashP: p, hashT: t,
+      match: hashMatch, found: stringMatch ? i : -1,
+      log: `Window at index ${i} ("${windowStr}"): Hash = ${t} ${hashMatch ? '== Hash Match!' : '!= Hash Mismatch'}`
+    });
+
+    if (stringMatch) {
+      steps.push({ windowIdx: i, text, pattern, hashP: p, hashT: t, match: true, found: i, log: `Success! Exact pattern "${pattern}" matches text at index ${i}.` });
+      visualizerState.steps = steps;
+      return;
+    }
+
+    if (i < N - M) {
+      t = (d * (t - text.charCodeAt(i) * h) + text.charCodeAt(i + M)) % q;
+      if (t < 0) t = t + q;
+      steps.push({ windowIdx: i + 1, text, pattern, hashP: p, hashT: t, match: false, found: -1, log: `Calculated rolling hash for next window [${i + 1}...${i + M}] -> Hash = ${t}` });
+    }
+  }
+
+  steps.push({ windowIdx: -1, text, pattern, hashP: p, hashT: 0, match: false, found: -1, log: `Pattern "${pattern}" not found in text.` });
+  visualizerState.steps = steps;
+}
+
+function generateSelectionSortSteps(arr) {
+  const steps = [];
+  const temp = [...arr];
+  const n = temp.length;
+  const sorted = [];
+
+  steps.push({ array: [...temp], compare: [], swap: [], sorted: [], minIdx: -1, log: "Selection Sort started." });
+
+  for (let i = 0; i < n - 1; i++) {
+    let minIdx = i;
+    steps.push({
+      array: [...temp], compare: [i], swap: [], sorted: [...sorted], minIdx,
+      log: `Pass ${i + 1}: Initialized minimum index at ${i} (val=${temp[i]})`
+    });
+
+    for (let j = i + 1; j < n; j++) {
+      steps.push({
+        array: [...temp], compare: [j, minIdx], swap: [], sorted: [...sorted], minIdx,
+        log: `Comparing index ${j} (${temp[j]}) with current min at index ${minIdx} (${temp[minIdx]})`
+      });
+
+      if (temp[j] < temp[minIdx]) {
+        minIdx = j;
+        steps.push({
+          array: [...temp], compare: [j], swap: [], sorted: [...sorted], minIdx,
+          log: `Found new minimum at index ${minIdx} (val=${temp[minIdx]})`
+        });
+      }
+    }
+
+    if (minIdx !== i) {
+      const swapVal = temp[i];
+      temp[i] = temp[minIdx];
+      temp[minIdx] = swapVal;
+      steps.push({
+        array: [...temp], compare: [], swap: [i, minIdx], sorted: [...sorted], minIdx,
+        log: `Swapped index ${i} (${temp[i]}) with minimum at index ${minIdx} (${temp[minIdx]})`
+      });
+    }
+    sorted.push(i);
+    steps.push({
+      array: [...temp], compare: [], swap: [], sorted: [...sorted], minIdx: -1,
+      log: `Element at index ${i} (${temp[i]}) is now in its sorted position.`
+    });
+  }
+  sorted.push(n - 1);
+  steps.push({
+    array: [...temp], compare: [], swap: [], sorted: Array.from({ length: n }, (_, i) => i), minIdx: -1,
+    log: "Selection Sort complete! All elements sorted."
+  });
+  visualizerState.steps = steps;
+}
+
+function generateHeapSortSteps(arr) {
+  const steps = [];
+  const temp = [...arr];
+  const n = temp.length;
+  const sorted = [];
+
+  steps.push({ array: [...temp], compare: [], swap: [], sorted: [], log: "Heap Sort started. Phase 1: Building Max-Heap." });
+
+  function heapify(size, root) {
+    let largest = root;
+    let left = 2 * root + 1;
+    let right = 2 * root + 2;
+
+    if (left < size) {
+      steps.push({ array: [...temp], compare: [root, left], swap: [], sorted: [...sorted], log: `Comparing root ${root} (${temp[root]}) with left child ${left} (${temp[left]})` });
+      if (temp[left] > temp[largest]) largest = left;
+    }
+
+    if (right < size) {
+      steps.push({ array: [...temp], compare: [largest, right], swap: [], sorted: [...sorted], log: `Comparing current max index ${largest} (${temp[largest]}) with right child ${right} (${temp[right]})` });
+      if (temp[right] > temp[largest]) largest = right;
+    }
+
+    if (largest !== root) {
+      const swapVal = temp[root];
+      temp[root] = temp[largest];
+      temp[largest] = swapVal;
+      steps.push({ array: [...temp], compare: [], swap: [root, largest], sorted: [...sorted], log: `Swapped root ${root} (${temp[root]}) with child ${largest} (${temp[largest]})` });
+      heapify(size, largest);
+    }
+  }
+
+  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+    heapify(n, i);
+  }
+
+  steps.push({ array: [...temp], compare: [], swap: [], sorted: [], log: "Max-Heap constructed! Phase 2: Extracting elements from heap." });
+
+  for (let i = n - 1; i > 0; i--) {
+    const swapVal = temp[0];
+    temp[0] = temp[i];
+    temp[i] = swapVal;
+    sorted.push(i);
+    steps.push({ array: [...temp], compare: [], swap: [0, i], sorted: [...sorted], log: `Extracted maximum element ${temp[i]} to index ${i}.` });
+    heapify(i, 0);
+  }
+  sorted.push(0);
+  steps.push({ array: [...temp], compare: [], swap: [], sorted: Array.from({ length: n }, (_, i) => i), log: "Heap Sort complete!" });
+  visualizerState.steps = steps;
+}
+
+function generateCountingSortSteps(arr) {
+  const steps = [];
+  const temp = [...arr];
+  const maxVal = Math.max(...temp);
+  const count = Array(maxVal + 1).fill(0);
+
+  steps.push({ array: [...temp], count: [...count], output: [], phase: 'init', log: "Counting Sort started. Initialized frequency array." });
+
+  for (let i = 0; i < temp.length; i++) {
+    const val = temp[i];
+    count[val]++;
+    steps.push({ array: [...temp], activeIdx: i, count: [...count], output: [], phase: 'tally', log: `Read ${val} at index ${i} -> count[${val}] = ${count[val]}` });
+  }
+
+  const output = [];
+  steps.push({ array: [...temp], count: [...count], output: [], phase: 'building', log: "Tally complete. Reconstructing sorted array from counts." });
+
+  let outIdx = 0;
+  for (let val = 0; val <= maxVal; val++) {
+    while (count[val] > 0) {
+      output.push(val);
+      count[val]--;
+      steps.push({ array: [...temp], count: [...count], output: [...output], activeVal: val, phase: 'building', log: `Placed ${val} at output index ${outIdx++} (remaining count[${val}] = ${count[val]})` });
+    }
+  }
+
+  steps.push({ array: [...output], count: [...count], output: [...output], phase: 'complete', log: "Counting Sort complete!" });
+  visualizerState.steps = steps;
+}
+
+function generateRadixSortSteps(arr) {
+  const steps = [];
+  let temp = [...arr];
+  const maxVal = Math.max(...temp);
+  let exp = 1;
+
+  steps.push({ array: [...temp], exp: 1, buckets: Array.from({ length: 10 }, () => []), phase: 'init', log: `Radix Sort started. Maximum value is ${maxVal}.` });
+
+  while (Math.floor(maxVal / exp) > 0) {
+    const buckets = Array.from({ length: 10 }, () => []);
+    steps.push({ array: [...temp], exp, buckets: buckets.map(b => [...b]), phase: 'pass_start', log: `Pass for digit place exponent = ${exp} (${exp === 1 ? 'Units' : exp === 10 ? 'Tens' : 'Hundreds'})` });
+
+    for (let i = 0; i < temp.length; i++) {
+      const num = temp[i];
+      const digit = Math.floor(num / exp) % 10;
+      buckets[digit].push(num);
+      steps.push({ array: [...temp], activeIdx: i, exp, buckets: buckets.map(b => [...b]), phase: 'distribute', log: `Number ${num}: digit at exp ${exp} is ${digit} -> bucket ${digit}` });
+    }
+
+    temp = [];
+    for (let d = 0; d < 10; d++) {
+      for (const val of buckets[d]) {
+        temp.push(val);
+      }
+    }
+    steps.push({ array: [...temp], exp, buckets: buckets.map(b => [...b]), phase: 'collect', log: `Collected bucket items back into array: [${temp.join(', ')}]` });
+    exp *= 10;
+  }
+
+  steps.push({ array: [...temp], exp: 0, buckets: Array.from({ length: 10 }, () => []), phase: 'complete', log: "Radix Sort complete! Array fully sorted." });
+  visualizerState.steps = steps;
+}
+
+function generateShellSortSteps(arr) {
+  const steps = [];
+  const temp = [...arr];
+  const n = temp.length;
+
+  steps.push({ array: [...temp], gap: Math.floor(n / 2), active: -1, compare: [], swap: [], log: "Shell Sort started." });
+
+  for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
+    steps.push({ array: [...temp], gap, active: -1, compare: [], swap: [], log: `--- New Gap size: ${gap} ---` });
+
+    for (let i = gap; i < n; i++) {
+      const key = temp[i];
+      let j = i;
+      steps.push({ array: [...temp], gap, active: i, compare: [i, j - gap], swap: [], log: `Inserting key ${key} at index ${i} with gap ${gap}` });
+
+      while (j >= gap && temp[j - gap] > key) {
+        steps.push({ array: [...temp], gap, active: j, compare: [j, j - gap], swap: [], log: `Compare index ${j - gap} (${temp[j - gap]}) > key ${key}. Shift right.` });
+        temp[j] = temp[j - gap];
+        steps.push({ array: [...temp], gap, active: j - gap, compare: [], swap: [j, j - gap], log: `Shifted value ${temp[j]} to index ${j}` });
+        j -= gap;
+      }
+      temp[j] = key;
+      steps.push({ array: [...temp], gap, active: j, compare: [], swap: [], log: `Placed key ${key} at index ${j}` });
+    }
+  }
+
+  steps.push({ array: [...temp], gap: 0, active: -1, compare: [], swap: [], sorted: Array.from({ length: n }, (_, i) => i), log: "Shell Sort complete!" });
+  visualizerState.steps = steps;
+}
+
+function generateCocktailSortSteps(arr) {
+  const steps = [];
+  const temp = [...arr];
+  let swapped = true;
+  let start = 0;
+  let end = temp.length - 1;
+  const sorted = [];
+
+  steps.push({ array: [...temp], compare: [], swap: [], sorted: [], log: "Cocktail Shaker Sort started." });
+
+  while (swapped) {
+    swapped = false;
+    steps.push({ array: [...temp], compare: [], swap: [], sorted: [...sorted], log: `Pass Left-to-Right (start=${start}, end=${end})` });
+
+    for (let i = start; i < end; ++i) {
+      steps.push({ array: [...temp], compare: [i, i + 1], swap: [], sorted: [...sorted], log: `Comparing ${temp[i]} and ${temp[i + 1]}` });
+      if (temp[i] > temp[i + 1]) {
+        const swapVal = temp[i];
+        temp[i] = temp[i + 1];
+        temp[i + 1] = swapVal;
+        swapped = true;
+        steps.push({ array: [...temp], compare: [], swap: [i, i + 1], sorted: [...sorted], log: `Swapped ${temp[i]} and ${temp[i + 1]}` });
+      }
+    }
+
+    if (!swapped) break;
+    swapped = false;
+    sorted.push(end);
+    end--;
+    steps.push({ array: [...temp], compare: [], swap: [], sorted: [...sorted], log: `Pass Right-to-Left (start=${start}, end=${end})` });
+
+    for (let i = end - 1; i >= start; i--) {
+      steps.push({ array: [...temp], compare: [i, i + 1], swap: [], sorted: [...sorted], log: `Comparing ${temp[i]} and ${temp[i + 1]}` });
+      if (temp[i] > temp[i + 1]) {
+        const swapVal = temp[i];
+        temp[i] = temp[i + 1];
+        temp[i + 1] = swapVal;
+        swapped = true;
+        steps.push({ array: [...temp], compare: [], swap: [i, i + 1], sorted: [...sorted], log: `Swapped ${temp[i]} and ${temp[i + 1]}` });
+      }
+    }
+    sorted.push(start);
+    start++;
+  }
+
+  steps.push({ array: [...temp], compare: [], swap: [], sorted: Array.from({ length: temp.length }, (_, i) => i), log: "Cocktail Shaker Sort complete!" });
+  visualizerState.steps = steps;
+}
+
+// --------------------------------------------------------------------------
+// EXPANDED SEARCHING ALGORITHM GENERATORS
+// --------------------------------------------------------------------------
+
+function generateLinearSearchSteps(arr, target) {
+  const steps = [];
+  const n = arr.length;
+  const discarded = [];
+
+  steps.push({ activeIdx: -1, discarded: [], found: -1, log: `Linear Search started. Target = ${target}` });
+
+  for (let i = 0; i < n; i++) {
+    steps.push({ activeIdx: i, discarded: [...discarded], found: -1, log: `Inspecting index ${i}: ${arr[i]} ${arr[i] === target ? '==' : '!='} ${target}` });
+
+    if (arr[i] === target) {
+      steps.push({ activeIdx: i, discarded: [...discarded], found: i, log: `Success! Target ${target} found at index ${i}.` });
+      visualizerState.steps = steps;
+      return;
+    }
+    discarded.push(i);
+  }
+
+  steps.push({ activeIdx: -1, discarded: [...discarded], found: -1, log: `Target ${target} not found in array.` });
+  visualizerState.steps = steps;
+}
+
+function generateTernarySearchSteps(arr, target) {
+  const steps = [];
+  let l = 0, r = arr.length - 1;
+  const n = arr.length;
+
+  steps.push({ l, r, m1: -1, m2: -1, discarded: [], found: -1, log: `Ternary Search started. Target = ${target}` });
+
+  while (l <= r) {
+    const m1 = l + Math.floor((r - l) / 3);
+    const m2 = r - Math.floor((r - l) / 3);
+
+    const discarded = [];
+    for (let i = 0; i < n; i++) {
+      if (i < l || i > r) discarded.push(i);
+    }
+
+    steps.push({ l, r, m1, m2, discarded, found: -1, log: `Pointers: Low=${l}, Mid1=${m1} (${arr[m1]}), Mid2=${m2} (${arr[m2]}), High=${r}` });
+
+    if (arr[m1] === target) {
+      steps.push({ l, r, m1, m2, discarded, found: m1, log: `Success! Target ${target} found at Mid1 (index ${m1}).` });
+      visualizerState.steps = steps;
+      return;
+    }
+    if (arr[m2] === target) {
+      steps.push({ l, r, m1, m2, discarded, found: m2, log: `Success! Target ${target} found at Mid2 (index ${m2}).` });
+      visualizerState.steps = steps;
+      return;
+    }
+
+    if (target < arr[m1]) {
+      steps.push({ l, r, m1, m2, discarded, found: -1, log: `Target ${target} < arr[Mid1] (${arr[m1]}). Shrinking high range to Mid1 - 1.` });
+      r = m1 - 1;
+    } else if (target > arr[m2]) {
+      steps.push({ l, r, m1, m2, discarded, found: -1, log: `Target ${target} > arr[Mid2] (${arr[m2]}). Shrinking low range to Mid2 + 1.` });
+      l = m2 + 1;
+    } else {
+      steps.push({ l, r, m1, m2, discarded, found: -1, log: `Target ${target} is between Mid1 and Mid2. Range: Mid1 + 1 to Mid2 - 1.` });
+      l = m1 + 1;
+      r = m2 - 1;
+    }
+  }
+
+  steps.push({ l, r, m1: -1, m2: -1, discarded: Array.from({ length: n }, (_, i) => i), found: -1, log: `Target ${target} not found.` });
+  visualizerState.steps = steps;
+}
+
+function generateJumpSearchSteps(arr, target) {
+  const steps = [];
+  const n = arr.length;
+  const stepSize = Math.floor(Math.sqrt(n));
+  let step = stepSize;
+  let prev = 0;
+
+  steps.push({ prev, step, activeIdx: -1, discarded: [], found: -1, log: `Jump Search started. Block step size = ${stepSize}, Target = ${target}` });
+
+  while (arr[Math.min(step, n) - 1] < target) {
+    const idxToCheck = Math.min(step, n) - 1;
+    const discarded = [];
+    for (let i = 0; i < prev; i++) discarded.push(i);
+
+    steps.push({ prev, step, activeIdx: idxToCheck, discarded, found: -1, log: `Jumped to index ${idxToCheck} (${arr[idxToCheck]}). ${arr[idxToCheck]} < ${target}, continuing jump.` });
+    prev = step;
+    step += stepSize;
+    if (prev >= n) {
+      steps.push({ prev, step, activeIdx: -1, discarded: Array.from({ length: n }, (_, i) => i), found: -1, log: `Reached end of array. Target ${target} not found.` });
+      visualizerState.steps = steps;
+      return;
+    }
+  }
+
+  steps.push({ prev, step, activeIdx: prev, discarded: [], found: -1, log: `Target bound found between index ${prev} and ${Math.min(step, n) - 1}. Starting linear scan.` });
+
+  while (arr[prev] < target) {
+    steps.push({ prev, step, activeIdx: prev, discarded: [], found: -1, log: `Linear scanning index ${prev} (val=${arr[prev]}) < ${target}` });
+    prev++;
+    if (prev === Math.min(step, n)) {
+      steps.push({ prev, step, activeIdx: -1, discarded: Array.from({ length: n }, (_, i) => i), found: -1, log: `Target ${target} not found in range.` });
+      visualizerState.steps = steps;
+      return;
+    }
+  }
+
+  if (arr[prev] === target) {
+    steps.push({ prev, step, activeIdx: prev, discarded: [], found: prev, log: `Success! Target ${target} found at index ${prev}.` });
+  } else {
+    steps.push({ prev, step, activeIdx: -1, discarded: Array.from({ length: n }, (_, i) => i), found: -1, log: `Target ${target} not found.` });
+  }
+  visualizerState.steps = steps;
+}
+
+function generateInterpolationSearchSteps(arr, target) {
+  const steps = [];
+  let low = 0, high = arr.length - 1;
+  const n = arr.length;
+
+  steps.push({ low, high, pos: -1, discarded: [], found: -1, log: `Interpolation Search started. Target = ${target}` });
+
+  while (low <= high && target >= arr[low] && target <= arr[high]) {
+    if (low === high) {
+      if (arr[low] === target) {
+        steps.push({ low, high, pos: low, discarded: [], found: low, log: `Success! Target ${target} found at single remaining index ${low}.` });
+      } else {
+        steps.push({ low, high, pos: low, discarded: Array.from({ length: n }, (_, i) => i), found: -1, log: `Target ${target} not found.` });
+      }
+      visualizerState.steps = steps;
+      return;
+    }
+
+    const pos = low + Math.floor(((target - arr[low]) * (high - low)) / (arr[high] - arr[low]));
+    const discarded = [];
+    for (let i = 0; i < n; i++) {
+      if (i < low || i > high) discarded.push(i);
+    }
+
+    steps.push({ low, high, pos, discarded, found: -1, log: `Calculated estimated probe index = ${pos} (val=${arr[pos]})` });
+
+    if (arr[pos] === target) {
+      steps.push({ low, high, pos, discarded, found: pos, log: `Success! Target ${target} found at estimated probe index ${pos}.` });
+      visualizerState.steps = steps;
+      return;
+    }
+
+    if (arr[pos] < target) {
+      steps.push({ low, high, pos, discarded, found: -1, log: `arr[probe] (${arr[pos]}) < target (${target}). Updating Low = ${pos + 1}` });
+      low = pos + 1;
+    } else {
+      steps.push({ low, high, pos, discarded, found: -1, log: `arr[probe] (${arr[pos]}) > target (${target}). Updating High = ${pos - 1}` });
+      high = pos - 1;
+    }
+  }
+
+  steps.push({ low, high, pos: -1, discarded: Array.from({ length: n }, (_, i) => i), found: -1, log: `Target ${target} not found.` });
+  visualizerState.steps = steps;
+}
+
+function generateExponentialSearchSteps(arr, target) {
+  const steps = [];
+  const n = arr.length;
+
+  steps.push({ bound: 1, low: 0, high: n - 1, mid: -1, activeIdx: -1, discarded: [], found: -1, log: `Exponential Search started. Target = ${target}` });
+
+  if (arr[0] === target) {
+    steps.push({ bound: 1, low: 0, high: 0, mid: 0, activeIdx: 0, discarded: [], found: 0, log: `Success! Target ${target} found at index 0.` });
+    visualizerState.steps = steps;
+    return;
+  }
+
+  let i = 1;
+  while (i < n && arr[i] <= target) {
+    steps.push({ bound: i, low: Math.floor(i / 2), high: Math.min(i, n - 1), mid: -1, activeIdx: i, discarded: [], log: `Bound index ${i} (val=${arr[i]}) <= ${target}. Doubling bound to ${i * 2}.` });
+    if (arr[i] === target) {
+      steps.push({ bound: i, low: i, high: i, mid: i, activeIdx: i, discarded: [], found: i, log: `Success! Target ${target} found at bound index ${i}.` });
+      visualizerState.steps = steps;
+      return;
+    }
+    i *= 2;
+  }
+
+  let low = Math.floor(i / 2);
+  let high = Math.min(i, n - 1);
+  steps.push({ bound: i, low, high, mid: -1, activeIdx: -1, discarded: [], log: `Target bound identified. Performing Binary Search in sub-range [${low}, ${high}].` });
+
+  while (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    const discarded = [];
+    for (let k = 0; k < n; k++) {
+      if (k < low || k > high) discarded.push(k);
+    }
+
+    steps.push({ bound: i, low, high, mid, activeIdx: mid, discarded, found: -1, log: `Binary Search mid=${mid} (val=${arr[mid]}). Range [${low}, ${high}]` });
+
+    if (arr[mid] === target) {
+      steps.push({ bound: i, low, high, mid, activeIdx: mid, discarded, found: mid, log: `Success! Target ${target} found at index ${mid}.` });
+      visualizerState.steps = steps;
+      return;
+    }
+    if (arr[mid] < target) low = mid + 1;
+    else high = mid - 1;
+  }
+
+  steps.push({ bound: i, low, high, mid: -1, activeIdx: -1, discarded: Array.from({ length: n }, (_, i) => i), found: -1, log: `Target ${target} not found.` });
+  visualizerState.steps = steps;
+}
+
 function getSortedIndicesList(len, count) {
   const res = [];
   for (let i = len - count; i < len; i++) {
@@ -19584,6 +20735,327 @@ function renderCanvasStep() {
     canvas.appendChild(barContainer);
   }
 
+  // --- EXPANDED ARRAY BAR SORTING (SELECTION, HEAP, SHELL, COCKTAIL, TIM, COMB, GNOME, PANCAKE, BITONIC) ---
+  else if (['selectionsort', 'heapsort', 'shellsort', 'cocktailsort', 'timsort', 'combsort', 'gnomesort', 'pancakesort', 'bitonicsort'].includes(visualizerState.algo)) {
+    const barContainer = document.createElement('div');
+    barContainer.className = 'bar-container';
+    const arrToRender = step.array || visualizerState.rawArray;
+    const maxVal = Math.max(...arrToRender, 1);
+
+    arrToRender.forEach((val, idx) => {
+      const bar = document.createElement('div');
+      bar.className = 'algo-bar';
+      const pctHeight = Math.max(15, (val / maxVal) * 80);
+      bar.style.height = `${pctHeight}%`;
+
+      if (step.compare && step.compare.includes(idx)) bar.classList.add('compare');
+      else if (step.swap && step.swap.includes(idx)) bar.classList.add('swap');
+      else if (step.sorted && step.sorted.includes(idx)) bar.classList.add('sorted');
+      else if (step.minIdx === idx || step.active === idx || step.gnomePos === idx || step.flipEnd === idx) bar.classList.add('compare');
+
+      const span = document.createElement('span');
+      span.className = 'algo-bar-val';
+      span.textContent = val;
+      bar.appendChild(span);
+
+      if (step.minIdx === idx) {
+        const ptr = document.createElement('div');
+        ptr.className = 'bs-pointer-label low';
+        ptr.textContent = 'Min';
+        bar.appendChild(ptr);
+      }
+      if (step.active === idx) {
+        const ptr = document.createElement('div');
+        ptr.className = 'bs-pointer-label mid';
+        ptr.textContent = 'Key';
+        bar.appendChild(ptr);
+      }
+      if (step.gnomePos === idx) {
+        const ptr = document.createElement('div');
+        ptr.className = 'bs-pointer-label mid';
+        ptr.textContent = 'Gnome';
+        bar.appendChild(ptr);
+      }
+      if (step.flipEnd === idx) {
+        const ptr = document.createElement('div');
+        ptr.className = 'bs-pointer-label high';
+        ptr.textContent = 'Flip';
+        bar.appendChild(ptr);
+      }
+
+      barContainer.appendChild(bar);
+    });
+    canvas.appendChild(barContainer);
+  }
+
+  // --- BUCKET SORT RENDERER ---
+  else if (visualizerState.algo === 'bucketsort') {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '1.2rem';
+    container.style.alignItems = 'center';
+    container.style.justifyContent = 'center';
+    container.style.width = '100%';
+    container.style.padding = '1rem';
+
+    // Top: Input Array
+    const topBox = document.createElement('div');
+    topBox.style.textAlign = 'center';
+    topBox.innerHTML = `<div style="font-size:0.85rem; font-weight:600; color:var(--text-muted); margin-bottom:0.5rem;">Input Array (20 Elements)</div>`;
+    const arrRow = document.createElement('div');
+    arrRow.className = 'bs-array';
+    step.array.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'bs-element';
+      if (idx === step.activeIdx) cell.classList.add('mid');
+      else cell.classList.add('active');
+      cell.textContent = val;
+      arrRow.appendChild(cell);
+    });
+    topBox.appendChild(arrRow);
+    container.appendChild(topBox);
+
+    // Middle: 5 Buckets
+    if (step.buckets) {
+      const bucketGrid = document.createElement('div');
+      bucketGrid.style.display = 'grid';
+      bucketGrid.style.gridTemplateColumns = 'repeat(5, 1fr)';
+      bucketGrid.style.gap = '10px';
+      bucketGrid.style.width = '100%';
+      bucketGrid.style.maxWidth = '750px';
+
+      const labels = ['0–19', '20–39', '40–59', '60–79', '80–99'];
+
+      step.buckets.forEach((items, bIdx) => {
+        const bCard = document.createElement('div');
+        bCard.style.background = step.activeBucket === bIdx ? 'rgba(236, 72, 153, 0.15)' : 'rgba(255, 255, 255, 0.03)';
+        bCard.style.border = step.activeBucket === bIdx ? '1px solid var(--secondary)' : '1px solid var(--border-color)';
+        bCard.style.borderRadius = '8px';
+        bCard.style.padding = '8px';
+        bCard.style.textAlign = 'center';
+        bCard.style.minHeight = '70px';
+
+        const bTitle = document.createElement('div');
+        bTitle.style.fontSize = '0.75rem';
+        bTitle.style.fontWeight = 'bold';
+        bTitle.style.color = 'var(--accent-cyan)';
+        bTitle.textContent = `Bucket ${bIdx} (${labels[bIdx]})`;
+        bCard.appendChild(bTitle);
+
+        const itemsDiv = document.createElement('div');
+        itemsDiv.style.display = 'flex';
+        itemsDiv.style.flexWrap = 'wrap';
+        itemsDiv.style.gap = '4px';
+        itemsDiv.style.justifyContent = 'center';
+        itemsDiv.style.marginTop = '6px';
+
+        items.forEach(val => {
+          const pill = document.createElement('span');
+          pill.style.background = 'rgba(99, 102, 241, 0.2)';
+          pill.style.border = '1px solid var(--primary)';
+          pill.style.borderRadius = '4px';
+          pill.style.padding = '2px 6px';
+          pill.style.fontSize = '0.8rem';
+          pill.style.fontWeight = 'bold';
+          pill.style.color = '#fff';
+          pill.textContent = val;
+          itemsDiv.appendChild(pill);
+        });
+
+        bCard.appendChild(itemsDiv);
+        bucketGrid.appendChild(bCard);
+      });
+      container.appendChild(bucketGrid);
+    }
+
+    // Bottom: Output Array
+    if (step.output && step.output.length > 0) {
+      const outBox = document.createElement('div');
+      outBox.style.textAlign = 'center';
+      outBox.innerHTML = `<div style="font-size:0.85rem; font-weight:600; color:var(--easy); margin-bottom:0.5rem;">Output Concatenated Array</div>`;
+      const outArr = document.createElement('div');
+      outArr.className = 'bs-array';
+      step.output.forEach(val => {
+        const cell = document.createElement('div');
+        cell.className = 'bs-element found';
+        cell.textContent = val;
+        outArr.appendChild(cell);
+      });
+      outBox.appendChild(outArr);
+      container.appendChild(outBox);
+    }
+
+    canvas.appendChild(container);
+  }
+
+  // --- EXPANDED SEARCHING (LINEAR, TERNARY, JUMP, INTERPOLATION, EXPONENTIAL, FIBONACCI) ---
+  else if (['linearsearch', 'ternarysearch', 'jumpsearch', 'interpolationsearch', 'exponentialsearch', 'fibonaccisearch'].includes(visualizerState.algo)) {
+    const bsContainer = document.createElement('div');
+    bsContainer.className = 'binary-search-container';
+    const arrayContainer = document.createElement('div');
+    arrayContainer.className = 'bs-array';
+
+    const raw = visualizerState.rawArray;
+
+    raw.forEach((val, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'bs-element';
+      cell.textContent = val;
+
+      const idxSpan = document.createElement('div');
+      idxSpan.className = 'bs-element-idx';
+      idxSpan.textContent = idx;
+      cell.appendChild(idxSpan);
+
+      // State highlights
+      if (idx === step.found) cell.classList.add('found');
+      else if (idx === step.activeIdx || idx === step.pos || idx === step.m1 || idx === step.m2 || idx === step.mid) cell.classList.add('mid');
+      else if (step.discarded && step.discarded.includes(idx)) cell.classList.add('discarded');
+      else cell.classList.add('active');
+
+      const tags = [];
+      if (visualizerState.algo === 'linearsearch') {
+        if (idx === step.activeIdx && idx !== step.found) tags.push('Cur');
+      }
+      else if (visualizerState.algo === 'ternarysearch') {
+        if (idx === step.l) tags.push('Low');
+        if (idx === step.m1 && idx !== step.found) tags.push('M1');
+        if (idx === step.m2 && idx !== step.found) tags.push('M2');
+        if (idx === step.r) tags.push('High');
+      }
+      else if (visualizerState.algo === 'jumpsearch') {
+        if (idx === step.prev) tags.push('Prev');
+        if (idx === step.activeIdx && idx !== step.found) tags.push('Scan');
+      }
+      else if (visualizerState.algo === 'interpolationsearch') {
+        if (idx === step.low) tags.push('Low');
+        if (idx === step.pos && idx !== step.found) tags.push('Probe');
+        if (idx === step.high) tags.push('High');
+      }
+      else if (visualizerState.algo === 'exponentialsearch') {
+        if (idx === step.bound) tags.push('Bound');
+        if (idx === step.low) tags.push('Low');
+        if (idx === step.mid && idx !== step.found) tags.push('Mid');
+        if (idx === step.high) tags.push('High');
+      }
+      else if (visualizerState.algo === 'fibonaccisearch') {
+        if (idx === step.activeIdx && idx !== step.found) tags.push('Idx');
+        if (idx === step.offset) tags.push('Offset');
+      }
+
+      if (tags.length > 0) {
+        const ptr = document.createElement('div');
+        ptr.className = 'bs-pointer-label';
+        if (tags.some(t => ['Mid', 'M1', 'M2', 'Probe', 'Scan', 'Idx'].includes(t))) ptr.classList.add('mid');
+        else if (tags.some(t => ['Low', 'Prev', 'Cur', 'Offset'].includes(t))) ptr.classList.add('low');
+        else if (tags.some(t => ['High', 'Bound'].includes(t))) ptr.classList.add('high');
+        ptr.textContent = tags.join(' • ');
+        cell.appendChild(ptr);
+      }
+
+      arrayContainer.appendChild(cell);
+    });
+
+    bsContainer.appendChild(arrayContainer);
+    canvas.appendChild(bsContainer);
+  }
+
+  // --- RABIN-KARP ROLLING HASH RENDERER ---
+  else if (visualizerState.algo === 'rabinkarp') {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '1.5rem';
+    container.style.alignItems = 'center';
+    container.style.justifyContent = 'center';
+    container.style.width = '100%';
+    container.style.padding = '1.5rem';
+
+    // Pattern String Header
+    const patHeader = document.createElement('div');
+    patHeader.style.textAlign = 'center';
+    patHeader.innerHTML = `
+      <div style="font-size:0.9rem; font-weight:700; color:var(--accent-cyan); margin-bottom:0.4rem;">
+        Pattern to Find: <span style="letter-spacing:2px; font-family:monospace; color:#fff; background:rgba(6,182,212,0.2); padding:2px 8px; border-radius:4px;">${step.pattern}</span>
+      </div>
+      <div style="font-size:0.8rem; color:var(--text-muted);">
+        Pattern Hash (p): <strong style="color:var(--secondary);">${step.hashP}</strong> | Current Window Hash (t): <strong style="color:var(--accent-cyan);">${step.hashT}</strong>
+      </div>
+    `;
+    container.appendChild(patHeader);
+
+    // Text String Array
+    const textRow = document.createElement('div');
+    textRow.className = 'bs-array';
+
+    const textStr = step.text;
+    const patLen = step.pattern.length;
+    const wIdx = step.windowIdx;
+
+    for (let i = 0; i < textStr.length; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'bs-element';
+      cell.style.fontFamily = 'monospace';
+      cell.style.fontSize = '1.1rem';
+      cell.textContent = textStr[i];
+
+      const idxSpan = document.createElement('div');
+      idxSpan.className = 'bs-element-idx';
+      idxSpan.textContent = i;
+      cell.appendChild(idxSpan);
+
+      const inWindow = wIdx !== -1 && i >= wIdx && i < wIdx + patLen;
+
+      if (step.found !== -1 && i >= step.found && i < step.found + patLen) {
+        cell.classList.add('found');
+      } else if (inWindow) {
+        if (step.match) cell.classList.add('found');
+        else cell.classList.add('mid');
+      } else {
+        cell.classList.add('active');
+      }
+
+      if (i === wIdx) {
+        const ptr = document.createElement('div');
+        ptr.className = 'bs-pointer-label low';
+        ptr.textContent = 'Win Start';
+        cell.appendChild(ptr);
+      }
+
+      textRow.appendChild(cell);
+    }
+    container.appendChild(textRow);
+
+    // Status Badge
+    const statusBadge = document.createElement('div');
+    statusBadge.style.padding = '6px 16px';
+    statusBadge.style.borderRadius = '20px';
+    statusBadge.style.fontSize = '0.85rem';
+    statusBadge.style.fontWeight = 'bold';
+    statusBadge.style.fontFamily = 'monospace';
+
+    if (step.found !== -1) {
+      statusBadge.style.background = 'rgba(16, 185, 129, 0.2)';
+      statusBadge.style.border = '1px solid var(--easy)';
+      statusBadge.style.color = 'var(--easy)';
+      statusBadge.textContent = `✔ PATTERN MATCH FOUND AT INDEX ${step.found}!`;
+    } else if (step.match) {
+      statusBadge.style.background = 'rgba(236, 72, 153, 0.2)';
+      statusBadge.style.border = '1px solid var(--secondary)';
+      statusBadge.style.color = '#f472b6';
+      statusBadge.textContent = `🔍 HASH MATCH (p=${step.hashP} == t=${step.hashT})! Checking substring equality...`;
+    } else {
+      statusBadge.style.background = 'rgba(255, 255, 255, 0.05)';
+      statusBadge.style.border = '1px solid var(--border-color)';
+      statusBadge.style.color = 'var(--text-muted)';
+      statusBadge.textContent = `⚡ Sliding Window Hash (t=${step.hashT}) != Pattern Hash (p=${step.hashP})`;
+    }
+    container.appendChild(statusBadge);
+
+    canvas.appendChild(container);
+  }
+
   // --- B. BINARY SEARCH ---
   else if (visualizerState.algo === 'binary') {
     const bsContainer = document.createElement('div');
@@ -19603,38 +21075,25 @@ function renderCanvasStep() {
 
       if (idx === step.found) cell.classList.add('found');
       else if (idx === step.mid) cell.classList.add('mid');
-      else if (step.discarded.includes(idx)) cell.classList.add('discarded');
+      else if (step.discarded && step.discarded.includes(idx)) cell.classList.add('discarded');
       else if (idx >= step.low && idx <= step.high) {
         cell.classList.add('active');
         if (idx === step.low || idx === step.high) cell.classList.add('low-high');
       }
 
-      if (idx === step.low && idx === step.high) {
-        const pointer = document.createElement('div');
-        pointer.className = 'bs-pointer-label low';
-        pointer.style.bottom = '-22px';
-        pointer.textContent = 'L & H';
-        cell.appendChild(pointer);
-      } else {
-        if (idx === step.low) {
-          const pointer = document.createElement('div');
-          pointer.className = 'bs-pointer-label low';
-          pointer.textContent = 'Low';
-          cell.appendChild(pointer);
-        }
-        if (idx === step.high) {
-          const pointer = document.createElement('div');
-          pointer.className = 'bs-pointer-label high';
-          pointer.textContent = 'High';
-          cell.appendChild(pointer);
-        }
-      }
-      if (idx === step.mid && idx !== step.found) {
-        const pointer = document.createElement('div');
-        pointer.className = 'bs-pointer-label mid';
-        pointer.style.bottom = '-36px';
-        pointer.textContent = 'Mid';
-        cell.appendChild(pointer);
+      const tags = [];
+      if (idx === step.low) tags.push('Low');
+      if (idx === step.mid && idx !== step.found) tags.push('Mid');
+      if (idx === step.high) tags.push('High');
+
+      if (tags.length > 0) {
+        const ptr = document.createElement('div');
+        ptr.className = 'bs-pointer-label';
+        if (tags.includes('Mid')) ptr.classList.add('mid');
+        else if (tags.includes('Low')) ptr.classList.add('low');
+        else if (tags.includes('High')) ptr.classList.add('high');
+        ptr.textContent = tags.join(' • ');
+        cell.appendChild(ptr);
       }
 
       arrayContainer.appendChild(cell);

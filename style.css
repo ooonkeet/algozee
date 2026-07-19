@@ -1419,20 +1419,25 @@ button, input, select {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
-  gap: 2.5rem;
+  padding: 2.2rem 0.5rem 3.5rem 0.5rem;
+  box-sizing: border-box;
 }
 
 .bs-array {
   display: flex;
-  gap: 6px;
+  row-gap: 3.2rem;
+  column-gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 1.2rem auto;
 }
 
 .bs-element {
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -1441,9 +1446,10 @@ button, input, select {
   justify-content: center;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   transition: all 0.3s ease;
   position: relative;
+  box-sizing: border-box;
 }
 
 .bs-element.active {
@@ -1479,24 +1485,33 @@ button, input, select {
 .bs-element-idx {
   position: absolute;
   top: -20px;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--text-muted);
-  font-weight: 400;
+  font-weight: 500;
+  font-family: monospace;
 }
 
 /* Element Pointers labels */
 .bs-pointer-label {
   position: absolute;
-  bottom: -22px;
-  font-size: 0.7rem;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   white-space: nowrap;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  z-index: 10;
 }
-.bs-pointer-label.low { color: var(--accent-cyan); }
-.bs-pointer-label.mid { color: #ffffff; }
-.bs-pointer-label.high { color: var(--secondary); }
+.bs-pointer-label.low { color: var(--accent-cyan); border-color: rgba(6, 182, 212, 0.5); }
+.bs-pointer-label.mid { color: #f472b6; border-color: rgba(236, 72, 153, 0.5); }
+.bs-pointer-label.high { color: var(--easy); border-color: rgba(16, 185, 129, 0.5); }
 
 /* Visualization Logs Panel */
 .visualizer-sidebar {

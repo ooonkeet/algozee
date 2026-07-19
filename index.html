@@ -449,13 +449,43 @@
                 style="font-size: 0.85rem; font-weight:600; color: var(--text-muted)">Algorithm:</label>
               <select class="filter-select" id="algo-select" style="padding: 0.5rem 1.5rem 0.5rem 0.5rem;"
                 onchange="loadSelectedAlgorithm()">
-                <option value="bubble">Bubble Sort</option>
-                <option value="binary">Binary Search</option>
-                <option value="window">Sliding Window (LC 3)</option>
-                <option value="pointer">Two Pointers (LC 11)</option>
-                <option value="twoSumII">Two Sum II (LC 167)</option>
-                <option value="cycle">Fast & Slow (LC 141)</option>
-                <option value="cycleII">Linked List Cycle II (LC 142)</option>
+                <optgroup label="─── Sorting Algorithms ───">
+                  <option value="bubble">Bubble Sort</option>
+                  <option value="insertionsort">Insertion Sort</option>
+                  <option value="selectionsort">Selection Sort</option>
+                  <option value="quicksort">Quick Sort Partition</option>
+                  <option value="quicksortfull">Quick Sort (Recursive)</option>
+                  <option value="mergesort">Merge Sort (Recursive)</option>
+                  <option value="heapsort">Heap Sort</option>
+                  <option value="countingsort">Counting Sort</option>
+                  <option value="radixsort">Radix Sort</option>
+                  <option value="shellsort">Shell Sort</option>
+                  <option value="cocktailsort">Cocktail Shaker Sort</option>
+                  <option value="timsort">Tim Sort (Hybrid)</option>
+                  <option value="bucketsort">Bucket Sort</option>
+                  <option value="combsort">Comb Sort</option>
+                  <option value="gnomesort">Gnome Sort</option>
+                  <option value="pancakesort">Pancake Sort</option>
+                  <option value="bitonicsort">Bitonic Sort</option>
+                </optgroup>
+                <optgroup label="─── Searching Algorithms ───">
+                  <option value="linearsearch">Linear Search</option>
+                  <option value="binary">Binary Search</option>
+                  <option value="ternarysearch">Ternary Search</option>
+                  <option value="jumpsearch">Jump Search</option>
+                  <option value="interpolationsearch">Interpolation Search</option>
+                  <option value="exponentialsearch">Exponential Search</option>
+                  <option value="fibonaccisearch">Fibonacci Search</option>
+                  <option value="rabinkarp">Rabin-Karp Rolling Hash</option>
+                  <option value="twoarraybinary">Two-Array Binary Search (LC 4)</option>
+                </optgroup>
+                <optgroup label="─── Patterns & Data Structures ───">
+                  <option value="window">Sliding Window (LC 3)</option>
+                  <option value="pointer">Two Pointers (LC 11)</option>
+                  <option value="twoSumII">Two Sum II (LC 167)</option>
+                  <option value="cycle">Fast & Slow (LC 141)</option>
+                  <option value="cycleII">Linked List Cycle II (LC 142)</option>
+                </optgroup>
                 <optgroup label="─── Linked List Operations ───">
                   <option value="ll-reverse">LL: Reverse (LC 206)</option>
                   <option value="ll-reverse-range">LL: Reverse Sublist (LC 92)</option>
