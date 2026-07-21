@@ -847,7 +847,10 @@ function onProblemClick(probId) {
 // ==========================================================================
 
 function loadProblemIntoVisualizer(prob) {
-  const selector = document.getElementById('algo-select');
+  // Use a plain object to stage the algo value — the real algo-select
+  // is empty until selectAlgoDirectly() populates it, so we can't assign
+  // to the DOM element directly (value won't stick on an empty <select>).
+  const selector = { value: 'bubble' };
 
   // 1. Fine-grained visualizer routing for the canvas engines
   if (prob.id === 4) {
@@ -907,7 +910,11 @@ function loadProblemIntoVisualizer(prob) {
     } else if (prob.id === 1382 || prob.id === 669 || prob.id === 701 || prob.subcategory === 'BST Rotation / Balance') {
       selector.value = 'avl';
     } else if (prob.subcategory === 'Huffman / Greedy Merge' || prob.id === 1167 || prob.id === 871) {
-      selector.value = 'huffman';
+      if (prob.id === 871) {
+        selector.value = 'refuelingstops';
+      } else {
+        selector.value = 'huffman';
+      }
     } else if (prob.id === 307 || prob.id === 315 || prob.id === 308 || prob.subcategory === 'Segment Tree') {
       selector.value = 'segmenttree';
     } else if (prob.id === 493 || prob.subcategory === 'Fenwick Tree / Segment Tree') {
@@ -1017,7 +1024,28 @@ function loadProblemIntoVisualizer(prob) {
     } else if (prob.subcategory === 'Grid DP') {
       selector.value = 'matrix';
     } else if (prob.subcategory === 'Greedy Scheduling / Sorting') {
-      selector.value = 'greedy';
+      // Fine-grained greedy routing
+      if (prob.id === 55 || prob.id === 45) {
+        selector.value = 'jumpgame';
+      } else if (prob.id === 134) {
+        selector.value = 'gasstation';
+      } else if (prob.id === 860) {
+        selector.value = 'lemonadechange';
+      } else if (prob.id === 605) {
+        selector.value = 'canplaceflowers';
+      } else if (prob.id === 621) {
+        selector.value = 'taskscheduler';
+      } else if (prob.id === 763) {
+        selector.value = 'partitionlabels';
+      } else if (prob.id === 406) {
+        selector.value = 'queuereconstruction';
+      } else if (prob.id === 122) {
+        selector.value = 'stockprofitII';
+      } else if (prob.id === 1710) {
+        selector.value = 'maxunitstruck';
+      } else {
+        selector.value = 'greedy';
+      }
     } else if (prob.subcategory === 'Bit Manipulation') {
       selector.value = 'bits';
     } else if (prob.topic === 'Binary Search') {
@@ -1026,7 +1054,13 @@ function loadProblemIntoVisualizer(prob) {
       selector.value = 'bubble';
     }
 
-  visualizerState.algo = selector.value;
+  // Populate the two-step topic+algo dropdowns with the resolved algo
+  if (typeof selectAlgoDirectly === 'function') {
+    selectAlgoDirectly(selector.value);
+  }
+
+  // Read the value from the now-populated real <select>
+  visualizerState.algo = document.getElementById('algo-select').value || selector.value;
   visualizerState.currentProbId = prob.id;
 
   // 2. Update the problem info banner
@@ -13344,6 +13378,78 @@ function resetVisualizer() {
     appendLog(`[INFO] ${label}: ${intervals.length} intervals, selecting max non-overlapping set.`, "info");
     generateGreedySteps(visualizerState.rawArray);
   }
+  else if (visualizerState.algo === 'jumpgame') {
+    // LC 55/45 — large array, several dead zones to make it interesting
+    const nums = [3, 2, 1, 0, 4, 2, 0, 3, 1, 1, 0, 2, 3, 1, 0, 0, 4, 2, 1, 0, 3];
+    visualizerState.rawArray = [...nums];
+    appendLog('[INFO] Jump Game II: greedy "farthest reach" sweep. Each cell = max jump distance.', 'info');
+    generateJumpGameSteps(nums);
+  }
+  else if (visualizerState.algo === 'gasstation') {
+    // LC 134 — 10 stations, exactly one valid starting point
+    const gas  = [2, 3, 4, 3, 1, 2, 5, 3, 2, 1];
+    const cost = [3, 2, 3, 2, 4, 1, 2, 3, 1, 4];
+    visualizerState.rawArray = { gas, cost };
+    appendLog('[INFO] Gas Station: circular tour with tank = gas - cost. Find valid start.', 'info');
+    generateGasStationSteps(gas, cost);
+  }
+  else if (visualizerState.algo === 'lemonadechange') {
+    // LC 860 — 14 customers, mix of $5/$10/$20
+    const bills = [5, 5, 5, 10, 20, 5, 5, 10, 5, 20, 10, 5, 20, 5];
+    visualizerState.rawArray = [...bills];
+    appendLog('[INFO] Lemonade Change: serve each customer (lemonade costs $5), make change greedily.', 'info');
+    generateLemonadeSteps(bills);
+  }
+  else if (visualizerState.algo === 'canplaceflowers') {
+    // LC 605 — 20-cell bed, needs n=5 flowers
+    const bed = [1,0,0,0,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0];
+    visualizerState.rawArray = [...bed];
+    appendLog('[INFO] Can Place Flowers: sweep left-to-right, plant wherever [0,0,0] window found.', 'info');
+    generateCanPlaceFlowersSteps(bed, 5);
+  }
+  else if (visualizerState.algo === 'taskscheduler') {
+    // LC 621 — 12 tasks, n=3 cooldown
+    const tasks = ['A','A','A','A','B','B','B','C','C','D','E','F'];
+    visualizerState.rawArray = [...tasks];
+    appendLog('[INFO] Task Scheduler: fill CPU slots, cooldown n=3. Greedy: most-frequent first.', 'info');
+    generateTaskSchedulerSteps(tasks, 3);
+  }
+  else if (visualizerState.algo === 'partitionlabels') {
+    // LC 763 — rich 20-char string with overlapping ranges
+    const s = 'ababcbacadefegdehijklij';
+    visualizerState.rawArray = s.split('');
+    appendLog('[INFO] Partition Labels: find last occurrence of each char, extend window greedily.', 'info');
+    generatePartitionLabelsSteps(s);
+  }
+  else if (visualizerState.algo === 'queuereconstruction') {
+    // LC 406 — 8 people
+    const people = [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2],[4,2],[6,0]];
+    visualizerState.rawArray = [...people];
+    appendLog('[INFO] Queue Reconstruction: sort tallest-first, insert each person at position k.', 'info');
+    generateQueueReconstructionSteps(people);
+  }
+  else if (visualizerState.algo === 'stockprofitII') {
+    // LC 122 — 14-day price series with multiple valleys/peaks
+    const prices = [7, 1, 5, 3, 6, 4, 1, 3, 6, 2, 8, 1, 4, 7];
+    visualizerState.rawArray = [...prices];
+    appendLog('[INFO] Stock Buy/Sell II: capture every upward move — sum all price[i]-price[i-1] > 0.', 'info');
+    generateStockProfitIISteps(prices);
+  }
+  else if (visualizerState.algo === 'maxunitstruck') {
+    // LC 1710 — 9 box types, truck capacity 12
+    const boxes = [[5,10],[2,5],[4,7],[3,9],[1,15],[6,4],[2,8],[3,6],[1,12]];
+    visualizerState.rawArray = [...boxes];
+    appendLog('[INFO] Max Units on Truck: sort by units/box desc, load greedily until truck full.', 'info');
+    generateMaxUnitsTruckSteps(boxes, 12);
+  }
+  else if (visualizerState.algo === 'refuelingstops') {
+    // LC 871 — 10 stations, target 700, tank 200
+    const stations = [[50,60],[100,40],[150,50],[200,40],[300,60],[350,50],[400,70],[500,80],[580,40],[650,30]];
+    const target = 700, startFuel = 200;
+    visualizerState.rawArray = { stations, target, startFuel };
+    appendLog('[INFO] Refueling Stops: greedy max-heap — when fuel runs out, take largest stored refuel.', 'info');
+    generateRefuelingStopsSteps(stations, target, startFuel);
+  }
   else if (visualizerState.algo === 'editdistance') {
     visualizerState.rawArray = { s1: 'horse', s2: 'ros' };
     appendLog('[INFO] Edit Distance DP: transforming "horse" into "ros".', "info");
@@ -19723,6 +19829,393 @@ function generateGreedySteps(intervals) {
     `Greedy complete. Selected ${selected.length} non-overlapping intervals out of ${sorted.length}. ` +
     `Rejected: ${sorted.length - selected.length}.`);
 
+  visualizerState.steps = steps;
+}
+
+// ── JUMP GAME I & II ──────────────────────────────────────────────────────
+function generateJumpGameSteps(nums) {
+  const steps = [];
+  const n = nums.length;
+  const snap = (i, farthest, currentEnd, jumps, phase, log) =>
+    steps.push({ nums: [...nums], i, farthest, currentEnd, jumps, phase, log });
+
+  snap(-1, 0, 0, 0, 'init',
+    `Array: [${nums.join(', ')}]. Each cell = max jump distance. Goal: reach index ${n-1}.`);
+
+  let farthest = 0, currentEnd = 0, jumps = 0;
+  for (let i = 0; i < n - 1; i++) {
+    const newFarthest = Math.max(farthest, i + nums[i]);
+    snap(i, newFarthest, currentEnd, jumps, 'scan',
+      `i=${i}, nums[i]=${nums[i]}: i+nums[i]=${i+nums[i]}. farthest = max(${farthest}, ${i+nums[i]}) = ${newFarthest}.`);
+    farthest = newFarthest;
+
+    if (i === currentEnd) {
+      jumps++;
+      currentEnd = farthest;
+      snap(i, farthest, currentEnd, jumps, 'jump',
+        `🔵 Jump boundary reached at i=${i}! Jump #${jumps}. New boundary → currentEnd=${currentEnd}. farthest=${farthest}.`);
+      if (currentEnd >= n - 1) {
+        snap(i, farthest, currentEnd, jumps, 'done',
+          `✅ Can reach end! Min jumps needed = ${jumps}. (Jump Game I: reachable = true)`);
+        visualizerState.steps = steps;
+        return;
+      }
+    }
+  }
+  snap(n - 1, farthest, currentEnd, jumps, 'done',
+    farthest >= n - 1
+      ? `✅ Jump Game I: REACHABLE. Jump Game II: Min jumps = ${jumps}.`
+      : `❌ Jump Game I: NOT reachable (stuck at 0-cell).`);
+  visualizerState.steps = steps;
+}
+
+// ── GAS STATION ──────────────────────────────────────────────────────────
+function generateGasStationSteps(gas, cost) {
+  const steps = [];
+  const n = gas.length;
+  const diff = gas.map((g, i) => g - cost[i]);
+  const snap = (pos, tank, totalTank, start, phase, log) =>
+    steps.push({ gas: [...gas], cost: [...cost], diff: [...diff], pos, tank, totalTank, start, phase, log });
+
+  snap(-1, 0, 0, 0, 'init',
+    `${n} stations. gas=[${gas}], cost=[${cost}]. net=[${diff.join(', ')}]. Total net=${diff.reduce((a,b)=>a+b,0)}.`);
+
+  let tank = 0, totalTank = 0, start = 0;
+  for (let i = 0; i < n; i++) {
+    tank += diff[i];
+    totalTank += diff[i];
+    snap(i, tank, totalTank, start, 'visit',
+      `Station ${i}: gas=${gas[i]}, cost=${cost[i]}, net=${diff[i]}. tank=${tank} (cumulative from start=${start}).`);
+
+    if (tank < 0) {
+      const oldStart = start;
+      start = i + 1;
+      tank = 0;
+      snap(i, tank, totalTank, start, 'reset',
+        `🔴 Tank went negative at ${i}! Start=${oldStart} fails. Reset start → ${start}, tank → 0.`);
+    } else {
+      snap(i, tank, totalTank, start, 'ok',
+        `✅ Tank OK (${tank}). Continuing from start=${start}.`);
+    }
+  }
+  if (totalTank >= 0) {
+    snap(-1, tank, totalTank, start, 'done',
+      `✅ Valid start = station ${start}. Total net gas = ${totalTank} ≥ 0, so a solution exists.`);
+  } else {
+    snap(-1, tank, totalTank, -1, 'done',
+      `❌ No valid starting station — total net gas = ${totalTank} < 0.`);
+  }
+  visualizerState.steps = steps;
+}
+
+// ── LEMONADE CHANGE ───────────────────────────────────────────────────────
+function generateLemonadeSteps(bills) {
+  const steps = [];
+  let fives = 0, tens = 0;
+  const snap = (i, bill, fives, tens, action, ok, log) =>
+    steps.push({ bills: [...bills], i, bill, fives, tens, action, ok, phase: action, log });
+
+  snap(-1, null, 0, 0, 'init', true,
+    `${bills.length} customers: [${bills.join(', ')}]. Lemonade = $5. Start with empty register.`);
+
+  for (let i = 0; i < bills.length; i++) {
+    const bill = bills[i];
+    let ok = true;
+    let action = '';
+
+    if (bill === 5) {
+      fives++;
+      action = 'receive $5 → no change needed';
+    } else if (bill === 10) {
+      if (fives === 0) { ok = false; action = 'receive $10 → need $5 change but none!'; }
+      else { fives--; tens++; action = 'receive $10 → give $5 change. fives--'; }
+    } else { // $20
+      if (tens > 0 && fives > 0) { tens--; fives--; action = 'receive $20 → give $10+$5 change (preferred)'; }
+      else if (fives >= 3) { fives -= 3; action = 'receive $20 → give 3×$5 change'; }
+      else { ok = false; action = 'receive $20 → cannot make $15 change!'; }
+    }
+    snap(i, bill, fives, tens, action, ok, `Customer ${i+1}: Bill $${bill}. ${action}. Register: $5×${fives}, $10×${tens}.${ok ? '' : ' ❌ FAIL'}`);
+    if (!ok) {
+      snap(-1, null, fives, tens, 'fail', false, `❌ Cannot provide change at customer ${i+1}. Result: false.`);
+      visualizerState.steps = steps;
+      return;
+    }
+  }
+  snap(-1, null, fives, tens, 'done', true,
+    `✅ All ${bills.length} customers served successfully! Register: $5×${fives}, $10×${tens}.`);
+  visualizerState.steps = steps;
+}
+
+// ── CAN PLACE FLOWERS ─────────────────────────────────────────────────────
+function generateCanPlaceFlowersSteps(bed, n) {
+  const steps = [];
+  const arr = [...bed];
+  let placed = 0;
+  const snap = (i, arr, placed, phase, log) =>
+    steps.push({ bed: [...arr], i, placed, n, phase, log });
+
+  snap(-1, arr, 0, 'init',
+    `Flowerbed: [${bed.join(', ')}]. Need to plant n=${n} flowers. Rule: no two adjacent flowers.`);
+
+  for (let i = 0; i < arr.length; i++) {
+    const empty = arr[i] === 0;
+    const leftOk = i === 0 || arr[i-1] === 0;
+    const rightOk = i === arr.length - 1 || arr[i+1] === 0;
+    snap(i, arr, placed, 'check',
+      `Check i=${i}: cell=${arr[i]}, left=${i>0?arr[i-1]:'edge'}, right=${i<arr.length-1?arr[i+1]:'edge'}. ` +
+      (empty && leftOk && rightOk ? 'All empty → can plant!' : 'Cannot plant here.'));
+
+    if (empty && leftOk && rightOk) {
+      arr[i] = 1;
+      placed++;
+      snap(i, arr, placed, 'plant',
+        `🌸 Planted at i=${i}! Total placed: ${placed}/${n}.`);
+      if (placed >= n) {
+        snap(-1, arr, placed, 'done',
+          `✅ Successfully planted ${placed} flowers (≥ n=${n}). Answer: true.`);
+        visualizerState.steps = steps;
+        return;
+      }
+    }
+  }
+  snap(-1, arr, placed, 'done',
+    placed >= n
+      ? `✅ Placed ${placed} flowers (≥ n=${n}). Answer: true.`
+      : `❌ Only placed ${placed}/${n}. Answer: false.`);
+  visualizerState.steps = steps;
+}
+
+// ── TASK SCHEDULER ────────────────────────────────────────────────────────
+function generateTaskSchedulerSteps(tasks, n) {
+  const steps = [];
+  const freq = {};
+  tasks.forEach(t => freq[t] = (freq[t] || 0) + 1);
+  const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+  const timeline = [];
+  const snap = (slot, timeline, cooldowns, phase, log) =>
+    steps.push({ tasks: [...tasks], freq: { ...freq }, slot, timeline: [...timeline], cooldowns: { ...cooldowns }, n, phase, log });
+
+  snap(-1, [], {}, 'init',
+    `Tasks: [${tasks.join(', ')}]. Cooldown n=${n}. Frequencies: ${sorted.map(([t,c])=>`${t}:${c}`).join(', ')}.`);
+
+  const counts = {};
+  sorted.forEach(([t, c]) => counts[t] = c);
+  const cooldownMap = {};
+  let slot = 0;
+  const maxSlots = tasks.length * (n + 1); // upper bound
+
+  while (Object.values(counts).some(c => c > 0) && slot < maxSlots) {
+    let placed = false;
+    for (const [task, cnt] of Object.entries(counts).sort((a,b) => b[1]-a[1])) {
+      if (cnt > 0 && (!cooldownMap[task] || cooldownMap[task] <= slot)) {
+        timeline.push(task);
+        counts[task]--;
+        cooldownMap[task] = slot + n + 1;
+        snap(slot, timeline, { ...cooldownMap }, 'place',
+          `Slot ${slot}: Place task '${task}' (remaining: ${counts[task]}). Next '${task}' available at slot ${cooldownMap[task]}.`);
+        placed = true;
+        slot++;
+        break;
+      }
+    }
+    if (!placed) {
+      timeline.push('idle');
+      snap(slot, timeline, { ...cooldownMap }, 'idle',
+        `Slot ${slot}: CPU IDLE — all available tasks are in cooldown. Wasted cycle.`);
+      slot++;
+    }
+  }
+  const totalTime = timeline.length;
+  const idleCount = timeline.filter(t => t === 'idle').length;
+  snap(-1, timeline, {}, 'done',
+    `✅ Total CPU time = ${totalTime} slots. Task time = ${tasks.length}, Idle = ${idleCount}. Formula: max(n, (maxFreq-1)*(n+1)+maxFreqCount).`);
+  visualizerState.steps = steps;
+}
+
+// ── PARTITION LABELS ──────────────────────────────────────────────────────
+function generatePartitionLabelsSteps(s) {
+  const steps = [];
+  const chars = s.split('');
+  const last = {};
+  chars.forEach((c, i) => last[c] = i);
+
+  const snap = (i, end, partitions, phase, log) =>
+    steps.push({ chars: [...chars], i, end, last: { ...last }, partitions: [...partitions], phase, log });
+
+  snap(-1, -1, [], 'init',
+    `String: "${s}". First pass: record last occurrence of each character.`);
+
+  // Show lastSeen map build
+  const lastSeenStr = Object.entries(last).sort((a,b)=>a[1]-b[1]).map(([c,i])=>`${c}→${i}`).join(', ');
+  snap(-1, -1, [], 'map', `lastSeen map built: {${lastSeenStr}}. Now sweep left-to-right extending window.`);
+
+  const partitions = [];
+  let start = 0, end = 0;
+  for (let i = 0; i < chars.length; i++) {
+    const newEnd = Math.max(end, last[chars[i]]);
+    snap(i, newEnd, partitions, 'scan',
+      `i=${i} '${chars[i]}': last['${chars[i]}']=last[${last[chars[i]]}]. end = max(${end}, ${last[chars[i]]}) = ${newEnd}.`);
+    end = newEnd;
+
+    if (i === end) {
+      const size = end - start + 1;
+      partitions.push(size);
+      snap(i, end, [...partitions], 'cut',
+        `✂ Partition cut at i=${i}! Segment "${s.slice(start, end+1)}" (size ${size}). Next starts at ${end+1}.`);
+      start = end + 1;
+    }
+  }
+  snap(-1, -1, partitions, 'done',
+    `✅ ${partitions.length} partitions: [${partitions.join(', ')}]. Each partition contains all occurrences of its chars.`);
+  visualizerState.steps = steps;
+}
+
+// ── QUEUE RECONSTRUCTION BY HEIGHT ────────────────────────────────────────
+function generateQueueReconstructionSteps(people) {
+  const steps = [];
+  const sorted = [...people].sort((a,b) => b[0] - a[0] || a[1] - b[1]);
+  const result = [];
+  const snap = (phase, sorted, result, activeIdx, log) =>
+    steps.push({ original: [...people], sorted: sorted.map(p=>[...p]), result: result.map(p=>[...p]), activeIdx, phase, log });
+
+  snap('init', sorted, [], -1,
+    `Input: [${people.map(p=>`[${p}]`).join(', ')}]. Step 1: Sort tallest first (by h desc, k asc).`);
+
+  snap('sort', sorted, [], -1,
+    `Sorted: [${sorted.map(p=>`[${p}]`).join(', ')}]. Step 2: Insert each person at index k.`);
+
+  sorted.forEach(([h, k], i) => {
+    result.splice(k, 0, [h, k]);
+    snap('insert', sorted, result, i,
+      `Insert [${h},${k}] at position ${k}. Queue: [${result.map(p=>`[${p}]`).join(', ')}]`);
+  });
+
+  snap('done', sorted, result, -1,
+    `✅ Final queue: [${result.map(p=>`[${p}]`).join(', ')}]. Each person has exactly k taller/equal-height people in front.`);
+  visualizerState.steps = steps;
+}
+
+// ── STOCK PROFIT II ───────────────────────────────────────────────────────
+function generateStockProfitIISteps(prices) {
+  const steps = [];
+  let profit = 0;
+  const trades = [];
+  const snap = (i, profit, trades, action, log) =>
+    steps.push({ prices: [...prices], i, profit, trades: [...trades], action, phase: action, log });
+
+  snap(-1, 0, [], 'init',
+    `Prices: [${prices.join(', ')}]. Greedy: buy whenever price[i] < price[i+1] (capture every upward move).`);
+
+  for (let i = 1; i < prices.length; i++) {
+    const gain = prices[i] - prices[i-1];
+    if (gain > 0) {
+      profit += gain;
+      trades.push({ buy: i-1, sell: i, gain });
+      snap(i, profit, trades, 'profit',
+        `Day ${i}: price[${i}]=${prices[i]} > price[${i-1}]=${prices[i-1]}. ✅ Profit +${gain} (buy D${i-1}, sell D${i}). Total = ${profit}.`);
+    } else {
+      snap(i, profit, trades, 'skip',
+        `Day ${i}: price[${i}]=${prices[i]} ≤ price[${i-1}]=${prices[i-1]}. ⏭ Skip (no gain = ${gain}).`);
+    }
+  }
+  snap(-1, profit, trades, 'done',
+    `✅ Max Profit = ${profit}. Captured ${trades.length} trades: ${trades.map(t=>`D${t.buy}→D${t.sell}(+${t.gain})`).join(', ')}.`);
+  visualizerState.steps = steps;
+}
+
+// ── MAX UNITS ON A TRUCK ──────────────────────────────────────────────────
+function generateMaxUnitsTruckSteps(boxes, truckSize) {
+  const steps = [];
+  const sorted = [...boxes].sort((a,b) => b[1]-a[1]);
+  let remaining = truckSize, totalUnits = 0;
+  const loaded = [];
+  const snap = (i, remaining, totalUnits, loaded, phase, log) =>
+    steps.push({ boxes: [...boxes], sorted: sorted.map(b=>[...b]), i, remaining, totalUnits, loaded: [...loaded], truckSize, phase, log });
+
+  snap(-1, truckSize, 0, [], 'init',
+    `${boxes.length} box types. TruckSize=${truckSize}. Sort by units/box descending to maximize value.`);
+
+  snap(-1, truckSize, 0, [], 'sort',
+    `Sorted by units desc: [${sorted.map(b=>`[${b[0]}boxes,${b[1]}units]`).join(', ')}]. Now load greedily.`);
+
+  for (let i = 0; i < sorted.length; i++) {
+    const [cnt, units] = sorted[i];
+    if (remaining <= 0) {
+      snap(i, remaining, totalUnits, loaded, 'full',
+        `Truck full (remaining=${remaining}). Skip [${cnt} boxes, ${units} units/box].`);
+      continue;
+    }
+    const take = Math.min(cnt, remaining);
+    const gained = take * units;
+    remaining -= take;
+    totalUnits += gained;
+    loaded.push({ take, units, gained });
+    snap(i, remaining, totalUnits, loaded, take === cnt ? 'load' : 'partial',
+      `Load ${take}/${cnt} boxes of ${units} units each → +${gained} units. Remaining capacity: ${remaining}. Total: ${totalUnits}.`);
+  }
+  snap(-1, remaining, totalUnits, loaded, 'done',
+    `✅ Max units loaded = ${totalUnits}. Used ${truckSize - remaining}/${truckSize} capacity.`);
+  visualizerState.steps = steps;
+}
+
+// ── REFUELING STOPS (LC 871) ──────────────────────────────────────────────
+function generateRefuelingStopsSteps(stations, target, startFuel) {
+  const steps = [];
+  // Max-heap simulation using sorted array
+  let fuel = startFuel, pos = 0, stops = 0;
+  const heap = []; // available fuels (collected but not used yet)
+  const used = []; // which stations were actually refueled
+  const snap = (i, fuel, pos, stops, heap, used, phase, log) =>
+    steps.push({ stations: [...stations], target, startFuel, i, fuel, pos, stops, heap: [...heap], used: [...used], phase, log });
+
+  snap(-1, fuel, 0, 0, [], [], 'init',
+    `Target=${target}, startFuel=${fuel}. ${stations.length} stations. Greedy: collect all reachable stations, use largest when empty.`);
+
+  for (let i = 0; i <= stations.length; i++) {
+    const nextPos = i < stations.length ? stations[i][0] : target;
+    const nextFuel = i < stations.length ? stations[i][1] : 0;
+
+    // Can we reach next station?
+    while (fuel < nextPos - pos) {
+      if (heap.length === 0) {
+        snap(i, fuel, pos, stops, [...heap], [...used], 'impossible',
+          `❌ Out of fuel at pos=${pos}, can't reach pos=${nextPos}. No stored fuel left. Impossible with current path.`);
+        // Try to add more stops to continue
+        snap(-1, fuel, pos, -1, [], used, 'done',
+          `❌ Cannot reach target=${target}. Minimum stops needed = -1 (impossible).`);
+        visualizerState.steps = steps;
+        return;
+      }
+      // Greedily use the largest stored fuel
+      const best = Math.max(...heap);
+      const bestIdx = heap.indexOf(best);
+      heap.splice(bestIdx, 1);
+      fuel += best;
+      stops++;
+      used.push(best);
+      snap(i, fuel, pos, stops, [...heap], [...used], 'refuel',
+        `⛽ Stop #${stops}: grab largest stored fuel=${best} from heap. fuel → ${fuel}. Now try again to reach pos=${nextPos}.`);
+    }
+
+    fuel -= (nextPos - pos);
+    pos = nextPos;
+
+    if (pos >= target) {
+      snap(i, fuel, pos, stops, [...heap], [...used], 'done',
+        `✅ Reached target=${target} with fuel=${fuel} remaining. Min refueling stops = ${stops}.`);
+      visualizerState.steps = steps;
+      return;
+    }
+
+    if (i < stations.length) {
+      heap.push(nextFuel);
+      heap.sort((a,b) => a - b); // keep sorted for visual display
+      snap(i, fuel, pos, stops, [...heap], [...used], 'collect',
+        `Station ${i} at pos=${stations[i][0]}: collect ${nextFuel} fuel into heap. Heap: [${heap.join(', ')}]. Current fuel: ${fuel}.`);
+    }
+  }
+  snap(-1, fuel, pos, stops, heap, used, 'done',
+    `✅ Reached target! Min refueling stops = ${stops}.`);
   visualizerState.steps = steps;
 }
 
@@ -29894,7 +30387,552 @@ function renderCanvasStep() {
     container.appendChild(infoCard);
     canvas.appendChild(container);
   }
+  else if (visualizerState.algo === 'jumpgame') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'width:100%;display:flex;flex-direction:column;gap:1.25rem;';
+
+    // Title
+    const title = document.createElement('div');
+    title.style.cssText = 'font-size:0.85rem;font-weight:700;color:var(--text-muted);font-family:monospace;display:flex;justify-content:space-between;align-items:center;';
+    const phaseColors = { init:'var(--text-muted)', scan:'var(--medium)', jump:'var(--accent-cyan)', done:'var(--easy)' };
+    title.innerHTML = `<span>Jump Game I & II (LC 55/45)</span><span style="color:${phaseColors[step.phase]||'var(--text-muted)'};background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:6px;">● ${step.phase.toUpperCase()}</span>`;
+    wrap.appendChild(title);
+
+    // Array row
+    const arrRow = document.createElement('div');
+    arrRow.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:6px 0;';
+    step.nums.forEach((v, idx) => {
+      const cell = document.createElement('div');
+      const isActive = idx === step.i;
+      const inReach = idx <= step.farthest && step.farthest >= 0;
+      const isBoundary = idx === step.currentEnd;
+      const bg = isActive ? 'var(--medium)' : isBoundary ? 'rgba(6,182,212,0.25)' : inReach ? 'rgba(6,182,212,0.12)' : 'rgba(255,255,255,0.05)';
+      const border = isActive ? 'var(--medium)' : isBoundary ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.12)';
+      cell.style.cssText = `min-width:52px;height:68px;padding:4px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:${bg};border:2px solid ${border};border-radius:10px;font-family:monospace;transition:all 0.2s;box-sizing:border-box;`;
+      cell.innerHTML = `
+        <div style="font-size:0.6rem;color:rgba(255,255,255,0.4);">idx ${idx}</div>
+        <div style="font-size:1.3rem;font-weight:800;color:${isActive?'#fff':inReach?'var(--accent-cyan)':'var(--text-muted)'}">${v}</div>
+        <div style="display:flex;gap:2px;min-height:14px;">
+          ${isBoundary ? '<span style="font-size:0.55rem;color:var(--accent-cyan);font-weight:800;background:rgba(6,182,212,0.2);padding:1px 3px;border-radius:3px;">BOUND</span>' : ''}
+          ${isActive ? '<span style="font-size:0.55rem;color:#fff;font-weight:800;background:rgba(255,255,255,0.2);padding:1px 3px;border-radius:3px;">▲ i</span>' : ''}
+        </div>`;
+      arrRow.appendChild(cell);
+    });
+    wrap.appendChild(arrRow);
+
+    // Legend
+    wrap.insertAdjacentHTML('beforeend', `<div style="display:flex;gap:1.5rem;justify-content:center;font-size:0.75rem;color:var(--text-muted);font-weight:600;">
+      <span style="color:var(--medium)">■ Current i</span>
+      <span style="color:var(--accent-cyan)">■ Boundary / Reach</span>
+      <span style="color:rgba(255,255,255,0.3)">■ Unreachable</span></div>`);
+
+    // Stats
+    const statsRow = document.createElement('div');
+    statsRow.style.cssText = 'display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;';
+    [['Farthest Reach', step.farthest, 'var(--accent-cyan)'],
+     ['Current Boundary', step.currentEnd, 'var(--secondary)'],
+     ['Jumps Made', step.jumps, 'var(--easy)']].forEach(([lbl, val, col]) => {
+      statsRow.insertAdjacentHTML('beforeend',
+        `<div style="text-align:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 20px;min-width:110px;">
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:4px;font-weight:600;">${lbl}</div>
+          <div style="font-size:1.8rem;font-weight:800;color:${col};font-family:monospace;">${val}</div>
+        </div>`);
+    });
+    wrap.appendChild(statsRow);
+    canvas.appendChild(wrap);
+  }
+
+  // ── GAS STATION ─────────────────────────────────────────────────────
+  else if (visualizerState.algo === 'gasstation') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'width:100%;display:flex;flex-direction:column;gap:1.25rem;align-items:center;';
+
+    const phaseColors = { init:'var(--text-muted)', visit:'var(--medium)', reset:'var(--hard)', ok:'var(--easy)', done:'var(--accent-cyan)' };
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);font-family:monospace;width:100%;display:flex;justify-content:space-between;align-items:center;">
+        <span>Gas Station (LC 134)</span>
+        <span style="color:${phaseColors[step.phase]||'var(--text-muted)'};background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:6px;">● ${step.phase.toUpperCase()}</span></div>`);
+
+    // Station cells
+    const stationsRow = document.createElement('div');
+    stationsRow.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:100%;';
+    step.gas.forEach((g, idx) => {
+      const net = step.diff[idx];
+      const isActive = idx === step.pos;
+      const isStart = idx === step.start;
+      const bg = isActive ? 'rgba(245,158,11,0.25)' : isStart ? 'rgba(16,185,129,0.2)' : 'rgba(255,255,255,0.05)';
+      const border = isActive ? 'rgb(245,158,11)' : isStart ? 'var(--easy)' : 'rgba(255,255,255,0.12)';
+      stationsRow.insertAdjacentHTML('beforeend',
+        `<div style="min-width:76px;background:${bg};border:2px solid ${border};border-radius:12px;padding:10px 8px;text-align:center;font-family:monospace;display:flex;flex-direction:column;gap:4px;box-shadow:${isActive?'0 0 12px rgba(245,158,11,0.3)':'none'};">
+          <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted)">Stn ${idx}</div>
+          <div style="font-size:0.85rem;font-weight:700;color:var(--easy)">⛽ +${g}</div>
+          <div style="font-size:0.85rem;font-weight:700;color:var(--hard)">🚗 -${step.cost[idx]}</div>
+          <div style="font-size:0.85rem;font-weight:800;color:${net>=0?'var(--easy)':'var(--hard)'};border-top:1px solid rgba(255,255,255,0.12);padding-top:4px;margin-top:2px;">net ${net>=0?'+':''}${net}</div>
+          <div style="min-height:16px;display:flex;flex-direction:column;align-items:center;gap:2px;">
+            ${isStart ? '<span style="font-size:0.6rem;color:var(--easy);font-weight:800;background:rgba(16,185,129,0.2);padding:1px 4px;border-radius:4px;">★ START</span>' : ''}
+            ${isActive ? '<span style="font-size:0.6rem;color:rgb(245,158,11);font-weight:800;background:rgba(245,158,11,0.2);padding:1px 4px;border-radius:4px;">▲ HERE</span>' : ''}
+          </div>
+        </div>`);
+    });
+    wrap.appendChild(stationsRow);
+
+    // Stats
+    const statsRow = document.createElement('div');
+    statsRow.style.cssText = 'display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;';
+    [['Tank Level', step.tank, step.tank < 0 ? 'var(--hard)' : 'var(--easy)'],
+     ['Total Net Gas', step.totalTank, step.totalTank >= 0 ? 'var(--easy)' : 'var(--hard)'],
+     ['Candidate Start', step.start, 'var(--accent-cyan)']].forEach(([lbl, val, col]) => {
+      statsRow.insertAdjacentHTML('beforeend',
+        `<div style="text-align:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 24px;min-width:120px;">
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:4px;font-weight:600;">${lbl}</div>
+          <div style="font-size:1.8rem;font-weight:800;color:${col};font-family:monospace;">${val}</div>
+        </div>`);
+    });
+    wrap.appendChild(statsRow);
+    canvas.appendChild(wrap);
+  }
+
+  // ── LEMONADE CHANGE ─────────────────────────────────────────────────
+  else if (visualizerState.algo === 'lemonadechange') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'width:100%;display:flex;flex-direction:column;gap:1.25rem;';
+
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);font-family:monospace;width:100%;display:flex;justify-content:space-between;align-items:center;">
+        <span>Lemonade Change (LC 860)</span>
+        <span style="color:${step.ok===false?'var(--hard)':step.phase==='done'?'var(--easy)':'var(--medium)'};background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:6px;">● ${(step.phase||'').toUpperCase()}</span></div>`);
+
+    // Customer queue
+    const queue = document.createElement('div');
+    queue.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;';
+    queue.insertAdjacentHTML('beforeend', '<div style="font-size:0.7rem;font-weight:600;color:var(--text-muted);width:100%;margin-bottom:4px;">Customer Queue:</div>');
+    step.bills.forEach((b, idx) => {
+      const isPast = idx < step.i;
+      const isCurrent = idx === step.i;
+      const color = b === 5 ? 'var(--easy)' : b === 10 ? 'var(--medium)' : 'var(--secondary)';
+      queue.insertAdjacentHTML('beforeend',
+        `<div style="width:52px;height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+          background:${isCurrent?color:isPast?'rgba(255,255,255,0.03)':'rgba(255,255,255,0.07)'};
+          border:2px solid ${isCurrent?color:'rgba(255,255,255,0.12)'};border-radius:10px;
+          opacity:${isPast?0.35:1};font-family:monospace;box-shadow:${isCurrent?'0 0 10px '+color:'none'};">
+          <div style="font-size:1.05rem;font-weight:800;color:${isCurrent?'#fff':color}">$${b}</div>
+          <div style="font-size:0.6rem;color:rgba(255,255,255,0.4)">#${idx+1}</div>
+        </div>`);
+    });
+    wrap.appendChild(queue);
+
+    // Register + action
+    const mid = document.createElement('div');
+    mid.style.cssText = 'display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;align-items:center;';
+    mid.insertAdjacentHTML('beforeend',
+      `<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px 28px;text-align:center;">
+        <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted);margin-bottom:10px;">💵 Cash Register In-Hand</div>
+        <div style="display:flex;gap:24px;">
+          <div><div style="font-size:0.7rem;color:var(--easy);font-weight:600;">$5 Bills</div><div style="font-size:2.4rem;font-weight:800;color:var(--easy);font-family:monospace;">${step.fives}</div></div>
+          <div><div style="font-size:0.7rem;color:var(--medium);font-weight:600;">$10 Bills</div><div style="font-size:2.4rem;font-weight:800;color:var(--medium);font-family:monospace;">${step.tens}</div></div>
+        </div>
+      </div>
+      <div style="background:${step.ok===false?'rgba(239,68,68,0.15)':step.phase==='done'?'rgba(16,185,129,0.1)':'rgba(255,255,255,0.05)'};border-radius:14px;padding:16px 24px;max-width:420px;width:100%;text-align:center;border:1px solid ${step.ok===false?'var(--hard)':step.phase==='done'?'var(--easy)':'rgba(255,255,255,0.12)'};">
+        <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;">Current Transaction Action</div>
+        <div style="font-size:0.9rem;font-weight:600;color:${step.ok===false?'var(--hard)':'var(--text-main)'};font-family:monospace;line-height:1.4;">${step.action || 'Initializing register...'}</div>
+      </div>`);
+    wrap.appendChild(mid);
+    canvas.appendChild(wrap);
+  }
+
+  // ── CAN PLACE FLOWERS ───────────────────────────────────────────────
+  else if (visualizerState.algo === 'canplaceflowers') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'width:100%;display:flex;flex-direction:column;gap:1.25rem;';
+
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);font-family:monospace;width:100%;display:flex;justify-content:space-between;align-items:center;">
+        <span>Can Place Flowers (LC 605)</span>
+        <span style="color:${step.phase==='plant'?'var(--easy)':step.phase==='done'?'var(--accent-cyan)':'var(--text-muted)'};background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:6px;">● ${step.phase.toUpperCase()}</span></div>`);
+
+    const bedRow = document.createElement('div');
+    bedRow.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;justify-content:center;';
+    step.bed.forEach((v, idx) => {
+      const isActive = idx === step.i;
+      const isPlant = v === 1;
+      const isNewPlant = isActive && step.phase === 'plant';
+      const bg = isNewPlant ? 'rgba(16,185,129,0.35)' : isPlant ? 'rgba(16,185,129,0.15)' : isActive ? 'rgba(245,158,11,0.25)' : 'rgba(255,255,255,0.05)';
+      const border = isNewPlant ? 'var(--easy)' : isPlant ? 'rgba(16,185,129,0.5)' : isActive ? 'rgb(245,158,11)' : 'rgba(255,255,255,0.12)';
+      bedRow.insertAdjacentHTML('beforeend',
+        `<div style="width:54px;height:64px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:6px 2px;background:${bg};border:2px solid ${border};border-radius:12px;font-family:monospace;box-sizing:border-box;">
+          <div style="font-size:1.5rem;line-height:1.2;">${isPlant ? '🌸' : '⬜'}</div>
+          <div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">idx ${idx}</div>
+          <div style="min-height:14px;">
+            ${isActive ? '<span style="font-size:0.6rem;color:rgb(245,158,11);font-weight:800;">▲ SCAN</span>' : ''}
+          </div>
+        </div>`);
+    });
+    wrap.appendChild(bedRow);
+
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;align-items:center;">
+        <div style="text-align:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 24px;min-width:110px;">
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:4px;font-weight:600;">Flowers Planted</div>
+          <div style="font-size:2rem;font-weight:800;color:var(--easy);font-family:monospace;">${step.placed}</div>
+        </div>
+        <div style="text-align:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 24px;min-width:110px;">
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:4px;font-weight:600;">Needed (n)</div>
+          <div style="font-size:2rem;font-weight:800;color:var(--accent-cyan);font-family:monospace;">${step.n}</div>
+        </div>
+        <div style="text-align:center;background:${step.placed>=step.n?'rgba(16,185,129,0.15)':'rgba(255,255,255,0.05)'};border-radius:10px;padding:12px 24px;border:1px solid ${step.placed>=step.n?'var(--easy)':'rgba(255,255,255,0.12)'};">
+          <div style="font-size:0.95rem;font-weight:800;color:${step.placed>=step.n?'var(--easy)':'var(--medium)'};">${step.placed>=step.n?'✅ Target Reached':'⏳ Searching...'}</div>
+        </div>
+      </div>`);
+    canvas.appendChild(wrap);
+  }
+
+  // ── TASK SCHEDULER ──────────────────────────────────────────────────
+  else if (visualizerState.algo === 'taskscheduler') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'width:100%;display:flex;flex-direction:column;gap:1.25rem;';
+
+    const phaseColors = { init:'var(--text-muted)', place:'var(--easy)', idle:'var(--hard)', done:'var(--accent-cyan)' };
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);font-family:monospace;width:100%;display:flex;justify-content:space-between;align-items:center;">
+        <span>Task Scheduler (LC 621) — Cooldown n=${step.n}</span>
+        <span style="color:${phaseColors[step.phase]||'var(--text-muted)'};background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:6px;">● ${step.phase.toUpperCase()}</span></div>`);
+
+    // Frequency bars
+    const freqRow = document.createElement('div');
+    freqRow.style.cssText = 'display:flex;gap:8px;justify-content:center;flex-wrap:wrap;';
+    const taskColors = ['var(--secondary)','var(--accent-cyan)','var(--easy)','var(--medium)','var(--hard)','rgb(245,158,11)'];
+    Object.entries(step.freq).sort((a,b)=>b[1]-a[1]).forEach(([task, cnt], colorIdx) => {
+      const color = taskColors[colorIdx % taskColors.length];
+      freqRow.insertAdjacentHTML('beforeend',
+        `<div style="text-align:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px 16px;min-width:60px;">
+          <div style="font-size:1.4rem;font-weight:800;color:${color};font-family:monospace;">${task}</div>
+          <div style="font-size:0.75rem;font-weight:600;color:var(--text-muted)">×${cnt} left</div>
+        </div>`);
+    });
+    wrap.appendChild(freqRow);
+
+    // CPU timeline
+    if (step.timeline && step.timeline.length > 0) {
+      const tlabel = document.createElement('div');
+      tlabel.style.cssText = 'font-size:0.75rem;font-weight:700;color:var(--text-muted);margin-top:4px;';
+      tlabel.textContent = 'CPU Timeline Grid:';
+      wrap.appendChild(tlabel);
+      const tl = document.createElement('div');
+      tl.style.cssText = 'display:flex;gap:4px;flex-wrap:wrap;';
+      step.timeline.forEach((t, idx) => {
+        const isIdle = t === 'idle';
+        const isLast = idx === step.timeline.length - 1;
+        const color = isIdle ? 'var(--hard)' : taskColors[Object.keys(step.freq).sort((a,b)=>step.freq[b]-step.freq[a]).indexOf(t) % taskColors.length];
+        tl.insertAdjacentHTML('beforeend',
+          `<div style="min-width:44px;height:50px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:${isIdle?'rgba(239,68,68,0.15)':'rgba(255,255,255,0.07)'};border:2px solid ${isLast?color:'rgba(255,255,255,0.12)'};border-radius:8px;font-family:monospace;${isLast?'box-shadow:0 0 10px '+color:''}">
+            <div style="font-size:0.95rem;font-weight:800;color:${isIdle?'var(--hard)':color}">${isIdle?'IDLE':t}</div>
+            <div style="font-size:0.6rem;color:rgba(255,255,255,0.35)">#${idx}</div>
+          </div>`);
+      });
+      wrap.appendChild(tl);
+    }
+
+    const idleCount = (step.timeline || []).filter(t => t === 'idle').length;
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="display:flex;gap:1.25rem;justify-content:center;flex-wrap:wrap;">
+        <div style="text-align:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 20px;">
+          <div style="font-size:0.65rem;color:var(--text-muted);font-weight:600;">Total CPU Slots</div>
+          <div style="font-size:1.6rem;font-weight:800;color:var(--text-main);font-family:monospace;">${step.timeline.length}</div>
+        </div>
+        <div style="text-align:center;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:10px 20px;">
+          <div style="font-size:0.65rem;color:var(--hard);font-weight:600;">Idle Slots</div>
+          <div style="font-size:1.6rem;font-weight:800;color:var(--hard);font-family:monospace;">${idleCount}</div>
+        </div>
+        <div style="text-align:center;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:10px 20px;">
+          <div style="font-size:0.65rem;color:var(--easy);font-weight:600;">Task Executions</div>
+          <div style="font-size:1.6rem;font-weight:800;color:var(--easy);font-family:monospace;">${step.timeline.length - idleCount}</div>
+        </div>
+      </div>`);
+    canvas.appendChild(wrap);
+  }
+
+  // ── PARTITION LABELS ────────────────────────────────────────────────
+  else if (visualizerState.algo === 'partitionlabels') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'width:100%;display:flex;flex-direction:column;gap:1.25rem;';
+
+    const phaseColors = { init:'var(--text-muted)', map:'var(--medium)', scan:'var(--medium)', cut:'var(--easy)', done:'var(--accent-cyan)' };
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);font-family:monospace;display:flex;justify-content:space-between;align-items:center;">
+        <span>Partition Labels (LC 763)</span>
+        <span style="color:${phaseColors[step.phase]||'var(--text-muted)'};background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:6px;">● ${step.phase.toUpperCase()}</span></div>`);
+
+    // Char cells
+    const partColors = ['var(--secondary)','var(--accent-cyan)','var(--easy)','rgb(245,158,11)','var(--medium)'];
+    const partitionBoundaries = [];
+    let runningSize = 0;
+    step.partitions.forEach(size => { runningSize += size; partitionBoundaries.push(runningSize - 1); });
+
+    const charRow = document.createElement('div');
+    charRow.style.cssText = 'display:flex;gap:5px;flex-wrap:wrap;justify-content:center;';
+    step.chars.forEach((c, idx) => {
+      const isActive = idx === step.i;
+      const isEnd = idx === step.end;
+      const partIdx = partitionBoundaries.findIndex(b => idx <= b);
+      const partColor = partIdx >= 0 ? partColors[partIdx % partColors.length] : 'rgba(255,255,255,0.05)';
+      const isCut = step.partitions.length > 0 && partitionBoundaries.slice(0,-1).includes(idx);
+      charRow.insertAdjacentHTML('beforeend',
+        `<div style="position:relative;width:42px;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:4px 2px;
+          background:${isActive?'rgba(245,158,11,0.35)':partIdx>=0?`rgba(255,255,255, 0.08)`:'rgba(255,255,255,0.05)'};
+          border:2px solid ${isActive?'rgb(245,158,11)':isEnd?partColor:'rgba(255,255,255,0.12)'};
+          border-radius:10px;font-family:monospace;${isCut?'border-right:4px solid var(--easy)':''};
+          ${step.phase==='cut'&&isEnd?'box-shadow:0 0 12px var(--easy)':''};box-sizing:border-box;">
+          <div style="font-size:1.25rem;font-weight:800;color:${isActive?'#fff':partColor}">${c}</div>
+          <div style="font-size:0.6rem;color:rgba(255,255,255,0.35)">${idx}</div>
+          <div style="min-height:12px;">
+            ${isEnd&&step.phase==='scan'?'<span style="font-size:0.55rem;color:var(--secondary);font-weight:800;background:rgba(0,0,0,0.5);padding:1px 3px;border-radius:3px;">▲END</span>':''}
+          </div>
+        </div>`);
+    });
+    wrap.appendChild(charRow);
+
+    // lastSeen map
+    if (step.last && Object.keys(step.last).length) {
+      const mapRow = document.createElement('div');
+      mapRow.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;justify-content:center;';
+      Object.entries(step.last).sort((a,b)=>a[1]-b[1]).forEach(([c, pos]) => {
+        const isCurrentChar = step.chars[step.i] === c;
+        mapRow.insertAdjacentHTML('beforeend',
+          `<div style="background:${isCurrentChar?'rgba(245,158,11,0.25)':'rgba(255,255,255,0.05)'};border:1px solid ${isCurrentChar?'rgb(245,158,11)':'rgba(255,255,255,0.1)'};border-radius:8px;padding:6px 12px;font-family:monospace;font-size:0.8rem;color:var(--text-muted);font-weight:700;">
+            <span style="color:${isCurrentChar?'rgb(245,158,11)':'var(--text-main)'}">${c}</span> → <span style="color:var(--accent-cyan)">last idx ${pos}</span>
+          </div>`);
+      });
+      wrap.appendChild(mapRow);
+    }
+
+    // Partitions result
+    if (step.partitions.length) {
+      wrap.insertAdjacentHTML('beforeend',
+        `<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+          ${step.partitions.map((sz, i) => `<div style="background:rgba(255,255,255,0.06);border:2px solid ${partColors[i%partColors.length]};border-radius:10px;padding:8px 16px;text-align:center;font-family:monospace;">
+            <div style="font-size:0.65rem;color:var(--text-muted);font-weight:600;">Partition ${i+1}</div>
+            <div style="font-size:1.3rem;font-weight:800;color:${partColors[i%partColors.length]}">Size ${sz}</div>
+          </div>`).join('')}
+        </div>`);
+    }
+    canvas.appendChild(wrap);
+  }
+
+  // ── QUEUE RECONSTRUCTION ─────────────────────────────────────────────
+  else if (visualizerState.algo === 'queuereconstruction') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'width:100%;display:flex;flex-direction:column;gap:1.5rem;';
+
+    const phaseColors = { init:'var(--text-muted)', sort:'var(--medium)', insert:'var(--accent-cyan)', done:'var(--easy)' };
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);font-family:monospace;display:flex;justify-content:space-between;align-items:center;">
+        <span>Queue Reconstruction (LC 406)</span>
+        <span style="color:${phaseColors[step.phase]||'var(--text-muted)'};background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:6px;">● ${step.phase.toUpperCase()}</span></div>`);
+
+    const renderPeopleRow = (label, people, activeIdx = -1, color = 'var(--accent-cyan)') => {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;flex-direction:column;gap:6px;';
+      row.insertAdjacentHTML('beforeend', `<div style="font-size:0.75rem;font-weight:700;color:var(--text-muted)">${label}</div>`);
+      const cells = document.createElement('div');
+      cells.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;';
+      people.forEach(([h, k], idx) => {
+        const isActive = idx === activeIdx;
+        cells.insertAdjacentHTML('beforeend',
+          `<div style="min-width:64px;background:${isActive?`rgba(${color.includes('cyan')?'6,182,212':'16,185,129'},0.25)`:'rgba(255,255,255,0.05)'};border:2px solid ${isActive?color:'rgba(255,255,255,0.12)'};border-radius:12px;padding:10px 12px;text-align:center;font-family:monospace;${isActive?'box-shadow:0 0 12px '+color:''}">
+            <div style="font-size:1.25rem;font-weight:800;color:${isActive?color:'var(--text-main)'}">${h}</div>
+            <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted);margin-top:2px;">k=${k}</div>
+            <div style="font-size:0.6rem;color:rgba(255,255,255,0.35);margin-top:2px;">pos #${idx}</div>
+          </div>`);
+      });
+      row.appendChild(cells);
+      return row;
+    };
+
+    if (step.sorted) wrap.appendChild(renderPeopleRow('Step 1 — Sorted People (height desc, k asc):', step.sorted, step.phase === 'insert' ? step.activeIdx : -1));
+    if (step.result && step.result.length > 0) wrap.appendChild(renderPeopleRow('Step 2 — Reconstructed Queue:', step.result, -1, 'var(--easy)'));
+
+    canvas.appendChild(wrap);
+  }
+
+  // ── STOCK PROFIT II ──────────────────────────────────────────────────
+  else if (visualizerState.algo === 'stockprofitII') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'width:100%;display:flex;flex-direction:column;gap:1.25rem;';
+
+    const phaseColors = { init:'var(--text-muted)', profit:'var(--easy)', skip:'var(--medium)', done:'var(--accent-cyan)' };
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);font-family:monospace;display:flex;justify-content:space-between;align-items:center;">
+        <span>Stock Buy/Sell II (LC 122)</span>
+        <span style="color:${phaseColors[step.phase]||'var(--text-muted)'};background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:6px;">● ${(step.phase||'').toUpperCase()}</span></div>`);
+
+    // Price chart bars
+    const maxP = Math.max(...step.prices);
+    const chartRow = document.createElement('div');
+    chartRow.style.cssText = 'display:flex;gap:8px;align-items:flex-end;height:140px;padding:12px 16px;background:rgba(255,255,255,0.03);border-radius:14px;border:1px solid rgba(255,255,255,0.08);width:100%;box-sizing:border-box;';
+    step.prices.forEach((p, idx) => {
+      const isCurrent = idx === step.i;
+      const isTrade = step.trades && step.trades.some(t => t.buy === idx || t.sell === idx);
+      const isBuy = step.trades && step.trades.some(t => t.buy === idx);
+      const isSell = step.trades && step.trades.some(t => t.sell === idx);
+      const h = Math.max(16, (p / maxP) * 100);
+      const bg = isSell ? 'var(--easy)' : isBuy ? 'rgba(16,185,129,0.4)' : isCurrent ? 'var(--medium)' : 'rgba(255,255,255,0.15)';
+      chartRow.insertAdjacentHTML('beforeend',
+        `<div style="flex:1;min-width:24px;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end;">
+          <div style="font-size:0.75rem;font-weight:700;color:${isBuy?'var(--easy)':isSell?'var(--easy)':isCurrent?'var(--medium)':'var(--text-muted)'};">$${p}</div>
+          <div style="width:100%;height:${h}px;background:${bg};border-radius:4px 4px 0 0;border:1px solid ${isCurrent?'var(--medium)':isTrade?'var(--easy)':'rgba(255,255,255,0.12)'};min-height:12px;${isCurrent?'box-shadow:0 0 10px var(--medium)':''}"></div>
+          <div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">D${idx}</div>
+          <div style="min-height:16px;">
+            ${isBuy ? '<span style="font-size:0.65rem;color:var(--easy);font-weight:800;background:rgba(16,185,129,0.2);padding:2px 4px;border-radius:4px;">▲BUY</span>' : ''}
+            ${isSell ? '<span style="font-size:0.65rem;color:var(--easy);font-weight:800;background:rgba(16,185,129,0.2);padding:2px 4px;border-radius:4px;">▼SELL</span>' : ''}
+          </div>
+        </div>`);
+    });
+    wrap.appendChild(chartRow);
+
+    // Trades + profit
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;align-items:center;">
+        <div style="text-align:center;background:rgba(16,185,129,0.12);border-radius:12px;padding:12px 24px;border:1px solid var(--easy);">
+          <div style="font-size:0.7rem;color:var(--text-muted);font-weight:600;">Total Profit</div>
+          <div style="font-size:2.2rem;font-weight:800;color:var(--easy);font-family:monospace;">+$${step.profit}</div>
+        </div>
+        <div style="text-align:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 24px;">
+          <div style="font-size:0.7rem;color:var(--text-muted);font-weight:600;">Profitable Trades</div>
+          <div style="font-size:2.2rem;font-weight:800;color:var(--accent-cyan);font-family:monospace;">${step.trades.length}</div>
+        </div>
+      </div>`);
+
+    if (step.trades && step.trades.length) {
+      const tradesRow = document.createElement('div');
+      tradesRow.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;justify-content:center;';
+      step.trades.forEach(t => {
+        tradesRow.insertAdjacentHTML('beforeend',
+          `<div style="background:rgba(16,185,129,0.12);border:1px solid var(--easy);border-radius:8px;padding:6px 12px;font-size:0.75rem;font-family:monospace;color:var(--easy);font-weight:700;">Day ${t.buy} → Day ${t.sell} (Profit: +$${t.gain})</div>`);
+      });
+      wrap.appendChild(tradesRow);
+    }
+    canvas.appendChild(wrap);
+  }
+
+  // ── MAX UNITS ON A TRUCK ────────────────────────────────────────────
+  else if (visualizerState.algo === 'maxunitstruck') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'width:100%;display:flex;flex-direction:column;gap:1.25rem;';
+
+    const phaseColors = { init:'var(--text-muted)', sort:'var(--medium)', load:'var(--easy)', partial:'var(--accent-cyan)', full:'var(--hard)', done:'var(--easy)' };
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);font-family:monospace;display:flex;justify-content:space-between;align-items:center;">
+        <span>Max Units on Truck (LC 1710) — Capacity ${step.truckSize}</span>
+        <span style="color:${phaseColors[step.phase]||'var(--text-muted)'};background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:6px;">● ${step.phase.toUpperCase()}</span></div>`);
+
+    // Sorted boxes
+    const boxRow = document.createElement('div');
+    boxRow.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;justify-content:center;';
+    (step.sorted || step.boxes).forEach(([cnt, units], idx) => {
+      const isActive = idx === step.i;
+      const isLoaded = step.loaded && step.loaded.some((l, li) => li === idx);
+      boxRow.insertAdjacentHTML('beforeend',
+        `<div style="min-width:72px;background:${isLoaded?'rgba(16,185,129,0.2)':isActive?'rgba(245,158,11,0.25)':'rgba(255,255,255,0.05)'};border:2px solid ${isLoaded?'var(--easy)':isActive?'rgb(245,158,11)':'rgba(255,255,255,0.12)'};border-radius:12px;padding:10px 12px;text-align:center;font-family:monospace;display:flex;flex-direction:column;gap:2px;">
+          <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted)">📦 × ${cnt} boxes</div>
+          <div style="font-size:1.25rem;font-weight:800;color:${isLoaded?'var(--easy)':isActive?'rgb(245,158,11)':'var(--secondary)'};">${units} units</div>
+          <div style="font-size:0.6rem;color:rgba(255,255,255,0.4)">per box</div>
+          ${isLoaded ? '<div style="font-size:0.65rem;color:var(--easy);font-weight:800;margin-top:2px;">✓ Loaded</div>' : ''}
+        </div>`);
+    });
+    wrap.appendChild(boxRow);
+
+    // Truck capacity bar
+    const usedCap = step.truckSize - step.remaining;
+    const pct = (usedCap / step.truckSize) * 100;
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px;text-align:center;">
+        <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted);margin-bottom:8px;">🚛 Truck Capacity Load: ${usedCap} / ${step.truckSize} boxes</div>
+        <div style="width:100%;height:24px;background:rgba(255,255,255,0.1);border-radius:12px;overflow:hidden;padding:2px;box-sizing:border-box;">
+          <div style="width:${pct}%;height:100%;background:${pct>=100?'var(--hard)':'var(--easy)'};border-radius:10px;transition:width 0.3s;box-shadow:0 0 10px ${pct>=100?'var(--hard)':'var(--easy)'};"></div>
+        </div>
+      </div>`);
+
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="text-align:center;background:rgba(16,185,129,0.12);border-radius:12px;padding:12px 24px;border:1px solid var(--easy);">
+        <div style="font-size:0.75rem;font-weight:700;color:var(--text-muted);">Total Units Loaded</div>
+        <div style="font-size:2.2rem;font-weight:800;color:var(--easy);font-family:monospace;">${step.totalUnits}</div>
+      </div>`);
+    canvas.appendChild(wrap);
+  }
+
+  // ── REFUELING STOPS ─────────────────────────────────────────────────
+  else if (visualizerState.algo === 'refuelingstops') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'width:100%;display:flex;flex-direction:column;gap:1.25rem;';
+
+    const phaseColors = { init:'var(--text-muted)', collect:'var(--medium)', refuel:'var(--accent-cyan)', impossible:'var(--hard)', done:'var(--easy)' };
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="font-size:0.85rem;font-weight:700;color:var(--text-muted);font-family:monospace;display:flex;justify-content:space-between;align-items:center;">
+        <span>Refueling Stops (LC 871) — Target Distance ${step.target}</span>
+        <span style="color:${phaseColors[step.phase]||'var(--text-muted)'};background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:6px;">● ${step.phase.toUpperCase()}</span></div>`);
+
+    // Road visualization
+    const roadWrap = document.createElement('div');
+    roadWrap.style.cssText = 'position:relative;width:100%;height:72px;background:rgba(255,255,255,0.04);border-radius:14px;border:1px solid rgba(255,255,255,0.08);box-sizing:border-box;padding:0 12px;';
+    // Road surface
+    roadWrap.insertAdjacentHTML('beforeend', '<div style="position:absolute;left:12px;right:12px;top:50%;height:6px;background:rgba(255,255,255,0.12);transform:translateY(-50%);border-radius:3px;"></div>');
+    // Progress fill
+    const prog = (step.pos / step.target) * 100;
+    roadWrap.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:12px;top:50%;height:6px;width:calc(${Math.min(prog,100)}% - 24px);background:var(--accent-cyan);transform:translateY(-50%);box-shadow:0 0 8px var(--accent-cyan);border-radius:3px;"></div>`);
+    // Stations
+    (step.stations || []).forEach(([pos, fuel], idx) => {
+      const pct = (pos / step.target) * 100;
+      const isCollected = idx < step.i;
+      roadWrap.insertAdjacentHTML('beforeend',
+        `<div style="position:absolute;left:${pct}%;top:10px;transform:translateX(-50%);text-align:center;z-index:2;">
+          <div style="font-size:0.75rem;color:${isCollected?'rgba(255,255,255,0.4)':'rgb(245,158,11)'};font-weight:800;background:rgba(0,0,0,0.6);padding:2px 6px;border-radius:6px;border:1px solid rgba(255,255,255,0.15);white-space:nowrap;">⛽ ${fuel}</div>
+          <div style="width:2px;height:12px;background:${isCollected?'rgba(255,255,255,0.2)':'rgb(245,158,11)'};margin:2px auto 0;"></div>
+        </div>`);
+    });
+    // Car
+    roadWrap.insertAdjacentHTML('beforeend',
+      `<div style="position:absolute;left:calc(${Math.min(prog,96)}%);top:50%;transform:translate(-50%,-50%);font-size:1.5rem;z-index:3;">🚗</div>`);
+    // Target flag
+    roadWrap.insertAdjacentHTML('beforeend', '<div style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:1.3rem;z-index:3;">🏁</div>');
+    wrap.appendChild(roadWrap);
+
+    // Stats row
+    wrap.insertAdjacentHTML('beforeend',
+      `<div style="display:flex;gap:1.25rem;justify-content:center;flex-wrap:wrap;">
+        <div style="text-align:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 20px;">
+          <div style="font-size:0.65rem;color:var(--text-muted);font-weight:600;">⛽ Fuel Left</div>
+          <div style="font-size:1.6rem;font-weight:800;color:${step.fuel<50?'var(--hard)':'var(--easy)'};font-family:monospace;">${step.fuel}</div>
+        </div>
+        <div style="text-align:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 20px;">
+          <div style="font-size:0.65rem;color:var(--text-muted);font-weight:600;">📍 Current Position</div>
+          <div style="font-size:1.6rem;font-weight:800;color:var(--accent-cyan);font-family:monospace;">${step.pos}</div>
+        </div>
+        <div style="text-align:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px 20px;">
+          <div style="font-size:0.65rem;color:var(--text-muted);font-weight:600;">🛑 Stops Made</div>
+          <div style="font-size:1.6rem;font-weight:800;color:var(--secondary);font-family:monospace;">${step.stops}</div>
+        </div>
+      </div>`);
+
+    // Max-heap panel
+    if (step.heap && step.heap.length > 0) {
+      const heapPanel = document.createElement('div');
+      heapPanel.style.cssText = 'background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px 16px;';
+      heapPanel.insertAdjacentHTML('beforeend', '<div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);margin-bottom:8px;">Collected Fuel (Max-Heap Priority Queue) — Greedy picks largest when fuel runs out:</div>');
+      const heapItems = document.createElement('div');
+      heapItems.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;';
+      [...step.heap].sort((a,b)=>b-a).forEach((v, idx) => {
+        heapItems.insertAdjacentHTML('beforeend',
+          `<div style="background:${idx===0?'rgba(6,182,212,0.25)':'rgba(255,255,255,0.07)'};border:2px solid ${idx===0?'var(--accent-cyan)':'rgba(255,255,255,0.12)'};border-radius:8px;padding:8px 14px;font-family:monospace;font-weight:800;font-size:0.9rem;color:${idx===0?'var(--accent-cyan)':'var(--text-muted)'};">
+            ${v}${idx===0?' (MAX ★)':''}
+          </div>`);
+      });
+      heapPanel.appendChild(heapItems);
+      wrap.appendChild(heapPanel);
+    }
+    canvas.appendChild(wrap);
+  }
 }
+
 
 
 function stepVisualizer() {

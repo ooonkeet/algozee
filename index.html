@@ -445,149 +445,259 @@
           <!-- Selection & Controls -->
           <div class="visualizer-controls">
             <div class="control-group">
+              <!-- Step 1: Topic -->
+              <label for="topic-select"
+                style="font-size: 0.85rem; font-weight:600; color: var(--text-muted)">Topic:</label>
+              <select class="filter-select" id="topic-select" style="padding: 0.5rem 1.5rem 0.5rem 0.5rem;"
+                onchange="populateAlgoDropdown()">
+                <option value="">— Pick a Topic —</option>
+                <option value="sorting">Sorting Algorithms</option>
+                <option value="searching">Searching Algorithms</option>
+                <option value="arrays">Arrays &amp; Sliding Window</option>
+                <option value="linkedlists">Linked Lists</option>
+                <option value="stacks">Stacks &amp; Queues</option>
+                <option value="trees">Trees &amp; BSTs</option>
+                <option value="graphs">Graphs &amp; Pathfinding</option>
+                <option value="dp">Dynamic Programming</option>
+                <option value="bits">Bit Manipulation</option>
+                <option value="tries">Tries &amp; Strings</option>
+                <option value="heaps">Heaps &amp; Priority Queues</option>
+                <option value="caches">Caches &amp; Design</option>
+                <option value="backtracking">Backtracking &amp; Recursion</option>
+                <option value="greedy">Greedy Algorithms</option>
+                <option value="advanced">Advanced Data Structures</option>
+              </select>
+            </div>
+
+            <!-- Step 2: Algorithm (populated by JS) -->
+            <div class="control-group" id="algo-select-group" style="display:none;">
               <label for="algo-select"
                 style="font-size: 0.85rem; font-weight:600; color: var(--text-muted)">Algorithm:</label>
               <select class="filter-select" id="algo-select" style="padding: 0.5rem 1.5rem 0.5rem 0.5rem;"
                 onchange="loadSelectedAlgorithm()">
-                <optgroup label="─── Sorting Algorithms ───">
-                  <option value="bubble">Bubble Sort</option>
-                  <option value="insertionsort">Insertion Sort</option>
-                  <option value="selectionsort">Selection Sort</option>
-                  <option value="quicksort">Quick Sort Partition</option>
-                  <option value="quicksortfull">Quick Sort (Recursive)</option>
-                  <option value="mergesort">Merge Sort (Recursive)</option>
-                  <option value="heapsort">Heap Sort</option>
-                  <option value="countingsort">Counting Sort</option>
-                  <option value="radixsort">Radix Sort</option>
-                  <option value="shellsort">Shell Sort</option>
-                  <option value="cocktailsort">Cocktail Shaker Sort</option>
-                  <option value="timsort">Tim Sort (Hybrid)</option>
-                  <option value="bucketsort">Bucket Sort</option>
-                  <option value="combsort">Comb Sort</option>
-                  <option value="gnomesort">Gnome Sort</option>
-                  <option value="pancakesort">Pancake Sort</option>
-                  <option value="bitonicsort">Bitonic Sort</option>
-                </optgroup>
-                <optgroup label="─── Searching Algorithms ───">
-                  <option value="linearsearch">Linear Search</option>
-                  <option value="binary">Binary Search</option>
-                  <option value="ternarysearch">Ternary Search</option>
-                  <option value="jumpsearch">Jump Search</option>
-                  <option value="interpolationsearch">Interpolation Search</option>
-                  <option value="exponentialsearch">Exponential Search</option>
-                  <option value="fibonaccisearch">Fibonacci Search</option>
-                  <option value="rabinkarp">Rabin-Karp Rolling Hash</option>
-                  <option value="twoarraybinary">Two-Array Binary Search (LC 4)</option>
-                </optgroup>
-                <optgroup label="─── Patterns & Data Structures ───">
-                  <option value="window">Sliding Window (LC 3)</option>
-                  <option value="pointer">Two Pointers (LC 11)</option>
-                  <option value="twoSumII">Two Sum II (LC 167)</option>
-                  <option value="cycle">Fast & Slow (LC 141)</option>
-                  <option value="cycleII">Linked List Cycle II (LC 142)</option>
-                </optgroup>
-                <optgroup label="─── Linked List Operations ───">
-                  <option value="ll-reverse">LL: Reverse (LC 206)</option>
-                  <option value="ll-reverse-range">LL: Reverse Sublist (LC 92)</option>
-                  <option value="ll-remove-nth">LL: Remove Nth From End (LC 19)</option>
-                  <option value="ll-remove-dups">LL: Remove Duplicates (LC 83)</option>
-                  <option value="ll-merge">LL: Merge Two Sorted (LC 21)</option>
-                  <option value="ll-swap-pairs">LL: Swap Pairs (LC 24)</option>
-                  <option value="ll-rotate">LL: Rotate List (LC 61)</option>
-                </optgroup>
-                <option value="stack">Monotonic Stack (LC 739)</option>
-                <option value="monostack">Monotonic Stack NGE-II / Circular (LC 503)</option>
-                <option value="largestRectangle">Largest Rectangle (LC 84)</option>
-                <option value="tree">Binary Tree DFS (LC 104)</option>
-                <option value="graph">Graph BFS/DFS (LC 200)</option>
-                <option value="dfs-cycle">DFS Cycle Detection (LC 207)</option>
-                <option value="matrix">Matrix Grid DP (LC 62)</option>
-                <option value="intervals">Interval Merging (LC 56)</option>
-                <option value="hash">Frequency HashMap (LC 1)</option>
-                <optgroup label="─── Bit Manipulation ───">
-                  <option value="singlenumber">Single Number I — XOR Cancellation (LC 136)</option>
-                  <option value="kernighan">Brian Kernighan's Bit Clearing (LC 191)</option>
-                  <option value="countbits">Counting Bits — DP Transitions (LC 338)</option>
-                  <option value="poweroftwo">Power of Two & Four (LC 231/342)</option>
-                  <option value="reversebits">Reverse Bits 32-Bit (LC 190)</option>
-                  <option value="singlenumberII">Single Number II — 3-Count Masks (LC 137)</option>
-                  <option value="bitmasksubsets">Bitmask Subsets — Power Set (LC 78)</option>
-                  <option value="missingnumber">Missing Number via XOR (LC 268)</option>
-                  <option value="bits">Bit Shift Register (LC 191)</option>
-                </optgroup>
-                <option value="trie">Trie Prefix Map (LC 208)</option>
-                <option value="stringdp">String DP — LCS (LC 1143)</option>
-                <option value="palindrome">Palindrome DP — Expand (LC 5)</option>
-                <option value="dp1d">1D Dynamic Programming (LC 70)</option>
-                <option value="prefixsum">Prefix Sum (LC 560)</option>
-                <option value="backtracking">Backtracking Board (N-Queens)</option>
-                <option value="unionfind">Union-Find Components</option>
-                <option value="segmenttree">Segment Tree Range Query</option>
-                <option value="avl">Self-Balancing AVL Tree</option>
-                <option value="huffman">Huffman Encoder Tree</option>
-                <option value="greedy">Greedy Interval Selection</option>
-                <option value="editdistance">Edit Distance DP</option>
-                <option value="heap">Heap / Priority Queue</option>
-                <option value="dijkstra">Dijkstra Shortest Path</option>
-                <option value="toposort">Topological Sort</option>
-                <option value="knapsack">0/1 Knapsack DP</option>
-                <option value="kmp">KMP String Matching</option>
-                <option value="fenwick">Fenwick Tree / BIT</option>
-                <option value="bellmanford">Bellman-Ford Relaxation</option>
-                <option value="floydwarshall">Floyd-Warshall Matrix</option>
-                <option value="quicksort">Quick Sort Partition</option>
-                <option value="quicksortfull">Quick Sort (Recursive)</option>
-                <option value="mergesort">Merge Sort (Recursive)</option>
-                <option value="insertionsort">Insertion Sort</option>
-                <option value="bfsgrid">BFS Grid Shortest Path</option>
-                <option value="rbtree">Red-Black Tree Balancing</option>
-                <option value="netflow">Network Flow (Edmonds-Karp)</option>
-                <option value="astar">A* Pathfinding Search</option>
-                <option value="prims">Prim's MST Algorithm</option>
-                <option value="singlenumber">Single Number (XOR Accumulator)</option>
-                <option value="bitmasksubsets">Bitmask Subsets Generation</option>
-                <option value="bitmaskdp">Bitmask DP (TSP)</option>
-                <option value="kosaraju">Kosaraju's SCC Algorithm</option>
-                <option value="binaryaddition">Binary Addition (XOR Carry)</option>
-                <option value="lrucache">LRU Cache</option>
-                <option value="lfucache">LFU Cache (LC 460)</option>
-                <option value="slidingmax">Sliding Window Maximum</option>
-                <option value="deque">Monotonic Deque (LC 239+)</option>
-                <option value="coinchange">Coin Change DP</option>
-                <option value="kruskal">Kruskal MST</option>
-                <option value="medianfinder">Median Finder (heap tree)</option>
-                <option value="sudoku">Sudoku Solver</option>
-                <optgroup label="─── Approved Additions ───">
-                  <option value="wordsearch2">Word Search II (LC 212)</option>
-                  <option value="generateparentheses">Generate Parentheses (LC 22)</option>
-                  <option value="lis">Longest Increasing Subsequence (LC 300)</option>
-                  <option value="trappingwater">Trapping Rain Water (LC 42)</option>
-                  <option value="burstballoons">Burst Balloons (LC 312)</option>
-                  <option value="minwindow">Minimum Window Substring (LC 76)</option>
-                  <option value="wordladder">Word Ladder (LC 127)</option>
-                  <option value="waterflow">Pacific Atlantic Water Flow (LC 417)</option>
-                  <option value="aliendictionary">Alien Dictionary (LC 269)</option>
-                  <option value="designtwitter">Design Twitter (LC 355)</option>
-                  <option value="serializedeserialize">Serialize & Deserialize Binary Tree (LC 297)</option>
-                </optgroup>
-                <optgroup label="─── Custom Visualizations ───">
-                  <option value="twoarraybinary">Two-Array Binary Search (LC 4)</option>
-                  <option value="arraycycle">Floyd's Array Cycle (LC 287)</option>
-                  <option value="reorderlist">Reorder List (LC 143)</option>
-                  <option value="treepathsum">Max Path Sum DFS (LC 124)</option>
-                  <option value="equationsolver">Equation Ratio Solver (LC 399)</option>
-                  <option value="tarjanbridge">Tarjan's Bridge Finder (LC 1192)</option>
-                  <option value="combinationtree">Combination Sum backtrack (LC 39)</option>
-                </optgroup>
-                <optgroup label="─── Advanced Sandbox Additions ───">
-                  <option value="boyermoore">Boyer-Moore Majority Vote (LC 169)</option>
-                  <option value="quickselect">Quick Select K-th Largest (LC 215)</option>
-                  <option value="bstdeletion">BST Deletion (LC 450)</option>
-                  <option value="segmenttreelazy">Segment Tree Lazy Propagation</option>
-                  <option value="multisourcebfs">Multi-Source BFS Grid (LC 994)</option>
-                </optgroup>
+                <option value="">— Pick an Algorithm —</option>
               </select>
             </div>
+
+            <script>
+              const ALGO_TOPICS = {
+                sorting: [
+                  ["bubble", "Bubble Sort"],
+                  ["insertionsort", "Insertion Sort"],
+                  ["selectionsort", "Selection Sort"],
+                  ["quicksort", "Quick Sort Partition"],
+                  ["quicksortfull", "Quick Sort (Recursive)"],
+                  ["mergesort", "Merge Sort (Recursive)"],
+                  ["heapsort", "Heap Sort"],
+                  ["countingsort", "Counting Sort"],
+                  ["radixsort", "Radix Sort"],
+                  ["shellsort", "Shell Sort"],
+                  ["cocktailsort", "Cocktail Shaker Sort"],
+                  ["timsort", "Tim Sort (Hybrid)"],
+                  ["bucketsort", "Bucket Sort"],
+                  ["combsort", "Comb Sort"],
+                  ["gnomesort", "Gnome Sort"],
+                  ["pancakesort", "Pancake Sort"],
+                  ["bitonicsort", "Bitonic Sort"],
+                ],
+                searching: [
+                  ["linearsearch", "Linear Search"],
+                  ["binary", "Binary Search"],
+                  ["ternarysearch", "Ternary Search"],
+                  ["jumpsearch", "Jump Search"],
+                  ["interpolationsearch", "Interpolation Search"],
+                  ["exponentialsearch", "Exponential Search"],
+                  ["fibonaccisearch", "Fibonacci Search"],
+                  ["rabinkarp", "Rabin-Karp Rolling Hash"],
+                  ["twoarraybinary", "Two-Array Binary Search (LC 4)"],
+                ],
+                arrays: [
+                  ["window", "Sliding Window (LC 3)"],
+                  ["pointer", "Two Pointers (LC 11)"],
+                  ["twoSumII", "Two Sum II (LC 167)"],
+                  ["prefixsum", "Prefix Sum (LC 560)"],
+                  ["hash", "Frequency HashMap (LC 1)"],
+                  ["trappingwater", "Trapping Rain Water (LC 42)"],
+                  ["boyermoore", "Boyer-Moore Majority Vote (LC 169)"],
+                  ["quickselect", "Quick Select K-th Largest (LC 215)"],
+                  ["arraycycle", "Floyd's Array Cycle (LC 287)"],
+                  ["minwindow", "Minimum Window Substring (LC 76)"],
+                ],
+                linkedlists: [
+                  ["cycle", "Fast & Slow (LC 141)"],
+                  ["cycleII", "Linked List Cycle II (LC 142)"],
+                  ["ll-reverse", "LL: Reverse (LC 206)"],
+                  ["ll-reverse-range", "LL: Reverse Sublist (LC 92)"],
+                  ["ll-remove-nth", "LL: Remove Nth From End (LC 19)"],
+                  ["ll-remove-dups", "LL: Remove Duplicates (LC 83)"],
+                  ["ll-merge", "LL: Merge Two Sorted (LC 21)"],
+                  ["ll-swap-pairs", "LL: Swap Pairs (LC 24)"],
+                  ["ll-rotate", "LL: Rotate List (LC 61)"],
+                  ["reorderlist", "Reorder List (LC 143)"],
+                ],
+                stacks: [
+                  ["stack", "Monotonic Stack (LC 739)"],
+                  ["monostack", "Monotonic Stack NGE-II / Circular (LC 503)"],
+                  ["largestRectangle", "Largest Rectangle (LC 84)"],
+                  ["slidingmax", "Sliding Window Maximum"],
+                  ["deque", "Monotonic Deque (LC 239+)"],
+                ],
+                trees: [
+                  ["tree", "Binary Tree DFS (LC 104)"],
+                  ["avl", "Self-Balancing AVL Tree"],
+                  ["rbtree", "Red-Black Tree Balancing"],
+                  ["huffman", "Huffman Encoder Tree"],
+                  ["bstdeletion", "BST Deletion (LC 450)"],
+                  ["serializedeserialize", "Serialize & Deserialize Binary Tree (LC 297)"],
+                  ["treepathsum", "Max Path Sum DFS (LC 124)"],
+                ],
+                graphs: [
+                  ["graph", "Graph BFS/DFS (LC 200)"],
+                  ["dfs-cycle", "DFS Cycle Detection (LC 207)"],
+                  ["dijkstra", "Dijkstra Shortest Path"],
+                  ["toposort", "Topological Sort"],
+                  ["bellmanford", "Bellman-Ford Relaxation"],
+                  ["floydwarshall", "Floyd-Warshall Matrix"],
+                  ["bfsgrid", "BFS Grid Shortest Path"],
+                  ["astar", "A* Pathfinding Search"],
+                  ["netflow", "Network Flow (Edmonds-Karp)"],
+                  ["kosaraju", "Kosaraju's SCC Algorithm"],
+                  ["unionfind", "Union-Find Components"],
+                  ["equationsolver", "Equation Ratio Solver (LC 399)"],
+                  ["tarjanbridge", "Tarjan's Bridge Finder (LC 1192)"],
+                  ["aliendictionary", "Alien Dictionary (LC 269)"],
+                  ["wordladder", "Word Ladder (LC 127)"],
+                  ["waterflow", "Pacific Atlantic Water Flow (LC 417)"],
+                  ["multisourcebfs", "Multi-Source BFS Grid (LC 994)"],
+                ],
+                dp: [
+                  ["dp1d", "1D Dynamic Programming (LC 70)"],
+                  ["matrix", "Matrix Grid DP (LC 62)"],
+                  ["stringdp", "String DP — LCS (LC 1143)"],
+                  ["palindrome", "Palindrome DP — Expand (LC 5)"],
+                  ["editdistance", "Edit Distance DP"],
+                  ["knapsack", "0/1 Knapsack DP"],
+                  ["lis", "Longest Increasing Subsequence (LC 300)"],
+                  ["coinchange", "Coin Change DP"],
+                  ["burstballoons", "Burst Balloons (LC 312)"],
+                  ["bitmaskdp", "Bitmask DP (TSP)"],
+                ],
+                bits: [
+                  ["singlenumber", "Single Number I — XOR Cancellation (LC 136)"],
+                  ["kernighan", "Brian Kernighan's Bit Clearing (LC 191)"],
+                  ["countbits", "Counting Bits — DP Transitions (LC 338)"],
+                  ["poweroftwo", "Power of Two & Four (LC 231/342)"],
+                  ["reversebits", "Reverse Bits 32-Bit (LC 190)"],
+                  ["singlenumberII", "Single Number II — 3-Count Masks (LC 137)"],
+                  ["bitmasksubsets", "Bitmask Subsets — Power Set (LC 78)"],
+                  ["missingnumber", "Missing Number via XOR (LC 268)"],
+                  ["bits", "Bit Shift Register (LC 191)"],
+                  ["binaryaddition", "Binary Addition (XOR Carry)"],
+                ],
+                tries: [
+                  ["trie", "Trie Prefix Map (LC 208)"],
+                  ["kmp", "KMP String Matching"],
+                  ["wordsearch2", "Word Search II (LC 212)"],
+                ],
+                heaps: [
+                  ["heap", "Heap / Priority Queue"],
+                  ["medianfinder", "Median Finder (heap tree)"],
+                  ["prims", "Prim's MST Algorithm"],
+                  ["kruskal", "Kruskal MST"],
+                  ["intervals", "Interval Merging (LC 56)"],
+                ],
+                caches: [
+                  ["lrucache", "LRU Cache"],
+                  ["lfucache", "LFU Cache (LC 460)"],
+                  ["designtwitter", "Design Twitter (LC 355)"],
+                ],
+                backtracking: [
+                  ["backtracking", "Backtracking Board (N-Queens)"],
+                  ["generateparentheses", "Generate Parentheses (LC 22)"],
+                  ["combinationtree", "Combination Sum backtrack (LC 39)"],
+                  ["sudoku", "Sudoku Solver"],
+                ],
+                greedy: [
+                  ["greedy", "Greedy Interval Selection"],
+                  ["jumpgame", "Jump Game I & II (LC 55/45)"],
+                  ["gasstation", "Gas Station Circular Tour (LC 134)"],
+                  ["lemonadechange", "Lemonade Change (LC 860)"],
+                  ["canplaceflowers", "Can Place Flowers (LC 605)"],
+                  ["taskscheduler", "Task Scheduler CPU Grid (LC 621)"],
+                  ["partitionlabels", "Partition Labels (LC 763)"],
+                  ["queuereconstruction", "Queue Reconstruction by Height (LC 406)"],
+                  ["stockprofitII", "Stock Buy/Sell II (LC 122)"],
+                  ["maxunitstruck", "Max Units on Truck (LC 1710)"],
+                  ["refuelingstops", "Refueling Stops (LC 871)"],
+                ],
+                advanced: [
+                  ["segmenttree", "Segment Tree Range Query"],
+                  ["segmenttreelazy", "Segment Tree Lazy Propagation"],
+                  ["fenwick", "Fenwick Tree / BIT"],
+                ],
+              };
+
+              function populateAlgoDropdown() {
+                const topic = document.getElementById('topic-select').value;
+                const algoGroup = document.getElementById('algo-select-group');
+                const algoSelect = document.getElementById('algo-select');
+
+                if (!topic) {
+                  algoGroup.style.display = 'none';
+                  return;
+                }
+
+                const algos = ALGO_TOPICS[topic] || [];
+                algoSelect.innerHTML = '<option value="">— Pick an Algorithm —</option>';
+                algos.forEach(([val, label]) => {
+                  const opt = document.createElement('option');
+                  opt.value = val;
+                  opt.textContent = label;
+                  algoSelect.appendChild(opt);
+                });
+
+                algoGroup.style.display = 'flex';
+              }
+
+              // Called by app.js when navigating directly from DSA Explorer.
+              // Finds the topic for a given algo value, populates both dropdowns,
+              // and selects the right algo — so the visualizer can load correctly.
+              function selectAlgoDirectly(algoValue) {
+                const topicSelect = document.getElementById('topic-select');
+                const algoGroup = document.getElementById('algo-select-group');
+                const algoSelect = document.getElementById('algo-select');
+
+                // Find which topic this algo belongs to
+                let foundTopic = null;
+                for (const [topicKey, entries] of Object.entries(ALGO_TOPICS)) {
+                  if (entries.some(([val]) => val === algoValue)) {
+                    foundTopic = topicKey;
+                    break;
+                  }
+                }
+
+                if (!foundTopic) return; // unknown algo, leave dropdowns as-is
+
+                // Set topic dropdown
+                topicSelect.value = foundTopic;
+
+                // Populate algo dropdown for that topic
+                const algos = ALGO_TOPICS[foundTopic] || [];
+                algoSelect.innerHTML = '<option value="">— Pick an Algorithm —</option>';
+                algos.forEach(([val, label]) => {
+                  const opt = document.createElement('option');
+                  opt.value = val;
+                  opt.textContent = label;
+                  algoSelect.appendChild(opt);
+                });
+
+                // Select the specific algo
+                algoSelect.value = algoValue;
+
+                // Show the algo dropdown
+                algoGroup.style.display = 'flex';
+              }
+            </script>
 
             <!-- Media visual buttons -->
             <div class="control-group">
